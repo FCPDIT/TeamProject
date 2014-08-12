@@ -1,6 +1,6 @@
 package retail;
 // Test Commit James
-//Test Commit Marc. 
+//Test Commit Marc. From Command Line
 
 
 public class Customer {
