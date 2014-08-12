@@ -29,6 +29,18 @@ public class RetailGUI extends JFrame{
 	private JPanel viewProductJPanel = new JPanel();
 	private JPanel editProductJPanel = new JPanel();
 	
+	private JPanel createInvJPanel = new JPanel();
+	private JPanel viewInvJPanel = new JPanel();
+	private JPanel editInvJPanel = new JPanel();
+	
+	private JPanel viewStockJPanel = new JPanel();
+	private JPanel editStockJPanel = new JPanel();
+	
+	private JPanel accessJPanel = new JPanel();
+	
+	private JPanel proflossJPanel = new JPanel();
+	
+	
 	public RetailGUI() {
 		// TODO Auto-generated constructor stub
 		mainJFrame.setTitle("Retail Application");
@@ -57,6 +69,18 @@ public class RetailGUI extends JFrame{
 		prodJTabbedPane.add("Create New Product",addProductJPanel);
 		prodJTabbedPane.add("View Product Details", viewProductJPanel);
 		prodJTabbedPane.add("Edit Product Details", editProductJPanel);
+		
+		invJTabbedPane.add("Create New Invoice", createInvJPanel);
+		invJTabbedPane.add("View Customer Invoice", viewInvJPanel);
+		invJTabbedPane.add("Edit Customer Invoice", editInvJPanel);
+		
+		stockJTabbedPane.add("View Available Stock", viewStockJPanel);
+		stockJTabbedPane.add("Edit Stock", editStockJPanel);
+		
+		accessJTabbedPane.add("Coming Soon", accessJPanel);
+		accessJTabbedPane.setVisible(false);
+		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
+		proflossJTabbedPane.setVisible(false);
 	}
 
 }
