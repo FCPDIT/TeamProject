@@ -1,6 +1,7 @@
 package retail;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Invoice {
@@ -104,6 +105,20 @@ public class Invoice {
 
 	public void setPaid(boolean paid) {
 		this.paid = paid;
+	}
+	
+	//View All
+	public String viewAllInvoices(ArrayList<Invoice> invoices){
+		String list = "";
+		for(Invoice v : invoices){
+			list+="Employee Name: " + employee.getEmployeeName() +
+					"\nCustomer Name: " + customer.getCustName() +
+					"\nProduct Code: " + product.getProductCode()+
+					"\nInvoice Total: " + totalInvoicePrice + 
+					"\nDate: " + invoiceDate + "\n\n";
+		}
+		
+		return list;
 	}
 
 }
