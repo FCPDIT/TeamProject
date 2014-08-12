@@ -77,9 +77,9 @@ public class Order {
 	public double calculateOrderWorth(){
 		double amount = 0.0;
 		
-		//for(Product ProductOrdered: this.listOfProductsOrder){
-		//	amount += ProductOrdered.getValue() * ProductOrdered.getOrderQuantity();
-		//}
+		for(Product ProductOrdered: this.listOfProductsOrdered){
+			amount += ProductOrdered.getRetailPrice() * this.quantity;
+		}
 		
 		return amount;
 	}
@@ -91,11 +91,12 @@ public class Order {
 			//System.out.println("Date of Order: " + this.dateOfOrder.toGMTString());
 			System.out.println("Products:");
 			System.out.println("-----------------");
-			/*for(Product ProductOrdered1: this.listOfProductsOrdered){
-				System.out.println("Product type: " + ProductOrdered1.getProductType());
-				System.out.println("Value of Product: " + ProductOrdered1.getValue());
-				System.out.println("Quantity: " + ProductOrdered1.getQuantity());
-			}*/
+			for(Product ProductOrdered1: this.listOfProductsOrdered){
+				System.out.println("Author: " + ProductOrdered1.getAuthor());
+				System.out.println("Title: " + ProductOrdered1.getTitle());
+				System.out.println("Value of Product: " + ProductOrdered1.getRetailPrice());
+				System.out.println("Quantity: " + this.quantity);
+			}
 			System.out.println("-----------------");
 			System.out.println("----------------------------------------------");
 		}
