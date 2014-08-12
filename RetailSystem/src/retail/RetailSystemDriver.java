@@ -25,8 +25,8 @@ public class RetailSystemDriver {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new RetailSystemDriver();
-
+		//new RetailSystemDriver();
+		new RetailGUI();
 	}
 
 }
