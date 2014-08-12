@@ -102,19 +102,28 @@ public class Invoice {
 		this.paid = paid;
 	}
 
+	//Simple print
+	String printDetails(Invoice v) {
+		if (v != null) {
+			return "Invoice ID: " + v.getId() + "\nProduct Id: "
+					+ v.getProduct().getProductCode() + "\nProduct Price: "
+					+ v.getProduct().getRetailPrice() + "\nEmployee Name: "
+					+ v.getEmployee().getEmployeeName() + "\nEmployee Id: "
+					+ v.getEmployee().getEmployeeId() + "\nCustomer Name: "
+					+ v.getCustomer().getCustName() + "\nCustomer Id: "
+					+ v.getCustomer().getCustId() + "\nInvoice Total: "
+					+ v.getTotalInvoicePrice() + "\nDate: "
+					+ v.getInvoiceDate() + "\n\n";
+		} else {
+			return "No details to print";
+		}
+
+	}
 	// View All - Question what do we want to print for all Invoice Info
 	public String viewAllInvoices(ArrayList<Invoice> invoices) {
 		String list = "";
 		for (Invoice v : invoices) {
-			list += "Invoice ID: " + v.getId()
-					+ "\nProduct Id: " + v.getProduct().getProductCode()
-					+"\nProduct Price: " + v.getProduct().getRetailPrice()
-					+ "\nEmployee Name: " + v.getEmployee().getEmployeeName()
-					+ "\nEmployee Id: " + v.getEmployee().getEmployeeId()
-					+ "\nCustomer Name: " + v.getCustomer().getCustName()
-					+ "\nCustomer Id: " + v.getCustomer().getCustId()
-					+ "\nInvoice Total: " + v.getTotalInvoicePrice() + "\nDate: "
-					+ v.getInvoiceDate() + "\n\n";
+			list += printDetails(v);
 		}
 		if (list.equals(""))
 			return "No invoices on record";
