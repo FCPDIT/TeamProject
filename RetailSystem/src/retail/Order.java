@@ -72,6 +72,11 @@ public class Order {
 	
 	public void setDelivered(){
 		this.delivered = true;
+		for(Product product1: this.listOfProductsOrdered){
+			//set the quantity of this item in stock to be itself + the amount ordered
+			product1.setCurrentStock(product1.getCurrentStock() + this.quantity);
+		}
+		
 	}
 	
 	public double calculateOrderWorth(){
