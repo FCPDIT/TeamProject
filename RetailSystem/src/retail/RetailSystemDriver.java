@@ -14,8 +14,8 @@ public class RetailSystemDriver {
 		products.add(p2);
 		
 		// Test Code to ensure Array has been populated.
-		for(Product products : products){ 
-			System.out.println(products.getAuthor());
+		for(Product p : products){ 
+			System.out.println(p.getAuthor());
 		}
 		
 		
