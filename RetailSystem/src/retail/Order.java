@@ -50,6 +50,10 @@ public class Order {
 		return this.listOfProductsOrdered;
 	}
 	
+	public Date getOrderDate(){
+		return this.dateOfOrder;
+	}
+	
 	public double calculateOrderWorth(){
 		double amount = 0.0;
 		
