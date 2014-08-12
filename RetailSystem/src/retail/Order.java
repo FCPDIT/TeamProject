@@ -76,7 +76,6 @@ public class Order {
 			//set the quantity of this item in stock to be itself + the amount ordered
 			product1.setCurrentStock(product1.getCurrentStock() + this.quantity);
 		}
-		
 	}
 	
 	public double calculateOrderWorth(){
@@ -85,12 +84,23 @@ public class Order {
 		for(Product ProductOrdered: this.listOfProductsOrdered){
 			amount += ProductOrdered.getRetailPrice() * this.quantity;
 		}
-		
 		return amount;
 	}
 	
+	public String viewAllOrders(){
+		String result = "";
+		String newLine = System.getProperty("line.seperator");
+		result = result + "----------------------------------------------" +  newLine + "ID of Customer Ordering: " + getOrderUniqueId() + newLine
+				+ "Products: " + "-----------------";
+		for(Product product1: this.listOfProductsOrdered){
+			result = result + "Author: " + product1.getAuthor() + newLine + "Title: " + product1.getTitle() + newLine + "Value of Product" + 
+		product1.getRetailPrice() + newLine + "Quantity: " + this.quantity + newLine + "-----------------";
+			
+		}
+		return result;
+	}
+	
 	public void printOrderDetails(){
-		for(Product ProductOrdered: this.listOfProductsOrdered){
 			System.out.println("----------------------------------------------");
 			System.out.println("ID of Customer Ordering: " + getOrderUniqueId());
 			//System.out.println("Date of Order: " + this.dateOfOrder.toGMTString());
@@ -101,10 +111,10 @@ public class Order {
 				System.out.println("Title: " + ProductOrdered1.getTitle());
 				System.out.println("Value of Product: " + ProductOrdered1.getRetailPrice());
 				System.out.println("Quantity: " + this.quantity);
+				System.out.println("-----------------");
 			}
-			System.out.println("-----------------");
 			System.out.println("----------------------------------------------");
 		}
-	}
+	
 
 }
