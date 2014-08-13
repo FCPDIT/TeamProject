@@ -14,7 +14,6 @@ public class RetailGUI extends JFrame{
 	
 	private JFrame mainJFrame = new JFrame();
 	private GridLayout grid = new GridLayout(0, 2, 4, 4);
-	private GridLayout grid3By3 = new GridLayout(0,3);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
 	
 	private JPanel loginJPanel = new JPanel();
@@ -159,7 +158,12 @@ public class RetailGUI extends JFrame{
 		editSupplyJPanel.add(saveSupplierJButton);
 		editSupplyJPanel.add(deleteSupplierJButton);
 
-		
+		supplierJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
+						supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
+			}
+		});
 		/*
 		 *LOGIN LOCK TABS - COMMENTED OUT FOR DEVELOPMENT EASE - PUT BACK IN WHEN RUNNING
 		 * 
