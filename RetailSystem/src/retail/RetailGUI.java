@@ -142,7 +142,7 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewsupplyJButton);
 		viewSupplyJPanel.add(allSupplyJButton);
 		viewSupplyJPanel.add(supplierJTextArea);
-<<<<<<< HEAD
+
 		editSupplyJPanel.add(editSupplierJTextField);
 		editSupplyJPanel.add(editSupplierJButton);
 		editSupplyJPanel.add(editSupplierId);
@@ -153,7 +153,7 @@ public class RetailGUI extends JFrame{
 		editSupplyJPanel.add(editSupplierDelivery);
 		editSupplyJPanel.add(saveSupplierJButton);
 		editSupplyJPanel.add(deleteSupplierJButton);
-=======
+
 		
 		/*
 		 *LOGIN LOCK TABS - COMMENTED OUT FOR DEVELOPMENT EASE - PUT BACK IN WHEN RUNNING
