@@ -71,7 +71,7 @@ public class RetailGUI extends JFrame{
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
 	private JTextField viewSupplyNameJTextField = new JTextField("Supplier Name");
 	private JTextArea supplierJTextArea = new JTextArea(20, 20);
-	private JButton viewsupplyJButton = new JButton("View Supplier Details");
+	private JButton viewSupplyJButton = new JButton("View Supplier Details");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	
 	private JTextField editSupplierJTextField = new JTextField("Supplier Id");
@@ -144,10 +144,9 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewSupplyJTextField);
 		viewSupplyJPanel.add(viewSupplyNameJLabel);
 		viewSupplyJPanel.add(viewSupplyNameJTextField);
-		viewSupplyJPanel.add(viewsupplyJButton);
+		viewSupplyJPanel.add(viewSupplyJButton);
 		viewSupplyJPanel.add(allSupplyJButton);
 		viewSupplyJPanel.add(supplierJTextArea);
-
 		editSupplyJPanel.add(editSupplierJTextField);
 		editSupplyJPanel.add(editSupplierJButton);
 		editSupplyJPanel.add(editSupplierId);
@@ -160,6 +159,7 @@ public class RetailGUI extends JFrame{
 		editSupplyJPanel.add(deleteSupplierJButton);
 
 		supplierJButton.addActionListener(new ActionListener(){
+			// function to add a new supplier
 			public void actionPerformed(ActionEvent e){
 				Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
 						supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
@@ -167,6 +167,38 @@ public class RetailGUI extends JFrame{
 				JOptionPane.showMessageDialog(null, "New Supplier Added");
 			}
 		});
+		
+		viewSupplyJButton.addActionListener(new ActionListener(){
+			// function to view a supplier by id or name
+			public void actionPerformed(ActionEvent e){
+				for(Supplier supplier: suppliers){
+					if(supplier.getId() == Integer.parseInt(viewSupplyJTextField.getText()) || supplier.getName() == viewSupplyNameJTextField.getText()){
+						supplierJTextArea.append("Supplier Id: "+supplier.getId()
+								+" Supplier Name: "+supplier.getName()
+								+" Supplier Address: "+supplier.getAddress()
+								+" Supplier Email: "+supplier.getEmail()
+								+"Supplier Phone: "+supplier.getPhone()
+								+"Supplier Delivery Time: "+supplier.getDaysToDeliver());
+					}else{
+						JOptionPane.showMessageDialog(null, "Supplier Not Found.");
+					}
+				}
+			}
+		});
+		
+		allSupplyJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				for(Supplier supplier: suppliers){
+					supplierJTextArea.append("Supplier Id: "+supplier.getId()
+							+" Supplier Name: "+supplier.getName()
+							+" Supplier Address: "+supplier.getAddress()
+							+" Supplier Email: "+supplier.getEmail()
+							+"Supplier Phone: "+supplier.getPhone()
+							+"Supplier Delivery Time: "+supplier.getDaysToDeliver());
+				}
+			}
+		});
+		
 		/*
 		 *LOGIN LOCK TABS - COMMENTED OUT FOR DEVELOPMENT EASE - PUT BACK IN WHEN RUNNING
 		 * 
