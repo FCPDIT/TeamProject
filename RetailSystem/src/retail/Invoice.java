@@ -105,30 +105,108 @@ public class Invoice {
 	//Simple print
 	String printDetails(Invoice v) {
 		if (v != null) {
-			return "Invoice ID: " + v.getId() + "\nProduct Id: "
-					+ v.getProduct().getProductCode() + "\nProduct Price: "
-					+ v.getProduct().getRetailPrice() + "\nEmployee Name: "
-					+ v.getEmployee().getEmployeeName() + "\nEmployee Id: "
-					+ v.getEmployee().getEmployeeId() + "\nCustomer Name: "
-					+ v.getCustomer().getCustName() + "\nCustomer Id: "
-					+ v.getCustomer().getCustId() + "\nInvoice Total: "
-					+ v.getTotalInvoicePrice() + "\nDate: "
-					+ v.getInvoiceDate() + "\n\n";
+			return "Invoice ID: " + v.getId() + 
+					"\nProduct Id: " + v.getProduct().getProductCode() 
+					+ "\nProduct Price: " +  String.format( "€%.2f", v.getProduct().getRetailPrice())
+					+ "\nQuantity of Order " + v.getQuantity()
+					+ "\nEmployee Name: " + v.getEmployee().getEmployeeName() 
+					+ "\nEmployee Id: "   + v.getEmployee().getEmployeeId() 
+					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
+					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
+					+ "\nInvoice Total: " +  String.format( "€%.2f", v.getTotalInvoicePrice()) 
+					+ "\nDate: " + v.getInvoiceDate() + "\n\n";
 		} else {
 			return "No details to print";
 		}
 
 	}
+	
 	// View All - Question what do we want to print for all Invoice Info
 	public String viewAllInvoices(ArrayList<Invoice> invoices) {
 		String list = "";
 		for (Invoice v : invoices) {
-			list += printDetails(v);
+			list += printDetails(v); // A Call to the method abve to print details
 		}
 		if (list.equals(""))
 			return "No invoices on record";
 		else
 			return list;
 	}
+	
+	//Method to Veiw the i=Invoice by ID
+	public String viewInvoiceById(int id, ArrayList<Invoice> invoices){
+		for(Invoice v : invoices){
+			if(v.getId() == id){
+				return printDetails(v);
+			}
+		}
+		return "No record of Invoice No: " + id + " has been found";
+		
+	}
+	
+	//Method to view invoices by customer
+	public String viewInvoiceByCustomer(Customer customer, ArrayList<Invoice> invoices){
+		for(Invoice v : invoices){
+			if(v.getCustomer().equals(customer)){
+				return printDetails(v);
+			}
+		}
+		return "No record of that Customer with Id No: " + customer.getCustId() + " has been found";
+	}
+	
+	//Method to view PAID invoices
+	public String viewPaidInvoice(ArrayList<Invoice> invoices){
+		String paid = "";
+		for(Invoice v : invoices){
+			if(v.isPaid()){
+				paid+= printDetails(v);
+			}
+		}
+		if(paid.equals("")){
+		return "All Invoices are currently unpaid";
+		}
+		else{
+			return paid;
+		}
+	}
+
+	//Method to view PAID invoices
+		public String viewUnPaidInvoice(ArrayList<Invoice> invoices){
+			String unpaid = "";
+			for(Invoice v : invoices){
+				if(v.isPaid() == false){
+					unpaid+= printDetails(v);
+				}
+			}
+			if(unpaid.equals("")){
+			return "All Invoices are currently unpaid";
+			}
+			else{
+				return unpaid;
+			}
+		}
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
