@@ -22,7 +22,9 @@ public class RetailSystemDriver {
 		*/
 		
 		//System.out.println(new Product().viewProductById("9780553386790", products));
-		System.out.println(new Product().viewAllProductDetails(products));
+		//System.out.println(new Product().viewAllProductDetails(products));
+		//System.out.println(new Product().viewProductByTitle("game of thrones",products));
+		//System.out.println(new Product().viewProductByAuthor("Lee",products));
 	}
 	
 
