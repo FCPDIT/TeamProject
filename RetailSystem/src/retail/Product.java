@@ -49,7 +49,7 @@ public class Product {
 	public String printProductDetails(Product p){
 		if (p!= null) {
 			
-			return "Product Id: : " + p.getProductCode() + 
+			return "\n Product Id: : " + p.getProductCode() + 
 					"\n Title: " + p.getTitle() +
 					"\n Author: " + p.getAuthor() +
 					"\n Current Stock: " + p.getCurrentStock() +
@@ -57,7 +57,7 @@ public class Product {
 					"\n Max Stock:" + p.getMaxStock() +
 					"\n Min Stock: " + p.getMinStock() +
 					"\n Cost Price: €" + p.getCostPrice() +
-					"\n Retail Price: €" + p.getRetailPrice();
+					"\n Retail Price: €" + p.getRetailPrice() +"\n";
 					
 		}
 		else{
@@ -65,6 +65,16 @@ public class Product {
 		}
 	}
 	
+	public String viewAllProductDetails(ArrayList<Product> products){
+		String list = "";
+		for(Product p : products){
+			list += printProductDetails(p);
+		}
+		if(list.equals(""))
+			return "No Products on System";
+		else
+			return list;
+	}
 	
 	public String viewProductById(String search,ArrayList<Product> products){
 

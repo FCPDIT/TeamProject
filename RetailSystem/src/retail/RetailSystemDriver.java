@@ -21,8 +21,8 @@ public class RetailSystemDriver {
 		}
 		*/
 		
-		System.out.println(new Product().viewProductById("9780553386790", products));
-		
+		//System.out.println(new Product().viewProductById("9780553386790", products));
+		System.out.println(new Product().viewAllProductDetails(products));
 	}
 	
 
@@ -31,7 +31,7 @@ public class RetailSystemDriver {
 	 */
 	public static void main(String[] args) {
 		new RetailSystemDriver(); // This has been used to test viewProductById. 
-		new RetailGUI();
+		//new RetailGUI();
 	}
 
 }
