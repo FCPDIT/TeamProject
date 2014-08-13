@@ -84,8 +84,8 @@ public class ViewCustomerInvoicePanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = invTextField.getText();
-				if(input.trim().equals("")){
-					textarea.setText("Please enter a number");
+				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
+					textarea.setText("Please enter a valid number");
 					invTextField.setText("");
 					custIdTextField.setText("");
 				}else{
@@ -115,8 +115,8 @@ public class ViewCustomerInvoicePanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = custIdTextField.getText();
-				if(input.trim().equals("")){
-					textarea.setText("Please enter a number");
+				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
+					textarea.setText("Please enter a valid number");
 					custIdTextField.setText("");
 					invTextField.setText("");
 				}else{
