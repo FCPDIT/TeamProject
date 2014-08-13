@@ -49,6 +49,11 @@ public class RetailGUI extends JFrame{
 	
 	private JPanel proflossJPanel = new JPanel();
 	
+	//login components
+	private JTextField loginTF = new JTextField();
+	private JTextField passwordTF = new JTextField();
+	private JButton loginBut = new JButton();
+	
 	private JLabel supplierIdJLabel = new JLabel("Customer ID: ");
 	private JTextField supplierIdJTextField = new JTextField("Required Field");
 	private JLabel supplierNameJLabel = new JLabel("Customer Name: ");
@@ -242,7 +247,7 @@ public class RetailGUI extends JFrame{
 			//no employee id match
 			JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 		}
->>>>>>> 8a6d0932a0b72234cacdeeb7058ecd633e677371
+
 		
 		
 	}
