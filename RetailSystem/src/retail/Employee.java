@@ -1,4 +1,6 @@
 package retail;
+
+import java.util.ArrayList;
 //Hannah
 //Hi Hanna form marc
 
@@ -15,6 +17,9 @@ public class Employee {
         this.access = access;
         this.salary = salary;
         this.password=password;
+    }
+    public Employee(){
+    	
     }
     public int getEmployeeId() {
         return employeeId;
