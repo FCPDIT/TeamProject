@@ -1,6 +1,10 @@
 package retail;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -10,6 +14,7 @@ public class RetailGUI extends JFrame{
 	
 	private JFrame mainJFrame = new JFrame();
 	private GridLayout grid = new GridLayout(0, 2, 4, 4);
+	private GridLayout grid3By3 = new GridLayout(0,3);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
 	
 	private JPanel loginJPanel = new JPanel();
@@ -64,6 +69,16 @@ public class RetailGUI extends JFrame{
 	private JButton viewsupplyJButton = new JButton("View Supplier Details");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	
+	private JTextField editSupplierJTextField = new JTextField("Supplier Id");
+	private JButton editSupplierJButton = new JButton("Find Supplier");
+	private JTextField editSupplierId = new JTextField("Edit Supplier Id:");
+	private JTextField editSupplierName = new JTextField("Edit Supplier Name");
+	private JTextField editSupplierAddress = new JTextField("Edit Supplier Address");
+	private JTextField editSupplierEmail = new JTextField("Edit Supplier Email");
+	private JTextField editSupplierPhone = new JTextField("Edit Supplier Phone");
+	private JTextField editSupplierDelivery = new JTextField("Edit Supplier Delivery");
+	private JButton saveSupplierJButton = new JButton("Update Supplier");
+	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
 	
 	public RetailGUI() {
 		// TODO Auto-generated constructor stub
@@ -108,6 +123,7 @@ public class RetailGUI extends JFrame{
 		
 		addSupplyJPanel.setLayout(grid);
 		viewSupplyJPanel.setLayout(grid);
+		editSupplyJPanel.setLayout(grid);
 		addSupplyJPanel.add(supplierIdJLabel);
 		addSupplyJPanel.add(supplierIdJTextField);
 		addSupplyJPanel.add(supplierNameJLabel);
@@ -126,7 +142,110 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewsupplyJButton);
 		viewSupplyJPanel.add(allSupplyJButton);
 		viewSupplyJPanel.add(supplierJTextArea);
+
+		editSupplyJPanel.add(editSupplierJTextField);
+		editSupplyJPanel.add(editSupplierJButton);
+		editSupplyJPanel.add(editSupplierId);
+		editSupplyJPanel.add(editSupplierName);
+		editSupplyJPanel.add(editSupplierAddress);
+		editSupplyJPanel.add(editSupplierEmail);
+		editSupplyJPanel.add(editSupplierPhone);
+		editSupplyJPanel.add(editSupplierDelivery);
+		editSupplyJPanel.add(saveSupplierJButton);
+		editSupplyJPanel.add(deleteSupplierJButton);
+
 		
+		/*
+		 *LOGIN LOCK TABS - COMMENTED OUT FOR DEVELOPMENT EASE - PUT BACK IN WHEN RUNNING
+		 * 
+		//lock the tabs until login successful
+		mainJTabbedPane.setEnabledAt(1, false);
+		mainJTabbedPane.setEnabledAt(2, false);
+		mainJTabbedPane.setEnabledAt(3, false);
+		mainJTabbedPane.setEnabledAt(4, false);
+		mainJTabbedPane.setEnabledAt(5, false);
+		mainJTabbedPane.setEnabledAt(6, false);
+		mainJTabbedPane.setEnabledAt(7, false);
+		
+		*/
+		
+		//add login components
+		JPanel loginComponentsJPanel = new JPanel();
+		loginComponentsJPanel.setLayout(new GridLayout(4,4));
+		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
+		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
+		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
+		loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
+		loginComponentsJPanel.add(loginBut= new JButton("Login"));
+		loginJPanel.add(loginComponentsJPanel);
+		//add listener for login button
+		LoginButtonHandler handler = new LoginButtonHandler();
+		loginBut.addActionListener(handler);
+		//focus listeners & handlers
+		loginTF.addMouseListener(new MouseAdapter() {
+			  @Override
+			  public void mouseClicked(MouseEvent e) {
+				  loginTF.setText("");
+			  }
+			});
+		passwordTF.addMouseListener(new MouseAdapter() {
+			  @Override
+			  public void mouseClicked(MouseEvent e) {
+				  passwordTF.setText("");
+			  }
+			});		
+	
+		
+	}
+	//handler for login button
+	private class LoginButtonHandler implements ActionListener
+	{
+	public void actionPerformed( ActionEvent e)
+		{//handler starts
+		Employee emp = new Employee();
+		int id = 0;
+		int password = 0;
+		try {
+			id = Integer.parseInt( loginTF.getText().trim() );
+		}
+		catch (NumberFormatException nfe){
+			loginTF.setText("");
+		}
+		try{
+			password = Integer.parseInt( passwordTF.getText().trim() );
+		}
+		catch(NumberFormatException nfe){
+			passwordTF.setText("");
+		}
+		int login = emp.verifyLogin(id, password);
+		if(login == 1){
+			// release all tabs - manager
+			mainJTabbedPane.setSelectedIndex(1);
+			mainJTabbedPane.setEnabledAt(1, true);
+			mainJTabbedPane.setEnabledAt(2, true);
+			mainJTabbedPane.setEnabledAt(3, true);
+			mainJTabbedPane.setEnabledAt(4, true);
+			mainJTabbedPane.setEnabledAt(5, true);
+			mainJTabbedPane.setEnabledAt(6, true);
+			mainJTabbedPane.setEnabledAt(7, true);
+			mainJTabbedPane.setEnabledAt(0, false);
+		}
+		else if(login == 2){
+			// release some tabs - staff SPRINT 2
+			
+		}
+		else if(login == 3){
+			//password incorrect
+			JOptionPane.showMessageDialog(loginJPanel, "Password doesn't match that Employee ID", "For your information", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if(login == 4){
+			//no employee id match
+			JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+		}
+>>>>>>> 8a6d0932a0b72234cacdeeb7058ecd633e677371
+		
+		
+	}
 	}
 
 }
