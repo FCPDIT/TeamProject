@@ -83,14 +83,18 @@ public class Product {
 	public String viewProductByTitle(String search, ArrayList<Product> products) {
 		String list = "";
 		for (Product p : products) {
-			if (p.getTitle().equalsIgnoreCase(search)) {	// Maybe this should be changed to contains once issue with case sensitivity is resolved.
+			if (p.getTitle().equalsIgnoreCase(search)) { // Maybe this should be
+															// changed to
+															// ".contains" once
+															// issue with case
+															// sensitivity is
+															// resolved.
 				list += printProductDetails(p);
 			}
 		}
-		if(list.equals("")){
-		return " No Product Found With That Title ";
-		}
-		else{
+		if (list.equals("")) {
+			return " No Product Found With That Title ";
+		} else {
 			return list;
 		}
 	}
@@ -110,6 +114,20 @@ public class Product {
 		}
 	}
 
+	public String viewProductByMinStock(int level, ArrayList<Product> products) {
+		String list = "";
+		for (Product p : products) {
+			if (p.getMinStock() == level) {
+				list += printProductDetails(p);
+			}
+		}
+		if (list.equals("")) {
+			return " No Products with such a min re-order Stock Level ";
+		} else {
+			return list;
+		}
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -117,7 +135,7 @@ public class Product {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getAuthor() {
 		return author;
 	}
