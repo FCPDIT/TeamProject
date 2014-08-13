@@ -33,8 +33,8 @@ public class InvoiceArrayListForTesting {
 	}
 
 	public static void main(String[] args) {
-		//new InvoiceArrayListForTesting();
-		new RetailGUI();
+		new InvoiceArrayListForTesting();
+		//new RetailGUI();
 	}
 
 }
