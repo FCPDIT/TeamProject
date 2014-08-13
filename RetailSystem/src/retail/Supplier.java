@@ -27,6 +27,15 @@ public class Supplier {
 		this.daysToDeliver = 28;
 	}
 	
+	public Supplier(int id, String name, String address, String email){
+		
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.daysToDeliver = 28;
+	}
+	
 	public String getName() {
 		return name;
 	}
