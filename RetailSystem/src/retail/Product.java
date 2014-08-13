@@ -1,5 +1,8 @@
 package retail;
 
+import java.util.ArrayList;
+
+
 public class Product {
 	private String title;
 	private String author;
@@ -14,13 +17,9 @@ public class Product {
 	
 	
 	
-	
-
 	public Supplier getSupplier() {
 		return supplier;
 	}
-
-
 
 
 
@@ -29,7 +28,9 @@ public class Product {
 	}
 
 
-
+	public Product(){
+		
+	}
 
 
 	public Product(String title, String author, String productCode, double retailPrice, double costPrice, int currentStock, int maxStock, int minStock, Supplier supplier) {
@@ -43,9 +44,39 @@ public class Product {
 		this.minStock = minStock;
 		this.supplier = supplier;
 	}
+	
+	
+	public String printProductDetails(Product p){
+		if (p!= null) {
+			
+			return "Product Id: : " + p.getProductCode() + 
+					"\n Title: " + p.getTitle() +
+					"\n Author: " + p.getAuthor() +
+					"\n Current Stock: " + p.getCurrentStock() +
+					"\n Supplier: " + p.getSupplier().getName() +
+					"\n Max Stock:" + p.getMaxStock() +
+					"\n Min Stock: " + p.getMinStock() +
+					"\n Cost Price: €" + p.getCostPrice() +
+					"\n Retail Price: €" + p.getRetailPrice();
+					
+		}
+		else{
+			return " No Details to Print ";
+		}
+	}
+	
+	
+	public String viewProductById(String search,ArrayList<Product> products){
 
-
-
+	for(Product p: products){
+		if(p.getProductCode().equals(search)){
+			System.out.println("--- ID Search Results ---");
+			return printProductDetails(p);
+		}
+		
+	}
+		return " No Product Found ";
+	}
 
 
 	public String getTitle() {
@@ -53,15 +84,9 @@ public class Product {
 	}
 
 
-
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-
-
 
 
 	public String getAuthor() {
@@ -69,15 +94,9 @@ public class Product {
 	}
 
 
-
-
-
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
-
-
 
 
 	public String getProductCode() {
@@ -85,15 +104,9 @@ public class Product {
 	}
 
 
-
-
-
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
-
-
-
 
 
 	public double getRetailPrice() {
@@ -101,15 +114,9 @@ public class Product {
 	}
 
 
-
-
-
 	public void setRetailPrice(double retailPrice) {
 		this.retailPrice = retailPrice;
 	}
-
-
-
 
 
 	public double getCostPrice() {
@@ -117,15 +124,9 @@ public class Product {
 	}
 
 
-
-
-
 	public void setCostPrice(double costPrice) {
 		this.costPrice = costPrice;
 	}
-
-
-
 
 
 	public int getCurrentStock() {
@@ -133,15 +134,9 @@ public class Product {
 	}
 
 
-
-
-
 	public void setCurrentStock(int currentStock) {
 		this.currentStock = currentStock;
 	}
-
-
-
 
 
 	public int getMaxStock() {
@@ -149,23 +144,14 @@ public class Product {
 	}
 
 
-
-
-
 	public void setMaxStock(int maxStock) {
 		this.maxStock = maxStock;
 	}
 
 
-
-
-
 	public int getMinStock() {
 		return minStock;
 	}
-
-
-
 
 
 	public void setMinStock(int minStock) {
