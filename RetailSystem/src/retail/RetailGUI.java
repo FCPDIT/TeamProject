@@ -5,13 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class RetailGUI extends JFrame{
 	
-	
+	private ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
 	private JFrame mainJFrame = new JFrame();
 	private GridLayout grid = new GridLayout(0, 2, 4, 4);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
@@ -160,8 +161,10 @@ public class RetailGUI extends JFrame{
 
 		supplierJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
+				Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
 						supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
+				suppliers.add(supplier);
+				JOptionPane.showMessageDialog(null, "New Supplier Added");
 			}
 		});
 		/*
