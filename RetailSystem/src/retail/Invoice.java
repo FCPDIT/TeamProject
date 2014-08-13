@@ -135,23 +135,32 @@ public class Invoice {
 	
 	//Method to Veiw the i=Invoice by ID
 	public String viewInvoiceById(int id, ArrayList<Invoice> invoices){
+	
 		for(Invoice v : invoices){
 			if(v.getId() == id){
 				return printDetails(v);
 			}
 		}
-		return "No record of Invoice No: " + id + " has been found";
+	
+			return "No record of Invoice No: " + id + " has been found";
+	
+		
 		
 	}
 	
 	//Method to view invoices by customer
-	public String viewInvoiceByCustomer(Customer customer, ArrayList<Invoice> invoices){
+	public String viewInvoiceByCustomer(int id, ArrayList<Invoice> invoices){
+		String list = "";
 		for(Invoice v : invoices){
-			if(v.getCustomer().equals(customer)){
-				return printDetails(v);
+			if(v.getCustomer().getCustId() == id){
+				list+= printDetails(v);
 			}
 		}
-		return "No record of that Customer with Id No: " + customer.getCustId() + " has been found";
+		if (list.equals(""))
+			return "No record of that Customer with Id No: " + id + " has been found";
+		else
+			return list;
+
 	}
 	
 	//Method to view PAID invoices
