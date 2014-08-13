@@ -28,7 +28,6 @@ public class Supplier {
 	}
 	
 public Supplier(int id, String name, String address, String email){
-		
 		this.id = id;
 		this.name = name;
 		this.address = address;

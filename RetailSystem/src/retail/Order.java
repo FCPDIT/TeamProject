@@ -12,6 +12,7 @@ public class Order {
 	//private Date dateOfOrder;
 	//array list of Products, each Order may have one or many Products Ordered, but only one customer Ordering
 	private ArrayList<Product> listOfProductsOrdered = new ArrayList<Product>();
+	private int customerUniqueId;
 	private int quantity;
 	private boolean delivered = false;
 	
@@ -23,9 +24,10 @@ public class Order {
 	
 	 
 	//single Order constructor
-	public Order(int orderUniqueId, Product ProductOrdered, int quantity) {
+	public Order(int orderUniqueId, int customerUniqueId, Product ProductOrdered, int quantity) {
 		this.orderUniqueId = orderUniqueId;
 		//this.dateOfOrder = new Date();
+		this.customerUniqueId = customerUniqueId;
 		this.addToProductList(ProductOrdered);
 		this.quantity = quantity;
 	}
@@ -58,6 +60,14 @@ public class Order {
 	}
 	*/
 	
+	public void setCustomerUniqueId(int customerUniqueId){
+		this.customerUniqueId = customerUniqueId;
+	}
+	
+	public int getCustomerUniqueId(){
+		return this.customerUniqueId;
+	}
+	
 	public int getOrderQuantity(){
 		return this.quantity;
 	}
@@ -87,15 +97,217 @@ public class Order {
 		return amount;
 	}
 	
-	public String viewAllOrders(){
+	//needs an actual arrayList of orders to process details for
+	public String viewAllOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		String newLine = System.getProperty("line.seperator");
-		result = result + "----------------------------------------------" +  newLine + "ID of Customer Ordering: " + getOrderUniqueId() + newLine
-				+ "Products: " + "-----------------";
-		for(Product product1: this.listOfProductsOrdered){
-			result = result + "Author: " + product1.getAuthor() + newLine + "Title: " + product1.getTitle() + newLine + "Value of Product" + 
-		product1.getRetailPrice() + newLine + "Quantity: " + this.quantity + newLine + "-----------------";
+		for(Order order: listOfOrders){
+			result = result + "----------------------------------------------" +  newLine + "Customer ID: " + order.getOrderUniqueId() + newLine
+					+ "Products: " + "-----------------";
+			for(Product product1: order.listOfProductsOrdered){
+				result = result + "Author: " + product1.getAuthor() + newLine + "Title: " + product1.getTitle() + newLine + "Value of Product: €" + 
+			product1.getRetailPrice() + newLine + "Quantity: " + order.quantity + newLine + "-----------------";
+				
+			}
+		}
+		return result;
+	}
+	
+	public String viewByOrderId(ArrayList<Order> listOfOrders, int orderId){
+		String result = "";
+		for(Order order: listOfOrders){
+			if(order.getOrderUniqueId() == orderId){
+				result = result + "----------------------------------------------" +  "\n" + "Order ID: " + order.getOrderUniqueId() + "\n"
+						+ "Customer ID: " + order.getCustomerUniqueId() + "Products: " + "-----------------";
+				for(Product product: order.getListOfProducts()){
+					result = result + 
+					"\n Product Id: : " + product.getProductCode() + 
+					"\n Title: " + product.getTitle() +
+					"\n Author: " + product.getAuthor() +
+					"\n Current Stock: " + product.getCurrentStock() +
+					"\n Supplier: " + product.getSupplier().getName() +
+					"\n Max Stock:" + product.getMaxStock() +
+					"\n Min Stock: " + product.getMinStock() +
+					"\n Cost Price: €" + product.getCostPrice() +
+					"\n Retail Price: €" + product.getRetailPrice() +"------------";
+				}
+				break;
+			}
+			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+				result = "Order not found. ";
+			}
+		}
+		return result;
+	}
+	
+	//needs arrayList of orders and the customer Id that we're looking for
+	public String viewOrderByCustomerId(ArrayList<Order> listOfOrders, int customerUniqueId){
+		String result = "";
+		boolean first = false;
+		for(Order order: listOfOrders){
+			if(order.getCustomerUniqueId() == customerUniqueId){
+				if(!first){
+					//add this if this is the first order from this customer
+					result = result + "----------------------------------------------" +  "\n" + "Customer ID: " + order.getCustomerUniqueId() + "\n"
+							+ "Products: " + "-----------------";
+					first = true;
+				}
+				for(Product product: this.listOfProductsOrdered){
+					result = result + 
+							"\n Product Id: : " + product.getProductCode() + 
+							"\n Title: " + product.getTitle() +
+							"\n Author: " + product.getAuthor() +
+							"\n Current Stock: " + product.getCurrentStock() +
+							"\n Supplier: " + product.getSupplier().getName() +
+							"\n Max Stock:" + product.getMaxStock() +
+							"\n Min Stock: " + product.getMinStock() +
+							"\n Cost Price: €" + product.getCostPrice() +
+							"\n Retail Price: €" + product.getRetailPrice() +"------------";
+				}
+			}
+		}
+		if(result.equals("")){
+			result = "No orders found for that customer";
+		}
+		return result;
+	}
+	
+	public String viewOrderByAuthor(ArrayList<Order> listOfOrders, String author){
+		String result = "";
+		boolean first = false;
+		for(Order order: listOfOrders){
+			ArrayList<Product> listOfProducts = order.getListOfProducts();
+			for(Product product: listOfProducts){
+				if(product.getAuthor().equals(author)){
+					if(!first){
+						//add this if this is the first order with a product from this author
+						result = result + "----------------------------------------------" +  "\n" + "Author: " + author + "\n"
+								+ "Orders: " + "-----------------";
+						first = true;
+					}
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+							"Products: " + "\n" + 
+							"\n Product Id: : " + product.getProductCode() + 
+							"\n Title: " + product.getTitle() +
+							"\n Author: " + product.getAuthor() +
+							"\n Current Stock: " + product.getCurrentStock() +
+							"\n Supplier: " + product.getSupplier().getName() +
+							"\n Max Stock:" + product.getMaxStock() +
+							"\n Min Stock: " + product.getMinStock() +
+							"\n Cost Price: €" + product.getCostPrice() +
+							"\n Retail Price: €" + product.getRetailPrice() +"------------";
+					break;
+				}
+			}
 			
+		}
+		return result;
+	}
+	
+	public String viewOrderByTitle(ArrayList<Order> listOfOrders, String title){
+		String result = "";
+		boolean first = false;
+		for(Order order: listOfOrders){
+			ArrayList<Product> listOfProducts = order.getListOfProducts();
+			for(Product product: listOfProducts){
+				if(product.getTitle().equals(title)){
+					if(!first){
+						//add this if this is the first order with a product with this title
+						result = result + "----------------------------------------------" +  "\n" + "Title: " + title + "\n"
+								+ "Orders: " + "-----------------";
+						first = true;
+					}
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+							"Products: " + "\n" + 
+							"\n Product Id: : " + product.getProductCode() + 
+							"\n Title: " + product.getTitle() +
+							"\n Author: " + product.getAuthor() +
+							"\n Current Stock: " + product.getCurrentStock() +
+							"\n Supplier: " + product.getSupplier().getName() +
+							"\n Max Stock:" + product.getMaxStock() +
+							"\n Min Stock: " + product.getMinStock() +
+							"\n Cost Price: €" + product.getCostPrice() +
+							"\n Retail Price: €" + product.getRetailPrice() +"------------";
+					break;
+				}
+			}
+		}
+		return result;
+	}
+	
+	public String viewOrderBySupplier(ArrayList<Order> listOfOrders, int supplierId){
+		String result = "";
+		boolean first = false;
+		for(Order order: listOfOrders){
+			ArrayList<Product> listOfProducts = order.getListOfProducts();
+			for(Product product: listOfProducts){
+				if(product.getSupplier().getId() == supplierId){
+					if(!first){
+						//add this if this is the first order with a product with this title
+						result = result + "----------------------------------------------" +  "\n" + "Supplier: " + supplierId + "\n"
+								+ "Orders: " + "-----------------";
+						first = true;
+					}
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+							"Products: " + "\n" + 
+							"\n Product Id: : " + product.getProductCode() + 
+							"\n Title: " + product.getTitle() +
+							"\n Author: " + product.getAuthor() +
+							"\n Current Stock: " + product.getCurrentStock() +
+							"\n Supplier: " + product.getSupplier().getName() +
+							"\n Max Stock:" + product.getMaxStock() +
+							"\n Min Stock: " + product.getMinStock() +
+							"\n Cost Price: €" + product.getCostPrice() +
+							"\n Retail Price: €" + product.getRetailPrice() +"------------";
+					break;
+				}
+			}
+		}
+		return result;
+	}
+	
+	public String viewDeliveredOrders(ArrayList<Order> listOfOrders){
+		String result = "";
+		for(Order order: listOfOrders){
+			result = "Delivered orders: \n";
+			if(order.isDelivered()){
+				for(Product product: order.getListOfProducts()){
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+							"Products: " + "\n" + 
+							"\n Product Id: : " + product.getProductCode() + 
+							"\n Title: " + product.getTitle() +
+							"\n Author: " + product.getAuthor() +
+							"\n Current Stock: " + product.getCurrentStock() +
+							"\n Supplier: " + product.getSupplier().getName() +
+							"\n Max Stock:" + product.getMaxStock() +
+							"\n Min Stock: " + product.getMinStock() +
+							"\n Cost Price: €" + product.getCostPrice() +
+							"\n Retail Price: €" + product.getRetailPrice() +"------------";
+				}
+			}
+		}
+		return result;
+	}
+	
+	public String viewUndeliveredOrders(ArrayList<Order> listOfOrders){
+		String result = "";
+		for(Order order: listOfOrders){
+			result = "Delivered orders: \n";
+			if(!order.isDelivered()){
+				for(Product product: order.getListOfProducts()){
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+							"Products: " + "\n" + 
+							"\n Product Id: : " + product.getProductCode() + 
+							"\n Title: " + product.getTitle() +
+							"\n Author: " + product.getAuthor() +
+							"\n Current Stock: " + product.getCurrentStock() +
+							"\n Supplier: " + product.getSupplier().getName() +
+							"\n Max Stock:" + product.getMaxStock() +
+							"\n Min Stock: " + product.getMinStock() +
+							"\n Cost Price: €" + product.getCostPrice() +
+							"\n Retail Price: €" + product.getRetailPrice() +"------------";
+				}
+			}
 		}
 		return result;
 	}
@@ -106,12 +318,17 @@ public class Order {
 			//System.out.println("Date of Order: " + this.dateOfOrder.toGMTString());
 			System.out.println("Products:");
 			System.out.println("-----------------");
-			for(Product ProductOrdered1: this.listOfProductsOrdered){
-				System.out.println("Author: " + ProductOrdered1.getAuthor());
-				System.out.println("Title: " + ProductOrdered1.getTitle());
-				System.out.println("Value of Product: " + ProductOrdered1.getRetailPrice());
-				System.out.println("Quantity: " + this.quantity);
-				System.out.println("-----------------");
+			for(Product product: this.listOfProductsOrdered){
+				System.out.println(
+							"\n Product Id: : " + product.getProductCode() + 
+							"\n Title: " + product.getTitle() +
+							"\n Author: " + product.getAuthor() +
+							"\n Current Stock: " + product.getCurrentStock() +
+							"\n Supplier: " + product.getSupplier().getName() +
+							"\n Max Stock:" + product.getMaxStock() +
+							"\n Min Stock: " + product.getMinStock() +
+							"\n Cost Price: €" + product.getCostPrice() +
+							"\n Retail Price: €" + product.getRetailPrice() +"------------");
 			}
 			System.out.println("----------------------------------------------");
 		}

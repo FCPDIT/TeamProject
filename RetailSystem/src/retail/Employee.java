@@ -46,5 +46,35 @@ public class Employee {
     public void setPassword(int password) {
         this.password = password;
     }
+    
+    	public int verifyLogin(int id, int password) {
+    	int count = 0;
+		int count1 = 0;
+		int login = 0;
+		RetailSystemDriver rs = new RetailSystemDriver();
+		ArrayList<Employee> elt = rs.getEmployees();
+
+		for(Employee employee: elt){
+			if(id == employee.getEmployeeId()){
+				count++;
+				if(employee.getAccess() == 0){
+					login = 1;
+				}
+				if(employee.getAccess() == 1){
+					login =2;
+				}
+				if(password == employee.getPassword()){
+					count1++;
+				}
+				if(count1 == 0){
+					login = 3;
+				}
+			}
+		}
+		if(count == 0){
+			login = 4;
+		}
+		return login;
+	}
      
 }
