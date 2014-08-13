@@ -16,6 +16,7 @@ public class RetailGUI extends JFrame{
 	private JFrame mainJFrame = new JFrame();
 	private GridLayout grid = new GridLayout(0, 2, 4, 4);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
+	JScrollPane scrollPane = new JScrollPane();
 	
 	private JPanel loginJPanel = new JPanel();
 	private JTabbedPane custJTabbedPane = new JTabbedPane();
@@ -146,7 +147,8 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewSupplyNameJTextField);
 		viewSupplyJPanel.add(viewSupplyJButton);
 		viewSupplyJPanel.add(allSupplyJButton);
-		viewSupplyJPanel.add(supplierJTextArea);
+		viewSupplyJPanel.add(scrollPane.add(supplierJTextArea));
+		supplierJTextArea.setLineWrap(true);
 		editSupplyJPanel.add(editSupplierJTextField);
 		editSupplyJPanel.add(editSupplierJButton);
 		editSupplyJPanel.add(editSupplierId);
@@ -171,30 +173,65 @@ public class RetailGUI extends JFrame{
 		viewSupplyJButton.addActionListener(new ActionListener(){
 			// function to view a supplier by id or name
 			public void actionPerformed(ActionEvent e){
-				for(Supplier supplier: suppliers){
-					if(supplier.getId() == Integer.parseInt(viewSupplyJTextField.getText()) || supplier.getName() == viewSupplyNameJTextField.getText()){
-						supplierJTextArea.append("Supplier Id: "+supplier.getId()
-								+" Supplier Name: "+supplier.getName()
-								+" Supplier Address: "+supplier.getAddress()
-								+" Supplier Email: "+supplier.getEmail()
-								+"Supplier Phone: "+supplier.getPhone()
-								+"Supplier Delivery Time: "+supplier.getDaysToDeliver());
-					}else{
-						JOptionPane.showMessageDialog(null, "Supplier Not Found.");
+				if(suppliers.size() >= 1){
+					for(Supplier supplier: suppliers){
+						if(supplier.getId() == Integer.parseInt(viewSupplyJTextField.getText()) || supplier.getName() == viewSupplyNameJTextField.getText()){
+							supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
+									+"\n Supplier Name: "+supplier.getName()
+									+"\n Supplier Address: "+supplier.getAddress()
+									+"\n Supplier Email: "+supplier.getEmail()
+									+"\n Supplier Phone: "+supplier.getPhone()
+									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+						}else{
+							JOptionPane.showMessageDialog(null, "Supplier Not Found.");
+						}
 					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Suppliers Found");
 				}
 			}
 		});
 		
 		allSupplyJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				if(suppliers.size() >= 1){
+					for(Supplier supplier: suppliers){
+						supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
+								+"\n Supplier Name: "+supplier.getName()
+								+"\n Supplier Address: "+supplier.getAddress()
+								+"\n Supplier Email: "+supplier.getEmail()
+								+"\n Supplier Phone: "+supplier.getPhone()
+								+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Suppliers Found");
+				}
+			}
+		});
+		
+		editSupplierJButton.addActionListener(new ActionListener(){
+			// retrieve and display supplier for editing
+			public void actionPerformed(ActionEvent e){
 				for(Supplier supplier: suppliers){
-					supplierJTextArea.append("Supplier Id: "+supplier.getId()
-							+" Supplier Name: "+supplier.getName()
-							+" Supplier Address: "+supplier.getAddress()
-							+" Supplier Email: "+supplier.getEmail()
-							+"Supplier Phone: "+supplier.getPhone()
-							+"Supplier Delivery Time: "+supplier.getDaysToDeliver());
+					if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						editSupplierId.setText(Integer.toString(supplier.getId()));
+						editSupplierName.setText(supplier.getName());
+						editSupplierAddress.setText(supplier.getAddress());
+						editSupplierEmail.setText(supplier.getEmail());
+						editSupplierPhone.setText(supplier.getPhone());
+						editSupplierDelivery.setText(Integer.toString(supplier.getDaysToDeliver()));
+					}
+				}
+			}
+		});
+		
+		deleteSupplierJButton.addActionListener(new ActionListener(){
+			// function to delete supplier by getting id from the supplier id label
+			public void actionPerformed(ActionEvent e){
+				for(Supplier supplier: suppliers){
+					if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						suppliers.remove(supplier);
+					}
 				}
 			}
 		});
