@@ -10,6 +10,7 @@ public class RetailGUI extends JFrame{
 	
 	private JFrame mainJFrame = new JFrame();
 	private GridLayout grid = new GridLayout(0, 2, 4, 4);
+	private GridLayout grid3By3 = new GridLayout(0,3);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
 	
 	private JPanel loginJPanel = new JPanel();
@@ -64,6 +65,16 @@ public class RetailGUI extends JFrame{
 	private JButton viewsupplyJButton = new JButton("View Supplier Details");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	
+	private JTextField editSupplierJTextField = new JTextField("Supplier Id");
+	private JButton editSupplierJButton = new JButton("Find Supplier");
+	private JTextField editSupplierId = new JTextField("Edit Supplier Id:");
+	private JTextField editSupplierName = new JTextField("Edit Supplier Name");
+	private JTextField editSupplierAddress = new JTextField("Edit Supplier Address");
+	private JTextField editSupplierEmail = new JTextField("Edit Supplier Email");
+	private JTextField editSupplierPhone = new JTextField("Edit Supplier Phone");
+	private JTextField editSupplierDelivery = new JTextField("Edit Supplier Delivery");
+	private JButton saveSupplierJButton = new JButton("Update Supplier");
+	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
 	
 	public RetailGUI() {
 		// TODO Auto-generated constructor stub
@@ -108,6 +119,7 @@ public class RetailGUI extends JFrame{
 		
 		addSupplyJPanel.setLayout(grid);
 		viewSupplyJPanel.setLayout(grid);
+		editSupplyJPanel.setLayout(grid);
 		addSupplyJPanel.add(supplierIdJLabel);
 		addSupplyJPanel.add(supplierIdJTextField);
 		addSupplyJPanel.add(supplierNameJLabel);
@@ -126,6 +138,16 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewsupplyJButton);
 		viewSupplyJPanel.add(allSupplyJButton);
 		viewSupplyJPanel.add(supplierJTextArea);
+		editSupplyJPanel.add(editSupplierJTextField);
+		editSupplyJPanel.add(editSupplierJButton);
+		editSupplyJPanel.add(editSupplierId);
+		editSupplyJPanel.add(editSupplierName);
+		editSupplyJPanel.add(editSupplierAddress);
+		editSupplyJPanel.add(editSupplierEmail);
+		editSupplyJPanel.add(editSupplierPhone);
+		editSupplyJPanel.add(editSupplierDelivery);
+		editSupplyJPanel.add(saveSupplierJButton);
+		editSupplyJPanel.add(deleteSupplierJButton);
 		
 	}
 
