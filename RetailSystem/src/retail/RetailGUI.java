@@ -1,11 +1,15 @@
 package retail;
 
+import java.awt.GridLayout;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class RetailGUI extends JFrame{
 	
+	
 	private JFrame mainJFrame = new JFrame();
+	private GridLayout grid = new GridLayout(0, 2, 4, 4);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
 	
 	private JPanel loginJPanel = new JPanel();
@@ -39,6 +43,26 @@ public class RetailGUI extends JFrame{
 	private JPanel accessJPanel = new JPanel();
 	
 	private JPanel proflossJPanel = new JPanel();
+	
+	private JLabel supplierIdJLabel = new JLabel("Customer ID: ");
+	private JTextField supplierIdJTextField = new JTextField("Required Field");
+	private JLabel supplierNameJLabel = new JLabel("Customer Name: ");
+	private JTextField supplierNameJTextField = new JTextField("Required Field");
+	private JLabel supplierAddressJLabel = new JLabel("Customer Address: ");
+	private JTextField supplierAddressJTextField = new JTextField("Required Field");
+	private JLabel supplierEmailJLabel= new JLabel("Customer Email: ");
+	private JTextField supplierEmailJTextField = new JTextField("Optional");
+	private JLabel supplierPhoneJLabel = new JLabel("Customer Phone Number: ");
+	private JTextField supplierPhoneJTextField = new JTextField("Optional");
+	private JButton supplierJButton = new JButton("Create New Supplier");
+	
+	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID: ");
+	private JTextField viewSupplyJTextField = new JTextField("Supplier Id");
+	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
+	private JTextField viewSupplyNameJTextField = new JTextField("Supplier Name");
+	private JTextArea supplierJTextArea = new JTextArea(20, 20);
+	private JButton viewsupplyJButton = new JButton("View Supplier Details");
+	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	
 	
 	public RetailGUI() {
@@ -78,9 +102,31 @@ public class RetailGUI extends JFrame{
 		stockJTabbedPane.add("Edit Stock", editStockJPanel);
 		
 		accessJTabbedPane.add("Coming Soon", accessJPanel);
-		accessJTabbedPane.setVisible(false);
+		accessJTabbedPane.setEnabled(false);
 		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
-		proflossJTabbedPane.setVisible(false);
+		proflossJTabbedPane.setEnabled(false);
+		
+		addSupplyJPanel.setLayout(grid);
+		viewSupplyJPanel.setLayout(grid);
+		addSupplyJPanel.add(supplierIdJLabel);
+		addSupplyJPanel.add(supplierIdJTextField);
+		addSupplyJPanel.add(supplierNameJLabel);
+		addSupplyJPanel.add(supplierNameJTextField);
+		addSupplyJPanel.add(supplierAddressJLabel);
+		addSupplyJPanel.add(supplierAddressJTextField);
+		addSupplyJPanel.add(supplierEmailJLabel);
+		addSupplyJPanel.add(supplierEmailJTextField);
+		addSupplyJPanel.add(supplierPhoneJLabel);
+		addSupplyJPanel.add(supplierPhoneJTextField);
+		addSupplyJPanel.add(supplierJButton);
+		viewSupplyJPanel.add(viewSupplyJLabel);
+		viewSupplyJPanel.add(viewSupplyJTextField);
+		viewSupplyJPanel.add(viewSupplyNameJLabel);
+		viewSupplyJPanel.add(viewSupplyNameJTextField);
+		viewSupplyJPanel.add(viewsupplyJButton);
+		viewSupplyJPanel.add(allSupplyJButton);
+		viewSupplyJPanel.add(supplierJTextArea);
+		
 	}
 
 }
