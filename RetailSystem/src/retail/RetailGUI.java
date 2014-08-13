@@ -1,6 +1,10 @@
 package retail;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -171,11 +175,10 @@ public class RetailGUI extends JFrame{
 				  passwordTF.setText("");
 			  }
 			});		
-	}
+	
 		
 	}
-	
-		//handler for login button
+	//handler for login button
 	private class LoginButtonHandler implements ActionListener
 	{
 	public void actionPerformed( ActionEvent e)
@@ -220,8 +223,9 @@ public class RetailGUI extends JFrame{
 			//no employee id match
 			JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 		}
-		}
 		
+		
+	}
 	}
 
 }
