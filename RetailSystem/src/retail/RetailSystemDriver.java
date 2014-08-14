@@ -50,7 +50,7 @@ public class RetailSystemDriver {
 	public static void main(String[] args) {
 		//new RetailSystemDriver(); // This is been used to test view functions in Product Class (e.g ViewProductByTitle). 
 		//new MarcTestingFrame();
-		//new RetailGUI();
+		new RetailGUI();
 	}
 
 }
