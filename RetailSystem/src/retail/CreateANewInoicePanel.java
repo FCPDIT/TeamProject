@@ -103,6 +103,7 @@ public class CreateANewInoicePanel extends JPanel {
 				String prodCode = prodCodeTextField.getText();
 				String quantityString = quantityTextField.getText();
 				
+				//check to see if any of the input boxes have been left empty or wrong input
 				if((invoiceIdString.trim().equals("") || invoiceIdString.matches(".*\\D.*"))|| 
 						(emplyIdString.trim().equals("") || emplyIdString.matches(".*\\D.*")) || 
 						(custIdString.trim().equals("") || custIdString.matches(".*\\D.*"))||
@@ -126,7 +127,7 @@ public class CreateANewInoicePanel extends JPanel {
 					Customer cusInput = invoice.returnCustomerObject(custId,customers);
 					Product prodInput = invoice.returnProductObject(prodCode, products);
 
-					//check to see if any of the input boxes have been left empty
+					
 					
 					
 					// create a new Invoice with checks. Need to be finished!!
