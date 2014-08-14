@@ -96,53 +96,76 @@ public class CreateANewInoicePanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				int invoiceId = Integer.parseInt(invTextField.getText());
-				int emplyId = Integer.parseInt(emplTextField.getText());
-				int custId = Integer.parseInt(custTextField.getText());
+				
+				String invoiceIdString = invTextField.getText();
+				String emplyIdString = emplTextField.getText();
+				String custIdString = custTextField.getText();
 				String prodCode = prodCodeTextField.getText();
-				int quantity = Integer.parseInt(quantityTextField.getText());
+				String quantityString = quantityTextField.getText();
+				
+				//check to see if any of the input boxes have been left empty or wrong input
+				if((invoiceIdString.trim().equals("") || invoiceIdString.matches(".*\\D.*"))|| 
+						(emplyIdString.trim().equals("") || emplyIdString.matches(".*\\D.*")) || 
+						(custIdString.trim().equals("") || custIdString.matches(".*\\D.*"))||
+						prodCode.trim().equals("")||
+						(quantityString.trim().equals("") || quantityString.matches(".*\\D.*")))
+				{
+					resultLabel.setText("Please ensure all text fields have been filled");
+				}else{
+					int invoiceId = Integer.parseInt(invoiceIdString);
+					int emplyId = Integer.parseInt(emplyIdString);
+					int custId = Integer.parseInt(custIdString);
+					int quantity = Integer.parseInt(quantityString);
 
-				// Fill arraylist with test info. Will be deleted also!!!!!!
-				employees.add(new Employee(1, "marc", 1, 50.00, 1234));
-				customers.add(new Customer(2, "Paddy Power", "Dublin"));
-				products.add(new Product("y", "y", "code", 60.00, 30.00, 30,40, 4, new Supplier(3, "m", "m")));
+					// Fill arraylist with test info. Will be deleted also!!!!!!
+					employees.add(new Employee(1, "marc", 1, 50.00, 1234));
+					customers.add(new Customer(2, "Paddy Power", "Dublin"));
+					products.add(new Product("y", "y", "code", 60.00, 30.00, 30,40, 4, new Supplier(3, "m", "m")));
 
-				//Objects needed to create the invoice Object
-				Employee emplInput = invoice.returnEmployeeObject(emplyId,employees);
-				Customer cusInput = invoice.returnCustomerObject(custId,customers);
-				Product prodInput = invoice.returnProductObject(prodCode, products);
+					//Objects needed to create the invoice Object
+					Employee emplInput = invoice.returnEmployeeObject(emplyId,employees);
+					Customer cusInput = invoice.returnCustomerObject(custId,customers);
+					Product prodInput = invoice.returnProductObject(prodCode, products);
 
-				// create a new Invoice with checks. Need to be finished!!
-				if (emplInput != null) {				
-					if (cusInput != null) {
-						if (prodInput != null) {
-							if(invoiceNumberUnique(invoiceId,invoices)){
-						//create a new Invoice Object with input
-							Invoice inv = new Invoice(invoiceId, emplInput, cusInput, prodInput, quantity);
-						//Add the newely created Invoice to the list
-							invoices.add(inv);
-							System.out.println(invoices.size());
-						//Set Label to Confirmation
-							resultLabel.setText("Thank you for the order");
-						// reset the textboxes to empty
-							invTextField.setText("");
-							emplTextField.setText("");
-							custTextField.setText("");
-							prodCodeTextField.setText("");
-							quantityTextField.setText("");
-							}else{
-								resultLabel.setText("Invoice Number is not Unique");
+					
+					
+					
+					// create a new Invoice with checks. Need to be finished!!
+					if (emplInput != null) {				
+						if (cusInput != null) {
+							if (prodInput != null) {
+								if(invoiceNumberUnique(invoiceId,invoices)){ 
+							//create a new Invoice Object with input
+								Invoice inv = new Invoice(invoiceId, emplInput, cusInput, prodInput, quantity);
+							//Add the newely created Invoice to the list
+								invoices.add(inv);
+								System.out.println(invoices.size());
+							//Set Label to Confirmation
+								resultLabel.setText("Thank you for the order");
+							// reset the textboxes to empty
+								invTextField.setText("");
+								emplTextField.setText("");
+								custTextField.setText("");
+								prodCodeTextField.setText("");
+								quantityTextField.setText("");
+								}else{
+									resultLabel.setText("Invoice Number is not Unique");
+								}
+							} else {
+								resultLabel.setText("No Product Record exist with that Input");
 							}
 						} else {
-							resultLabel.setText("No Product Record exist with that Input");
+							resultLabel.setText("No Customer Record exist with that Input");
 						}
 					} else {
-						resultLabel.setText("No Customer Record exist with that Input");
+						resultLabel.setText("No Employee Record exist with that Input");
 					}
-				} else {
-					resultLabel.setText("No Employee Record exist with that Input");
+					
 				}
+				
+				
+				
+				
 
 			}
 		});

@@ -52,14 +52,12 @@ public class Employee {
         this.password = password;
     }
     
-    	public int verifyLogin(int id, int password) {
+    	public int verifyLogin(ObjectList ol, int id, int password) {
     	int count = 0;
 		int count1 = 0;
 		int login = 0;
-		RetailSystemDriver rs = new RetailSystemDriver();
-		ArrayList<Employee> elt = rs.getEmployees();
 
-		for(Employee employee: elt){
+		for(Employee employee: ol.getEmployees()){
 			if(id == employee.getEmployeeId()){
 				count++;
 				if(employee.getAccess() == 0){

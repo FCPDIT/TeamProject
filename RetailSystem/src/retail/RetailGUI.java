@@ -1,5 +1,6 @@
 package retail;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import javax.swing.*;
 public class RetailGUI extends JFrame{
 	
 	private ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
+	private ObjectList ol = new ObjectList();
 	private JFrame mainJFrame = new JFrame();
 	private GridLayout grid = new GridLayout(0, 2, 4, 4);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
@@ -53,12 +55,13 @@ public class RetailGUI extends JFrame{
 	private JPanel logoutJPanel = new JPanel();
 	
 	//login components
+	JPanel loginComponentsJPanel = new JPanel();
 	private JTextField loginTF = new JTextField();
 	private JTextField passwordTF = new JTextField();
 	private JButton loginBut = new JButton();
 	
 	//logout components
-		private JButton logoutBut = new JButton();
+	private JButton logoutBut = new JButton();
 	
 	private JLabel supplierIdJLabel = new JLabel("Customer ID: ");
 	private JTextField supplierIdJTextField = new JTextField("Required Field");
@@ -90,6 +93,21 @@ public class RetailGUI extends JFrame{
 	private JTextField editSupplierDelivery = new JTextField("Edit Supplier Delivery");
 	private JButton saveSupplierJButton = new JButton("Update Supplier");
 	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
+	
+	//Edit Invoice Components 
+	JPanel editInvoiceComponentsJPanel = new JPanel();
+	JPanel saveInvoiceComponentsJPanel = new JPanel();
+	private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
+	private JButton editInvoiceJButton = new JButton("Find Invoice");
+	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
+	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
+	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
+	private JTextField editInvoiceProduct = new JTextField("Edit Product");
+	private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
+	private JButton payInvoiceJButton = new JButton("Pay Invoice");
+	private JButton saveInvoiceJButton = new JButton("Update Invoice");
+	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
+	private JTextField editPayStatus = new JTextField("");
 	
 	public RetailGUI() {
 		// TODO Auto-generated constructor stub
@@ -242,57 +260,67 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
-		/*
-		 *LOGIN LOCK TABS - COMMENTED OUT FOR DEVELOPMENT EASE - PUT BACK IN WHEN RUNNING
-		 * 
-		//lock the tabs until login successful
-		mainJTabbedPane.setEnabledAt(1, false);
-		mainJTabbedPane.setEnabledAt(2, false);
-		mainJTabbedPane.setEnabledAt(3, false);
-		mainJTabbedPane.setEnabledAt(4, false);
-		mainJTabbedPane.setEnabledAt(5, false);
-		mainJTabbedPane.setEnabledAt(6, false);
-		mainJTabbedPane.setEnabledAt(7, false);
-		mainJTabbedPane.setEnabledAt(8, false);
-		
-		*/
-		
-		//add login components
-		JPanel loginComponentsJPanel = new JPanel();
-		loginComponentsJPanel.setLayout(new GridLayout(4,4));
-		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
-		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
-		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
-		loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
-		loginComponentsJPanel.add(loginBut= new JButton("Login"));
-		loginJPanel.add(loginComponentsJPanel);
-		//add listener for login button
-		LoginButtonHandler handler = new LoginButtonHandler();
-		loginBut.addActionListener(handler);
-		//focus listeners & handlers
-		loginTF.addMouseListener(new MouseAdapter() {
-			  @Override
-			  public void mouseClicked(MouseEvent e) {
-				  loginTF.setText("");
-			  }
-			});
-		passwordTF.addMouseListener(new MouseAdapter() {
-			  @Override
-			  public void mouseClicked(MouseEvent e) {
-				  passwordTF.setText("");
-			  }
-			});		
-		
-		//logout function
-		JPanel logoutComponentsJPanel = new JPanel();
-		logoutComponentsJPanel.setLayout(new GridLayout(4,4));
-		logoutComponentsJPanel.add(new JLabel("Logout of application: "));
-		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
-		logoutJPanel.add(logoutComponentsJPanel);
-		logoutBut.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				// release all tabs - manager
-				mainJTabbedPane.setSelectedIndex(0);
+		//add edit invoice components
+				JPanel findInvoiceComponentsJPanel = new JPanel();
+				findInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
+				findInvoiceComponentsJPanel.add(editInvoiceJTextField);
+				editInvoiceJTextField.addMouseListener(new MouseAdapter() {
+					  @Override
+					  public void mouseClicked(MouseEvent e) {
+						  editInvoiceJTextField.setText("");
+					  }
+					});
+				findInvoiceComponentsJPanel.add(editInvoiceJButton);
+				editInvoiceComponentsJPanel.setLayout(new GridLayout(3,2));
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
+				editInvoiceComponentsJPanel.add(editInvoiceId);
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Employee ID"));
+				editInvoiceComponentsJPanel.add(editInvoiceEmployee);
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
+				editInvoiceComponentsJPanel.add(editInvoiceCustomer);
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Product ID"));
+				editInvoiceComponentsJPanel.add(editInvoiceProduct);
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Quantity"));
+				editInvoiceComponentsJPanel.add(editInvoiceQuantity);
+				editInvoiceComponentsJPanel.add(editPayStatus);
+				editPayStatus.setEditable(false);
+				editInvoiceComponentsJPanel.add(payInvoiceJButton);
+				payInvoiceJButton.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						Invoice inv = new Invoice();
+						inv.payInvoice(ol, Integer.parseInt(editInvoiceJTextField.getText().trim()));
+						JOptionPane.showMessageDialog(null, "Paid!");
+						editInvoiceJButton.doClick();		
+					}
+				});
+				saveInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
+				saveInvoiceComponentsJPanel.add(saveInvoiceJButton);
+				saveInvoiceComponentsJPanel.add(deleteInvoiceJButton);
+				deleteInvoiceJButton.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						Invoice inv = new Invoice();
+						int index = inv.deleteInvoice(ol, Integer.parseInt(editInvoiceJTextField.getText().trim()));
+						ol.getInvoices().remove(index);
+						JOptionPane.showMessageDialog(null, "Deleted!");
+						editInvoiceJTextField.setText(Integer.toString(ol.getInvoices().get(0).getId()));
+						editInvoiceJButton.doClick();
+					}
+				});
+				editInvJPanel.setLayout(new GridLayout(3,2));
+				editInvJPanel.add(findInvoiceComponentsJPanel);
+				editInvJPanel.add(editInvoiceComponentsJPanel);
+				editInvJPanel.add(saveInvoiceComponentsJPanel);
+				editInvoiceComponentsJPanel.setVisible(false);
+				saveInvoiceComponentsJPanel.setVisible(false);
+				EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
+				editInvoiceJButton.addActionListener(eib);
+				SaveButtonHandler sbh = new SaveButtonHandler();
+				saveInvoiceJButton.addActionListener(sbh);
+				
+				
+				/*	
+
+				//lock the tabs until login successful
 				mainJTabbedPane.setEnabledAt(1, false);
 				mainJTabbedPane.setEnabledAt(2, false);
 				mainJTabbedPane.setEnabledAt(3, false);
@@ -301,62 +329,164 @@ public class RetailGUI extends JFrame{
 				mainJTabbedPane.setEnabledAt(6, false);
 				mainJTabbedPane.setEnabledAt(7, false);
 				mainJTabbedPane.setEnabledAt(8, false);
-				mainJTabbedPane.setEnabledAt(0, true);;
-			}
-		});
-	
-		
-	}
-	//handler for login button
-	private class LoginButtonHandler implements ActionListener
-	{
-	public void actionPerformed( ActionEvent e)
-		{//handler starts
-		Employee emp = new Employee();
-		int id = 0;
-		int password = 0;
-		try {
-			id = Integer.parseInt( loginTF.getText().trim() );
-		}
-		catch (NumberFormatException nfe){
-			loginTF.setText("");
-		}
-		try{
-			password = Integer.parseInt( passwordTF.getText().trim() );
-		}
-		catch(NumberFormatException nfe){
-			passwordTF.setText("");
-		}
-		int login = emp.verifyLogin(id, password);
-		if(login == 1){
-			// release all tabs - manager
-			mainJTabbedPane.setSelectedIndex(1);
-			mainJTabbedPane.setEnabledAt(1, true);
-			mainJTabbedPane.setEnabledAt(2, true);
-			mainJTabbedPane.setEnabledAt(3, true);
-			mainJTabbedPane.setEnabledAt(4, true);
-			mainJTabbedPane.setEnabledAt(5, true);
-			mainJTabbedPane.setEnabledAt(6, true);
-			mainJTabbedPane.setEnabledAt(7, true);
-			mainJTabbedPane.setEnabledAt(8, true);
-			mainJTabbedPane.setEnabledAt(0, false);
-		}
-		else if(login == 2){
-			// release some tabs - staff SPRINT 2
+				
+				*/
+				
+				
+				//add login components
+				loginComponentsJPanel.setLayout(new GridLayout(4,4));
+				loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
+				loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
+				loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
+				loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
+				loginComponentsJPanel.add(loginBut= new JButton("Login"));
+				loginJPanel.add(loginComponentsJPanel);
+				//add listener for login button
+				LoginButtonHandler handler = new LoginButtonHandler();
+				loginBut.addActionListener(handler);
+				//add listener for save button
+				//focus listeners & handlers
+				loginTF.addMouseListener(new MouseAdapter() {
+					  @Override
+					  public void mouseClicked(MouseEvent e) {
+						  loginTF.setText("");
+					  }
+					});
+				passwordTF.addMouseListener(new MouseAdapter() {
+					  @Override
+					  public void mouseClicked(MouseEvent e) {
+						  passwordTF.setText("");
+					  }
+					});	
+				
+				JPanel logoutComponentsJPanel = new JPanel();
+				logoutComponentsJPanel.setLayout(new GridLayout(4,4));
+				logoutComponentsJPanel.add(new JLabel("Logout of application: "));
+				logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
+				logoutJPanel.add(logoutComponentsJPanel);
+				logoutBut.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						// release all tabs - manager
+						mainJTabbedPane.setSelectedIndex(0);
+						mainJTabbedPane.setEnabledAt(1, false);
+						mainJTabbedPane.setEnabledAt(2, false);
+						mainJTabbedPane.setEnabledAt(3, false);
+						mainJTabbedPane.setEnabledAt(4, false);
+						mainJTabbedPane.setEnabledAt(5, false);
+						mainJTabbedPane.setEnabledAt(6, false);
+						mainJTabbedPane.setEnabledAt(7, false);
+						mainJTabbedPane.setEnabledAt(8, false);
+						mainJTabbedPane.setEnabledAt(0, true);;
+					}
+				});
 			
-		}
-		else if(login == 3){
-			//password incorrect
-			JOptionPane.showMessageDialog(loginJPanel, "Password doesn't match that Employee ID", "For your information", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else if(login == 4){
-			//no employee id match
-			JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-		}
+				
+			}
+			//handler for login button
+			private class LoginButtonHandler implements ActionListener
+			{
+			public void actionPerformed( ActionEvent e)
+				{//handler starts
+				Employee emp = new Employee();
+				int id = 0;
+				int password = 0;
+				try {
+					id = Integer.parseInt( loginTF.getText().trim() );
+				}
+				catch (NumberFormatException nfe){
+					loginTF.setText("");
+				}
+				try{
+					password = Integer.parseInt( passwordTF.getText().trim() );
+				}
+				catch(NumberFormatException nfe){
+					passwordTF.setText("");
+				}
+				int login = emp.verifyLogin(ol, id, password);
+				if(login == 1){
+					// release all tabs - manager
+					mainJTabbedPane.setSelectedIndex(1);
+					mainJTabbedPane.setEnabledAt(1, true);
+					mainJTabbedPane.setEnabledAt(2, true);
+					mainJTabbedPane.setEnabledAt(3, true);
+					mainJTabbedPane.setEnabledAt(4, true);
+					mainJTabbedPane.setEnabledAt(5, true);
+					mainJTabbedPane.setEnabledAt(6, true);
+					mainJTabbedPane.setEnabledAt(7, true);
+					mainJTabbedPane.setEnabledAt(8, true);
+					mainJTabbedPane.setEnabledAt(0, false);
+				}
+				else if(login == 2){
+					// release some tabs - staff SPRINT 2
+					
+				}
+				else if(login == 3){
+					//password incorrect
+					JOptionPane.showMessageDialog(loginJPanel, "Password doesn't match that Employee ID", "For your information", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else if(login == 4){
+					//no employee id match
+					JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+				}		
+				}
+			}
+			
+			//Handler for edit invoice button
+			private class EditInvoiceButtonHandler implements ActionListener
+			{
+			public void actionPerformed( ActionEvent e)
+				{//handler starts
+					ArrayList<String> fields = new ArrayList<String>();
+					Invoice inv = new Invoice();
+					int id = 0;
+					try {
+						id = Integer.parseInt( editInvoiceJTextField.getText().trim() );
+					}
+					catch (NumberFormatException nfe){
+						editInvoiceJTextField.setText("");
+					}
+					int invoiceID = inv.verifyInvoiceID(ol, id);
+					if(invoiceID == 1){
+						editInvoiceComponentsJPanel.setVisible(true);
+						saveInvoiceComponentsJPanel.setVisible(true);
+						fields = inv.returnFields(ol, id);
+						editInvoiceId.setText(fields.get(0));
+						editInvoiceEmployee.setText(fields.get(1));
+						editInvoiceCustomer.setText(fields.get(2));
+						editInvoiceProduct.setText(fields.get(3));
+						editInvoiceQuantity.setText(fields.get(4));
+						editPayStatus.setText(fields.get(5));
+						if(fields.get(5).equals("Unpaid")){
+							editPayStatus.setForeground(Color.RED);
+						}
+					}
+					else if(invoiceID == 2){
+						//no employee id match
+						JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+					}
 
-		
-		
-	}
-	}
+				}	
+			}
+			
+			//handler for save button
+			private class SaveButtonHandler implements ActionListener
+			{
+			public void actionPerformed( ActionEvent e)
+				{
+				Invoice inv = new Invoice();
+					ArrayList<String> fields = new ArrayList<String>();
+					fields.add(new String (editInvoiceId.getText().trim()));
+					fields.add(new String (editInvoiceEmployee.getText().trim()));
+					fields.add(new String (editInvoiceCustomer.getText().trim()));
+					fields.add(new String (editInvoiceProduct.getText().trim()));
+					fields.add(new String (editInvoiceQuantity.getText().trim()));
+					fields.add(new String (editInvoiceJTextField.getText().trim()));
+					inv.updateInvoice(ol, fields);
+					editInvoiceJTextField.setText(fields.get(0));
+					JOptionPane.showMessageDialog(null, "Updated!");
+					editInvoiceJButton.doClick();
+					
+				}
+			}
 
 }
