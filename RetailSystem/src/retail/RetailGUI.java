@@ -50,10 +50,15 @@ public class RetailGUI extends JFrame{
 	
 	private JPanel proflossJPanel = new JPanel();
 	
+	private JPanel logoutJPanel = new JPanel();
+	
 	//login components
 	private JTextField loginTF = new JTextField();
 	private JTextField passwordTF = new JTextField();
 	private JButton loginBut = new JButton();
+	
+	//logout components
+		private JButton logoutBut = new JButton();
 	
 	private JLabel supplierIdJLabel = new JLabel("Customer ID: ");
 	private JTextField supplierIdJTextField = new JTextField("Required Field");
@@ -102,6 +107,7 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.add("Stock Management", stockJTabbedPane);
 		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
 		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
+		mainJTabbedPane.add("Logout", logoutJPanel);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
 		custJTabbedPane.add("View Customer Details", viewCustJPanel);
@@ -275,6 +281,19 @@ public class RetailGUI extends JFrame{
 				  passwordTF.setText("");
 			  }
 			});		
+		
+		//logout function
+		JPanel logoutComponentsJPanel = new JPanel();
+		logoutComponentsJPanel.setLayout(new GridLayout(4,4));
+		logoutComponentsJPanel.add(new JLabel("Logout of application: "));
+		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
+		logoutJPanel.add(logoutComponentsJPanel);
+		logoutBut.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				mainJFrame.setVisible(false);
+				new RetailGUI();
+			}
+		});
 	
 		
 	}
