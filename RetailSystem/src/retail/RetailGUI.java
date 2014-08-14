@@ -302,6 +302,7 @@ public class RetailGUI extends JFrame{
 						int index = inv.deleteInvoice(ol, Integer.parseInt(editInvoiceJTextField.getText().trim()));
 						ol.getInvoices().remove(index);
 						JOptionPane.showMessageDialog(null, "Deleted!");
+						editInvoiceJTextField.setText(Integer.toString(ol.getInvoices().get(0).getId()));
 						editInvoiceJButton.doClick();
 					}
 				});
