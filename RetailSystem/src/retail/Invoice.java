@@ -107,13 +107,13 @@ public class Invoice {
 		if (v != null) {
 			return "Invoice ID: " + v.getId() + 
 					"\nProduct Id: " + v.getProduct().getProductCode() 
-					+ "\nProduct Price: " +  String.format( "€%.2f", v.getProduct().getRetailPrice())
+					+ "\nProduct Price: " +  String.format( "ï¿½%.2f", v.getProduct().getRetailPrice())
 					+ "\nQuantity of Order " + v.getQuantity()
 					+ "\nEmployee Name: " + v.getEmployee().getEmployeeName() 
 					+ "\nEmployee Id: "   + v.getEmployee().getEmployeeId() 
 					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
 					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
-					+ "\nInvoice Total: " +  String.format( "€%.2f", v.getTotalInvoicePrice()) 
+					+ "\nInvoice Total: " +  String.format( "ï¿½%.2f", v.getTotalInvoicePrice()) 
 					+ "\nDate: " + v.getInvoiceDate() + "\n\n";
 		} else {
 			return "No details to print";
@@ -232,6 +232,114 @@ public class Invoice {
 			return null;
 		}
 
+		//method to edit invoices by id
+				public int verifyInvoiceID(int id) {
+			    	int count = 0;
+			    	int validID = 0;
+					RetailSystemDriver rs = new RetailSystemDriver();
+					ArrayList<Invoice> ilt = rs.getInvoices();
+					for(Invoice invoice: ilt){
+						if(id == invoice.getId()){
+							count++;
+							validID = 1;
+						}
+					}	
+					if(count == 0){
+						validID = 2;
+					}
+					return validID;
+				}
+				
+				//method to set fields on edit invoice
+				public ArrayList<String> returnFields(int id){
+					RetailSystemDriver rs = new RetailSystemDriver();
+					ArrayList<Invoice> ilt = rs.getInvoices();
+					ArrayList<String> fields = new ArrayList<String>();
+					String invId = Integer.toString(id);
+					fields.add(invId);
+					String employee ="";
+					String customer ="";
+					String product ="";
+					String quantity ="";
+					String paid = "Unpaid";
+					for(Invoice invoice: ilt){
+						if(id == invoice.getId()){
+							employee = Integer.toString(invoice.getEmployee().getEmployeeId());
+							customer = Integer.toString(invoice.getCustomer().getCustId());
+							product = invoice.getProduct().getProductCode();
+							quantity = Integer.toString(invoice.getQuantity());
+							if(invoice.isPaid()){
+								paid = "Paid";
+							}
+							fields.add(employee);
+							fields.add(customer);
+							fields.add(product);
+							fields.add(quantity);
+							fields.add(paid);
+						}
+					}		
+					return fields;
+				}
+				
+				
+				//method to update invoices
+				public void updateInvoice(ArrayList<String> fields){
+					RetailSystemDriver rs = new RetailSystemDriver();
+					ArrayList<Invoice> ilt = rs.getInvoices();
+					ArrayList<Customer> clt = rs.getCustomers();
+					ArrayList<Employee> elt = rs.getEmployees();
+					ArrayList<Product> plt = rs.getProducts();
+					int invId = Integer.parseInt(fields.get(0));
+					int employeeId = Integer.parseInt(fields.get(1));
+					int customerId = Integer.parseInt(fields.get(2));
+					String productId =fields.get(3);
+					int qty = Integer.parseInt(fields.get(4));
+					int currentId = Integer.parseInt(fields.get(5));
+					Employee emp = elt.get(0);
+					Customer cust = clt.get(0);
+					Product prod = plt.get(0);
+					
+					for(Employee employee: elt){
+						if(employeeId == employee.getEmployeeId()){
+							emp = employee;
+						}
+					}
+					
+					for(Customer customer: clt){
+						if(customerId == customer.getCustId()){
+							cust = customer;
+						}
+					}
+					
+					for(Product product: plt){
+						if(productId.equals(product.getProductCode())){
+							prod = product;
+						}
+					}
+					
+					for(Invoice invoice: ilt){
+						if(currentId == invoice.getId()){
+							invoice.setId(invId);
+							invoice.setEmployee(emp);
+							invoice.setCustomer(cust);
+							invoice.setProduct(prod);
+							invoice.setQuantity(qty);
+						}
+					}
+				}
+				
+				//method to pay invoice
+				public void payInvoice(int id){
+					RetailSystemDriver rs = new RetailSystemDriver();
+					ArrayList<Invoice> ilt = rs.getInvoices();
+					for(Invoice invoice:ilt){
+						if(id == invoice.getId()){
+							invoice.setPaid(true);
+						}
+					}
+					
+				}
+				
 
 }
 
