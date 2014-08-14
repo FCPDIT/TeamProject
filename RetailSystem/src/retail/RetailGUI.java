@@ -1,5 +1,6 @@
 package retail;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +59,7 @@ public class RetailGUI extends JFrame{
 	private JButton loginBut = new JButton();
 	
 	//logout components
-		private JButton logoutBut = new JButton();
+	private JButton logoutBut = new JButton();
 	
 	private JLabel supplierIdJLabel = new JLabel("Customer ID: ");
 	private JTextField supplierIdJTextField = new JTextField("Required Field");
@@ -90,6 +91,21 @@ public class RetailGUI extends JFrame{
 	private JTextField editSupplierDelivery = new JTextField("Edit Supplier Delivery");
 	private JButton saveSupplierJButton = new JButton("Update Supplier");
 	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
+	
+	//Edit Invoice Components 
+	JPanel editInvoiceComponentsJPanel = new JPanel();
+	JPanel saveInvoiceComponentsJPanel = new JPanel();
+	private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
+	private JButton editInvoiceJButton = new JButton("Find Invoice");
+	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
+	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
+	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
+	private JTextField editInvoiceProduct = new JTextField("Edit Product");
+	private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
+	private JButton payInvoiceJButton = new JButton("Pay Invoice");
+	private JButton saveInvoiceJButton = new JButton("Update Invoice");
+	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
+	private JTextField editPayStatus = new JTextField("");
 	
 	public RetailGUI() {
 		// TODO Auto-generated constructor stub
@@ -242,6 +258,52 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
+		//add edit invoice components
+				JPanel findInvoiceComponentsJPanel = new JPanel();
+				findInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
+				findInvoiceComponentsJPanel.add(editInvoiceJTextField);
+				editInvoiceJTextField.addMouseListener(new MouseAdapter() {
+					  @Override
+					  public void mouseClicked(MouseEvent e) {
+						  editInvoiceJTextField.setText("");
+					  }
+					});
+				findInvoiceComponentsJPanel.add(editInvoiceJButton);
+				editInvoiceComponentsJPanel.setLayout(new GridLayout(3,2));
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
+				editInvoiceComponentsJPanel.add(editInvoiceId);
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Employee ID"));
+				editInvoiceComponentsJPanel.add(editInvoiceEmployee);
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
+				editInvoiceComponentsJPanel.add(editInvoiceCustomer);
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Product ID"));
+				editInvoiceComponentsJPanel.add(editInvoiceProduct);
+				editInvoiceComponentsJPanel.add(new JLabel("Enter New Quantity"));
+				editInvoiceComponentsJPanel.add(editInvoiceQuantity);
+				editInvoiceComponentsJPanel.add(editPayStatus);
+				editPayStatus.setEditable(false);
+				editInvoiceComponentsJPanel.add(payInvoiceJButton);
+				payInvoiceJButton.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						Invoice inv = new Invoice();
+						inv.payInvoice(Integer.parseInt(editInvoiceJTextField.getText().trim()));
+						
+					}
+				});
+				saveInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
+				saveInvoiceComponentsJPanel.add(saveInvoiceJButton);
+				saveInvoiceComponentsJPanel.add(deleteInvoiceJButton);
+				editInvJPanel.setLayout(new GridLayout(3,2));
+				editInvJPanel.add(findInvoiceComponentsJPanel);
+				editInvJPanel.add(editInvoiceComponentsJPanel);
+				editInvJPanel.add(saveInvoiceComponentsJPanel);
+				editInvoiceComponentsJPanel.setVisible(false);
+				saveInvoiceComponentsJPanel.setVisible(false);
+				EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
+				editInvoiceJButton.addActionListener(eib);
+				SaveButtonHandler sbh = new SaveButtonHandler();
+				saveInvoiceJButton.addActionListener(sbh);
+		
 		/*
 		 *LOGIN LOCK TABS - COMMENTED OUT FOR DEVELOPMENT EASE - PUT BACK IN WHEN RUNNING
 		 * 
@@ -356,7 +418,62 @@ public class RetailGUI extends JFrame{
 
 		
 		
+		}
 	}
-	}
+	
+	//Handler for edit invoice button
+		private class EditInvoiceButtonHandler implements ActionListener
+		{
+		public void actionPerformed( ActionEvent e)
+			{//handler starts
+				ArrayList<String> fields = new ArrayList<String>();
+				Invoice inv = new Invoice();
+				int id = 0;
+				try {
+					id = Integer.parseInt( editInvoiceJTextField.getText().trim() );
+				}
+				catch (NumberFormatException nfe){
+					editInvoiceJTextField.setText("");
+				}
+				int invoiceID = inv.verifyInvoiceID(id);
+				if(invoiceID == 1){
+					editInvoiceComponentsJPanel.setVisible(true);
+					saveInvoiceComponentsJPanel.setVisible(true);
+					fields = inv.returnFields(id);
+					editInvoiceId.setText(fields.get(0));
+					editInvoiceEmployee.setText(fields.get(1));
+					editInvoiceCustomer.setText(fields.get(2));
+					editInvoiceProduct.setText(fields.get(3));
+					editInvoiceQuantity.setText(fields.get(4));
+					editPayStatus.setText(fields.get(5));
+					if(fields.get(5).equals("Unpaid")){
+						editPayStatus.setForeground(Color.RED);
+					}
+				}
+				else if(invoiceID == 2){
+					//no employee id match
+					JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+				}
+
+			}	
+		}
+		
+		//handler for save button
+		private class SaveButtonHandler implements ActionListener
+		{
+		public void actionPerformed( ActionEvent e)
+			{
+			Invoice inv = new Invoice();
+				ArrayList<String> fields = new ArrayList<String>();
+				fields.add(new String (editInvoiceId.getText().trim()));
+				fields.add(new String (editInvoiceEmployee.getText().trim()));
+				fields.add(new String (editInvoiceCustomer.getText().trim()));
+				fields.add(new String (editInvoiceProduct.getText().trim()));
+				fields.add(new String (editInvoiceQuantity.getText().trim()));
+				fields.add(new String (editInvoiceJTextField.getText().trim()));
+				inv.updateInvoice(fields);
+				
+			}
+		}
 
 }
