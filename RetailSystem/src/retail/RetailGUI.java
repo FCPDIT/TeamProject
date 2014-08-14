@@ -401,7 +401,7 @@ public class RetailGUI extends JFrame{
 				catch(NumberFormatException nfe){
 					passwordTF.setText("");
 				}
-				int login = emp.verifyLogin(id, password);
+				int login = emp.verifyLogin(ol, id, password);
 				if(login == 1){
 					// release all tabs - manager
 					mainJTabbedPane.setSelectedIndex(1);
