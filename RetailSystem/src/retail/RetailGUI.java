@@ -50,10 +50,15 @@ public class RetailGUI extends JFrame{
 	
 	private JPanel proflossJPanel = new JPanel();
 	
+	private JPanel logoutJPanel = new JPanel();
+	
 	//login components
 	private JTextField loginTF = new JTextField();
 	private JTextField passwordTF = new JTextField();
 	private JButton loginBut = new JButton();
+	
+	//logout components
+		private JButton logoutBut = new JButton();
 	
 	private JLabel supplierIdJLabel = new JLabel("Customer ID: ");
 	private JTextField supplierIdJTextField = new JTextField("Required Field");
@@ -102,6 +107,7 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.add("Stock Management", stockJTabbedPane);
 		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
 		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
+		mainJTabbedPane.add("Logout", logoutJPanel);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
 		custJTabbedPane.add("View Customer Details", viewCustJPanel);
@@ -247,6 +253,7 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.setEnabledAt(5, false);
 		mainJTabbedPane.setEnabledAt(6, false);
 		mainJTabbedPane.setEnabledAt(7, false);
+		mainJTabbedPane.setEnabledAt(8, false);
 		
 		*/
 		
@@ -275,6 +282,28 @@ public class RetailGUI extends JFrame{
 				  passwordTF.setText("");
 			  }
 			});		
+		
+		//logout function
+		JPanel logoutComponentsJPanel = new JPanel();
+		logoutComponentsJPanel.setLayout(new GridLayout(4,4));
+		logoutComponentsJPanel.add(new JLabel("Logout of application: "));
+		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
+		logoutJPanel.add(logoutComponentsJPanel);
+		logoutBut.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				// release all tabs - manager
+				mainJTabbedPane.setSelectedIndex(0);
+				mainJTabbedPane.setEnabledAt(1, false);
+				mainJTabbedPane.setEnabledAt(2, false);
+				mainJTabbedPane.setEnabledAt(3, false);
+				mainJTabbedPane.setEnabledAt(4, false);
+				mainJTabbedPane.setEnabledAt(5, false);
+				mainJTabbedPane.setEnabledAt(6, false);
+				mainJTabbedPane.setEnabledAt(7, false);
+				mainJTabbedPane.setEnabledAt(8, false);
+				mainJTabbedPane.setEnabledAt(0, true);;
+			}
+		});
 	
 		
 	}
@@ -309,6 +338,7 @@ public class RetailGUI extends JFrame{
 			mainJTabbedPane.setEnabledAt(5, true);
 			mainJTabbedPane.setEnabledAt(6, true);
 			mainJTabbedPane.setEnabledAt(7, true);
+			mainJTabbedPane.setEnabledAt(8, true);
 			mainJTabbedPane.setEnabledAt(0, false);
 		}
 		else if(login == 2){

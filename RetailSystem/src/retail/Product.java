@@ -43,19 +43,17 @@ public class Product {
 
 	public String printProductDetails(Product p) {
 		if (p != null) {
-
-			return "\n Product Id: : " + p.getProductCode() + "\n Title: "
-					+ p.getTitle() + "\n Author: " + p.getAuthor()
-					+ "\n Current Stock: " + p.getCurrentStock()
-					+ "\n Supplier: " + p.getSupplier().getName()
-					+ "\n Max Stock:" + p.getMaxStock() + "\n Min Stock: "
-					+ p.getMinStock() + "\n Cost Price: ï¿½" + p.getCostPrice()
-					+ "\n Retail Price: ï¿½" + p.getRetailPrice() + "\n";
-
+		return "\n Product Id: : " + p.getProductCode() + "\n Title: "
+		+ p.getTitle() + "\n Author: " + p.getAuthor()
+		+ "\n Current Stock: " + p.getCurrentStock()
+		+ "\n Supplier: " + p.getSupplier().getName()
+		+ "\n Max Stock:" + p.getMaxStock() + "\n Min Stock: "
+		+ p.getMinStock() + "\n Cost Price: €" + p.getCostPrice()
+		+ "\n Retail Price: €" + p.getRetailPrice() + "\n";
 		} else {
-			return " No Details to Print ";
+		return " No Details to Print ";
 		}
-	}
+		}
 
 	public String viewAllProductDetails(ArrayList<Product> products) {
 		String list = "";
@@ -128,7 +126,7 @@ public class Product {
 		}
 	}
 	
-	
+
 	//search for products within a range ie between 5.99-10.99 euro, 10-20 etc. maybe use checkbox/radio buttons in the gui to select range
 	public String viewProductbyRetailPrice(double minPrice,double maxPrice, ArrayList<Product> products) {
 		String list = "";
@@ -175,12 +173,16 @@ public class Product {
 	public void removeStockById (String productCode, ArrayList<Product> products){
 		for (Product p : products) {
 			if (productCode == p.getProductCode()) {
-				products.remove(p); //not sure if this is the best way to remove a stockline but might be ok for this project..
+
+				products.remove(p); //not sure if this is the best way to remove a 
+									//stockline but might be ok for this project..
 			}
 		}
 	}
 	
-	
+
+		
+
 
 	public String getTitle() {
 		return title;
