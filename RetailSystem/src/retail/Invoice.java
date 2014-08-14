@@ -194,6 +194,43 @@ public class Invoice {
 				return unpaid;
 			}
 		}
+		
+		/**
+		 * Methods required to create a new Invoice Object:
+		 * 	1. Method to return an Employee from an ArrayList
+		 * 	2. Method to return a Customer from an ArrayList
+		 * 	3. Method to return a Product from an ArrayList
+		 */
+		
+		//1. Method to return the Employee form an ArrayList
+		public Employee returnEmployeeObject(int id, ArrayList<Employee>employees){
+			for(Employee e : employees){
+				if(e.getEmployeeId()==id){
+					return e;
+				}
+			}
+			return null;
+		}
+		
+		//2. Method to return a Customer from an ArrayList
+		public Customer returnCustomerObject(int id, ArrayList<Customer>customers){
+			for(Customer c : customers){
+				if(c.getCustId()==id){
+					return c;
+				}
+			}
+			return null;
+		}
+		
+		//3. Method to return a Product from an ArrayList
+		public Product returnProductObject(String prodcode, ArrayList<Product> products){
+			for(Product p : products){
+				if(p.getProductCode().equals(prodcode)){
+					return p;
+				}
+			}
+			return null;
+		}
 
 
 }

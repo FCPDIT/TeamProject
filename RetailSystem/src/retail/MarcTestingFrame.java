@@ -9,6 +9,7 @@ public class MarcTestingFrame extends JFrame{
 	
 	//Variables
 	private JPanel panel = new ViewCustomerInvoicePanel();
+	private JPanel invoicePanel = new CreateANewInoicePanel();
 	private Container container;
 	
 	//Constructor
@@ -16,7 +17,8 @@ public class MarcTestingFrame extends JFrame{
 		setSize(450, 450);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		container = getContentPane();
-		container.add(panel);
+		//container.add(panel);
+		container.add(invoicePanel);
 		setVisible(true);
 	}
 	
