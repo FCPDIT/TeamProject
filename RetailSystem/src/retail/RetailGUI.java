@@ -253,6 +253,7 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.setEnabledAt(5, false);
 		mainJTabbedPane.setEnabledAt(6, false);
 		mainJTabbedPane.setEnabledAt(7, false);
+		mainJTabbedPane.setEnabledAt(8, false);
 		
 		*/
 		
@@ -290,8 +291,17 @@ public class RetailGUI extends JFrame{
 		logoutJPanel.add(logoutComponentsJPanel);
 		logoutBut.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				mainJFrame.setVisible(false);
-				new RetailGUI();
+				// release all tabs - manager
+				mainJTabbedPane.setSelectedIndex(0);
+				mainJTabbedPane.setEnabledAt(1, false);
+				mainJTabbedPane.setEnabledAt(2, false);
+				mainJTabbedPane.setEnabledAt(3, false);
+				mainJTabbedPane.setEnabledAt(4, false);
+				mainJTabbedPane.setEnabledAt(5, false);
+				mainJTabbedPane.setEnabledAt(6, false);
+				mainJTabbedPane.setEnabledAt(7, false);
+				mainJTabbedPane.setEnabledAt(8, false);
+				mainJTabbedPane.setEnabledAt(0, true);;
 			}
 		});
 	
@@ -328,6 +338,7 @@ public class RetailGUI extends JFrame{
 			mainJTabbedPane.setEnabledAt(5, true);
 			mainJTabbedPane.setEnabledAt(6, true);
 			mainJTabbedPane.setEnabledAt(7, true);
+			mainJTabbedPane.setEnabledAt(8, true);
 			mainJTabbedPane.setEnabledAt(0, false);
 		}
 		else if(login == 2){
