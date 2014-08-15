@@ -28,10 +28,10 @@ public class ViewProductDetailsPanel extends JPanel{
 	
 	//Constructor
 	public ViewProductDetailsPanel() {
-		//Create an arraylist of product objects to test the GUI
-		Product p1 = new Product("Game of Thrones", "George R.R Martin", "1", 9.99, 3.75,100,200,15,new Supplier(12345," Books Express "," 12 Main Street, Cork "," sales@bookexpress.com ", " 01685789 "));
-		Product p2 = new Product("Not a Drill", "Lee Child", "2", 12.75, 4.95,50,200,10,new Supplier(12569," Book Warehouse "," 12 Whitehall industrial Park, Dublin "," sales@bookwarehouse.ie ", " 01488759 "));
-		Product p3 = new Product("Harry Potter", "J.K Rowling", "3", 11.99, 2.95,25,100,50,new Supplier(12745," Books Direct "," 25 Dublin Road, Cavan "," sales@booksdirect.ie ", " 016885698 "));
+		//Create an ArrayList of product objects to test the GUI
+		Product p1 = new Product("Game of Thrones", "George R.R Martin", "1", 9.99, 3.75,2,200,15,new Supplier(12345," Books Express "," 12 Main Street, Cork "," sales@bookexpress.com ", " 01685789 "));
+		Product p2 = new Product("Not a Drill", "Lee Child", "2", 12.75, 4.95,201,200,10,new Supplier(12569," Book Warehouse "," 12 Whitehall industrial Park, Dublin "," sales@bookwarehouse.ie ", " 01488759 "));
+		Product p3 = new Product("Harry Potter", "J.K Rowling", "3", 11.99, 2.95,11,100,10,new Supplier(12745," Books Direct "," 25 Dublin Road, Cavan "," sales@booksdirect.ie ", " 016885698 "));
 		products.add(p1);
 		products.add(p2);
 		products.add(p3);
@@ -156,9 +156,9 @@ public class ViewProductDetailsPanel extends JPanel{
 
 		//Button 4: 	View All
 		//1. View all Button
-		JButton viewAllProductsBtn = new JButton("View All");
-		gc.gridx = 0;
-		gc.gridy = 4;
+		JButton viewAllProductsBtn = new JButton(" View All Products ");
+		gc.gridx = 4;
+		gc.gridy = 1;
 		add(viewAllProductsBtn,gc);
 		viewAllProductsBtn.addActionListener(new ActionListener() {
 			@Override
@@ -166,6 +166,34 @@ public class ViewProductDetailsPanel extends JPanel{
 				textarea.setText(product.viewAllProductDetails(products));	//viewAllProducts() is in the Product Class
 			}
 		});
+		
+		
+		// Button 5: View All Current Stock below Min Reorder Level
+				
+				JButton viewAllBelowMinReorder = new JButton(" View All Low Stock ");
+				gc.gridx = 4;
+				gc.gridy = 2;
+				add(viewAllBelowMinReorder,gc);
+				viewAllBelowMinReorder.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						textarea.setText(product.viewProductByMinStock(products));
+					}
+				});
+				
+				
+		// Button 6: View all Current Stock above Max level (Over Stock)	
+				JButton viewAllAboveMaxReorder = new JButton(" View All Over Stock ");
+				gc.gridx = 4;
+				gc.gridy = 3;
+				add(viewAllAboveMaxReorder,gc);
+				viewAllAboveMaxReorder.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						textarea.setText(product.viewProductByOverStock(products));
+					}
+				});
+		
 	}
 }
 

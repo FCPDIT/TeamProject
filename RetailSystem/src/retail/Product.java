@@ -111,20 +111,37 @@ public class Product {
 			return list;
 		}
 	}
-
-	public String viewProductByMinStock(int level, ArrayList<Product> products) {
+	// Search for all products which Current Stock level are below the Min reorder value.
+	public String viewProductByMinStock(ArrayList<Product> products) {
 		String list = "";
+		
 		for (Product p : products) {
-			if (p.getMinStock() == level) {
-				list += printProductDetails(p);
+			if (p.getCurrentStock() <= p.getMinStock()) {
+				list +=printProductDetails(p);
 			}
 		}
 		if (list.equals("")) {
-			return " No Products with such a min re-order Stock Level ";
+			return " No Products with a Stock level below reorder level ";
 		} else {
 			return list;
 		}
 	}
+	
+	// Search for all products which Current Stock level are above Max Stock Level.
+		public String viewProductByOverStock(ArrayList<Product> products) {
+			String list = "";
+			
+			for (Product p : products) {
+				if (p.getCurrentStock() >= p.getMaxStock()) {
+					list +=printProductDetails(p);
+				}
+			}
+			if (list.equals("")) {
+				return " No Products are over stocked ";
+			} else {
+				return list;
+			}
+		}
 	
 
 	//search for products within a range ie between 5.99-10.99 euro, 10-20 etc. maybe use checkbox/radio buttons in the gui to select range
