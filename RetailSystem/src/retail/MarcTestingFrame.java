@@ -23,7 +23,8 @@ public class MarcTestingFrame extends JFrame{
 	}
 	
 	public static void main(String [] args){
-		new MarcTestingFrame();
+		//new MarcTestingFrame();
+		new RetailGUI();
 	}
 
 	
