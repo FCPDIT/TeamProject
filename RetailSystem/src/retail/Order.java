@@ -12,7 +12,7 @@ public class Order {
 	//private Date dateOfOrder;
 	//array list of Products, each Order may have one or many Products Ordered, but only one customer Ordering
 	private ArrayList<Product> listOfProductsOrdered = new ArrayList<Product>();
-	private int customerUniqueId;
+	private int supplierUniqueId;
 	private int quantity;
 	private boolean delivered = false;
 	
@@ -27,7 +27,7 @@ public class Order {
 	public Order(int orderUniqueId, int customerUniqueId, Product ProductOrdered, int quantity) {
 		this.orderUniqueId = orderUniqueId;
 		//this.dateOfOrder = new Date();
-		this.customerUniqueId = customerUniqueId;
+		this.supplierUniqueId = customerUniqueId;
 		this.addToProductList(ProductOrdered);
 		this.quantity = quantity;
 	}
@@ -60,12 +60,12 @@ public class Order {
 	}
 	*/
 	
-	public void setCustomerUniqueId(int customerUniqueId){
-		this.customerUniqueId = customerUniqueId;
+	public void setSupplierUniqueId(int customerUniqueId){
+		this.supplierUniqueId = customerUniqueId;
 	}
 	
-	public int getCustomerUniqueId(){
-		return this.customerUniqueId;
+	public int getSupplierUniqueId(){
+		return this.supplierUniqueId;
 	}
 	
 	public int getOrderQuantity(){
@@ -118,7 +118,7 @@ public class Order {
 		for(Order order: listOfOrders){
 			if(order.getOrderUniqueId() == orderId){
 				result = result + "----------------------------------------------" +  "\n" + "Order ID: " + order.getOrderUniqueId() + "\n"
-						+ "Customer ID: " + order.getCustomerUniqueId() + "Products: " + "-----------------";
+						+ "Customer ID: " + order.getSupplierUniqueId() + "Products: " + "-----------------";
 				for(Product product: order.getListOfProducts()){
 					result = result + 
 					"\n Product Id: : " + product.getProductCode() + 
@@ -141,14 +141,14 @@ public class Order {
 	}
 	
 	//needs arrayList of orders and the customer Id that we're looking for
-	public String viewOrderByCustomerId(ArrayList<Order> listOfOrders, int customerUniqueId){
+	public String viewOrderBySupplierId(ArrayList<Order> listOfOrders, int customerUniqueId){
 		String result = "";
 		boolean first = false;
 		for(Order order: listOfOrders){
-			if(order.getCustomerUniqueId() == customerUniqueId){
+			if(order.getSupplierUniqueId() == customerUniqueId){
 				if(!first){
 					//add this if this is the first order from this customer
-					result = result + "----------------------------------------------" +  "\n" + "Customer ID: " + order.getCustomerUniqueId() + "\n"
+					result = result + "----------------------------------------------" +  "\n" + "Supplier ID: " + order.getSupplierUniqueId() + "\n"
 							+ "Products: " + "-----------------";
 					first = true;
 				}
@@ -185,7 +185,7 @@ public class Order {
 								+ "Orders: " + "-----------------";
 						first = true;
 					}
-					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
@@ -217,7 +217,7 @@ public class Order {
 								+ "Orders: " + "-----------------";
 						first = true;
 					}
-					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
@@ -248,7 +248,7 @@ public class Order {
 								+ "Orders: " + "-----------------";
 						first = true;
 					}
-					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
@@ -272,7 +272,7 @@ public class Order {
 			result = "Delivered orders: \n";
 			if(order.isDelivered()){
 				for(Product product: order.getListOfProducts()){
-					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
@@ -295,7 +295,7 @@ public class Order {
 			result = "Delivered orders: \n";
 			if(!order.isDelivered()){
 				for(Product product: order.getListOfProducts()){
-					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getCustomerUniqueId() + 
+					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
