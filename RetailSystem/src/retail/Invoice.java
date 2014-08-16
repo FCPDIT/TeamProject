@@ -233,10 +233,10 @@ public class Invoice {
 		}
 
 		//method to edit invoices by id
-		public int verifyInvoiceID(ObjectList ol, int id) {
+		public int verifyInvoiceID(ArrayList<Invoice> invoices, int id) {
 	    	int count = 0;
 	    	int validID = 0;
-			for(Invoice invoice: ol.getInvoices()){
+			for(Invoice invoice: invoices){
 				if(id == invoice.getId()){
 					count++;
 					validID = 1;
@@ -248,8 +248,24 @@ public class Invoice {
 			return validID;
 		}
 		
+		//method to pay invoices by customer
+		public int verifyInvoiceByCustomerID(ArrayList<Customer> customers, int id) {
+	    	int count = 0;
+	    	int validID = 0;
+			for(Customer customer: customers){
+				if(id == customer.getCustId()){
+					count++;
+					validID = 1;
+				}
+			}	
+			if(count == 0){
+				validID = 2;
+			}
+			return validID;
+		}
+		
 		//method to set fields on edit invoice
-		public ArrayList<String> returnFields(ObjectList ol, int id){
+		public ArrayList<String> returnFields(ArrayList<Invoice> invoices, int id){
 			
 			ArrayList<String> fields = new ArrayList<String>();
 			String invId = Integer.toString(id);
@@ -259,7 +275,7 @@ public class Invoice {
 			String product ="";
 			String quantity ="";
 			String paid = "Unpaid";
-			for(Invoice invoice: ol.getInvoices()){
+			for(Invoice invoice: invoices){
 				if(id == invoice.getId()){
 					employee = Integer.toString(invoice.getEmployee().getEmployeeId());
 					customer = Integer.toString(invoice.getCustomer().getCustId());
@@ -280,36 +296,36 @@ public class Invoice {
 		
 		
 		//method to update invoices
-		public void updateInvoice(ObjectList ol, ArrayList<String> fields){
+		public void updateInvoice(ArrayList<Invoice> invoices, ArrayList<Employee> employees, ArrayList<Product> products, ArrayList<Customer> customers, ArrayList<String> fields){
 			int invId = Integer.parseInt(fields.get(0));
 			int employeeId = Integer.parseInt(fields.get(1));
 			int customerId = Integer.parseInt(fields.get(2));
 			String productId =fields.get(3);
 			int qty = Integer.parseInt(fields.get(4));
 			int currentId = Integer.parseInt(fields.get(5));
-			Employee emp = ol.getEmployees().get(0);
-			Customer cust = ol.getCustomers().get(0);
-			Product prod = ol.getProducts().get(0);
+			Employee emp = employees.get(0);
+			Customer cust = customers.get(0);
+			Product prod = products.get(0);
 			
-			for(Employee employee: ol.getEmployees()){
+			for(Employee employee: employees){
 				if(employeeId == employee.getEmployeeId()){
 					emp = employee;
 				}
 			}
 			
-			for(Customer customer: ol.getCustomers()){
+			for(Customer customer: customers){
 				if(customerId == customer.getCustId()){
 					cust = customer;
 				}
 			}
 			
-			for(Product product: ol.getProducts()){
+			for(Product product: products){
 				if(productId.equals(product.getProductCode())){
 					prod = product;
 				}
 			}
 			
-			for(Invoice invoice: ol.getInvoices()){
+			for(Invoice invoice: invoices){
 				if(currentId == invoice.getId()){
 					invoice.setId(invId);
 					invoice.setEmployee(emp);
@@ -321,8 +337,8 @@ public class Invoice {
 		}
 		
 		//method to pay invoice
-		public void payInvoice(ObjectList ol, int id){
-			for(Invoice invoice: ol.getInvoices()){
+		public void payInvoice(ArrayList<Invoice> invoices, int id){
+			for(Invoice invoice: invoices){
 				if(id == invoice.getId()){
 					invoice.setPaid(true);
 				}
@@ -331,11 +347,11 @@ public class Invoice {
 		}
 		
 		//method to delete invoice
-		public int deleteInvoice(ObjectList ol, int id){
+		public int deleteInvoice(ArrayList<Invoice> invoices, int id){
 			int index = 0;
-			for(Invoice invoice: ol.getInvoices()){
+			for(Invoice invoice: invoices){
 				if(id == invoice.getId()){
-					index = ol.getInvoices().indexOf(invoice);
+					index = invoices.indexOf(invoice);
 				}
 			}
 			return index;
