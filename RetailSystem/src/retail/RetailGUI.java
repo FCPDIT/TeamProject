@@ -1,6 +1,7 @@
 package retail;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +21,7 @@ public class RetailGUI extends JFrame{
 	
 	private ObjectList ol = new ObjectList();
 	private JFrame mainJFrame = new JFrame();
-	private GridLayout grid = new GridLayout(0, 2, 4, 4);
+	private GridLayout grid = new GridLayout(0, 1, 0, 10);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
 	JScrollPane scrollPane = new JScrollPane();
 	
@@ -67,6 +68,20 @@ public class RetailGUI extends JFrame{
 	//logout components
 	private JButton logoutBut = new JButton();
 	
+	//Customer Components
+	private JLabel custIdJLabel = new JLabel("Enter Customer ID");
+	private JTextField custIdJTextField = new JTextField("Required Field");
+	private JLabel custNameJLabel = new JLabel("Enter Customer Name");
+	private JTextField custNameJTextField = new JTextField("Required Field");
+	private JLabel custAddressJLabel = new JLabel("Enter Customer Address");
+	private JTextField custAddressJTextField = new JTextField("Required Field");
+	private JLabel custEmailJLabel = new JLabel("Enter Customer Email");
+	private JTextField custEmailJTextField = new JTextField("Optional Field");
+	private JLabel custPhoneJLabel = new JLabel("Enter Customer Phone");
+	private JTextField custPhoneJTextField = new JTextField("Optional Field");	
+	private JButton custJButton  = new JButton("Create New Customer");
+	
+	//Supplier Components
 	private JLabel supplierIdJLabel = new JLabel("Customer ID: ");
 	private JTextField supplierIdJTextField = new JTextField("Required Field");
 	private JLabel supplierNameJLabel = new JLabel("Customer Name: ");
@@ -78,7 +93,6 @@ public class RetailGUI extends JFrame{
 	private JLabel supplierPhoneJLabel = new JLabel("Customer Phone Number: ");
 	private JTextField supplierPhoneJTextField = new JTextField("Optional");
 	private JButton supplierJButton = new JButton("Create New Supplier");
-	
 	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID: ");
 	private JTextField viewSupplyJTextField = new JTextField("Supplier Id");
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
@@ -86,7 +100,6 @@ public class RetailGUI extends JFrame{
 	private JTextArea supplierJTextArea = new JTextArea(20, 20);
 	private JButton viewSupplyJButton = new JButton("View Supplier Details");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
-	
 	private JTextField editSupplierJTextField = new JTextField("Supplier Id");
 	private JButton editSupplierJButton = new JButton("Find Supplier");
 	private JTextField editSupplierId = new JTextField("Edit Supplier Id:");
@@ -126,7 +139,7 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.add("Supplier Management", supplyJTabbedPane);
 		mainJTabbedPane.add("Product Management", prodJTabbedPane);
 		mainJTabbedPane.add("Invoice Management", invJTabbedPane);
-		mainJTabbedPane.add("Stock Management", stockJTabbedPane);
+		mainJTabbedPane.add("Order Management", stockJTabbedPane);
 		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
 		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
 		mainJTabbedPane.add("Logout", logoutJPanel);
@@ -154,6 +167,19 @@ public class RetailGUI extends JFrame{
 		accessJTabbedPane.setEnabled(false);
 		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
 		proflossJTabbedPane.setEnabled(false);
+		
+		addCustJPanel.setLayout(grid);
+		addCustJPanel.add(custIdJLabel);
+		addCustJPanel.add(custIdJTextField);
+		addCustJPanel.add(custNameJLabel);
+		addCustJPanel.add(custNameJTextField);
+		addCustJPanel.add(custAddressJLabel);
+		addCustJPanel.add(custAddressJTextField);
+		addCustJPanel.add(custEmailJLabel);
+		addCustJPanel.add(custEmailJTextField);
+		addCustJPanel.add(custPhoneJLabel);
+		addCustJPanel.add(custPhoneJTextField);
+		addCustJPanel.add(custJButton);
 		
 		addSupplyJPanel.setLayout(grid);
 		viewSupplyJPanel.setLayout(grid);
