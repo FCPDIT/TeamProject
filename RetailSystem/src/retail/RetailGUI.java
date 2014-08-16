@@ -181,6 +181,16 @@ public class RetailGUI extends JFrame{
 		addCustJPanel.add(custPhoneJTextField);
 		addCustJPanel.add(custJButton);
 		
+		custJButton.addActionListener(new ActionListener(){
+			// function to add a new customer
+			public void actionPerformed(ActionEvent e){
+				Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
+						custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
+						custPhoneJTextField.getText());
+				customers.add(customer);
+			}
+		});
+		
 		addSupplyJPanel.setLayout(grid);
 		viewSupplyJPanel.setLayout(grid);
 		editSupplyJPanel.setLayout(grid);
