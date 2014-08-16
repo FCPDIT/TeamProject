@@ -52,32 +52,33 @@ public class Employee {
         this.password = password;
     }
     
-    	public int verifyLogin(ObjectList ol, int id, int password) {
-    	int count = 0;
-		int count1 = 0;
-		int login = 0;
+	//method to verify login
+	public int verifyLogin(ArrayList<Employee> employees, int id, int password) {
+	int count = 0;
+	int count1 = 0;
+	int login = 0;
 
-		for(Employee employee: ol.getEmployees()){
-			if(id == employee.getEmployeeId()){
-				count++;
-				if(employee.getAccess() == 0){
-					login = 1;
-				}
-				if(employee.getAccess() == 1){
-					login =2;
-				}
-				if(password == employee.getPassword()){
-					count1++;
-				}
-				if(count1 == 0){
-					login = 3;
-				}
+	for(Employee employee: employees){
+		if(id == employee.getEmployeeId()){
+			count++;
+			if(employee.getAccess() == 0){
+				login = 1;
+			}
+			if(employee.getAccess() == 1){
+				login =2;
+			}
+			if(password == employee.getPassword()){
+				count1++;
+			}
+			if(count1 == 0){
+				login = 3;
 			}
 		}
-		if(count == 0){
-			login = 4;
-		}
-		return login;
 	}
+	if(count == 0){
+		login = 4;
+	}
+	return login;
+}
      
 }
