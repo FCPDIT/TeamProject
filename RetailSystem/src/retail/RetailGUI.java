@@ -217,6 +217,7 @@ public class RetailGUI extends JFrame{
 		});
 		
 		allSupplyJButton.addActionListener(new ActionListener(){
+			// view all suppliers
 			public void actionPerformed(ActionEvent e){
 				if(suppliers.size() >= 1){
 					for(Supplier supplier: suppliers){
@@ -249,6 +250,25 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
+		saveSupplierJButton.addActionListener(new ActionListener(){
+			//function to update supplier
+			public void actionPerformed(ActionEvent e){
+				for(Supplier supplier: suppliers){
+					if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						supplier.setId(Integer.parseInt(editSupplierId.getText()));
+						supplier.setName(editSupplierName.getText());
+						supplier.setAddress(editSupplierAddress.getText());
+						supplier.setEmail(editSupplierEmail.getText());
+						supplier.setPhone(editSupplierPhone.getText());
+						supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
+					}else{
+						JOptionPane.showMessageDialog(null, "Supplier Not Updated.");
+					}
+				}
+			}
+			
+		});	
+		
 		deleteSupplierJButton.addActionListener(new ActionListener(){
 			// function to delete supplier by getting id from the supplier id label
 			public void actionPerformed(ActionEvent e){
@@ -270,6 +290,7 @@ public class RetailGUI extends JFrame{
 						  editInvoiceJTextField.setText("");
 					  }
 					});
+				
 				findInvoiceComponentsJPanel.add(editInvoiceJButton);
 				editInvoiceComponentsJPanel.setLayout(new GridLayout(3,2));
 				editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
