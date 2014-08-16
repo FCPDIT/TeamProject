@@ -14,6 +14,10 @@ import javax.swing.*;
 public class RetailGUI extends JFrame{
 	
 	private ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
+	private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
+	private ArrayList<Customer> customers = new ArrayList<Customer>();
+	private ArrayList<Product> products = new ArrayList<Product>();
+	
 	private ObjectList ol = new ObjectList();
 	private JFrame mainJFrame = new JFrame();
 	private GridLayout grid = new GridLayout(0, 2, 4, 4);
@@ -245,6 +249,8 @@ public class RetailGUI extends JFrame{
 						editSupplierEmail.setText(supplier.getEmail());
 						editSupplierPhone.setText(supplier.getPhone());
 						editSupplierDelivery.setText(Integer.toString(supplier.getDaysToDeliver()));
+					}else{
+						JOptionPane.showMessageDialog(null, "Supplier Not Found");
 					}
 				}
 			}
@@ -358,7 +364,7 @@ public class RetailGUI extends JFrame{
 				loginComponentsJPanel.setLayout(new GridLayout(4,4));
 				loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
 				loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
-				loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
+				loginComponentsJPanel.add(new JLabel("Enter Employee Password"));
 				loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
 				loginComponentsJPanel.add(loginBut= new JButton("Login"));
 				loginJPanel.add(loginComponentsJPanel);
