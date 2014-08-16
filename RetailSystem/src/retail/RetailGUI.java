@@ -80,7 +80,6 @@ public class RetailGUI extends JFrame{
 	private JLabel custPhoneJLabel = new JLabel("Enter Customer Phone");
 	private JTextField custPhoneJTextField = new JTextField();	
 	private JButton custJButton  = new JButton("Create New Customer");
-	
 	private JLabel viewCustById = new JLabel("Find Customer By ID: ");
 	private JTextField custById = new JTextField();
 	private JLabel viewCustByName = new JLabel("Find Customer By Name: ");
@@ -88,6 +87,15 @@ public class RetailGUI extends JFrame{
 	private JButton viewCustJButton = new JButton("View Customer");
 	private JButton viewAllCustJButton = new JButton("View All Customers");
 	private JTextArea custJTextArea = new JTextArea(10,20);
+	private JTextField editCustById = new JTextField();
+	private JButton findCustById = new JButton("Find Customer");
+	private JTextField editCustId = new JTextField();
+	private JTextField editCustName = new JTextField();
+	private JTextField editCustAddress = new JTextField();
+	private JTextField editCustEmail = new JTextField();
+	private JTextField editCustPhone = new JTextField();
+	private JButton updateCustJButton = new JButton("Update Customer Details");
+	private JButton deleteCustJButton = new JButton("Delete Customer");
 	
 	//Supplier Components
 	private JLabel supplierIdJLabel = new JLabel("Supplier ID: ");
@@ -110,12 +118,12 @@ public class RetailGUI extends JFrame{
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	private JTextField editSupplierJTextField = new JTextField();
 	private JButton editSupplierJButton = new JButton("Find Supplier");
-	private JTextField editSupplierId = new JTextField("Edit Supplier Id:");
-	private JTextField editSupplierName = new JTextField("Edit Supplier Name");
-	private JTextField editSupplierAddress = new JTextField("Edit Supplier Address");
-	private JTextField editSupplierEmail = new JTextField("Edit Supplier Email");
-	private JTextField editSupplierPhone = new JTextField("Edit Supplier Phone");
-	private JTextField editSupplierDelivery = new JTextField("Edit Supplier Delivery");
+	private JTextField editSupplierId = new JTextField();
+	private JTextField editSupplierName = new JTextField();
+	private JTextField editSupplierAddress = new JTextField();
+	private JTextField editSupplierEmail = new JTextField();
+	private JTextField editSupplierPhone = new JTextField();
+	private JTextField editSupplierDelivery = new JTextField();
 	private JButton saveSupplierJButton = new JButton("Update Supplier");
 	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
 	
@@ -178,6 +186,7 @@ public class RetailGUI extends JFrame{
 		
 		addCustJPanel.setLayout(grid);
 		viewCustJPanel.setLayout(grid);
+		editCustJPanel.setLayout(grid);
 		addCustJPanel.add(custIdJLabel);
 		addCustJPanel.add(custIdJTextField);
 		addCustJPanel.add(custNameJLabel);
@@ -197,6 +206,16 @@ public class RetailGUI extends JFrame{
 		viewCustJPanel.add(viewAllCustJButton);
 		viewCustJPanel.add(custJTextArea);
 		custJTextArea.setLineWrap(true);
+		editCustJPanel.add(editCustById);
+		editCustJPanel.add(findCustById);
+		editCustJPanel.add(editCustId);
+		editCustJPanel.add(editCustName);
+		editCustJPanel.add(editCustAddress);
+		editCustJPanel.add(editCustEmail);
+		editCustJPanel.add(editCustPhone);
+		editCustJPanel.add(updateCustJButton);
+		editCustJPanel.add(deleteCustJButton);
+		
 		
 		custJButton.addActionListener(new ActionListener(){
 			// function to add a new customer
@@ -205,11 +224,93 @@ public class RetailGUI extends JFrame{
 						custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
 						custPhoneJTextField.getText());
 				customers.add(customer);
+				JOptionPane.showMessageDialog(null, "New Customer Added");			}
+		});
+		
+		viewCustJButton.addActionListener(new ActionListener(){
+			// function to view a customer by id or name
+			public void actionPerformed(ActionEvent e){
+				if(customers.size() >= 1){
+					for(Customer customer: customers){
+						if(customer.getCustId() == Integer.parseInt(custById.getText()) || customer.getCustName() == custByName.getText()){
+							custJTextArea.setText(" Customer Id: "+customer.getCustId()
+									+"\n Customer Name: "+customer.getCustName()
+									+"\n Customer Address: "+customer.getCustAddress()
+									+"\n Customer Email: "+customer.getCustEmail()
+									+"\n Customer Phone: "+customer.getCustTelephone());
+						}else{
+							JOptionPane.showMessageDialog(null, "Customer Not Found.");
+						}
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Customers Found");
+				}
 			}
 		});
 		
+		viewAllCustJButton.addActionListener(new ActionListener(){
+			// function to view all customers
+			public void actionPerformed(ActionEvent e){
+				if(customers.size() >= 1){
+					for(Customer customer: customers){
+						custJTextArea.setText(" Customer Id: "+customer.getCustId()
+									+"\n Customer Name: "+customer.getCustName()
+									+"\n Customer Address: "+customer.getCustAddress()
+									+"\n Customer Email: "+customer.getCustEmail()
+									+"\n Customer Phone: "+customer.getCustTelephone());
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Customers Found");
+				}
+			}
+		});
 		
+		findCustById.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				for(Customer customer: customers){
+					if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						editCustId.setText(Integer.toString(customer.getCustId()));
+						editCustName.setText(customer.getCustName());
+						editCustAddress.setText(customer.getCustAddress());
+						editCustEmail.setText(customer.getCustEmail());
+						editCustPhone.setText(customer.getCustTelephone());
+					}else{
+						JOptionPane.showMessageDialog(null, "Customer Not Found");
+					}
+				}
+			}
+		});
 		
+		updateCustJButton.addActionListener(new ActionListener(){
+			//update a specific customer
+			public void actionPerformed(ActionEvent e){
+				for(Customer customer: customers){
+					if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						customer.setCustId(Integer.parseInt(editCustId.getText()));
+						customer.setCustName(editCustName.getText());
+						customer.setCustAddress(editCustAddress.getText());
+						customer.setCustEmail(editCustEmail.getText());
+						customer.setCustTelephone(editCustPhone.getText());
+					}else{
+						JOptionPane.showMessageDialog(null, "Customer Not Updated.");
+					}
+				}
+			}
+		});
+		
+		deleteCustJButton.addActionListener(new ActionListener(){
+			//delete function for customer
+			public void actionPerformed(ActionEvent arg){
+				for(Customer customer: customers){
+					if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						customers.remove(customer);
+					}else{
+						JOptionPane.showMessageDialog(null, "Customer Not Deleted");
+					}
+				}
+			}
+		});
+			
 		addSupplyJPanel.setLayout(grid);
 		viewSupplyJPanel.setLayout(grid);
 		editSupplyJPanel.setLayout(grid);
@@ -332,10 +433,12 @@ public class RetailGUI extends JFrame{
 		
 		deleteSupplierJButton.addActionListener(new ActionListener(){
 			// function to delete supplier by getting id from the supplier id label
-			public void actionPerformed(ActionEvent e){
+			public void actionPerformed(ActionEvent arg){
 				for(Supplier supplier: suppliers){
 					if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
 						suppliers.remove(supplier);
+					}else{
+						JOptionPane.showMessageDialog(null, "Supplier Not Deleted");
 					}
 				}
 			}
