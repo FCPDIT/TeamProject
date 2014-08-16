@@ -1,49 +1,27 @@
 package retail;
 
 import java.util.ArrayList;
-//import java.util.Date;
 
 
+//the Order class holds an ArrayList of OrderProducts within each instance
+//each OrderProduct holds one Product and the quantity of that Product ordered
+//when creating a new Order, only one OrderProduct is originally added
+//any other OrderProducts can then be added to that object
+//this is to make it easier to make either a single Product Order or a multiple Product Order
 public class Order {
 	
-	//id of customer that Ordered
 	private int orderUniqueId;
-	//date of Order, format ok for now, may change later down the line
-	//private Date dateOfOrder;
-	//array list of Products, each Order may have one or many Products Ordered, but only one customer Ordering
-	private ArrayList<Product> listOfProductsOrdered = new ArrayList<Product>();
+	private ArrayList<OrderProduct> listOfProductsOrdered = new ArrayList<OrderProduct>();
 	private int supplierUniqueId;
-	private int quantity;
 	private boolean delivered = false;
-	
-	/* Products need to contain quantity of Order somehow. To be more OO, the quantity should be held within
-	   an object, rather than be deducted from the original Product's quantity variable displaying how many are in stock.
-	   I propose Product be a base class, invoiceProduct and OrderProduct both extend the base Product class and have
-	   extra variables to show their individual Order quantity.
-	*/
-	
 	 
-	//single Order constructor
-	public Order(int orderUniqueId, int customerUniqueId, Product ProductOrdered, int quantity) {
+	public Order(int orderUniqueId, int supplierUniqueId, Product productOrdered, int quantity) {
 		this.orderUniqueId = orderUniqueId;
-		//this.dateOfOrder = new Date();
-		this.supplierUniqueId = customerUniqueId;
-		this.addToProductList(ProductOrdered);
-		this.quantity = quantity;
+		this.supplierUniqueId = supplierUniqueId;
+		this.addToProductList(new OrderProduct(productOrdered, quantity));
 	}
 	
-	//multiple Order constructor
-	//unused for now
-	/* public Order (int orderUniqueId, ArrayList<Product> listOfProductsOrdered){
-		this.orderUniqueId = orderUniqueId;
-		//this.dateOfOrder = new Date();
-		for(Product ProductOrdered: listOfProductsOrdered){
-			this.addToProductList(ProductOrdered);
-		}
-	}
-	*/
-	
-	public void addToProductList(Product ProductOrdered){
+	public void addToProductList(OrderProduct ProductOrdered){
 		this.listOfProductsOrdered.add(ProductOrdered);
 	}
 	
@@ -51,29 +29,16 @@ public class Order {
 		return this.orderUniqueId;
 	}
 	
-	public ArrayList<Product> getListOfProducts(){
+	public ArrayList<OrderProduct> getListOfOrderProducts(){
 		return this.listOfProductsOrdered;
 	}
 	
-	/*public Date getOrderDate(){
-		return this.dateOfOrder;
-	}
-	*/
-	
-	public void setSupplierUniqueId(int customerUniqueId){
-		this.supplierUniqueId = customerUniqueId;
+	public void setSupplierUniqueId(int supplierUniqueId){
+		this.supplierUniqueId = supplierUniqueId;
 	}
 	
 	public int getSupplierUniqueId(){
 		return this.supplierUniqueId;
-	}
-	
-	public int getOrderQuantity(){
-		return this.quantity;
-	}
-	
-	public void setOrderQuantity(int quantity){
-		this.quantity = quantity;
 	}
 	
 	public boolean isDelivered(){
@@ -82,17 +47,17 @@ public class Order {
 	
 	public void setDelivered(){
 		this.delivered = true;
-		for(Product product1: this.listOfProductsOrdered){
+		for(OrderProduct oProduct: this.listOfProductsOrdered){
 			//set the quantity of this item in stock to be itself + the amount ordered
-			product1.setCurrentStock(product1.getCurrentStock() + this.quantity);
+			oProduct.getProduct().setCurrentStock(oProduct.getProduct().getCurrentStock() + oProduct.getQuantity());
 		}
 	}
 	
 	public double calculateOrderWorth(){
 		double amount = 0.0;
 		
-		for(Product ProductOrdered: this.listOfProductsOrdered){
-			amount += ProductOrdered.getRetailPrice() * this.quantity;
+		for(OrderProduct productOrdered: this.listOfProductsOrdered){
+			amount += productOrdered.getProduct().getRetailPrice() * productOrdered.getQuantity();
 		}
 		return amount;
 	}
@@ -100,14 +65,22 @@ public class Order {
 	//needs an actual arrayList of orders to process details for
 	public String viewAllOrders(ArrayList<Order> listOfOrders){
 		String result = "";
-		String newLine = System.getProperty("line.seperator");
 		for(Order order: listOfOrders){
-			result = result + "----------------------------------------------" +  newLine + "Customer ID: " + order.getOrderUniqueId() + newLine
-					+ "Products: " + "-----------------";
-			for(Product product1: order.listOfProductsOrdered){
-				result = result + "Author: " + product1.getAuthor() + newLine + "Title: " + product1.getTitle() + newLine + "Value of Product: €" + 
-			product1.getRetailPrice() + newLine + "Quantity: " + order.quantity + newLine + "-----------------";
-				
+			result = result + "---------------------------------------------- \n"  + "Order ID: " + order.getOrderUniqueId() 
+					+ "\n Products: " + "-----------------";
+			for(OrderProduct oProduct: order.getListOfOrderProducts()){
+				Product product = oProduct.getProduct();
+				result = result + 
+				"\n Product Id: : " + product.getProductCode() + 
+				"\n Title: " + product.getTitle() +
+				"\n Author: " + product.getAuthor() +
+				"\n Quantity Ordered: " + oProduct.getQuantity() + 
+				"\n Current Stock: " + product.getCurrentStock() +
+				"\n Supplier: " + product.getSupplier().getName() +
+				"\n Max Stock:" + product.getMaxStock() +
+				"\n Min Stock: " + product.getMinStock() +
+				"\n Cost Price: €" + product.getCostPrice() +
+				"\n Retail Price: €" + product.getRetailPrice() +"------------";				
 			}
 		}
 		return result;
@@ -117,13 +90,15 @@ public class Order {
 		String result = "";
 		for(Order order: listOfOrders){
 			if(order.getOrderUniqueId() == orderId){
-				result = result + "----------------------------------------------" +  "\n" + "Order ID: " + order.getOrderUniqueId() + "\n"
-						+ "Customer ID: " + order.getSupplierUniqueId() + "Products: " + "-----------------";
-				for(Product product: order.getListOfProducts()){
+				result = result + "----------------------------------------------" +  "\n" + "Order ID: " + 
+						 order.getOrderUniqueId() + "\n"	+ "Products: " + "-----------------";
+				for(OrderProduct oProduct: order.getListOfOrderProducts()){
+					Product product = oProduct.getProduct();
 					result = result + 
 					"\n Product Id: : " + product.getProductCode() + 
 					"\n Title: " + product.getTitle() +
 					"\n Author: " + product.getAuthor() +
+					"\n Quantity Ordered: " + oProduct.getQuantity() + 
 					"\n Current Stock: " + product.getCurrentStock() +
 					"\n Supplier: " + product.getSupplier().getName() +
 					"\n Max Stock:" + product.getMaxStock() +
@@ -141,22 +116,24 @@ public class Order {
 	}
 	
 	//needs arrayList of orders and the customer Id that we're looking for
-	public String viewOrderBySupplierId(ArrayList<Order> listOfOrders, int customerUniqueId){
+	public String viewOrderBySupplierId(ArrayList<Order> listOfOrders, int supplierUniqueId){
 		String result = "";
 		boolean first = false;
 		for(Order order: listOfOrders){
-			if(order.getSupplierUniqueId() == customerUniqueId){
+			if(order.getSupplierUniqueId() == supplierUniqueId){
 				if(!first){
 					//add this if this is the first order from this customer
 					result = result + "----------------------------------------------" +  "\n" + "Supplier ID: " + order.getSupplierUniqueId() + "\n"
 							+ "Products: " + "-----------------";
 					first = true;
 				}
-				for(Product product: this.listOfProductsOrdered){
+				for(OrderProduct oProduct: order.getListOfOrderProducts()){
+					Product product = oProduct.getProduct();
 					result = result + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
 							"\n Author: " + product.getAuthor() +
+							"\n Quantity Ordered: " + oProduct.getQuantity() + 
 							"\n Current Stock: " + product.getCurrentStock() +
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock:" + product.getMaxStock() +
@@ -176,8 +153,9 @@ public class Order {
 		String result = "";
 		boolean first = false;
 		for(Order order: listOfOrders){
-			ArrayList<Product> listOfProducts = order.getListOfProducts();
-			for(Product product: listOfProducts){
+			ArrayList<OrderProduct> listOfOrderProducts = order.getListOfOrderProducts();
+			for(OrderProduct oProduct: listOfOrderProducts){
+				Product product = oProduct.getProduct();
 				if(product.getAuthor().equals(author)){
 					if(!first){
 						//add this if this is the first order with a product from this author
@@ -191,6 +169,7 @@ public class Order {
 							"\n Title: " + product.getTitle() +
 							"\n Author: " + product.getAuthor() +
 							"\n Current Stock: " + product.getCurrentStock() +
+							"\n Quantity Ordered: " + oProduct.getQuantity() + 
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock:" + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
@@ -199,7 +178,6 @@ public class Order {
 					break;
 				}
 			}
-			
 		}
 		return result;
 	}
@@ -208,8 +186,9 @@ public class Order {
 		String result = "";
 		boolean first = false;
 		for(Order order: listOfOrders){
-			ArrayList<Product> listOfProducts = order.getListOfProducts();
-			for(Product product: listOfProducts){
+			ArrayList<OrderProduct> listOfOrderProducts = order.getListOfOrderProducts();
+			for(OrderProduct oProduct: listOfOrderProducts){
+				Product product = oProduct.getProduct();
 				if(product.getTitle().equals(title)){
 					if(!first){
 						//add this if this is the first order with a product with this title
@@ -222,6 +201,7 @@ public class Order {
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
 							"\n Author: " + product.getAuthor() +
+							"\n Quantity Ordered: " + oProduct.getQuantity() + 
 							"\n Current Stock: " + product.getCurrentStock() +
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock:" + product.getMaxStock() +
@@ -239,8 +219,9 @@ public class Order {
 		String result = "";
 		boolean first = false;
 		for(Order order: listOfOrders){
-			ArrayList<Product> listOfProducts = order.getListOfProducts();
-			for(Product product: listOfProducts){
+			ArrayList<OrderProduct> listOfOrderProducts = order.getListOfOrderProducts();
+			for(OrderProduct oProduct: listOfOrderProducts){
+				Product product = oProduct.getProduct();
 				if(product.getSupplier().getId() == supplierId){
 					if(!first){
 						//add this if this is the first order with a product with this title
@@ -253,6 +234,7 @@ public class Order {
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
 							"\n Author: " + product.getAuthor() +
+							"\n Quantity Ordered: " + oProduct.getQuantity() + 
 							"\n Current Stock: " + product.getCurrentStock() +
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock:" + product.getMaxStock() +
@@ -271,12 +253,14 @@ public class Order {
 		for(Order order: listOfOrders){
 			result = "Delivered orders: \n";
 			if(order.isDelivered()){
-				for(Product product: order.getListOfProducts()){
+				for(OrderProduct oProduct: order.getListOfOrderProducts()){
+					Product product = oProduct.getProduct();
 					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
 							"\n Author: " + product.getAuthor() +
+							"\n Quantity Ordered: " + oProduct.getQuantity() + 
 							"\n Current Stock: " + product.getCurrentStock() +
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock:" + product.getMaxStock() +
@@ -294,12 +278,14 @@ public class Order {
 		for(Order order: listOfOrders){
 			result = "Delivered orders: \n";
 			if(!order.isDelivered()){
-				for(Product product: order.getListOfProducts()){
+				for(OrderProduct oProduct: order.getListOfOrderProducts()){
+					Product product = oProduct.getProduct();
 					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
 							"\n Author: " + product.getAuthor() +
+							"\n Quantity Ordered: " + oProduct.getQuantity() + 
 							"\n Current Stock: " + product.getCurrentStock() +
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock:" + product.getMaxStock() +
@@ -312,17 +298,19 @@ public class Order {
 		return result;
 	}
 	
-	public void printOrderDetails(){
+	public void printOrderDetails(Order order){
 			System.out.println("----------------------------------------------");
 			System.out.println("ID of Customer Ordering: " + getOrderUniqueId());
 			//System.out.println("Date of Order: " + this.dateOfOrder.toGMTString());
 			System.out.println("Products:");
 			System.out.println("-----------------");
-			for(Product product: this.listOfProductsOrdered){
+			for(OrderProduct oProduct: order.getListOfOrderProducts()){
+				Product product = oProduct.getProduct();
 				System.out.println(
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
 							"\n Author: " + product.getAuthor() +
+							"\n Quantity Ordered: " + oProduct.getQuantity() + 
 							"\n Current Stock: " + product.getCurrentStock() +
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock:" + product.getMaxStock() +
