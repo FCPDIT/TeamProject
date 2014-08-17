@@ -43,7 +43,7 @@ public class Product {
 
 	public String printProductDetails(Product p) {
 		if (p != null) {
-		return "\n Product Id: : " + p.getProductCode() + "\n Title: "
+		return "\n Product Id: : " + (p.getProductCode()) + "\n Title: "
 		+ p.getTitle() + "\n Author: " + p.getAuthor()
 		+ "\n Current Stock: " + p.getCurrentStock()
 		+ "\n Supplier: " + p.getSupplier().getName()
