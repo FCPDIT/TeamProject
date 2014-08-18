@@ -11,8 +11,36 @@ public class InvoiceTest {
 	private ArrayList<Employee> employees = new ArrayList<>();
 	private ArrayList<Customer> customers = new ArrayList<>();
 	private ArrayList<Product> products = new ArrayList<>();
+	private ArrayList<Invoice> invoices = new ArrayList<>();
 	
-
+	
+	@Test
+	public void testViewAllInvoices(){	
+		assertEquals("No invoices on record", inv.viewAllInvoices(invoices));
+	}
+	
+	@Test
+	public void testViewInvoiceById(){
+		Invoice inv2 = new Invoice(2, new Employee(2,"john",2,110.00,4567), new Customer(1,"Rudds","Galway"), new Product("x", "x", "x", 55.00, 25.00, 20, 30, 3, new Supplier(2,"h","h")),12);
+		invoices.add(inv2);
+		assertEquals("No record of Invoice No: 1 has been found", inv.viewInvoiceById(1, invoices));
+	}
+	
+	@Test
+	public void testViewInvoiceByCustomer(){
+		assertEquals("No record of that Customer with Id No: 6 has been found", inv.viewInvoiceByCustomer(6, invoices));
+	}
+	
+	@Test
+	public void testViewPaidInvoice(){
+		assertEquals("All Invoices are currently unpaid", inv.viewPaidInvoice(invoices));
+	}
+	
+	@Test
+	public void testViewUnPaidInvoice(){
+		assertEquals("All Invoices are currently Paid", inv.viewUnPaidInvoice(invoices));
+	}
+	
 	//=====================
 	@Test
 	public void testReturnEmployeeObjectEquals() {
@@ -57,5 +85,6 @@ public class InvoiceTest {
 		products.add(prod);
 		assertNotEquals(prod, inv.returnProductObject("9999999", products));
 	}
+	
 		
 }

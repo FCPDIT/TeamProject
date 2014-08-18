@@ -188,7 +188,7 @@ public class Invoice {
 				}
 			}
 			if(unpaid.equals("")){
-			return "All Invoices are currently unpaid";
+			return "All Invoices are currently Paid";
 			}
 			else{
 				return unpaid;
