@@ -26,6 +26,7 @@ public class ViewProductDetailsPanel extends JPanel{
 	private JTextField productTitleTextField;
 	private JTextField productAuthorTextField;
 	
+
 	//Constructor
 	public ViewProductDetailsPanel() {
 		//Create an ArrayList of product objects to test the GUI
