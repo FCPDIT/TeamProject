@@ -107,13 +107,13 @@ public class Invoice {
 		if (v != null) {
 			return "Invoice ID: " + v.getId() + 
 					"\nProduct Id: " + v.getProduct().getProductCode() 
-					+ "\nProduct Price: " +  String.format("€%.2f", v.getProduct().getRetailPrice())
+					+ "\nProduct Price: " +  String.format("ï¿½%.2f", v.getProduct().getRetailPrice())
 					+ "\nQuantity of Order " + v.getQuantity()
 					+ "\nEmployee Name: " + v.getEmployee().getEmployeeName() 
 					+ "\nEmployee Id: "   + v.getEmployee().getEmployeeId() 
 					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
 					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
-					+ "\nInvoice Total: " +  String.format("€%.2f", v.getTotalInvoicePrice()) 
+					+ "\nInvoice Total: " +  String.format("ï¿½%.2f", v.getTotalInvoicePrice()) 
 					+ "\nDate: " + v.getInvoiceDate() + "\n\n";
 		} else {
 			return "No details to print";
@@ -274,6 +274,7 @@ public class Invoice {
 			String customer ="";
 			String product ="";
 			String quantity ="";
+			String total ="";
 			String paid = "Unpaid";
 			for(Invoice invoice: invoices){
 				if(id == invoice.getId()){
@@ -281,6 +282,7 @@ public class Invoice {
 					customer = Integer.toString(invoice.getCustomer().getCustId());
 					product = invoice.getProduct().getProductCode();
 					quantity = Integer.toString(invoice.getQuantity());
+					total = Double.toString(invoice.getTotalInvoicePrice());
 					if(invoice.isPaid()){
 						paid = "Paid";
 					}
@@ -288,6 +290,7 @@ public class Invoice {
 					fields.add(customer);
 					fields.add(product);
 					fields.add(quantity);
+					fields.add(total);
 					fields.add(paid);
 				}
 			}		
