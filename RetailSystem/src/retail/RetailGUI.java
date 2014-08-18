@@ -618,6 +618,8 @@ public class RetailGUI extends JFrame{
 						logoutBut.addActionListener(new ActionListener(){
 							public void actionPerformed(ActionEvent e){
 								// release all tabs - manager
+								loginTF.setText("");
+								passwordTF.setText("");
 								mainJTabbedPane.setSelectedIndex(0);
 								mainJTabbedPane.setEnabledAt(1, false);
 								mainJTabbedPane.setEnabledAt(2, false);
