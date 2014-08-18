@@ -142,23 +142,23 @@ public class RetailGUI extends JFrame{
 	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
 	
 	//Product Components
-	private JLabel prodTitle = new JLabel();
+	private JLabel prodTitle = new JLabel("Book Title");
 	private JTextField titleJTextField = new JTextField();
-	private JLabel prodAuthor = new JLabel();
+	private JLabel prodAuthor = new JLabel("Author");
 	private JTextField authorJTextField = new JTextField();
-	private JLabel prodCode = new JLabel();
+	private JLabel prodCode = new JLabel("Book Code");
 	private JTextField codeJTextField = new JTextField();
-	private JLabel prodRetail = new JLabel();
+	private JLabel prodRetail = new JLabel("Retail Price");
 	private JTextField retailJTextField = new JTextField();
-	private JLabel prodCost = new JLabel();
+	private JLabel prodCost = new JLabel("Cost Price");
 	private JTextField costJTextField = new JTextField();
-	private JLabel prodTotalStock = new JLabel();
+	private JLabel prodTotalStock = new JLabel("Total Stock");
 	private JTextField tStockJTextField = new JTextField();
-	private JLabel prodMaxStock = new JLabel();
+	private JLabel prodMaxStock = new JLabel("Maximum Stock");
 	private JTextField maxJTextField = new JTextField();
-	private JLabel prodMinStock = new JLabel();
+	private JLabel prodMinStock = new JLabel("Minimum Stock");
 	private JTextField minJTextField = new JTextField();
-	private JLabel prodSupplierId = new JLabel();
+	private JLabel prodSupplierId = new JLabel("Supplier Id");
 	private JTextField prodSupplierIdJTextField = new JTextField();
 	private JButton productJButton = new JButton("Create New Product");
 	
