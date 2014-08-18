@@ -174,7 +174,7 @@ public class RetailGUI extends JFrame{
 		//add some test invoices to array list
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), products.get(0), 10));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), products.get(1), 20));
-		
+
 		// TODO Auto-generated constructor stub
 		mainJFrame.setTitle("Retail Application");
 		mainJFrame.setBounds(0, 0, 800, 600);
@@ -256,6 +256,7 @@ public class RetailGUI extends JFrame{
 						custPhoneJTextField.getText());
 				customers.add(customer);
 				JOptionPane.showMessageDialog(null, "New Customer Added");			}
+				
 		});
 		
 		viewCustJButton.addActionListener(new ActionListener(){
