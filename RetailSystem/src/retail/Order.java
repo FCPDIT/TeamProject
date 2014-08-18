@@ -14,6 +14,10 @@ public class Order {
 	private ArrayList<OrderProduct> listOfProductsOrdered = new ArrayList<OrderProduct>();
 	private int supplierUniqueId;
 	private boolean delivered = false;
+	
+	public Order(){
+		
+	}
 	 
 	public Order(int orderUniqueId, int supplierUniqueId, Product productOrdered, int quantity) {
 		this.orderUniqueId = orderUniqueId;
@@ -82,6 +86,9 @@ public class Order {
 				"\n Cost Price: €" + product.getCostPrice() +
 				"\n Retail Price: €" + product.getRetailPrice() +"------------";				
 			}
+			if(result.equals("")){
+				result = "No orders found. ";
+			}
 		}
 		return result;
 	}
@@ -115,40 +122,6 @@ public class Order {
 		return result;
 	}
 	
-	//needs arrayList of orders and the customer Id that we're looking for
-	public String viewOrderBySupplierId(ArrayList<Order> listOfOrders, int supplierUniqueId){
-		String result = "";
-		boolean first = false;
-		for(Order order: listOfOrders){
-			if(order.getSupplierUniqueId() == supplierUniqueId){
-				if(!first){
-					//add this if this is the first order from this customer
-					result = result + "----------------------------------------------" +  "\n" + "Supplier ID: " + order.getSupplierUniqueId() + "\n"
-							+ "Products: " + "-----------------";
-					first = true;
-				}
-				for(OrderProduct oProduct: order.getListOfOrderProducts()){
-					Product product = oProduct.getProduct();
-					result = result + 
-							"\n Product Id: : " + product.getProductCode() + 
-							"\n Title: " + product.getTitle() +
-							"\n Author: " + product.getAuthor() +
-							"\n Quantity Ordered: " + oProduct.getQuantity() + 
-							"\n Current Stock: " + product.getCurrentStock() +
-							"\n Supplier: " + product.getSupplier().getName() +
-							"\n Max Stock:" + product.getMaxStock() +
-							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: €" + product.getCostPrice() +
-							"\n Retail Price: €" + product.getRetailPrice() +"------------";
-				}
-			}
-		}
-		if(result.equals("")){
-			result = "No orders found for that customer";
-		}
-		return result;
-	}
-	
 	public String viewOrderByAuthor(ArrayList<Order> listOfOrders, String author){
 		String result = "";
 		boolean first = false;
@@ -176,6 +149,9 @@ public class Order {
 							"\n Cost Price: €" + product.getCostPrice() +
 							"\n Retail Price: €" + product.getRetailPrice() +"------------";
 					break;
+				}
+				else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+					result = "No order with a product by that author found. ";
 				}
 			}
 		}
@@ -210,6 +186,9 @@ public class Order {
 							"\n Retail Price: €" + product.getRetailPrice() +"------------";
 					break;
 				}
+				else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+					result = "No order with a product of that title found. ";
+				}
 			}
 		}
 		return result;
@@ -243,6 +222,9 @@ public class Order {
 							"\n Retail Price: €" + product.getRetailPrice() +"------------";
 					break;
 				}
+				else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+					result = "No order from that supplier found. ";
+				}
 			}
 		}
 		return result;
@@ -255,7 +237,7 @@ public class Order {
 			if(order.isDelivered()){
 				for(OrderProduct oProduct: order.getListOfOrderProducts()){
 					Product product = oProduct.getProduct();
-					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
+					result = result + "\n" + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + "\n" +
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
@@ -269,6 +251,9 @@ public class Order {
 							"\n Retail Price: €" + product.getRetailPrice() +"------------";
 				}
 			}
+			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+				result = "No delivered orders found. ";
+			}
 		}
 		return result;
 	}
@@ -280,7 +265,7 @@ public class Order {
 			if(!order.isDelivered()){
 				for(OrderProduct oProduct: order.getListOfOrderProducts()){
 					Product product = oProduct.getProduct();
-					result = result + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
+					result = result + "\n" + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + "\n" +
 							"Products: " + "\n" + 
 							"\n Product Id: : " + product.getProductCode() + 
 							"\n Title: " + product.getTitle() +
@@ -293,6 +278,9 @@ public class Order {
 							"\n Cost Price: €" + product.getCostPrice() +
 							"\n Retail Price: €" + product.getRetailPrice() +"------------";
 				}
+			}
+			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+				result = "No undelivered orders found. ";
 			}
 		}
 		return result;
