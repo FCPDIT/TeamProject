@@ -2,6 +2,7 @@ package retail;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,14 +53,20 @@ public class RetailGUI extends JFrame{
 	private JPanel editSupplyJPanel = new JPanel();
 	
 	private JPanel addProductJPanel = new JPanel();
-	private JPanel viewProductJPanel = new ViewProductDetailsPanel();
+	//private JPanel viewProductJPanel = new ViewProductDetailsPanel();
+	private JPanel viewProductJPanel = new JPanel();
 	private JPanel editProductJPanel = new JPanel();
+	private JPanel searchByRetailJpanel = new JPanel();
+	private JPanel viewProductByQuantityJPanel = new JPanel();
+	private JPanel AddRemoveStockJPanel = new JPanel();
 	
-	private JPanel createInvJPanel = new CreateANewInvoicePanel();
+	//private JPanel createInvJPanel = new CreateANewInvoicePanel();
+	private JPanel createInvJPanel = new JPanel();
 	private JPanel viewInvJPanel = new ViewCustomerInvoicePanel();
 	private JPanel editInvJPanel = new JPanel();
 	
-	private JPanel createOrderPanel = new CreateNewOrderPanel();
+	//private JPanel createOrderPanel = new CreateNewOrderPanel();
+	private JPanel createOrderPanel = new JPanel();
 	
 	private JPanel accessJPanel = new JPanel();
 	
@@ -156,6 +163,9 @@ public class RetailGUI extends JFrame{
 		private JButton saveInvoiceJButton = new JButton("Update Invoice");
 		private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
 		private JTextField editPayStatus = new JTextField("");
+		
+		//Product components
+	
 	
 	public RetailGUI() {
 		
@@ -203,6 +213,10 @@ public class RetailGUI extends JFrame{
 		prodJTabbedPane.add("Create New Product",addProductJPanel);
 		prodJTabbedPane.add("View Product Details", viewProductJPanel);
 		prodJTabbedPane.add("Edit Product Details", editProductJPanel);
+		prodJTabbedPane.add("Search by retail price", searchByRetailJpanel);
+		prodJTabbedPane.add("Search by quantity", viewProductByQuantityJPanel);
+		prodJTabbedPane.add("Add/remove stock", AddRemoveStockJPanel);
+		
 		
 		invJTabbedPane.add("Create New Invoice", createInvJPanel);
 		invJTabbedPane.add("View Customer Invoice", viewInvJPanel);
