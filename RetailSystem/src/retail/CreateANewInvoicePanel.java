@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class CreateANewInoicePanel extends JPanel {
+public class CreateANewInvoicePanel extends JPanel {
 
 	// variables
 	private JLabel invoiceIdLabel, employeeIdLabel, customerIdLabel,
@@ -30,7 +30,7 @@ public class CreateANewInoicePanel extends JPanel {
 	private ArrayList<Invoice> invoices = new ArrayList<>();
 	private Invoice invoice = new Invoice();
 
-	public CreateANewInoicePanel() {
+	public CreateANewInvoicePanel() {
 		// Setting the size
 		Dimension size = getPreferredSize();
 		size.width = 200;
@@ -42,7 +42,7 @@ public class CreateANewInoicePanel extends JPanel {
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.insets = new Insets(5, 5, 5, 5);
 
-		// Add Componoents to the Panel
+		// Add Components to the Panel
 		invoiceIdLabel = new JLabel("Invoice ID: ");
 		gc.gridx = 0;
 		gc.gridy = 0;
@@ -137,7 +137,7 @@ public class CreateANewInoicePanel extends JPanel {
 								if(invoiceNumberUnique(invoiceId,invoices)){ 
 							//create a new Invoice Object with input
 								Invoice inv = new Invoice(invoiceId, emplInput, cusInput, prodInput, quantity);
-							//Add the newely created Invoice to the list
+							//Add the newly created Invoice to the list
 								invoices.add(inv);
 								System.out.println(invoices.size());
 							//Set Label to Confirmation
@@ -160,13 +160,7 @@ public class CreateANewInoicePanel extends JPanel {
 					} else {
 						resultLabel.setText("No Employee Record exist with that Input");
 					}
-					
 				}
-				
-				
-				
-				
-
 			}
 		});
 		//Result label to display message to user
@@ -174,7 +168,6 @@ public class CreateANewInoicePanel extends JPanel {
 		gc.gridx = 0;
 		gc.gridy = 6;
 		add(resultLabel, gc);
-
 	}
 	
 	//Method to check to see if invoice number is unique

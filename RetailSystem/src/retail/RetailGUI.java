@@ -16,10 +16,19 @@ public class RetailGUI extends JFrame{
 	
 	private ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
 	private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
+	private ArrayList<Order> orders = new ArrayList<Order>();
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private ArrayList<Employee> employees  = new ArrayList<Employee>();
 
+	public ArrayList<Order> getOrders(){
+		return this.orders;
+	}
+	
+	public void addOrders(Order order){
+		orders.add(order);
+	}
+	
 	private JFrame mainJFrame = new JFrame();
 	private GridLayout grid = new GridLayout(0, 1, 0, 10);
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
@@ -30,7 +39,7 @@ public class RetailGUI extends JFrame{
 	private JTabbedPane supplyJTabbedPane = new JTabbedPane();
 	private JTabbedPane prodJTabbedPane = new JTabbedPane();
 	private JTabbedPane invJTabbedPane = new JTabbedPane();
-	private JTabbedPane stockJTabbedPane = new JTabbedPane();
+	private JTabbedPane orderJTabbedPane = new JTabbedPane();
 	private JTabbedPane accessJTabbedPane = new JTabbedPane();
 	private JTabbedPane proflossJTabbedPane = new JTabbedPane();
 	
@@ -46,12 +55,11 @@ public class RetailGUI extends JFrame{
 	private JPanel viewProductJPanel = new ViewProductDetailsPanel();
 	private JPanel editProductJPanel = new JPanel();
 	
-	private JPanel createInvJPanel = new CreateANewInoicePanel();
+	private JPanel createInvJPanel = new CreateANewInvoicePanel();
 	private JPanel viewInvJPanel = new ViewCustomerInvoicePanel();
 	private JPanel editInvJPanel = new JPanel();
 	
-	private JPanel viewStockJPanel = new JPanel();
-	private JPanel editStockJPanel = new JPanel();
+	private JPanel createOrderPanel = new CreateNewOrderPanel();
 	
 	private JPanel accessJPanel = new JPanel();
 	
@@ -179,7 +187,7 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.add("Supplier Management", supplyJTabbedPane);
 		mainJTabbedPane.add("Product Management", prodJTabbedPane);
 		mainJTabbedPane.add("Invoice Management", invJTabbedPane);
-		mainJTabbedPane.add("Order Management", stockJTabbedPane);
+		mainJTabbedPane.add("Order Management", orderJTabbedPane);
 		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
 		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
 		mainJTabbedPane.add("Logout", logoutJPanel);
@@ -200,8 +208,7 @@ public class RetailGUI extends JFrame{
 		invJTabbedPane.add("View Customer Invoice", viewInvJPanel);
 		invJTabbedPane.add("Edit Customer Invoice", editInvJPanel);
 		
-		stockJTabbedPane.add("View Available Stock", viewStockJPanel);
-		stockJTabbedPane.add("Edit Stock", editStockJPanel);
+		orderJTabbedPane.add("Create New Order", createOrderPanel);
 		
 		accessJTabbedPane.add("Coming Soon", accessJPanel);
 		accessJTabbedPane.setEnabled(false);
