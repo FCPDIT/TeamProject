@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -81,7 +82,8 @@ public class ViewProductDetailsPanel extends JPanel{
 				// This method could be enhanced by adding in a check 
 				//to ensure 9 digits have been entered to match an ISBN number.
 				if(input.trim().equals("")){ 
-					textarea.setText("Please enter a valid ID");		
+					//textarea.setText("Please enter a valid ID");	
+					JOptionPane.showMessageDialog(null, "Please Enter a Value in the ID Field");
 					invTextField.setText("");
 					productTitleTextField.setText("");
 				}else{
@@ -112,7 +114,8 @@ public class ViewProductDetailsPanel extends JPanel{
 				String input = productTitleTextField.getText();
 				
 				if(input.trim().equals("")){ 
-					textarea.setText("Please enter a valid Title");
+					//textarea.setText("Please enter a valid Title");
+					JOptionPane.showMessageDialog(null, "Please Enter a Value in the Title Field");
 					productTitleTextField.setText("");
 					invTextField.setText("");
 				}else{
@@ -146,11 +149,11 @@ public class ViewProductDetailsPanel extends JPanel{
 																							//All names in array should be stored in lower case.
 						
 						if(input.trim().equals("")){ 	// If no text is entered
-							textarea.setText("Please enter text in Author Field");
+							//textarea.setText("Please enter text in Author Field");
+							JOptionPane.showMessageDialog(null, "Please Enter a Value in the Author Field");
 							productAuthorTextField.setText("");
 							invTextField.setText("");
 						}else{							// Take in String and Search for it.
-							//int num = Integer.parseInt(input);
 							textarea.setText(product.viewProductByAuthor(input, products));	
 							productAuthorTextField.setText("");
 							invTextField.setText("");
