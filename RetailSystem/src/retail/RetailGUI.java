@@ -60,6 +60,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editInvJPanel = new JPanel();
 	
 	private JPanel createOrderPanel = new CreateNewOrderPanel();
+	private JPanel viewOrderJPanel = new ViewOrderPanel();
 	
 	private JPanel accessJPanel = new JPanel();
 	
@@ -209,6 +210,7 @@ public class RetailGUI extends JFrame{
 		invJTabbedPane.add("Edit Customer Invoice", editInvJPanel);
 		
 		orderJTabbedPane.add("Create New Order", createOrderPanel);
+		orderJTabbedPane.add("View Orders", viewOrderJPanel);
 		
 		accessJTabbedPane.add("Coming Soon", accessJPanel);
 		accessJTabbedPane.setEnabled(false);
