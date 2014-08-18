@@ -1,12 +1,16 @@
 package retail;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.GridBagLayout;
 
 import javax.swing.*;
 
@@ -54,7 +58,7 @@ public class RetailGUI extends JFrame{
 	//private JPanel viewProductJPanel = new ViewProductDetailsPanel();
 	private JPanel viewProductJPanel = new JPanel();
 	private JPanel editProductJPanel = new JPanel();
-	private JPanel searchByRetailJpanel = new JPanel();
+	private JPanel searchByRetailJPanel = new JPanel();
 	private JPanel viewProductByQuantityJPanel = new JPanel();
 	private JPanel AddRemoveStockJPanel = new JPanel();
 	
@@ -65,7 +69,7 @@ public class RetailGUI extends JFrame{
 	
 	//private JPanel createOrderPanel = new CreateNewOrderPanel();
 	private JPanel createOrderPanel = new JPanel();
-	private JPanel viewOrderJPanel = new ViewOrderPanel();
+	//private JPanel viewOrderJPanel = new ViewOrderPanel();
 	
 	private JPanel accessJPanel = new JPanel();
 	
@@ -161,6 +165,26 @@ public class RetailGUI extends JFrame{
 	private JLabel prodSupplierId = new JLabel("Supplier Id");
 	private JTextField prodSupplierIdJTextField = new JTextField();
 	private JButton productJButton = new JButton("Create New Product");
+	
+	private JRadioButton under5Radio = new JRadioButton("under 4.99");
+	private JRadioButton fiveTo10Radio = new JRadioButton("5 - 9.99");
+	private JRadioButton tenTo20Radio = new JRadioButton("10 - 20");
+	private JRadioButton over20Radio = new JRadioButton("20 plus");
+	private JLabel searchByRetail = new JLabel("Search by retail price range");
+	private JButton searchByRetailButton = new JButton("Search");
+	private JButton searchByQuantityButton = new JButton("Search");
+	private JTextArea priceTextArea = new JTextArea(20, 60);
+	private JTextArea quantityTextArea = new JTextArea(20,60);
+	private JLabel searchByQuantity = new JLabel("Search by stock quantity");
+	private JRadioButton under50Radio = new JRadioButton("under 50");
+	private JRadioButton fiftyTo100Radio = new JRadioButton("50 - 100");
+	private JRadioButton hundredTo200Radio = new JRadioButton("100 - 200");
+	private JRadioButton over200Radio = new JRadioButton("200 plus");
+	
+	
+	
+	
+	
 	
 	//Edit Invoice Components 
 		JPanel findInvoiceComponentsJPanel = new JPanel();
@@ -260,7 +284,7 @@ public class RetailGUI extends JFrame{
 		prodJTabbedPane.add("Create New Product",addProductJPanel);
 		prodJTabbedPane.add("View Product Details", viewProductJPanel);
 		prodJTabbedPane.add("Edit Product Details", editProductJPanel);
-		prodJTabbedPane.add("Search by retail price", searchByRetailJpanel);
+		prodJTabbedPane.add("Search by retail price", searchByRetailJPanel);
 		prodJTabbedPane.add("Search by quantity", viewProductByQuantityJPanel);
 		prodJTabbedPane.add("Add/remove stock", AddRemoveStockJPanel);
 		
@@ -270,7 +294,7 @@ public class RetailGUI extends JFrame{
 		invJTabbedPane.add("Edit Customer Invoice", editInvJPanel);
 		
 		orderJTabbedPane.add("Create New Order", createOrderPanel);
-		orderJTabbedPane.add("View Orders", viewOrderJPanel);
+		//orderJTabbedPane.add("View Orders", viewOrderJPanel);
 		
 		accessJTabbedPane.add("Coming Soon", accessJPanel);
 		accessJTabbedPane.setEnabled(false);
@@ -561,6 +585,45 @@ public class RetailGUI extends JFrame{
 		addProductJPanel.add(prodSupplierId);
 		addProductJPanel.add(prodSupplierIdJTextField);
 		addProductJPanel.add(productJButton);
+		
+		searchByRetailJPanel.add(searchByRetail);
+		searchByRetailJPanel.add(under5Radio);
+		searchByRetailJPanel.add(fiveTo10Radio);
+		searchByRetailJPanel.add(tenTo20Radio);
+		searchByRetailJPanel.add(over20Radio);
+		searchByRetailJPanel.add(searchByRetailButton);
+		searchByRetailJPanel.add(priceTextArea);
+		
+		ButtonGroup priceRange = new ButtonGroup();
+		priceRange.add(under5Radio);
+		priceRange.add(fiveTo10Radio);
+		priceRange.add(tenTo20Radio);
+		priceRange.add(over20Radio);
+		
+		
+		viewProductByQuantityJPanel.add(searchByQuantity);
+		viewProductByQuantityJPanel.add(under50Radio);
+		viewProductByQuantityJPanel.add(fiftyTo100Radio);
+		viewProductByQuantityJPanel.add(hundredTo200Radio);
+		viewProductByQuantityJPanel.add(over200Radio);
+		viewProductByQuantityJPanel.add(searchByQuantityButton);
+		viewProductByQuantityJPanel.add(quantityTextArea);
+		
+		
+		ButtonGroup quantity = new ButtonGroup();
+		quantity.add(under50Radio);
+		quantity.add(fiftyTo100Radio);
+		quantity.add(hundredTo200Radio);
+		quantity.add(over200Radio);
+		
+		
+		
+		
+		
+		
+	
+		
+	
 		
 		productJButton.addActionListener(new ActionListener(){
 			//function to create a product
