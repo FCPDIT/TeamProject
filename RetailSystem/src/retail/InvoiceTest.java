@@ -11,7 +11,7 @@ public class InvoiceTest {
 	private ArrayList<Employee> employees = new ArrayList<>();
 	private ArrayList<Customer> customers = new ArrayList<>();
 	private ArrayList<Product> products = new ArrayList<>();
-	private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
+	
 
 	//=====================
 	@Test
