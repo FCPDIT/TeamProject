@@ -1,7 +1,6 @@
 package retail;
 
 import java.util.ArrayList;
-import java.util.regex.*;
 
 public class Product {
 	private String title;
@@ -48,8 +47,8 @@ public class Product {
 		+ "\n Current Stock: " + p.getCurrentStock()
 		+ "\n Supplier: " + p.getSupplier().getName()
 		+ "\n Max Stock:" + p.getMaxStock() + "\n Min Stock: "
-		+ p.getMinStock() + "\n Cost Price: €" + p.getCostPrice()
-		+ "\n Retail Price: €" + p.getRetailPrice() + "\n";
+		+ p.getMinStock() + "\n Cost Price: ï¿½" + p.getCostPrice()
+		+ "\n Retail Price: ï¿½" + p.getRetailPrice() + "\n";
 		} else {
 		return " No Details to Print ";
 		}

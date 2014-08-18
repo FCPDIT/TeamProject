@@ -1,7 +1,6 @@
 package retail;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -134,6 +133,27 @@ public class RetailGUI extends JFrame{
 	private JTextField editSupplierDelivery = new JTextField();
 	private JButton saveSupplierJButton = new JButton("Update Supplier");
 	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
+	
+	//Product Components
+	private JLabel prodTitle = new JLabel("Book Title ");
+	private JTextField titleJTextField = new JTextField();
+	private JLabel prodAuthor = new JLabel("Author ");
+	private JTextField authorJTextField = new JTextField();
+	private JLabel prodCode = new JLabel("Book Code ");
+	private JTextField codeJTextField = new JTextField();
+	private JLabel prodRetail = new JLabel("Retail Price ");
+	private JTextField retailJTextField = new JTextField();
+	private JLabel prodCost = new JLabel("Cost Price ");
+	private JTextField costJTextField = new JTextField();
+	private JLabel prodTotalStock = new JLabel("Total in Stock ");
+	private JTextField tStockJTextField = new JTextField();
+	private JLabel prodMaxStock = new JLabel("Maximum Stock ");
+	private JTextField maxJTextField = new JTextField();
+	private JLabel prodMinStock = new JLabel("Minimum Stock ");
+	private JTextField minJTextField = new JTextField();
+	private JLabel prodSupplierId = new JLabel("Supplier Id:");
+	private JTextField prodSupplierIdJTextField = new JTextField();
+	private JButton productJButton = new JButton("Create New Product");
 	
 	//Edit Invoice Components 
 	JPanel findInvoiceComponentsJPanel = new JPanel();
@@ -299,6 +319,7 @@ public class RetailGUI extends JFrame{
 		});
 		
 		findCustById.addActionListener(new ActionListener(){
+			//function to find customer by id for editing
 			public void actionPerformed(ActionEvent e){
 				for(Customer customer: customers){
 					if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
@@ -473,6 +494,51 @@ public class RetailGUI extends JFrame{
 					}else{
 						JOptionPane.showMessageDialog(null, "Supplier Not Deleted");
 					}
+				}
+			}
+		});
+		/*
+		 * Start of Product Creation 
+		 */
+		addProductJPanel.setLayout(grid);
+		addProductJPanel.add(prodTitle);
+		addProductJPanel.add(titleJTextField);
+		addProductJPanel.add(prodAuthor);
+		addProductJPanel.add(authorJTextField);
+		addProductJPanel.add(prodCode);
+		addProductJPanel.add(codeJTextField);
+		addProductJPanel.add(prodRetail);
+		addProductJPanel.add(retailJTextField);
+		addProductJPanel.add(prodCost);
+		addProductJPanel.add(costJTextField);
+		addProductJPanel.add(prodTotalStock);
+		addProductJPanel.add(tStockJTextField);
+		addProductJPanel.add(prodMaxStock);
+		addProductJPanel.add(maxJTextField);
+		addProductJPanel.add(prodMinStock);
+		addProductJPanel.add(minJTextField);
+		addProductJPanel.add(prodSupplierId);
+		addProductJPanel.add(supplierIdJTextField);
+		addProductJPanel.add(productJButton);
+		
+		productJButton.addActionListener(new ActionListener(){
+			//function to create a product
+			public void actionPerformed(ActionEvent e){
+				if(suppliers.size() >= 1){
+					for(Supplier supplier: suppliers){
+						if(supplier.getId() ==Integer.parseInt(prodSupplierIdJTextField.getText())){
+							Product product = new Product(titleJTextField.getText(),authorJTextField.getText(),
+									codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
+									Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
+									Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
+									);
+							products.add(product);
+						}else{
+							JOptionPane.showMessageDialog(null,"Supplier Not Found");
+						}
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
 				}
 			}
 		});
