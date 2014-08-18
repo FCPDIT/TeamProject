@@ -720,6 +720,9 @@ public class RetailGUI extends JFrame{
 							else if(invoiceID == 2){
 								//no employee id match
 								JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+								editCustomerInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceComponentsJPanel.setVisible(false);
+								saveInvoiceComponentsJPanel.setVisible(false);
 							}
 
 						}	
@@ -772,6 +775,9 @@ public class RetailGUI extends JFrame{
 							else if(customerID == 2){
 								//no employee id match
 								JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+								editCustomerInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceComponentsJPanel.setVisible(false);
+								saveInvoiceComponentsJPanel.setVisible(false);
 							}
 						}
 					}
