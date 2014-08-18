@@ -1,8 +1,6 @@
 package retail;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,7 +65,6 @@ public class RetailGUI extends JFrame{
 	
 	//private JPanel createOrderPanel = new CreateNewOrderPanel();
 	private JPanel createOrderPanel = new JPanel();
-	private JPanel createOrderPanel = new CreateNewOrderPanel();
 	private JPanel viewOrderJPanel = new ViewOrderPanel();
 	
 	private JPanel accessJPanel = new JPanel();
@@ -144,6 +141,27 @@ public class RetailGUI extends JFrame{
 	private JButton saveSupplierJButton = new JButton("Update Supplier");
 	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
 	
+	//Product Components
+	private JLabel prodTitle = new JLabel();
+	private JTextField titleJTextField = new JTextField();
+	private JLabel prodAuthor = new JLabel();
+	private JTextField authorJTextField = new JTextField();
+	private JLabel prodCode = new JLabel();
+	private JTextField codeJTextField = new JTextField();
+	private JLabel prodRetail = new JLabel();
+	private JTextField retailJTextField = new JTextField();
+	private JLabel prodCost = new JLabel();
+	private JTextField costJTextField = new JTextField();
+	private JLabel prodTotalStock = new JLabel();
+	private JTextField tStockJTextField = new JTextField();
+	private JLabel prodMaxStock = new JLabel();
+	private JTextField maxJTextField = new JTextField();
+	private JLabel prodMinStock = new JLabel();
+	private JTextField minJTextField = new JTextField();
+	private JLabel prodSupplierId = new JLabel();
+	private JTextField prodSupplierIdJTextField = new JTextField();
+	private JButton productJButton = new JButton("Create New Product");
+	
 	//Edit Invoice Components 
 		JPanel findInvoiceComponentsJPanel = new JPanel();
 		JPanel editInvoiceComponentsJPanel = new JPanel();
@@ -165,30 +183,36 @@ public class RetailGUI extends JFrame{
 		private JButton saveInvoiceJButton = new JButton("Update Invoice");
 		private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
 		private JTextField editPayStatus = new JTextField("");
+
 		
-		//Product components
-	
-	JPanel findInvoiceComponentsJPanel = new JPanel();
-	JPanel editInvoiceComponentsJPanel = new JPanel();
-	JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
-	JPanel saveInvoiceComponentsJPanel = new JPanel();
-	private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
-	private JTextArea customerInvoiceJTextArea = new JTextArea();
-	private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
-	private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
-	private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
-	private JTextField editCustomerInvoiceJTextField = new JTextField("Customer Id");
-	private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
-	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
-	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
-	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
-	private JTextField editInvoiceProduct = new JTextField("Edit Product");
-	private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
+/*	 Should These be added here
+ * 
+ * JPanel findInvoiceComponentsJPanel = new JPanel();
+ * JPanel editInvoiceComponentsJPanel = new JPanel();
+ * JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
+ * JPanel saveInvoiceComponentsJPanel = new JPanel();
+ * private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
+ * private JTextArea customerInvoiceJTextArea = new JTextArea();
+ * private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
+ * private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
+ * private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
+ * private JTextField editCustomerInvoiceJTextField = new JTextField("Customer Id");
+ * private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
+ * private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
+ * private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
+ * private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
+ * private JTextField editInvoiceProduct = new JTextField("Edit Product");
+ * private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
+	*/
+		
 	private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
-	private JButton payInvoiceJButton = new JButton("Pay Invoice");
-	private JButton saveInvoiceJButton = new JButton("Update Invoice");
-	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
-	private JTextField editPayStatus = new JTextField("");
+	/*
+	 * private JButton payInvoiceJButton = new JButton("Pay Invoice");
+	 * private JButton saveInvoiceJButton = new JButton("Update Invoice");
+	 * private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
+	 * private JTextField editPayStatus = new JTextField("");
+	
+	*/
 	
 	public RetailGUI() {
 		
@@ -510,6 +534,52 @@ public class RetailGUI extends JFrame{
 					}else{
 						JOptionPane.showMessageDialog(null, "Supplier Not Deleted");
 					}
+				}
+			}
+		});
+		
+		/*
+		 * Start of Product Creation 
+		 */
+		addProductJPanel.setLayout(grid);
+		addProductJPanel.add(prodTitle);
+		addProductJPanel.add(titleJTextField);
+		addProductJPanel.add(prodAuthor);
+		addProductJPanel.add(authorJTextField);
+		addProductJPanel.add(prodCode);
+		addProductJPanel.add(codeJTextField);
+		addProductJPanel.add(prodRetail);
+		addProductJPanel.add(retailJTextField);
+		addProductJPanel.add(prodCost);
+		addProductJPanel.add(costJTextField);
+		addProductJPanel.add(prodTotalStock);
+		addProductJPanel.add(tStockJTextField);
+		addProductJPanel.add(prodMaxStock);
+		addProductJPanel.add(maxJTextField);
+		addProductJPanel.add(prodMinStock);
+		addProductJPanel.add(minJTextField);
+		addProductJPanel.add(prodSupplierId);
+		addProductJPanel.add(prodSupplierIdJTextField);
+		addProductJPanel.add(productJButton);
+		
+		productJButton.addActionListener(new ActionListener(){
+			//function to create a product
+			public void actionPerformed(ActionEvent e){
+				if(suppliers.size() >= 1){
+					for(Supplier supplier: suppliers){
+						if(supplier.getId() ==Integer.parseInt(prodSupplierIdJTextField.getText())){
+							Product product = new Product(titleJTextField.getText(),authorJTextField.getText(),
+									codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
+									Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
+									Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
+									);
+							products.add(product);
+						}else{
+							JOptionPane.showMessageDialog(null,"Supplier Not Found");
+						}
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
 				}
 			}
 		});
