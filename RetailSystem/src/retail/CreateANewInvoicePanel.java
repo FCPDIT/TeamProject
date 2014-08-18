@@ -1,6 +1,7 @@
 package retail;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -18,7 +20,7 @@ public class CreateANewInvoicePanel extends JPanel {
 
 	// variables
 	private JLabel invoiceIdLabel, employeeIdLabel, customerIdLabel,
-			productCodeLabel, quantityLabel, resultLabel;
+			productCodeLabel, quantityLabel;//, resultLabel; may not need this label, neater with JOptionPanes
 	private JTextField invTextField, emplTextField, custTextField,
 			prodCodeTextField, quantityTextField;
 	private JButton createInvBtn;
@@ -50,6 +52,8 @@ public class CreateANewInvoicePanel extends JPanel {
 		invTextField = new JTextField(10);
 		gc.gridx = 1;
 		gc.gridy = 0;
+		Font bigFont = invTextField.getFont().deriveFont(Font.PLAIN, 20f); //used to se the height of the textBox!!
+		invTextField.setFont(bigFont);
 		add(invTextField, gc);
 		// ====
 		employeeIdLabel = new JLabel("Employee ID: ");
@@ -59,6 +63,7 @@ public class CreateANewInvoicePanel extends JPanel {
 		emplTextField = new JTextField(10);
 		gc.gridx = 1;
 		gc.gridy = 1;
+		emplTextField.setFont(bigFont);
 		add(emplTextField, gc);
 		// ====
 		customerIdLabel = new JLabel("Customer ID: ");
@@ -68,6 +73,7 @@ public class CreateANewInvoicePanel extends JPanel {
 		custTextField = new JTextField(10);
 		gc.gridx = 1;
 		gc.gridy = 2;
+		custTextField.setFont(bigFont);
 		add(custTextField, gc);
 		// ====
 		productCodeLabel = new JLabel("Product Code: ");
@@ -77,6 +83,7 @@ public class CreateANewInvoicePanel extends JPanel {
 		prodCodeTextField = new JTextField(10);
 		gc.gridx = 1;
 		gc.gridy = 3;
+		prodCodeTextField.setFont(bigFont);
 		add(prodCodeTextField, gc);
 		// ====
 		quantityLabel = new JLabel("Quantity: ");
@@ -86,6 +93,7 @@ public class CreateANewInvoicePanel extends JPanel {
 		quantityTextField = new JTextField(10);
 		gc.gridx = 1;
 		gc.gridy = 4;
+		quantityTextField.setFont(bigFont);
 		add(quantityTextField, gc);
 		// ====
 		createInvBtn = new JButton("Create Invoice");
@@ -110,7 +118,8 @@ public class CreateANewInvoicePanel extends JPanel {
 						prodCode.trim().equals("")||
 						(quantityString.trim().equals("") || quantityString.matches(".*\\D.*")))
 				{
-					resultLabel.setText("Please ensure all text fields have been filled");
+					//resultLabel.setText("Please ensure all text fields have been filled");
+					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
 					int invoiceId = Integer.parseInt(invoiceIdString);
 					int emplyId = Integer.parseInt(emplyIdString);
@@ -139,9 +148,10 @@ public class CreateANewInvoicePanel extends JPanel {
 								Invoice inv = new Invoice(invoiceId, emplInput, cusInput, prodInput, quantity);
 							//Add the newly created Invoice to the list
 								invoices.add(inv);
-								System.out.println(invoices.size());
+								//System.out.println(invoices.size()); //delete this, used for testing only!!
 							//Set Label to Confirmation
-								resultLabel.setText("Thank you for the order");
+								//resultLabel.setText("Thank you for the order"); useful link for jOptionPane
+								JOptionPane.showMessageDialog (null, "Thank you for the order", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
 							// reset the textboxes to empty
 								invTextField.setText("");
 								emplTextField.setText("");
@@ -149,25 +159,26 @@ public class CreateANewInvoicePanel extends JPanel {
 								prodCodeTextField.setText("");
 								quantityTextField.setText("");
 								}else{
-									resultLabel.setText("Invoice Number is not Unique");
+									
+									JOptionPane.showMessageDialog (null, "Invoice Number is not Unique", "Invoice Info", JOptionPane.WARNING_MESSAGE);
 								}
 							} else {
-								resultLabel.setText("No Product Record exist with that Input");
+								JOptionPane.showMessageDialog (null, "No Product Record exist with that Input", "Product Info", JOptionPane.WARNING_MESSAGE);
 							}
 						} else {
-							resultLabel.setText("No Customer Record exist with that Input");
+							JOptionPane.showMessageDialog (null, "No Customer Record exist with that Input", "Customer Info", JOptionPane.WARNING_MESSAGE);
 						}
 					} else {
-						resultLabel.setText("No Employee Record exist with that Input");
+						JOptionPane.showMessageDialog (null, "No Employee Record exist with that Input", "Employee Info", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
 		});
-		//Result label to display message to user
-		resultLabel = new JLabel("");
+		//Result label to display message to user. Possibly not needed!!
+		/*resultLabel = new JLabel("");
 		gc.gridx = 0;
 		gc.gridy = 6;
-		add(resultLabel, gc);
+		add(resultLabel, gc);*/
 	}
 	
 	//Method to check to see if invoice number is unique
