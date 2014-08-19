@@ -3,13 +3,20 @@ package retail;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 import java.awt.GridBagLayout;
 
 import javax.swing.*;
@@ -55,8 +62,8 @@ public class RetailGUI extends JFrame{
 	private JPanel editSupplyJPanel = new JPanel();
 	
 	private JPanel addProductJPanel = new JPanel();
-	//private JPanel viewProductJPanel = new ViewProductDetailsPanel();
-	private JPanel viewProductJPanel = new JPanel();
+	private JPanel viewProductJPanel = new ViewProductDetailsPanel();
+	//private JPanel viewProductJPanel = new JPanel();
 	private JPanel editProductJPanel = new JPanel();
 	private JPanel searchByRetailJPanel = new JPanel();
 	private JPanel viewProductByQuantityJPanel = new JPanel();
@@ -64,7 +71,7 @@ public class RetailGUI extends JFrame{
 	
 	private JPanel createInvJPanel = new CreateANewInvoicePanel();
 	//private JPanel createInvJPanel = new JPanel();
-	private JPanel viewInvJPanel = new ViewCustomerInvoicePanel();
+	private JPanel viewInvJPanel = new JPanel();	//ViewCustomerInvoicePanel();
 	private JPanel editInvJPanel = new JPanel();
 	
 	//private JPanel createOrderPanel = new CreateNewOrderPanel();
@@ -209,6 +216,19 @@ public class RetailGUI extends JFrame{
 		private JTextField editPayStatus = new JTextField("");	
 		private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
 
+		
+		//===========================================
+		//View Customer Invoice Panel and Components
+			
+			//Panel
+			private JPanel viewCustomerPanel = new JPanel();
+			
+			//Components
+			private JTextArea textarea;
+			private JTextField invTextField2;
+			private JTextField custIdTextField;
+			private Invoice invoice = new Invoice();
+		//==========================================
 	
 	public RetailGUI() {
 		
@@ -775,8 +795,136 @@ public class RetailGUI extends JFrame{
 							}
 						});
 					
+						//===============================
+						//vIWcUSTOMERiNVOICE fUNCTIONALITY
+						GridBagConstraints gc = new GridBagConstraints();
+						gc.insets = new Insets(5, 5, 5, 5);
+						viewInvJPanel.add(viewCustomerPanel);
+						viewCustomerPanel.setLayout(new GridBagLayout());
+						gc.insets = new Insets(5,5,5,5); //sets the padding around each component
 						
-					}
+						/**
+						 * Add All the Components
+						 * 	TextArea x1
+						 *  Label x2
+						 *  TextField x2
+						 *  Button x5
+						 *  
+						 */
+						//1. TextArea
+						textarea = new JTextArea(20,50); //height - width
+						textarea.setEditable(false);
+						JScrollPane scrollPane = new JScrollPane(textarea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+						GridBagConstraints c = new GridBagConstraints();
+				        c.gridwidth = GridBagConstraints.REMAINDER;
+				        c.fill = GridBagConstraints.BOTH;
+				        c.weightx = 1.0;
+				        c.weighty = 1.0;
+				        viewCustomerPanel.add(scrollPane, c);
+						
+						// First Label and controls:	View Invoice by ID 
+						JLabel invIdlbl = new JLabel("Invoice ID: "); //Label
+						gc.gridx = 0;
+						gc.gridy = 1;
+						viewCustomerPanel.add(invIdlbl,gc);
+						invTextField2 = new JTextField(10); //Text Field
+						gc.gridx = 1;
+						gc.gridy = 1;
+						viewCustomerPanel.add(invTextField2,gc);
+						JButton invButton = new JButton("Invoice ID");	//button
+						gc.gridx = 2;
+						gc.gridy = 1;
+						viewCustomerPanel.add(invButton,gc);
+						//Action listener For Button to view Invoice by Id
+						invButton.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								String input = invTextField2.getText();
+								if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
+									textarea.setText("Please enter a valid number");
+									invTextField2.setText("");
+									custIdTextField.setText("");
+								}else{
+									int num = Integer.parseInt(input);
+									textarea.setText(invoice.viewInvoiceById(num, invoices)); //viewInvoiceById() is in the Invoice Class
+									invTextField2.setText("");
+									custIdTextField.setText("");
+								}
+							}
+						});
+						
+						//Second Label and controls: 	View Customer by ID
+						JLabel custIdlbl = new JLabel("Customer ID: ");
+						gc.gridx = 0;
+						gc.gridy = 2;
+						viewCustomerPanel.add(custIdlbl,gc);
+						custIdTextField = new JTextField(10);
+						gc.gridx = 1;
+						gc.gridy = 2;
+						viewCustomerPanel.add(custIdTextField,gc);
+						JButton custIdButton = new JButton("Customer ID");
+						gc.gridx = 2;
+						gc.gridy = 2;
+						viewCustomerPanel.add(custIdButton,gc);
+						custIdButton.addActionListener(new ActionListener() {
+							//Action listener For Button to view Customer by Id
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								String input = custIdTextField.getText();
+								if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
+									textarea.setText("Please enter a valid number");
+									custIdTextField.setText("");
+									invTextField2.setText("");
+								}else{
+									int num = Integer.parseInt(input);
+									textarea.setText(invoice.viewInvoiceByCustomer(num, invoices));	//viewInvoiceByCustomer() is in the Invoice class
+									custIdTextField.setText("");
+									invTextField2.setText("");
+								}
+							}
+						});
+						
+						//Button x3: 	View All/ View Paid/ View UnPaid
+						//1. View all Button
+						JButton viewAllBtn = new JButton("View All");
+						gc.gridx = 0;
+						gc.gridy = 3;
+						viewCustomerPanel.add(viewAllBtn,gc);
+						viewAllBtn.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								textarea.setText(invoice.viewAllInvoices(invoices));	//viewAllInvoices() is in the Invoice Class
+							}
+						});
+						
+						//2. Paid Button
+						JButton viewPaidBtn = new JButton("View Paid");
+						gc.gridx = 1;
+						gc.gridy = 3;
+						viewCustomerPanel.add(viewPaidBtn,gc);
+						viewPaidBtn.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								textarea.setText(invoice.viewPaidInvoice(invoices));	//viewPaidInvoice() is in the invoice class
+								
+							}
+						});
+						
+						//3. UnPaid Button
+						JButton viewUnpaidBtn = new JButton("View Unpaid");
+						viewUnpaidBtn.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								textarea.setText(invoice.viewUnPaidInvoice(invoices));	//viewUnPaidInvoice() is in the invoice class
+							}
+						});
+						gc.gridx = 2;
+						gc.gridy = 3;
+						viewCustomerPanel.add(viewUnpaidBtn,gc);
+						
+						
+					} //END OF CONSTRUCTOR
 					//handler for login button
 					private class LoginButtonHandler implements ActionListener
 					{
