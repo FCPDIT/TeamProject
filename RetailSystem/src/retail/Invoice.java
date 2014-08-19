@@ -13,6 +13,7 @@ public class Invoice {
 	private String invoiceDate;
 	private boolean paid = false;
 	private double totalInvoicePrice;
+	private ArrayList<InvoiceProduct> invoiceProducts = new ArrayList<InvoiceProduct>();
 
 	public Invoice() {
 	} // used for testing only
@@ -29,9 +30,39 @@ public class Invoice {
 		product.setCurrentStock(product.getCurrentStock() - quantity); // Stock check must be added in the driver class
 																		
 	}
+	
+	//2nd Constructor
+	public Invoice(int id, Employee employee, Customer customer, ArrayList<InvoiceProduct> invoiceProducts) {
+		this.id = id;
+		this.employee = employee;
+		this.customer = customer;
+		this.invoiceProducts = invoiceProducts;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
+		invoiceDate = sdf.format(new Date());
+	}
 
+	//Methods
+	public double calculateInvoiceTotal(){
+		
+		double amount = 0.0;
+		
+		for(InvoiceProduct productOrdered: this.invoiceProducts){
+			amount += productOrdered.getProduct().getRetailPrice() * productOrdered.getQuantity();
+		}
+		return amount;
+	}
+	
+	//Getter and setters
 	public double getTotalInvoicePrice() {
 		return totalInvoicePrice;
+	}
+
+	public ArrayList<InvoiceProduct> getInvoiceProducts() {
+		return invoiceProducts;
+	}
+
+	public void setInvoiceProducts(ArrayList<InvoiceProduct> invoiceProducts) {
+		this.invoiceProducts = invoiceProducts;
 	}
 
 	public void setTotalInvoicePrice(double totalInvoicePrice) {
@@ -104,17 +135,25 @@ public class Invoice {
 
 	//Simple print
 	String printDetails(Invoice v) {
+		String list = "";
 		if (v != null) {
-			return "Invoice ID: " + v.getId() + 
-					"\nProduct Id: " + v.getProduct().getProductCode() 
-					+ "\nProduct Price: " +  String.format("ï¿½%.2f", v.getProduct().getRetailPrice())
-					+ "\nQuantity of Order " + v.getQuantity()
-					+ "\nEmployee Name: " + v.getEmployee().getEmployeeName() 
+			list += "Invoice ID: " + v.getId();
+			list+="\n-------------------------------";
+				for(InvoiceProduct pds : v.getInvoiceProducts() ){
+					list+="\nProduct Id: " + pds.getProduct().getProductCode() 
+					+ "\nProduct Price: " +  String.format("€%.2f", pds.getProduct().getRetailPrice())
+					+ "\nQuantity of Order " + pds.getQuantity() 
+					+ "\nTotal of " + pds.getProduct().getProductCode() +" : " + (pds.getQuantity()*pds.getProduct().getRetailPrice()) 
+					+ "\n--------------";
+				}
+					list += "\nEmployee Name: " + v.getEmployee().getEmployeeName() 
 					+ "\nEmployee Id: "   + v.getEmployee().getEmployeeId() 
 					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
 					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
-					+ "\nInvoice Total: " +  String.format("ï¿½%.2f", v.getTotalInvoicePrice()) 
+					+ "\nInvoice Total: " +  String.format("€%.2f", v.calculateInvoiceTotal()) 
 					+ "\nDate: " + v.getInvoiceDate() + "\n\n";
+					list+="-------------------------------\n";
+				return list;
 		} else {
 			return "No details to print";
 		}

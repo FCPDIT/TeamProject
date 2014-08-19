@@ -6,13 +6,20 @@ public class InvoiceArrayListForTesting {
 
 	private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
 	private Customer c1 = new Customer(1,"Johnnys","Dublin"); //This object was created for Testing the viewInvoiceByCustomer() method
-	
+	private ArrayList<InvoiceProduct> listOfAllProducts = new ArrayList<InvoiceProduct>();
 	//Hard-coded arraylist of Invoices
 	public void createList(){
-		Invoice inv1 = new Invoice(1, new Employee(1,"marc",1,100.00,1234), c1, new Product("a", "b", "d", 50.00, 20.00, 10, 20, 2, new Supplier(1,"f","g")),10);
-		Invoice inv2 = new Invoice(2, new Employee(2,"john",2,110.00,4567), new Customer(2,"Rudds","Galway"), new Product("x", "x", "x", 55.00, 25.00, 20, 30, 3, new Supplier(2,"h","h")),12);
-		Invoice inv3 = new Invoice(3, new Employee(3,"mary",3,130.00,3987), new Customer(3,"Dennys","Cork"), new Product("y", "y", "y", 60.00, 30.00, 30, 40, 4, new Supplier(3,"m","m")),14);
-		invoices.add(inv1);
+		Product p1 = new Product("x", "x", "x", 5.00, 25.00, 20, 30, 3, new Supplier(2,"h","h"));
+		Product p2 = new Product("a", "b", "c", 5.00, 25.00, 20, 30, 3, new Supplier(2,"h","h"));
+		InvoiceProduct inp = new InvoiceProduct(p1, 5);
+		InvoiceProduct inp2 = new InvoiceProduct(p2, 5);
+		listOfAllProducts.add(inp);
+		listOfAllProducts.add(inp2);
+		
+		
+		
+		Invoice inv2 = new Invoice(2, new Employee(2,"john",2,110.00,4567), new Customer(2,"Rudds","Galway"),listOfAllProducts);
+		Invoice inv3 = new Invoice(3, new Employee(3,"mary",3,130.00,3987), new Customer(3,"Dennys","Cork"), listOfAllProducts);
 		invoices.add(inv2);
 		invoices.add(inv3);
 	}
