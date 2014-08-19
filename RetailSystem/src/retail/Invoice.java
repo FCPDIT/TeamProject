@@ -135,11 +135,15 @@ public class Invoice {
 
 	//Simple print
 	String printDetails(Invoice v) {
+		int count = 1;
 		String list = "";
 		if (v != null) {
 			list += "Invoice ID: " + v.getId();
 			list+="\n-------------------------------";
 				for(InvoiceProduct pds : v.getInvoiceProducts() ){
+					list+="\nItem number " + count+ " of this Invoice \n";
+					list+="-------------------------------";
+					count++;
 					list+="\nProduct Id: " + pds.getProduct().getProductCode() 
 					+ "\nProduct Price: " +  String.format("€%.2f", pds.getProduct().getRetailPrice())
 					+ "\nQuantity of Order " + pds.getQuantity() 

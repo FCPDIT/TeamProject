@@ -29,10 +29,10 @@ public class InvoiceArrayListForTesting {
 	public InvoiceArrayListForTesting() {
 		createList();
 		Invoice invoice = new Invoice();
-		System.out.println(invoice.viewAllInvoices(invoices)); //testing ViewAll Method: Working
-		//System.out.println(invoice.viewInvoiceById(1, invoices));//viewInvoiceById Method: Working
+		//System.out.println(invoice.viewAllInvoices(invoices)); //testing ViewAll Method: Working
+		//System.out.println(invoice.viewInvoiceById(2, invoices));//viewInvoiceById Method: Working
 		
-		//System.out.println(invoice.viewInvoiceByCustomer(3, invoices)); //testing viewInvoiceByCustomer Method: working
+		System.out.println(invoice.viewInvoiceByCustomer(3, invoices)); //testing viewInvoiceByCustomer Method: working
 		//System.out.println(invoice.viewInvoiceByCustomer(2, invoices)); //testing viewInvoiceByCustomer Method: working
 	
 		//System.out.println(invoice.viewPaidInvoice(invoices)); //testing viewPaidInvoice: Working
