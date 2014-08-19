@@ -15,21 +15,26 @@ public class ViewCustomerInvoicePanel2 extends JPanel{
 	private JPanel leftPanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	
-	//Labels
+	//Labels for left panel
 	private JLabel invIdLbl = new JLabel("Invoice Id: ");
 	private JLabel employLbl = new JLabel("Employee ID: ");
 	private JLabel custId = new JLabel("Customer ID: ");
 	private JLabel prodId = new JLabel("Product ID: ");
 	private JLabel quantity = new JLabel("Quantity: ");
 	
-	//JText Fields
+	//JText Fields for left panel
 	private JTextField invTextF = new JTextField(10);
 	private JTextField employTextF = new JTextField(10);
 	private JTextField custTextF = new JTextField(10);
 	private JTextField prodTextF = new JTextField(10);
 	private JTextField quantityTextF = new JTextField(10);
 	
-	//Text area
+	//Buttons for left Panel
+	private JButton confirmBtn = new JButton("Confirm");
+	private JButton addBtn = new JButton("Add");
+	
+	
+	//Text area for right panel
 	private JTextArea textarea = new JTextArea();
 	
 	//Constructor
@@ -40,7 +45,9 @@ public class ViewCustomerInvoicePanel2 extends JPanel{
 		setPreferredSize(size);
 		setBorder(BorderFactory.createTitledBorder("Invoice details"));
 		
+		//================================
 		//Left Panel Components
+		//================================
 		leftPanel.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.insets = new Insets(5,5,5,5);
@@ -78,13 +85,23 @@ public class ViewCustomerInvoicePanel2 extends JPanel{
 		leftPanel.add(quantity,gc);
 		gc.gridx = 1;
 		gc.gridy = 4;
-		gc.weighty = 10;
-		gc.fill = GridBagConstraints.LINE_END;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		leftPanel.add(quantityTextF,gc);
+		//=====
+		gc.gridx = 1;
+		gc.gridy = 5;
+		addBtn.setPreferredSize(new Dimension(115, 30)); //width/height
+		leftPanel.add(addBtn,gc);
+		//=====
+		gc.gridx = 1;
+		gc.gridy = 6;
+		confirmBtn.setPreferredSize(new Dimension(115, 30));
+		leftPanel.add(confirmBtn,gc);
 		
-		//TextPane
-		textarea = new JTextArea(20,20); //height - width
+		
+		//================================
+		//Right Panel : TextArea and Pane
+		//================================
+		textarea = new JTextArea(15,20); //height - width
 		textarea.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(textarea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         gc.gridwidth = GridBagConstraints.REMAINDER;
@@ -92,11 +109,9 @@ public class ViewCustomerInvoicePanel2 extends JPanel{
         gc.weightx = 1.0;
         gc.weighty = 1.0;
         gc.gridx = 3;
-		
         rightPanel.add(scrollPane, gc);
 		
 		
-		//Right Panel
 		//Main Panel Add
 		add(leftPanel);
 		add(rightPanel);
