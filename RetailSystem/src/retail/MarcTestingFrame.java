@@ -10,21 +10,22 @@ public class MarcTestingFrame extends JFrame{
 	//Variables
 	private JPanel panel = new ViewCustomerInvoicePanel();
 	private JPanel invoicePanel = new CreateANewInvoicePanel();
+	private JPanel splitPanel = new ViewCustomerInvoicePanel2();
 	private Container container;
 	
 	//Constructor
 	public MarcTestingFrame(){
-		setSize(450, 450);
+		setSize(600,600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		container = getContentPane();
 		//container.add(panel);
-		container.add(invoicePanel);
+		container.add(splitPanel);
 		setVisible(true);
 	}
 	
 	public static void main(String [] args){
-		//new MarcTestingFrame();
-		new RetailGUI();
+		new MarcTestingFrame();
+		//new RetailGUI();
 	}
 
 	
