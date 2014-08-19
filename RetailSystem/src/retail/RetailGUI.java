@@ -206,37 +206,9 @@ public class RetailGUI extends JFrame{
 		private JButton payInvoiceJButton = new JButton("Pay Invoice");
 		private JButton saveInvoiceJButton = new JButton("Update Invoice");
 		private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
-		private JTextField editPayStatus = new JTextField("");
+		private JTextField editPayStatus = new JTextField("");	
+		private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
 
-		
-/*	 Should These be added here
- * 
- * JPanel findInvoiceComponentsJPanel = new JPanel();
- * JPanel editInvoiceComponentsJPanel = new JPanel();
- * JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
- * JPanel saveInvoiceComponentsJPanel = new JPanel();
- * private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
- * private JTextArea customerInvoiceJTextArea = new JTextArea();
- * private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
- * private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
- * private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
- * private JTextField editCustomerInvoiceJTextField = new JTextField("Customer Id");
- * private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
- * private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
- * private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
- * private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
- * private JTextField editInvoiceProduct = new JTextField("Edit Product");
- * private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
-	*/
-		
-	private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
-	/*
-	 * private JButton payInvoiceJButton = new JButton("Pay Invoice");
-	 * private JButton saveInvoiceJButton = new JButton("Update Invoice");
-	 * private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
-	 * private JTextField editPayStatus = new JTextField("");
-	
-	*/
 	
 	public RetailGUI() {
 		
@@ -886,7 +858,7 @@ public class RetailGUI extends JFrame{
 								}
 							}
 							else if(invoiceID == 2){
-								//no employee id match
+								//no invoice id match
 								JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 								editCustomerInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceComponentsJPanel.setVisible(false);
@@ -941,7 +913,7 @@ public class RetailGUI extends JFrame{
 								}						
 							}
 							else if(customerID == 2){
-								//no employee id match
+								//no customer id match
 								JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 								editCustomerInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceComponentsJPanel.setVisible(false);
@@ -972,4 +944,3 @@ public class RetailGUI extends JFrame{
 					}
 
 		}
-
