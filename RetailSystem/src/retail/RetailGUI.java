@@ -57,12 +57,16 @@ public class RetailGUI extends JFrame{
 	private JTabbedPane accessJTabbedPane = new JTabbedPane();
 	private JTabbedPane proflossJTabbedPane = new JTabbedPane();
 	
+	private JPanel custJPanel = new JPanel();
 	private JPanel addCustJPanel = new JPanel();
 	private JPanel viewCustJPanel = new JPanel();
+	private JPanel custTextJPanel = new JPanel();
 	private JPanel editCustJPanel = new JPanel();
 	
+	private JPanel suppJPanel = new JPanel();
 	private JPanel addSupplyJPanel = new JPanel();
 	private JPanel viewSupplyJPanel = new JPanel();
+	private JPanel suppTextJPanel = new JPanel();
 	private JPanel editSupplyJPanel = new JPanel();
 	
 	private JPanel addProductJPanel = new JPanel();
@@ -115,7 +119,7 @@ public class RetailGUI extends JFrame{
 	private JTextField custByName = new JTextField();
 	private JButton viewCustJButton = new JButton("View Customer");
 	private JButton viewAllCustJButton = new JButton("View All Customers");
-	private JTextArea custJTextArea = new JTextArea(10,20);
+	private JTextArea custJTextArea = new JTextArea(20,50);
 	private JTextField editCustById = new JTextField();
 	private JButton findCustById = new JButton("Find Customer");
 	private JTextField editCustId = new JTextField();
@@ -142,7 +146,7 @@ public class RetailGUI extends JFrame{
 	private JTextField viewSupplyJTextField = new JTextField();
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
 	private JTextField viewSupplyNameJTextField = new JTextField();
-	private JTextArea supplierJTextArea = new JTextArea(20, 20);
+	private JTextArea supplierJTextArea = new JTextArea(50, 50);
 	private JButton viewSupplyJButton = new JButton("View Supplier Details");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	private JTextField editSupplierJTextField = new JTextField();
@@ -280,11 +284,17 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.add("Logout", logoutJPanel);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
-		custJTabbedPane.add("View Customer Details", viewCustJPanel);
+		custJTabbedPane.add("View Customer Details", custJPanel);
+		custJPanel.setLayout(grid);
+		custJPanel.add(viewCustJPanel);
+		custJPanel.add(custTextJPanel);
 		custJTabbedPane.add("Edit Customer Details", editCustJPanel);
 		
 		supplyJTabbedPane.add("Create New Supplier",addSupplyJPanel);
-		supplyJTabbedPane.add("View Supplier Details", viewSupplyJPanel);
+		supplyJTabbedPane.add("View Supplier Details", suppJPanel);
+		suppJPanel.setLayout(grid);
+		suppJPanel.add(viewSupplyJPanel);
+		suppJPanel.add(suppTextJPanel);
 		supplyJTabbedPane.add("Edit Supplier Details", editSupplyJPanel);
 		
 		prodJTabbedPane.add("Create New Product",addProductJPanel);
@@ -327,7 +337,7 @@ public class RetailGUI extends JFrame{
 		viewCustJPanel.add(custByName);
 		viewCustJPanel.add(viewCustJButton);
 		viewCustJPanel.add(viewAllCustJButton);
-		viewCustJPanel.add(custJTextArea);
+		custTextJPanel.add(scrollPane.add(custJTextArea));
 		custJTextArea.setLineWrap(true);
 		editCustJPanel.add(editCustById);
 		editCustJPanel.add(findCustById);
@@ -354,7 +364,7 @@ public class RetailGUI extends JFrame{
 		viewCustJButton.addActionListener(new ActionListener(){
 			// function to view a customer by id or name
 			public void actionPerformed(ActionEvent e){
-				if(customers.size() >= 1){
+			if(customers.size() >= 1){
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(custById.getText()) || customer.getCustName() == custByName.getText()){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
@@ -362,8 +372,6 @@ public class RetailGUI extends JFrame{
 									+"\n Customer Address: "+customer.getCustAddress()
 									+"\n Customer Email: "+customer.getCustEmail()
 									+"\n Customer Phone: "+customer.getCustTelephone());
-						}else{
-							JOptionPane.showMessageDialog(null, "Customer Not Found.");
 						}
 					}
 				}else{
@@ -375,13 +383,16 @@ public class RetailGUI extends JFrame{
 		viewAllCustJButton.addActionListener(new ActionListener(){
 			// function to view all customers
 			public void actionPerformed(ActionEvent e){
+				custJTextArea.setText(null);
 				if(customers.size() >= 1){
 					for(Customer customer: customers){
-						custJTextArea.setText(" Customer Id: "+customer.getCustId()
+						
+						custJTextArea.append(" Customer Id: "+customer.getCustId()
 									+"\n Customer Name: "+customer.getCustName()
 									+"\n Customer Address: "+customer.getCustAddress()
 									+"\n Customer Email: "+customer.getCustEmail()
-									+"\n Customer Phone: "+customer.getCustTelephone());
+									+"\n Customer Phone: "+customer.getCustTelephone()
+									+"\n");
 					}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Customers Found");
@@ -455,7 +466,7 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewSupplyNameJTextField);
 		viewSupplyJPanel.add(viewSupplyJButton);
 		viewSupplyJPanel.add(allSupplyJButton);
-		viewSupplyJPanel.add(supplierJTextArea);
+		suppTextJPanel.add(scrollPane.add(supplierJTextArea));
 		supplierJTextArea.setLineWrap(true);
 		editSupplyJPanel.add(editSupplierJTextField);
 		editSupplyJPanel.add(editSupplierJButton);
@@ -503,9 +514,10 @@ public class RetailGUI extends JFrame{
 		allSupplyJButton.addActionListener(new ActionListener(){
 			// view all suppliers
 			public void actionPerformed(ActionEvent e){
+				supplierJTextArea.setText(null);
 				if(suppliers.size() >= 1){
 					for(Supplier supplier: suppliers){
-						supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
+						supplierJTextArea.append(" Supplier Id: "+supplier.getId()
 								+"\n Supplier Name: "+supplier.getName()
 								+"\n Supplier Address: "+supplier.getAddress()
 								+"\n Supplier Email: "+supplier.getEmail()
