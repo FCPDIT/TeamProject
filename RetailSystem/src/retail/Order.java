@@ -19,10 +19,10 @@ public class Order {
 		
 	}
 	 
-	public Order(int orderUniqueId, int supplierUniqueId, Product productOrdered, int quantity) {
+	public Order(int orderUniqueId, int supplierUniqueId, OrderProduct productOrdered) {
 		this.orderUniqueId = orderUniqueId;
 		this.supplierUniqueId = supplierUniqueId;
-		this.addToProductList(new OrderProduct(productOrdered, quantity));
+		this.addToProductList(productOrdered);
 	}
 	
 	public void addToProductList(OrderProduct ProductOrdered){
@@ -72,20 +72,7 @@ public class Order {
 		for(Order order: listOfOrders){
 			result = result + "---------------------------------------------- \n"  + "Order ID: " + order.getOrderUniqueId() 
 					+ "\n Products: " + "-----------------";
-			for(OrderProduct oProduct: order.getListOfOrderProducts()){
-				Product product = oProduct.getProduct();
-				result = result + 
-				"\n Product Id: : " + product.getProductCode() + 
-				"\n Title: " + product.getTitle() +
-				"\n Author: " + product.getAuthor() +
-				"\n Quantity Ordered: " + oProduct.getQuantity() + 
-				"\n Current Stock: " + product.getCurrentStock() +
-				"\n Supplier: " + product.getSupplier().getName() +
-				"\n Max Stock:" + product.getMaxStock() +
-				"\n Min Stock: " + product.getMinStock() +
-				"\n Cost Price: €" + product.getCostPrice() +
-				"\n Retail Price: €" + product.getRetailPrice() +"------------";				
-			}
+			printOrderDetails(order);
 			if(result.equals("")){
 				result = "No orders found. ";
 			}
@@ -99,20 +86,7 @@ public class Order {
 			if(order.getOrderUniqueId() == orderId){
 				result = result + "----------------------------------------------" +  "\n" + "Order ID: " + 
 						 order.getOrderUniqueId() + "\n"	+ "Products: " + "-----------------";
-				for(OrderProduct oProduct: order.getListOfOrderProducts()){
-					Product product = oProduct.getProduct();
-					result = result + 
-					"\n Product Id: : " + product.getProductCode() + 
-					"\n Title: " + product.getTitle() +
-					"\n Author: " + product.getAuthor() +
-					"\n Quantity Ordered: " + oProduct.getQuantity() + 
-					"\n Current Stock: " + product.getCurrentStock() +
-					"\n Supplier: " + product.getSupplier().getName() +
-					"\n Max Stock:" + product.getMaxStock() +
-					"\n Min Stock: " + product.getMinStock() +
-					"\n Cost Price: €" + product.getCostPrice() +
-					"\n Retail Price: €" + product.getRetailPrice() +"------------";
-				}
+				printOrderDetails(order);
 				break;
 			}
 			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
@@ -235,21 +209,7 @@ public class Order {
 		for(Order order: listOfOrders){
 			result = "Delivered orders: \n";
 			if(order.isDelivered()){
-				for(OrderProduct oProduct: order.getListOfOrderProducts()){
-					Product product = oProduct.getProduct();
-					result = result + "\n" + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + "\n" +
-							"Products: " + "\n" + 
-							"\n Product Id: : " + product.getProductCode() + 
-							"\n Title: " + product.getTitle() +
-							"\n Author: " + product.getAuthor() +
-							"\n Quantity Ordered: " + oProduct.getQuantity() + 
-							"\n Current Stock: " + product.getCurrentStock() +
-							"\n Supplier: " + product.getSupplier().getName() +
-							"\n Max Stock:" + product.getMaxStock() +
-							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: €" + product.getCostPrice() +
-							"\n Retail Price: €" + product.getRetailPrice() +"------------";
-				}
+				printOrderDetails(order);
 			}
 			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
 				result = "No delivered orders found. ";
@@ -263,21 +223,7 @@ public class Order {
 		for(Order order: listOfOrders){
 			result = "Delivered orders: \n";
 			if(!order.isDelivered()){
-				for(OrderProduct oProduct: order.getListOfOrderProducts()){
-					Product product = oProduct.getProduct();
-					result = result + "\n" + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + "\n" +
-							"Products: " + "\n" + 
-							"\n Product Id: : " + product.getProductCode() + 
-							"\n Title: " + product.getTitle() +
-							"\n Author: " + product.getAuthor() +
-							"\n Quantity Ordered: " + oProduct.getQuantity() + 
-							"\n Current Stock: " + product.getCurrentStock() +
-							"\n Supplier: " + product.getSupplier().getName() +
-							"\n Max Stock:" + product.getMaxStock() +
-							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: €" + product.getCostPrice() +
-							"\n Retail Price: €" + product.getRetailPrice() +"------------";
-				}
+				printOrderDetails(order);
 			}
 			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
 				result = "No undelivered orders found. ";
@@ -286,26 +232,23 @@ public class Order {
 		return result;
 	}
 	
-	public void printOrderDetails(Order order){
-			System.out.println("----------------------------------------------");
-			System.out.println("ID of Customer Ordering: " + getOrderUniqueId());
-			//System.out.println("Date of Order: " + this.dateOfOrder.toGMTString());
-			System.out.println("Products:");
-			System.out.println("-----------------");
-			for(OrderProduct oProduct: order.getListOfOrderProducts()){
-				Product product = oProduct.getProduct();
-				System.out.println(
-							"\n Product Id: : " + product.getProductCode() + 
-							"\n Title: " + product.getTitle() +
-							"\n Author: " + product.getAuthor() +
-							"\n Quantity Ordered: " + oProduct.getQuantity() + 
-							"\n Current Stock: " + product.getCurrentStock() +
-							"\n Supplier: " + product.getSupplier().getName() +
-							"\n Max Stock:" + product.getMaxStock() +
-							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: €" + product.getCostPrice() +
-							"\n Retail Price: €" + product.getRetailPrice() +"------------");
-			}
-			System.out.println("----------------------------------------------");
+	public String printOrderDetails(Order order){
+		String result = "";
+		for(OrderProduct oProduct: order.getListOfOrderProducts()){
+			Product product = oProduct.getProduct();
+			result = result + "\n" + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + "\n" +
+					"Products: " + "\n" + 
+					"\n Product Id: : " + product.getProductCode() + 
+					"\n Title: " + product.getTitle() +
+					"\n Author: " + product.getAuthor() +
+					"\n Quantity Ordered: " + oProduct.getQuantity() + 
+					"\n Current Stock: " + product.getCurrentStock() +
+					"\n Supplier: " + product.getSupplier().getName() +
+					"\n Max Stock:" + product.getMaxStock() +
+					"\n Min Stock: " + product.getMinStock() +
+					"\n Cost Price: €" + product.getCostPrice() +
+					"\n Retail Price: €" + product.getRetailPrice() +"------------";
 		}
+		return result;
+	}
 }
