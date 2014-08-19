@@ -26,9 +26,9 @@ public class ViewOrderPanel extends JPanel{
 	
 	public ViewOrderPanel(){
 		
-		Order order1 = new Order(1, 1, new Product("a", "b", "d", 50.00, 20.00, 10, 20, 2, new Supplier(1,"f","g")), 1);
-		Order order2 = new Order(2, 1, new Product("x", "x", "x", 55.00, 25.00, 20, 30, 3, new Supplier(2,"h","h")), 1);
-		Order order3 = new Order(3, 1, new Product("y", "y", "y", 60.00, 30.00, 30, 40, 4, new Supplier(3,"m","m")), 1);
+		Order order1 = new Order(1, 1, new OrderProduct(new Product("a", "b", "d", 50.00, 20.00, 10, 20, 2, new Supplier(1,"f","g")), 1));
+		Order order2 = new Order(2, 1, new OrderProduct(new Product("x", "x", "x", 55.00, 25.00, 20, 30, 3, new Supplier(2,"h","h")), 1));
+		Order order3 = new Order(3, 1, new OrderProduct(new Product("y", "y", "y", 60.00, 30.00, 30, 40, 4, new Supplier(3,"m","m")), 1));
 		
 		orders.add(order1);
 		orders.add(order2);
