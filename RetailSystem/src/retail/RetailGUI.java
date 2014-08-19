@@ -62,8 +62,8 @@ public class RetailGUI extends JFrame{
 	private JPanel viewProductByQuantityJPanel = new JPanel();
 	private JPanel AddRemoveStockJPanel = new JPanel();
 	
-	//private JPanel createInvJPanel = new CreateANewInvoicePanel();
-	private JPanel createInvJPanel = new JPanel();
+	private JPanel createInvJPanel = new CreateANewInvoicePanel();
+	//private JPanel createInvJPanel = new JPanel();
 	private JPanel viewInvJPanel = new ViewCustomerInvoicePanel();
 	private JPanel editInvJPanel = new JPanel();
 	
