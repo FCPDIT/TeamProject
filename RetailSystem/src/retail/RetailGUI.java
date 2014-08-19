@@ -1,7 +1,9 @@
 package retail;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -10,16 +12,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.*;
+import javax.swing.ScrollPaneConstants;
 
 @SuppressWarnings("serial")
 public class RetailGUI extends JFrame{
@@ -62,8 +66,8 @@ public class RetailGUI extends JFrame{
 	private JPanel editSupplyJPanel = new JPanel();
 	
 	private JPanel addProductJPanel = new JPanel();
-	private JPanel viewProductJPanel = new ViewProductDetailsPanel();
-	//private JPanel viewProductJPanel = new JPanel();
+	//private JPanel viewProductJPanel = new ViewProductDetailsPanel();
+	private JPanel viewProductDetailsJPanel = new JPanel();
 	private JPanel editProductJPanel = new JPanel();
 	private JPanel searchByRetailJPanel = new JPanel();
 	private JPanel viewProductByQuantityJPanel = new JPanel();
@@ -189,7 +193,16 @@ public class RetailGUI extends JFrame{
 	private JRadioButton over200Radio = new JRadioButton("200 plus");
 	
 	
-	
+	// View Product Components
+	private Product product = new Product();
+	private JTextArea productTextArea;
+	private JTextField productIdTextField;
+	private JTextField productTitleTextField;
+	private JTextField productAuthorTextField;
+	private JTextField viewProductIdTextField;
+	//private JTextField invTextField;
+	private JPanel viewProductDetailsPanel= new JPanel();
+	private JPanel viewProductDetails= new JPanel();
 	
 	
 	
@@ -242,8 +255,9 @@ public class RetailGUI extends JFrame{
 		suppliers.add(new Supplier(1, "Sam", "Dublin","sam@email.com","123456"));
 		suppliers.add(new Supplier(2, "Tom", "Cork","tom@email.com","234567"));
 		//add some test products to array list
-		products.add(new Product("Game of Thrones", "George R.R Martin", "9780553386790", 9.99, 3.75,100,200,15, suppliers.get(0)));
-		products.add(new Product("Not a Drill", "Lee Child", "9780553389521", 12.75, 4.95,50,200,10, suppliers.get(1)));
+		products.add(new Product("Game of Thrones", "George R.R Martin", "1", 9.99, 3.75,100,200,15, suppliers.get(0)));
+		products.add(new Product("Not a Drill", "Lee Child", "2", 12.75, 4.95,221,200,10, suppliers.get(1)));
+		products.add(new Product("Harry Potter", "j.k rowling", "3", 11.99, 2.95,9,100,10,suppliers.get(0)));
 		//add some test invoices to array list
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), products.get(0), 10));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), products.get(1), 20));
@@ -274,7 +288,7 @@ public class RetailGUI extends JFrame{
 		supplyJTabbedPane.add("Edit Supplier Details", editSupplyJPanel);
 		
 		prodJTabbedPane.add("Create New Product",addProductJPanel);
-		prodJTabbedPane.add("View Product Details", viewProductJPanel);
+		prodJTabbedPane.add("View Product Details", viewProductDetailsPanel);
 		prodJTabbedPane.add("Edit Product Details", editProductJPanel);
 		prodJTabbedPane.add("Search by retail price", searchByRetailJPanel);
 		prodJTabbedPane.add("Search by quantity", viewProductByQuantityJPanel);
@@ -922,6 +936,188 @@ public class RetailGUI extends JFrame{
 						gc.gridx = 2;
 						gc.gridy = 3;
 						viewCustomerPanel.add(viewUnpaidBtn,gc);
+					
+						
+						
+						
+						//======================== Start ===========
+						
+						viewProductDetailsPanel.add(viewProductDetails);
+						viewProductDetails.setLayout(new GridBagLayout());
+						gc.insets = new Insets(5,5,5,5); //sets the padding around each component
+						
+
+						//1. TextArea
+						productTextArea = new JTextArea(20,20); //height - width
+						productTextArea.setEditable(false);
+						JScrollPane scrollPane1 = new JScrollPane(productTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+				        c.gridwidth = GridBagConstraints.REMAINDER;
+				        c.fill = GridBagConstraints.BOTH;
+				        c.weightx = 1.0;
+				        c.weighty = 1.0;
+				        viewProductDetails.add(scrollPane1, c);
+						
+						// First Label and controls:	View Product by ID 
+						JLabel productIdlbl = new JLabel("Enter Product ID: "); //Label
+						gc.gridx = 0;
+						gc.gridy = 1;
+						viewProductDetails.add(productIdlbl,gc);
+						viewProductIdTextField = new JTextField(10); //Text Field
+						gc.gridx = 1;
+						gc.gridy = 1;
+						viewProductDetails.add(viewProductIdTextField,gc);
+						JButton productButton = new JButton("Search Product ID");	//button
+						gc.gridx = 2;
+						gc.gridy = 1;
+						viewProductDetails.add(productButton,gc);
+						productButton.setPreferredSize(new Dimension(155,20));
+						//Action listener For Button to view Product by Id
+						productButton.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								String input = viewProductIdTextField.getText();
+								// This method could be enhanced by adding in a check 
+								//to ensure 9 digits have been entered to match an ISBN number.
+								if(input.trim().equals("")){ 
+									//textarea.setText("Please enter a valid ID");	
+									JOptionPane.showMessageDialog(null, "Please Enter a Value in the ID Field");
+									viewProductIdTextField.setText("");
+									productTitleTextField.setText("");
+								}else{
+									productTextArea.setText(product.viewProductById(input, products)); //viewInvoiceById() is in the Invoice Class
+									viewProductIdTextField.setText("");
+									productTitleTextField.setText("");
+									productAuthorTextField.setText("");
+								}
+							}
+						});
+						
+						//Second Label and controls: 	View Product by Title
+						JLabel productTitlelbl = new JLabel("Product Title: ");
+						gc.gridx = 0;
+						gc.gridy = 2;
+						viewProductDetails.add(productTitlelbl,gc);
+						productTitleTextField = new JTextField(10);
+						gc.gridx = 1;
+						gc.gridy = 2;
+						viewProductDetails.add(productTitleTextField,gc);
+						JButton productTitleButton = new JButton("Search Product Title");
+						gc.gridx = 2;
+						gc.gridy = 2;
+						viewProductDetails.add(productTitleButton,gc);
+						productTitleButton.setPreferredSize(new Dimension(155,20));
+						productTitleButton.addActionListener(new ActionListener() {
+							//Action listener For Button to view product by Title
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								String input = productTitleTextField.getText();
+								
+								if(input.trim().equals("")){ 
+									//textarea.setText("Please enter a valid Title");
+									JOptionPane.showMessageDialog(null, "Please Enter a Value in the Title Field");
+									productTitleTextField.setText("");
+									
+								}else{
+									
+									productTextArea.setText(product.viewProductByTitle(input, products));	//viewInvoiceByCustomer() is in the Invoice class
+									productTitleTextField.setText("");
+									viewProductIdTextField.setText("");
+									productAuthorTextField.setText("");
+									
+									
+								}
+							}
+						});
+						
+						
+						//Third Label and controls: 	View Product by Author
+								JLabel productAuthorlbl = new JLabel("Product Author: ");
+								gc.gridx = 0;
+								gc.gridy = 3;
+								viewProductDetails.add(productAuthorlbl,gc);
+								productAuthorTextField = new JTextField(10);
+								gc.gridx = 1;
+								gc.gridy = 3;
+								viewProductDetails.add(productAuthorTextField,gc);
+								JButton productAuthorBtn = new JButton("Search Author");
+								gc.gridx = 2;
+								gc.gridy = 3;
+								viewProductDetails.add(productAuthorBtn,gc);
+								productAuthorBtn.setPreferredSize(new Dimension(155,20));
+								productAuthorBtn.addActionListener(new ActionListener() {
+									//Action listener For Button to view product by Title
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
+																											//All names in array should be stored in lower case.
+										
+										if(input.trim().equals("")){ 	// If no text is entered
+											//textarea.setText("Please enter text in Author Field");
+											JOptionPane.showMessageDialog(null, "Please Enter a Value in the Author Field");
+											productAuthorTextField.setText("");
+											//invTextField.setText("");
+										}else{							// Take in String and Search for it.
+											productTextArea.setText(product.viewProductByAuthor(input, products));	
+											productAuthorTextField.setText("");
+											viewProductIdTextField.setText("");
+											productTitleTextField.setText("");
+										}
+									}
+								});
+
+						//Button 4: 	View All
+						//1. View all Button
+						JButton viewAllProductsBtn = new JButton(" View All Products ");
+						gc.gridx = 4;
+						gc.gridy = 1;
+						viewProductDetails.add(viewAllProductsBtn,gc);
+						viewAllProductsBtn.setPreferredSize(new Dimension(155,20));
+						viewAllProductsBtn.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								productTextArea.setText(product.viewAllProductDetails(products));	//viewAllProducts() is in the Product Class
+								viewProductIdTextField.setText("");
+								productTitleTextField.setText("");
+								productAuthorTextField.setText("");
+							}
+						});
+						
+						
+						// Button 5: View All Current Stock below Min Reorder Level
+								
+								JButton viewAllBelowMinReorder = new JButton(" View All Low Stock ");
+								gc.gridx = 4;
+								gc.gridy = 2;
+								viewProductDetails.add(viewAllBelowMinReorder,gc);
+								viewAllBelowMinReorder.setPreferredSize(new Dimension(155,20));
+								viewAllBelowMinReorder.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										productTextArea.setText(product.viewProductByMinStock(products));
+										viewProductIdTextField.setText("");
+										productTitleTextField.setText("");
+										productAuthorTextField.setText("");
+									}
+								});
+								
+								
+						// Button 6: View all Current Stock above Max level (Over Stock)	
+								JButton viewAllAboveMaxReorder = new JButton(" View All Over Stock ");
+								gc.gridx = 4;
+								gc.gridy = 3;
+								viewProductDetails.add(viewAllAboveMaxReorder,gc);
+								viewAllAboveMaxReorder.setPreferredSize(new Dimension(155,20));
+								viewAllAboveMaxReorder.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										productTextArea.setText(product.viewProductByOverStock(products));
+										viewProductIdTextField.setText("");
+										productTitleTextField.setText("");
+										productAuthorTextField.setText("");
+									}
+								});
+						
+						//=======================  End
 						
 						
 					} //END OF CONSTRUCTOR
