@@ -119,7 +119,7 @@ public class RetailGUI extends JFrame{
 	private JTextField custByName = new JTextField();
 	private JButton viewCustJButton = new JButton("View Customer");
 	private JButton viewAllCustJButton = new JButton("View All Customers");
-	private JTextArea custJTextArea = new JTextArea(20,50);
+	private JTextArea custJTextArea = new JTextArea(10, 65);
 	private JTextField editCustById = new JTextField();
 	private JButton findCustById = new JButton("Find Customer");
 	private JTextField editCustId = new JTextField();
@@ -146,7 +146,7 @@ public class RetailGUI extends JFrame{
 	private JTextField viewSupplyJTextField = new JTextField();
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
 	private JTextField viewSupplyNameJTextField = new JTextField();
-	private JTextArea supplierJTextArea = new JTextArea(50, 50);
+	private JTextArea supplierJTextArea = new JTextArea(10, 65);
 	private JButton viewSupplyJButton = new JButton("View Supplier Details");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	private JTextField editSupplierJTextField = new JTextField();
@@ -337,7 +337,8 @@ public class RetailGUI extends JFrame{
 		viewCustJPanel.add(custByName);
 		viewCustJPanel.add(viewCustJButton);
 		viewCustJPanel.add(viewAllCustJButton);
-		custTextJPanel.add(scrollPane.add(custJTextArea));
+		JScrollPane custScrollPane = new JScrollPane(custJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		custTextJPanel.add(custScrollPane);
 		custJTextArea.setLineWrap(true);
 		editCustJPanel.add(editCustById);
 		editCustJPanel.add(findCustById);
@@ -466,7 +467,8 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewSupplyNameJTextField);
 		viewSupplyJPanel.add(viewSupplyJButton);
 		viewSupplyJPanel.add(allSupplyJButton);
-		suppTextJPanel.add(scrollPane.add(supplierJTextArea));
+		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		suppTextJPanel.add(suppJScrollPane);
 		supplierJTextArea.setLineWrap(true);
 		editSupplyJPanel.add(editSupplierJTextField);
 		editSupplyJPanel.add(editSupplierJButton);
