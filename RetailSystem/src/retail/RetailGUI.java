@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -82,7 +83,6 @@ public class RetailGUI extends JFrame{
 	private JPanel viewInvJPanel = new JPanel();	//ViewCustomerInvoicePanel();
 	private JPanel editInvJPanel = new JPanel();
 	
-	//private JPanel createOrderPanel = new CreateNewOrderPanel();
 	private JPanel createOrderPanel = new JPanel();
 	//private JPanel viewOrderJPanel = new ViewOrderPanel();
 	
@@ -262,6 +262,30 @@ public class RetailGUI extends JFrame{
 	private Invoice invoice = new Invoice();
 	//==========================================
 	
+	
+	//==================================
+	//createNewOrder Panel components
+	Order baseOrder;
+	//Panels
+	private JPanel createNewOrderLeftPanel = new JPanel();
+	private JPanel createNewOrderRightPanel = new JPanel();
+	//Labels
+	private JLabel orderIdLabel = new JLabel("Order ID: ");
+	private JLabel supplierIdLabel = new JLabel("Supplier ID: ");
+	private JLabel productCodeLabel = new JLabel("Product ID: ");
+	private JLabel quantityLabel = new JLabel("Quantity: ");
+	//JTextFields
+	private JTextField orderIdTextField = new JTextField(10);
+	private JTextField supplierIdTextField = new JTextField(10);
+	private JTextField productCodeTextField = new JTextField(10);
+	private JTextField quantityTextField = new JTextField(10);
+	//JButtons
+	private JButton addProductButton =  new JButton("Add Product to Order");
+	private JButton confirmOrderButton = new JButton("Confirm Order");
+	//JTextArea
+	private JTextArea textArea = new JTextArea();
+	//=========================================================================
+	
 	public RetailGUI() {
 		
 		//add some test employees to array list
@@ -281,7 +305,6 @@ public class RetailGUI extends JFrame{
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), products.get(0), 10));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), products.get(1), 20));
 
-		// TODO Auto-generated constructor stub
 		mainJFrame.setTitle("Retail Application");
 		mainJFrame.setBounds(0, 0, 800, 600);
 		mainJFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -777,8 +800,144 @@ public class RetailGUI extends JFrame{
 		SaveButtonHandler sbh = new SaveButtonHandler();
 		saveInvoiceJButton.addActionListener(sbh);
 		
+		//====================================================================================
+		//set up order panels
+		Dimension size = getPreferredSize();
+		size.width = 500;
+		setPreferredSize(size);
+		createOrderPanel.setBorder(BorderFactory.createTitledBorder("Order details"));
+		//Left Panel Components
+		createNewOrderLeftPanel.setLayout(new GridBagLayout());
+		GridBagConstraints orderGC = new GridBagConstraints();
+		orderGC.insets = new Insets(5,5,5,5);
+		//=====
+		orderGC.gridx = 0;
+		orderGC.gridy = 0;
+		createNewOrderLeftPanel.add(orderIdLabel,orderGC);
+		orderGC.gridx = 1;
+		orderGC.gridy = 0;
+		createNewOrderLeftPanel.add(orderIdTextField,orderGC);
+		//=====
+		orderGC.gridx = 0;
+		orderGC.gridy = 1;
+		createNewOrderLeftPanel.add(supplierIdLabel,orderGC);
+		orderGC.gridx = 1;
+		orderGC.gridy = 1;
+		createNewOrderLeftPanel.add(supplierIdTextField,orderGC);
+		//=====
+		orderGC.gridx = 0;
+		orderGC.gridy = 2;
+		createNewOrderLeftPanel.add(productCodeLabel,orderGC);
+		orderGC.gridx = 1;
+		orderGC.gridy = 2;
+		createNewOrderLeftPanel.add(productCodeTextField,orderGC);
+		//=====
+		orderGC.gridx = 0;
+		orderGC.gridy = 3;
+		createNewOrderLeftPanel.add(quantityLabel,orderGC);
+		orderGC.gridx = 1;
+		orderGC.gridy = 3;
+		createNewOrderLeftPanel.add(quantityTextField,orderGC);
+		//=====
+		orderGC.gridx = 0;
+		orderGC.gridy = 4;
+		createNewOrderLeftPanel.add(addProductButton,orderGC);
+		orderGC.gridx = 1;
+		orderGC.gridy = 4;
+		orderGC.weighty = 10;
+		createNewOrderLeftPanel.add(confirmOrderButton,orderGC);
+		//TextPane
+		textArea = new JTextArea(20,20); //height - width
+		textArea.setEditable(false);
+		JScrollPane orderScrollPane = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        orderGC.gridwidth = GridBagConstraints.REMAINDER;
+        orderGC.fill = GridBagConstraints.BOTH;
+        orderGC.weightx = 1.0;
+        orderGC.weighty = 1.0;
+        orderGC.gridx = 3;
+        createNewOrderRightPanel.add(orderScrollPane, orderGC);
+		//Right Panel
+		//Main Panel Add
+		createOrderPanel.add(createNewOrderLeftPanel);
+		createOrderPanel.add(createNewOrderRightPanel);
+		//if clicked, we try to add the product to the order if it is being made, add it to a new one if it isn't and throw up an error if it already has been made.
+		addProductButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				
+				String orderIdString = orderIdTextField.getText();
+				String productCodeString = productCodeTextField.getText();
+				String supplierIdString = supplierIdTextField.getText();
+				String quantityString = quantityTextField.getText();
+				Product product = null;
+				Supplier supplier = null;
+				boolean alreadyExists = false;
 				
+				if((orderIdString.trim().equals("") || (orderIdString.trim().equals(".*\\D.*")) || 
+						(productCodeString.trim().equals("") || (productCodeString.trim().equals(".*\\D.*")) ||
+								(supplierIdString.trim().equals("") || (supplierIdString.trim().equals(".*\\D.*")) ||
+										(quantityString.trim().equals("") || (quantityString.trim().equals(".*\\D.*"))))))){
+					JOptionPane.showMessageDialog(null, "Please ensure all text fields have been filled!");
+				}
+				else{
+					//check for a product with the inputed ID
+					for(Product product1: products){
+						if(product1.getProductCode().equals(productCodeString)){
+							product = product1;
+							break;
+						}
+					}
+					//check for a supplier with the inputed ID
+					for(Supplier supplier1: suppliers){
+						if(supplier1.getId() == (Integer.parseInt(supplierIdString))){
+							supplier = supplier1;
+							break;
+						}
+					}
+					//check for an order with the inputed ID
+					for(Order order1: orders){
+						if(order1.getOrderUniqueId() == (Integer.parseInt(orderIdString))){
+							alreadyExists = true;
+							break;
+						}
+					}
+					
+					if(product == null){
+						JOptionPane.showMessageDialog(null, "Supplier with that ID does not exist!");
+					}
+					else if(supplier == (null)){
+						JOptionPane.showMessageDialog(null, "Supplier with that ID does not exist!");
+					}
+					else if(alreadyExists){
+						JOptionPane.showMessageDialog(null, "Order with that ID already exists!");
+					}
+					else{
+						if(baseOrder == (null)){
+							baseOrder = new Order((Integer.parseInt(orderIdString)), (Integer.parseInt(supplierIdString)), new OrderProduct(product, (Integer.parseInt(quantityString))));
+						}
+						else{
+							baseOrder.addToProductList(new OrderProduct(product, (Integer.parseInt(quantityString))));
+							textArea.setText(new Order().printOrderDetails(baseOrder));
+						}
+					}
+				}
+			}
+		});
+		confirmOrderButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(baseOrder == null){
+					JOptionPane.showMessageDialog(null, "Order contains no products, please add some products before trying to confirm!");
+				}
+				else{
+					orders.add(baseOrder);				
+				}
+			}
+		});
+		//createNewOrderComponents added.
+		//=========================================================================================
+		
 		/*remove comment marks to run login function
 
 				//lock the tabs until login successful
