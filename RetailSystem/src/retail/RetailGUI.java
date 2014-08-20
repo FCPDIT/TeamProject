@@ -220,6 +220,8 @@ public class RetailGUI extends JFrame{
 	//private JTextField invTextField;
 	private JPanel viewProductDetailsPanel= new JPanel();
 	private JPanel viewProductDetails= new JPanel();
+	private int buttonWidth = 155;
+	private int buttonHeight = 20;
 	
 	
 	
@@ -1001,7 +1003,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 2;
 		gc.gridy = 1;
 		viewProductDetails.add(productButton,gc);
-		productButton.setPreferredSize(new Dimension(155,20));
+		productButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
 		//Action listener For Button to view Product by Id
 		productButton.addActionListener(new ActionListener() {
 			@Override
@@ -1036,7 +1038,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 2;
 		gc.gridy = 2;
 		viewProductDetails.add(productTitleButton,gc);
-		productTitleButton.setPreferredSize(new Dimension(155,20));
+		productTitleButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
 		productTitleButton.addActionListener(new ActionListener() {
 			//Action listener For Button to view product by Title
 			@Override
@@ -1074,7 +1076,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 2;
 		gc.gridy = 3;
 		viewProductDetails.add(productAuthorBtn,gc);
-		productAuthorBtn.setPreferredSize(new Dimension(155,20));
+		productAuthorBtn.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
 		productAuthorBtn.addActionListener(new ActionListener() {
 			//Action listener For Button to view product by Title
 			@Override
@@ -1102,7 +1104,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 4;
 		gc.gridy = 1;
 		viewProductDetails.add(viewAllProductsBtn,gc);
-		viewAllProductsBtn.setPreferredSize(new Dimension(155,20));
+		viewAllProductsBtn.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
 		viewAllProductsBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1120,7 +1122,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 4;
 		gc.gridy = 2;
 		viewProductDetails.add(viewAllBelowMinReorder,gc);
-		viewAllBelowMinReorder.setPreferredSize(new Dimension(155,20));
+		viewAllBelowMinReorder.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
 		viewAllBelowMinReorder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1137,7 +1139,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 4;
 		gc.gridy = 3;
 		viewProductDetails.add(viewAllAboveMaxReorder,gc);
-		viewAllAboveMaxReorder.setPreferredSize(new Dimension(155,20));
+		viewAllAboveMaxReorder.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
 		viewAllAboveMaxReorder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
