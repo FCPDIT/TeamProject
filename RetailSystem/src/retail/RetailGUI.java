@@ -1801,9 +1801,9 @@ public class RetailGUI extends JFrame{
 						for(Invoice invoice: invoices){
 							if(id == invoice.getCustomer().getCustId() ){
 								if(invoice.isPaid() == false){
-									s = "\nProduct Id : " + invoice.getProduct().getProductCode() + 
-										"\nQuantity: " + invoice.getQuantity() + "\nTotal: " + 
-										invoice.getTotalInvoicePrice() + "\n";
+									s = "\nInvoice Id : " + invoice.getId() + 
+											"\nDate: " + invoice.getInvoiceDate()+ "\nTotal: " + 
+											invoice.getTotalInvoicePrice() + "\n";
 									customerInvoiceJTextArea.append(s);
 									total = total + invoice.getTotalInvoicePrice();
 									count++;								
