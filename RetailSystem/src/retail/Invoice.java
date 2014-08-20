@@ -39,6 +39,7 @@ public class Invoice {
 		this.invoiceProducts = invoiceProducts;
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
 		invoiceDate = sdf.format(new Date());
+		totalInvoicePrice = calculateInvoiceTotal();
 	}
 
 	//Methods
@@ -144,8 +145,9 @@ public class Invoice {
 					list+="\nItem number " + count+ " of this Invoice \n";
 					list+="-------------------------------";
 					count++;
-					list+="\nProduct Id: " + pds.getProduct().getProductCode() 
-					+ "\nProduct Price: " +  String.format("€%.2f", pds.getProduct().getRetailPrice())
+					list+="\nProduct Id: " + pds.getProduct().getProductCode()
+					+"\nProduct Title: " + pds.getProduct().getTitle()
+					+ "\nProduct Price: " +  String.format("ï¿½%.2f", pds.getProduct().getRetailPrice())
 					+ "\nQuantity of Order " + pds.getQuantity() 
 					+ "\nTotal of " + pds.getProduct().getProductCode() +" : " + (pds.getQuantity()*pds.getProduct().getRetailPrice()) 
 					+ "\n--------------";
@@ -154,7 +156,7 @@ public class Invoice {
 					+ "\nEmployee Id: "   + v.getEmployee().getEmployeeId() 
 					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
 					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
-					+ "\nInvoice Total: " +  String.format("€%.2f", v.calculateInvoiceTotal()) 
+					+ "\nInvoice Total: " +  String.format("ï¿½%.2f", v.calculateInvoiceTotal()) 
 					+ "\nDate: " + v.getInvoiceDate() + "\n\n";
 					list+="-------------------------------\n";
 				return list;
@@ -273,134 +275,6 @@ public class Invoice {
 				}
 			}
 			return null;
-		}
-
-		//method to edit invoices by id
-		public int verifyInvoiceID(ArrayList<Invoice> invoices, int id) {
-	    	int count = 0;
-	    	int validID = 0;
-			for(Invoice invoice: invoices){
-				if(id == invoice.getId()){
-					count++;
-					validID = 1;
-				}
-			}	
-			if(count == 0){
-				validID = 2;
-			}
-			return validID;
-		}
-		
-		//method to pay invoices by customer
-		public int verifyInvoiceByCustomerID(ArrayList<Customer> customers, int id) {
-	    	int count = 0;
-	    	int validID = 0;
-			for(Customer customer: customers){
-				if(id == customer.getCustId()){
-					count++;
-					validID = 1;
-				}
-			}	
-			if(count == 0){
-				validID = 2;
-			}
-			return validID;
-		}
-		
-		//method to set fields on edit invoice
-		public ArrayList<String> returnFields(ArrayList<Invoice> invoices, int id){
-			
-			ArrayList<String> fields = new ArrayList<String>();
-			String invId = Integer.toString(id);
-			fields.add(invId);
-			String employee ="";
-			String customer ="";
-			String product ="";
-			String quantity ="";
-			String total ="";
-			String paid = "Unpaid";
-			for(Invoice invoice: invoices){
-				if(id == invoice.getId()){
-					employee = Integer.toString(invoice.getEmployee().getEmployeeId());
-					customer = Integer.toString(invoice.getCustomer().getCustId());
-					product = invoice.getProduct().getProductCode();
-					quantity = Integer.toString(invoice.getQuantity());
-					total = Double.toString(invoice.getTotalInvoicePrice());
-					if(invoice.isPaid()){
-						paid = "Paid";
-					}
-					fields.add(employee);
-					fields.add(customer);
-					fields.add(product);
-					fields.add(quantity);
-					fields.add(total);
-					fields.add(paid);
-				}
-			}		
-			return fields;
-		}
-		
-		
-		//method to update invoices
-		public void updateInvoice(ArrayList<Invoice> invoices, ArrayList<Employee> employees, ArrayList<Product> products, ArrayList<Customer> customers, ArrayList<String> fields){
-			int invId = Integer.parseInt(fields.get(0));
-			int employeeId = Integer.parseInt(fields.get(1));
-			int customerId = Integer.parseInt(fields.get(2));
-			String productId =fields.get(3);
-			int qty = Integer.parseInt(fields.get(4));
-			int currentId = Integer.parseInt(fields.get(5));
-			Employee emp = employees.get(0);
-			Customer cust = customers.get(0);
-			Product prod = products.get(0);
-			
-			for(Employee employee: employees){
-				if(employeeId == employee.getEmployeeId()){
-					emp = employee;
-				}
-			}
-			
-			for(Customer customer: customers){
-				if(customerId == customer.getCustId()){
-					cust = customer;
-				}
-			}
-			
-			for(Product product: products){
-				if(productId.equals(product.getProductCode())){
-					prod = product;
-				}
-			}
-			
-			for(Invoice invoice: invoices){
-				if(currentId == invoice.getId()){
-					invoice.setId(invId);
-					invoice.setEmployee(emp);
-					invoice.setCustomer(cust);
-					invoice.setProduct(prod);
-					invoice.setQuantity(qty);
-				}
-			}
-		}
-		
-		//method to pay invoice
-		public void payInvoice(ArrayList<Invoice> invoices, int id){
-			for(Invoice invoice: invoices){
-				if(id == invoice.getId()){
-					invoice.setPaid(true);
-				}
-			}
-			
-		}
-		
-		//method to delete invoice
-		public int deleteInvoice(ArrayList<Invoice> invoices, int id){
-			int index = 0;
-			for(Invoice invoice: invoices){
-				if(id == invoice.getId()){
-					index = invoices.indexOf(invoice);
-				}
-			}
-			return index;
 		}
 		
 }

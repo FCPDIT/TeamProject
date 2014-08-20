@@ -131,7 +131,7 @@ public class ViewCustomerInvoicePanel extends JPanel{
 		//Button x3: 	View All/ View Paid/ View UnPaid
 		//1. View all Button
 		JButton viewAllBtn = new JButton("View All");
-		gc.gridx = 0;
+		gc.gridx = 2;
 		gc.gridy = 3;
 		add(viewAllBtn,gc);
 		viewAllBtn.addActionListener(new ActionListener() {
@@ -143,8 +143,8 @@ public class ViewCustomerInvoicePanel extends JPanel{
 		
 		//2. Paid Button
 		JButton viewPaidBtn = new JButton("View Paid");
-		gc.gridx = 1;
-		gc.gridy = 3;
+		gc.gridx = 3;
+		gc.gridy = 1;
 		add(viewPaidBtn,gc);
 		viewPaidBtn.addActionListener(new ActionListener() {
 			
@@ -163,8 +163,8 @@ public class ViewCustomerInvoicePanel extends JPanel{
 				textarea.setText(invoice.viewUnPaidInvoice(invoices));	//viewUnPaidInvoice() is in the invoice class
 			}
 		});
-		gc.gridx = 2;
-		gc.gridy = 3;
+		gc.gridx = 3;
+		gc.gridy = 2;
 		add(viewUnpaidBtn,gc);
 		
 	} //End of Constructor

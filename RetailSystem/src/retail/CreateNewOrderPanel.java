@@ -29,8 +29,8 @@ public class CreateNewOrderPanel extends JPanel{
 	
 	//variables
 	//Panels
-	private JPanel leftPanel = new JPanel();
-	private JPanel rightPanel = new JPanel();
+	private JPanel createNewOrderLeftPanel = new JPanel();
+	private JPanel createNewOrderRightPanel = new JPanel();
 	
 	//Labels
 	private JLabel orderIdLabel = new JLabel("Order ID: ");
@@ -59,45 +59,45 @@ public class CreateNewOrderPanel extends JPanel{
 		setBorder(BorderFactory.createTitledBorder("Invoice details"));
 		
 		//Left Panel Components
-		leftPanel.setLayout(new GridBagLayout());
+		createNewOrderLeftPanel.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.insets = new Insets(5,5,5,5);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 0;
-		leftPanel.add(orderIdLabel,gc);
+		createNewOrderLeftPanel.add(orderIdLabel,gc);
 		gc.gridx = 1;
 		gc.gridy = 0;
-		leftPanel.add(orderIdTextField,gc);
+		createNewOrderLeftPanel.add(orderIdTextField,gc);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 1;
-		leftPanel.add(supplierIdLabel,gc);
+		createNewOrderLeftPanel.add(supplierIdLabel,gc);
 		gc.gridx = 1;
 		gc.gridy = 1;
-		leftPanel.add(supplierIdTextField,gc);
+		createNewOrderLeftPanel.add(supplierIdTextField,gc);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 2;
-		leftPanel.add(productCodeLabel,gc);
+		createNewOrderLeftPanel.add(productCodeLabel,gc);
 		gc.gridx = 1;
 		gc.gridy = 2;
-		leftPanel.add(productCodeTextField,gc);
+		createNewOrderLeftPanel.add(productCodeTextField,gc);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 3;
-		leftPanel.add(quantityLabel,gc);
+		createNewOrderLeftPanel.add(quantityLabel,gc);
 		gc.gridx = 1;
 		gc.gridy = 3;
-		leftPanel.add(quantityTextField,gc);
+		createNewOrderLeftPanel.add(quantityTextField,gc);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 4;
-		leftPanel.add(addProductButton,gc);
+		createNewOrderLeftPanel.add(addProductButton,gc);
 		gc.gridx = 1;
 		gc.gridy = 4;
 		gc.weighty = 10;
-		leftPanel.add(confirmOrderButton,gc);
+		createNewOrderLeftPanel.add(confirmOrderButton,gc);
 		
 		//TextPane
 		textArea = new JTextArea(20,20); //height - width
@@ -109,13 +109,13 @@ public class CreateNewOrderPanel extends JPanel{
         gc.weighty = 1.0;
         gc.gridx = 3;
 		
-        rightPanel.add(scrollPane, gc);
+        createNewOrderRightPanel.add(scrollPane, gc);
 		
 		
 		//Right Panel
 		//Main Panel Add
-		add(leftPanel);
-		add(rightPanel);
+		add(createNewOrderLeftPanel);
+		add(createNewOrderRightPanel);
 		
 		//if clicked, we try to add the product to the order if it is being made, add it to a new one if it isn't and throw up an error if it already has been made.
 		addProductButton.addActionListener(new ActionListener() {
@@ -193,7 +193,8 @@ public class CreateNewOrderPanel extends JPanel{
 					JOptionPane.showMessageDialog(null, "Order contains no products, please add some products before trying to confirm!");
 				}
 				else{
-					orders.add(baseOrder);				}
+					orders.add(baseOrder);				
+				}
 			}
 		});
 	}	
