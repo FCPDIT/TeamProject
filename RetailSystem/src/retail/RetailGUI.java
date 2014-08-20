@@ -1173,6 +1173,23 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 2;
 		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
 		viewCustomerPanel.add(viewUnpaidBtn,gc);
+		
+		//4. Reset Panel Btn
+		JButton resetPanelBtn = new JButton("Clear Panel");
+		gc.gridx = 3;
+		gc.gridy = 3;
+		resetPanelBtn.setPreferredSize(new Dimension(120, 30));
+		viewCustomerPanel.add(resetPanelBtn,gc);
+		resetPanelBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textarea.setText("");
+				invTextField2.setText("");
+				custIdTextField.setText("");
+				
+			}
+		});
 	
 		//==============================================
 		//Marc: Create Invoice Functionality
