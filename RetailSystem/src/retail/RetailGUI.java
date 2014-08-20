@@ -224,41 +224,41 @@ public class RetailGUI extends JFrame{
 	
 	
 	//Edit Invoice Components 
-		JPanel findInvoiceComponentsJPanel = new JPanel();
-		JPanel editInvoiceComponentsJPanel = new JPanel();
-		JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
-		JPanel saveInvoiceComponentsJPanel = new JPanel();
-		private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
-		private JTextArea customerInvoiceJTextArea = new JTextArea(10,20);
-		private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
-		private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
-		private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
-		private JTextField editCustomerInvoiceJTextField = new JTextField("Customer Id");
-		private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
-		private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
-		private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
-		private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
-		private JTextField editInvoiceProduct = new JTextField("Edit Product");
-		private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
-		private JButton payInvoiceJButton = new JButton("Pay Invoice");
-		private JButton saveInvoiceJButton = new JButton("Update Invoice");
-		private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
-		private JTextField editPayStatus = new JTextField("");	
-		private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
+	JPanel findInvoiceComponentsJPanel = new JPanel();
+	JPanel editInvoiceComponentsJPanel = new JPanel();
+	JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
+	JPanel saveInvoiceComponentsJPanel = new JPanel();
+	private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
+	private JTextArea customerInvoiceJTextArea = new JTextArea(10,20);
+	private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
+	private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
+	private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
+	private JTextField editCustomerInvoiceJTextField = new JTextField("Customer Id");
+	private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
+	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
+	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
+	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
+	private JTextField editInvoiceProduct = new JTextField("Edit Product");
+	private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
+	private JButton payInvoiceJButton = new JButton("Pay Invoice");
+	private JButton saveInvoiceJButton = new JButton("Update Invoice");
+	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
+	private JTextField editPayStatus = new JTextField("");	
+	private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
 
 		
-		//===========================================
-		//View Customer Invoice Panel and Components
-			
-			//Panel
-			private JPanel viewCustomerPanel = new JPanel();
-			
-			//Components
-			private JTextArea textarea;
-			private JTextField invTextField2;
-			private JTextField custIdTextField;
-			private Invoice invoice = new Invoice();
-		//==========================================
+	//===========================================
+	//View Customer Invoice Panel and Components
+		
+	//Panel
+	private JPanel viewCustomerPanel = new JPanel();
+	
+	//Components
+	private JTextArea textarea;
+	private JTextField invTextField2;
+	private JTextField custIdTextField;
+	private Invoice invoice = new Invoice();
+	//==========================================
 	
 	public RetailGUI() {
 		
@@ -662,15 +662,6 @@ public class RetailGUI extends JFrame{
 		quantity.add(hundredTo200Radio);
 		quantity.add(over200Radio);
 		
-		
-		
-		
-		
-		
-	
-		
-	
-		
 		productJButton.addActionListener(new ActionListener(){
 			//function to create a product
 			public void actionPerformed(ActionEvent e){
@@ -694,98 +685,98 @@ public class RetailGUI extends JFrame{
 		});
 		
 		//add edit invoice components	
-				findInvoiceComponentsJPanel.setLayout(new GridLayout(2,2));
-				findInvoiceComponentsJPanel.add(editInvoiceJTextField);
-				editInvoiceJTextField.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-					editInvoiceJTextField.setText("");
+		findInvoiceComponentsJPanel.setLayout(new GridLayout(2,2));
+		findInvoiceComponentsJPanel.add(editInvoiceJTextField);
+		editInvoiceJTextField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			editInvoiceJTextField.setText("");
+			}
+		});
+		findInvoiceComponentsJPanel.add(editInvoiceJButton);
+		findInvoiceComponentsJPanel.add(editCustomerInvoiceJTextField);
+		editCustomerInvoiceJTextField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			editCustomerInvoiceJTextField.setText("");
+			}
+		});
+		findInvoiceComponentsJPanel.add(editCustomerInvoiceJButton);
+		editCustomerInvoiceComponentsJPanel.setLayout(new GridLayout(2,2));
+		editCustomerInvoiceComponentsJPanel.add(new JLabel("Total owed on all invoices:"));
+		editCustomerInvoiceComponentsJPanel.add(allInvoicesTotalJTextField);
+		JScrollPane customerInvoiceJScrollPane = new JScrollPane(customerInvoiceJTextArea);
+		customerInvoiceJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		editCustomerInvoiceComponentsJPanel.add(customerInvoiceJScrollPane);
+		editCustomerInvoiceComponentsJPanel.add(payAllInvoicesJButton);
+		payAllInvoicesJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				for(Invoice invoice: invoices)
+				{
+					if(Integer.parseInt(editCustomerInvoiceJTextField.getText().trim()) == invoice.getCustomer().getCustId() ){
+						invoice.setPaid(true);
 					}
-				});
-				findInvoiceComponentsJPanel.add(editInvoiceJButton);
-				findInvoiceComponentsJPanel.add(editCustomerInvoiceJTextField);
-				editCustomerInvoiceJTextField.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-					editCustomerInvoiceJTextField.setText("");
-					}
-				});
-				findInvoiceComponentsJPanel.add(editCustomerInvoiceJButton);
-				editCustomerInvoiceComponentsJPanel.setLayout(new GridLayout(2,2));
-				editCustomerInvoiceComponentsJPanel.add(new JLabel("Total owed on all invoices:"));
-				editCustomerInvoiceComponentsJPanel.add(allInvoicesTotalJTextField);
-				JScrollPane customerInvoiceJScrollPane = new JScrollPane(customerInvoiceJTextArea);
-				customerInvoiceJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-				editCustomerInvoiceComponentsJPanel.add(customerInvoiceJScrollPane);
-				editCustomerInvoiceComponentsJPanel.add(payAllInvoicesJButton);
-				payAllInvoicesJButton.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						for(Invoice invoice: invoices)
-						{
-							if(Integer.parseInt(editCustomerInvoiceJTextField.getText().trim()) == invoice.getCustomer().getCustId() ){
-								invoice.setPaid(true);
-							}
-						}
-						JOptionPane.showMessageDialog(null, "Paid!");
-						editCustomerInvoiceJButton.doClick();		
-						}
-					});
-				customerInvoiceJTextArea.setEditable(false);
-				allInvoicesTotalJTextField.setEditable(false);
-				editInvoiceComponentsJPanel.setLayout(new GridLayout(4,2));
-				editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
-				editInvoiceComponentsJPanel.add(editInvoiceId);
-				editInvoiceComponentsJPanel.add(new JLabel("Enter New Employee ID"));
-				editInvoiceComponentsJPanel.add(editInvoiceEmployee);
-				editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
-				editInvoiceComponentsJPanel.add(editInvoiceCustomer);
-				editInvoiceComponentsJPanel.add(new JLabel("Enter New Product ID"));
-				editInvoiceComponentsJPanel.add(editInvoiceProduct);
-				editInvoiceComponentsJPanel.add(new JLabel("Enter New Quantity"));
-				editInvoiceComponentsJPanel.add(editInvoiceQuantity);
-				editInvoiceComponentsJPanel.add(editInvoiceAmount);
-				editInvoiceComponentsJPanel.add(editPayStatus);
-				editPayStatus.setEditable(false);
-				editInvoiceComponentsJPanel.add(payInvoiceJButton);
-				payInvoiceJButton.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						Invoice inv = new Invoice();
-						inv.payInvoice(invoices, Integer.parseInt(editInvoiceJTextField.getText().trim()));
-						JOptionPane.showMessageDialog(null, "Paid!");
-						editPayStatus.setForeground(Color.BLACK);
-						editInvoiceJButton.doClick();		
-						}
-					});
-				saveInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
-				saveInvoiceComponentsJPanel.add(saveInvoiceJButton);
-				saveInvoiceComponentsJPanel.add(deleteInvoiceJButton);
-				deleteInvoiceJButton.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						Invoice inv = new Invoice();
-						int index = inv.deleteInvoice(invoices, Integer.parseInt(editInvoiceJTextField.getText().trim()));
-						invoices.remove(index);
-						JOptionPane.showMessageDialog(null, "Deleted!");
-						editInvoiceJTextField.setText(Integer.toString(invoices.get(0).getId()));
-						editInvoiceJButton.doClick();
-						}
-					});
-				editInvJPanel.setLayout(new GridLayout(4,2));
-				editInvJPanel.add(findInvoiceComponentsJPanel);
-				editInvJPanel.add(editInvoiceComponentsJPanel);
-				editInvJPanel.add(editCustomerInvoiceComponentsJPanel);
-				editInvJPanel.add(saveInvoiceComponentsJPanel);
-				editCustomerInvoiceComponentsJPanel.setVisible(false);
-				editInvoiceComponentsJPanel.setVisible(false);
-				saveInvoiceComponentsJPanel.setVisible(false);
-				EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
-				editInvoiceJButton.addActionListener(eib);
-				EditCustomerInvoiceButtonHandler ecib = new EditCustomerInvoiceButtonHandler();
-				editCustomerInvoiceJButton.addActionListener(ecib);
-				SaveButtonHandler sbh = new SaveButtonHandler();
-				saveInvoiceJButton.addActionListener(sbh);
+				}
+				JOptionPane.showMessageDialog(null, "Paid!");
+				editCustomerInvoiceJButton.doClick();		
+				}
+			});
+		customerInvoiceJTextArea.setEditable(false);
+		allInvoicesTotalJTextField.setEditable(false);
+		editInvoiceComponentsJPanel.setLayout(new GridLayout(4,2));
+		editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
+		editInvoiceComponentsJPanel.add(editInvoiceId);
+		editInvoiceComponentsJPanel.add(new JLabel("Enter New Employee ID"));
+		editInvoiceComponentsJPanel.add(editInvoiceEmployee);
+		editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
+		editInvoiceComponentsJPanel.add(editInvoiceCustomer);
+		editInvoiceComponentsJPanel.add(new JLabel("Enter New Product ID"));
+		editInvoiceComponentsJPanel.add(editInvoiceProduct);
+		editInvoiceComponentsJPanel.add(new JLabel("Enter New Quantity"));
+		editInvoiceComponentsJPanel.add(editInvoiceQuantity);
+		editInvoiceComponentsJPanel.add(editInvoiceAmount);
+		editInvoiceComponentsJPanel.add(editPayStatus);
+		editPayStatus.setEditable(false);
+		editInvoiceComponentsJPanel.add(payInvoiceJButton);
+		payInvoiceJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Invoice inv = new Invoice();
+				inv.payInvoice(invoices, Integer.parseInt(editInvoiceJTextField.getText().trim()));
+				JOptionPane.showMessageDialog(null, "Paid!");
+				editPayStatus.setForeground(Color.BLACK);
+				editInvoiceJButton.doClick();		
+				}
+			});
+		saveInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
+		saveInvoiceComponentsJPanel.add(saveInvoiceJButton);
+		saveInvoiceComponentsJPanel.add(deleteInvoiceJButton);
+		deleteInvoiceJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Invoice inv = new Invoice();
+				int index = inv.deleteInvoice(invoices, Integer.parseInt(editInvoiceJTextField.getText().trim()));
+				invoices.remove(index);
+				JOptionPane.showMessageDialog(null, "Deleted!");
+				editInvoiceJTextField.setText(Integer.toString(invoices.get(0).getId()));
+				editInvoiceJButton.doClick();
+				}
+			});
+		editInvJPanel.setLayout(new GridLayout(4,2));
+		editInvJPanel.add(findInvoiceComponentsJPanel);
+		editInvJPanel.add(editInvoiceComponentsJPanel);
+		editInvJPanel.add(editCustomerInvoiceComponentsJPanel);
+		editInvJPanel.add(saveInvoiceComponentsJPanel);
+		editCustomerInvoiceComponentsJPanel.setVisible(false);
+		editInvoiceComponentsJPanel.setVisible(false);
+		saveInvoiceComponentsJPanel.setVisible(false);
+		EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
+		editInvoiceJButton.addActionListener(eib);
+		EditCustomerInvoiceButtonHandler ecib = new EditCustomerInvoiceButtonHandler();
+		editCustomerInvoiceJButton.addActionListener(ecib);
+		SaveButtonHandler sbh = new SaveButtonHandler();
+		saveInvoiceJButton.addActionListener(sbh);
+		
 				
-						
-						
+				
 		/*remove comment marks to run login function
 
 				//lock the tabs until login successful
@@ -800,531 +791,531 @@ public class RetailGUI extends JFrame{
 						
 		*/			
 				
-				//add login components
-				loginComponentsJPanel.setLayout(new GridLayout(4,4));
-				loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
-				loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
-				loginComponentsJPanel.add(new JLabel("Enter Employee Password"));
-				loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
-				loginComponentsJPanel.add(loginBut= new JButton("Login"));
-				loginJPanel.add(loginComponentsJPanel);
-				//add listener for login button
-				LoginButtonHandler handler = new LoginButtonHandler();
-				loginBut.addActionListener(handler);
-				//add listener for save button
-						//focus listeners & handlers
-						loginTF.addMouseListener(new MouseAdapter() {
-							  @Override
-							  public void mouseClicked(MouseEvent e) {
-								  loginTF.setText("");
-							  }
-							});
-						passwordTF.addMouseListener(new MouseAdapter() {
-							  @Override
-							  public void mouseClicked(MouseEvent e) {
-								  passwordTF.setText("");
-							  }
-							});	
-						
-						JPanel logoutComponentsJPanel = new JPanel();
-						logoutComponentsJPanel.setLayout(new GridLayout(4,4));
-						logoutComponentsJPanel.add(new JLabel("Logout of application: "));
-						logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
-						logoutJPanel.add(logoutComponentsJPanel);
-						logoutBut.addActionListener(new ActionListener(){
-							public void actionPerformed(ActionEvent e){
-								// release all tabs - manager
-								loginTF.setText("");
-								passwordTF.setText("");
-								mainJTabbedPane.setSelectedIndex(0);
-								mainJTabbedPane.setEnabledAt(1, false);
-								mainJTabbedPane.setEnabledAt(2, false);
-								mainJTabbedPane.setEnabledAt(3, false);
-								mainJTabbedPane.setEnabledAt(4, false);
-								mainJTabbedPane.setEnabledAt(5, false);
-								mainJTabbedPane.setEnabledAt(6, false);
-								mainJTabbedPane.setEnabledAt(7, false);
-								mainJTabbedPane.setEnabledAt(8, false);
-								mainJTabbedPane.setEnabledAt(0, true);;
-							}
-						});
-					
-						//===============================
-						//vIWcUSTOMERiNVOICE fUNCTIONALITY
-						GridBagConstraints gc = new GridBagConstraints();
-						gc.insets = new Insets(5, 5, 5, 5);
-						viewInvJPanel.add(viewCustomerPanel);
-						viewCustomerPanel.setLayout(new GridBagLayout());
-						gc.insets = new Insets(5,5,5,5); //sets the padding around each component
-						
-						/**
-						 * Add All the Components
-						 * 	TextArea x1
-						 *  Label x2
-						 *  TextField x2
-						 *  Button x5
-						 *  
-						 */
-						//1. TextArea
-						textarea = new JTextArea(20,50); //height - width
-						textarea.setEditable(false);
-						JScrollPane scrollPane = new JScrollPane(textarea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-						GridBagConstraints c = new GridBagConstraints();
-				        c.gridwidth = GridBagConstraints.REMAINDER;
-				        c.fill = GridBagConstraints.BOTH;
-				        c.weightx = 1.0;
-				        c.weighty = 1.0;
-				        viewCustomerPanel.add(scrollPane, c);
-						
-						// First Label and controls:	View Invoice by ID 
-						JLabel invIdlbl = new JLabel("Invoice ID: "); //Label
-						gc.gridx = 0;
-						gc.gridy = 1;
-						viewCustomerPanel.add(invIdlbl,gc);
-						invTextField2 = new JTextField(10); //Text Field
-						gc.gridx = 1;
-						gc.gridy = 1;
-						viewCustomerPanel.add(invTextField2,gc);
-						JButton invButton = new JButton("Invoice ID");	//button
-						gc.gridx = 2;
-						gc.gridy = 1;
-						viewCustomerPanel.add(invButton,gc);
-						//Action listener For Button to view Invoice by Id
-						invButton.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								String input = invTextField2.getText();
-								if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
-									textarea.setText("Please enter a valid number");
-									invTextField2.setText("");
-									custIdTextField.setText("");
-								}else{
-									int num = Integer.parseInt(input);
-									textarea.setText(invoice.viewInvoiceById(num, invoices)); //viewInvoiceById() is in the Invoice Class
-									invTextField2.setText("");
-									custIdTextField.setText("");
-								}
-							}
-						});
-						
-						//Second Label and controls: 	View Customer by ID
-						JLabel custIdlbl = new JLabel("Customer ID: ");
-						gc.gridx = 0;
-						gc.gridy = 2;
-						viewCustomerPanel.add(custIdlbl,gc);
-						custIdTextField = new JTextField(10);
-						gc.gridx = 1;
-						gc.gridy = 2;
-						viewCustomerPanel.add(custIdTextField,gc);
-						JButton custIdButton = new JButton("Customer ID");
-						gc.gridx = 2;
-						gc.gridy = 2;
-						viewCustomerPanel.add(custIdButton,gc);
-						custIdButton.addActionListener(new ActionListener() {
-							//Action listener For Button to view Customer by Id
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								String input = custIdTextField.getText();
-								if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
-									textarea.setText("Please enter a valid number");
-									custIdTextField.setText("");
-									invTextField2.setText("");
-								}else{
-									int num = Integer.parseInt(input);
-									textarea.setText(invoice.viewInvoiceByCustomer(num, invoices));	//viewInvoiceByCustomer() is in the Invoice class
-									custIdTextField.setText("");
-									invTextField2.setText("");
-								}
-							}
-						});
-						
-						//Button x3: 	View All/ View Paid/ View UnPaid
-						//1. View all Button
-						JButton viewAllBtn = new JButton("View All");
-						gc.gridx = 0;
-						gc.gridy = 3;
-						viewCustomerPanel.add(viewAllBtn,gc);
-						viewAllBtn.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								textarea.setText(invoice.viewAllInvoices(invoices));	//viewAllInvoices() is in the Invoice Class
-							}
-						});
-						
-						//2. Paid Button
-						JButton viewPaidBtn = new JButton("View Paid");
-						gc.gridx = 1;
-						gc.gridy = 3;
-						viewCustomerPanel.add(viewPaidBtn,gc);
-						viewPaidBtn.addActionListener(new ActionListener() {
-							
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								textarea.setText(invoice.viewPaidInvoice(invoices));	//viewPaidInvoice() is in the invoice class
-								
-							}
-						});
-						
-						//3. UnPaid Button
-						JButton viewUnpaidBtn = new JButton("View Unpaid");
-						viewUnpaidBtn.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								textarea.setText(invoice.viewUnPaidInvoice(invoices));	//viewUnPaidInvoice() is in the invoice class
-							}
-						});
-						gc.gridx = 2;
-						gc.gridy = 3;
-						viewCustomerPanel.add(viewUnpaidBtn,gc);
-					
-						
-						
-						
-						//======================== Start ===========
-						
-						viewProductDetailsPanel.add(viewProductDetails);
-						viewProductDetails.setLayout(new GridBagLayout());
-						gc.insets = new Insets(5,5,5,5); //sets the padding around each component
-						
+		//add login components
+		loginComponentsJPanel.setLayout(new GridLayout(4,4));
+		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
+		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
+		loginComponentsJPanel.add(new JLabel("Enter Employee Password"));
+		loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
+		loginComponentsJPanel.add(loginBut= new JButton("Login"));
+		loginJPanel.add(loginComponentsJPanel);
+		//add listener for login button
+		LoginButtonHandler handler = new LoginButtonHandler();
+		loginBut.addActionListener(handler);
+		//add listener for save button
+		//focus listeners & handlers
+		loginTF.addMouseListener(new MouseAdapter() {
+			  @Override
+			  public void mouseClicked(MouseEvent e) {
+				  loginTF.setText("");
+			  }
+			});
+		passwordTF.addMouseListener(new MouseAdapter() {
+			  @Override
+			  public void mouseClicked(MouseEvent e) {
+				  passwordTF.setText("");
+			  }
+			});	
+		
+		JPanel logoutComponentsJPanel = new JPanel();
+		logoutComponentsJPanel.setLayout(new GridLayout(4,4));
+		logoutComponentsJPanel.add(new JLabel("Logout of application: "));
+		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
+		logoutJPanel.add(logoutComponentsJPanel);
+		logoutBut.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				// release all tabs - manager
+				loginTF.setText("");
+				passwordTF.setText("");
+				mainJTabbedPane.setSelectedIndex(0);
+				mainJTabbedPane.setEnabledAt(1, false);
+				mainJTabbedPane.setEnabledAt(2, false);
+				mainJTabbedPane.setEnabledAt(3, false);
+				mainJTabbedPane.setEnabledAt(4, false);
+				mainJTabbedPane.setEnabledAt(5, false);
+				mainJTabbedPane.setEnabledAt(6, false);
+				mainJTabbedPane.setEnabledAt(7, false);
+				mainJTabbedPane.setEnabledAt(8, false);
+				mainJTabbedPane.setEnabledAt(0, true);;
+			}
+		});
+	
+		//===============================
+		//vIWcUSTOMERiNVOICE fUNCTIONALITY
+		GridBagConstraints gc = new GridBagConstraints();
+		gc.insets = new Insets(5, 5, 5, 5);
+		viewInvJPanel.add(viewCustomerPanel);
+		viewCustomerPanel.setLayout(new GridBagLayout());
+		gc.insets = new Insets(5,5,5,5); //sets the padding around each component
+		
+		/**
+		 * Add All the Components
+		 * 	TextArea x1
+		 *  Label x2
+		 *  TextField x2
+		 *  Button x5
+		 *  
+		 */
+		//1. TextArea
+		textarea = new JTextArea(20,50); //height - width
+		textarea.setEditable(false);
+		JScrollPane scrollPane = new JScrollPane(textarea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        viewCustomerPanel.add(scrollPane, c);
+		
+		// First Label and controls:	View Invoice by ID 
+		JLabel invIdlbl = new JLabel("Invoice ID: "); //Label
+		gc.gridx = 0;
+		gc.gridy = 1;
+		viewCustomerPanel.add(invIdlbl,gc);
+		invTextField2 = new JTextField(10); //Text Field
+		gc.gridx = 1;
+		gc.gridy = 1;
+		viewCustomerPanel.add(invTextField2,gc);
+		JButton invButton = new JButton("Invoice ID");	//button
+		gc.gridx = 2;
+		gc.gridy = 1;
+		viewCustomerPanel.add(invButton,gc);
+		//Action listener For Button to view Invoice by Id
+		invButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = invTextField2.getText();
+				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
+					textarea.setText("Please enter a valid number");
+					invTextField2.setText("");
+					custIdTextField.setText("");
+				}else{
+					int num = Integer.parseInt(input);
+					textarea.setText(invoice.viewInvoiceById(num, invoices)); //viewInvoiceById() is in the Invoice Class
+					invTextField2.setText("");
+					custIdTextField.setText("");
+				}
+			}
+		});
+		
+		//Second Label and controls: 	View Customer by ID
+		JLabel custIdlbl = new JLabel("Customer ID: ");
+		gc.gridx = 0;
+		gc.gridy = 2;
+		viewCustomerPanel.add(custIdlbl,gc);
+		custIdTextField = new JTextField(10);
+		gc.gridx = 1;
+		gc.gridy = 2;
+		viewCustomerPanel.add(custIdTextField,gc);
+		JButton custIdButton = new JButton("Customer ID");
+		gc.gridx = 2;
+		gc.gridy = 2;
+		viewCustomerPanel.add(custIdButton,gc);
+		custIdButton.addActionListener(new ActionListener() {
+			//Action listener For Button to view Customer by Id
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = custIdTextField.getText();
+				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
+					textarea.setText("Please enter a valid number");
+					custIdTextField.setText("");
+					invTextField2.setText("");
+				}else{
+					int num = Integer.parseInt(input);
+					textarea.setText(invoice.viewInvoiceByCustomer(num, invoices));	//viewInvoiceByCustomer() is in the Invoice class
+					custIdTextField.setText("");
+					invTextField2.setText("");
+				}
+			}
+		});
+		
+		//Button x3: 	View All/ View Paid/ View UnPaid
+		//1. View all Button
+		JButton viewAllBtn = new JButton("View All");
+		gc.gridx = 0;
+		gc.gridy = 3;
+		viewCustomerPanel.add(viewAllBtn,gc);
+		viewAllBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textarea.setText(invoice.viewAllInvoices(invoices));	//viewAllInvoices() is in the Invoice Class
+			}
+		});
+		
+		//2. Paid Button
+		JButton viewPaidBtn = new JButton("View Paid");
+		gc.gridx = 1;
+		gc.gridy = 3;
+		viewCustomerPanel.add(viewPaidBtn,gc);
+		viewPaidBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textarea.setText(invoice.viewPaidInvoice(invoices));	//viewPaidInvoice() is in the invoice class
+				
+			}
+		});
+		
+		//3. UnPaid Button
+		JButton viewUnpaidBtn = new JButton("View Unpaid");
+		viewUnpaidBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textarea.setText(invoice.viewUnPaidInvoice(invoices));	//viewUnPaidInvoice() is in the invoice class
+			}
+		});
+		gc.gridx = 2;
+		gc.gridy = 3;
+		viewCustomerPanel.add(viewUnpaidBtn,gc);
+	
+		
+		
+		
+		//======================== Start ===========
+		
+		viewProductDetailsPanel.add(viewProductDetails);
+		viewProductDetails.setLayout(new GridBagLayout());
+		gc.insets = new Insets(5,5,5,5); //sets the padding around each component
+		
 
-						//1. TextArea
-						productTextArea = new JTextArea(20,20); //height - width
-						productTextArea.setEditable(false);
-						JScrollPane scrollPane1 = new JScrollPane(productTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-				        c.gridwidth = GridBagConstraints.REMAINDER;
-				        c.fill = GridBagConstraints.BOTH;
-				        c.weightx = 1.0;
-				        c.weighty = 1.0;
-				        viewProductDetails.add(scrollPane1, c);
-						
-						// First Label and controls:	View Product by ID 
-						JLabel productIdlbl = new JLabel("Enter Product ID: "); //Label
-						gc.gridx = 0;
-						gc.gridy = 1;
-						viewProductDetails.add(productIdlbl,gc);
-						viewProductIdTextField = new JTextField(10); //Text Field
-						gc.gridx = 1;
-						gc.gridy = 1;
-						viewProductDetails.add(viewProductIdTextField,gc);
-						JButton productButton = new JButton("Search Product ID");	//button
-						gc.gridx = 2;
-						gc.gridy = 1;
-						viewProductDetails.add(productButton,gc);
-						productButton.setPreferredSize(new Dimension(155,20));
-						//Action listener For Button to view Product by Id
-						productButton.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								String input = viewProductIdTextField.getText();
-								// This method could be enhanced by adding in a check 
-								//to ensure 9 digits have been entered to match an ISBN number.
-								if(input.trim().equals("")){ 
-									//textarea.setText("Please enter a valid ID");	
-									JOptionPane.showMessageDialog(null, "Please Enter a Value in the ID Field");
-									viewProductIdTextField.setText("");
-									productTitleTextField.setText("");
-								}else{
-									productTextArea.setText(product.viewProductById(input, products)); //viewInvoiceById() is in the Invoice Class
-									viewProductIdTextField.setText("");
-									productTitleTextField.setText("");
-									productAuthorTextField.setText("");
-								}
-							}
-						});
-						
-						//Second Label and controls: 	View Product by Title
-						JLabel productTitlelbl = new JLabel("Product Title: ");
-						gc.gridx = 0;
-						gc.gridy = 2;
-						viewProductDetails.add(productTitlelbl,gc);
-						productTitleTextField = new JTextField(10);
-						gc.gridx = 1;
-						gc.gridy = 2;
-						viewProductDetails.add(productTitleTextField,gc);
-						JButton productTitleButton = new JButton("Search Product Title");
-						gc.gridx = 2;
-						gc.gridy = 2;
-						viewProductDetails.add(productTitleButton,gc);
-						productTitleButton.setPreferredSize(new Dimension(155,20));
-						productTitleButton.addActionListener(new ActionListener() {
-							//Action listener For Button to view product by Title
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								String input = productTitleTextField.getText();
-								
-								if(input.trim().equals("")){ 
-									//textarea.setText("Please enter a valid Title");
-									JOptionPane.showMessageDialog(null, "Please Enter a Value in the Title Field");
-									productTitleTextField.setText("");
-									
-								}else{
-									
-									productTextArea.setText(product.viewProductByTitle(input, products));	//viewInvoiceByCustomer() is in the Invoice class
-									productTitleTextField.setText("");
-									viewProductIdTextField.setText("");
-									productAuthorTextField.setText("");
-									
-									
-								}
-							}
-						});
-						
-						
-						//Third Label and controls: 	View Product by Author
-								JLabel productAuthorlbl = new JLabel("Product Author: ");
-								gc.gridx = 0;
-								gc.gridy = 3;
-								viewProductDetails.add(productAuthorlbl,gc);
-								productAuthorTextField = new JTextField(10);
-								gc.gridx = 1;
-								gc.gridy = 3;
-								viewProductDetails.add(productAuthorTextField,gc);
-								JButton productAuthorBtn = new JButton("Search Author");
-								gc.gridx = 2;
-								gc.gridy = 3;
-								viewProductDetails.add(productAuthorBtn,gc);
-								productAuthorBtn.setPreferredSize(new Dimension(155,20));
-								productAuthorBtn.addActionListener(new ActionListener() {
-									//Action listener For Button to view product by Title
-									@Override
-									public void actionPerformed(ActionEvent e) {
-										String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
-																											//All names in array should be stored in lower case.
-										
-										if(input.trim().equals("")){ 	// If no text is entered
-											//textarea.setText("Please enter text in Author Field");
-											JOptionPane.showMessageDialog(null, "Please Enter a Value in the Author Field");
-											productAuthorTextField.setText("");
-											//invTextField.setText("");
-										}else{							// Take in String and Search for it.
-											productTextArea.setText(product.viewProductByAuthor(input, products));	
-											productAuthorTextField.setText("");
-											viewProductIdTextField.setText("");
-											productTitleTextField.setText("");
-										}
-									}
-								});
-
-						//Button 4: 	View All
-						//1. View all Button
-						JButton viewAllProductsBtn = new JButton(" View All Products ");
-						gc.gridx = 4;
-						gc.gridy = 1;
-						viewProductDetails.add(viewAllProductsBtn,gc);
-						viewAllProductsBtn.setPreferredSize(new Dimension(155,20));
-						viewAllProductsBtn.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								productTextArea.setText(product.viewAllProductDetails(products));	//viewAllProducts() is in the Product Class
-								viewProductIdTextField.setText("");
-								productTitleTextField.setText("");
-								productAuthorTextField.setText("");
-							}
-						});
-						
-						
-						// Button 5: View All Current Stock below Min Reorder Level
-								
-								JButton viewAllBelowMinReorder = new JButton(" View All Low Stock ");
-								gc.gridx = 4;
-								gc.gridy = 2;
-								viewProductDetails.add(viewAllBelowMinReorder,gc);
-								viewAllBelowMinReorder.setPreferredSize(new Dimension(155,20));
-								viewAllBelowMinReorder.addActionListener(new ActionListener() {
-									@Override
-									public void actionPerformed(ActionEvent e) {
-										productTextArea.setText(product.viewProductByMinStock(products));
-										viewProductIdTextField.setText("");
-										productTitleTextField.setText("");
-										productAuthorTextField.setText("");
-									}
-								});
-								
-								
-						// Button 6: View all Current Stock above Max level (Over Stock)	
-								JButton viewAllAboveMaxReorder = new JButton(" View All Over Stock ");
-								gc.gridx = 4;
-								gc.gridy = 3;
-								viewProductDetails.add(viewAllAboveMaxReorder,gc);
-								viewAllAboveMaxReorder.setPreferredSize(new Dimension(155,20));
-								viewAllAboveMaxReorder.addActionListener(new ActionListener() {
-									@Override
-									public void actionPerformed(ActionEvent e) {
-										productTextArea.setText(product.viewProductByOverStock(products));
-										viewProductIdTextField.setText("");
-										productTitleTextField.setText("");
-										productAuthorTextField.setText("");
-									}
-								});
-						
-						//=======================  End
-						
-						
-					} //END OF CONSTRUCTOR
-					//handler for login button
-					private class LoginButtonHandler implements ActionListener
-					{
-					public void actionPerformed( ActionEvent e)
-						{//handler starts
-						Employee emp = new Employee();
-						int id = 0;
-						int password = 0;
-						try {
-							id = Integer.parseInt( loginTF.getText().trim() );
-						}
-						catch (NumberFormatException nfe){
-							loginTF.setText("");
-						}
-						try{
-							password = Integer.parseInt( passwordTF.getText().trim() );
-						}
-						catch(NumberFormatException nfe){
-							passwordTF.setText("");
-						}
-						int login = emp.verifyLogin(employees, id, password);
-						if(login == 1){
-							// release all tabs - manager
-							mainJTabbedPane.setSelectedIndex(1);
-							mainJTabbedPane.setEnabledAt(1, true);
-							mainJTabbedPane.setEnabledAt(2, true);
-							mainJTabbedPane.setEnabledAt(3, true);
-							mainJTabbedPane.setEnabledAt(4, true);
-							mainJTabbedPane.setEnabledAt(5, true);
-							mainJTabbedPane.setEnabledAt(6, true);
-							mainJTabbedPane.setEnabledAt(7, true);
-							mainJTabbedPane.setEnabledAt(8, true);
-							mainJTabbedPane.setEnabledAt(0, false);
-						}
-						else if(login == 2){
-							// release some tabs - staff SPRINT 2
-							
-						}
-						else if(login == 3){
-							//password incorrect
-							JOptionPane.showMessageDialog(loginJPanel, "Password doesn't match that Employee ID", "For your information", JOptionPane.INFORMATION_MESSAGE);
-						}
-						else if(login == 4){
-							//no employee id match
-							JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-						}		
-						}
-					}
+		//1. TextArea
+		productTextArea = new JTextArea(20,20); //height - width
+		productTextArea.setEditable(false);
+		JScrollPane scrollPane1 = new JScrollPane(productTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        viewProductDetails.add(scrollPane1, c);
+		
+		// First Label and controls:	View Product by ID 
+		JLabel productIdlbl = new JLabel("Enter Product ID: "); //Label
+		gc.gridx = 0;
+		gc.gridy = 1;
+		viewProductDetails.add(productIdlbl,gc);
+		viewProductIdTextField = new JTextField(10); //Text Field
+		gc.gridx = 1;
+		gc.gridy = 1;
+		viewProductDetails.add(viewProductIdTextField,gc);
+		JButton productButton = new JButton("Search Product ID");	//button
+		gc.gridx = 2;
+		gc.gridy = 1;
+		viewProductDetails.add(productButton,gc);
+		productButton.setPreferredSize(new Dimension(155,20));
+		//Action listener For Button to view Product by Id
+		productButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = viewProductIdTextField.getText();
+				// This method could be enhanced by adding in a check 
+				//to ensure 9 digits have been entered to match an ISBN number.
+				if(input.trim().equals("")){ 
+					//textarea.setText("Please enter a valid ID");	
+					JOptionPane.showMessageDialog(null, "Please Enter a Value in the ID Field");
+					viewProductIdTextField.setText("");
+					productTitleTextField.setText("");
+				}else{
+					productTextArea.setText(product.viewProductById(input, products)); //viewInvoiceById() is in the Invoice Class
+					viewProductIdTextField.setText("");
+					productTitleTextField.setText("");
+					productAuthorTextField.setText("");
+				}
+			}
+		});
+		
+		//Second Label and controls: 	View Product by Title
+		JLabel productTitlelbl = new JLabel("Product Title: ");
+		gc.gridx = 0;
+		gc.gridy = 2;
+		viewProductDetails.add(productTitlelbl,gc);
+		productTitleTextField = new JTextField(10);
+		gc.gridx = 1;
+		gc.gridy = 2;
+		viewProductDetails.add(productTitleTextField,gc);
+		JButton productTitleButton = new JButton("Search Product Title");
+		gc.gridx = 2;
+		gc.gridy = 2;
+		viewProductDetails.add(productTitleButton,gc);
+		productTitleButton.setPreferredSize(new Dimension(155,20));
+		productTitleButton.addActionListener(new ActionListener() {
+			//Action listener For Button to view product by Title
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = productTitleTextField.getText();
+				
+				if(input.trim().equals("")){ 
+					//textarea.setText("Please enter a valid Title");
+					JOptionPane.showMessageDialog(null, "Please Enter a Value in the Title Field");
+					productTitleTextField.setText("");
 					
-					//Handler for edit invoice by id button
-					private class EditInvoiceButtonHandler implements ActionListener
-					{
-					public void actionPerformed( ActionEvent e)
-						{//handler starts
-							ArrayList<String> fields = new ArrayList<String>();
-							Invoice inv = new Invoice();
-							int id = 0;
-							try {
-								id = Integer.parseInt( editInvoiceJTextField.getText().trim() );
-							}
-							catch (NumberFormatException nfe){
-								editInvoiceJTextField.setText("");
-							}
-							int invoiceID = inv.verifyInvoiceID(invoices, id);
-							if(invoiceID == 1){
-								editCustomerInvoiceComponentsJPanel.setVisible(false);
-								editInvoiceComponentsJPanel.setVisible(true);
-								saveInvoiceComponentsJPanel.setVisible(true);
-								fields = inv.returnFields(invoices, id);
-								editInvoiceId.setText(fields.get(0));
-								editInvoiceEmployee.setText(fields.get(1));
-								editInvoiceCustomer.setText(fields.get(2));
-								editInvoiceProduct.setText(fields.get(3));
-								editInvoiceQuantity.setText(fields.get(4));
-								editInvoiceAmount.setText(fields.get(5));
-								editPayStatus.setText(fields.get(6));
-								if(fields.get(6).equals("Unpaid")){
-									editPayStatus.setForeground(Color.RED);
-								}
-							}
-							else if(invoiceID == 2){
-								//no invoice id match
-								JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-								editCustomerInvoiceComponentsJPanel.setVisible(false);
-								editInvoiceComponentsJPanel.setVisible(false);
-								saveInvoiceComponentsJPanel.setVisible(false);
-							}
-
-						}	
-					}
+				}else{
 					
-					//Handler for pay invoices by customer button
-					private class EditCustomerInvoiceButtonHandler implements ActionListener
-					{
-					public void actionPerformed( ActionEvent e)
-						{//handler starts
-							Invoice inv = new Invoice();
-							int count = 0;
-							String s = "";
-							double total = 0;
-							String totalString = "";
-							int id = 0;
-							try {
-								id = Integer.parseInt( editCustomerInvoiceJTextField.getText().trim() );
-							}
-							catch (NumberFormatException nfe){
-								editCustomerInvoiceJTextField.setText("");
-							}
-							int customerID = inv.verifyInvoiceByCustomerID(customers, id);
-							if(customerID == 1){
-								editCustomerInvoiceComponentsJPanel.setVisible(true);
-								editInvoiceComponentsJPanel.setVisible(false);
-								saveInvoiceComponentsJPanel.setVisible(false);
-								customerInvoiceJTextArea.setText("Unpaid Invoices: ");
-								for(Invoice invoice: invoices){
-									if(id == invoice.getCustomer().getCustId() ){
-										if(invoice.isPaid() == false){
-											s = "\nProduct Id : " + invoice.getProduct().getProductCode() + 
-												"\nQuantity: " + invoice.getQuantity() + "\nTotal: " + 
-												invoice.getTotalInvoicePrice() + "\n";
-											customerInvoiceJTextArea.append(s);
-											total = total + invoice.getTotalInvoicePrice();
-											count++;								
-										}
-									}
-								}
-								if(count == 0){
-									JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
-									editCustomerInvoiceComponentsJPanel.setVisible(false);
-								}
-								else{
-									totalString = Double.toString(total);
-									allInvoicesTotalJTextField.setText(totalString);
-								}						
-							}
-							else if(customerID == 2){
-								//no customer id match
-								JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-								editCustomerInvoiceComponentsJPanel.setVisible(false);
-								editInvoiceComponentsJPanel.setVisible(false);
-								saveInvoiceComponentsJPanel.setVisible(false);
-							}
-						}
-					}
+					productTextArea.setText(product.viewProductByTitle(input, products));	//viewInvoiceByCustomer() is in the Invoice class
+					productTitleTextField.setText("");
+					viewProductIdTextField.setText("");
+					productAuthorTextField.setText("");
 					
-					//handler for save button
-					private class SaveButtonHandler implements ActionListener
-					{
-					public void actionPerformed( ActionEvent e)
-						{
-						Invoice inv = new Invoice();
-							ArrayList<String> fields = new ArrayList<String>();
-							fields.add(new String (editInvoiceId.getText().trim()));
-							fields.add(new String (editInvoiceEmployee.getText().trim()));
-							fields.add(new String (editInvoiceCustomer.getText().trim()));
-							fields.add(new String (editInvoiceProduct.getText().trim()));
-							fields.add(new String (editInvoiceQuantity.getText().trim()));
-							fields.add(new String (editInvoiceJTextField.getText().trim()));
-							inv.updateInvoice(invoices, employees, products, customers, fields);
-							editInvoiceJTextField.setText(fields.get(0));
-							JOptionPane.showMessageDialog(null, "Updated!");
-							editInvoiceJButton.doClick();
-							
-						}
-					}
+					
+				}
+			}
+		});
+		
+		
+		//Third Label and controls: 	View Product by Author
+		JLabel productAuthorlbl = new JLabel("Product Author: ");
+		gc.gridx = 0;
+		gc.gridy = 3;
+		viewProductDetails.add(productAuthorlbl,gc);
+		productAuthorTextField = new JTextField(10);
+		gc.gridx = 1;
+		gc.gridy = 3;
+		viewProductDetails.add(productAuthorTextField,gc);
+		JButton productAuthorBtn = new JButton("Search Author");
+		gc.gridx = 2;
+		gc.gridy = 3;
+		viewProductDetails.add(productAuthorBtn,gc);
+		productAuthorBtn.setPreferredSize(new Dimension(155,20));
+		productAuthorBtn.addActionListener(new ActionListener() {
+			//Action listener For Button to view product by Title
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
+																					//All names in array should be stored in lower case.
+				
+				if(input.trim().equals("")){ 	// If no text is entered
+					//textarea.setText("Please enter text in Author Field");
+					JOptionPane.showMessageDialog(null, "Please Enter a Value in the Author Field");
+					productAuthorTextField.setText("");
+					//invTextField.setText("");
+				}else{							// Take in String and Search for it.
+					productTextArea.setText(product.viewProductByAuthor(input, products));	
+					productAuthorTextField.setText("");
+					viewProductIdTextField.setText("");
+					productTitleTextField.setText("");
+				}
+			}
+		});
 
+		//Button 4: 	View All
+		//1. View all Button
+		JButton viewAllProductsBtn = new JButton(" View All Products ");
+		gc.gridx = 4;
+		gc.gridy = 1;
+		viewProductDetails.add(viewAllProductsBtn,gc);
+		viewAllProductsBtn.setPreferredSize(new Dimension(155,20));
+		viewAllProductsBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				productTextArea.setText(product.viewAllProductDetails(products));	//viewAllProducts() is in the Product Class
+				viewProductIdTextField.setText("");
+				productTitleTextField.setText("");
+				productAuthorTextField.setText("");
+			}
+		});
+		
+		
+		// Button 5: View All Current Stock below Min Reorder Level
+				
+		JButton viewAllBelowMinReorder = new JButton(" View All Low Stock ");
+		gc.gridx = 4;
+		gc.gridy = 2;
+		viewProductDetails.add(viewAllBelowMinReorder,gc);
+		viewAllBelowMinReorder.setPreferredSize(new Dimension(155,20));
+		viewAllBelowMinReorder.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				productTextArea.setText(product.viewProductByMinStock(products));
+				viewProductIdTextField.setText("");
+				productTitleTextField.setText("");
+				productAuthorTextField.setText("");
+			}
+		});
+				
+				
+		// Button 6: View all Current Stock above Max level (Over Stock)	
+		JButton viewAllAboveMaxReorder = new JButton(" View All Over Stock ");
+		gc.gridx = 4;
+		gc.gridy = 3;
+		viewProductDetails.add(viewAllAboveMaxReorder,gc);
+		viewAllAboveMaxReorder.setPreferredSize(new Dimension(155,20));
+		viewAllAboveMaxReorder.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				productTextArea.setText(product.viewProductByOverStock(products));
+				viewProductIdTextField.setText("");
+				productTitleTextField.setText("");
+				productAuthorTextField.setText("");
+			}
+		});
+		
+		//=======================  End
+		
+		
+		} //END OF CONSTRUCTOR
+		//handler for login button
+		private class LoginButtonHandler implements ActionListener
+		{
+		public void actionPerformed( ActionEvent e)
+			{//handler starts
+			Employee emp = new Employee();
+			int id = 0;
+			int password = 0;
+			try {
+				id = Integer.parseInt( loginTF.getText().trim() );
+			}
+			catch (NumberFormatException nfe){
+				loginTF.setText("");
+			}
+			try{
+				password = Integer.parseInt( passwordTF.getText().trim() );
+			}
+			catch(NumberFormatException nfe){
+				passwordTF.setText("");
+			}
+			int login = emp.verifyLogin(employees, id, password);
+			if(login == 1){
+				// release all tabs - manager
+				mainJTabbedPane.setSelectedIndex(1);
+				mainJTabbedPane.setEnabledAt(1, true);
+				mainJTabbedPane.setEnabledAt(2, true);
+				mainJTabbedPane.setEnabledAt(3, true);
+				mainJTabbedPane.setEnabledAt(4, true);
+				mainJTabbedPane.setEnabledAt(5, true);
+				mainJTabbedPane.setEnabledAt(6, true);
+				mainJTabbedPane.setEnabledAt(7, true);
+				mainJTabbedPane.setEnabledAt(8, true);
+				mainJTabbedPane.setEnabledAt(0, false);
+			}
+			else if(login == 2){
+				// release some tabs - staff SPRINT 2
+				
+			}
+			else if(login == 3){
+				//password incorrect
+				JOptionPane.showMessageDialog(loginJPanel, "Password doesn't match that Employee ID", "For your information", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else if(login == 4){
+				//no employee id match
+				JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+			}		
+			}
 		}
+		
+		//Handler for edit invoice by id button
+		private class EditInvoiceButtonHandler implements ActionListener
+		{
+		public void actionPerformed( ActionEvent e)
+			{//handler starts
+				ArrayList<String> fields = new ArrayList<String>();
+				Invoice inv = new Invoice();
+				int id = 0;
+				try {
+					id = Integer.parseInt( editInvoiceJTextField.getText().trim() );
+				}
+				catch (NumberFormatException nfe){
+					editInvoiceJTextField.setText("");
+				}
+				int invoiceID = inv.verifyInvoiceID(invoices, id);
+				if(invoiceID == 1){
+					editCustomerInvoiceComponentsJPanel.setVisible(false);
+					editInvoiceComponentsJPanel.setVisible(true);
+					saveInvoiceComponentsJPanel.setVisible(true);
+					fields = inv.returnFields(invoices, id);
+					editInvoiceId.setText(fields.get(0));
+					editInvoiceEmployee.setText(fields.get(1));
+					editInvoiceCustomer.setText(fields.get(2));
+					editInvoiceProduct.setText(fields.get(3));
+					editInvoiceQuantity.setText(fields.get(4));
+					editInvoiceAmount.setText(fields.get(5));
+					editPayStatus.setText(fields.get(6));
+					if(fields.get(6).equals("Unpaid")){
+						editPayStatus.setForeground(Color.RED);
+					}
+				}
+				else if(invoiceID == 2){
+					//no invoice id match
+					JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+					editCustomerInvoiceComponentsJPanel.setVisible(false);
+					editInvoiceComponentsJPanel.setVisible(false);
+					saveInvoiceComponentsJPanel.setVisible(false);
+				}
+
+			}	
+		}
+		
+		//Handler for pay invoices by customer button
+		private class EditCustomerInvoiceButtonHandler implements ActionListener
+		{
+		public void actionPerformed( ActionEvent e)
+			{//handler starts
+				Invoice inv = new Invoice();
+				int count = 0;
+				String s = "";
+				double total = 0;
+				String totalString = "";
+				int id = 0;
+				try {
+					id = Integer.parseInt( editCustomerInvoiceJTextField.getText().trim() );
+				}
+				catch (NumberFormatException nfe){
+					editCustomerInvoiceJTextField.setText("");
+				}
+				int customerID = inv.verifyInvoiceByCustomerID(customers, id);
+				if(customerID == 1){
+					editCustomerInvoiceComponentsJPanel.setVisible(true);
+					editInvoiceComponentsJPanel.setVisible(false);
+					saveInvoiceComponentsJPanel.setVisible(false);
+					customerInvoiceJTextArea.setText("Unpaid Invoices: ");
+					for(Invoice invoice: invoices){
+						if(id == invoice.getCustomer().getCustId() ){
+							if(invoice.isPaid() == false){
+								s = "\nProduct Id : " + invoice.getProduct().getProductCode() + 
+									"\nQuantity: " + invoice.getQuantity() + "\nTotal: " + 
+									invoice.getTotalInvoicePrice() + "\n";
+								customerInvoiceJTextArea.append(s);
+								total = total + invoice.getTotalInvoicePrice();
+								count++;								
+							}
+						}
+					}
+					if(count == 0){
+						JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
+						editCustomerInvoiceComponentsJPanel.setVisible(false);
+					}
+					else{
+						totalString = Double.toString(total);
+						allInvoicesTotalJTextField.setText(totalString);
+					}						
+				}
+				else if(customerID == 2){
+					//no customer id match
+					JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+					editCustomerInvoiceComponentsJPanel.setVisible(false);
+					editInvoiceComponentsJPanel.setVisible(false);
+					saveInvoiceComponentsJPanel.setVisible(false);
+				}
+			}
+		}
+		
+		//handler for save button
+		private class SaveButtonHandler implements ActionListener
+			{
+			public void actionPerformed( ActionEvent e)
+				{
+				Invoice inv = new Invoice();
+					ArrayList<String> fields = new ArrayList<String>();
+					fields.add(new String (editInvoiceId.getText().trim()));
+					fields.add(new String (editInvoiceEmployee.getText().trim()));
+					fields.add(new String (editInvoiceCustomer.getText().trim()));
+					fields.add(new String (editInvoiceProduct.getText().trim()));
+					fields.add(new String (editInvoiceQuantity.getText().trim()));
+					fields.add(new String (editInvoiceJTextField.getText().trim()));
+					inv.updateInvoice(invoices, employees, products, customers, fields);
+					editInvoiceJTextField.setText(fields.get(0));
+					JOptionPane.showMessageDialog(null, "Updated!");
+						editInvoiceJButton.doClick();
+						
+					}
+				}
+
+}
