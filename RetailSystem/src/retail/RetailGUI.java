@@ -1410,6 +1410,10 @@ public class RetailGUI extends JFrame{
 				prodTextF.setText("");
 				quantityTextF.setText("");
 				textAreaMarc.setText("");
+				invTextF.setEnabled(true);
+				employTextF.setEnabled(true);
+				custTextF.setEnabled(true);
+				addMoreArrayList = new ArrayList<InvoiceProduct>();
 				
 			}
 		});
