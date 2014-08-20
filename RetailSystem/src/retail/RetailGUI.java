@@ -346,6 +346,74 @@ public class RetailGUI extends JFrame{
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), products.get(0), 10));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), products.get(1), 20));
 		
+		
+		/*remove comment marks to run login function
+
+		//lock the tabs until login successful
+		mainJTabbedPane.setEnabledAt(1, false);
+		mainJTabbedPane.setEnabledAt(2, false);
+		mainJTabbedPane.setEnabledAt(3, false);
+		mainJTabbedPane.setEnabledAt(4, false);
+		mainJTabbedPane.setEnabledAt(5, false);
+		mainJTabbedPane.setEnabledAt(6, false);
+		mainJTabbedPane.setEnabledAt(7, false);
+		mainJTabbedPane.setEnabledAt(8, false);
+						
+		*/			
+				
+		//add login components
+		loginComponentsJPanel.setLayout(new GridLayout(4,4));
+		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
+		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
+		loginComponentsJPanel.add(new JLabel("Enter Employee Password"));
+		loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
+		loginComponentsJPanel.add(loginBut= new JButton("Login"));
+		loginJPanel.add(loginComponentsJPanel);
+		//add listener for login button
+		LoginButtonHandler handler = new LoginButtonHandler();
+		loginBut.addActionListener(handler);
+		//focus listeners & handlers
+		loginTF.addMouseListener(new MouseAdapter() {
+			 @Override
+			 public void mouseClicked(MouseEvent e) {
+				 loginTF.setText("");
+			}
+		});
+		passwordTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				passwordTF.setText("");
+			}
+		});					
+		
+		logoutComponentsJPanel.setLayout(new GridLayout(4,4));
+		logoutComponentsJPanel.add(new JLabel("Logout of application: "));
+		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
+		logoutJPanel.add(logoutComponentsJPanel);
+		logoutBut.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				// release all tabs - manager
+				loginTF.setText("");
+				passwordTF.setText("");
+				mainJTabbedPane.setSelectedIndex(0);
+				mainJTabbedPane.setEnabledAt(1, false);
+				mainJTabbedPane.setEnabledAt(2, false);
+				mainJTabbedPane.setEnabledAt(3, false);
+				mainJTabbedPane.setEnabledAt(4, false);
+				mainJTabbedPane.setEnabledAt(5, false);
+				mainJTabbedPane.setEnabledAt(6, false);
+				mainJTabbedPane.setEnabledAt(7, false);
+				mainJTabbedPane.setEnabledAt(8, false);
+				mainJTabbedPane.setEnabledAt(0, true);;
+			}
+		});
+		
+		mainJFrame.setTitle("Retail Application");
+		mainJFrame.setBounds(0, 0, 800, 600);
+		mainJFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		mainJFrame.setVisible(true);
+		mainJFrame.add(mainJTabbedPane);
+		
 		mainJTabbedPane.add("Login", loginJPanel);
 		mainJTabbedPane.add("Customer Management", custJTabbedPane);
 		mainJTabbedPane.add("Supplier Management", supplyJTabbedPane);
@@ -1015,67 +1083,6 @@ public class RetailGUI extends JFrame{
 		});
 		//createNewOrderComponents added.
 		//=========================================================================================
-		
-		/*remove comment marks to run login function
-
-		//lock the tabs until login successful
-		mainJTabbedPane.setEnabledAt(1, false);
-		mainJTabbedPane.setEnabledAt(2, false);
-		mainJTabbedPane.setEnabledAt(3, false);
-		mainJTabbedPane.setEnabledAt(4, false);
-		mainJTabbedPane.setEnabledAt(5, false);
-		mainJTabbedPane.setEnabledAt(6, false);
-		mainJTabbedPane.setEnabledAt(7, false);
-		mainJTabbedPane.setEnabledAt(8, false);
-						
-		*/			
-				
-		//add login components
-		loginComponentsJPanel.setLayout(new GridLayout(4,4));
-		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
-		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
-		loginComponentsJPanel.add(new JLabel("Enter Employee Password"));
-		loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
-		loginComponentsJPanel.add(loginBut= new JButton("Login"));
-		loginJPanel.add(loginComponentsJPanel);
-		//add listener for login button
-		LoginButtonHandler handler = new LoginButtonHandler();
-		loginBut.addActionListener(handler);
-		//focus listeners & handlers
-		loginTF.addMouseListener(new MouseAdapter() {
-			 @Override
-			 public void mouseClicked(MouseEvent e) {
-				 loginTF.setText("");
-			}
-		});
-		passwordTF.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				passwordTF.setText("");
-			}
-		});					
-		
-		logoutComponentsJPanel.setLayout(new GridLayout(4,4));
-		logoutComponentsJPanel.add(new JLabel("Logout of application: "));
-		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
-		logoutJPanel.add(logoutComponentsJPanel);
-		logoutBut.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				// release all tabs - manager
-				loginTF.setText("");
-				passwordTF.setText("");
-				mainJTabbedPane.setSelectedIndex(0);
-				mainJTabbedPane.setEnabledAt(1, false);
-				mainJTabbedPane.setEnabledAt(2, false);
-				mainJTabbedPane.setEnabledAt(3, false);
-				mainJTabbedPane.setEnabledAt(4, false);
-				mainJTabbedPane.setEnabledAt(5, false);
-				mainJTabbedPane.setEnabledAt(6, false);
-				mainJTabbedPane.setEnabledAt(7, false);
-				mainJTabbedPane.setEnabledAt(8, false);
-				mainJTabbedPane.setEnabledAt(0, true);;
-			}
-		});
 	
 		//===============================
 		//vIWcUSTOMERiNVOICE fUNCTIONALITY
@@ -1656,12 +1663,6 @@ public class RetailGUI extends JFrame{
 		});
 		
 		//=======================  End
-		
-		mainJFrame.setTitle("Retail Application");
-		mainJFrame.setBounds(0, 0, 800, 600);
-		mainJFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		mainJFrame.setVisible(true);
-		mainJFrame.add(mainJTabbedPane);
 		
 		} //END OF CONSTRUCTOR
 
