@@ -39,6 +39,7 @@ public class Invoice {
 		this.invoiceProducts = invoiceProducts;
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
 		invoiceDate = sdf.format(new Date());
+		totalInvoicePrice = calculateInvoiceTotal();
 	}
 
 	//Methods
