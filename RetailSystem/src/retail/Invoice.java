@@ -144,7 +144,8 @@ public class Invoice {
 					list+="\nItem number " + count+ " of this Invoice \n";
 					list+="-------------------------------";
 					count++;
-					list+="\nProduct Id: " + pds.getProduct().getProductCode() 
+					list+="\nProduct Id: " + pds.getProduct().getProductCode()
+					+"\nProduct Title: " + pds.getProduct().getTitle()
 					+ "\nProduct Price: " +  String.format("€%.2f", pds.getProduct().getRetailPrice())
 					+ "\nQuantity of Order " + pds.getQuantity() 
 					+ "\nTotal of " + pds.getProduct().getProductCode() +" : " + (pds.getQuantity()*pds.getProduct().getRetailPrice()) 
