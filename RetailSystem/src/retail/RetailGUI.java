@@ -1040,6 +1040,7 @@ public class RetailGUI extends JFrame{
 		JButton invButton = new JButton("Invoice ID");	//button
 		gc.gridx = 2;
 		gc.gridy = 1;
+		invButton.setPreferredSize(new Dimension(120, 30));
 		viewCustomerPanel.add(invButton,gc);
 		//Action listener For Button to view Invoice by Id
 		invButton.addActionListener(new ActionListener() {
@@ -1071,6 +1072,7 @@ public class RetailGUI extends JFrame{
 		JButton custIdButton = new JButton("Customer ID");
 		gc.gridx = 2;
 		gc.gridy = 2;
+		custIdButton.setPreferredSize(new Dimension(120, 30));
 		viewCustomerPanel.add(custIdButton,gc);
 		custIdButton.addActionListener(new ActionListener() {
 			//Action listener For Button to view Customer by Id
@@ -1093,8 +1095,9 @@ public class RetailGUI extends JFrame{
 		//Button x3: 	View All/ View Paid/ View UnPaid
 		//1. View all Button
 		JButton viewAllBtn = new JButton("View All");
-		gc.gridx = 0;
+		gc.gridx = 2;
 		gc.gridy = 3;
+		viewAllBtn.setPreferredSize(new Dimension(120, 30));
 		viewCustomerPanel.add(viewAllBtn,gc);
 		viewAllBtn.addActionListener(new ActionListener() {
 			@Override
@@ -1105,8 +1108,9 @@ public class RetailGUI extends JFrame{
 		
 		//2. Paid Button
 		JButton viewPaidBtn = new JButton("View Paid");
-		gc.gridx = 1;
-		gc.gridy = 3;
+		gc.gridx = 3;
+		gc.gridy = 1;
+		viewPaidBtn.setPreferredSize(new Dimension(120, 30));
 		viewCustomerPanel.add(viewPaidBtn,gc);
 		viewPaidBtn.addActionListener(new ActionListener() {
 			
@@ -1125,8 +1129,9 @@ public class RetailGUI extends JFrame{
 				textarea.setText(invoice.viewUnPaidInvoice(invoices));	//viewUnPaidInvoice() is in the invoice class
 			}
 		});
-		gc.gridx = 2;
-		gc.gridy = 3;
+		gc.gridx = 3;
+		gc.gridy = 2;
+		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
 		viewCustomerPanel.add(viewUnpaidBtn,gc);
 	
 		
