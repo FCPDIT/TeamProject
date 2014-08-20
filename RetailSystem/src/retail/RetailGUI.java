@@ -439,26 +439,34 @@ public class RetailGUI extends JFrame{
 		custJButton.addActionListener(new ActionListener(){
 			// function to add a new customer
 			public void actionPerformed(ActionEvent e){
-				Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
+				try{
+					Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
 						custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
 						custPhoneJTextField.getText());
-				customers.add(customer);
-				JOptionPane.showMessageDialog(null, "New Customer Added");			}
-				
+					customers.add(customer);
+					JOptionPane.showMessageDialog(null, "New Customer Added");			
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+				}
+			}	
 		});
 		
 		viewCustJButton.addActionListener(new ActionListener(){
 			// function to view a customer by id or name
 			public void actionPerformed(ActionEvent e){
 			if(customers.size() >= 1){
-					for(Customer customer: customers){
+					try{
+						for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(custById.getText()) || customer.getCustName() == custByName.getText()){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
 									+"\n Customer Name: "+customer.getCustName()
 									+"\n Customer Address: "+customer.getCustAddress()
 									+"\n Customer Email: "+customer.getCustEmail()
 									+"\n Customer Phone: "+customer.getCustTelephone());
+							}
 						}
+					}catch(NumberFormatException nfe){
+						JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 					}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Customers Found");
@@ -470,34 +478,40 @@ public class RetailGUI extends JFrame{
 			// function to view all customers
 			public void actionPerformed(ActionEvent e){
 				custJTextArea.setText(null);
-				if(customers.size() >= 1){
-					for(Customer customer: customers){
-						
-						custJTextArea.append(" Customer Id: "+customer.getCustId()
-									+"\n Customer Name: "+customer.getCustName()
-									+"\n Customer Address: "+customer.getCustAddress()
-									+"\n Customer Email: "+customer.getCustEmail()
-									+"\n Customer Phone: "+customer.getCustTelephone()
-									+"\n");
+				try{
+					if(customers.size() >= 1){
+						for(Customer customer: customers){
+							
+							custJTextArea.append(" Customer Id: "+customer.getCustId()
+										+"\n Customer Name: "+customer.getCustName()
+										+"\n Customer Address: "+customer.getCustAddress()
+										+"\n Customer Email: "+customer.getCustEmail()
+										+"\n Customer Phone: "+customer.getCustTelephone()
+										+"\n");
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, "No Customers Found");
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "No Customers Found");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
 			}
 		});
 		
 		findCustById.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				for(Customer customer: customers){
-					if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
-						editCustId.setText(Integer.toString(customer.getCustId()));
-						editCustName.setText(customer.getCustName());
-						editCustAddress.setText(customer.getCustAddress());
-						editCustEmail.setText(customer.getCustEmail());
-						editCustPhone.setText(customer.getCustTelephone());
-					}else{
-						JOptionPane.showMessageDialog(null, "Customer Not Found");
+				try{
+					for(Customer customer: customers){
+						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+							editCustId.setText(Integer.toString(customer.getCustId()));
+							editCustName.setText(customer.getCustName());
+							editCustAddress.setText(customer.getCustAddress());
+							editCustEmail.setText(customer.getCustEmail());
+							editCustPhone.setText(customer.getCustTelephone());
+						}
 					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
 			}
 		});
@@ -505,16 +519,18 @@ public class RetailGUI extends JFrame{
 		updateCustJButton.addActionListener(new ActionListener(){
 			//update a specific customer
 			public void actionPerformed(ActionEvent e){
-				for(Customer customer: customers){
-					if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
-						customer.setCustId(Integer.parseInt(editCustId.getText()));
-						customer.setCustName(editCustName.getText());
-						customer.setCustAddress(editCustAddress.getText());
-						customer.setCustEmail(editCustEmail.getText());
-						customer.setCustTelephone(editCustPhone.getText());
-					}else{
-						JOptionPane.showMessageDialog(null, "Customer Not Updated.");
+				try{
+					for(Customer customer: customers){
+						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+							customer.setCustId(Integer.parseInt(editCustId.getText()));
+							customer.setCustName(editCustName.getText());
+							customer.setCustAddress(editCustAddress.getText());
+							customer.setCustEmail(editCustEmail.getText());
+							customer.setCustTelephone(editCustPhone.getText());
+						}
 					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
 			}
 		});
@@ -522,12 +538,14 @@ public class RetailGUI extends JFrame{
 		deleteCustJButton.addActionListener(new ActionListener(){
 			//delete function for customer
 			public void actionPerformed(ActionEvent arg){
-				for(Customer customer: customers){
-					if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
-						customers.remove(customer);
-					}else{
-						JOptionPane.showMessageDialog(null, "Customer Not Deleted");
+				try{
+					for(Customer customer: customers){
+						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+							customers.remove(customer);
+						}
 					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
 			}
 		});
@@ -576,31 +594,37 @@ public class RetailGUI extends JFrame{
 		supplierJButton.addActionListener(new ActionListener(){
 			// function to add a new supplier
 			public void actionPerformed(ActionEvent e){
-				Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
-						supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
-				suppliers.add(supplier);
-				JOptionPane.showMessageDialog(null, "New Supplier Added");
+				try{	
+					Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
+							supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
+					suppliers.add(supplier);
+					JOptionPane.showMessageDialog(null, "New Supplier Added");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
+				}
 			}
 		});
 		
 		viewSupplyJButton.addActionListener(new ActionListener(){
 			// function to view a supplier by id or name
 			public void actionPerformed(ActionEvent e){
-				if(suppliers.size() >= 1){
-					for(Supplier supplier: suppliers){
-						if(supplier.getId() == Integer.parseInt(viewSupplyJTextField.getText()) || supplier.getName() == viewSupplyNameJTextField.getText()){
-							supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
-									+"\n Supplier Name: "+supplier.getName()
-									+"\n Supplier Address: "+supplier.getAddress()
-									+"\n Supplier Email: "+supplier.getEmail()
-									+"\n Supplier Phone: "+supplier.getPhone()
-									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
-						}else{
-							JOptionPane.showMessageDialog(null, "Supplier Not Found.");
+				try{
+					if(suppliers.size() >= 1){
+						for(Supplier supplier: suppliers){
+							if(supplier.getId() == Integer.parseInt(viewSupplyJTextField.getText()) || supplier.getName() == viewSupplyNameJTextField.getText()){
+								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
+										+"\n Supplier Name: "+supplier.getName()
+										+"\n Supplier Address: "+supplier.getAddress()
+										+"\n Supplier Email: "+supplier.getEmail()
+										+"\n Supplier Phone: "+supplier.getPhone()
+										+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+							}
 						}
+					}else{
+						JOptionPane.showMessageDialog(null, "No Suppliers Found");
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "No Suppliers Found");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
 			}
 		});
@@ -609,17 +633,21 @@ public class RetailGUI extends JFrame{
 			// view all suppliers
 			public void actionPerformed(ActionEvent e){
 				supplierJTextArea.setText(null);
-				if(suppliers.size() >= 1){
-					for(Supplier supplier: suppliers){
-						supplierJTextArea.append(" Supplier Id: "+supplier.getId()
-								+"\n Supplier Name: "+supplier.getName()
-								+"\n Supplier Address: "+supplier.getAddress()
-								+"\n Supplier Email: "+supplier.getEmail()
-								+"\n Supplier Phone: "+supplier.getPhone()
-								+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+				try{
+					if(suppliers.size() >= 1){
+						for(Supplier supplier: suppliers){
+							supplierJTextArea.append(" Supplier Id: "+supplier.getId()
+									+"\n Supplier Name: "+supplier.getName()
+									+"\n Supplier Address: "+supplier.getAddress()
+									+"\n Supplier Email: "+supplier.getEmail()
+									+"\n Supplier Phone: "+supplier.getPhone()
+									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, "No Suppliers Found");
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "No Suppliers Found");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
 			}
 		});
@@ -627,17 +655,19 @@ public class RetailGUI extends JFrame{
 		editSupplierJButton.addActionListener(new ActionListener(){
 			// retrieve and display supplier for editing
 			public void actionPerformed(ActionEvent e){
-				for(Supplier supplier: suppliers){
-					if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
-						editSupplierId.setText(Integer.toString(supplier.getId()));
-						editSupplierName.setText(supplier.getName());
-						editSupplierAddress.setText(supplier.getAddress());
-						editSupplierEmail.setText(supplier.getEmail());
-						editSupplierPhone.setText(supplier.getPhone());
-						editSupplierDelivery.setText(Integer.toString(supplier.getDaysToDeliver()));
-					}else{
-						JOptionPane.showMessageDialog(null, "Supplier Not Found");
+				try{
+					for(Supplier supplier: suppliers){
+						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+							editSupplierId.setText(Integer.toString(supplier.getId()));
+							editSupplierName.setText(supplier.getName());
+							editSupplierAddress.setText(supplier.getAddress());
+							editSupplierEmail.setText(supplier.getEmail());
+							editSupplierPhone.setText(supplier.getPhone());
+							editSupplierDelivery.setText(Integer.toString(supplier.getDaysToDeliver()));
+						}
 					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
 			}
 		});
@@ -645,17 +675,19 @@ public class RetailGUI extends JFrame{
 		saveSupplierJButton.addActionListener(new ActionListener(){
 			//function to update supplier
 			public void actionPerformed(ActionEvent e){
-				for(Supplier supplier: suppliers){
-					if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
-						supplier.setId(Integer.parseInt(editSupplierId.getText()));
-						supplier.setName(editSupplierName.getText());
-						supplier.setAddress(editSupplierAddress.getText());
-						supplier.setEmail(editSupplierEmail.getText());
-						supplier.setPhone(editSupplierPhone.getText());
-						supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
-					}else{
-						JOptionPane.showMessageDialog(null, "Supplier Not Updated.");
+				try{
+					for(Supplier supplier: suppliers){
+						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+							supplier.setId(Integer.parseInt(editSupplierId.getText()));
+							supplier.setName(editSupplierName.getText());
+							supplier.setAddress(editSupplierAddress.getText());
+							supplier.setEmail(editSupplierEmail.getText());
+							supplier.setPhone(editSupplierPhone.getText());
+							supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
+						}
 					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
 			}
 			
@@ -664,12 +696,14 @@ public class RetailGUI extends JFrame{
 		deleteSupplierJButton.addActionListener(new ActionListener(){
 			// function to delete supplier by getting id from the supplier id label
 			public void actionPerformed(ActionEvent arg){
-				for(Supplier supplier: suppliers){
-					if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
-						suppliers.remove(supplier);
-					}else{
-						JOptionPane.showMessageDialog(null, "Supplier Not Deleted");
+				try{
+					for(Supplier supplier: suppliers){
+						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+							suppliers.remove(supplier);
+						}
 					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
 			}
 		});
@@ -731,21 +765,23 @@ public class RetailGUI extends JFrame{
 		productJButton.addActionListener(new ActionListener(){
 			//function to create a product
 			public void actionPerformed(ActionEvent e){
-				if(suppliers.size() >= 1){
-					for(Supplier supplier: suppliers){
-						if(supplier.getId() ==Integer.parseInt(prodSupplierIdJTextField.getText())){
-							Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
-									codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
-									Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
-									Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
-									);
-							products.add(product);
-						}else{
-							JOptionPane.showMessageDialog(null,"Supplier Not Found");
+				try{
+					if(suppliers.size() >= 1){
+						for(Supplier supplier: suppliers){
+							if(supplier.getId() ==Integer.parseInt(prodSupplierIdJTextField.getText())){
+								Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
+										codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
+										Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
+										Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
+										);
+								products.add(product);
+							}
 						}
+					}else{
+						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
 			}
 		});
