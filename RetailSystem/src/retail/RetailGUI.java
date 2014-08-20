@@ -1274,7 +1274,7 @@ public class RetailGUI extends JFrame{
 						addMoreArrayList.add(invProd);
 						
 						for(InvoiceProduct prod : addMoreArrayList){
-						message += "Product No: " + prod.getProduct().getProductCode() +"\nQuantity: " + prod.getQuantity() + "\n";
+						message += "Product No: " + prod.getProduct().getProductCode() +"\nQuantity: " + prod.getQuantity() + "\n\n";
 						}
 						textAreaMarc.setText(message);
 						message = "";
