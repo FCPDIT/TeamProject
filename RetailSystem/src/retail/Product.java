@@ -2,6 +2,8 @@ package retail;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class Product {
 	private String title;
 	private String author;
@@ -177,22 +179,17 @@ public class Product {
 		}
 	}
 	
-	public void addStockById (String productCode, int quantityToAdd, ArrayList<Product> products){
-		for (Product p : products) {
-			if (productCode == p.getProductCode()){ 
-			p.setCurrentStock(quantityToAdd+p.getCurrentStock());
-			}
-		}
-		
-	}
 	
 	public void removeStockById (String productCode, ArrayList<Product> products){
 		for (Product p : products) {
-			if (productCode == p.getProductCode()) {
+			if (productCode.equals(p.getProductCode())) {
 
-				products.remove(p); //not sure if this is the best way to remove a 
+				products.remove(p);
+				              //not sure if this is the best way to remove a 
 									//stockline but might be ok for this project..
-			}
+			}/*else{
+				JOptionPane.showMessageDialog(null, "Product not deleted.");
+			}*/
 		}
 	}
 	

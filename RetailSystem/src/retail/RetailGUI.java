@@ -66,12 +66,12 @@ public class RetailGUI extends JFrame{
 	private JPanel editSupplyJPanel = new JPanel();
 	
 	private JPanel addProductJPanel = new JPanel();
-	//private JPanel viewProductJPanel = new ViewProductDetailsPanel();
+	private JPanel viewProductJPanel = new ViewProductDetailsPanel();
 	private JPanel viewProductDetailsJPanel = new JPanel();
 	private JPanel editProductJPanel = new JPanel();
-	private JPanel searchByRetailJPanel = new JPanel();
-	private JPanel viewProductByQuantityJPanel = new JPanel();
-	private JPanel AddRemoveStockJPanel = new JPanel();
+	
+	
+	
 	
 	private JPanel createInvJPanel = new CreateANewInvoicePanel();
 	//private JPanel createInvJPanel = new JPanel();
@@ -177,16 +177,35 @@ public class RetailGUI extends JFrame{
 	private JTextField prodSupplierIdJTextField = new JTextField();
 	private JButton productJButton = new JButton("Create New Product");
 	
+	//edit product components
+	private JLabel editDetails = new JLabel ("Product code");
+	private JTextField enterProdCodeJTextField = new JTextField();
+	private JButton editDetailsJButton = new JButton("Select product to edit");
+	private JLabel editProdTitle = new JLabel("Book Title");
+	private JTextField editTitleJTextField = new JTextField();
+	private JLabel editProdAuthor = new JLabel("Author");
+	private JTextField editAuthorJTextField = new JTextField();
+	private JLabel editProdCode = new JLabel("Book Code");
+	private JTextField editCodeJTextField = new JTextField();
+	private JLabel editProdRetail = new JLabel("Retail Price");
+	private JTextField editRetailJTextField = new JTextField();
+	private JLabel editProdCost = new JLabel("Cost Price");
+	private JTextField editCostJTextField = new JTextField();
+	private JLabel editProdTotalStock = new JLabel("Total Stock");
+	private JTextField editStockJTextField = new JTextField();
+	private JLabel editProdMaxStock = new JLabel("Maximum Stock");
+	private JTextField editMaxJTextField = new JTextField();
+	private JLabel editProdMinStock = new JLabel("Minimum Stock");
+	private JTextField editMinJTextField = new JTextField();
+	private JLabel editProdSupplierId = new JLabel("Supplier Id");
+	private JTextField editProdSupplierIdJTextField = new JTextField();
+	private JButton updateProductJButton = new JButton("Update details");
+	private JButton deleteStockLineJButton = new JButton("Delete stock line");
+	
 	private JRadioButton under5Radio = new JRadioButton("under 4.99");
 	private JRadioButton fiveTo10Radio = new JRadioButton("5 - 9.99");
 	private JRadioButton tenTo20Radio = new JRadioButton("10 - 20");
 	private JRadioButton over20Radio = new JRadioButton("20 plus");
-	private JLabel searchByRetail = new JLabel("Search by retail price range");
-	private JButton searchByRetailButton = new JButton("Search");
-	private JButton searchByQuantityButton = new JButton("Search");
-	private JTextArea priceTextArea = new JTextArea(20, 60);
-	private JTextArea quantityTextArea = new JTextArea(20,60);
-	private JLabel searchByQuantity = new JLabel("Search by stock quantity");
 	private JRadioButton under50Radio = new JRadioButton("under 50");
 	private JRadioButton fiftyTo100Radio = new JRadioButton("50 - 100");
 	private JRadioButton hundredTo200Radio = new JRadioButton("100 - 200");
@@ -258,6 +277,7 @@ public class RetailGUI extends JFrame{
 		products.add(new Product("Game of Thrones", "George R.R Martin", "1", 9.99, 3.75,100,200,15, suppliers.get(0)));
 		products.add(new Product("Not a Drill", "Lee Child", "2", 12.75, 4.95,221,200,10, suppliers.get(1)));
 		products.add(new Product("Harry Potter", "j.k rowling", "3", 11.99, 2.95,9,100,10,suppliers.get(0)));
+		
 		//add some test invoices to array list
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), products.get(0), 10));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), products.get(1), 20));
@@ -290,9 +310,9 @@ public class RetailGUI extends JFrame{
 		prodJTabbedPane.add("Create New Product",addProductJPanel);
 		prodJTabbedPane.add("View Product Details", viewProductDetailsPanel);
 		prodJTabbedPane.add("Edit Product Details", editProductJPanel);
-		prodJTabbedPane.add("Search by retail price", searchByRetailJPanel);
-		prodJTabbedPane.add("Search by quantity", viewProductByQuantityJPanel);
-		prodJTabbedPane.add("Add/remove stock", AddRemoveStockJPanel);
+		
+		
+		
 		
 		
 		invJTabbedPane.add("Create New Invoice", createInvJPanel);
@@ -592,13 +612,32 @@ public class RetailGUI extends JFrame{
 		addProductJPanel.add(prodSupplierIdJTextField);
 		addProductJPanel.add(productJButton);
 		
-		searchByRetailJPanel.add(searchByRetail);
-		searchByRetailJPanel.add(under5Radio);
-		searchByRetailJPanel.add(fiveTo10Radio);
-		searchByRetailJPanel.add(tenTo20Radio);
-		searchByRetailJPanel.add(over20Radio);
-		searchByRetailJPanel.add(searchByRetailButton);
-		searchByRetailJPanel.add(priceTextArea);
+		editProductJPanel.setLayout(grid);
+		editProductJPanel.add(editDetails);
+		editProductJPanel.add(enterProdCodeJTextField);
+		editProductJPanel.add(editDetailsJButton);		
+		editProductJPanel.add(editProdTitle);
+		editProductJPanel.add(editTitleJTextField);
+		editProductJPanel.add(editProdAuthor);
+		editProductJPanel.add(editAuthorJTextField);
+		editProductJPanel.add(editProdCode);
+		editProductJPanel.add(editCodeJTextField);
+		editProductJPanel.add(editProdRetail);
+		editProductJPanel.add(editRetailJTextField);
+		editProductJPanel.add(editProdCost);
+		editProductJPanel.add(editCostJTextField);
+		editProductJPanel.add(editProdTotalStock);
+		editProductJPanel.add(editStockJTextField);
+		editProductJPanel.add(editProdMaxStock);
+		editProductJPanel.add(editMaxJTextField);
+		editProductJPanel.add(editProdMinStock);
+		editProductJPanel.add(editMinJTextField);
+		editProductJPanel.add(editProdSupplierId);
+		editProductJPanel.add(editProdSupplierIdJTextField);
+		editProductJPanel.add(updateProductJButton);
+		editProductJPanel.add(deleteStockLineJButton);
+		
+		
 		
 		ButtonGroup priceRange = new ButtonGroup();
 		priceRange.add(under5Radio);
@@ -607,13 +646,7 @@ public class RetailGUI extends JFrame{
 		priceRange.add(over20Radio);
 		
 		
-		viewProductByQuantityJPanel.add(searchByQuantity);
-		viewProductByQuantityJPanel.add(under50Radio);
-		viewProductByQuantityJPanel.add(fiftyTo100Radio);
-		viewProductByQuantityJPanel.add(hundredTo200Radio);
-		viewProductByQuantityJPanel.add(over200Radio);
-		viewProductByQuantityJPanel.add(searchByQuantityButton);
-		viewProductByQuantityJPanel.add(quantityTextArea);
+
 		
 		
 		ButtonGroup quantity = new ButtonGroup();
@@ -1116,7 +1149,143 @@ public class RetailGUI extends JFrame{
 										productAuthorTextField.setText("");
 									}
 								});
-						
+								
+							// Button 7: search all stock by retail price range
+								JButton searchByRetail = new JButton ("Search by retail");
+								gc.gridx = 0;
+								gc.gridy = 4;
+								viewProductDetails.add(searchByRetail,gc);
+								searchByRetail.setPreferredSize(new Dimension(155,20));
+								gc.gridx = 1;
+								gc.gridy = 4;
+								viewProductDetails.add(under5Radio,gc);
+								gc.gridx = 2;
+								gc.gridy = 4;
+								viewProductDetails.add(fiveTo10Radio,gc);
+								gc.gridx = 3;
+								gc.gridy = 4;
+								viewProductDetails.add(tenTo20Radio,gc);
+								gc.gridx = 4;
+								gc.gridy = 4;
+								viewProductDetails.add(over20Radio,gc);
+								searchByRetail.addActionListener(new ActionListener(){
+									public void actionPerformed(ActionEvent e) {
+										if (under5Radio.isSelected()) {
+											productTextArea.setText(product.viewProductbyRetailPrice(0.01, 4.99, products));
+											priceRange.clearSelection();
+										}
+										if (fiveTo10Radio.isSelected()){
+											productTextArea.setText(product.viewProductbyRetailPrice(5,10, products));
+											priceRange.clearSelection();
+										}
+										
+										if (tenTo20Radio.isSelected()){
+											productTextArea.setText(product.viewProductbyRetailPrice(10.01, 20, products));
+											priceRange.clearSelection();
+										}
+										
+										if (over20Radio.isSelected()){
+											productTextArea.setText(product.viewProductbyRetailPrice(20.01, 100, products));
+											priceRange.clearSelection();
+										}
+									}
+								});
+								
+								//Button 8: to search stock by quantity range
+								JButton searchByQuantity = new JButton ("Search by quantity");
+								gc.gridx = 0;
+								gc.gridy = 5;
+								viewProductDetails.add(searchByQuantity,gc);
+								searchByQuantity.setPreferredSize(new Dimension(155,20));
+								gc.gridx = 1;
+								gc.gridy = 5;
+								viewProductDetails.add(under50Radio,gc);
+								gc.gridx = 2;
+								gc.gridy = 5;
+								viewProductDetails.add(fiftyTo100Radio,gc);
+								gc.gridx = 3;
+								gc.gridy = 5;
+								viewProductDetails.add(hundredTo200Radio,gc);
+								gc.gridx = 4;
+								gc.gridy = 5;
+								viewProductDetails.add(over200Radio,gc);
+							
+								searchByQuantity.addActionListener(new ActionListener(){
+									public void actionPerformed(ActionEvent e) {
+										if (under50Radio.isSelected()) {
+											productTextArea.setText(product.viewProductbyQuantity(1, 50, products));
+											quantity.clearSelection();
+										}
+										if (fiftyTo100Radio.isSelected()){
+											productTextArea.setText(product.viewProductbyQuantity(51,100, products));
+											quantity.clearSelection();
+										}
+										
+										if (hundredTo200Radio.isSelected()){
+											productTextArea.setText(product.viewProductbyQuantity(101, 200, products));
+											quantity.clearSelection();
+										}
+										
+										if (over200Radio.isSelected()){
+											productTextArea.setText(product.viewProductbyQuantity(200, 500, products));
+											quantity.clearSelection();
+										}
+									}
+								});
+								
+								
+								editDetailsJButton.addActionListener(new ActionListener(){
+									public void actionPerformed(ActionEvent e){
+										for(Product product: products){
+											if(product.getProductCode().equals(enterProdCodeJTextField.getText())){
+												editCodeJTextField.setText(product.getProductCode());
+												editAuthorJTextField.setText(product.getAuthor());
+												editTitleJTextField.setText(product.getTitle());
+												editRetailJTextField.setText(Double.toString(product.getRetailPrice()));
+												editCostJTextField.setText(Double.toString(product.getCostPrice()));
+												editStockJTextField.setText(Integer.toString(product.getCurrentStock()));
+												editMaxJTextField.setText(Integer.toString(product.getMaxStock()));
+												editMinJTextField.setText(Integer.toString(product.getMinStock()));
+												editProdSupplierIdJTextField.setText(Integer.toString(product.getSupplier().getId()));											
+																							
+											}/*else{
+												enterProdCodeJTextField.setText("");
+												JOptionPane.showMessageDialog(null, "Product Not Found");
+										}*/
+										}
+									}
+								});
+								
+								// to update product details
+								updateProductJButton.addActionListener(new ActionListener(){
+									public void actionPerformed(ActionEvent e){
+										for (Product product: products){
+											if(product.getProductCode().equals(enterProdCodeJTextField.getText())){
+												product.setProductCode(editCodeJTextField.getText());
+												product.setAuthor(editAuthorJTextField.getText());
+												product.setTitle(editTitleJTextField.getText());
+												product.setRetailPrice(Double.parseDouble(editRetailJTextField.getText()));
+												product.setCostPrice(Double.parseDouble(editCostJTextField.getText()));
+												product.setCurrentStock(Integer.parseInt(editStockJTextField.getText()));
+												product.setMaxStock(Integer.parseInt(editMaxJTextField.getText()));
+												product.setMinStock(Integer.parseInt(editMaxJTextField.getText()));	
+												JOptionPane.showMessageDialog(null, "Product updated");
+												
+											}
+										}
+									}
+								});
+								
+								// to delete stockline from system
+								deleteStockLineJButton.addActionListener(new ActionListener(){
+									public void actionPerformed(ActionEvent e){
+										String code = enterProdCodeJTextField.getText();									
+										product.removeStockById(code,products);
+										JOptionPane.showMessageDialog(null, "Stockline deleted");
+										
+									}
+								});
+														
 						//=======================  End
 						
 						
