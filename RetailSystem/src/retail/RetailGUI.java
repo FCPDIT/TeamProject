@@ -345,12 +345,6 @@ public class RetailGUI extends JFrame{
 		//add some test invoices to array list
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), products.get(0), 10));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), products.get(1), 20));
-
-		mainJFrame.setTitle("Retail Application");
-		mainJFrame.setBounds(0, 0, 800, 600);
-		mainJFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		mainJFrame.setVisible(true);
-		mainJFrame.add(mainJTabbedPane);
 		
 		mainJTabbedPane.add("Login", loginJPanel);
 		mainJTabbedPane.add("Customer Management", custJTabbedPane);
@@ -1627,6 +1621,11 @@ public class RetailGUI extends JFrame{
 		
 		//=======================  End
 		
+		mainJFrame.setTitle("Retail Application");
+		mainJFrame.setBounds(0, 0, 800, 600);
+		mainJFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		mainJFrame.setVisible(true);
+		mainJFrame.add(mainJTabbedPane);
 		
 		} //END OF CONSTRUCTOR
 
