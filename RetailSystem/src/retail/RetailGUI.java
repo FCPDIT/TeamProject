@@ -677,7 +677,7 @@ public class RetailGUI extends JFrame{
 				if(suppliers.size() >= 1){
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() ==Integer.parseInt(prodSupplierIdJTextField.getText())){
-							Product product = new Product(titleJTextField.getText(),authorJTextField.getText(),
+							Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
 									codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
 									Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
 									Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
