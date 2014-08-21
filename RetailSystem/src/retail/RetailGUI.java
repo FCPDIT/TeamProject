@@ -85,6 +85,8 @@ public class RetailGUI extends JFrame{
 	
 	private JPanel createOrderPanel = new JPanel();
 	private JPanel viewOrderJPanel = new JPanel();
+	private JPanel viewOrderLeftJPanel = new JPanel();
+	private JPanel viewOrderRightJPanel = new JPanel();
 	
 	private JPanel accessJPanel = new JPanel();
 	
@@ -262,44 +264,44 @@ public class RetailGUI extends JFrame{
 	//==========================================
 	
 	//=========================================
-			//Marc: Create a new Invoice Panel
-				
-				//Panel
-				private JPanel createNewInvoicePanel = new JPanel();
-				
-			//Components
-				//variables
-				//private Invoice invoice = new Invoice();
-				private ArrayList<InvoiceProduct> addMoreArrayList = new ArrayList<InvoiceProduct>();
-				private String message = "";
-				private String outputMessage="";
-				//Panels
-				private JTextArea textAreaMarc = new JTextArea();
-				private JPanel leftPanel = new JPanel();
-				private JPanel rightPanel = new JPanel();
-				
-				//Labels for left panel
-				private JLabel invIdLbl = new JLabel("Invoice Id: ");
-				private JLabel employLbl = new JLabel("Employee ID: ");
-				private JLabel custId = new JLabel("Customer ID: ");
-				private JLabel prodId = new JLabel("Product ID: ");
-				private JLabel quantitylbl = new JLabel("Quantity: ");
-				
-				//JText Fields for left panel
-				private JTextField invTextF = new JTextField(10);
-				private JTextField employTextF = new JTextField(10);
-				private JTextField custTextF = new JTextField(10);
-				private JTextField prodTextF = new JTextField(10);
-				private JTextField quantityTextF = new JTextField(10);
-				
-				//4 Buttons for left Panel
-				/*private JButton singleBtn = new JButton("Single Invoice");
-				private JButton multiBtn = new JButton("Multipe Invoice");*/
-				private JButton addMoreBtn = new JButton("Add More");
-				private JButton finishBtn = new JButton("Finished");
-				private JButton resetBtn = new JButton("Reset");
-			//End Of Marc: Create a new Invoice Panel
-			//=========================================
+	//Marc: Create a new Invoice Panel
+	
+	//Panel
+	private JPanel createNewInvoicePanel = new JPanel();
+	
+	//Components
+	//variables
+	//private Invoice invoice = new Invoice();
+	private ArrayList<InvoiceProduct> addMoreArrayList = new ArrayList<InvoiceProduct>();
+	private String message = "";
+	private String outputMessage="";
+	//Panels
+	private JTextArea textAreaMarc = new JTextArea();
+	private JPanel leftPanel = new JPanel();
+	private JPanel rightPanel = new JPanel();
+	
+	//Labels for left panel
+	private JLabel invIdLbl = new JLabel("Invoice Id: ");
+	private JLabel employLbl = new JLabel("Employee ID: ");
+	private JLabel custId = new JLabel("Customer ID: ");
+	private JLabel prodId = new JLabel("Product ID: ");
+	private JLabel quantitylbl = new JLabel("Quantity: ");
+	
+	//JText Fields for left panel
+	private JTextField invTextF = new JTextField(10);
+	private JTextField employTextF = new JTextField(10);
+	private JTextField custTextF = new JTextField(10);
+	private JTextField prodTextF = new JTextField(10);
+	private JTextField quantityTextF = new JTextField(10);
+	
+	//4 Buttons for left Panel
+	/*private JButton singleBtn = new JButton("Single Invoice");
+	private JButton multiBtn = new JButton("Multipe Invoice");*/
+	private JButton addMoreBtn = new JButton("Add More");
+	private JButton finishBtn = new JButton("Finished");
+	private JButton resetBtn = new JButton("Reset");
+	//End Of Marc: Create a new Invoice Panel
+	//=========================================
 	
 	
 	//==================================
@@ -316,6 +318,8 @@ public class RetailGUI extends JFrame{
 	//JTextFields
 	private JTextField orderIdTextField = new JTextField(10);
 	private JTextField supplierIdTextField = new JTextField(10);
+	private JTextField titleTextField = new JTextField(10);
+	private JTextField authorTextField = new JTextField(10);
 	private JTextField productCodeTextField = new JTextField(10);
 	private JTextField quantityTextField = new JTextField(10);
 	//JButtons
@@ -331,6 +335,10 @@ public class RetailGUI extends JFrame{
 	private JButton orderIdButton = new JButton("Find order with this ID");	
 	private JLabel viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
 	private JButton supplierIdButton = new JButton("Find order with this Supplier");
+	private JLabel viewOrderTitleLabel = new JLabel("Title: ");
+	private JButton titleButton = new JButton("Find order containing a product with this title");	
+	private JLabel viewOrderAuthorLabel = new JLabel("Author: ");
+	private JButton authorButton = new JButton("Find order containing a product by this author");	
 	private JTextArea viewOrderTextArea;
 	//=========================================================================
 	
@@ -352,6 +360,9 @@ public class RetailGUI extends JFrame{
 		//add some test invoices to array list
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), products.get(0), 10));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), products.get(1), 20));
+		//add some test orders to array list
+		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
+		orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
 		
 		
 		/*remove comment marks to run login function
@@ -416,7 +427,8 @@ public class RetailGUI extends JFrame{
 		});
 		
 		mainJFrame.setTitle("Retail Application");
-		mainJFrame.setBounds(0, 0, 800, 600);
+		//mainJFrame.setBounds(0, 0, 800, 600);
+		mainJFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		mainJFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mainJFrame.setVisible(true);
 		mainJFrame.add(mainJTabbedPane);
@@ -1092,13 +1104,15 @@ public class RetailGUI extends JFrame{
 		viewOrderJPanel.setPreferredSize(size1);
 		viewOrderJPanel.setBorder(BorderFactory.createTitledBorder("Order details"));
 		//====
-		setLayout(new GridBagLayout());
+		viewOrderLeftJPanel.setLayout(new GridBagLayout());
+		viewOrderRightJPanel.setLayout(new GridBagLayout());
+		viewOrderJPanel.setLayout(new GridLayout(1, 1));
 		GridBagConstraints viewOrderGC = new GridBagConstraints();
 		viewOrderGC.insets = new Insets(5,5,5,5);
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 1;
-		viewOrderJPanel.add(viewAllOrdersButton, viewOrderGC);
+		viewOrderLeftJPanel.add(viewAllOrdersButton, viewOrderGC);
 		viewAllOrdersButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1108,7 +1122,7 @@ public class RetailGUI extends JFrame{
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 2;
-		viewOrderJPanel.add(viewDeliveredButton, viewOrderGC);
+		viewOrderLeftJPanel.add(viewDeliveredButton, viewOrderGC);
 		viewDeliveredButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1118,7 +1132,7 @@ public class RetailGUI extends JFrame{
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 3;
-		viewOrderJPanel.add(viewUndeliveredButton, viewOrderGC);
+		viewOrderLeftJPanel.add(viewUndeliveredButton, viewOrderGC);
 		viewUndeliveredButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1128,14 +1142,14 @@ public class RetailGUI extends JFrame{
 		//====
 		viewOrderGC.gridx = 1;
 		viewOrderGC.gridy = 1;
-		viewOrderJPanel.add(viewOrderOrderIdLabel, viewOrderGC);
+		viewOrderLeftJPanel.add(viewOrderOrderIdLabel, viewOrderGC);
 		orderIdTextField = new JTextField(10); 
-		viewOrderGC.gridx = 1;
-		viewOrderGC.gridy = 2;
-		viewOrderJPanel.add(orderIdTextField, viewOrderGC);
-		viewOrderGC.gridx = 1;
-		viewOrderGC.gridy = 3;
-		viewOrderJPanel.add(orderIdButton, viewOrderGC);
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 1;
+		viewOrderLeftJPanel.add(orderIdTextField, viewOrderGC);
+		viewOrderGC.gridx = 3;
+		viewOrderGC.gridy = 1;
+		viewOrderLeftJPanel.add(orderIdButton, viewOrderGC);
 		orderIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1153,16 +1167,15 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//====
-		viewOrderGC.gridx = 2;
-		viewOrderGC.gridy = 1;
-		viewOrderJPanel.add(viewOrderSupplierIdLabel,viewOrderGC);
-		supplierIdTextField = new JTextField(10);
+		viewOrderGC.gridx = 1;
+		viewOrderGC.gridy = 2;
+		viewOrderLeftJPanel.add(viewOrderSupplierIdLabel,viewOrderGC);
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 2;
-		viewOrderJPanel.add(supplierIdTextField,viewOrderGC);
-		viewOrderGC.gridx = 2;
-		viewOrderGC.gridy = 3;
-		viewOrderJPanel.add(supplierIdButton,viewOrderGC);
+		viewOrderLeftJPanel.add(supplierIdTextField,viewOrderGC);
+		viewOrderGC.gridx = 3;
+		viewOrderGC.gridy = 2;
+		viewOrderLeftJPanel.add(supplierIdButton,viewOrderGC);
 		supplierIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1180,6 +1193,56 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//====
+		viewOrderGC.gridx = 1;
+		viewOrderGC.gridy = 3;
+		viewOrderLeftJPanel.add(viewOrderTitleLabel, viewOrderGC);
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 3;
+		viewOrderLeftJPanel.add(titleTextField, viewOrderGC);
+		viewOrderGC.gridx = 3;
+		viewOrderGC.gridy = 3;
+		viewOrderLeftJPanel.add(titleButton, viewOrderGC);
+		titleButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = titleTextField.getText();
+				if(input.trim().equals("")){ 
+					viewOrderTextArea.setText("Please enter a title");
+					titleTextField.setText("");
+					orderIdTextField.setText("");
+				}else{
+					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));	
+					titleTextField.setText("");
+					orderIdTextField.setText("");
+				}
+			}
+		});
+		//====
+		viewOrderGC.gridx = 1;
+		viewOrderGC.gridy = 4;
+		viewOrderLeftJPanel.add(viewOrderAuthorLabel,viewOrderGC);
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 4;
+		viewOrderLeftJPanel.add(authorTextField,viewOrderGC);
+		viewOrderGC.gridx = 3;
+		viewOrderGC.gridy = 4;
+		viewOrderLeftJPanel.add(authorButton,viewOrderGC);
+		authorButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = authorTextField.getText();
+				if(input.trim().equals("")){ 
+					viewOrderTextArea.setText("Please enter an author's name");
+					authorTextField.setText("");
+					orderIdTextField.setText("");
+				}else{
+					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));	
+					authorTextField.setText("");
+					orderIdTextField.setText("");
+				}
+			}
+		});
+		//====
 		viewOrderTextArea = new JTextArea(20, 20); //height - width
 		viewOrderTextArea.setEditable(false);
 		JScrollPane viewOrderScrollPane = new JScrollPane(viewOrderTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -1187,8 +1250,13 @@ public class RetailGUI extends JFrame{
         viewOrderGC.fill = GridBagConstraints.BOTH;
         viewOrderGC.weightx = 1.0;
         viewOrderGC.weighty = 1.0;
-        viewOrderGC.gridx = 4;
-        viewOrderJPanel.add(viewOrderScrollPane, viewOrderGC);
+        viewOrderGC.gridx = 0;
+        viewOrderGC.gridy = 0;
+        viewOrderRightJPanel.add(viewOrderScrollPane, viewOrderGC);
+        viewOrderJPanel.add(viewOrderLeftJPanel, viewOrderGC);
+        viewOrderGC.gridx = 1;
+        viewOrderGC.gridy = 0;
+        viewOrderJPanel.add(viewOrderRightJPanel);
 		//=========================================================================================
 	
 		//===============================
@@ -1395,7 +1463,7 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 5;
 		addMoreBtn.setPreferredSize(new Dimension(120, 30)); //width/height
 		leftPanel.add(addMoreBtn,gc);
-//AddMoreBtn Event Listener
+		//AddMoreBtn Event Listener
 		addMoreBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -1434,13 +1502,13 @@ public class RetailGUI extends JFrame{
 				
 			}
 		});
-//End of AddMoreBtnEventListener		
+		//End of AddMoreBtnEventListener		
 		//=====
 		gc.gridx = 1;
 		gc.gridy = 6;
 		finishBtn.setPreferredSize(new Dimension(120, 30));
 		leftPanel.add(finishBtn,gc);
-//finishBtn eventListener
+		//finishBtn eventListener
 		finishBtn.addActionListener(new ActionListener() {
 			
 			@Override
