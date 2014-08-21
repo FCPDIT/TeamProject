@@ -334,32 +334,27 @@ public class RetailGUI extends JFrame{
 	//==================================
 	//createNewOrder Panel components
 	Order baseOrder;
-	//Panels
+	ArrayList<OrderProduct> addMoreProducts = new ArrayList<OrderProduct>();
+	String result = "";
 	private JPanel createNewOrderLeftPanel = new JPanel();
 	private JPanel createNewOrderRightPanel = new JPanel();
-	//Labels
-	private JLabel orderIdLabel = new JLabel("Order ID: ");
-	private JLabel supplierIdLabel = new JLabel("Supplier ID: ");
-	private JLabel productCodeLabel = new JLabel("Product ID: ");
-	private JLabel quantityLabel = new JLabel("Quantity: ");
-	//JTextFields
-	private JTextField viewOrderIdTextField = new JTextField(10);
-	private JTextField supplierIdTextField = new JTextField(10);
-	private JTextField titleTextField = new JTextField(10);
-	private JTextField authorTextField = new JTextField(10);
-	private JTextField productCodeTextField = new JTextField(10);
-	private JTextField quantityTextField = new JTextField(10);
-	//JButtons
-	private JButton addProductButton =  new JButton("Add Product to Order");
-	private JButton confirmOrderButton = new JButton("Confirm Order");
-	//JTextArea
-	private JTextArea textArea = new JTextArea();
-	//viewOrder Panel components
-	private JButton viewAllOrdersButton = new JButton("View All");
-	private JButton viewDeliveredButton = new JButton("View Delivered Orders");
-	private JButton viewUndeliveredButton = new JButton("View Undelivered Order");
+	private JLabel createOrderOrderIdLabel = new JLabel("Order ID: ");
+	private JLabel createOrderSupplierIdLabel = new JLabel("Supplier ID: ");
+	private JLabel createOrderProductCodeLabel = new JLabel("Product ID: ");
+	private JLabel createOrderQuantityLabel = new JLabel("Quantity: ");
+	private JTextField createOrderOrderIdTextField = new JTextField(10);
+	private JTextField createOrderSupplierIdTextField = new JTextField(10);
+	private JTextField createOrderProductCodeTextField = new JTextField(10);
+	private JTextField createOrderQuantityTextField = new JTextField(10);
+	private JButton createOrderAddProductButton =  new JButton("Add Product to Order");
+	private JButton createOrderConfirmOrderButton = new JButton("Confirm Order");
+	private JTextArea createOrderScrollPaneTextArea = new JTextArea();
+	//=====
+	private JButton viewOrderViewAllOrdersButton = new JButton("View All");
+	private JButton viewOrderViewDeliveredButton = new JButton("View Delivered Orders");
+	private JButton viewOrderViewUndeliveredButton = new JButton("View Undelivered Order");
 	private JLabel viewOrderOrderIdLabel = new JLabel("Order ID: ");
-	private JButton viewOrderIdButton = new JButton("Find order with this ID");	
+	private JButton viewOrderOrderIdButton = new JButton("Find order with this ID");	
 	private JLabel viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
 	private JButton viewOrderSupplierIdButton = new JButton("Find order with this Supplier");
 	private JLabel viewOrderTitleLabel = new JLabel("Title: ");
@@ -367,6 +362,12 @@ public class RetailGUI extends JFrame{
 	private JLabel viewOrderAuthorLabel = new JLabel("Author: ");
 	private JButton viewOrderAuthorButton = new JButton("Find order containing a product by this author");	
 	private JTextArea viewOrderTextArea;
+	private JTextField viewOrderOrderIdTextField = new JTextField(10);
+	private JTextField viewOrderSupplierIdTextField = new JTextField(10);
+	private JTextField viewOrderTitleTextField = new JTextField(10);
+	private JTextField viewOrderAuthorTextField = new JTextField(10);
+	private JTextField viewOrderProductCodeTextField = new JTextField(10);
+	private JTextField viewOrderQuantityTextField = new JTextField(10);
 	//=========================================================================
 	
 	public RetailGUI() {
@@ -1011,43 +1012,43 @@ public class RetailGUI extends JFrame{
 		//=====
 		orderGC.gridx = 0;
 		orderGC.gridy = 0;
-		createNewOrderLeftPanel.add(orderIdLabel,orderGC);
+		createNewOrderLeftPanel.add(createOrderOrderIdLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 0;
-		createNewOrderLeftPanel.add(viewOrderIdTextField,orderGC);
+		createNewOrderLeftPanel.add(createOrderOrderIdTextField,orderGC);
 		//=====
 		orderGC.gridx = 0;
 		orderGC.gridy = 1;
-		createNewOrderLeftPanel.add(supplierIdLabel,orderGC);
+		createNewOrderLeftPanel.add(createOrderSupplierIdLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 1;
-		createNewOrderLeftPanel.add(supplierIdTextField,orderGC);
+		createNewOrderLeftPanel.add(createOrderSupplierIdTextField,orderGC);
 		//=====
 		orderGC.gridx = 0;
 		orderGC.gridy = 2;
-		createNewOrderLeftPanel.add(productCodeLabel,orderGC);
+		createNewOrderLeftPanel.add(createOrderProductCodeLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 2;
-		createNewOrderLeftPanel.add(productCodeTextField,orderGC);
+		createNewOrderLeftPanel.add(createOrderProductCodeTextField,orderGC);
 		//=====
 		orderGC.gridx = 0;
 		orderGC.gridy = 3;
-		createNewOrderLeftPanel.add(quantityLabel,orderGC);
+		createNewOrderLeftPanel.add(createOrderQuantityLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 3;
-		createNewOrderLeftPanel.add(quantityTextField,orderGC);
+		createNewOrderLeftPanel.add(createOrderQuantityTextField,orderGC);
 		//=====
 		orderGC.gridx = 0;
 		orderGC.gridy = 4;
-		createNewOrderLeftPanel.add(addProductButton,orderGC);
+		createNewOrderLeftPanel.add(createOrderAddProductButton,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 4;
 		orderGC.weighty = 10;
-		createNewOrderLeftPanel.add(confirmOrderButton,orderGC);
+		createNewOrderLeftPanel.add(createOrderConfirmOrderButton,orderGC);
 		//TextPane
-		textArea = new JTextArea(20,20); //height - width
-		textArea.setEditable(false);
-		JScrollPane orderScrollPane = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		createOrderScrollPaneTextArea = new JTextArea(20,20); //height - width
+		createOrderScrollPaneTextArea.setEditable(false);
+		JScrollPane orderScrollPane = new JScrollPane(createOrderScrollPaneTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         orderGC.gridwidth = GridBagConstraints.REMAINDER;
         orderGC.fill = GridBagConstraints.BOTH;
         orderGC.weightx = 1.0;
@@ -1059,91 +1060,62 @@ public class RetailGUI extends JFrame{
 		createOrderPanel.add(createNewOrderLeftPanel);
 		createOrderPanel.add(createNewOrderRightPanel);
 		//if clicked, we try to add the product to the order if it is being made, add it to a new one if it isn't and throw up an error if it already has been made.
-		addProductButton.addActionListener(new ActionListener() {
+		createOrderAddProductButton.addActionListener(new ActionListener() {
+			//TODO
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				String orderIdString = viewOrderIdTextField.getText();
-				String productCodeString = productCodeTextField.getText();
-				String supplierIdString = supplierIdTextField.getText();
-				String quantityString = quantityTextField.getText();
-				Product product = null;
-				Supplier supplier = null;
-				boolean alreadyExists = false;
-				
-				if((orderIdString.trim().equals("") || (orderIdString.trim().equals(".*\\D.*")))){
-					JOptionPane.showMessageDialog(null, "Order");
-				}
-				else if((productCodeString.trim().equals("") || (productCodeString.trim().equals(".*\\D.*")))){
-					JOptionPane.showMessageDialog(null, "Product");
-				}
-				else if((supplierIdString.trim().equals("") || (supplierIdString.trim().equals(".*\\D.*")))){
-					JOptionPane.showMessageDialog(null, "Supplier");
-				}
-				else if((quantityString.trim().equals("") || (quantityString.trim().equals(".*\\D.*")))){
-					JOptionPane.showMessageDialog(null, "Quantity");
-				}
-				
-				if((orderIdString.trim().equals("") || (orderIdString.trim().equals(".*\\D.*")) || 
-						(productCodeString.trim().equals("") || (productCodeString.trim().equals(".*\\D.*")) ||
-								(supplierIdString.trim().equals("") || (supplierIdString.trim().equals(".*\\D.*")) ||
-										(quantityString.trim().equals("") || (quantityString.trim().equals(".*\\D.*"))))))){
-					JOptionPane.showMessageDialog(null, "Please ensure all text fields have been filled!");
-				}
-				else{
-					//check for a product with the inputed ID
-					for(Product product1: products){
-						if(product1.getProductCode().equals(productCodeString)){
-							product = product1;
-							break;
-						}
-					}
-					//check for a supplier with the inputed ID
-					for(Supplier supplier1: suppliers){
-						if(supplier1.getId() == (Integer.parseInt(supplierIdString))){
-							supplier = supplier1;
-							break;
-						}
-					}
-					//check for an order with the inputed ID
-					for(Order order1: orders){
-						if(order1.getOrderUniqueId() == (Integer.parseInt(orderIdString))){
-							alreadyExists = true;
-							break;
-						}
-					}
+				String orderId = createOrderOrderIdTextField.getText();
+				String supplierId = createOrderSupplierIdTextField.getText();
+				String productCode = createOrderProductCodeTextField.getText();
+				String quantity = createOrderQuantityTextField.getText();
+				if((orderId.trim().equals("") || orderId.matches(".*\\D.*")) ||
+						(supplierId.trim().equals("") || supplierId.matches(".*\\D.*")) ||
+							(productCode.trim().equals("") || productCode.matches(".*\\D.*")) ||
+								(quantity.trim().equals("") || quantity.matches(".*\\D.*"))){
+									JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
+				}else{
+					//disable the other text fields
+					createOrderOrderIdTextField.setEnabled(false);
+					createOrderSupplierIdTextField.setEnabled(false);
 					
-					if(product == null){
-						JOptionPane.showMessageDialog(null, "Supplier with that ID does not exist!");
-					}
-					else if(supplier == (null)){
-						JOptionPane.showMessageDialog(null, "Supplier with that ID does not exist!");
-					}
-					else if(alreadyExists){
-						JOptionPane.showMessageDialog(null, "Order with that ID already exists!");
+					//Add to 'addMoreArrayList'
+					Product p = invoice.returnProductObject(productCode, products);
+					int quantity1 = Integer.parseInt(quantity);
+					if(p!=null){
+						OrderProduct orderProduct = new OrderProduct(p, quantity1);
+						addMoreProducts.add(orderProduct);
+						
+						for(OrderProduct prod : addMoreProducts){
+						result += "Product No: " + prod.getProduct().getProductCode() +"\nQuantity: " + prod.getQuantity() + "\n\n";
+						}
+						createOrderScrollPaneTextArea.setText(result);
+						createOrderScrollPaneTextArea.setCaretPosition(0);
+						result = "";
 					}
 					else{
-						if(baseOrder == (null)){
-							baseOrder = new Order((Integer.parseInt(orderIdString)), (Integer.parseInt(supplierIdString)), new OrderProduct(product, (Integer.parseInt(quantityString))));
-						}
-						else{
-							baseOrder.addToProductList(new OrderProduct(product, (Integer.parseInt(quantityString))));
-							textArea.setText(Order.printOrderDetails(baseOrder));
-						}
+						JOptionPane.showMessageDialog (null, "No Product Record exist with that Input", "Product Info", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
 		});
-		confirmOrderButton.addActionListener(new ActionListener() {
+		createOrderConfirmOrderButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(baseOrder == null){
-					JOptionPane.showMessageDialog(null, "Order contains no products, please add some products before trying to confirm!");
-				}
-				else{
-					orders.add(baseOrder);				
-				}
+				Order createdOrder = new Order((Integer.parseInt(createOrderOrderIdTextField.getText())), (Integer.parseInt(createOrderSupplierIdTextField.getText())), addMoreProducts);
+				orders.add(createdOrder);
+				JOptionPane.showMessageDialog(null, "Order complete!");
+				createOrderOrderIdTextField.setEnabled(true);
+				createOrderSupplierIdTextField.setEnabled(true);
+				createOrderOrderIdTextField.setText("");
+				createOrderSupplierIdTextField.setText("");
+				createOrderProductCodeTextField.setText("");
+				createOrderQuantityTextField.setText("");
+				
+				createOrderScrollPaneTextArea.setText("");
+				createOrderScrollPaneTextArea.setCaretPosition(0);
+				
+				addMoreProducts = new ArrayList<OrderProduct>();
 			}
 		});
 		//createNewOrderComponents added.
@@ -1161,8 +1133,8 @@ public class RetailGUI extends JFrame{
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 1;
-		viewOrderLeftJPanel.add(viewAllOrdersButton, viewOrderGC);
-		viewAllOrdersButton.addActionListener(new ActionListener() {
+		viewOrderLeftJPanel.add(viewOrderViewAllOrdersButton, viewOrderGC);
+		viewOrderViewAllOrdersButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewOrderTextArea.setText(Order.viewAllOrders(orders));	
@@ -1171,8 +1143,8 @@ public class RetailGUI extends JFrame{
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 2;
-		viewOrderLeftJPanel.add(viewDeliveredButton, viewOrderGC);
-		viewDeliveredButton.addActionListener(new ActionListener() {
+		viewOrderLeftJPanel.add(viewOrderViewDeliveredButton, viewOrderGC);
+		viewOrderViewDeliveredButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewOrderTextArea.setText(Order.viewDeliveredOrders(orders));	
@@ -1181,8 +1153,8 @@ public class RetailGUI extends JFrame{
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 3;
-		viewOrderLeftJPanel.add(viewUndeliveredButton, viewOrderGC);
-		viewUndeliveredButton.addActionListener(new ActionListener() {
+		viewOrderLeftJPanel.add(viewOrderViewUndeliveredButton, viewOrderGC);
+		viewOrderViewUndeliveredButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewOrderTextArea.setText(Order.viewUndeliveredOrders(orders));	
@@ -1192,26 +1164,26 @@ public class RetailGUI extends JFrame{
 		viewOrderGC.gridx = 1;
 		viewOrderGC.gridy = 1;
 		viewOrderLeftJPanel.add(viewOrderOrderIdLabel, viewOrderGC);
-		viewOrderIdTextField = new JTextField(10); 
+		viewOrderOrderIdTextField = new JTextField(10); 
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 1;
-		viewOrderLeftJPanel.add(viewOrderIdTextField, viewOrderGC);
+		viewOrderLeftJPanel.add(viewOrderOrderIdTextField, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 1;
-		viewOrderLeftJPanel.add(viewOrderIdButton, viewOrderGC);
-		viewOrderIdButton.addActionListener(new ActionListener() {
+		viewOrderLeftJPanel.add(viewOrderOrderIdButton, viewOrderGC);
+		viewOrderOrderIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = viewOrderIdTextField.getText();
+				String input = viewOrderOrderIdTextField.getText();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){
 					viewOrderTextArea.setText("Please enter a valid number");
-					viewOrderIdTextField.setText("");
-					supplierIdTextField.setText("");
+					viewOrderOrderIdTextField.setText("");
+					viewOrderSupplierIdTextField.setText("");
 				}else{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 
-					viewOrderIdTextField.setText("");
-					supplierIdTextField.setText("");
+					viewOrderOrderIdTextField.setText("");
+					viewOrderSupplierIdTextField.setText("");
 				}
 			}
 		});
@@ -1221,24 +1193,23 @@ public class RetailGUI extends JFrame{
 		viewOrderLeftJPanel.add(viewOrderSupplierIdLabel,viewOrderGC);
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 2;
-		JTextField viewSupplierIdTextField = new JTextField(10);
-		viewOrderLeftJPanel.add(viewSupplierIdTextField,viewOrderGC);
+		viewOrderLeftJPanel.add(viewOrderSupplierIdTextField,viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 2;
 		viewOrderLeftJPanel.add(viewOrderSupplierIdButton,viewOrderGC);
 		viewOrderSupplierIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = supplierIdTextField.getText();
+				String input = viewOrderSupplierIdTextField.getText();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ 
 					viewOrderTextArea.setText("Please enter a valid number");
-					supplierIdTextField.setText("");
-					viewOrderIdTextField.setText("");
+					viewOrderSupplierIdTextField.setText("");
+					viewOrderOrderIdTextField.setText("");
 				}else{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));	
-					supplierIdTextField.setText("");
-					viewOrderIdTextField.setText("");
+					viewOrderSupplierIdTextField.setText("");
+					viewOrderOrderIdTextField.setText("");
 				}
 			}
 		});
@@ -1248,22 +1219,22 @@ public class RetailGUI extends JFrame{
 		viewOrderLeftJPanel.add(viewOrderTitleLabel, viewOrderGC);
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 3;
-		viewOrderLeftJPanel.add(titleTextField, viewOrderGC);
+		viewOrderLeftJPanel.add(viewOrderTitleTextField, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 3;
 		viewOrderLeftJPanel.add(viewOrderTitleButton, viewOrderGC);
 		viewOrderTitleButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = titleTextField.getText();
+				String input = viewOrderTitleTextField.getText();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter a title");
-					titleTextField.setText("");
-					viewOrderIdTextField.setText("");
+					viewOrderTitleTextField.setText("");
+					viewOrderOrderIdTextField.setText("");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));	
-					titleTextField.setText("");
-					viewOrderIdTextField.setText("");
+					viewOrderTitleTextField.setText("");
+					viewOrderOrderIdTextField.setText("");
 				}
 			}
 		});
@@ -1273,22 +1244,22 @@ public class RetailGUI extends JFrame{
 		viewOrderLeftJPanel.add(viewOrderAuthorLabel,viewOrderGC);
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 4;
-		viewOrderLeftJPanel.add(authorTextField,viewOrderGC);
+		viewOrderLeftJPanel.add(viewOrderAuthorTextField,viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 4;
 		viewOrderLeftJPanel.add(viewOrderAuthorButton,viewOrderGC);
 		viewOrderAuthorButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = authorTextField.getText();
+				String input = viewOrderAuthorTextField.getText();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter an author's name");
-					authorTextField.setText("");
-					viewOrderIdTextField.setText("");
+					viewOrderAuthorTextField.setText("");
+					viewOrderOrderIdTextField.setText("");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));	
-					authorTextField.setText("");
-					viewOrderIdTextField.setText("");
+					viewOrderAuthorTextField.setText("");
+					viewOrderOrderIdTextField.setText("");
 				}
 			}
 		});
@@ -1522,7 +1493,7 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(addMoreBtn,gc);
 		//AddMoreBtn Event Listener
 		addMoreBtn.addActionListener(new ActionListener() {
-			
+			//TODO
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String prodId = prodTextF.getText();

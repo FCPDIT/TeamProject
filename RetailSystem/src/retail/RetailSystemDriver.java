@@ -7,5 +7,4 @@ public class RetailSystemDriver {
 	public static void main(String[] args) {
 		new RetailGUI();
 	}
-
 }

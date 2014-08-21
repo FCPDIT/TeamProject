@@ -25,6 +25,12 @@ public class Order {
 		this.addToProductList(productOrdered);
 	}
 	
+	public Order(int orderUniqueId, int supplierUniqueId, ArrayList<OrderProduct> OrderProductList) {
+		this.orderUniqueId = orderUniqueId;
+		this.supplierUniqueId = supplierUniqueId;
+		this.listOfProductsOrdered = OrderProductList;
+	}
+	
 	public void addToProductList(OrderProduct ProductOrdered){
 		this.listOfProductsOrdered.add(ProductOrdered);
 	}
