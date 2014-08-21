@@ -2,8 +2,6 @@ package retail;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 public class Product {
 	private String title;
 	private String author;
@@ -13,7 +11,7 @@ public class Product {
 	private int currentStock;
 	private int maxStock;
 	private int minStock;
-	// hardback or paperback ??
+	
 	private Supplier supplier; // or just supplierId ??
 
 	public Supplier getSupplier() {
