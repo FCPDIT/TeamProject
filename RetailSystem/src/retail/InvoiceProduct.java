@@ -9,6 +9,7 @@ public class InvoiceProduct {
 		// TODO Auto-generated constructor stub
 		this.product = product;
 		this.quantity = quantity;
+		product.setCurrentStock(product.getCurrentStock()-quantity);
 	}
 
 	public Product getProduct() {
@@ -26,6 +27,5 @@ public class InvoiceProduct {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
 	
 }
