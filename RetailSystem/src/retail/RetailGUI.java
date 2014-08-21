@@ -82,13 +82,10 @@ public class RetailGUI extends JFrame{
 	private JPanel editInvJPanel = new JPanel();
 	
 	private JPanel createOrderPanel = new JPanel();
-<<<<<<< HEAD
 	private JPanel viewOrderJPanel = new JPanel();
 	private JPanel viewOrderLeftJPanel = new JPanel();
 	private JPanel viewOrderRightJPanel = new JPanel();
-=======
 	//private JPanel viewOrderJPanel = new ViewOrderPanel();
->>>>>>> branch 'dev' of https://github.com/FCPDIT/TeamProject.git
 	
 	private JPanel accessJPanel = new JPanel();
 	
@@ -294,7 +291,6 @@ public class RetailGUI extends JFrame{
 	//==========================================
 	
 	//=========================================
-<<<<<<< HEAD
 	//Marc: Create a new Invoice Panel
 	
 	//Panel
@@ -333,46 +329,6 @@ public class RetailGUI extends JFrame{
 	private JButton resetBtn = new JButton("Reset");
 	//End Of Marc: Create a new Invoice Panel
 	//=========================================
-=======
-//Marc: Create a new Invoice Panel
-	
-	//Panel
-	private JPanel createNewInvoicePanel = new JPanel();
-	
-//Components
-	//variables
-	//private Invoice invoice = new Invoice();
-	private ArrayList<InvoiceProduct> addMoreArrayList = new ArrayList<InvoiceProduct>();
-	private String message = "";
-	private String outputMessage="";
-	//Panels
-	private JTextArea textAreaMarc = new JTextArea();
-	private JPanel leftPanel = new JPanel();
-	private JPanel rightPanel = new JPanel();
-	
-	//Labels for left panel
-	private JLabel invIdLbl = new JLabel("Invoice Id: ");
-	private JLabel employLbl = new JLabel("Employee ID: ");
-	private JLabel custId = new JLabel("Customer ID: ");
-	private JLabel prodId = new JLabel("Product ID: ");
-	private JLabel quantitylbl = new JLabel("Quantity: ");
-	
-	//JText Fields for left panel
-	private JTextField invTextF = new JTextField(10);
-	private JTextField employTextF = new JTextField(10);
-	private JTextField custTextF = new JTextField(10);
-	private JTextField prodTextF = new JTextField(10);
-	private JTextField quantityTextF = new JTextField(10);
-	
-	//4 Buttons for left Panel
-	/*private JButton singleBtn = new JButton("Single Invoice");
-	private JButton multiBtn = new JButton("Multipe Invoice");*/
-	private JButton addMoreBtn = new JButton("Add More");
-	private JButton finishBtn = new JButton("Finished");
-	private JButton resetBtn = new JButton("Reset");
-//End Of Marc: Create a new Invoice Panel
-//=========================================
->>>>>>> branch 'dev' of https://github.com/FCPDIT/TeamProject.git
 	
 	
 	//==================================
@@ -398,7 +354,6 @@ public class RetailGUI extends JFrame{
 	private JButton confirmOrderButton = new JButton("Confirm Order");
 	//JTextArea
 	private JTextArea textArea = new JTextArea();
-<<<<<<< HEAD
 	//viewOrder Panel components
 	private JButton viewAllOrdersButton = new JButton("View All");
 	private JButton viewDeliveredButton = new JButton("View Delivered Orders");
@@ -412,8 +367,6 @@ public class RetailGUI extends JFrame{
 	private JLabel viewOrderAuthorLabel = new JLabel("Author: ");
 	private JButton authorButton = new JButton("Find order containing a product by this author");	
 	private JTextArea viewOrderTextArea;
-=======
->>>>>>> branch 'dev' of https://github.com/FCPDIT/TeamProject.git
 	//=========================================================================
 	
 	public RetailGUI() {
@@ -1181,7 +1134,6 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//createNewOrderComponents added.
-<<<<<<< HEAD
 		//viewOrder components: 
 		Dimension size1 = getPreferredSize();
 		size1.width = 500;
@@ -1341,8 +1293,6 @@ public class RetailGUI extends JFrame{
         viewOrderGC.gridx = 1;
         viewOrderGC.gridy = 0;
         viewOrderJPanel.add(viewOrderRightJPanel);
-=======
->>>>>>> branch 'dev' of https://github.com/FCPDIT/TeamProject.git
 		//=========================================================================================
 	
 		//===============================
