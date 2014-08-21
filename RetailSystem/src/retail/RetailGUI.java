@@ -251,25 +251,27 @@ public class RetailGUI extends JFrame{
 	
 	
 	//Edit Invoice Components 
-	private JPanel findInvoiceComponentsJPanel = new JPanel();
-	private JPanel editInvoiceComponentsJPanel = new JPanel();
-	private JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
-	private JPanel saveInvoiceComponentsJPanel = new JPanel();
-	private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
-	private JTextArea customerInvoiceJTextArea = new JTextArea(10,20);
-	private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
-	private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
-	private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
-	private JTextField editCustomerInvoiceJTextField = new JTextField("Customer Id");
-	private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
-	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
-	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
-	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
-	private JButton payInvoiceJButton = new JButton("Pay Invoice");
-	private JButton saveInvoiceJButton = new JButton("Update Invoice");
-	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
-	private JTextField editPayStatus = new JTextField("");	
-	private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
+		private JPanel findInvoiceComponentsJPanel = new JPanel();
+		private JPanel editInvoiceComponentsJPanel = new JPanel();
+		private JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
+		private JPanel saveInvoiceComponentsJPanel = new JPanel();
+		private JPanel editInvoiceProductsComponentsJPanel = new JPanel();
+		private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
+		private JTextArea customerInvoiceJTextArea = new JTextArea(10,20);
+		private JTextArea productInvoiceJTextArea = new JTextArea();
+		private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
+		private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
+		private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
+		private JTextField editCustomerInvoiceJTextField = new JTextField("Customer Id");
+		private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
+		private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
+		private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
+		private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
+		private JButton payInvoiceJButton = new JButton("Pay Invoice");
+		private JButton saveInvoiceJButton = new JButton("Update Invoice");
+		private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
+		private JTextField editPayStatus = new JTextField("");	
+		private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
 
 		
 	//===========================================
@@ -917,10 +919,6 @@ public class RetailGUI extends JFrame{
 		editInvoiceComponentsJPanel.add(editInvoiceEmployee);
 		editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
 		editInvoiceComponentsJPanel.add(editInvoiceCustomer);
-		//editInvoiceComponentsJPanel.add(new JLabel("Enter New Product ID"));
-		//editInvoiceComponentsJPanel.add(editInvoiceProduct);
-		//editInvoiceComponentsJPanel.add(new JLabel("Enter New Quantity"));
-		//editInvoiceComponentsJPanel.add(editInvoiceQuantity);
 		editInvoiceComponentsJPanel.add(new JLabel("Total"));
 		editInvoiceComponentsJPanel.add(editInvoiceAmount);
 		editInvoiceComponentsJPanel.add(editPayStatus);
@@ -938,6 +936,11 @@ public class RetailGUI extends JFrame{
 				editInvoiceJButton.doClick();		
 			}
 		});
+		JScrollPane invoiceProductsJScrollPane = new JScrollPane(productInvoiceJTextArea);
+		invoiceProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
+		editInvoiceProductsComponentsJPanel.setLayout(new GridLayout(1,2));
+		productInvoiceJTextArea.setEditable(false);
 		saveInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
 		saveInvoiceComponentsJPanel.add(saveInvoiceJButton);
 		saveInvoiceComponentsJPanel.add(deleteInvoiceJButton);
@@ -956,11 +959,13 @@ public class RetailGUI extends JFrame{
 				saveInvoiceComponentsJPanel.setVisible(false);
 			}
 		});
-		editInvJPanel.setLayout(new GridLayout(4,2));
+		editInvJPanel.setLayout(new GridLayout(5,3));
 		editInvJPanel.add(findInvoiceComponentsJPanel);
 		editInvJPanel.add(editInvoiceComponentsJPanel);
-		editInvJPanel.add(editCustomerInvoiceComponentsJPanel);
+		editInvJPanel.add(editInvoiceProductsComponentsJPanel);
 		editInvJPanel.add(saveInvoiceComponentsJPanel);
+		editInvJPanel.add(editCustomerInvoiceComponentsJPanel);
+		editInvoiceProductsComponentsJPanel.setVisible(false);
 		editCustomerInvoiceComponentsJPanel.setVisible(false);
 		editInvoiceComponentsJPanel.setVisible(false);
 		saveInvoiceComponentsJPanel.setVisible(false);
@@ -1887,6 +1892,8 @@ public class RetailGUI extends JFrame{
 			private class EditInvoiceButtonHandler implements ActionListener{
 				public void actionPerformed( ActionEvent e){//handler starts
 					int id = 0;
+					String s = "";
+					productInvoiceJTextArea.setText("Product Details\n");
 					try {
 						id = Integer.parseInt( editInvoiceJTextField.getText().trim() );
 					}
@@ -1900,11 +1907,15 @@ public class RetailGUI extends JFrame{
 								editCustomerInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceComponentsJPanel.setVisible(true);
 								saveInvoiceComponentsJPanel.setVisible(true);
+								editInvoiceProductsComponentsJPanel.setVisible(true);
 								editInvoiceId.setText(Integer.toString(id));
 								editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
 								editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
-								//editInvoiceProduct.setText(invoice.getProduct().getProductCode());
-								//editInvoiceQuantity.setText(Integer.toString(invoice.getQuantity()));
+								for(InvoiceProduct ip: invoice.getInvoiceProducts()){
+											s = "\nProduct Title: " + ip.getProduct().getTitle() + 
+													"     ||    Quantity: " + Integer.toString(ip.getQuantity());
+											productInvoiceJTextArea.append(s);								
+									}	
 								editInvoiceAmount.setText(Double.toString(invoice.getTotalInvoicePrice()));
 								if(invoice.isPaid() == false){
 									editPayStatus.setText("Unpaid");
@@ -1923,6 +1934,7 @@ public class RetailGUI extends JFrame{
 						editCustomerInvoiceComponentsJPanel.setVisible(false);
 						editInvoiceComponentsJPanel.setVisible(false);
 						saveInvoiceComponentsJPanel.setVisible(false);
+						editInvoiceProductsComponentsJPanel.setVisible(false);
 					}
 				}
 				public int verifyInvoiceID(int id) {
@@ -1968,6 +1980,7 @@ public class RetailGUI extends JFrame{
 							editCustomerInvoiceComponentsJPanel.setVisible(true);
 							editInvoiceComponentsJPanel.setVisible(false);
 							saveInvoiceComponentsJPanel.setVisible(false);
+							editInvoiceProductsComponentsJPanel.setVisible(false);
 							customerInvoiceJTextArea.setText("Unpaid Invoices: ");
 							for(Invoice invoice: invoices){
 								if(id == invoice.getCustomer().getCustId() ){
