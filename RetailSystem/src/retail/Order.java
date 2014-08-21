@@ -67,7 +67,7 @@ public class Order {
 	}
 	
 	//needs an actual arrayList of orders to process details for
-	public String viewAllOrders(ArrayList<Order> listOfOrders){
+	public static String viewAllOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		for(Order order: listOfOrders){
 			result = result + "---------------------------------------------- \n"  + "Order ID: " + order.getOrderUniqueId() 
@@ -80,7 +80,7 @@ public class Order {
 		return result;
 	}
 	
-	public String viewByOrderId(ArrayList<Order> listOfOrders, int orderId){
+	public static String viewByOrderId(ArrayList<Order> listOfOrders, int orderId){
 		String result = "";
 		for(Order order: listOfOrders){
 			if(order.getOrderUniqueId() == orderId){
@@ -168,7 +168,7 @@ public class Order {
 		return result;
 	}
 	
-	public String viewOrderBySupplier(ArrayList<Order> listOfOrders, int supplierId){
+	public static String viewOrderBySupplier(ArrayList<Order> listOfOrders, int supplierId){
 		String result = "";
 		boolean first = false;
 		for(Order order: listOfOrders){
@@ -204,12 +204,12 @@ public class Order {
 		return result;
 	}
 	
-	public String viewDeliveredOrders(ArrayList<Order> listOfOrders){
+	public static String viewDeliveredOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		for(Order order: listOfOrders){
 			result = "Delivered orders: \n";
 			if(order.isDelivered()){
-				printOrderDetails(order);
+				Order.printOrderDetails(order);
 			}
 			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
 				result = "No delivered orders found. ";
@@ -218,7 +218,7 @@ public class Order {
 		return result;
 	}
 	
-	public String viewUndeliveredOrders(ArrayList<Order> listOfOrders){
+	public static String viewUndeliveredOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		for(Order order: listOfOrders){
 			result = "Delivered orders: \n";
@@ -232,7 +232,7 @@ public class Order {
 		return result;
 	}
 	
-	public String printOrderDetails(Order order){
+	public static String printOrderDetails(Order order){
 		String result = "";
 		for(OrderProduct oProduct: order.getListOfOrderProducts()){
 			Product product = oProduct.getProduct();

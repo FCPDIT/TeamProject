@@ -84,7 +84,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editInvJPanel = new JPanel();
 	
 	private JPanel createOrderPanel = new JPanel();
-	//private JPanel viewOrderJPanel = new ViewOrderPanel();
+	private JPanel viewOrderJPanel = new JPanel();
 	
 	private JPanel accessJPanel = new JPanel();
 	
@@ -325,6 +325,15 @@ public class RetailGUI extends JFrame{
 	private JButton confirmOrderButton = new JButton("Confirm Order");
 	//JTextArea
 	private JTextArea textArea = new JTextArea();
+	//viewOrder Panel components
+	private JButton viewAllOrdersButton = new JButton("View All");
+	private JButton viewDeliveredButton = new JButton("View Delivered Orders");
+	private JButton viewUndeliveredButton = new JButton("View Undelivered Order");
+	private JLabel viewOrderOrderIdLabel = new JLabel("Order ID: ");
+	private JButton orderIdButton = new JButton("Find order with this ID");	
+	private JLabel viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
+	private JButton supplierIdButton = new JButton("Find order with this Supplier");
+	private JTextArea viewOrderTextArea;
 	//=========================================================================
 	
 	public RetailGUI() {
@@ -451,7 +460,7 @@ public class RetailGUI extends JFrame{
 		invJTabbedPane.add("Edit Customer Invoice", editInvJPanel);
 		
 		orderJTabbedPane.add("Create New Order", createOrderPanel);
-		//orderJTabbedPane.add("View Orders", viewOrderJPanel);
+		orderJTabbedPane.add("View Orders", viewOrderJPanel);
 		
 		accessJTabbedPane.add("Coming Soon", accessJPanel);
 		accessJTabbedPane.setEnabled(false);
@@ -1082,6 +1091,109 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//createNewOrderComponents added.
+		//viewOrder components: 
+		Dimension size1 = getPreferredSize();
+		size1.width = 500;
+		viewOrderJPanel.setPreferredSize(size1);
+		viewOrderJPanel.setBorder(BorderFactory.createTitledBorder("Order details"));
+		//====
+		setLayout(new GridBagLayout());
+		GridBagConstraints viewOrderGC = new GridBagConstraints();
+		viewOrderGC.insets = new Insets(5,5,5,5);
+		//====
+		viewOrderGC.gridx = 0;
+		viewOrderGC.gridy = 1;
+		viewOrderJPanel.add(viewAllOrdersButton, viewOrderGC);
+		viewAllOrdersButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewOrderTextArea.setText(Order.viewAllOrders(orders));	
+			}
+		});
+		//====
+		viewOrderGC.gridx = 0;
+		viewOrderGC.gridy = 2;
+		viewOrderJPanel.add(viewDeliveredButton, viewOrderGC);
+		viewDeliveredButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewOrderTextArea.setText(Order.viewDeliveredOrders(orders));	
+			}
+		});
+		//====
+		viewOrderGC.gridx = 0;
+		viewOrderGC.gridy = 3;
+		viewOrderJPanel.add(viewUndeliveredButton, viewOrderGC);
+		viewUndeliveredButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewOrderTextArea.setText(Order.viewUndeliveredOrders(orders));	
+			}
+		});
+		//====
+		viewOrderGC.gridx = 1;
+		viewOrderGC.gridy = 1;
+		viewOrderJPanel.add(viewOrderOrderIdLabel, viewOrderGC);
+		orderIdTextField = new JTextField(10); 
+		viewOrderGC.gridx = 1;
+		viewOrderGC.gridy = 2;
+		viewOrderJPanel.add(orderIdTextField, viewOrderGC);
+		viewOrderGC.gridx = 1;
+		viewOrderGC.gridy = 3;
+		viewOrderJPanel.add(orderIdButton, viewOrderGC);
+		orderIdButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = orderIdTextField.getText();
+				if(input.trim().equals("") || input.matches(".*\\D.*")){
+					viewOrderTextArea.setText("Please enter a valid number");
+					orderIdTextField.setText("");
+					supplierIdTextField.setText("");
+				}else{
+					int num = Integer.parseInt(input);
+					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 
+					orderIdTextField.setText("");
+					supplierIdTextField.setText("");
+				}
+			}
+		});
+		//====
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 1;
+		viewOrderJPanel.add(viewOrderSupplierIdLabel,viewOrderGC);
+		supplierIdTextField = new JTextField(10);
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 2;
+		viewOrderJPanel.add(supplierIdTextField,viewOrderGC);
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 3;
+		viewOrderJPanel.add(supplierIdButton,viewOrderGC);
+		supplierIdButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = supplierIdTextField.getText();
+				if(input.trim().equals("") || input.matches(".*\\D.*")){ 
+					viewOrderTextArea.setText("Please enter a valid number");
+					supplierIdTextField.setText("");
+					orderIdTextField.setText("");
+				}else{
+					int num = Integer.parseInt(input);
+					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));	
+					supplierIdTextField.setText("");
+					orderIdTextField.setText("");
+				}
+			}
+		});
+		//====
+		viewOrderTextArea = new JTextArea(20, 20); //height - width
+		viewOrderTextArea.setEditable(false);
+		JScrollPane viewOrderScrollPane = new JScrollPane(viewOrderTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        viewOrderGC.gridwidth = GridBagConstraints.REMAINDER;
+        viewOrderGC.fill = GridBagConstraints.BOTH;
+        viewOrderGC.weightx = 1.0;
+        viewOrderGC.weighty = 1.0;
+        viewOrderGC.gridx = 4;
+        viewOrderJPanel.add(viewOrderScrollPane, viewOrderGC);
 		//=========================================================================================
 	
 		//===============================
