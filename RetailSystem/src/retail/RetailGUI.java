@@ -241,8 +241,6 @@ public class RetailGUI extends JFrame{
 	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
 	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
 	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
-	private JTextField editInvoiceProduct = new JTextField("Edit Product");
-	private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
 	private JButton payInvoiceJButton = new JButton("Pay Invoice");
 	private JButton saveInvoiceJButton = new JButton("Update Invoice");
 	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
@@ -895,17 +893,14 @@ public class RetailGUI extends JFrame{
 		});
 		customerInvoiceJTextArea.setEditable(false);
 		allInvoicesTotalJTextField.setEditable(false);
-		editInvoiceComponentsJPanel.setLayout(new GridLayout(4,2));
+		editInvoiceComponentsJPanel.setLayout(new GridLayout(5,2));
 		editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
 		editInvoiceComponentsJPanel.add(editInvoiceId);
 		editInvoiceComponentsJPanel.add(new JLabel("Enter New Employee ID"));
 		editInvoiceComponentsJPanel.add(editInvoiceEmployee);
 		editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
 		editInvoiceComponentsJPanel.add(editInvoiceCustomer);
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Product ID"));
-		editInvoiceComponentsJPanel.add(editInvoiceProduct);
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Quantity"));
-		editInvoiceComponentsJPanel.add(editInvoiceQuantity);
+		editInvoiceComponentsJPanel.add(new JLabel("Total"));
 		editInvoiceComponentsJPanel.add(editInvoiceAmount);
 		editInvoiceComponentsJPanel.add(editPayStatus);
 		editPayStatus.setEditable(false);
@@ -1844,8 +1839,6 @@ public class RetailGUI extends JFrame{
 							editInvoiceId.setText(Integer.toString(id));
 							editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
 							editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
-							editInvoiceProduct.setText(invoice.getProduct().getProductCode());
-							editInvoiceQuantity.setText(Integer.toString(invoice.getQuantity()));
 							editInvoiceAmount.setText(Double.toString(invoice.getTotalInvoicePrice()));
 							if(invoice.isPaid() == false){
 								editPayStatus.setText("Unpaid");
@@ -1947,18 +1940,14 @@ public class RetailGUI extends JFrame{
 				int invId = 0;						
 				int empId = 0;
 				int custId = 0;
-				String productId = editInvoiceProduct.getText().trim();
-				int qty = 0;
 				int currentId = Integer.parseInt(editInvoiceJTextField.getText().trim());
 				int count1 = 0, count2 = 0, count3 = 0;
 				Employee emp = employees.get(0);
 				Customer cust = customers.get(0);
-				Product prod = products.get(0);
 				try{
 					invId = Integer.parseInt(editInvoiceId.getText().trim());
 					empId = Integer.parseInt(editInvoiceEmployee.getText().trim());
 					custId = Integer.parseInt(editInvoiceCustomer.getText().trim());
-					qty = Integer.parseInt(editInvoiceQuantity.getText().trim());
 				}
 				catch(NumberFormatException nfe){
 					invalidId();
@@ -1974,21 +1963,13 @@ public class RetailGUI extends JFrame{
 						cust = customer;
 						count2++;
 					}
-				}						
-				for(Product product: products){
-					if(productId.equals(product.getProductCode())){
-						prod = product;
-						count3++;						
-					}
-				}					
+				}											
 				if (count1 != 0 && count2 != 0 && count3 != 0){
 					for(Invoice invoice: invoices){
 						if(currentId == invoice.getId()){
 							invoice.setId(invId);
 							invoice.setEmployee(emp);
 							invoice.setCustomer(cust);
-							invoice.setProduct(prod);
-							invoice.setQuantity(qty);
 						}
 					}
 					editInvoiceJTextField.setText(Integer.toString(currentId));
@@ -2001,10 +1982,6 @@ public class RetailGUI extends JFrame{
 				}
 				else if(count2 == 0){
 					JOptionPane.showMessageDialog(null, "Invalid Customer Id!");
-					editInvoiceJButton.doClick();
-				}
-				else if(count3 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Product Id!");
 					editInvoiceJButton.doClick();
 				}	
 			}
