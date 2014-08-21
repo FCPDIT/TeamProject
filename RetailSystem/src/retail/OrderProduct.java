@@ -11,6 +11,7 @@ public class OrderProduct {
 	public OrderProduct(Product product, int quantity){
 		this.product = product;
 		this.quantity = quantity;
+		product.setCurrentStock(product.getCurrentStock()+quantity);
 	}
 
 	public Product getProduct(){

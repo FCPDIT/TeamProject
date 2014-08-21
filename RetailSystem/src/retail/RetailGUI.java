@@ -343,7 +343,7 @@ public class RetailGUI extends JFrame{
 	private JLabel productCodeLabel = new JLabel("Product ID: ");
 	private JLabel quantityLabel = new JLabel("Quantity: ");
 	//JTextFields
-	private JTextField orderIdTextField = new JTextField(10);
+	private JTextField viewOrderIdTextField = new JTextField(10);
 	private JTextField supplierIdTextField = new JTextField(10);
 	private JTextField titleTextField = new JTextField(10);
 	private JTextField authorTextField = new JTextField(10);
@@ -359,13 +359,13 @@ public class RetailGUI extends JFrame{
 	private JButton viewDeliveredButton = new JButton("View Delivered Orders");
 	private JButton viewUndeliveredButton = new JButton("View Undelivered Order");
 	private JLabel viewOrderOrderIdLabel = new JLabel("Order ID: ");
-	private JButton orderIdButton = new JButton("Find order with this ID");	
+	private JButton viewOrderIdButton = new JButton("Find order with this ID");	
 	private JLabel viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
-	private JButton supplierIdButton = new JButton("Find order with this Supplier");
+	private JButton viewOrderSupplierIdButton = new JButton("Find order with this Supplier");
 	private JLabel viewOrderTitleLabel = new JLabel("Title: ");
-	private JButton titleButton = new JButton("Find order containing a product with this title");	
+	private JButton viewOrderTitleButton = new JButton("Find order containing a product with this title");	
 	private JLabel viewOrderAuthorLabel = new JLabel("Author: ");
-	private JButton authorButton = new JButton("Find order containing a product by this author");	
+	private JButton viewOrderAuthorButton = new JButton("Find order containing a product by this author");	
 	private JTextArea viewOrderTextArea;
 	//=========================================================================
 	
@@ -1014,7 +1014,7 @@ public class RetailGUI extends JFrame{
 		createNewOrderLeftPanel.add(orderIdLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 0;
-		createNewOrderLeftPanel.add(orderIdTextField,orderGC);
+		createNewOrderLeftPanel.add(viewOrderIdTextField,orderGC);
 		//=====
 		orderGC.gridx = 0;
 		orderGC.gridy = 1;
@@ -1063,13 +1063,26 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String orderIdString = orderIdTextField.getText();
+				String orderIdString = viewOrderIdTextField.getText();
 				String productCodeString = productCodeTextField.getText();
 				String supplierIdString = supplierIdTextField.getText();
 				String quantityString = quantityTextField.getText();
 				Product product = null;
 				Supplier supplier = null;
 				boolean alreadyExists = false;
+				
+				if((orderIdString.trim().equals("") || (orderIdString.trim().equals(".*\\D.*")))){
+					JOptionPane.showMessageDialog(null, "Order");
+				}
+				else if((productCodeString.trim().equals("") || (productCodeString.trim().equals(".*\\D.*")))){
+					JOptionPane.showMessageDialog(null, "Product");
+				}
+				else if((supplierIdString.trim().equals("") || (supplierIdString.trim().equals(".*\\D.*")))){
+					JOptionPane.showMessageDialog(null, "Supplier");
+				}
+				else if((quantityString.trim().equals("") || (quantityString.trim().equals(".*\\D.*")))){
+					JOptionPane.showMessageDialog(null, "Quantity");
+				}
 				
 				if((orderIdString.trim().equals("") || (orderIdString.trim().equals(".*\\D.*")) || 
 						(productCodeString.trim().equals("") || (productCodeString.trim().equals(".*\\D.*")) ||
@@ -1115,7 +1128,7 @@ public class RetailGUI extends JFrame{
 						}
 						else{
 							baseOrder.addToProductList(new OrderProduct(product, (Integer.parseInt(quantityString))));
-							textArea.setText(new Order().printOrderDetails(baseOrder));
+							textArea.setText(Order.printOrderDetails(baseOrder));
 						}
 					}
 				}
@@ -1179,25 +1192,25 @@ public class RetailGUI extends JFrame{
 		viewOrderGC.gridx = 1;
 		viewOrderGC.gridy = 1;
 		viewOrderLeftJPanel.add(viewOrderOrderIdLabel, viewOrderGC);
-		orderIdTextField = new JTextField(10); 
+		viewOrderIdTextField = new JTextField(10); 
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 1;
-		viewOrderLeftJPanel.add(orderIdTextField, viewOrderGC);
+		viewOrderLeftJPanel.add(viewOrderIdTextField, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 1;
-		viewOrderLeftJPanel.add(orderIdButton, viewOrderGC);
-		orderIdButton.addActionListener(new ActionListener() {
+		viewOrderLeftJPanel.add(viewOrderIdButton, viewOrderGC);
+		viewOrderIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = orderIdTextField.getText();
+				String input = viewOrderIdTextField.getText();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){
 					viewOrderTextArea.setText("Please enter a valid number");
-					orderIdTextField.setText("");
+					viewOrderIdTextField.setText("");
 					supplierIdTextField.setText("");
 				}else{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 
-					orderIdTextField.setText("");
+					viewOrderIdTextField.setText("");
 					supplierIdTextField.setText("");
 				}
 			}
@@ -1208,23 +1221,24 @@ public class RetailGUI extends JFrame{
 		viewOrderLeftJPanel.add(viewOrderSupplierIdLabel,viewOrderGC);
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 2;
-		viewOrderLeftJPanel.add(supplierIdTextField,viewOrderGC);
+		JTextField viewSupplierIdTextField = new JTextField(10);
+		viewOrderLeftJPanel.add(viewSupplierIdTextField,viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 2;
-		viewOrderLeftJPanel.add(supplierIdButton,viewOrderGC);
-		supplierIdButton.addActionListener(new ActionListener() {
+		viewOrderLeftJPanel.add(viewOrderSupplierIdButton,viewOrderGC);
+		viewOrderSupplierIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = supplierIdTextField.getText();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ 
 					viewOrderTextArea.setText("Please enter a valid number");
 					supplierIdTextField.setText("");
-					orderIdTextField.setText("");
+					viewOrderIdTextField.setText("");
 				}else{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));	
 					supplierIdTextField.setText("");
-					orderIdTextField.setText("");
+					viewOrderIdTextField.setText("");
 				}
 			}
 		});
@@ -1237,19 +1251,19 @@ public class RetailGUI extends JFrame{
 		viewOrderLeftJPanel.add(titleTextField, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 3;
-		viewOrderLeftJPanel.add(titleButton, viewOrderGC);
-		titleButton.addActionListener(new ActionListener() {
+		viewOrderLeftJPanel.add(viewOrderTitleButton, viewOrderGC);
+		viewOrderTitleButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = titleTextField.getText();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter a title");
 					titleTextField.setText("");
-					orderIdTextField.setText("");
+					viewOrderIdTextField.setText("");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));	
 					titleTextField.setText("");
-					orderIdTextField.setText("");
+					viewOrderIdTextField.setText("");
 				}
 			}
 		});
@@ -1262,19 +1276,19 @@ public class RetailGUI extends JFrame{
 		viewOrderLeftJPanel.add(authorTextField,viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 4;
-		viewOrderLeftJPanel.add(authorButton,viewOrderGC);
-		authorButton.addActionListener(new ActionListener() {
+		viewOrderLeftJPanel.add(viewOrderAuthorButton,viewOrderGC);
+		viewOrderAuthorButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = authorTextField.getText();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter an author's name");
 					authorTextField.setText("");
-					orderIdTextField.setText("");
+					viewOrderIdTextField.setText("");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));	
 					authorTextField.setText("");
-					orderIdTextField.setText("");
+					viewOrderIdTextField.setText("");
 				}
 			}
 		});
