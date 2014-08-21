@@ -241,8 +241,6 @@ public class RetailGUI extends JFrame{
 	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
 	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
 	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
-	private JTextField editInvoiceProduct = new JTextField("Edit Product");
-	private JTextField editInvoiceQuantity = new JTextField("Edit Product Quantity");
 	private JButton payInvoiceJButton = new JButton("Pay Invoice");
 	private JButton saveInvoiceJButton = new JButton("Update Invoice");
 	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
@@ -886,17 +884,18 @@ public class RetailGUI extends JFrame{
 		});
 		customerInvoiceJTextArea.setEditable(false);
 		allInvoicesTotalJTextField.setEditable(false);
-		editInvoiceComponentsJPanel.setLayout(new GridLayout(4,2));
+		editInvoiceComponentsJPanel.setLayout(new GridLayout(5,2));
 		editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
 		editInvoiceComponentsJPanel.add(editInvoiceId);
 		editInvoiceComponentsJPanel.add(new JLabel("Enter New Employee ID"));
 		editInvoiceComponentsJPanel.add(editInvoiceEmployee);
 		editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
 		editInvoiceComponentsJPanel.add(editInvoiceCustomer);
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Product ID"));
-		editInvoiceComponentsJPanel.add(editInvoiceProduct);
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Quantity"));
-		editInvoiceComponentsJPanel.add(editInvoiceQuantity);
+		//editInvoiceComponentsJPanel.add(new JLabel("Enter New Product ID"));
+		//editInvoiceComponentsJPanel.add(editInvoiceProduct);
+		//editInvoiceComponentsJPanel.add(new JLabel("Enter New Quantity"));
+		//editInvoiceComponentsJPanel.add(editInvoiceQuantity);
+		editInvoiceComponentsJPanel.add(new JLabel("Total"));
 		editInvoiceComponentsJPanel.add(editInvoiceAmount);
 		editInvoiceComponentsJPanel.add(editPayStatus);
 		editPayStatus.setEditable(false);
@@ -1685,253 +1684,254 @@ public class RetailGUI extends JFrame{
 		} //END OF CONSTRUCTOR
 
 	//handler for login button
-		private class LoginButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){//handler starts
-				Employee emp = new Employee();
-				int id = 0;
-				int password = 0;
-				try {
-					id = Integer.parseInt( loginTF.getText().trim() );
-				}
-				catch (NumberFormatException nfe){
-					loginTF.setText("");
-				}
-				try{
-					password = Integer.parseInt( passwordTF.getText().trim() );
-				}
-				catch(NumberFormatException nfe){
-					passwordTF.setText("");
-				}
-				int login = emp.verifyLogin(employees, id, password);
-					if(login == 1){
-						// release all tabs - manager
-						mainJTabbedPane.setSelectedIndex(1);
-						mainJTabbedPane.setEnabledAt(1, true);
-						mainJTabbedPane.setEnabledAt(2, true);
-						mainJTabbedPane.setEnabledAt(3, true);
-						mainJTabbedPane.setEnabledAt(4, true);
-						mainJTabbedPane.setEnabledAt(5, true);
-						mainJTabbedPane.setEnabledAt(6, true);
-						mainJTabbedPane.setEnabledAt(7, true);
-						mainJTabbedPane.setEnabledAt(8, true);
-						mainJTabbedPane.setEnabledAt(0, false);
-				}
-				else if(login == 2){
-					// release some tabs - staff SPRINT 2						
-				}
-				else if(login == 3){
-					//password incorrect
-					JOptionPane.showMessageDialog(loginJPanel, "Password doesn't match that Employee ID", "For your information", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else if(login == 4){
-					//no employee id match
-					JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-				}		
-			}
-		}
-						
-		//Handler for edit invoice by id button
-		private class EditInvoiceButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){//handler starts
-				int id = 0;
-				try {
-					id = Integer.parseInt( editInvoiceJTextField.getText().trim() );
-				}
-				catch (NumberFormatException nfe){
-					editInvoiceJTextField.setText("");
-				}
-				int invoiceID = verifyInvoiceID(id);
-				if(invoiceID == 1){
-					for(Invoice invoice: invoices){
-						if(id == invoice.getId()){
-							editCustomerInvoiceComponentsJPanel.setVisible(false);
-							editInvoiceComponentsJPanel.setVisible(true);
-							saveInvoiceComponentsJPanel.setVisible(true);
-							editInvoiceId.setText(Integer.toString(id));
-							editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
-							editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
-							editInvoiceProduct.setText(invoice.getProduct().getProductCode());
-							editInvoiceQuantity.setText(Integer.toString(invoice.getQuantity()));
-							editInvoiceAmount.setText(Double.toString(invoice.getTotalInvoicePrice()));
-							if(invoice.isPaid() == false){
-								editPayStatus.setText("Unpaid");
-								editPayStatus.setForeground(Color.RED);
-							}
-							if(invoice.isPaid()){
-								editPayStatus.setText("Paid");
-								editPayStatus.setForeground(Color.BLACK);
-							}
-						}
-					}	
-				}
-				else if(invoiceID == 2){
-					//no invoice id match
-					JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-					editCustomerInvoiceComponentsJPanel.setVisible(false);
-					editInvoiceComponentsJPanel.setVisible(false);
-					saveInvoiceComponentsJPanel.setVisible(false);
-				}
-			}
-			public int verifyInvoiceID(int id) {
-		    	int count = 0;
-		    	int validID = 0;
-				for(Invoice invoice: invoices){
-					if(id == invoice.getId()){
-						count++;
-						validID = 1;
-					}
-				}	
-				if(count == 0){
-					validID = 2;
-				}
-				return validID;
-			}
-		}
-						
-		//Handler for pay invoices by customer button
-		private class EditCustomerInvoiceButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){//handler starts
-					int count = 0, count1 = 0;;
-					String s = "";
-					double total = 0;
-					String totalString = "";
-					int id = 0, customerID = 1;
+			private class LoginButtonHandler implements ActionListener{
+				public void actionPerformed( ActionEvent e){//handler starts
+					Employee emp = new Employee();
+					int id = 0;
+					int password = 0;
 					try {
-						id = Integer.parseInt( editCustomerInvoiceJTextField.getText().trim() );
+						id = Integer.parseInt( loginTF.getText().trim() );
 					}
 					catch (NumberFormatException nfe){
-						editCustomerInvoiceJTextField.setText("");
+						loginTF.setText("");
 					}
-					for(Customer customer: customers){
-						if(id == customer.getCustId()){
-							count1++;
-							customerID = 1;
-						}
-					}	
-					if(count1 == 0){
-						customerID = 2;
+					try{
+						password = Integer.parseInt( passwordTF.getText().trim() );
 					}
-					if(customerID == 1){
-						editCustomerInvoiceComponentsJPanel.setVisible(true);
-						editInvoiceComponentsJPanel.setVisible(false);
-						saveInvoiceComponentsJPanel.setVisible(false);
-						customerInvoiceJTextArea.setText("Unpaid Invoices: ");
+					catch(NumberFormatException nfe){
+						passwordTF.setText("");
+					}
+					int login = emp.verifyLogin(employees, id, password);
+						if(login == 1){
+							// release all tabs - manager
+							mainJTabbedPane.setSelectedIndex(1);
+							mainJTabbedPane.setEnabledAt(1, true);
+							mainJTabbedPane.setEnabledAt(2, true);
+							mainJTabbedPane.setEnabledAt(3, true);
+							mainJTabbedPane.setEnabledAt(4, true);
+							mainJTabbedPane.setEnabledAt(5, true);
+							mainJTabbedPane.setEnabledAt(6, true);
+							mainJTabbedPane.setEnabledAt(7, true);
+							mainJTabbedPane.setEnabledAt(8, true);
+							mainJTabbedPane.setEnabledAt(0, false);
+					}
+					else if(login == 2){
+						// release some tabs - staff SPRINT 2						
+					}
+					else if(login == 3){
+						//password incorrect
+						JOptionPane.showMessageDialog(loginJPanel, "Password doesn't match that Employee ID", "For your information", JOptionPane.INFORMATION_MESSAGE);
+					}
+					else if(login == 4){
+						//no employee id match
+						JOptionPane.showMessageDialog(loginJPanel, "Employee ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+					}		
+				}
+			}
+							
+			//Handler for edit invoice by id button
+			private class EditInvoiceButtonHandler implements ActionListener{
+				public void actionPerformed( ActionEvent e){//handler starts
+					int id = 0;
+					try {
+						id = Integer.parseInt( editInvoiceJTextField.getText().trim() );
+					}
+					catch (NumberFormatException nfe){
+						editInvoiceJTextField.setText("");
+					}
+					int invoiceID = verifyInvoiceID(id);
+					if(invoiceID == 1){
 						for(Invoice invoice: invoices){
-							if(id == invoice.getCustomer().getCustId() ){
+							if(id == invoice.getId()){
+								editCustomerInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceComponentsJPanel.setVisible(true);
+								saveInvoiceComponentsJPanel.setVisible(true);
+								editInvoiceId.setText(Integer.toString(id));
+								editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
+								editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
+								//editInvoiceProduct.setText(invoice.getProduct().getProductCode());
+								//editInvoiceQuantity.setText(Integer.toString(invoice.getQuantity()));
+								editInvoiceAmount.setText(Double.toString(invoice.getTotalInvoicePrice()));
 								if(invoice.isPaid() == false){
-									s = "\nInvoice Id : " + invoice.getId() + 
-											"\nDate: " + invoice.getInvoiceDate()+ "\nTotal: " + 
-											invoice.getTotalInvoicePrice() + "\n";
-									customerInvoiceJTextArea.append(s);
-									total = total + invoice.getTotalInvoicePrice();
-									count++;								
+									editPayStatus.setText("Unpaid");
+									editPayStatus.setForeground(Color.RED);
+								}
+								if(invoice.isPaid()){
+									editPayStatus.setText("Paid");
+									editPayStatus.setForeground(Color.BLACK);
 								}
 							}
-						}
-						if(count == 0){
-							JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
-							editCustomerInvoiceComponentsJPanel.setVisible(false);
-						}
-						else{
-							totalString = Double.toString(total);
-							allInvoicesTotalJTextField.setText(totalString);
-						}						
+						}	
 					}
-					else if(customerID == 2){
-						//no customer id match
-						JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+					else if(invoiceID == 2){
+						//no invoice id match
+						JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 						editCustomerInvoiceComponentsJPanel.setVisible(false);
 						editInvoiceComponentsJPanel.setVisible(false);
 						saveInvoiceComponentsJPanel.setVisible(false);
 					}
 				}
-			}
-						
-		//handler for save button
-		private class SaveButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){
-				int invId = 0;						
-				int empId = 0;
-				int custId = 0;
-				String productId = editInvoiceProduct.getText().trim();
-				int qty = 0;
-				int currentId = Integer.parseInt(editInvoiceJTextField.getText().trim());
-				int count1 = 0, count2 = 0, count3 = 0;
-				Employee emp = employees.get(0);
-				Customer cust = customers.get(0);
-				Product prod = products.get(0);
-				try{
-					invId = Integer.parseInt(editInvoiceId.getText().trim());
-					empId = Integer.parseInt(editInvoiceEmployee.getText().trim());
-					custId = Integer.parseInt(editInvoiceCustomer.getText().trim());
-					qty = Integer.parseInt(editInvoiceQuantity.getText().trim());
-				}
-				catch(NumberFormatException nfe){
-					invalidId();
-				}						
-				for(Employee employee: employees){
-					if(empId == employee.getEmployeeId()){
-						emp = employee;
-						count1++;
-					}
-				}						
-				for(Customer customer: customers){
-					if(custId == customer.getCustId()){
-						cust = customer;
-						count2++;
-					}
-				}						
-				for(Product product: products){
-					if(productId.equals(product.getProductCode())){
-						prod = product;
-						count3++;						
-					}
-				}					
-				if (count1 != 0 && count2 != 0 && count3 != 0){
+				public int verifyInvoiceID(int id) {
+			    	int count = 0;
+			    	int validID = 0;
 					for(Invoice invoice: invoices){
-						if(currentId == invoice.getId()){
-							invoice.setId(invId);
-							invoice.setEmployee(emp);
-							invoice.setCustomer(cust);
-							invoice.setProduct(prod);
-							invoice.setQuantity(qty);
+						if(id == invoice.getId()){
+							count++;
+							validID = 1;
+						}
+					}	
+					if(count == 0){
+						validID = 2;
+					}
+					return validID;
+				}
+			}
+							
+			//Handler for pay invoices by customer button
+			private class EditCustomerInvoiceButtonHandler implements ActionListener{
+				public void actionPerformed( ActionEvent e){//handler starts
+						int count = 0, count1 = 0;;
+						String s = "";
+						double total = 0;
+						String totalString = "";
+						int id = 0, customerID = 1;
+						try {
+							id = Integer.parseInt( editCustomerInvoiceJTextField.getText().trim() );
+						}
+						catch (NumberFormatException nfe){
+							editCustomerInvoiceJTextField.setText("");
+						}
+						for(Customer customer: customers){
+							if(id == customer.getCustId()){
+								count1++;
+								customerID = 1;
+							}
+						}	
+						if(count1 == 0){
+							customerID = 2;
+						}
+						if(customerID == 1){
+							editCustomerInvoiceComponentsJPanel.setVisible(true);
+							editInvoiceComponentsJPanel.setVisible(false);
+							saveInvoiceComponentsJPanel.setVisible(false);
+							customerInvoiceJTextArea.setText("Unpaid Invoices: ");
+							for(Invoice invoice: invoices){
+								if(id == invoice.getCustomer().getCustId() ){
+									if(invoice.isPaid() == false){
+										s = "\nInvoice Id : " + invoice.getId() + 
+												"\nDate: " + invoice.getInvoiceDate()+ "\nTotal: " + 
+												invoice.getTotalInvoicePrice() + "\n";
+										customerInvoiceJTextArea.append(s);
+										total = total + invoice.getTotalInvoicePrice();
+										count++;								
+									}
+								}
+							}
+							if(count == 0){
+								JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
+								editCustomerInvoiceComponentsJPanel.setVisible(false);
+							}
+							else{
+								totalString = Double.toString(total);
+								allInvoicesTotalJTextField.setText(totalString);
+							}						
+						}
+						else if(customerID == 2){
+							//no customer id match
+							JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+							editCustomerInvoiceComponentsJPanel.setVisible(false);
+							editInvoiceComponentsJPanel.setVisible(false);
+							saveInvoiceComponentsJPanel.setVisible(false);
 						}
 					}
-					editInvoiceJTextField.setText(Integer.toString(currentId));
-					JOptionPane.showMessageDialog(null, "Updated!");
+				}
+							
+			//handler for save button
+			private class SaveButtonHandler implements ActionListener{
+				public void actionPerformed( ActionEvent e){
+					int invId = 0;						
+					int empId = 0;
+					int custId = 0;
+					//String productId = editInvoiceProduct.getText().trim();
+					//int qty = 0;
+					int currentId = Integer.parseInt(editInvoiceJTextField.getText().trim());
+					int count1 = 0, count2 = 0, count3 = 0;
+					Employee emp = employees.get(0);
+					Customer cust = customers.get(0);
+					//Product prod = products.get(0);
+					try{
+						invId = Integer.parseInt(editInvoiceId.getText().trim());
+						empId = Integer.parseInt(editInvoiceEmployee.getText().trim());
+						custId = Integer.parseInt(editInvoiceCustomer.getText().trim());
+						//qty = Integer.parseInt(editInvoiceQuantity.getText().trim());
+					}
+					catch(NumberFormatException nfe){
+						invalidId();
+					}						
+					for(Employee employee: employees){
+						if(empId == employee.getEmployeeId()){
+							emp = employee;
+							count1++;
+						}
+					}						
+					for(Customer customer: customers){
+						if(custId == customer.getCustId()){
+							cust = customer;
+							count2++;
+						}
+					}						
+				/*	for(Product product: products){
+						if(productId.equals(product.getProductCode())){
+							prod = product;
+							count3++;						
+						}
+					}
+					*/					
+					if (count1 != 0 && count2 != 0 && count3 != 0){
+						for(Invoice invoice: invoices){
+							if(currentId == invoice.getId()){
+								invoice.setId(invId);
+								invoice.setEmployee(emp);
+								invoice.setCustomer(cust);
+							//	invoice.setProduct(prod);
+							//	invoice.setQuantity(qty);
+							}
+						}
+						editInvoiceJTextField.setText(Integer.toString(currentId));
+						JOptionPane.showMessageDialog(null, "Updated!");
+						editInvoiceJButton.doClick();
+					}
+					else if(count1 == 0){
+						JOptionPane.showMessageDialog(null, "Invalid Employee Id!");
+						editInvoiceJButton.doClick();
+					}
+					else if(count2 == 0){
+						JOptionPane.showMessageDialog(null, "Invalid Customer Id!");
+						editInvoiceJButton.doClick();
+					}
+					/*else if(count3 == 0){
+						JOptionPane.showMessageDialog(null, "Invalid Product Id!");
+						editInvoiceJButton.doClick();
+					}	*/
+				}
+				public void invalidId(){
+					JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
 					editInvoiceJButton.doClick();
 				}
-				else if(count1 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Employee Id!");
-					editInvoiceJButton.doClick();
-				}
-				else if(count2 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Customer Id!");
-					editInvoiceJButton.doClick();
-				}
-				else if(count3 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Product Id!");
-					editInvoiceJButton.doClick();
-				}	
-			}
-			public void invalidId(){
-				JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
-				editInvoiceJButton.doClick();
-			}
-		}// End handler for save button
-		
-		public boolean invoiceNumberUnique(int id, ArrayList<Invoice> invoices){
-			int count = 0;
-			for(Invoice i : invoices){
-				if(i.getId()==id){
-					count++;
-				}
-			}
-			if(count>=1)
-				return false;
-			else 
-				return true;
+			}// End handler for save button
 			
-		}
+			public boolean invoiceNumberUnique(int id, ArrayList<Invoice> invoices){
+				int count = 0;
+				for(Invoice i : invoices){
+					if(i.getId()==id){
+						count++;
+					}
+				}
+				if(count>=1)
+					return false;
+				else 
+					return true;
+				
+			}
 
-}//End class
+	}//End class
