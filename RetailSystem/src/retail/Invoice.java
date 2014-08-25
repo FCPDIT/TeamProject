@@ -147,7 +147,7 @@ public class Invoice {
 					count++;
 					list+="\nProduct Id: " + pds.getProduct().getProductCode()
 					+"\nProduct Title: " + pds.getProduct().getTitle()
-					+ "\nProduct Price: " +  String.format("�%.2f", pds.getProduct().getRetailPrice())
+					+ "\nProduct Price: " +  String.format("%.2f", pds.getProduct().getRetailPrice())
 					+ "\nQuantity of Order " + pds.getQuantity() 
 					+ "\nTotal of " + pds.getProduct().getProductCode() +" : " + (pds.getQuantity()*pds.getProduct().getRetailPrice()) 
 					+ "\n--------------";
@@ -156,7 +156,7 @@ public class Invoice {
 					+ "\nEmployee Id: "   + v.getEmployee().getEmployeeId() 
 					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
 					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
-					+ "\nInvoice Total: " +  String.format("�%.2f", v.calculateInvoiceTotal()) 
+					+ "\nInvoice Total: " +  String.format("%.2f", v.calculateInvoiceTotal()) 
 					+ "\nDate: " + v.getInvoiceDate() + "\n\n";
 					list+="-------------------------------\n";
 				return list;

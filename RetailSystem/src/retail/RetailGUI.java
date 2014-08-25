@@ -35,7 +35,9 @@ public class RetailGUI extends JFrame{
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private ArrayList<Employee> employees  = new ArrayList<Employee>();
-
+	private ArrayList<InvoiceProduct> invoiceProducts1 = new ArrayList<InvoiceProduct>();
+	private ArrayList<InvoiceProduct> invoiceProducts2 = new ArrayList<InvoiceProduct>();
+	
 	public ArrayList<Order> getOrders(){
 		return this.orders;
 	}
@@ -365,9 +367,13 @@ public class RetailGUI extends JFrame{
 		products.add(new Product("Game of Thrones", "George R.R Martin", "1", 9.99, 3.75,100,200,15, suppliers.get(0)));
 		products.add(new Product("Not a Drill", "Lee Child", "2", 12.75, 4.95,221,200,10, suppliers.get(1)));
 		products.add(new Product("Harry Potter", "j.k rowling", "3", 11.99, 2.95,9,100,10,suppliers.get(0)));
+		//Add ArrayList of InvoiceProduct for Invoice Constructor
+		invoiceProducts1.add(new InvoiceProduct(products.get(0), 5));
+		invoiceProducts2.add(new InvoiceProduct(products.get(1), 10));
+		invoiceProducts2.add(new InvoiceProduct(products.get(2), 8));
 		//add some test invoices to array list
-		invoices.add(new Invoice(1, employees.get(0), customers.get(0), products.get(0), 10));
-		invoices.add(new Invoice(2, employees.get(1), customers.get(1), products.get(1), 20));
+		invoices.add(new Invoice(1, employees.get(0), customers.get(0), invoiceProducts1));
+		invoices.add(new Invoice(2, employees.get(1), customers.get(1), invoiceProducts2));
 		//add some test orders to array list
 		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
 		orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
