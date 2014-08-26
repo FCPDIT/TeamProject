@@ -40,6 +40,7 @@ public class RetailGUI extends JFrame{
 	private ArrayList<Employee> employees  = new ArrayList<Employee>();
 	private ArrayList<InvoiceProduct> invoiceProducts1 = new ArrayList<InvoiceProduct>();
 	private ArrayList<InvoiceProduct> invoiceProducts2 = new ArrayList<InvoiceProduct>();
+	private ArrayList<InvoiceProduct> invoiceProducts3 = new ArrayList<InvoiceProduct>();
 	
 	public ArrayList<Order> getOrders(){
 		return this.orders;
@@ -405,6 +406,10 @@ public class RetailGUI extends JFrame{
 		invoiceProducts1.add(new InvoiceProduct(products.get(0), 5));
 		invoiceProducts2.add(new InvoiceProduct(products.get(1), 10));
 		invoiceProducts2.add(new InvoiceProduct(products.get(2), 8));
+		invoiceProducts3.add(new InvoiceProduct(products.get(4), 20));
+		invoiceProducts3.add(new InvoiceProduct(products.get(6), 10));
+		invoiceProducts3.add(new InvoiceProduct(products.get(10), 15));
+		invoiceProducts3.add(new InvoiceProduct(products.get(20), 5));
 		//add some test invoices to array list
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), invoiceProducts1));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), invoiceProducts2));
@@ -2395,8 +2400,63 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//=======================  End
-		
+		createInvoices();
 		} //END OF CONSTRUCTOR
+	//TODO - end of constructor
+	
+	public void createInvoices(){
+		invoices.add(new Invoice(1001, employees.get(0), customers.get(0), invoiceProducts1, 1));
+		invoices.add(new Invoice(1002, employees.get(1), customers.get(1), invoiceProducts2, 1));
+		invoices.add(new Invoice(1003, employees.get(0), customers.get(2), invoiceProducts3, 1));
+		invoices.add(new Invoice(1004, employees.get(1), customers.get(3), invoiceProducts3, 10));
+		invoices.add(new Invoice(1005, employees.get(0), customers.get(4), invoiceProducts2, 10));
+		invoices.add(new Invoice(1006, employees.get(1), customers.get(5), invoiceProducts1, 10));
+		invoices.add(new Invoice(1007, employees.get(0), customers.get(1), invoiceProducts1, 10));
+		invoices.add(new Invoice(1008, employees.get(1), customers.get(2), invoiceProducts1, 2));
+		invoices.add(new Invoice(1009, employees.get(0), customers.get(3), invoiceProducts2, 2));
+		invoices.add(new Invoice(1010, employees.get(1), customers.get(4), invoiceProducts1, 2));
+		invoices.add(new Invoice(1011, employees.get(0), customers.get(5), invoiceProducts2, 3));
+		invoices.add(new Invoice(1012, employees.get(1), customers.get(1), invoiceProducts3, 3));
+		invoices.add(new Invoice(1013, employees.get(0), customers.get(0), invoiceProducts3, 3));
+		invoices.add(new Invoice(1014, employees.get(1), customers.get(1), invoiceProducts3, 4));
+		invoices.add(new Invoice(1015, employees.get(0), customers.get(2), invoiceProducts2, 4));
+		invoices.add(new Invoice(1016, employees.get(1), customers.get(0), invoiceProducts2, 4));
+		invoices.add(new Invoice(1017, employees.get(0), customers.get(0), invoiceProducts2, 15));
+		invoices.add(new Invoice(1018, employees.get(1), customers.get(3), invoiceProducts1, 15));
+		invoices.add(new Invoice(1019, employees.get(0), customers.get(3), invoiceProducts1, 15));
+		invoices.add(new Invoice(1020, employees.get(1), customers.get(4), invoiceProducts2, 8));
+		invoices.add(new Invoice(1021, employees.get(0), customers.get(5), invoiceProducts3, 8));
+		invoices.add(new Invoice(1022, employees.get(1), customers.get(1), invoiceProducts1, 8));
+		invoices.add(new Invoice(1023, employees.get(0), customers.get(2), invoiceProducts1, 22));
+		invoices.add(new Invoice(1024, employees.get(1), customers.get(3), invoiceProducts3, 20));
+		invoices.add(new Invoice(1025, employees.get(0), customers.get(4), invoiceProducts3, 19));
+		invoices.add(new Invoice(1026, employees.get(0), customers.get(5), invoiceProducts3, 30));
+		invoices.add(new Invoice(1027, employees.get(0), customers.get(0), invoiceProducts3, 44));
+		invoices.add(new Invoice(1028, employees.get(1), customers.get(0), invoiceProducts3, 66));
+		invoices.add(new Invoice(1029, employees.get(0), customers.get(2), invoiceProducts2, 27));
+		invoices.add(new Invoice(1030, employees.get(0), customers.get(2), invoiceProducts2, 25));
+		invoices.add(new Invoice(1031, employees.get(1), customers.get(2), invoiceProducts2, 16));
+		invoices.add(new Invoice(1032, employees.get(1), customers.get(2), invoiceProducts2, 13));
+		invoices.add(new Invoice(1033, employees.get(0), customers.get(1), invoiceProducts2, 22));
+		invoices.add(new Invoice(1034, employees.get(1), customers.get(3), invoiceProducts2, 33));
+		invoices.add(new Invoice(1035, employees.get(0), customers.get(4), invoiceProducts2, 41));
+		invoices.add(new Invoice(1036, employees.get(0), customers.get(5), invoiceProducts3, 39));
+		invoices.add(new Invoice(1037, employees.get(0), customers.get(3), invoiceProducts3, 48));
+		invoices.add(new Invoice(1038, employees.get(1), customers.get(1), invoiceProducts3, 50));
+		invoices.add(new Invoice(1039, employees.get(0), customers.get(2), invoiceProducts1, 55));
+		invoices.add(new Invoice(1040, employees.get(1), customers.get(0), invoiceProducts3, 60));
+		invoices.add(new Invoice(1041, employees.get(1), customers.get(0), invoiceProducts1, 69));
+		invoices.add(new Invoice(1042, employees.get(0), customers.get(1), invoiceProducts3, 71));
+		invoices.add(new Invoice(1043, employees.get(1), customers.get(1), invoiceProducts2, 63));
+		invoices.add(new Invoice(1044, employees.get(0), customers.get(1), invoiceProducts2, 34));
+		invoices.add(new Invoice(1045, employees.get(0), customers.get(2), invoiceProducts2, 31));
+		invoices.add(new Invoice(1046, employees.get(1), customers.get(2), invoiceProducts2, 66));
+		invoices.add(new Invoice(1047, employees.get(0), customers.get(2), invoiceProducts2, 67));
+		invoices.add(new Invoice(1048, employees.get(1), customers.get(4), invoiceProducts2, 52));
+		invoices.add(new Invoice(1049, employees.get(1), customers.get(4), invoiceProducts2, 41));
+		invoices.add(new Invoice(1050, employees.get(0), customers.get(5), invoiceProducts3, 46));
+		
+	}
 
 	//handler for login button
 			private class LoginButtonHandler implements ActionListener{
