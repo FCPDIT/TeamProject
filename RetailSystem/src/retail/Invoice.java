@@ -2,6 +2,7 @@ package retail;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Invoice {
@@ -14,6 +15,7 @@ public class Invoice {
 	private boolean paid = false;
 	private double totalInvoicePrice;
 	private ArrayList<InvoiceProduct> invoiceProducts = new ArrayList<InvoiceProduct>();
+	private int noOfDays;
 
 	public Invoice() {
 	} // used for testing only
@@ -40,6 +42,23 @@ public class Invoice {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
 		invoiceDate = sdf.format(new Date());
 		totalInvoicePrice = calculateInvoiceTotal();
+	}
+	
+	//3rd Constructor for test invoices with historical dates
+	public Invoice(int id, Employee employee, Customer customer, ArrayList<InvoiceProduct> invoiceProducts, int noOfDays) {
+		this.id = id;
+		this.employee = employee;
+		this.customer = customer;
+		this.invoiceProducts = invoiceProducts;
+		this.noOfDays = noOfDays;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
+		invoiceDate = sdf.format(new Date());
+		totalInvoicePrice = calculateInvoiceTotal();
+		this.noOfDays = noOfDays;
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE, - noOfDays);
+		invoiceDate = sdf.format(cal.getTime());
 	}
 
 	//Methods
