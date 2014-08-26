@@ -11,10 +11,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -270,6 +273,10 @@ public class RetailGUI extends JFrame{
 	private JTextField invTextField2;
 	private JTextField custIdTextField;
 	private Invoice invoice = new Invoice();
+	
+	private Vector<String> existingInvoiceNums = new Vector<>();
+	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(existingInvoiceNums); //create the combo box
+	private JComboBox<String> comboBoxInvoice;
 	//==========================================
 	
 	//=========================================
@@ -1617,7 +1624,10 @@ public class RetailGUI extends JFrame{
 		//=========================================================================================
 	
 		//===============================
-		//vIWcUSTOMERiNVOICE fUNCTIONALITY
+		//vIWcUSTOMERiNVOICE fUNCTIONALITY - Marc
+        existingInvoiceNums.add(Integer.toString(invoices.get(0).getId()));
+        existingInvoiceNums.add(Integer.toString(invoices.get(1).getId()));
+        
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.insets = new Insets(5, 5, 5, 5);
 		viewInvJPanel.add(viewCustomerPanel);
@@ -1648,10 +1658,11 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 1;
 		viewCustomerPanel.add(invIdlbl,gc);
-		invTextField2 = new JTextField(10); //Text Field
+		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
+		listOfInvoices.setSelectedItem(existingInvoiceNums.get(0)); //setting the combo box to the first invoice number
 		gc.gridx = 1;
 		gc.gridy = 1;
-		viewCustomerPanel.add(invTextField2,gc);
+		viewCustomerPanel.add(comboBoxInvoice,gc);
 		JButton invButton = new JButton("Invoice ID");	//button
 		gc.gridx = 2;
 		gc.gridy = 1;
@@ -1855,6 +1866,8 @@ public class RetailGUI extends JFrame{
 						textAreaMarc.setText(message);
 						textAreaMarc.setCaretPosition(0);
 						message = "";
+						
+						
 					}else{
 						JOptionPane.showMessageDialog (null, "No Product Record exist with that Input", "Product Info", JOptionPane.WARNING_MESSAGE);
 					}
@@ -1947,6 +1960,9 @@ public class RetailGUI extends JFrame{
 											}
 											//outputMessage+="\nArraySize: " + addMoreArrayList.size(); for testing
 										}
+										String inputFromTestField = invTextF.getText();
+										listOfInvoices.addElement(inputFromTestField);
+										//input.setText("");
 										//reset the text Boxes to Null
 										invTextF.setText("");
 										employTextF.setText("");
@@ -1961,6 +1977,8 @@ public class RetailGUI extends JFrame{
 										outputMessage = "";
 										message = "";
 										addMoreArrayList = new ArrayList<InvoiceProduct>();
+										
+										
 										
 									}else{
 										JOptionPane.showMessageDialog (null, "Invoice Number is not Unique", "Invoice Info", JOptionPane.WARNING_MESSAGE);
