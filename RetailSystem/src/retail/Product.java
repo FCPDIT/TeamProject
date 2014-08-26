@@ -2,6 +2,8 @@ package retail;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class Product {
 	private String title;
 	private String author;
@@ -69,7 +71,7 @@ public class Product {
 
 		for (Product p : products) {
 			if (p.getProductCode().equalsIgnoreCase(search)) {
-				System.out.println("--- ID Search Results ---");
+				//System.out.println("--- ID Search Results ---");
 				return printProductDetails(p);
 			}
 
@@ -96,12 +98,13 @@ public class Product {
 		}
 	}
 
-	public String viewProductByAuthor(String search, ArrayList<Product> products) {
+	public String viewProductByAuthor(String searchAuthor, ArrayList<Product> products) {
 		String list = "";
 
 		for (Product p : products) {
-			if (p.getAuthor().contains(search)) {
+			if (p.getAuthor().toLowerCase().contains(searchAuthor)) {	// Convert Author which is stored in Array into lower case while searching.
 				list += printProductDetails(p);
+				
 			}
 		}
 		if (list.equals("")) {

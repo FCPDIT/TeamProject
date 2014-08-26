@@ -379,9 +379,28 @@ public class RetailGUI extends JFrame{
 		suppliers.add(new Supplier(1, "Sam", "Dublin","sam@email.com","123456"));
 		suppliers.add(new Supplier(2, "Tom", "Cork","tom@email.com","234567"));
 		//add some test products to array list
-		products.add(new Product("Game of Thrones", "George R.R Martin", "1", 9.99, 3.75,100,200,15, suppliers.get(0)));
-		products.add(new Product("Not a Drill", "Lee Child", "2", 12.75, 4.95,221,200,10, suppliers.get(1)));
-		products.add(new Product("Harry Potter", "j.k rowling", "3", 11.99, 2.95,9,100,10,suppliers.get(0)));
+		//(String title, String author, String productCode,double retailPrice, double costPrice, int currentStock, int maxStock, int minStock, Supplier supplier)
+		products.add(new Product("Game of Thrones", "George R.R Martin", "0001", 9.99, 3.75,100,200,15, suppliers.get(0)));
+		products.add(new Product("Not a Drill", "Lee Child", "0002", 12.75, 4.95,221,200,10, suppliers.get(1)));
+		products.add(new Product("Harry Potter", "j.k rowling", "0003", 11.99, 2.95,9,100,10,suppliers.get(0)));
+		products.add(new Product("Tara Road", "Maeve Binchy", "0004", 11.99, 2.04,20,30,10,suppliers.get(1)));
+		products.add(new Product("Echoes", "Maeve Binchy", "0005", 14.99, 1.96,20,30,10,suppliers.get(1)));
+		products.add(new Product("The Glass Lake", "Maeve Binchy", "0006", 16.99, 2.98,20,30,10,suppliers.get(1)));
+		products.add(new Product("Heart and Soul", "Maeve Binchy", "0007", 17.99, 2.97,20,30,10,suppliers.get(1)));
+		products.add(new Product("Light a Penny Candle", "Maeve Binchy", "0008", 11.99, 3.05,20,30,10,suppliers.get(1)));
+		products.add(new Product("Die Trying", "Lee Child", "0009", 10.99, 2.54,15,20,5,suppliers.get(1)));
+		products.add(new Product("The Enemy", "Lee Child", "0010", 11.99, 2.95,15,20,5,suppliers.get(1)));
+		products.add(new Product("One Shot", "Lee Child", "0011", 12.99, 2.83,15,20,5,suppliers.get(1)));
+		products.add(new Product("61 Hours", "Lee Child", "0012", 14.99, 2.78,15,20,5,suppliers.get(1)));
+		products.add(new Product("The Book Thief", "Khaled Hosseini", "0013", 8.99, 3.17,9,30,10,suppliers.get(0)));
+		products.add(new Product("The Hunger Games", "Suzanne Collins", "0014", 8.99, 1.97,30,25,10,suppliers.get(0)));
+		products.add(new Product("The Help", "Kathryn Stockett", "0015", 10.99, 2.51,10,20,10,suppliers.get(0)));
+		products.add(new Product("Life of Pi", "Yann Martel", "0016", 9.99, 2.12,10,10,10,suppliers.get(1)));
+		products.add(new Product("Catching Fire (The Hunger Games #2)", "Suzanne Collins", "0017", 10.99, 1.95,9,100,10,suppliers.get(1)));
+		products.add(new Product("The Girl with the Dragon Tatto", "Steig Larsson", "0018", 9.99, 1.98,15,20,10,suppliers.get(0)));
+		products.add(new Product("Water for Elephants", "Sara Gruen", "0019", 11.99, 3.02,15,20,10,suppliers.get(0)));
+		products.add(new Product("The Da Vinci Code", "Dan Brown", "0020", 7.99, 1.93,15,20,10,suppliers.get(1)));
+		products.add(new Product("The Curious Incident of the Dog in the Night-Time", "Mark Haddon", "0021", 7.99, 1.92,15,20,10,suppliers.get(0)));
 		//Add ArrayList of InvoiceProduct for Invoice Constructor
 		invoiceProducts1.add(new InvoiceProduct(products.get(0), 5));
 		invoiceProducts2.add(new InvoiceProduct(products.get(1), 10));
@@ -1804,8 +1823,8 @@ public class RetailGUI extends JFrame{
 		//Objects below for testing purposes only!!!
 		employees.add(new Employee(1, "marc", 1, 50.00, 1234));
 		customers.add(new Customer(2, "Paddy Power", "Dublin"));
-		products.add(new Product("y", "y", "a", 60.00, 30.00, 30,40, 4, new Supplier(3, "m", "m")));
-		products.add(new Product("y", "y", "s", 60.00, 30.00, 30,40, 4, new Supplier(3, "m", "m")));
+		//products.add(new Product("y", "y", "a", 60.00, 30.00, 30,40, 4, new Supplier(3, "m", "m")));
+		//products.add(new Product("y", "y", "s", 60.00, 30.00, 30,40, 4, new Supplier(3, "m", "m")));
 		//================================
 		//Left Panel Components
 		//================================
@@ -2177,7 +2196,7 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
-																					//All names in array should be stored in lower case.
+				//String input = (productAuthorTextField.getText());																	//All names in array should be stored in lower case.
 				
 				if(input.trim().equals("")){ 	// If no text is entered
 					//textarea.setText("Please enter text in Author Field");
@@ -2186,7 +2205,7 @@ public class RetailGUI extends JFrame{
 					//invTextField.setText("");
 				}else{							// Take in String and Search for it.
 					productTextArea.setText(product.viewProductByAuthor(input, products));	
-					productTextArea.setCaretPosition(0);
+					productTextArea.setCaretPosition(0);		// This sets the position of the scroll bar to the top of the page.
 					productAuthorTextField.setText("");
 					viewProductIdTextField.setText("");
 					productTitleTextField.setText("");
