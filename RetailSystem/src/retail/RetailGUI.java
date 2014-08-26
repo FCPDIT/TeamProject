@@ -277,6 +277,10 @@ public class RetailGUI extends JFrame{
 	private Vector<String> existingInvoiceNums = new Vector<>();
 	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(existingInvoiceNums); //create the combo box
 	private JComboBox<String> comboBoxInvoice;
+	
+	private Vector<String> existingCustomerId = new Vector<>();
+	private DefaultComboBoxModel<String> listOfCustomers = new DefaultComboBoxModel<>(existingCustomerId); //create the combo box
+	private JComboBox<String> comboBoxCustomer;
 	//==========================================
 	
 	//=========================================
@@ -367,6 +371,10 @@ public class RetailGUI extends JFrame{
 		//add some test customers to array list
 		customers.add(new Customer(1, "Sam", "Dublin"));
 		customers.add(new Customer(2, "Tom", "Cork"));
+		customers.add(new Customer(3, "Mary", "Kildare"));
+		customers.add(new Customer(4, "Trish", "Dublin"));
+		customers.add(new Customer(5, "Chris", "Cork"));
+		customers.add(new Customer(6, "Billy", "Waterford"));
 		//add some test suppliers to array list
 		suppliers.add(new Supplier(1, "Sam", "Dublin","sam@email.com","123456"));
 		suppliers.add(new Supplier(2, "Tom", "Cork","tom@email.com","234567"));
@@ -381,6 +389,7 @@ public class RetailGUI extends JFrame{
 		//add some test invoices to array list
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), invoiceProducts1));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), invoiceProducts2));
+		invoices.add(new Invoice(3, employees.get(1), customers.get(2), invoiceProducts2));
 		//add some test orders to array list
 		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
 		orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
@@ -1625,8 +1634,12 @@ public class RetailGUI extends JFrame{
 	
 		//===============================
 		//vIWcUSTOMERiNVOICE fUNCTIONALITY - Marc
+        //Hardcoding info
         existingInvoiceNums.add(Integer.toString(invoices.get(0).getId()));
         existingInvoiceNums.add(Integer.toString(invoices.get(1).getId()));
+        existingCustomerId.add(Integer.toString(customers.get(0).getCustId()));
+        existingCustomerId.add(Integer.toString(customers.get(1).getCustId()));
+        existingCustomerId.add(Integer.toString(customers.get(2).getCustId()));
         
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.insets = new Insets(5, 5, 5, 5);
@@ -1672,7 +1685,7 @@ public class RetailGUI extends JFrame{
 		invButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = invTextField2.getText();
+				String input = (String)comboBoxInvoice.getSelectedItem();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
 					textarea.setText("Please enter a valid number");
 					textarea.setCaretPosition(0);
@@ -1682,8 +1695,8 @@ public class RetailGUI extends JFrame{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceById(num, invoices)); //viewInvoiceById() is in the Invoice Class
 					textarea.setCaretPosition(0);
-					invTextField2.setText("");
-					custIdTextField.setText("");
+					//invTextField2.setText("");
+					//custIdTextField.setText("");
 				}
 			}
 		});
@@ -1693,10 +1706,11 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 2;
 		viewCustomerPanel.add(custIdlbl,gc);
-		custIdTextField = new JTextField(10);
+		comboBoxCustomer =  new JComboBox<String>(listOfCustomers); //combo box here
+		listOfCustomers.setSelectedItem(existingCustomerId.get(0));
 		gc.gridx = 1;
 		gc.gridy = 2;
-		viewCustomerPanel.add(custIdTextField,gc);
+		viewCustomerPanel.add(comboBoxCustomer,gc);
 		JButton custIdButton = new JButton("Customer ID");
 		gc.gridx = 2;
 		gc.gridy = 2;
@@ -1706,7 +1720,8 @@ public class RetailGUI extends JFrame{
 			//Action listener For Button to view Customer by Id
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = custIdTextField.getText();
+				//String input = (String)comboBoxInvoice.getSelectedItem();
+				String input = (String)comboBoxCustomer.getSelectedItem();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
 					textarea.setText("Please enter a valid number");
 					textarea.setCaretPosition(0);
@@ -1716,8 +1731,8 @@ public class RetailGUI extends JFrame{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceByCustomer(num, invoices));	//viewInvoiceByCustomer() is in the Invoice class
 					textarea.setCaretPosition(0);
-					custIdTextField.setText("");
-					invTextField2.setText("");
+					//custIdTextField.setText("");
+					//invTextField2.setText("");
 				}
 			}
 		});
@@ -1962,6 +1977,8 @@ public class RetailGUI extends JFrame{
 										}
 										String inputFromTestField = invTextF.getText();
 										listOfInvoices.addElement(inputFromTestField);
+										String inputFromCusId = custTextF.getText();
+										listOfCustomers.addElement(inputFromCusId);
 										//input.setText("");
 										//reset the text Boxes to Null
 										invTextF.setText("");

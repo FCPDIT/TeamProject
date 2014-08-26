@@ -10,6 +10,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -21,7 +22,7 @@ public class ComboBoxExample extends JFrame{
 	private Container container = getContentPane();
 	private JTextField input = new JTextField(10);
 	private JButton button = new JButton("Add");
-	
+	private JButton displayBtn = new JButton("Display");
 	//Components for the Combo Box
 	private Vector<String> listOfLetters  = new Vector<>();
 	private DefaultComboBoxModel<String> list = new DefaultComboBoxModel<>(listOfLetters); //create the combo box
@@ -43,6 +44,7 @@ public class ComboBoxExample extends JFrame{
 		panel.add(comboBox);
 		panel.add(input);
 		panel.add(button);
+		panel.add(displayBtn);
 		container.add(panel);
 		
 		//Dropdown list
@@ -60,6 +62,15 @@ public class ComboBoxExample extends JFrame{
 			}
 		});
 		
+		displayBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = (String)comboBox.getSelectedItem(); //how to actually get the value from a Combo box
+				JOptionPane.showMessageDialog(null, input);
+				
+			}
+		});
 		
 		
 		
