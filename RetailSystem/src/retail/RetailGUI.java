@@ -30,6 +30,13 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.ScrollPaneConstants;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.*;
+import org.jfree.chart.plot.*;
+
 @SuppressWarnings("serial")
 public class RetailGUI extends JFrame{
 	
@@ -2325,6 +2332,29 @@ public class RetailGUI extends JFrame{
 				}
 			}
 		});
+		
+		JButton costGraph = new JButton ("stock by cost price graph");
+		productGC.gridx = 0;
+		productGC.gridy = 6;
+		viewProductDetails.add(costGraph,productGC);
+		
+		costGraph.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				DefaultCategoryDataset costData = new DefaultCategoryDataset();
+				costData.setValue(product.quantityByCost(0.01, 1.99, products), "Price", "under 2");
+				costData.setValue(product.quantityByCost(2.00, 3.00, products), "Price", "2 to 3");
+				costData.setValue(product.quantityByCost(3.01, 5.00, products), "Price", "3 to 5");
+				costData.setValue(product.quantityByCost(5.01, 200.99, products), "Price", "over 5");
+			
+				JFreeChart costChart = ChartFactory.createBarChart("Cost price chart", "Price range", "Stock quantity", costData, PlotOrientation.VERTICAL, false, true, false);
+				CategoryPlot p = costChart.getCategoryPlot();
+				p.setRangeGridlinePaint(Color.BLACK);
+				ChartFrame retailGraphFrame = new ChartFrame("stock value chart",costChart);
+				retailGraphFrame.setVisible(true);
+				retailGraphFrame.setSize(450, 350);
+			}
+		});
+		
 
 		//Button 8: to search stock by quantity range
 		JButton searchByQuantity = new JButton ("Search by quantity");
