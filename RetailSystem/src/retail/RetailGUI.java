@@ -86,7 +86,10 @@ public class RetailGUI extends JFrame{
 	private JPanel viewOrderRightJPanel = new JPanel();
 	private JPanel editOrderJPanel = new JPanel();
 	
-	private JPanel accessJPanel = new JPanel();
+	private JPanel employeeJPanel = new JPanel();
+	private JPanel viewEmployeeJPanel = new JPanel();
+	private JPanel editEmployeeJPanel = new JPanel();
+	
 	private JPanel proflossJPanel = new JPanel();
 	
 	//login components
@@ -171,6 +174,18 @@ public class RetailGUI extends JFrame{
 	private JTextField editSupplierDelivery = new JTextField();
 	private JButton saveSupplierJButton = new JButton("Update Supplier");
 	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
+	
+	//Employee Components
+	//TODO
+	private JLabel employeeId = new JLabel("Employee ID ");
+	private JTextField employeeIdField = new JTextField();
+	private JLabel employeeAcess = new JLabel("Access Level ");
+	private JTextField employeeAcessField = new JTextField();
+	private JLabel employeeSalary = new JLabel("Employee Salary");
+	private JTextField employeeSalaryField = new JTextField();
+	private JLabel employeePassword = new JLabel("Employee Password");
+	private JTextField employeePassField = new JTextField();
+	private JButton employeeJButton = new JButton("Create New Employee");
 	
 	//Product Components
 	private JLabel prodTitle = new JLabel("Book Title");
@@ -549,10 +564,52 @@ public class RetailGUI extends JFrame{
 		orderJTabbedPane.add("View Orders", viewOrderJPanel);
 		orderJTabbedPane.add("Edit Orders", editOrderJPanel);
 		
-		accessJTabbedPane.add("Coming Soon", accessJPanel);
-		accessJTabbedPane.setEnabled(false);
+		accessJTabbedPane.add("Create Employee", employeeJPanel);
+		accessJTabbedPane.add("View Employee", viewEmployeeJPanel);
+		accessJTabbedPane.add("Edit Employee", editEmployeeJPanel);
+		
 		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
 		proflossJTabbedPane.setEnabled(false);
+		
+		employeeJPanel.setLayout(new GridBagLayout());
+		viewEmployeeJPanel.setLayout(new GridBagLayout());
+		editEmployeeJPanel.setLayout(new GridBagLayout());
+		gc.gridx = 0;
+		gc.gridy = 1;
+		employeeId.setPreferredSize(d);
+		employeeJPanel.add(employeeId, gc);
+		gc.gridx = 0;
+		gc.gridy = 2;
+		employeeIdField.setPreferredSize(d);
+		employeeJPanel.add(employeeIdField, gc);
+		gc.gridx = 0;
+		gc.gridy = 3;
+		employeeAcess.setPreferredSize(d);
+		employeeJPanel.add(employeeAcess, gc);
+		gc.gridx = 0;
+		gc.gridy = 4;
+		employeeAcessField.setPreferredSize(d);
+		employeeJPanel.add(employeeAcessField, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		employeeSalary.setPreferredSize(d);
+		employeeJPanel.add(employeeSalary, gc);
+		gc.gridx = 0;
+		gc.gridy = 6;
+		employeeSalaryField.setPreferredSize(d);
+		employeeJPanel.add(employeeSalaryField, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
+		employeePassword.setPreferredSize(d);
+		employeeJPanel.add(employeePassword, gc);
+		gc.gridx = 0;
+		gc.gridy = 8;
+		employeePassField.setPreferredSize(d);
+		employeeJPanel.add(employeePassField, gc);
+		gc.gridx = 0;
+		gc.gridy = 9;
+		employeeJButton.setPreferredSize(d);
+		employeeJPanel.add(employeeJButton, gc);
 		
 		addCustJPanel.setLayout(new GridBagLayout());
 		viewCustJPanel.setLayout(new GridBagLayout());
