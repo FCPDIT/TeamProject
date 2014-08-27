@@ -35,6 +35,10 @@ public class Order {
 		this.listOfProductsOrdered.add(ProductOrdered);
 	}
 	
+	public void setOrderUniqueId(int orderUniqueId){
+		this.orderUniqueId = orderUniqueId;
+	}
+	
 	public int getOrderUniqueId(){
 		return this.orderUniqueId;
 	}
@@ -95,7 +99,7 @@ public class Order {
 				result += printOrderDetails(order);
 				break;
 			}
-			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+			if(result.equals("")){
 				result = "Order not found. ";
 			}
 		}
@@ -130,8 +134,8 @@ public class Order {
 							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
 					break;
 				}
-				else if(result.equals("") && listOfOrders.indexOf(order) == listOfOrders.size()-1){
-					result = "No order with a product by that author found. ";
+				if(result.equals("")){
+					result = "No order containing a product by that author found. ";
 				}
 			}
 		}
@@ -166,8 +170,8 @@ public class Order {
 							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
 					break;
 				}
-				else if(result.equals("") && listOfOrders.indexOf(order) == listOfOrders.size()-1){
-					result = "No order with a product of that title found. ";
+				if(result.equals("")){
+					result = "No order containing a product with that title found. ";
 				}
 			}
 		}
@@ -196,14 +200,14 @@ public class Order {
 							"\n Quantity Ordered: " + oProduct.getQuantity() + 
 							"\n Current Stock: " + product.getCurrentStock() +
 							"\n Supplier: " + product.getSupplier().getName() +
-							"\n Max Stock:" + product.getMaxStock() +
+							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
 							"\n Cost Price: €" + product.getCostPrice() +
 							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
 					break;
 				}
-				else if(result.equals("") && listOfOrders.indexOf(order) == listOfOrders.size()-1){
-					result = "No order from that supplier found. ";
+				if(result.equals("")){
+					result = "No orders from that supplier found. ";
 				}
 			}
 		}
@@ -217,7 +221,7 @@ public class Order {
 			if(order.isDelivered()){
 				result += printOrderDetails(order);
 			}
-			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+			if(result.equals("Delivered orders: \n")){
 				result = "No delivered orders found. ";
 			}
 		}
@@ -230,7 +234,7 @@ public class Order {
 			if(!order.isDelivered()){
 				result += printOrderDetails(order);
 			}
-			else if(listOfOrders.indexOf(order) == listOfOrders.size()-1){
+			if(result.equals("Undelivered orders: \n")){
 				result = "No undelivered orders found. ";
 			}
 		}
@@ -249,7 +253,7 @@ public class Order {
 					"\n Quantity Ordered: " + oProduct.getQuantity() + 
 					"\n Current Stock: " + product.getCurrentStock() +
 					"\n Supplier: " + product.getSupplier().getName() +
-					"\n Max Stock:" + product.getMaxStock() +
+					"\n Max Stock: " + product.getMaxStock() +
 					"\n Min Stock: " + product.getMinStock() +
 					"\n Cost Price: €" + product.getCostPrice() +
 					"\n Retail Price: €" + product.getRetailPrice() +"\n" + "\n------------";
