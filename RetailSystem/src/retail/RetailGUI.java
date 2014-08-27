@@ -678,6 +678,42 @@ public class RetailGUI extends JFrame{
 
 		});
 		
+		viewEmpIdButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				// view by employee id
+				try{
+					for(Employee employee: employees){
+						if(employee.getEmployeeId() == Integer.parseInt(viewEmpId.getText())){
+							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+						+"\n Employee Name: " +employee.getEmployeeName() 
+						+"\n Employee Access Level: " +employee.getAccess()
+						+"\n Employee Password: " +employee.getPassword()
+						+"\n Employee Salary: " +employee.getSalary());
+						}
+					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "ID Should be a number");
+				}
+			}
+
+		});
+		
+		viewEmpNameButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				// view by employee name
+				for(Employee employee: employees){
+					if(employee.getEmployeeName().equalsIgnoreCase(viewEmpName.getText())){
+						empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+					+"\n Employee Name: " +employee.getEmployeeName() 
+					+"\n Employee Access Level: " +employee.getAccess()
+					+"\n Employee Password: " +employee.getPassword()
+					+"\n Employee Salary: " +employee.getSalary());
+					}
+				}
+			}
+
+		});
+		
 		
 		addCustJPanel.setLayout(new GridBagLayout());
 		viewCustJPanel.setLayout(new GridBagLayout());
