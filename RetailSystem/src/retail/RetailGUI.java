@@ -422,6 +422,7 @@ public class RetailGUI extends JFrame{
 		invoices.add(new Invoice(1, employees.get(0), customers.get(0), invoiceProducts1));
 		invoices.add(new Invoice(2, employees.get(1), customers.get(1), invoiceProducts2));
 		invoices.add(new Invoice(3, employees.get(1), customers.get(2), invoiceProducts2));
+		createInvoices();
 		//add some test orders to array list
 		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
 		orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
@@ -1666,12 +1667,14 @@ public class RetailGUI extends JFrame{
 	
 		//===============================
 		//vIWcUSTOMERiNVOICE fUNCTIONALITY - Marc
-        //Hardcoding info
-        existingInvoiceNums.add(Integer.toString(invoices.get(0).getId()));
-        existingInvoiceNums.add(Integer.toString(invoices.get(1).getId()));
-        existingCustomerId.add(Integer.toString(customers.get(0).getCustId()));
-        existingCustomerId.add(Integer.toString(customers.get(1).getCustId()));
-        existingCustomerId.add(Integer.toString(customers.get(2).getCustId()));
+        //Hardcoding info TODO: Marc
+        for(int i=0;i<invoices.size();i++){
+			 existingInvoiceNums.add(Integer.toString(invoices.get(i).getId()));
+        }
+        for(int i = 0;i<customers.size();i++){
+        existingCustomerId.add(Integer.toString(customers.get(i).getCustId()));
+        }
+    
         
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.insets = new Insets(5, 5, 5, 5);
@@ -2416,7 +2419,8 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//=======================  End
-		createInvoices();
+		//createInvoices();
+	
 		} //END OF CONSTRUCTOR
 	//TODO - end of constructor
 	
@@ -2732,5 +2736,7 @@ public class RetailGUI extends JFrame{
 					return true;
 				
 			}
+			
+		
 
 	}//End class
