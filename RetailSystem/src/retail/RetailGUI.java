@@ -582,6 +582,8 @@ public class RetailGUI extends JFrame{
 		
 		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
 		proflossJTabbedPane.setEnabled(false);
+		
+		
 		//TODO
 		employeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
@@ -628,7 +630,6 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 11;
 		employeeJButton.setPreferredSize(d);
 		employeeJPanel.add(employeeJButton, gc);
-		
 		viewEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -679,30 +680,33 @@ public class RetailGUI extends JFrame{
 		});
 		
 		viewEmpIdButton.addActionListener(new ActionListener(){
+			// function to view a customer by id or name
 			public void actionPerformed(ActionEvent e){
-				// view by employee id
-				try{
-					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(viewEmpId.getText())){
+			if(employees.size() >= 1){
+					try{
+						for(Employee employee: employees){
+						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdField.getText())){
 							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-						+"\n Employee Name: " +employee.getEmployeeName() 
-						+"\n Employee Access Level: " +employee.getAccess()
-						+"\n Employee Password: " +employee.getPassword()
-						+"\n Employee Salary: " +employee.getSalary());
+									+"\n Employee Name: " +employee.getEmployeeName() 
+									+"\n Employee Access Level: " +employee.getAccess()
+									+"\n Employee Password: " +employee.getPassword()
+									+"\n Employee Salary: " +employee.getSalary());
+							}
 						}
+					}catch(NumberFormatException nfe){
+						JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "ID Should be a number");
+				}else{
+					JOptionPane.showMessageDialog(null, "No Employees Found");
 				}
 			}
-
 		});
 		
 		viewEmpNameButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				// view by employee name
 				for(Employee employee: employees){
-					if(employee.getEmployeeName().equalsIgnoreCase(viewEmpName.getText())){
+					if(employee.getEmployeeName().equalsIgnoreCase(viewEmpNameField.getText())){
 						empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
 					+"\n Employee Name: " +employee.getEmployeeName() 
 					+"\n Employee Access Level: " +employee.getAccess()
@@ -714,6 +718,23 @@ public class RetailGUI extends JFrame{
 
 		});
 		
+		viewEmpAllButton.addActionListener(new ActionListener(){
+			// function to view all employees
+			public void actionPerformed(ActionEvent e){
+				empJTextArea.setText(null);
+					if(employees.size() >= 1){
+						for(Employee employee: employees){
+							empJTextArea.append("\n Employee ID: "+employee.getEmployeeId()
+							+"\n Employee Name: " +employee.getEmployeeName() 
+							+"\n Employee Access Level: " +employee.getAccess()
+							+"\n Employee Password: " +employee.getPassword()
+							+"\n Employee Salary: " +employee.getSalary()+"\n");
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, "No Customers Found");
+					}
+			}
+		});
 		
 		addCustJPanel.setLayout(new GridBagLayout());
 		viewCustJPanel.setLayout(new GridBagLayout());
@@ -893,11 +914,10 @@ public class RetailGUI extends JFrame{
 			// function to view all customers
 			public void actionPerformed(ActionEvent e){
 				custJTextArea.setText(null);
-				try{
 					if(customers.size() >= 1){
 						for(Customer customer: customers){
 							
-							custJTextArea.append(" Customer Id: "+customer.getCustId()
+							custJTextArea.append("\n Customer Id: "+customer.getCustId()
 										+"\n Customer Name: "+customer.getCustName()
 										+"\n Customer Address: "+customer.getCustAddress()
 										+"\n Customer Email: "+customer.getCustEmail()
@@ -907,9 +927,6 @@ public class RetailGUI extends JFrame{
 					}else{
 						JOptionPane.showMessageDialog(null, "No Customers Found");
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
-				}
 			}
 		});
 		
@@ -1153,22 +1170,18 @@ public class RetailGUI extends JFrame{
 			// view all suppliers
 			public void actionPerformed(ActionEvent e){
 				supplierJTextArea.setText(null);
-				try{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
-							supplierJTextArea.append(" Supplier Id: "+supplier.getId()
+							supplierJTextArea.append("\n Supplier Id: "+supplier.getId()
 									+"\n Supplier Name: "+supplier.getName()
 									+"\n Supplier Address: "+supplier.getAddress()
 									+"\n Supplier Email: "+supplier.getEmail()
 									+"\n Supplier Phone: "+supplier.getPhone()
-									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver()+"\n");
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Suppliers Found");
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Id should be a number.");
-				}
 			}
 		});
 		
