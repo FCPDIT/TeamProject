@@ -179,6 +179,8 @@ public class RetailGUI extends JFrame{
 	//TODO
 	private JLabel employeeId = new JLabel("Employee ID ");
 	private JTextField employeeIdField = new JTextField();
+	private JLabel  employeeName = new JLabel("Employee Name ");
+	private JTextField employeeNameField = new JTextField();
 	private JLabel employeeAcess = new JLabel("Access Level ");
 	private JTextField employeeAcessField = new JTextField();
 	private JLabel employeeSalary = new JLabel("Employee Salary");
@@ -186,6 +188,16 @@ public class RetailGUI extends JFrame{
 	private JLabel employeePassword = new JLabel("Employee Password");
 	private JTextField employeePassField = new JTextField();
 	private JButton employeeJButton = new JButton("Create New Employee");
+	
+	private JLabel viewEmpId = new JLabel("View By ID");
+	private JTextField viewEmpIdField = new JTextField();
+	private JButton viewEmpIdButton = new JButton("Search Employees");
+	private JLabel viewEmpName = new JLabel("View By Name");
+	private JTextField viewEmpNameField = new JTextField();
+	private JButton viewEmpNameButton = new JButton("Search Employees");
+	private JLabel viewEmpAll = new JLabel("View All Employees");
+	private JButton viewEmpAllButton = new JButton("View All");
+	private JTextArea empJTextArea = new JTextArea(10, 65);
 	
 	//Product Components
 	private JLabel prodTitle = new JLabel("Book Title");
@@ -570,10 +582,8 @@ public class RetailGUI extends JFrame{
 		
 		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
 		proflossJTabbedPane.setEnabled(false);
-		
+		//TODO
 		employeeJPanel.setLayout(new GridBagLayout());
-		viewEmployeeJPanel.setLayout(new GridBagLayout());
-		editEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
 		employeeId.setPreferredSize(d);
@@ -584,32 +594,90 @@ public class RetailGUI extends JFrame{
 		employeeJPanel.add(employeeIdField, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		employeeName.setPreferredSize(d);
+		employeeJPanel.add(employeeName, gc);
+		gc.gridx = 0;
+		gc.gridy = 4;
+		employeeNameField.setPreferredSize(d);
+		employeeJPanel.add(employeeNameField, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
 		employeeAcess.setPreferredSize(d);
 		employeeJPanel.add(employeeAcess, gc);
 		gc.gridx = 0;
-		gc.gridy = 4;
+		gc.gridy = 6;
 		employeeAcessField.setPreferredSize(d);
 		employeeJPanel.add(employeeAcessField, gc);
 		gc.gridx = 0;
-		gc.gridy = 5;
+		gc.gridy = 7;
 		employeeSalary.setPreferredSize(d);
 		employeeJPanel.add(employeeSalary, gc);
 		gc.gridx = 0;
-		gc.gridy = 6;
+		gc.gridy = 8;
 		employeeSalaryField.setPreferredSize(d);
 		employeeJPanel.add(employeeSalaryField, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 9;
 		employeePassword.setPreferredSize(d);
 		employeeJPanel.add(employeePassword, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
+		gc.gridy = 10;
 		employeePassField.setPreferredSize(d);
 		employeeJPanel.add(employeePassField, gc);
 		gc.gridx = 0;
-		gc.gridy = 9;
+		gc.gridy = 11;
 		employeeJButton.setPreferredSize(d);
 		employeeJPanel.add(employeeJButton, gc);
+		
+		viewEmployeeJPanel.setLayout(new GridBagLayout());
+		gc.gridx = 0;
+		gc.gridy = 1;
+		viewEmpId.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpId, gc);
+		gc.gridx = 0;
+		gc.gridy = 2;
+		viewEmpIdField.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpIdField, gc);
+		gc.gridx = 0;
+		gc.gridy = 3;
+		viewEmpIdButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpIdButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 4;
+		viewEmpName.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpName, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		viewEmpNameField.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpNameField, gc);
+		gc.gridx = 0;
+		gc.gridy = 6;
+		viewEmpNameButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpNameButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
+		viewEmpAll.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpAll, gc);
+		gc.gridx = 0;
+		gc.gridy = 8;
+		viewEmpAllButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpAllButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 9;
+		JScrollPane empScrollPane = new JScrollPane(empJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		viewEmployeeJPanel.add(empScrollPane, gc);
+		
+		
+		editEmployeeJPanel.setLayout(new GridBagLayout());
+		
+		employeeJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
+				employees.add(employee);
+			}
+
+		});
+		
 		
 		addCustJPanel.setLayout(new GridBagLayout());
 		viewCustJPanel.setLayout(new GridBagLayout());
