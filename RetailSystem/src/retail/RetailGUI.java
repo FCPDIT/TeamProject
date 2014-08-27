@@ -1707,6 +1707,7 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 1;
 		viewCustomerPanel.add(invIdlbl,gc);
 		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
+		comboBoxInvoice.setPreferredSize(new Dimension(60, 20));
 		listOfInvoices.setSelectedItem(existingInvoiceNums.get(0)); //setting the combo box to the first invoice number
 		gc.gridx = 1;
 		gc.gridy = 1;
@@ -1742,6 +1743,7 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 2;
 		viewCustomerPanel.add(custIdlbl,gc);
 		comboBoxCustomer =  new JComboBox<String>(listOfCustomers); //combo box here
+		comboBoxCustomer.setPreferredSize(new Dimension(60, 20));
 		listOfCustomers.setSelectedItem(existingCustomerId.get(0));
 		gc.gridx = 1;
 		gc.gridy = 2;
