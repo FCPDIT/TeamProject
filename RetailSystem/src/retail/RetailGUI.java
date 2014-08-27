@@ -598,7 +598,6 @@ public class RetailGUI extends JFrame{
 		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
 		proflossJTabbedPane.setEnabled(false);	
 		
-		//TODO
 		employeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
