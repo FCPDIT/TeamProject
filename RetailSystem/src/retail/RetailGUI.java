@@ -2381,6 +2381,7 @@ public class RetailGUI extends JFrame{
 		// to update product details
 		updateProductJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				
 				for (Product product: products){
 					if(product.getProductCode().equals(enterProdCodeJTextField.getText())){
 						product.setProductCode(editCodeJTextField.getText());
@@ -2391,6 +2392,13 @@ public class RetailGUI extends JFrame{
 						product.setCurrentStock(Integer.parseInt(editStockJTextField.getText()));
 						product.setMaxStock(Integer.parseInt(editMaxJTextField.getText()));
 						product.setMinStock(Integer.parseInt(editMaxJTextField.getText()));
+						
+						for (Supplier supplier:suppliers){
+							if (supplier.getId() == Integer.parseInt (editProdSupplierIdJTextField.getText())){
+							product.setSupplier(supplier);
+							}
+						}
+					
 						JOptionPane.showMessageDialog(null, "Product updated");
 
 					}
