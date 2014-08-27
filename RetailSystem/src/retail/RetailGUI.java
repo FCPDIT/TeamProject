@@ -2499,21 +2499,35 @@ public class RetailGUI extends JFrame{
 						passwordTF.setText("");
 					}
 					int login = emp.verifyLogin(employees, id, password);
-						if(login == 1){
-							// release all tabs - manager
-							mainJTabbedPane.setSelectedIndex(1);
-							mainJTabbedPane.setEnabledAt(1, true);
-							mainJTabbedPane.setEnabledAt(2, true);
-							mainJTabbedPane.setEnabledAt(3, true);
-							mainJTabbedPane.setEnabledAt(4, true);
-							mainJTabbedPane.setEnabledAt(5, true);
-							mainJTabbedPane.setEnabledAt(6, true);
-							mainJTabbedPane.setEnabledAt(7, true);
-							mainJTabbedPane.setEnabledAt(8, true);
-							mainJTabbedPane.setEnabledAt(0, false);
+					if(login == 1){
+						// release all tabs - manager
+						mainJTabbedPane.setSelectedIndex(1);
+						mainJTabbedPane.setEnabledAt(1, true);
+						mainJTabbedPane.setEnabledAt(2, true);
+						mainJTabbedPane.setEnabledAt(3, true);
+						mainJTabbedPane.setEnabledAt(4, true);
+						mainJTabbedPane.setEnabledAt(5, true);
+						mainJTabbedPane.setEnabledAt(6, true);
+						mainJTabbedPane.setEnabledAt(7, true);
+						mainJTabbedPane.setEnabledAt(8, true);
+						mainJTabbedPane.setEnabledAt(0, false);
 					}
 					else if(login == 2){
-						// release some tabs - staff SPRINT 2						
+						// release some tabs - staff 
+						mainJTabbedPane.setSelectedIndex(1);
+						mainJTabbedPane.setEnabledAt(1, true);
+						mainJTabbedPane.setEnabledAt(2, true);
+						mainJTabbedPane.setEnabledAt(3, true);
+						mainJTabbedPane.setEnabledAt(4, true);
+						mainJTabbedPane.setEnabledAt(5, true);
+						mainJTabbedPane.setEnabledAt(6, false);
+						mainJTabbedPane.setEnabledAt(7, false);
+						mainJTabbedPane.setEnabledAt(8, true);
+						mainJTabbedPane.setEnabledAt(0, false);
+						invJTabbedPane.setEnabledAt(2, false);
+						supplyJTabbedPane.setEnabledAt(2, false);
+						prodJTabbedPane.setEnabledAt(2, false);
+						custJTabbedPane.setEnabledAt(2, false);						
 					}
 					else if(login == 3){
 						//password incorrect
