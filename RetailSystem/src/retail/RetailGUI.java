@@ -27,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import javax.swing.ScrollPaneConstants;
 
 @SuppressWarnings("serial")
@@ -90,7 +91,7 @@ public class RetailGUI extends JFrame{
 	//login components
 	private JPanel loginComponentsJPanel = new JPanel();
 	private JTextField loginTF = new JTextField();
-	private JTextField passwordTF = new JTextField();
+	private JPasswordField passwordTF = new JPasswordField();
 	private JButton loginBut = new JButton();
 	
 	//logout components
@@ -447,7 +448,7 @@ public class RetailGUI extends JFrame{
 		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
 		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
 		loginComponentsJPanel.add(new JLabel("Enter Employee Password"));
-		loginComponentsJPanel.add(passwordTF = new JTextField("Password", 10));
+		loginComponentsJPanel.add(passwordTF = new JPasswordField("Password", 10));
 		loginComponentsJPanel.add(loginBut= new JButton("Login"));
 		loginJPanel.add(loginComponentsJPanel);
 		//add listener for login button
@@ -2493,7 +2494,7 @@ public class RetailGUI extends JFrame{
 						loginTF.setText("");
 					}
 					try{
-						password = Integer.parseInt( passwordTF.getText().trim() );
+						password = Integer.parseInt( new String(passwordTF.getPassword()) );
 					}
 					catch(NumberFormatException nfe){
 						passwordTF.setText("");
