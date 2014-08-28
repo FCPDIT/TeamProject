@@ -3570,7 +3570,7 @@ public class RetailGUI extends JFrame{
 							order.setSupplierUniqueId(supplierId);
 						}
 					}
-					editInvoiceJTextField.setText(Integer.toString(currentId));
+					editOrderJTextField.setText(Integer.toString(currentId));
 					JOptionPane.showMessageDialog(null, "Updated!");
 					editInvoiceJButton.doClick();
 				}
