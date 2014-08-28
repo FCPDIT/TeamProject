@@ -341,13 +341,26 @@ public class RetailGUI extends JFrame{
 	private JTextField custIdTextField;
 	private Invoice invoice = new Invoice();
 	
+	//Combo Box for invoice ID on View Customer Invoice Panel
 	private Vector<String> existingInvoiceNums = new Vector<>();
 	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(existingInvoiceNums); //create the combo box
 	private JComboBox<String> comboBoxInvoice;
-	
+	//====
 	private Vector<String> existingCustomerId = new Vector<>();
 	private DefaultComboBoxModel<String> listOfCustomers = new DefaultComboBoxModel<>(existingCustomerId); //create the combo box
 	private JComboBox<String> comboBoxCustomer;
+	
+	//TODO Marc: Combo
+	//Combo Box for Employee ID, Customer ID, Product ID on Create new Invoice Panel
+	private Vector<String> empIdVector = new Vector<>();
+	private DefaultComboBoxModel<String> listOfEmpIds = new DefaultComboBoxModel<>(empIdVector); //create the combo box
+	private JComboBox<String> empIDComboBox;
+	private Vector<String> cusIdVector = new Vector<>();
+	private DefaultComboBoxModel<String> listOfCusIds = new DefaultComboBoxModel<>(cusIdVector); //create the combo box
+	private JComboBox<String> cusIDComboBox;
+	private Vector<String> prodIdVector = new Vector<>();
+	private DefaultComboBoxModel<String> listOfProdIds = new DefaultComboBoxModel<>(prodIdVector); //create the combo box
+	private JComboBox<String> prodIDComboBox;
 	
 	//=========Marc: Components for higher and lower Pie Chart==========
 	private ArrayList<String> productCodes;
@@ -2645,12 +2658,8 @@ public class RetailGUI extends JFrame{
 		
 	
 		//==============================================
-		//Marc: Create Invoice Functionality
-		//Objects below for testing purposes only!!!
-		employees.add(new Employee(1, "marc", 1, 50.00, 1234));
-		customers.add(new Customer(2, "Paddy Power", "Dublin"));
-		//products.add(new Product("y", "y", "a", 60.00, 30.00, 30,40, 4, new Supplier(3, "m", "m")));
-		//products.add(new Product("y", "y", "s", 60.00, 30.00, 30,40, 4, new Supplier(3, "m", "m")));
+		//TODO Marc: Create Invoice Functionality
+		
 		//================================
 		//Left Panel Components
 		//================================
@@ -2669,23 +2678,32 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 1;
 		leftPanel.add(employLbl,gc);
+		empIDComboBox = new JComboBox<String>(listOfEmpIds);
+		empIDComboBox.setPreferredSize(new Dimension(60, 20));
 		gc.gridx = 1;
 		gc.gridy = 1;
-		leftPanel.add(employTextF,gc);
+		leftPanel.add(empIDComboBox,gc);
+		
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 2;
 		leftPanel.add(custId,gc);
+			//Add Combo here
+		cusIDComboBox = new JComboBox<String>(listOfCusIds);
+		cusIDComboBox.setPreferredSize(new Dimension(60, 20));
 		gc.gridx = 1;
 		gc.gridy = 2;
-		leftPanel.add(custTextF,gc);
+		leftPanel.add(cusIDComboBox,gc);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 3;
 		leftPanel.add(prodId,gc);
+			//Add combo here
+		prodIDComboBox = new JComboBox<String>(listOfProdIds);
+		prodIDComboBox.setPreferredSize(new Dimension(60, 20));
 		gc.gridx = 1;
 		gc.gridy = 3;
-		leftPanel.add(prodTextF,gc);
+		leftPanel.add(prodIDComboBox,gc);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 4;
