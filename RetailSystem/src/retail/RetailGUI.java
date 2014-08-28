@@ -2664,6 +2664,18 @@ public class RetailGUI extends JFrame{
 		//Left Panel Components
 		//================================
 		leftPanel.setLayout(new GridBagLayout());
+		
+		//Get the info to fill the list of details for each dropdown
+		for(int i=0;i<employees.size();i++){
+			empIdVector.add(Integer.toString(employees.get(i).getEmployeeId()));
+		}
+		for(int i=0;i<customers.size();i++){
+			cusIdVector.add(Integer.toString(customers.get(i).getCustId()));
+		}
+		for(int i=0;i<products.size();i++){
+			prodIdVector.add(products.get(i).getProductCode());
+		}
+		
 		//GridBagConstraints gc = new GridBagConstraints();
 		createInvJPanel.add(createNewInvoicePanel);
 		gc.insets = new Insets(5,5,5,5);
@@ -2680,6 +2692,7 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(employLbl,gc);
 		empIDComboBox = new JComboBox<String>(listOfEmpIds);
 		empIDComboBox.setPreferredSize(new Dimension(60, 20));
+		listOfEmpIds.setSelectedItem(empIdVector.get(0));
 		gc.gridx = 1;
 		gc.gridy = 1;
 		leftPanel.add(empIDComboBox,gc);
@@ -2691,6 +2704,7 @@ public class RetailGUI extends JFrame{
 			//Add Combo here
 		cusIDComboBox = new JComboBox<String>(listOfCusIds);
 		cusIDComboBox.setPreferredSize(new Dimension(60, 20));
+		listOfCusIds.setSelectedItem(cusIdVector.get(0));
 		gc.gridx = 1;
 		gc.gridy = 2;
 		leftPanel.add(cusIDComboBox,gc);
@@ -2701,6 +2715,7 @@ public class RetailGUI extends JFrame{
 			//Add combo here
 		prodIDComboBox = new JComboBox<String>(listOfProdIds);
 		prodIDComboBox.setPreferredSize(new Dimension(60, 20));
+		listOfProdIds.setSelectedItem(prodIdVector.get(0));
 		gc.gridx = 1;
 		gc.gridy = 3;
 		leftPanel.add(prodIDComboBox,gc);
