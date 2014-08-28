@@ -2860,9 +2860,9 @@ public class RetailGUI extends JFrame{
 									//input.setText("");
 									//reset the text Boxes to Null
 									invTextF.setText("");
-									employTextF.setText("");
-									custTextF.setText("");
-									prodTextF.setText("");
+									listOfEmpIds.setSelectedItem("select");
+									listOfCusIds.setSelectedItem("select");
+									listOfProdIds.setSelectedItem("select");
 									quantityTextF.setText("");
 									textAreaMarc.setText(outputMessage);
 									textAreaMarc.setCaretPosition(0);
