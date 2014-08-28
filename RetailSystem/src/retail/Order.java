@@ -217,11 +217,13 @@ public class Order {
 	public static String viewDeliveredOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		for(Order order: listOfOrders){
-			result = "Delivered orders: \n";
 			if(order.isDelivered()){
+				if(result.equals("")){
+					result = "Delivered orders: \n";
+				}
 				result += printOrderDetails(order);
 			}
-			if(result.equals("Delivered orders: \n")){
+			if(result.equals("")){
 				result = "No delivered orders found. ";
 			}
 		}
@@ -229,14 +231,17 @@ public class Order {
 	}
 	
 	public static String viewUndeliveredOrders(ArrayList<Order> listOfOrders){
-		String result = "Undelivered orders: \n";
+		String result = "";
 		for(Order order: listOfOrders){
 			if(!order.isDelivered()){
+				if(result.equals("")){
+					result = "Undelivered orders: \n";
+				}
 				result += printOrderDetails(order);
 			}
-			if(result.equals("Undelivered orders: \n")){
-				result = "No undelivered orders found. ";
-			}
+		}
+		if(result.equals("")){
+			result = "No undelivered orders found.";
 		}
 		return result;
 	}
