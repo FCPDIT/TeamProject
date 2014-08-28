@@ -1846,7 +1846,6 @@ public class RetailGUI extends JFrame{
 					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}
 				else{
-					JOptionPane.showMessageDialog (null, "In the else loop", "Missing Info", JOptionPane.WARNING_MESSAGE);
 					int orderId = Integer.parseInt(orderIdString);
 					int supplierId = Integer.parseInt(supplierIdString);
 					int productCode = Integer.parseInt(productCodeString);
@@ -1873,9 +1872,7 @@ public class RetailGUI extends JFrame{
 					orderProducts.add(orderProd);
 					
 					if(supplierExists){
-						JOptionPane.showMessageDialog (null, "in supplier", "Missing Info", JOptionPane.WARNING_MESSAGE);
 						if(productExists){
-							JOptionPane.showMessageDialog (null, "in order", "Missing Info", JOptionPane.WARNING_MESSAGE);
 							if(orderNumberUnique(orderId, orders)){
 								
 								//All checks passed, create Invoice
