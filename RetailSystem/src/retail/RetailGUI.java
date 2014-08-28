@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -64,6 +65,7 @@ public class RetailGUI extends JFrame{
 	private ArrayList<InvoiceProduct> invoiceProducts1 = new ArrayList<InvoiceProduct>();
 	private ArrayList<InvoiceProduct> invoiceProducts2 = new ArrayList<InvoiceProduct>();
 	private ArrayList<InvoiceProduct> invoiceProducts3 = new ArrayList<InvoiceProduct>();
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
 	
 	public ArrayList<Order> getOrders(){
 		return this.orders;
@@ -311,13 +313,17 @@ public class RetailGUI extends JFrame{
 	private JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
 	private JPanel saveInvoiceComponentsJPanel = new JPanel();
 	private JPanel editInvoiceProductsComponentsJPanel = new JPanel();
-	private JTextField editInvoiceJTextField = new JTextField("Invoice Id");
+	private Vector<String> editExistingInvoiceNums = new Vector<>();
+	private DefaultComboBoxModel<String> editListOfInvoices = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
+	private JComboBox<String> editComboBoxInvoice;
+	private Vector<String> editExistingCustomerInvoiceNums = new Vector<>();
+	private DefaultComboBoxModel<String> editCustomerListOfInvoices = new DefaultComboBoxModel<>(editExistingCustomerInvoiceNums); //create the combo box
+	private JComboBox<String> editComboBoxCustomerInvoice;
 	private JTextArea customerInvoiceJTextArea = new JTextArea(10,20);
 	private JTextArea productInvoiceJTextArea = new JTextArea();
 	private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
 	private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
 	private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
-	private JTextField editCustomerInvoiceJTextField = new JTextField("Customer Id");
 	private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
 	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
 	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
@@ -327,6 +333,7 @@ public class RetailGUI extends JFrame{
 	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
 	private JTextField editPayStatus = new JTextField("");	
 	private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
+
 
 		
 	//===========================================
@@ -1654,32 +1661,25 @@ public class RetailGUI extends JFrame{
 		editProductJPanel.add(deleteStockLineJButton, gc);
 		
 		
-		//add edit invoice components	
+		//add edit invoice components
+		fillComboBox();
 		findInvoiceComponentsJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
-		editInvoiceJTextField.setPreferredSize(d);
-		findInvoiceComponentsJPanel.add(editInvoiceJTextField, gc);
-		editInvoiceJTextField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			editInvoiceJTextField.setText("");
-			}
-		});
+		editComboBoxInvoice = new JComboBox<String>(editListOfInvoices); //Combo box rather than Text Field
+		editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
+		findInvoiceComponentsJPanel.add(editComboBoxInvoice, gc);
+		editComboBoxInvoice.setPreferredSize(d);
 		gc.gridx = 0;
 		gc.gridy = 2;
 		editInvoiceJButton.setPreferredSize(d);
 		findInvoiceComponentsJPanel.add(editInvoiceJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
-		editCustomerInvoiceJTextField.setPreferredSize(d);
-		findInvoiceComponentsJPanel.add(editCustomerInvoiceJTextField, gc);
-		editCustomerInvoiceJTextField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			editCustomerInvoiceJTextField.setText("");
-			}
-		});
+		editComboBoxCustomerInvoice = new JComboBox<String>(editCustomerListOfInvoices); //Combo box rather than Text Field
+		editCustomerListOfInvoices.setSelectedItem(editExistingCustomerInvoiceNums.get(0));
+		findInvoiceComponentsJPanel.add(editComboBoxCustomerInvoice, gc);
+		editComboBoxCustomerInvoice.setPreferredSize(d);
 		gc.gridx = 0;
 		gc.gridy = 4;
 		editCustomerInvoiceJButton.setPreferredSize(d);
@@ -1694,8 +1694,10 @@ public class RetailGUI extends JFrame{
 		
 		payAllInvoicesJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+				int id = Integer.parseInt( s );
 				for(Invoice invoice: invoices){
-					if(Integer.parseInt(editCustomerInvoiceJTextField.getText().trim()) == invoice.getCustomer().getCustId() ){
+					if(id == invoice.getCustomer().getCustId() ){
 						invoice.setPaid(true);
 					}
 				}
@@ -1719,8 +1721,10 @@ public class RetailGUI extends JFrame{
 		editInvoiceComponentsJPanel.add(payInvoiceJButton);
 		payInvoiceJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				String s = (String)editComboBoxInvoice.getSelectedItem();
+				int id = Integer.parseInt( s );
 				for(Invoice invoice: invoices){
-					if(invoice.getId() == Integer.parseInt(editInvoiceJTextField.getText().trim())){
+					if(invoice.getId() == id){
 						invoice.setPaid(true);
 					}
 				}
@@ -1740,16 +1744,21 @@ public class RetailGUI extends JFrame{
 		deleteInvoiceJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int index=0;
+				String s = (String)editComboBoxInvoice.getSelectedItem();
+				int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
+				int id = Integer.parseInt( s );
 				for(Invoice invoice: invoices){
-					if(invoice.getId() == Integer.parseInt(editInvoiceJTextField.getText().trim())){
+					if(invoice.getId() == id){
 						index = invoices.indexOf(invoice);
 					}
 				}
 				invoices.remove(index);
 				JOptionPane.showMessageDialog(null, "Deleted!");
+				editComboBoxInvoice.removeItemAt(comboIndex);
 				editCustomerInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceComponentsJPanel.setVisible(false);
 				saveInvoiceComponentsJPanel.setVisible(false);
+				editInvoiceProductsComponentsJPanel.setVisible(false);
 			}
 		});
 		editInvJPanel.setLayout(new GridLayout(5,3));
@@ -3288,127 +3297,130 @@ public class RetailGUI extends JFrame{
 	//TODO - end of constructor
 	
 	public void createInvoices(){
-		invoices.add(new Invoice(1001, employees.get(0), customers.get(0), invoiceProducts1, 1));
-		invoices.add(new Invoice(1002, employees.get(1), customers.get(1), invoiceProducts2, 1));
-		invoices.add(new Invoice(1003, employees.get(0), customers.get(2), invoiceProducts3, 1));
-		invoices.add(new Invoice(1004, employees.get(1), customers.get(3), invoiceProducts3, 10));
-		invoices.add(new Invoice(1005, employees.get(0), customers.get(4), invoiceProducts2, 10));
-		invoices.add(new Invoice(1006, employees.get(1), customers.get(5), invoiceProducts1, 10));
-		invoices.add(new Invoice(1007, employees.get(0), customers.get(1), invoiceProducts1, 10));
-		invoices.add(new Invoice(1008, employees.get(1), customers.get(2), invoiceProducts1, 2));
-		invoices.add(new Invoice(1009, employees.get(0), customers.get(3), invoiceProducts2, 2));
-		invoices.add(new Invoice(1010, employees.get(1), customers.get(4), invoiceProducts1, 2));
-		invoices.add(new Invoice(1011, employees.get(0), customers.get(5), invoiceProducts2, 3));
-		invoices.add(new Invoice(1012, employees.get(1), customers.get(1), invoiceProducts3, 3));
-		invoices.add(new Invoice(1013, employees.get(0), customers.get(0), invoiceProducts3, 3));
-		invoices.add(new Invoice(1014, employees.get(1), customers.get(1), invoiceProducts3, 4));
-		invoices.add(new Invoice(1015, employees.get(0), customers.get(2), invoiceProducts2, 4));
-		invoices.add(new Invoice(1016, employees.get(1), customers.get(0), invoiceProducts2, 4));
-		invoices.add(new Invoice(1017, employees.get(0), customers.get(0), invoiceProducts2, 15));
-		invoices.add(new Invoice(1018, employees.get(1), customers.get(3), invoiceProducts1, 15));
-		invoices.add(new Invoice(1019, employees.get(0), customers.get(3), invoiceProducts1, 15));
-		invoices.add(new Invoice(1020, employees.get(1), customers.get(4), invoiceProducts2, 8));
-		invoices.add(new Invoice(1021, employees.get(0), customers.get(5), invoiceProducts3, 8));
-		invoices.add(new Invoice(1022, employees.get(1), customers.get(1), invoiceProducts1, 8));
-		invoices.add(new Invoice(1023, employees.get(0), customers.get(2), invoiceProducts1, 22));
-		invoices.add(new Invoice(1024, employees.get(1), customers.get(3), invoiceProducts3, 20));
-		invoices.add(new Invoice(1025, employees.get(0), customers.get(4), invoiceProducts3, 19));
-		invoices.add(new Invoice(1026, employees.get(0), customers.get(5), invoiceProducts3, 30));
-		invoices.add(new Invoice(1027, employees.get(0), customers.get(0), invoiceProducts3, 44));
-		invoices.add(new Invoice(1028, employees.get(1), customers.get(0), invoiceProducts3, 66));
-		invoices.add(new Invoice(1029, employees.get(0), customers.get(2), invoiceProducts2, 27));
-		invoices.add(new Invoice(1030, employees.get(0), customers.get(2), invoiceProducts2, 25));
-		invoices.add(new Invoice(1031, employees.get(1), customers.get(2), invoiceProducts2, 16));
-		invoices.add(new Invoice(1032, employees.get(1), customers.get(2), invoiceProducts2, 13));
-		invoices.add(new Invoice(1033, employees.get(0), customers.get(1), invoiceProducts2, 22));
-		invoices.add(new Invoice(1034, employees.get(1), customers.get(3), invoiceProducts2, 33));
-		invoices.add(new Invoice(1035, employees.get(0), customers.get(4), invoiceProducts2, 41));
-		invoices.add(new Invoice(1036, employees.get(0), customers.get(5), invoiceProducts3, 39));
-		invoices.add(new Invoice(1037, employees.get(0), customers.get(3), invoiceProducts3, 48));
-		invoices.add(new Invoice(1038, employees.get(1), customers.get(1), invoiceProducts3, 50));
-		invoices.add(new Invoice(1039, employees.get(0), customers.get(2), invoiceProducts1, 55));
-		invoices.add(new Invoice(1040, employees.get(1), customers.get(0), invoiceProducts3, 60));
-		invoices.add(new Invoice(1041, employees.get(1), customers.get(0), invoiceProducts1, 69));
-		invoices.add(new Invoice(1042, employees.get(0), customers.get(1), invoiceProducts3, 71));
-		invoices.add(new Invoice(1043, employees.get(1), customers.get(1), invoiceProducts2, 63));
-		invoices.add(new Invoice(1044, employees.get(0), customers.get(1), invoiceProducts2, 34));
-		invoices.add(new Invoice(1045, employees.get(0), customers.get(2), invoiceProducts2, 31));
-		invoices.add(new Invoice(1046, employees.get(1), customers.get(2), invoiceProducts2, 66));
-		invoices.add(new Invoice(1047, employees.get(0), customers.get(2), invoiceProducts2, 67));
-		invoices.add(new Invoice(1048, employees.get(1), customers.get(4), invoiceProducts2, 52));
-		invoices.add(new Invoice(1049, employees.get(1), customers.get(4), invoiceProducts2, 41));
-		invoices.add(new Invoice(1050, employees.get(0), customers.get(5), invoiceProducts3, 46));
+		invoices.add(new Invoice(1001, employees.get(0), customers.get(0), invoiceProducts1, 1, true));
+		invoices.add(new Invoice(1002, employees.get(1), customers.get(1), invoiceProducts2, 1, true));
+		invoices.add(new Invoice(1003, employees.get(0), customers.get(2), invoiceProducts3, 1, false));
+		invoices.add(new Invoice(1004, employees.get(1), customers.get(3), invoiceProducts3, 10, true));
+		invoices.add(new Invoice(1005, employees.get(0), customers.get(4), invoiceProducts2, 10, false));
+		invoices.add(new Invoice(1006, employees.get(1), customers.get(5), invoiceProducts1, 10, true));
+		invoices.add(new Invoice(1007, employees.get(0), customers.get(1), invoiceProducts1, 10, false));
+		invoices.add(new Invoice(1008, employees.get(1), customers.get(2), invoiceProducts1, 2, false));
+		invoices.add(new Invoice(1009, employees.get(0), customers.get(3), invoiceProducts2, 2, false));
+		invoices.add(new Invoice(1010, employees.get(1), customers.get(4), invoiceProducts1, 2, true));
+		invoices.add(new Invoice(1011, employees.get(0), customers.get(5), invoiceProducts2, 3, true));
+		invoices.add(new Invoice(1012, employees.get(1), customers.get(1), invoiceProducts3, 3, false));
+		invoices.add(new Invoice(1013, employees.get(0), customers.get(0), invoiceProducts3, 3, false));
+		invoices.add(new Invoice(1014, employees.get(1), customers.get(1), invoiceProducts3, 4, true));
+		invoices.add(new Invoice(1015, employees.get(0), customers.get(2), invoiceProducts2, 4, false));
+		invoices.add(new Invoice(1016, employees.get(1), customers.get(0), invoiceProducts2, 4, false));
+		invoices.add(new Invoice(1017, employees.get(0), customers.get(0), invoiceProducts2, 15, true));
+		invoices.add(new Invoice(1018, employees.get(1), customers.get(3), invoiceProducts1, 15, false));
+		invoices.add(new Invoice(1019, employees.get(0), customers.get(3), invoiceProducts1, 15, false));
+		invoices.add(new Invoice(1020, employees.get(1), customers.get(4), invoiceProducts2, 8, true));
+		invoices.add(new Invoice(1021, employees.get(0), customers.get(5), invoiceProducts3, 8, true));
+		invoices.add(new Invoice(1022, employees.get(1), customers.get(1), invoiceProducts1, 8, false));
+		invoices.add(new Invoice(1023, employees.get(0), customers.get(2), invoiceProducts1, 22, true));
+		invoices.add(new Invoice(1024, employees.get(1), customers.get(3), invoiceProducts3, 20, false));
+		invoices.add(new Invoice(1025, employees.get(0), customers.get(4), invoiceProducts3, 19, false));
+		invoices.add(new Invoice(1026, employees.get(0), customers.get(5), invoiceProducts3, 30, true));
+		invoices.add(new Invoice(1027, employees.get(0), customers.get(0), invoiceProducts3, 44, false));
+		invoices.add(new Invoice(1028, employees.get(1), customers.get(0), invoiceProducts3, 66, false));
+		invoices.add(new Invoice(1029, employees.get(0), customers.get(2), invoiceProducts2, 27, false));
+		invoices.add(new Invoice(1030, employees.get(0), customers.get(2), invoiceProducts2, 25, true));
+		invoices.add(new Invoice(1031, employees.get(1), customers.get(2), invoiceProducts2, 16, true));
+		invoices.add(new Invoice(1032, employees.get(1), customers.get(2), invoiceProducts2, 13, false));
+		invoices.add(new Invoice(1033, employees.get(0), customers.get(1), invoiceProducts2, 22, false));
+		invoices.add(new Invoice(1034, employees.get(1), customers.get(3), invoiceProducts2, 33, true));
+		invoices.add(new Invoice(1035, employees.get(0), customers.get(4), invoiceProducts2, 41, false));
+		invoices.add(new Invoice(1036, employees.get(0), customers.get(5), invoiceProducts3, 39, false));
+		invoices.add(new Invoice(1037, employees.get(0), customers.get(3), invoiceProducts3, 48, true));
+		invoices.add(new Invoice(1038, employees.get(1), customers.get(1), invoiceProducts3, 50, false));
+		invoices.add(new Invoice(1039, employees.get(0), customers.get(2), invoiceProducts1, 55, false));
+		invoices.add(new Invoice(1040, employees.get(1), customers.get(0), invoiceProducts3, 60, true));
+		invoices.add(new Invoice(1041, employees.get(1), customers.get(0), invoiceProducts1, 69, false));
+		invoices.add(new Invoice(1042, employees.get(0), customers.get(1), invoiceProducts3, 71, false));
+		invoices.add(new Invoice(1043, employees.get(1), customers.get(1), invoiceProducts2, 63, true));
+		invoices.add(new Invoice(1044, employees.get(0), customers.get(1), invoiceProducts2, 34, true));
+		invoices.add(new Invoice(1045, employees.get(0), customers.get(2), invoiceProducts2, 31, false));
+		invoices.add(new Invoice(1046, employees.get(1), customers.get(2), invoiceProducts2, 66, false));
+		invoices.add(new Invoice(1047, employees.get(0), customers.get(2), invoiceProducts2, 67, false));
+		invoices.add(new Invoice(1048, employees.get(1), customers.get(4), invoiceProducts2, 52, false));
+		invoices.add(new Invoice(1049, employees.get(1), customers.get(4), invoiceProducts2, 41, false));
+		invoices.add(new Invoice(1050, employees.get(0), customers.get(5), invoiceProducts3, 46, true));
 		
+	}
+	
+	public void fillComboBox(){
+		//get comboBox contents
+		for(Invoice invoice: invoices){
+			editExistingInvoiceNums.add(Integer.toString(invoice.getId()));
+		}
+		for(Customer customer: customers){
+			editExistingCustomerInvoiceNums.add(Integer.toString(customer.getCustId()));
+		}
 	}
 
 	
 
-		//Handler for edit invoice by id button
-		private class EditInvoiceButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){//handler starts
-				int id = 0;
-				String s = "";
-				productInvoiceJTextArea.setText("Product Details\n");
-				try {
-					id = Integer.parseInt( editInvoiceJTextField.getText().trim() );
-				}
-				catch (NumberFormatException nfe){
-					editInvoiceJTextField.setText("");
-				}
-				int invoiceID = verifyInvoiceID(id);
-				if(invoiceID == 1){
-					for(Invoice invoice: invoices){
-						if(id == invoice.getId()){
-							editCustomerInvoiceComponentsJPanel.setVisible(false);
-							editInvoiceComponentsJPanel.setVisible(true);
-							saveInvoiceComponentsJPanel.setVisible(true);
-							editInvoiceProductsComponentsJPanel.setVisible(true);
-							editInvoiceId.setText(Integer.toString(id));
-							editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
-							editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
-							for(InvoiceProduct ip: invoice.getInvoiceProducts()){
-										s = "\nProduct Title: " + ip.getProduct().getTitle() + 
-												"     ||    Quantity: " + Integer.toString(ip.getQuantity());
-										productInvoiceJTextArea.append(s);								
-								}	
-							editInvoiceAmount.setText(Double.toString(invoice.getTotalInvoicePrice()));
-							if(invoice.isPaid() == false){
-								editPayStatus.setText("Unpaid");
-								editPayStatus.setForeground(Color.RED);
-							}
-							if(invoice.isPaid()){
-								editPayStatus.setText("Paid");
-								editPayStatus.setForeground(Color.BLACK);
-							}
-						}
-					}	
-				}
-				else if(invoiceID == 2){
-					//no invoice id match
-					JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-					editCustomerInvoiceComponentsJPanel.setVisible(false);
-					editInvoiceComponentsJPanel.setVisible(false);
-					saveInvoiceComponentsJPanel.setVisible(false);
-					editInvoiceProductsComponentsJPanel.setVisible(false);
-				}
-			}
-					
-				
-			public int verifyInvoiceID(int id) {
-		    	int count = 0;
-		    	int validID = 0;
+	//Handler for edit invoice by id button
+	private class EditInvoiceButtonHandler implements ActionListener{
+		public void actionPerformed( ActionEvent e){//handler starts
+			int id = 0;
+			String s = (String)editComboBoxInvoice.getSelectedItem();
+			id = Integer.parseInt( s );
+			productInvoiceJTextArea.setText("Product Details\n");
+			int invoiceID = verifyInvoiceID(id);
+			if(invoiceID == 1){
 				for(Invoice invoice: invoices){
 					if(id == invoice.getId()){
-						count++;
-						validID = 1;
+						editCustomerInvoiceComponentsJPanel.setVisible(false);
+						editInvoiceComponentsJPanel.setVisible(true);
+						saveInvoiceComponentsJPanel.setVisible(true);
+						editInvoiceProductsComponentsJPanel.setVisible(true);
+						editInvoiceId.setText(Integer.toString(id));
+						editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
+						editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
+						for(InvoiceProduct ip: invoice.getInvoiceProducts()){
+									s = "\nProduct Title: " + ip.getProduct().getTitle() + 
+											"     ||    Quantity: " + Integer.toString(ip.getQuantity());
+									productInvoiceJTextArea.append(s);								
+							}	
+						editInvoiceAmount.setText(Double.toString(invoice.getTotalInvoicePrice()));
+						if(invoice.isPaid() == false){
+							editPayStatus.setText("Unpaid");
+							editPayStatus.setForeground(Color.RED);
+						}
+						if(invoice.isPaid()){
+							editPayStatus.setText("Paid");
+							editPayStatus.setForeground(Color.BLACK);
+						}
 					}
 				}	
-				if(count == 0){
-					validID = 2;
-				}
-				return validID;
+			}
+			else if(invoiceID == 2){
+				//no invoice id match
+				JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+				editCustomerInvoiceComponentsJPanel.setVisible(false);
+				editInvoiceComponentsJPanel.setVisible(false);
+				saveInvoiceComponentsJPanel.setVisible(false);
+				editInvoiceProductsComponentsJPanel.setVisible(false);
 			}
 		}
+	}
+	public int verifyInvoiceID(int id) {
+    	int count = 0;
+    	int validID = 0;
+		for(Invoice invoice: invoices){
+			if(id == invoice.getId()){
+				count++;
+				validID = 1;
+			}
+		}	
+		if(count == 0){
+			validID = 2;
+		}
+		return validID;
+	}
 						
 		//Handler for deliver orders by supplier button
 		private class editSupplierOrderButtonHandler implements ActionListener{
@@ -3654,16 +3666,11 @@ public class RetailGUI extends JFrame{
 		private class EditCustomerInvoiceButtonHandler implements ActionListener{
 			public void actionPerformed( ActionEvent e){//handler starts
 					int count = 0, count1 = 0;;
-					String s = "";
+					String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+					int id = Integer.parseInt( s );
 					double total = 0;
 					String totalString = "";
-					int id = 0, customerID = 1;
-					try {
-						id = Integer.parseInt( editCustomerInvoiceJTextField.getText().trim() );
-					}
-					catch (NumberFormatException nfe){
-						editCustomerInvoiceJTextField.setText("");
-					}
+					int customerID = 1;
 					for(Customer customer: customers){
 						if(id == customer.getCustId()){
 							count1++;
@@ -3683,7 +3690,7 @@ public class RetailGUI extends JFrame{
 							if(id == invoice.getCustomer().getCustId() ){
 								if(invoice.isPaid() == false){
 									s = "\nInvoice Id : " + invoice.getId() + 
-											"\nDate: " + invoice.getInvoiceDate()+ "\nTotal: " + 
+											"\nDate: " + sdf.format(invoice.getInvoiceDate())+ "\nTotal: " + 
 											invoice.getTotalInvoicePrice() + "\n";
 									customerInvoiceJTextArea.append(s);
 									total = total + invoice.getTotalInvoicePrice();
@@ -3706,6 +3713,7 @@ public class RetailGUI extends JFrame{
 						editCustomerInvoiceComponentsJPanel.setVisible(false);
 						editInvoiceComponentsJPanel.setVisible(false);
 						saveInvoiceComponentsJPanel.setVisible(false);
+						editInvoiceProductsComponentsJPanel.setVisible(false);
 					}
 				}
 			}
@@ -3716,18 +3724,16 @@ public class RetailGUI extends JFrame{
 				int invId = 0;						
 				int empId = 0;
 				int custId = 0;
-				//String productId = editInvoiceProduct.getText().trim();
-				//int qty = 0;
-				int currentId = Integer.parseInt(editInvoiceJTextField.getText().trim());
-				int count1 = 0, count2 = 0, count3 = 0;
+				int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
+				String s = (String)editComboBoxInvoice.getSelectedItem();
+				int currentId = Integer.parseInt( s );
+				int count1 = 0, count2 = 0;
 				Employee emp = employees.get(0);
 				Customer cust = customers.get(0);
-				//Product prod = products.get(0);
 				try{
 					invId = Integer.parseInt(editInvoiceId.getText().trim());
 					empId = Integer.parseInt(editInvoiceEmployee.getText().trim());
 					custId = Integer.parseInt(editInvoiceCustomer.getText().trim());
-					//qty = Integer.parseInt(editInvoiceQuantity.getText().trim());
 				}
 				catch(NumberFormatException nfe){
 					invalidId();
@@ -3743,26 +3749,19 @@ public class RetailGUI extends JFrame{
 						cust = customer;
 						count2++;
 					}
-				}						
-			/*	for(Product product: products){
-					if(productId.equals(product.getProductCode())){
-						prod = product;
-						count3++;						
-					}
-				}
-				*/					
-				if (count1 != 0 && count2 != 0 && count3 != 0){
+				}											
+				if (count1 != 0 && count2 != 0){
 					for(Invoice invoice: invoices){
 						if(currentId == invoice.getId()){
 							invoice.setId(invId);
 							invoice.setEmployee(emp);
 							invoice.setCustomer(cust);
-						//	invoice.setProduct(prod);
-						//	invoice.setQuantity(qty);
 						}
 					}
-					editInvoiceJTextField.setText(Integer.toString(currentId));
 					JOptionPane.showMessageDialog(null, "Updated!");
+					editComboBoxInvoice.removeAllItems();
+					fillComboBox();
+					editComboBoxInvoice.setSelectedItem(editExistingInvoiceNums.get(comboIndex));
 					editInvoiceJButton.doClick();
 				}
 				else if(count1 == 0){
@@ -3773,10 +3772,6 @@ public class RetailGUI extends JFrame{
 					JOptionPane.showMessageDialog(null, "Invalid Customer Id!");
 					editInvoiceJButton.doClick();
 				}
-				/*else if(count3 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Product Id!");
-					editInvoiceJButton.doClick();
-				}	*/
 			}
 			public void invalidId(){
 				JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
