@@ -10,6 +10,7 @@ public class Employee {
     private int access;
     private double salary;
     private int password;
+    
     public Employee(int employeeId, String employeeName, int access,
             double salary, int password) {
         this.employeeId = employeeId;

@@ -22,13 +22,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 import javax.swing.ScrollPaneConstants;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 @SuppressWarnings("serial")
 public class RetailGUI extends JFrame{
@@ -86,7 +95,10 @@ public class RetailGUI extends JFrame{
 	private JPanel viewOrderRightJPanel = new JPanel();
 	private JPanel editOrderJPanel = new JPanel();
 	
-	private JPanel accessJPanel = new JPanel();
+	private JPanel employeeJPanel = new JPanel();
+	private JPanel viewEmployeeJPanel = new JPanel();
+	private JPanel editEmployeeJPanel = new JPanel();
+	
 	private JPanel proflossJPanel = new JPanel();
 	
 	//login components
@@ -171,6 +183,45 @@ public class RetailGUI extends JFrame{
 	private JTextField editSupplierDelivery = new JTextField();
 	private JButton saveSupplierJButton = new JButton("Update Supplier");
 	private JButton deleteSupplierJButton = new JButton("Delete Supplier");
+	
+	//Employee Components
+	//TODO
+	private JLabel employeeId = new JLabel("Employee ID ");
+	private JTextField employeeIdField = new JTextField();
+	private JLabel  employeeName = new JLabel("Employee Name ");
+	private JTextField employeeNameField = new JTextField();
+	private JLabel employeeAcess = new JLabel("Access Level ");
+	private JTextField employeeAcessField = new JTextField();
+	private JLabel employeeSalary = new JLabel("Employee Salary");
+	private JTextField employeeSalaryField = new JTextField();
+	private JLabel employeePassword = new JLabel("Employee Password");
+	private JTextField employeePassField = new JTextField();
+	private JButton employeeJButton = new JButton("Create New Employee");
+	private JLabel viewEmpId = new JLabel("View By ID");
+	private JTextField viewEmpIdField = new JTextField();
+	private JButton viewEmpIdButton = new JButton("Search Employees");
+	private JLabel viewEmpName = new JLabel("View By Name");
+	private JTextField viewEmpNameField = new JTextField();
+	private JButton viewEmpNameButton = new JButton("Search Employees");
+	private JLabel viewEmpAll = new JLabel("View All Employees");
+	private JButton viewEmpAllButton = new JButton("View All");
+	private JTextArea empJTextArea = new JTextArea(10, 65);
+	
+	private JLabel editFindById = new JLabel("Enter Employee ID ");
+	private JTextField editFindByIdField = new JTextField();
+	private JButton editById = new JButton("Find Employee Details");
+	private JLabel editEmpId = new JLabel("Employee Id");
+	private JTextField editEmpIdField = new JTextField();
+	private JLabel editEmpName = new JLabel("Employee Name");
+	private JTextField editEmpNameField = new JTextField();
+	private JLabel editEmpAccess = new JLabel("Employee Access Level");
+	private JTextField editEmpAccessField = new JTextField();
+	private JLabel editEmpSalary = new JLabel("Employee Salary");
+	private JTextField editEmpSalaryField = new JTextField();
+	private JLabel editEmpPassword = new JLabel("Employee Password");
+	private JTextField editEmpPasswordField = new JTextField();
+	private JButton updateEmployee = new JButton("Update Employee");
+	private JButton deleteEmployee = new JButton("Delete Employee");
 	
 	//Product Components
 	private JLabel prodTitle = new JLabel("Book Title");
@@ -286,7 +337,10 @@ public class RetailGUI extends JFrame{
 	private JComboBox<String> comboBoxCustomer;
 	//==========================================
 	
+	///============Components for Pie Chart ============================
+		private DefaultPieDataset pieDataset = new DefaultPieDataset();
 	//=========================================
+		
 	//Marc: Create a new Invoice Panel
 	
 	//Panel
@@ -549,10 +603,277 @@ public class RetailGUI extends JFrame{
 		orderJTabbedPane.add("View Orders", viewOrderJPanel);
 		orderJTabbedPane.add("Edit Orders", editOrderJPanel);
 		
-		accessJTabbedPane.add("Coming Soon", accessJPanel);
-		accessJTabbedPane.setEnabled(false);
+		accessJTabbedPane.add("Create Employee", employeeJPanel);
+		accessJTabbedPane.add("View Employee", viewEmployeeJPanel);
+		accessJTabbedPane.add("Edit Employee", editEmployeeJPanel);
+		
 		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
-		proflossJTabbedPane.setEnabled(false);
+		proflossJTabbedPane.setEnabled(false);	
+		
+		employeeJPanel.setLayout(new GridBagLayout());
+		gc.gridx = 0;
+		gc.gridy = 1;
+		employeeId.setPreferredSize(d);
+		employeeJPanel.add(employeeId, gc);
+		gc.gridx = 0;
+		gc.gridy = 2;
+		employeeIdField.setPreferredSize(d);
+		employeeJPanel.add(employeeIdField, gc);
+		gc.gridx = 0;
+		gc.gridy = 3;
+		employeeName.setPreferredSize(d);
+		employeeJPanel.add(employeeName, gc);
+		gc.gridx = 0;
+		gc.gridy = 4;
+		employeeNameField.setPreferredSize(d);
+		employeeJPanel.add(employeeNameField, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		employeeAcess.setPreferredSize(d);
+		employeeJPanel.add(employeeAcess, gc);
+		gc.gridx = 0;
+		gc.gridy = 6;
+		employeeAcessField.setPreferredSize(d);
+		employeeJPanel.add(employeeAcessField, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
+		employeeSalary.setPreferredSize(d);
+		employeeJPanel.add(employeeSalary, gc);
+		gc.gridx = 0;
+		gc.gridy = 8;
+		employeeSalaryField.setPreferredSize(d);
+		employeeJPanel.add(employeeSalaryField, gc);
+		gc.gridx = 0;
+		gc.gridy = 9;
+		employeePassword.setPreferredSize(d);
+		employeeJPanel.add(employeePassword, gc);
+		gc.gridx = 0;
+		gc.gridy = 10;
+		employeePassField.setPreferredSize(d);
+		employeeJPanel.add(employeePassField, gc);
+		gc.gridx = 0;
+		gc.gridy = 11;
+		employeeJButton.setPreferredSize(d);
+		employeeJPanel.add(employeeJButton, gc);
+		viewEmployeeJPanel.setLayout(new GridBagLayout());
+		gc.gridx = 0;
+		gc.gridy = 1;
+		viewEmpId.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpId, gc);
+		gc.gridx = 0;
+		gc.gridy = 2;
+		viewEmpIdField.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpIdField, gc);
+		gc.gridx = 0;
+		gc.gridy = 3;
+		viewEmpIdButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpIdButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 4;
+		viewEmpName.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpName, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		viewEmpNameField.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpNameField, gc);
+		gc.gridx = 0;
+		gc.gridy = 6;
+		viewEmpNameButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpNameButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
+		viewEmpAll.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpAll, gc);
+		gc.gridx = 0;
+		gc.gridy = 8;
+		viewEmpAllButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpAllButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 9;
+		JScrollPane empScrollPane = new JScrollPane(empJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		viewEmployeeJPanel.add(empScrollPane, gc);
+		
+		editEmployeeJPanel.setLayout(new GridBagLayout());
+		gc.gridx = 0;
+		gc.gridy = 1;
+		editFindById.setPreferredSize(d);
+		editEmployeeJPanel.add(editFindById, gc);
+		gc.gridx = 0;
+		gc.gridy = 2;
+		editFindByIdField.setPreferredSize(d);
+		editEmployeeJPanel.add(editFindByIdField, gc);
+		gc.gridx = 0;
+		gc.gridy = 3;
+		editById.setPreferredSize(d);
+		editEmployeeJPanel.add(editById, gc);
+		gc.gridx = 0;
+		gc.gridy = 4;
+		editEmpId.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpId, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		editEmpIdField.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpIdField, gc);
+		gc.gridx = 0;
+		gc.gridy = 6;
+		editEmpName.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpName, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
+		editEmpNameField.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpNameField, gc);
+		gc.gridx = 0;
+		gc.gridy = 8;
+		editEmpAccess.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpAccess, gc);
+		gc.gridx = 0;
+		gc.gridy = 9;
+		editEmpAccessField.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpAccessField, gc);
+		gc.gridx = 0;
+		gc.gridy = 10;
+		editEmpSalary.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpSalary, gc);
+		gc.gridx = 0;
+		gc.gridy = 11;
+		editEmpSalaryField.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpSalaryField, gc);
+		gc.gridx = 0;
+		gc.gridy = 12;
+		editEmpPassword.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpPassword, gc);
+		gc.gridx = 0;
+		gc.gridy = 13;
+		editEmpPasswordField.setPreferredSize(d);
+		editEmployeeJPanel.add(editEmpPasswordField, gc);
+		gc.gridx = 0;
+		gc.gridy = 14;
+		updateEmployee.setPreferredSize(d);
+		editEmployeeJPanel.add(updateEmployee, gc);
+		gc.gridx = 0;
+		gc.gridy = 15;
+		deleteEmployee.setPreferredSize(d);
+		editEmployeeJPanel.add(deleteEmployee, gc);
+
+		
+		employeeJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
+				employees.add(employee);
+			}
+
+		});
+		
+		viewEmpIdButton.addActionListener(new ActionListener(){
+			// function to view a customer by id or name
+			public void actionPerformed(ActionEvent e){
+			if(employees.size() >= 1){
+					try{
+						for(Employee employee: employees){
+						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdField.getText())){
+							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+									+"\n Employee Name: " +employee.getEmployeeName() 
+									+"\n Employee Access Level: " +employee.getAccess()
+									+"\n Employee Password: " +employee.getPassword()
+									+"\n Employee Salary: " +employee.getSalary());
+							}
+						}
+					}catch(NumberFormatException nfe){
+						JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Employees Found");
+				}
+			}
+		});
+		
+		viewEmpNameButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				// view by employee name
+				for(Employee employee: employees){
+					if(employee.getEmployeeName().equalsIgnoreCase(viewEmpNameField.getText())){
+						empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+					+"\n Employee Name: " +employee.getEmployeeName() 
+					+"\n Employee Access Level: " +employee.getAccess()
+					+"\n Employee Password: " +employee.getPassword()
+					+"\n Employee Salary: " +employee.getSalary());
+					}
+				}
+			}
+
+		});
+		
+		viewEmpAllButton.addActionListener(new ActionListener(){
+			// function to view all employees
+			public void actionPerformed(ActionEvent e){
+				empJTextArea.setText(null);
+					if(employees.size() >= 1){
+						for(Employee employee: employees){
+							empJTextArea.append("\n Employee ID: "+employee.getEmployeeId()
+							+"\n Employee Name: " +employee.getEmployeeName() 
+							+"\n Employee Access Level: " +employee.getAccess()
+							+"\n Employee Password: " +employee.getPassword()
+							+"\n Employee Salary: " +employee.getSalary()+"\n");
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, "No Customers Found");
+					}
+			}
+		});
+		
+		editById.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					for(Employee employee: employees){
+						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+							editEmpIdField.setText(Integer.toString(employee.getEmployeeId()));
+							editEmpNameField.setText(employee.getEmployeeName());
+							editEmpAccessField.setText(Integer.toString(employee.getAccess()));
+							editEmpSalaryField.setText(Double.toString(employee.getSalary()));
+							editEmpPasswordField.setText(Integer.toString(employee.getPassword()));
+						}
+					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+				}
+			}
+		});
+		
+		updateEmployee.addActionListener(new ActionListener(){
+			//update a specific customer
+			public void actionPerformed(ActionEvent e){
+				try{
+					for(Employee employee: employees){
+						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+							employee.setEmployeeId(Integer.parseInt(editEmpIdField.getText()));
+							employee.setEmployeeName(editEmpNameField.getText());
+							employee.setAccess(Integer.parseInt(editEmpAccessField.getText()));
+							employee.setSalary(Double.parseDouble(editEmpSalaryField.getText()));
+							employee.setPassword(Integer.parseInt(editEmpPasswordField.getText()));
+							JOptionPane.showMessageDialog(null, "Employee Updated");
+						}
+					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+				}
+			}
+		});
+		
+		deleteEmployee.addActionListener(new ActionListener(){
+			//delete function for employee
+			public void actionPerformed(ActionEvent arg){
+				try{
+					for(Employee employee: employees){
+						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+							employees.remove(employee);
+							JOptionPane.showMessageDialog(null, "Employee Deleted");
+						}
+					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
+				}
+			}
+		});
 		
 		addCustJPanel.setLayout(new GridBagLayout());
 		viewCustJPanel.setLayout(new GridBagLayout());
@@ -732,11 +1053,10 @@ public class RetailGUI extends JFrame{
 			// function to view all customers
 			public void actionPerformed(ActionEvent e){
 				custJTextArea.setText(null);
-				try{
 					if(customers.size() >= 1){
 						for(Customer customer: customers){
 							
-							custJTextArea.append(" Customer Id: "+customer.getCustId()
+							custJTextArea.append("\n Customer Id: "+customer.getCustId()
 										+"\n Customer Name: "+customer.getCustName()
 										+"\n Customer Address: "+customer.getCustAddress()
 										+"\n Customer Email: "+customer.getCustEmail()
@@ -746,9 +1066,6 @@ public class RetailGUI extends JFrame{
 					}else{
 						JOptionPane.showMessageDialog(null, "No Customers Found");
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
-				}
 			}
 		});
 		
@@ -992,22 +1309,18 @@ public class RetailGUI extends JFrame{
 			// view all suppliers
 			public void actionPerformed(ActionEvent e){
 				supplierJTextArea.setText(null);
-				try{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
-							supplierJTextArea.append(" Supplier Id: "+supplier.getId()
+							supplierJTextArea.append("\n Supplier Id: "+supplier.getId()
 									+"\n Supplier Name: "+supplier.getName()
 									+"\n Supplier Address: "+supplier.getAddress()
 									+"\n Supplier Email: "+supplier.getEmail()
 									+"\n Supplier Phone: "+supplier.getPhone()
-									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver()+"\n");
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Suppliers Found");
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Id should be a number.");
-				}
 			}
 		});
 		
@@ -2051,6 +2364,44 @@ public class RetailGUI extends JFrame{
 				
 			}
 		});
+		
+		//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
+				JButton invoicesPieChart = new JButton(" Paid Vs. Unpaid Invoices");
+				gc.gridx =1;
+				gc.gridy= 3;
+				viewCustomerPanel.add(invoicesPieChart,gc);
+				invoicesPieChart.setPreferredSize(new Dimension(200,30));
+				invoicesPieChart.addActionListener(new ActionListener(){
+				
+					public void actionPerformed(ActionEvent e){
+						//int paid = invoice.viewUnPaidInvoice(invoices);
+						int count=0;
+						int paid = invoice.countPaidInvoices(count, invoices);
+						int unpaid = (invoices.size()-paid);
+						//invoice.countPaidInvoices(, invoices);
+						//pieDataset.setValue("Paid", invoice.countPaidInvoices(buttonHeight, invoices));
+						pieDataset.setValue("Paid",paid);
+						pieDataset.setValue("UnPaid",unpaid);
+						//pieDataset.setValue("Three", new Integer(30));
+						//pieDataset.setValue("Four", new Integer(40));
+						
+						JFreeChart chart = ChartFactory.createPieChart3D("Invoice Review", pieDataset, true,true,true);
+						PiePlot3D p=(PiePlot3D)chart.getPlot();
+					//	ChartPanel chPanel = new ChartPanel(chart);
+					//	chPanel.setPreferredSize(new Dimension(785, 440));
+					//	chPanel.setMouseWheelEnabled(true);
+					//	viewCustomerPanel.add(chPanel);
+						ChartFrame frame = new ChartFrame("Pie Chart", chart);
+						frame.setVisible(true);
+						frame.setSize(450,500);
+					}
+					
+				});
+				
+				//===============================================================================================
+		
+		
+		
 	
 		//==============================================
 		//Marc: Create Invoice Functionality
@@ -2537,6 +2888,29 @@ public class RetailGUI extends JFrame{
 				}
 			}
 		});
+		
+		JButton costGraph = new JButton ("stock by cost price graph");
+		productGC.gridx = 0;
+		productGC.gridy = 6;
+		viewProductDetails.add(costGraph,productGC);
+		
+		costGraph.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				DefaultCategoryDataset costData = new DefaultCategoryDataset();
+				costData.setValue(product.quantityByCost(0.01, 1.99, products), "Price", "under 2");
+				costData.setValue(product.quantityByCost(2.00, 3.00, products), "Price", "2 to 3");
+				costData.setValue(product.quantityByCost(3.01, 5.00, products), "Price", "3 to 5");
+				costData.setValue(product.quantityByCost(5.01, 200.99, products), "Price", "over 5");
+			
+				JFreeChart costChart = ChartFactory.createBarChart("Cost price chart", "Price range", "Stock quantity", costData, PlotOrientation.VERTICAL, false, true, false);
+				CategoryPlot p = costChart.getCategoryPlot();
+				p.setRangeGridlinePaint(Color.BLACK);
+				ChartFrame retailGraphFrame = new ChartFrame("stock value chart",costChart);
+				retailGraphFrame.setVisible(true);
+				retailGraphFrame.setSize(450, 350);
+			}
+		});
+		
 
 		//Button 8: to search stock by quantity range
 		JButton searchByQuantity = new JButton ("Search by quantity");

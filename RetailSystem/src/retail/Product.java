@@ -14,7 +14,7 @@ public class Product {
 	private int maxStock;
 	private int minStock;
 	
-	private Supplier supplier; // or just supplierId ??
+	private Supplier supplier;
 
 	public Supplier getSupplier() {
 		return supplier;
@@ -162,6 +162,18 @@ public class Product {
 			return list;
 		}
 	}
+	
+	public int quantityByCost(double minPrice, double maxPrice, ArrayList<Product> products) {
+		int amount = 0;
+		for (Product p : products) {
+			if (p.getCostPrice() >= minPrice & p.getCostPrice() < maxPrice){
+			amount = amount += p.getCurrentStock();
+			}
+		}
+				return amount;
+			}
+		
+
 	
 	//again to check stock levels in a range, under 50, over 100 etc
 	public String viewProductbyQuantity(int minQuantity,int maxQuantity, ArrayList<Product> products) {
