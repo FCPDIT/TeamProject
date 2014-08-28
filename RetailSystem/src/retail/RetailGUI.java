@@ -2487,7 +2487,7 @@ public class RetailGUI extends JFrame{
 				pieDataset.setValue(fourth, fou);
 				pieDataset.setValue(fifth, fift);
 				
-				JFreeChart chart = ChartFactory.createPieChart3D("Most Common", pieDataset, true, true, true); //3D pie chart
+				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Highest Selling", pieDataset, true, true, true); //3D pie chart
 				PiePlot3D p = (PiePlot3D)chart.getPlot();
 				ChartFrame frame = new ChartFrame("Pie Chart", chart);
 				frame.setVisible(true);
@@ -2564,7 +2564,7 @@ public class RetailGUI extends JFrame{
 				pieDataset.setValue(fourth, fou);
 				pieDataset.setValue(fifth, fift);
 				
-				JFreeChart chart = ChartFactory.createPieChart3D("Most Common", pieDataset, true, true, true); //3D pie chart
+				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Lowest Selling", pieDataset, true, true, true); //3D pie chart
 				PiePlot3D p = (PiePlot3D)chart.getPlot();
 				ChartFrame frame = new ChartFrame("Pie Chart", chart);
 				frame.setVisible(true);
@@ -3227,7 +3227,7 @@ public class RetailGUI extends JFrame{
 		invoices.add(new Invoice(1001, employees.get(0), customers.get(0), invoiceProducts1, 1));
 		invoices.add(new Invoice(1002, employees.get(1), customers.get(1), invoiceProducts2, 1));
 		invoices.add(new Invoice(1003, employees.get(0), customers.get(2), invoiceProducts3, 1));
-		/*invoices.add(new Invoice(1004, employees.get(1), customers.get(3), invoiceProducts3, 10));
+		invoices.add(new Invoice(1004, employees.get(1), customers.get(3), invoiceProducts3, 10));
 		invoices.add(new Invoice(1005, employees.get(0), customers.get(4), invoiceProducts2, 10));
 		invoices.add(new Invoice(1006, employees.get(1), customers.get(5), invoiceProducts1, 10));
 		invoices.add(new Invoice(1007, employees.get(0), customers.get(1), invoiceProducts1, 10));
@@ -3273,7 +3273,7 @@ public class RetailGUI extends JFrame{
 		invoices.add(new Invoice(1047, employees.get(0), customers.get(2), invoiceProducts2, 67));
 		invoices.add(new Invoice(1048, employees.get(1), customers.get(4), invoiceProducts2, 52));
 		invoices.add(new Invoice(1049, employees.get(1), customers.get(4), invoiceProducts2, 41));
-		invoices.add(new Invoice(1050, employees.get(0), customers.get(5), invoiceProducts3, 46));*/
+		invoices.add(new Invoice(1050, employees.get(0), customers.get(5), invoiceProducts3, 46));
 		
 	}
 
