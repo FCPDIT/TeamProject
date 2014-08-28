@@ -1,6 +1,7 @@
 package retail;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 //the Order class holds an ArrayList of OrderProducts within each instance
@@ -14,6 +15,8 @@ public class Order {
 	private ArrayList<OrderProduct> listOfProductsOrdered = new ArrayList<OrderProduct>();
 	private int supplierUniqueId;
 	private boolean delivered = false;
+	private Date orderDate;
+	private double totalOrderPrice;
 	
 	public Order(){
 		
@@ -23,14 +26,44 @@ public class Order {
 		this.orderUniqueId = orderUniqueId;
 		this.supplierUniqueId = supplierUniqueId;
 		this.addToProductList(productOrdered);
+		orderDate = new Date();
+		totalOrderPrice = calculateOrderTotal();
 	}
 	
 	public Order(int orderUniqueId, int supplierUniqueId, ArrayList<OrderProduct> OrderProductList) {
 		this.orderUniqueId = orderUniqueId;
 		this.supplierUniqueId = supplierUniqueId;
 		this.listOfProductsOrdered = OrderProductList;
+		orderDate = new Date();
+		totalOrderPrice = calculateOrderTotal();
 	}
 	
+	public double calculateOrderTotal(){
+		
+		double amount = 0.0;
+		
+		for(OrderProduct productOrdered: this.listOfProductsOrdered){
+			amount += productOrdered.getProduct().getCostPrice() * productOrdered.getQuantity();
+		}
+		return amount;
+	}
+	
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public double getTotalOrderPrice() {
+		return totalOrderPrice;
+	}
+
+	public void setTotalOrderPrice(double totalOrderPrice) {
+		this.totalOrderPrice = totalOrderPrice;
+	}
+
 	public void addToProductList(OrderProduct ProductOrdered){
 		this.listOfProductsOrdered.add(ProductOrdered);
 	}
@@ -130,8 +163,8 @@ public class Order {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: €" + product.getCostPrice() +
-							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: ï¿½" + product.getCostPrice() +
+							"\n Retail Price: ï¿½" + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -166,8 +199,8 @@ public class Order {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: €" + product.getCostPrice() +
-							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: ï¿½" + product.getCostPrice() +
+							"\n Retail Price: ï¿½" + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -202,8 +235,8 @@ public class Order {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: €" + product.getCostPrice() +
-							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: ï¿½" + product.getCostPrice() +
+							"\n Retail Price: ï¿½" + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -260,8 +293,8 @@ public class Order {
 					"\n Supplier: " + product.getSupplier().getName() +
 					"\n Max Stock: " + product.getMaxStock() +
 					"\n Min Stock: " + product.getMinStock() +
-					"\n Cost Price: €" + product.getCostPrice() +
-					"\n Retail Price: €" + product.getRetailPrice() +"\n" + "\n------------";
+					"\n Cost Price: ï¿½" + product.getCostPrice() +
+					"\n Retail Price: ï¿½" + product.getRetailPrice() +"\n" + "\n------------";
 		}
 		return result;
 	}
