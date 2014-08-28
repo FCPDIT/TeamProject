@@ -11,7 +11,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -317,7 +330,7 @@ public class RetailGUI extends JFrame{
 
 		
 	//===========================================
-	//View Customer Invoice Panel and Components
+	//TODO Marc: View Customer Invoice Panel and Components
 		
 	//Panel
 	private JPanel viewCustomerPanel = new JPanel();
@@ -335,6 +348,16 @@ public class RetailGUI extends JFrame{
 	private Vector<String> existingCustomerId = new Vector<>();
 	private DefaultComboBoxModel<String> listOfCustomers = new DefaultComboBoxModel<>(existingCustomerId); //create the combo box
 	private JComboBox<String> comboBoxCustomer;
+	
+	//=========Marc: Components for higher and lower Pie Chart==========
+	private ArrayList<String> productCodes;
+	private int[] countsHigher; //needed in main
+	private int[] countsLower;  //needed in main
+	private JButton highestSellingButton; 
+	private JButton lowsetsellingButton;
+	private int topNum = 5;
+	
+	//End
 	//==========================================
 	
 	///============Components for Pie Chart ============================
@@ -502,18 +525,31 @@ public class RetailGUI extends JFrame{
 		products.add(new Product("Water for Elephants", "Sara Gruen", "0019", 11.99, 3.02,15,20,10,suppliers.get(0)));
 		products.add(new Product("The Da Vinci Code", "Dan Brown", "0020", 7.99, 1.93,15,20,10,suppliers.get(4)));
 		products.add(new Product("The Curious Incident of the Dog in the Night-Time", "Mark Haddon", "0021", 7.99, 1.92,15,20,10,suppliers.get(4)));
+		
 		//Add ArrayList of InvoiceProduct for Invoice Constructor
-		invoiceProducts1.add(new InvoiceProduct(products.get(0), 5));
-		invoiceProducts2.add(new InvoiceProduct(products.get(1), 10));
-		invoiceProducts2.add(new InvoiceProduct(products.get(2), 8));
-		invoiceProducts3.add(new InvoiceProduct(products.get(4), 20));
-		invoiceProducts3.add(new InvoiceProduct(products.get(6), 10));
-		invoiceProducts3.add(new InvoiceProduct(products.get(10), 15));
-		invoiceProducts3.add(new InvoiceProduct(products.get(20), 5));
+		invoiceProducts1.add(new InvoiceProduct(products.get(0), 1));
+		invoiceProducts1.add(new InvoiceProduct(products.get(1), 2));
+		invoiceProducts1.add(new InvoiceProduct(products.get(2), 3));
+		invoiceProducts1.add(new InvoiceProduct(products.get(3), 31));
+		invoiceProducts1.add(new InvoiceProduct(products.get(4), 6));
+		invoiceProducts2.add(new InvoiceProduct(products.get(5), 89));
+		invoiceProducts2.add(new InvoiceProduct(products.get(6), 45));
+		invoiceProducts2.add(new InvoiceProduct(products.get(7), 33));
+		invoiceProducts2.add(new InvoiceProduct(products.get(8),45));
+		invoiceProducts1.add(new InvoiceProduct(products.get(9), 7));
+		invoiceProducts1.add(new InvoiceProduct(products.get(10), 22));
+		invoiceProducts1.add(new InvoiceProduct(products.get(11), 13));
+		invoiceProducts3.add(new InvoiceProduct(products.get(12), 18));
+		invoiceProducts3.add(new InvoiceProduct(products.get(13), 21));
+		invoiceProducts3.add(new InvoiceProduct(products.get(14), 24));
+		invoiceProducts3.add(new InvoiceProduct(products.get(15), 7));
+		invoiceProducts3.add(new InvoiceProduct(products.get(16), 8));
+		invoiceProducts1.add(new InvoiceProduct(products.get(17), 8));
+		invoiceProducts1.add(new InvoiceProduct(products.get(18), 100));
+		invoiceProducts1.add(new InvoiceProduct(products.get(19), 101));
+		invoiceProducts1.add(new InvoiceProduct(products.get(20), 102));
+		
 		//add some test invoices to array list
-		invoices.add(new Invoice(1, employees.get(0), customers.get(0), invoiceProducts1));
-		invoices.add(new Invoice(2, employees.get(1), customers.get(1), invoiceProducts2));
-		invoices.add(new Invoice(3, employees.get(1), customers.get(2), invoiceProducts2));
 		createInvoices();
 		//add some test orders to array list
 		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
@@ -2412,6 +2448,163 @@ public class RetailGUI extends JFrame{
 				
 			}
 		});
+		//========================== Pie Chart Highest lowest Selling ===============================
+		//TODO high low
+		highestSellingButton = new JButton("Highest selling");
+		gc.gridx = 2;
+		gc.gridy = 4;
+		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
+		viewCustomerPanel.add(highestSellingButton,gc);
+		
+		highestSellingButton.addActionListener(new ActionListener() {
+			
+			@SuppressWarnings("rawtypes")
+			@Override
+			public void actionPerformed(ActionEvent ex) {
+				productCodes = findProductCodes();
+				countsHigher = new int[productCodes.size()];
+
+				// count occuernces of each product in the invoices
+				for (Invoice v : invoices) {
+					for(InvoiceProduct inp : v.getInvoiceProducts()){
+					for(int i=0;i<productCodes.size();i++){
+						if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
+							{
+								countsHigher[i]+=inp.getQuantity();
+							}
+						}
+					}
+				}
+				
+				//Filling the hash map
+				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+				for(int i = 0;i<countsHigher.length;i++){
+					hmap.put(productCodes.get(i), countsHigher[i]);
+				}
+				
+				//Sorting the HashMap
+				Map<String, Integer> map = sortByValues(hmap, true);
+				//System.out.println("After sorting: ");
+				Set set2 = map.entrySet();
+				Iterator iterator2 = set2.iterator();
+				int counter = 0;
+				int [] popularValue = new int [topNum];
+				String [] popular = new String [topNum];
+				while (iterator2.hasNext() && counter < topNum) {
+					Map.Entry me2 = (Map.Entry) iterator2.next();
+					//System.out.print(me2.getKey() + " : ");
+					popularValue[counter] = (int) me2.getValue();
+					popular[counter] =  (String) me2.getKey();
+					counter++;
+				}
+				
+				//Fill the data
+				String first = popular[0];
+				String second = popular[1];
+				String third = popular[2];
+				String fourth = popular[3];
+				String fifth = popular[4];
+				
+				int fir = popularValue[0];
+				int sec = popularValue[1];
+				int thir = popularValue[2];
+				int fou = popularValue[3];
+				int fift = popularValue[4];
+ 				
+				DefaultPieDataset pieDataset = new DefaultPieDataset();
+				pieDataset.setValue(first, fir);
+				pieDataset.setValue(second, sec);
+				pieDataset.setValue(third, thir);
+				pieDataset.setValue(fourth, fou);
+				pieDataset.setValue(fifth, fift);
+				
+				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Highest Selling", pieDataset, true, true, true); //3D pie chart
+				PiePlot3D p = (PiePlot3D)chart.getPlot();
+				ChartFrame frame = new ChartFrame("Pie Chart", chart);
+				frame.setVisible(true);
+				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				frame.setSize(450, 500);
+			}
+		});
+		
+		lowsetsellingButton = new JButton("Lowest selling");
+		gc.gridx = 3;
+		gc.gridy = 4;
+		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
+		viewCustomerPanel.add(lowsetsellingButton,gc);
+		lowsetsellingButton.addActionListener(new ActionListener() {
+			
+			@SuppressWarnings("rawtypes")
+			@Override
+			public void actionPerformed(ActionEvent ex) {
+
+				productCodes = findProductCodes();
+				countsLower = new int[productCodes.size()];
+				
+				// count occuernces of each product in the invoices
+				for (Invoice v : invoices) {
+					for(InvoiceProduct inp : v.getInvoiceProducts()){
+					for(int i=0;i<productCodes.size();i++){
+						if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
+							{
+							countsLower[i]+=inp.getQuantity();
+							}
+						}
+					}
+				}
+				
+				//Filling the hash map
+				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+				for(int i = 0;i<countsLower.length;i++){
+					hmap.put(productCodes.get(i), countsLower[i]);
+				}
+				
+				//Sorting the HashMap
+				Map<String, Integer> map = sortByValues(hmap, false);
+				//System.out.println("After sorting: ");
+				Set set2 = map.entrySet();
+				Iterator iterator2 = set2.iterator();
+				int counter = 0;
+				int [] popularValue = new int [topNum];
+				String [] popular = new String [topNum];
+				while (iterator2.hasNext() && counter < topNum) {
+					Map.Entry me2 = (Map.Entry) iterator2.next();
+					//System.out.print(me2.getKey() + " : ");
+					popularValue[counter] = (int) me2.getValue();
+					popular[counter] =  (String) me2.getKey();
+					counter++;
+				}
+				
+				//Fill the data
+				String first = popular[0];
+				String second = popular[1];
+				String third = popular[2];
+				String fourth = popular[3];
+				String fifth = popular[4];
+				
+				int fir = popularValue[0];
+				int sec = popularValue[1];
+				int thir = popularValue[2];
+				int fou = popularValue[3];
+				int fift = popularValue[4];
+ 				
+				DefaultPieDataset pieDataset = new DefaultPieDataset();
+				pieDataset.setValue(first, fir);
+				pieDataset.setValue(second, sec);
+				pieDataset.setValue(third, thir);
+				pieDataset.setValue(fourth, fou);
+				pieDataset.setValue(fifth, fift);
+				
+				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Lowest Selling", pieDataset, true, true, true); //3D pie chart
+				PiePlot3D p = (PiePlot3D)chart.getPlot();
+				ChartFrame frame = new ChartFrame("Pie Chart", chart);
+				frame.setVisible(true);
+				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				frame.setSize(450, 500);
+			}
+		});
+		
+		//===========================================================================================
 		
 		//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
 		JButton invoicesPieChart = new JButton(" Paid Vs. Unpaid Invoices");
@@ -3569,6 +3762,41 @@ public class RetailGUI extends JFrame{
 				return false;
 			else 
 				return true;
+			
+		}
+		
+		//Method to sort the hash map
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		private static HashMap<String, Integer> sortByValues(HashMap<String, Integer> map, boolean reverse) {
+			List list = new LinkedList(map.entrySet());
+			// Defined Custom Comparator here
+			Collections.sort(list, new Comparator() {
+				public int compare(Object o1, Object o2) {
+					return ((Comparable) ((Map.Entry) (o1)).getValue())
+							.compareTo(((Map.Entry) (o2)).getValue());
+				}
+			});
+			if (reverse)
+				Collections.reverse(list);
+			// Here I am copying the sorted list in HashMap
+			// using LinkedHashMap to preserve the insertion order
+			HashMap sortedHashMap = new LinkedHashMap();
+			for (Iterator it = list.iterator(); it.hasNext();) {
+				Map.Entry entry = (Map.Entry) it.next();
+				sortedHashMap.put(entry.getKey(), entry.getValue());
+			}
+			return sortedHashMap;
+		}
+		
+		//TODO Method to get all the product codes from the ArrayList
+		public ArrayList<String> findProductCodes(){
+			ArrayList<String> returnCodeNames = new ArrayList<String>();
+			
+			for(Product p: products){
+				returnCodeNames.add(p.getProductCode());
+			}
+			
+			return returnCodeNames;
 			
 		}
 
