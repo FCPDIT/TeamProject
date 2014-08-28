@@ -2691,8 +2691,8 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 1;
 		leftPanel.add(employLbl,gc);
 		empIDComboBox = new JComboBox<String>(listOfEmpIds);
-		empIDComboBox.setPreferredSize(new Dimension(60, 20));
-		listOfEmpIds.setSelectedItem(empIdVector.get(0));
+		empIDComboBox.setPreferredSize(new Dimension(80, 20));
+		listOfEmpIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 1;
 		leftPanel.add(empIDComboBox,gc);
@@ -2703,8 +2703,8 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(custId,gc);
 			//Add Combo here
 		cusIDComboBox = new JComboBox<String>(listOfCusIds);
-		cusIDComboBox.setPreferredSize(new Dimension(60, 20));
-		listOfCusIds.setSelectedItem(cusIdVector.get(0));
+		cusIDComboBox.setPreferredSize(new Dimension(80, 20));
+		listOfCusIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 2;
 		leftPanel.add(cusIDComboBox,gc);
@@ -2714,8 +2714,8 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(prodId,gc);
 			//Add combo here
 		prodIDComboBox = new JComboBox<String>(listOfProdIds);
-		prodIDComboBox.setPreferredSize(new Dimension(60, 20));
-		listOfProdIds.setSelectedItem(prodIdVector.get(0));
+		prodIDComboBox.setPreferredSize(new Dimension(80, 20));
+		listOfProdIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 3;
 		leftPanel.add(prodIDComboBox,gc);
