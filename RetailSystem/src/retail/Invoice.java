@@ -44,12 +44,13 @@ public class Invoice {
 	}
 	
 	//3rd Constructor for test invoices with historical dates
-	public Invoice(int id, Employee employee, Customer customer, ArrayList<InvoiceProduct> invoiceProducts, int noOfDays) {
+	public Invoice(int id, Employee employee, Customer customer, ArrayList<InvoiceProduct> invoiceProducts, int noOfDays, boolean paid) {
 		this.id = id;
 		this.employee = employee;
 		this.customer = customer;
 		this.invoiceProducts = invoiceProducts;
 		this.noOfDays = noOfDays;
+		this.paid = paid;
 		invoiceDate = new Date();
 		totalInvoicePrice = calculateInvoiceTotal();
 		this.noOfDays = noOfDays;
