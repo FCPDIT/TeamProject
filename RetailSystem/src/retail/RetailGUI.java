@@ -2786,17 +2786,17 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(addMoreArrayList.size());
 				String invoiceIdStr = invTextF.getText();
-				String employeeIdStr = employTextF.getText();
-				String customerIdStr = custTextF.getText();
-				String productIdStr = prodTextF.getText();
+				String employeeIdStr = (String)empIDComboBox.getSelectedItem();
+				String customerIdStr = (String)cusIDComboBox.getSelectedItem();
+				String productIdStr = (String)prodIDComboBox.getSelectedItem();
 				String quantityStr = quantityTextF.getText();
 				
 				//Make sure all text fields are filled with RELAVENT content
 				if((invoiceIdStr.trim().equals("")||invoiceIdStr.matches(".*\\D.*"))
-					||	(employeeIdStr.trim().equals("")||employeeIdStr.matches(".*\\D.*"))
-					||	(customerIdStr.trim().equals("")||customerIdStr.matches(".*\\D.*"))
+					||	(employeeIdStr.equals("select"))
+					||	(customerIdStr.equals("select"))
 					||	(productIdStr.trim().equals(""))
-					||	(quantityStr.trim().equals("")||quantityStr.matches(".*\\D.*")))
+					||	(quantityStr.equals("select")))
 				{
 					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
