@@ -22,20 +22,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 import javax.swing.ScrollPaneConstants;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.*;
-import org.jfree.chart.plot.*;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 @SuppressWarnings("serial")
 public class RetailGUI extends JFrame{
@@ -335,7 +337,10 @@ public class RetailGUI extends JFrame{
 	private JComboBox<String> comboBoxCustomer;
 	//==========================================
 	
+	///============Components for Pie Chart ============================
+		private DefaultPieDataset pieDataset = new DefaultPieDataset();
 	//=========================================
+		
 	//Marc: Create a new Invoice Panel
 	
 	//Panel
@@ -2359,6 +2364,44 @@ public class RetailGUI extends JFrame{
 				
 			}
 		});
+		
+		//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
+				JButton invoicesPieChart = new JButton(" Paid Vs. Unpaid Invoices");
+				gc.gridx =1;
+				gc.gridy= 3;
+				viewCustomerPanel.add(invoicesPieChart,gc);
+				invoicesPieChart.setPreferredSize(new Dimension(200,30));
+				invoicesPieChart.addActionListener(new ActionListener(){
+				
+					public void actionPerformed(ActionEvent e){
+						//int paid = invoice.viewUnPaidInvoice(invoices);
+						int count=0;
+						int paid = invoice.countPaidInvoices(count, invoices);
+						int size = (invoices.size());
+						//invoice.countPaidInvoices(, invoices);
+						//pieDataset.setValue("Paid", invoice.countPaidInvoices(buttonHeight, invoices));
+						pieDataset.setValue("Paid",paid);
+						pieDataset.setValue("UnPaid",size);
+						//pieDataset.setValue("Three", new Integer(30));
+						//pieDataset.setValue("Four", new Integer(40));
+						
+						JFreeChart chart = ChartFactory.createPieChart3D("Invoice Review", pieDataset, true,true,true);
+						PiePlot3D p=(PiePlot3D)chart.getPlot();
+					//	ChartPanel chPanel = new ChartPanel(chart);
+					//	chPanel.setPreferredSize(new Dimension(785, 440));
+					//	chPanel.setMouseWheelEnabled(true);
+					//	viewCustomerPanel.add(chPanel);
+						ChartFrame frame = new ChartFrame("Pie Chart", chart);
+						frame.setVisible(true);
+						frame.setSize(450,500);
+					}
+					
+				});
+				
+				//===============================================================================================
+		
+		
+		
 	
 		//==============================================
 		//Marc: Create Invoice Functionality

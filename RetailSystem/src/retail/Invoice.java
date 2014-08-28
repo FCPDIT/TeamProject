@@ -259,6 +259,30 @@ public class Invoice {
 			}
 		}
 		
+		//============= Method to Count amount of Invoices which are paid ==============================
+		public int countPaidInvoices(int count, ArrayList<Invoice> invoices) {
+			
+			for(Invoice v : invoices){
+				if(v.isPaid()== true){
+					count++;
+					//System.out.println("Count num is" + count);		// Debug code to ensure count is working.
+	
+					//return count;
+					
+				}
+				else{
+					
+					return count;
+				}
+			}
+			return count;
+			}
+		
+		//============================================================================================
+		
+		
+		
+		
 		/**
 		 * Methods required to create a new Invoice Object:
 		 * 	1. Method to return an Employee from an ArrayList
