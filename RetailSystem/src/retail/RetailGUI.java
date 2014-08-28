@@ -2377,11 +2377,11 @@ public class RetailGUI extends JFrame{
 						//int paid = invoice.viewUnPaidInvoice(invoices);
 						int count=0;
 						int paid = invoice.countPaidInvoices(count, invoices);
-						int size = (invoices.size());
+						int unpaid = (invoices.size()-paid);
 						//invoice.countPaidInvoices(, invoices);
 						//pieDataset.setValue("Paid", invoice.countPaidInvoices(buttonHeight, invoices));
 						pieDataset.setValue("Paid",paid);
-						pieDataset.setValue("UnPaid",size);
+						pieDataset.setValue("UnPaid",unpaid);
 						//pieDataset.setValue("Three", new Integer(30));
 						//pieDataset.setValue("Four", new Integer(40));
 						
