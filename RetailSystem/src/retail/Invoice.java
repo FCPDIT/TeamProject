@@ -11,11 +11,12 @@ public class Invoice {
 	private Customer customer;
 	private Product product;
 	private int quantity;
-	private String invoiceDate;
+	private Date invoiceDate;
 	private boolean paid = false;
 	private double totalInvoicePrice;
 	private ArrayList<InvoiceProduct> invoiceProducts = new ArrayList<InvoiceProduct>();
 	private int noOfDays;
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
 
 	public Invoice() {
 	} // used for testing only
@@ -26,8 +27,7 @@ public class Invoice {
 		this.customer = customer;
 		this.employee = employee;
 		this.quantity = quantity;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
-		invoiceDate = sdf.format(new Date());  
+		invoiceDate = new Date();
 		totalInvoicePrice = product.getRetailPrice() * quantity;
 		product.setCurrentStock(product.getCurrentStock() - quantity); // Stock check must be added in the driver class
 																		
@@ -39,8 +39,7 @@ public class Invoice {
 		this.employee = employee;
 		this.customer = customer;
 		this.invoiceProducts = invoiceProducts;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
-		invoiceDate = sdf.format(new Date());
+		invoiceDate = new Date();
 		totalInvoicePrice = calculateInvoiceTotal();
 	}
 	
@@ -51,14 +50,13 @@ public class Invoice {
 		this.customer = customer;
 		this.invoiceProducts = invoiceProducts;
 		this.noOfDays = noOfDays;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
-		invoiceDate = sdf.format(new Date());
+		invoiceDate = new Date();
 		totalInvoicePrice = calculateInvoiceTotal();
 		this.noOfDays = noOfDays;
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		cal.add(Calendar.DATE, - noOfDays);
-		invoiceDate = sdf.format(cal.getTime());
+		invoiceDate = cal.getTime();
 	}
 
 	//Methods
@@ -133,11 +131,11 @@ public class Invoice {
 		return id;
 	}
 
-	public String getInvoiceDate() {
+	public Date getInvoiceDate() {
 		return invoiceDate;
 	}
 
-	public void setInvoiceDate(String invoiceDate) {
+	public void setInvoiceDate(Date invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 
@@ -176,7 +174,7 @@ public class Invoice {
 					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
 					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
 					+ "\nInvoice Total: " +  String.format("%.2f", v.calculateInvoiceTotal()) 
-					+ "\nDate: " + v.getInvoiceDate() + "\n\n";
+					+ "\nDate: " + sdf.format(v.getInvoiceDate()) + "\n\n";
 					list+="-------------------------------\n";
 				return list;
 		} else {
