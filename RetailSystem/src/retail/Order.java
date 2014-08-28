@@ -83,9 +83,9 @@ public class Order {
 			result = result + "---------------------------------------------- \n"  + "Order ID: " + order.getOrderUniqueId() 
 					+ "\n Products: " + "-----------------";
 			result += printOrderDetails(order);
-			if(result.equals("")){
-				result = "No orders found. ";
-			}
+		}
+		if(result.equals("")){
+			result = "No orders found. ";
 		}
 		return result;
 	}
@@ -135,9 +135,9 @@ public class Order {
 					break;
 				}
 			}
-			if(result.equals("")){
-				result = "No order containing a product by that author found. ";
-			}
+		}
+		if(result.equals("")){
+			result = "No order containing a product by that author found. ";
 		}
 		return result;
 	}
@@ -171,9 +171,9 @@ public class Order {
 					break;
 				}
 			}
-			if(result.equals("")){
-				result = "No order containing a product with that title found. ";
-			}
+		}
+		if(result.equals("")){
+			result = "No order containing a product with that title found. ";
 		}
 		return result;
 	}
@@ -207,9 +207,9 @@ public class Order {
 					break;
 				}
 			}
-			if(result.equals("")){
-				result = "No orders from that supplier found. ";
-			}
+		}
+		if(result.equals("")){
+			result = "No orders from that supplier found. ";
 		}
 		return result;
 	}
