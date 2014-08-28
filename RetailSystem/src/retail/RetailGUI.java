@@ -373,7 +373,7 @@ public class RetailGUI extends JFrame{
 	
 	//4 Buttons for left Panel
 	/*private JButton singleBtn = new JButton("Single Invoice");
-	private JButton multiBtn = new JButton("Multipe Invoice");*/
+	private JButton multiBtn = new JButton("Multiple Invoice");*/
 	private JButton addMoreBtn = new JButton("Add More");
 	private JButton finishBtn = new JButton("Finished");
 	private JButton resetBtn = new JButton("Reset");
@@ -401,6 +401,13 @@ public class RetailGUI extends JFrame{
 	private JTextArea createOrderScrollPaneTextArea = new JTextArea();
 	//=====
 	//viewOrder Panel components
+	private Vector<String> existingOrderIds = new Vector<>();
+	private DefaultComboBoxModel<String> listOfOrders = new DefaultComboBoxModel<>(existingOrderIds); //create the combo box
+	private JComboBox<String> viewOrderOrderIdComboBox;
+	
+	private Vector<String> existingSupplierId = new Vector<>();
+	private DefaultComboBoxModel<String> listOfSuppliers = new DefaultComboBoxModel<>(existingSupplierId); //create the combo box
+	private JComboBox<String> viewOrderSupplierIdComboBox;
 	private JButton viewOrderViewAllOrdersButton = new JButton("View All");
 	private JButton viewOrderViewDeliveredButton = new JButton("View Delivered Orders");
 	private JButton viewOrderViewUndeliveredButton = new JButton("View Undelivered Order");
@@ -413,6 +420,7 @@ public class RetailGUI extends JFrame{
 	private JLabel viewOrderAuthorLabel = new JLabel("Author: ");
 	private JButton viewOrderAuthorButton = new JButton("Find order containing a product by this author");	
 	private JTextArea viewOrderTextArea;
+	//Deprecated
 	private JTextField viewOrderOrderIdTextField = new JTextField();
 	private JTextField viewOrderSupplierIdTextField = new JTextField();
 	private JTextField viewOrderTitleTextField = new JTextField();
@@ -1908,6 +1916,13 @@ public class RetailGUI extends JFrame{
 			);
 		//createNewOrderComponents added.
 		//viewOrder components: 
+		//get the arrayList of existing order and supplier IDs for the comboBoxes
+		for(int i=0; i<orders.size(); i++){
+			existingOrderIds.add(Integer.toString(orders.get(i).getOrderUniqueId()));
+        }
+        for(int i = 0; i< suppliers.size(); i++){
+    	   	existingSupplierId.add(Integer.toString(suppliers.get(i).getId()));
+        }
 		Dimension d2 = new Dimension(300, 30);
 		Dimension size1 = getPreferredSize();
 		size1.width = 500;
@@ -1956,10 +1971,14 @@ public class RetailGUI extends JFrame{
 		viewOrderGC.gridx = 1;
 		viewOrderGC.gridy = 1;
 		viewOrderLeftJPanel.add(viewOrderOrderIdLabel, viewOrderGC);
+		//TODO comboBox order
+		viewOrderOrderIdComboBox = new JComboBox<>(listOfOrders);
+		viewOrderOrderIdComboBox.setPreferredSize(new Dimension(d));
+		listOfOrders.setSelectedItem(existingOrderIds.get(0));
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 1;
 		viewOrderOrderIdTextField.setPreferredSize(d);
-		viewOrderLeftJPanel.add(viewOrderOrderIdTextField, viewOrderGC);
+		viewOrderLeftJPanel.add(viewOrderOrderIdComboBox, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 1;
 		viewOrderOrderIdButton.setPreferredSize(d2);
@@ -1967,7 +1986,7 @@ public class RetailGUI extends JFrame{
 		viewOrderOrderIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = viewOrderOrderIdTextField.getText();
+				String input = (String) viewOrderOrderIdComboBox.getSelectedItem();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){
 					viewOrderTextArea.setText("Please enter a valid number");
 					viewOrderOrderIdTextField.setText("");
@@ -2231,6 +2250,7 @@ public class RetailGUI extends JFrame{
 		JLabel invIdlbl = new JLabel("Invoice ID: "); //Label
 		gc.gridx = 0;
 		gc.gridy = 1;
+		//TODO boobs
 		viewCustomerPanel.add(invIdlbl,gc);
 		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
 		comboBoxInvoice.setPreferredSize(new Dimension(60, 20));

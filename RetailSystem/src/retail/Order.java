@@ -99,9 +99,9 @@ public class Order {
 				result += printOrderDetails(order);
 				break;
 			}
-			if(result.equals("")){
-				result = "Order not found. ";
-			}
+		}
+		if(result.equals("")){
+			result = "Order not found. ";
 		}
 		return result;
 	}
@@ -134,9 +134,9 @@ public class Order {
 							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
 					break;
 				}
-				if(result.equals("")){
-					result = "No order containing a product by that author found. ";
-				}
+			}
+			if(result.equals("")){
+				result = "No order containing a product by that author found. ";
 			}
 		}
 		return result;
@@ -170,9 +170,9 @@ public class Order {
 							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
 					break;
 				}
-				if(result.equals("")){
-					result = "No order containing a product with that title found. ";
-				}
+			}
+			if(result.equals("")){
+				result = "No order containing a product with that title found. ";
 			}
 		}
 		return result;
@@ -206,9 +206,9 @@ public class Order {
 							"\n Retail Price: €" + product.getRetailPrice() +"\n------------";
 					break;
 				}
-				if(result.equals("")){
-					result = "No orders from that supplier found. ";
-				}
+			}
+			if(result.equals("")){
+				result = "No orders from that supplier found. ";
 			}
 		}
 		return result;
@@ -223,9 +223,9 @@ public class Order {
 				}
 				result += printOrderDetails(order);
 			}
-			if(result.equals("")){
-				result = "No delivered orders found. ";
-			}
+		}
+		if(result.equals("")){
+			result = "No delivered orders found. ";
 		}
 		return result;
 	}
