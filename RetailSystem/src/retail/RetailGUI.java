@@ -12,19 +12,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -69,6 +71,8 @@ public class RetailGUI extends JFrame{
 	public void addOrders(Order order){
 		orders.add(order);
 	}
+	
+	
 	
 	private JFrame mainJFrame = new JFrame();
 	private GridBagConstraints gc = new GridBagConstraints();
@@ -303,6 +307,12 @@ public class RetailGUI extends JFrame{
 	private ButtonGroup priceRange = new ButtonGroup();
 	private ButtonGroup quantity = new ButtonGroup();
 	
+	// TODO  Set Image Icons
+//	ImageIcon productIcon = new ImageIcon("C:/Users/James/Desktop/testA.png");
+//	ImageIcon invoiceIcon = new ImageIcon("C:/Users/James/Desktop/Invoice.png");
+			
+			
+			
 	// TODO Product Combo Box
 	private Vector<String> existingProductId = new Vector<>();
 	private DefaultComboBoxModel<String> listOfProductId = new DefaultComboBoxModel<>(existingProductId);
@@ -657,8 +667,11 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.add("Login", loginJPanel);
 		mainJTabbedPane.add("Customer Management", custJTabbedPane);
 		mainJTabbedPane.add("Supplier Management", supplyJTabbedPane);
-		mainJTabbedPane.add("Product Management", prodJTabbedPane);
-		mainJTabbedPane.add("Invoice Management", invJTabbedPane);
+//		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);		// This code was used when testing image icons 
+//		mainJTabbedPane.addTab("Invoice Management",invoiceIcon, invJTabbedPane);		// Needs more work do not delete
+		mainJTabbedPane.addTab("Product Management", prodJTabbedPane);
+		mainJTabbedPane.addTab("Invoice Management", invJTabbedPane);
+		
 		mainJTabbedPane.add("Order Management", orderJTabbedPane);
 		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
 		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
@@ -3087,15 +3100,15 @@ public class RetailGUI extends JFrame{
 				if(input.trim().equals("")){ 
 					//textarea.setText("Please enter a valid ID");	
 					JOptionPane.showMessageDialog(null, "Please Enter a Value in the ID Field");
-					viewProductIdTextField.setText("");
-					productTitleTextField.setText("");
+					//viewProductIdTextField.setText("");
+					//productTitleTextField.setText("");
 				}else{
 				
 					productTextArea.setText(product.viewProductById(input, products)); //viewInvoiceById() is in the Invoice Class
 					productTextArea.setCaretPosition(0);
-					viewProductIdTextField.setText("");
-					productTitleTextField.setText("");
-					productAuthorTextField.setText("");
+					//viewProductIdTextField.setText("");
+					//productTitleTextField.setText("");
+					//productAuthorTextField.setText("");
 					productTextArea.setCaretPosition(0);
 				}
 			}
