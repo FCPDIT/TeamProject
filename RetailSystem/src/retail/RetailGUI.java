@@ -213,9 +213,10 @@ public class RetailGUI extends JFrame{
 	private JTextField employeePassField = new JTextField();
 	private JButton employeeJButton = new JButton("Create New Employee");
 	private JLabel viewEmpId = new JLabel("View By ID");
-	private JTextField viewEmpIdField = new JTextField();
+	private JComboBox<String> empIdCombo = new JComboBox<String>();
 	private JButton viewEmpIdButton = new JButton("Search Employees");
 	private JLabel viewEmpName = new JLabel("View By Name");
+	private JComboBox<String> empNameCombo = new JComboBox<String>();
 	private JTextField viewEmpNameField = new JTextField();
 	private JButton viewEmpNameButton = new JButton("Search Employees");
 	private JLabel viewEmpAll = new JLabel("View All Employees");
@@ -223,6 +224,7 @@ public class RetailGUI extends JFrame{
 	private JTextArea empJTextArea = new JTextArea(10, 65);
 	
 	private JLabel editFindById = new JLabel("Enter Employee ID ");
+	private JComboBox<String> viewEmpIdCombo = new JComboBox<String>();
 	private JTextField editFindByIdField = new JTextField();
 	private JButton editById = new JButton("Find Employee Details");
 	private JLabel editEmpId = new JLabel("Employee Id");
@@ -682,6 +684,9 @@ public class RetailGUI extends JFrame{
 		proflossJTabbedPane.setEnabled(false);	
 		
 		employeeJPanel.setLayout(new GridBagLayout());
+		this.empIDPopulate(empIdCombo);
+		this.empNamePopulate();
+		this.empIDPopulate(viewEmpIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		employeeId.setPreferredSize(d);
@@ -733,8 +738,10 @@ public class RetailGUI extends JFrame{
 		viewEmployeeJPanel.add(viewEmpId, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		viewEmpIdField.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpIdField, gc);
+		empIdCombo.setPreferredSize(d);
+		empIdCombo.setSelectedIndex(0);
+		empIdCombo.setEditable(true);
+		viewEmployeeJPanel.add(empIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		viewEmpIdButton.setPreferredSize(d);
@@ -745,8 +752,10 @@ public class RetailGUI extends JFrame{
 		viewEmployeeJPanel.add(viewEmpName, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
-		viewEmpNameField.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpNameField, gc);
+		empNameCombo.setPreferredSize(d);
+		empNameCombo.setSelectedIndex(0);
+		empNameCombo.setEditable(true);
+		viewEmployeeJPanel.add(empNameCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
 		viewEmpNameButton.setPreferredSize(d);
@@ -762,8 +771,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 9;
 		JScrollPane empScrollPane = new JScrollPane(empJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		viewEmployeeJPanel.add(empScrollPane, gc);
-		
+		viewEmployeeJPanel.add(empScrollPane, gc);	
 		editEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -771,8 +779,10 @@ public class RetailGUI extends JFrame{
 		editEmployeeJPanel.add(editFindById, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		editFindByIdField.setPreferredSize(d);
-		editEmployeeJPanel.add(editFindByIdField, gc);
+		viewEmpIdCombo.setPreferredSize(d);
+		viewEmpIdCombo.setSelectedIndex(0);
+		viewEmpIdCombo.setEditable(true);
+		editEmployeeJPanel.add(viewEmpIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		editById.setPreferredSize(d);
@@ -841,12 +851,12 @@ public class RetailGUI extends JFrame{
 			if(employees.size() >= 1){
 					try{
 						for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdField.getText())){
-							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-									+"\n Employee Name: " +employee.getEmployeeName() 
-									+"\n Employee Access Level: " +employee.getAccess()
-									+"\n Employee Password: " +employee.getPassword()
-									+"\n Employee Salary: " +employee.getSalary());
+							if(employee.getEmployeeId()== Integer.parseInt(empIdCombo.getSelectedItem().toString())){
+								empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+										+"\n Employee Name: " +employee.getEmployeeName() 
+										+"\n Employee Access Level: " +employee.getAccess()
+										+"\n Employee Password: " +employee.getPassword()
+										+"\n Employee Salary: " +employee.getSalary());
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -862,7 +872,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				// view by employee name
 				for(Employee employee: employees){
-					if(employee.getEmployeeName().equalsIgnoreCase(viewEmpNameField.getText())){
+					if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
 						empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
 					+"\n Employee Name: " +employee.getEmployeeName() 
 					+"\n Employee Access Level: " +employee.getAccess()
@@ -896,7 +906,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+						if(employee.getEmployeeId()== Integer.parseInt(empIdCombo.getSelectedItem().toString())){
 							editEmpIdField.setText(Integer.toString(employee.getEmployeeId()));
 							editEmpNameField.setText(employee.getEmployeeName());
 							editEmpAccessField.setText(Integer.toString(employee.getAccess()));
@@ -915,7 +925,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+						if(employee.getEmployeeId() == Integer.parseInt(empIdCombo.getSelectedItem().toString())){
 							employee.setEmployeeId(Integer.parseInt(editEmpIdField.getText()));
 							employee.setEmployeeName(editEmpNameField.getText());
 							employee.setAccess(Integer.parseInt(editEmpAccessField.getText()));
@@ -935,7 +945,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent arg){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+						if(employee.getEmployeeId() == Integer.parseInt(empIdCombo.getSelectedItem().toString())){
 							employees.remove(employee);
 							JOptionPane.showMessageDialog(null, "Employee Deleted");
 						}
@@ -3826,6 +3836,18 @@ public class RetailGUI extends JFrame{
 			
 			return returnCodeNames;
 			
+		}
+		public void empIDPopulate(JComboBox<String> combo){
+			for(Employee employee: employees){
+				String str = Integer.toString(employee.getEmployeeId());
+				combo.addItem(str);
+			}
+		}
+		public void empNamePopulate(){
+			for(Employee employee: employees){
+				String str = employee.getEmployeeName();
+				empNameCombo.addItem(str);
+			}
 		}
 
 }//End class
