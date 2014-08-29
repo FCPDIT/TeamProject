@@ -296,13 +296,26 @@ public class RetailGUI extends JFrame{
 	private JTextField productTitleTextField;
 	private JTextField productAuthorTextField;
 	private JTextField viewProductIdTextField;
-	//private JTextField invTextField;
 	private JPanel viewProductDetailsPanel= new JPanel();
 	private JPanel viewProductDetails= new JPanel();
 	private int buttonWidth = 155;
 	private int buttonHeight = 20;
 	private ButtonGroup priceRange = new ButtonGroup();
 	private ButtonGroup quantity = new ButtonGroup();
+	
+	// TODO Product Combo Box
+	private Vector<String> existingProductId = new Vector<>();
+	private DefaultComboBoxModel<String> listOfProductId = new DefaultComboBoxModel<>(existingProductId);
+	private JComboBox<String> comboBoxProductId;
+	
+	private Vector<String> existingProductTitle = new Vector<>();
+	private DefaultComboBoxModel<String> listofProductTitle = new DefaultComboBoxModel<>(existingProductTitle);
+	private JComboBox<String> comboBoxProductTitle;
+	
+	private Vector<String> existingProductAuthor = new Vector<>();
+	private DefaultComboBoxModel<String> listOfProductAuthor = new DefaultComboBoxModel<>(existingProductAuthor);
+	private JComboBox<String> comboBoxProductAuthor;
+	
 	
 	//Edit Invoice Components 
 	private JPanel findInvoiceComponentsJPanel = new JPanel();
@@ -3017,7 +3030,7 @@ public class RetailGUI extends JFrame{
 		//End of Marc Functionality
 		//==============================================
 		
-		
+		// TODO Product Details
 		//======================== Start View Product Details ===========
 		
 		viewProductDetailsPanel.add(viewProductDetails);
@@ -3037,26 +3050,38 @@ public class RetailGUI extends JFrame{
         c.weightx = 1.0;
         c.weighty = 1.0;
         viewProductDetails.add(scrollPane1, c);
-		
+        
+        // For Loop used to Populate Combo Box of ProductCode/ID
+        for(int i=0;i<products.size();i++){
+			 existingProductId.add((products.get(i).getProductCode()));
+       }
+      
 		// First Label and controls:	View Product by ID 
 		JLabel productIdlbl = new JLabel("Enter Product ID: "); //Label
 		productGC.gridx = 0;
 		productGC.gridy = 1;
 		viewProductDetails.add(productIdlbl,productGC);
-		viewProductIdTextField = new JTextField(10); //Text Field
+		comboBoxProductId = new JComboBox<>(listOfProductId);
+		comboBoxProductId.setPreferredSize(d);
+		comboBoxProductId.setMinimumSize(d);
+		//viewProductIdTextField = new JTextField(10); //Text Field
 		productGC.gridx = 1;
 		productGC.gridy = 1;
-		viewProductDetails.add(viewProductIdTextField,productGC);
+		viewProductDetails.add(comboBoxProductId,productGC);
+		//viewProductDetails.add(viewProductIdTextField,productGC);
 		JButton productButton = new JButton("Search Product ID");	//button
 		productGC.gridx = 2;
 		productGC.gridy = 1;
 		viewProductDetails.add(productButton,productGC);
-		productButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		productButton.setPreferredSize(d);
+		productButton.setMinimumSize(d);
 		//Action listener For Button to view Product by Id
 		productButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = viewProductIdTextField.getText();
+				String input = (String)comboBoxProductId.getSelectedItem();
+				
+				//String input = viewProductIdTextField.getText();
 				// This method could be enhanced by adding in a check 
 				//to ensure 9 digits have been entered to match an ISBN number.
 				if(input.trim().equals("")){ 
@@ -3076,25 +3101,35 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
+		// For Loop to populate combo box of Title.
+		 for(int i=0;i<products.size();i++){
+			 existingProductTitle.add((products.get(i).getTitle()));
+       }
+		
 		//Second Label and controls: 	View Product by Title
 		JLabel productTitlelbl = new JLabel("Product Title: ");
 		productGC.gridx = 0;
 		productGC.gridy = 2;
 		viewProductDetails.add(productTitlelbl,productGC);
-		productTitleTextField = new JTextField(10);
+		comboBoxProductTitle = new JComboBox<>(listofProductTitle);
+		comboBoxProductTitle.setPreferredSize(d);
+		comboBoxProductTitle.setMinimumSize(d);
+		//productTitleTextField = new JTextField(10);
 		productGC.gridx = 1;
 		productGC.gridy = 2;
-		viewProductDetails.add(productTitleTextField,productGC);
+		viewProductDetails.add(comboBoxProductTitle,productGC);
 		JButton productTitleButton = new JButton("Search Product Title");
 		productGC.gridx = 2;
 		productGC.gridy = 2;
 		viewProductDetails.add(productTitleButton,productGC);
-		productTitleButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		productTitleButton.setPreferredSize(d);
+		productTitleButton.setMinimumSize(d);
 		productTitleButton.addActionListener(new ActionListener() {
 			//Action listener For Button to view product by Title
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = productTitleTextField.getText();
+				String input = (String)comboBoxProductTitle.getSelectedItem();
+				//String input = productTitleTextField.getText();
 				
 				if(input.trim().equals("")){ 
 					//textarea.setText("Please enter a valid Title");
@@ -3114,33 +3149,44 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
+		// For Loop to populate ComboBox of Author.
+				 for(int i=0;i<products.size();i++){
+					 existingProductAuthor.add((products.get(i).getAuthor()));
+		       }
+		
 		
 		//Third Label and controls: 	View Product by Author
 		JLabel productAuthorlbl = new JLabel("Product Author: ");
 		productGC.gridx = 0;
 		productGC.gridy = 3;
 		viewProductDetails.add(productAuthorlbl,productGC);
+		comboBoxProductAuthor = new JComboBox<>(listOfProductAuthor);
+		comboBoxProductAuthor.setPreferredSize(d);
+		comboBoxProductAuthor.setMinimumSize(d);
 		productAuthorTextField = new JTextField(10);
 		productGC.gridx = 1;
 		productGC.gridy = 3;
-		viewProductDetails.add(productAuthorTextField,productGC);
+		viewProductDetails.add(comboBoxProductAuthor,productGC);
 		JButton productAuthorBtn = new JButton("Search Author");
 		productGC.gridx = 2;
 		productGC.gridy = 3;
 		viewProductDetails.add(productAuthorBtn,productGC);
-		productAuthorBtn.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		productAuthorBtn.setPreferredSize(d);
+		productAuthorBtn.setMinimumSize(d);
 		productAuthorBtn.addActionListener(new ActionListener() {
+			
 			//Action listener For Button to view product by Title
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
-				//String input = (productAuthorTextField.getText());																	//All names in array should be stored in lower case.
+				String input = ((String)comboBoxProductAuthor.getSelectedItem()).toLowerCase();
+				//String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
+																					//All names in array should be stored in lower case.
 				
 				if(input.trim().equals("")){ 	// If no text is entered
-					//textarea.setText("Please enter text in Author Field");
+					
 					JOptionPane.showMessageDialog(null, "Please Enter a Value in the Author Field");
 					productAuthorTextField.setText("");
-					//invTextField.setText("");
+					
 				}else{							// Take in String and Search for it.
 					productTextArea.setText(product.viewProductByAuthor(input, products));	
 					productTextArea.setCaretPosition(0);		// This sets the position of the scroll bar to the top of the page.
@@ -3157,7 +3203,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 4;
 		productGC.gridy = 1;
 		viewProductDetails.add(viewAllProductsBtn,productGC);
-		viewAllProductsBtn.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		viewAllProductsBtn.setPreferredSize(d);
+		viewAllProductsBtn.setMinimumSize(d);
 		viewAllProductsBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -3176,7 +3223,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 4;
 		productGC.gridy = 2;
 		viewProductDetails.add(viewAllBelowMinReorder,productGC);
-		viewAllBelowMinReorder.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		viewAllBelowMinReorder.setPreferredSize(d);
+		viewAllBelowMinReorder.setMinimumSize(d);
 		viewAllBelowMinReorder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -3193,7 +3241,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 4;
 		productGC.gridy = 3;
 		viewProductDetails.add(viewAllAboveMaxReorder,productGC);
-		viewAllAboveMaxReorder.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		viewAllAboveMaxReorder.setPreferredSize(d);
+		viewAllAboveMaxReorder.setMinimumSize(d);
 		viewAllAboveMaxReorder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -3210,7 +3259,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 0;
 		productGC.gridy = 4;
 		viewProductDetails.add(searchByRetail,productGC);
-		searchByRetail.setPreferredSize(new Dimension(155,20));
+		searchByRetail.setPreferredSize(d);
+		searchByRetail.setMinimumSize(d);
 		productGC.gridx = 1;
 		productGC.gridy = 4;
 		viewProductDetails.add(under5Radio,productGC);
@@ -3246,6 +3296,8 @@ public class RetailGUI extends JFrame{
 		});
 		
 		JButton costGraph = new JButton ("stock by cost price graph");
+		costGraph.setPreferredSize(d);
+		costGraph.setMinimumSize(d);
 		productGC.gridx = 0;
 		productGC.gridy = 6;
 		viewProductDetails.add(costGraph,productGC);
@@ -3273,7 +3325,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 0;
 		productGC.gridy = 5;
 		viewProductDetails.add(searchByQuantity,productGC);
-		searchByQuantity.setPreferredSize(new Dimension(155,20));
+		searchByQuantity.setPreferredSize(d);
+		searchByQuantity.setMinimumSize(d);
 		productGC.gridx = 1;
 		productGC.gridy = 5;
 		viewProductDetails.add(under50Radio,productGC);
