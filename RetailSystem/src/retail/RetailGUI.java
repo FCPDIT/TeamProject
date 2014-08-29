@@ -2763,9 +2763,9 @@ public class RetailGUI extends JFrame{
 			//TODO Add more products to Invoice
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String prodId = prodTextF.getText();
+				String prodId =(String)prodIDComboBox.getSelectedItem();;
 				String quan = quantityTextF.getText();
-				if(prodId.trim().equals("")|| (quan.trim().equals("") || quan.matches(".*\\D.*"))){
+				if(prodId.equals("select")|| (quan.trim().equals("") || quan.matches(".*\\D.*"))){
 					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
 					//disable the other text fileds
@@ -2926,9 +2926,9 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				invTextF.setText("");
-				employTextF.setText("");
-				custTextF.setText("");
-				prodTextF.setText("");
+				listOfEmpIds.setSelectedItem("select");
+				listOfCusIds.setSelectedItem("select");
+				listOfProdIds.setSelectedItem("select");
 				quantityTextF.setText("");
 				textAreaMarc.setText("");
 				invTextF.setEnabled(true);
