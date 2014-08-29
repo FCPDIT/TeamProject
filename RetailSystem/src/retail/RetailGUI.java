@@ -135,14 +135,16 @@ public class RetailGUI extends JFrame{
 	private JTextField custPhoneJTextField = new JTextField();	
 	private JButton custJButton  = new JButton("Create New Customer");
 	private JLabel viewCustById = new JLabel("Find Customer By ID: ");
-	private JTextField custById = new JTextField();
+	private JComboBox<String> custIdCombo = new JComboBox<String>();
+	private JButton viewCustJButton = new JButton("View By ID");
 	private JLabel viewCustByName = new JLabel("Find Customer By Name: ");
-	private JTextField custByName = new JTextField();
-	private JButton viewCustJButton = new JButton("View Customer");
+	private JComboBox<String> custNameCombo = new JComboBox<String>();
+	private JButton viewCustNameJButton = new JButton("View By Name");
 	private JButton viewAllCustJButton = new JButton("View All Customers");
 	private JTextArea custJTextArea = new JTextArea(10, 65);
+	
 	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer Number");
-	private JTextField editCustById = new JTextField();
+	private JComboBox<String> editCustIdCombo = new JComboBox<String>();
 	private JButton findCustById = new JButton("Find Customer");
 	private JLabel editCustIdJLabel = new JLabel("Customer ID");
 	private JLabel editCustNameJLabel = new JLabel("Customer Name");
@@ -169,7 +171,6 @@ public class RetailGUI extends JFrame{
 	private JLabel supplierPhoneJLabel = new JLabel("Supplier Phone Number: ");
 	private JTextField supplierPhoneJTextField = new JTextField();
 	private JButton supplierJButton = new JButton("Create New Supplier");
-	
 	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID: ");
 	private JComboBox<String> suppIdCombo = new JComboBox<String>();
 	private JButton viewSupplyJButton = new JButton("View Supplier By ID");
@@ -218,7 +219,6 @@ public class RetailGUI extends JFrame{
 	private JLabel viewEmpAll = new JLabel("View All Employees");
 	private JButton viewEmpAllButton = new JButton("View All");
 	private JTextArea empJTextArea = new JTextArea(10, 65);
-	
 	private JLabel editFindById = new JLabel("Enter Employee ID ");
 	private JComboBox<String> viewEmpIdCombo = new JComboBox<String>();
 	private JButton editById = new JButton("Find Employee Details");
@@ -954,6 +954,9 @@ public class RetailGUI extends JFrame{
 		addCustJPanel.setLayout(new GridBagLayout());
 		viewCustJPanel.setLayout(new GridBagLayout());
 		editCustJPanel.setLayout(new GridBagLayout());
+		this.custIdPopulate(custIdCombo);
+		this.custNamePopulate(custNameCombo);
+		this.custIdPopulate(editCustIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		custIdJLabel.setPreferredSize(d);
@@ -1003,26 +1006,34 @@ public class RetailGUI extends JFrame{
 		viewCustJPanel.add(viewCustById, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		custById.setPreferredSize(d);
-		viewCustJPanel.add(custById, gc);
+		custIdCombo.setPreferredSize(d);
+		custIdCombo.setSelectedIndex(0);
+		custIdCombo.setEditable(true);
+		viewCustJPanel.add(custIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
-		viewCustByName.setPreferredSize(d);
-		viewCustJPanel.add(viewCustByName, gc);
-		gc.gridx = 0;
-		gc.gridy = 4;
-		custByName.setPreferredSize(d);
-		viewCustJPanel.add(custByName, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
 		viewCustJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewCustJButton, gc);
 		gc.gridx = 0;
+		gc.gridy = 4;
+		viewCustByName.setPreferredSize(d);
+		viewCustJPanel.add(viewCustByName, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		custNameCombo.setPreferredSize(d);
+		custNameCombo.setSelectedIndex(0);
+		custNameCombo.setEditable(true);
+		viewCustJPanel.add(custNameCombo, gc);
+		gc.gridx = 0;
 		gc.gridy = 6;
+		viewCustNameJButton.setPreferredSize(d);
+		viewCustJPanel.add(viewCustNameJButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
 		viewAllCustJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewAllCustJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 8;
 		JScrollPane custScrollPane = new JScrollPane(custJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		viewCustJPanel.add(custScrollPane, gc);
 		gc.gridx = 0;
@@ -1031,8 +1042,10 @@ public class RetailGUI extends JFrame{
 		editCustJPanel.add(editFindCustIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		editCustById.setPreferredSize(d);
-		editCustJPanel.add(editCustById, gc);
+		editCustIdCombo.setPreferredSize(d);
+		editCustIdCombo.setSelectedItem(0);
+		editCustIdCombo.setEditable(true);
+		editCustJPanel.add(editCustIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		findCustById.setPreferredSize(d);
@@ -1108,7 +1121,7 @@ public class RetailGUI extends JFrame{
 			if(customers.size() >= 1){
 					try{
 						for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(custById.getText()) || customer.getCustName() == custByName.getText()){
+						if(customer.getCustId() == Integer.parseInt(custIdCombo.getSelectedItem().toString())){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
 									+"\n Customer Name: "+customer.getCustName()
 									+"\n Customer Address: "+customer.getCustAddress()
@@ -1119,6 +1132,25 @@ public class RetailGUI extends JFrame{
 					}catch(NumberFormatException nfe){
 						JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Customers Found");
+				}
+			}
+		});
+		
+		viewCustNameJButton.addActionListener(new ActionListener(){
+			// function to view a customer by id or name
+			public void actionPerformed(ActionEvent e){
+			if(customers.size() >= 1){
+						for(Customer customer: customers){
+						if(customer.getCustName() == custNameCombo.getSelectedItem()){
+							custJTextArea.setText(" Customer Id: "+customer.getCustId()
+									+"\n Customer Name: "+customer.getCustName()
+									+"\n Customer Address: "+customer.getCustAddress()
+									+"\n Customer Email: "+customer.getCustEmail()
+									+"\n Customer Phone: "+customer.getCustTelephone());
+							}
+						}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Customers Found");
 				}
@@ -1149,7 +1181,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
 							editCustId.setText(Integer.toString(customer.getCustId()));
 							editCustName.setText(customer.getCustName());
 							editCustAddress.setText(customer.getCustAddress());
@@ -1168,7 +1200,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
 							customer.setCustId(Integer.parseInt(editCustId.getText()));
 							customer.setCustName(editCustName.getText());
 							customer.setCustAddress(editCustAddress.getText());
@@ -1187,7 +1219,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent arg){
 				try{
 					for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
 							customers.remove(customer);
 						}
 					}
@@ -1283,7 +1315,6 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 8;
 		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		viewSupplyJPanel.add(suppJScrollPane, gc);
-
 		gc.gridx = 0;
 		gc.gridy = 1;
 		editFindSuppIdJLabel.setPreferredSize(d);
