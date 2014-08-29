@@ -2770,8 +2770,8 @@ public class RetailGUI extends JFrame{
 				}else{
 					//disable the other text fileds
 					invTextF.setEnabled(false);
-					employTextF.setEnabled(false);
-					custTextF.setEnabled(false);
+					empIDComboBox.setEnabled(false);
+					cusIDComboBox.setEnabled(false);
 					
 					//Add to 'addMoreArrayList'
 					Product p = invoice.returnProductObject(prodId, products);
@@ -2860,6 +2860,8 @@ public class RetailGUI extends JFrame{
 															"\nProduct Code: " + productIdStr+
 															"\nNo. of items: " + quantityStr;
 															//+"\nArraySize: " + addMoreArrayList.size();
+									//existingInvoiceNums.add(invoiceIdStr);
+									
 									}else{
 										Invoice multipleInvoice = new Invoice(invoiceId,employeeObj,customerObj,addMoreArrayList);
 										invoices.add(multipleInvoice);
@@ -2894,8 +2896,8 @@ public class RetailGUI extends JFrame{
 									textAreaMarc.setText(outputMessage);
 									textAreaMarc.setCaretPosition(0);
 									invTextF.setEnabled(true);
-									employTextF.setEnabled(true);
-									custTextF.setEnabled(true);
+									empIDComboBox.setEnabled(true);
+									cusIDComboBox.setEnabled(true);
 									outputMessage = "";
 									message = "";
 									addMoreArrayList = new ArrayList<InvoiceProduct>();
@@ -2932,8 +2934,8 @@ public class RetailGUI extends JFrame{
 				quantityTextF.setText("");
 				textAreaMarc.setText("");
 				invTextF.setEnabled(true);
-				employTextF.setEnabled(true);
-				custTextF.setEnabled(true);
+				empIDComboBox.setEnabled(true);
+				cusIDComboBox.setEnabled(true);
 				addMoreArrayList = new ArrayList<InvoiceProduct>();
 				
 			}
