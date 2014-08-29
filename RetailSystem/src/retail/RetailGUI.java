@@ -218,7 +218,6 @@ public class RetailGUI extends JFrame{
 	private JButton viewEmpIdButton = new JButton("Search Employees");
 	private JLabel viewEmpName = new JLabel("View By Name");
 	private JComboBox<String> empNameCombo = new JComboBox<String>();
-	private JTextField viewEmpNameField = new JTextField();
 	private JButton viewEmpNameButton = new JButton("Search Employees");
 	private JLabel viewEmpAll = new JLabel("View All Employees");
 	private JButton viewEmpAllButton = new JButton("View All");
@@ -906,7 +905,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId()== Integer.parseInt(empIdCombo.getSelectedItem().toString())){
+						if(employee.getEmployeeId()== Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							editEmpIdField.setText(Integer.toString(employee.getEmployeeId()));
 							editEmpNameField.setText(employee.getEmployeeName());
 							editEmpAccessField.setText(Integer.toString(employee.getAccess()));
@@ -925,7 +924,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(empIdCombo.getSelectedItem().toString())){
+						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							employee.setEmployeeId(Integer.parseInt(editEmpIdField.getText()));
 							employee.setEmployeeName(editEmpNameField.getText());
 							employee.setAccess(Integer.parseInt(editEmpAccessField.getText()));
@@ -945,7 +944,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent arg){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(empIdCombo.getSelectedItem().toString())){
+						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							employees.remove(employee);
 							JOptionPane.showMessageDialog(null, "Employee Deleted");
 						}
@@ -1376,7 +1375,7 @@ public class RetailGUI extends JFrame{
 				try{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
-							if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString()) || supplier.getName() == suppNameCombo.getSelectedItem()){
+							if(supplier.getId() == Integer.parseInt(suppIdCombo.getSelectedItem().toString()) || supplier.getName() == suppNameCombo.getSelectedItem()){
 								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
 										+"\n Supplier Name: "+supplier.getName()
 										+"\n Supplier Address: "+supplier.getAddress()
