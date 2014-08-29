@@ -2359,8 +2359,8 @@ public class RetailGUI extends JFrame{
 		//TODO boobs
 		viewCustomerPanel.add(invIdlbl,gc);
 		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
-		comboBoxInvoice.setPreferredSize(new Dimension(60, 20));
-		listOfInvoices.setSelectedItem(existingInvoiceNums.get(0)); //setting the combo box to the first invoice number
+		comboBoxInvoice.setPreferredSize(new Dimension(80, 20));
+		listOfInvoices.setSelectedItem("select"); //setting the combo box to the first invoice number
 		gc.gridx = 1;
 		gc.gridy = 1;
 		viewCustomerPanel.add(comboBoxInvoice,gc);
@@ -2377,8 +2377,8 @@ public class RetailGUI extends JFrame{
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
 					textarea.setText("Please enter a valid number");
 					textarea.setCaretPosition(0);
-					invTextField2.setText("");
-					custIdTextField.setText("");
+					listOfCustomers.setSelectedItem("select");
+					listOfInvoices.setSelectedItem("select");
 				}else{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceById(num, invoices)); //viewInvoiceById() is in the Invoice Class
@@ -2395,8 +2395,8 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 2;
 		viewCustomerPanel.add(custIdlbl,gc);
 		comboBoxCustomer =  new JComboBox<String>(listOfCustomers); //combo box here
-		comboBoxCustomer.setPreferredSize(new Dimension(60, 20));
-		listOfCustomers.setSelectedItem(existingCustomerId.get(0));
+		comboBoxCustomer.setPreferredSize(new Dimension(80, 20));
+		listOfCustomers.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 2;
 		viewCustomerPanel.add(comboBoxCustomer,gc);
@@ -2414,8 +2414,8 @@ public class RetailGUI extends JFrame{
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
 					textarea.setText("Please enter a valid number");
 					textarea.setCaretPosition(0);
-					custIdTextField.setText("");
-					invTextField2.setText("");
+					listOfCustomers.setSelectedItem("select");
+					listOfInvoices.setSelectedItem("select");
 				}else{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceByCustomer(num, invoices));	//viewInvoiceByCustomer() is in the Invoice class
@@ -2482,8 +2482,8 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				textarea.setText("");
-				invTextField2.setText("");
-				custIdTextField.setText("");
+				listOfCustomers.setSelectedItem("select");
+				listOfInvoices.setSelectedItem("select");
 				
 			}
 		});
