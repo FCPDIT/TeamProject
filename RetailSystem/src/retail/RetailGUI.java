@@ -19,14 +19,9 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -177,10 +172,11 @@ public class RetailGUI extends JFrame{
 	
 	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID: ");
 	private JComboBox<String> suppIdCombo = new JComboBox<String>();
+	private JButton viewSupplyJButton = new JButton("View Supplier By ID");
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
 	private JComboBox<String> suppNameCombo = new JComboBox<String>();
 	private JTextArea supplierJTextArea = new JTextArea(10, 65);
-	private JButton viewSupplyJButton = new JButton("View Supplier Details");
+	private JButton viewSupplyNameJButton = new JButton("View Supplier By Name");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	private JLabel editFindSuppIdJLabel = new JLabel("Enter Supplier Number");
 	private JComboBox<String> editSuppIdCombo = new JComboBox<String>();
@@ -1263,24 +1259,28 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(suppIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		viewSupplyJButton.setPreferredSize(d);
+		viewSupplyJPanel.add(viewSupplyJButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 4;
 		viewSupplyNameJLabel.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyNameJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 4;
+		gc.gridy = 5;
 		suppNameCombo.setPreferredSize(d);
 		suppNameCombo.setSelectedIndex(0);
 		suppNameCombo.setEditable(true);
 		viewSupplyJPanel.add(suppNameCombo, gc);
 		gc.gridx = 0;
-		gc.gridy = 5;
-		viewSupplyJButton.setPreferredSize(d);
-		viewSupplyJPanel.add(viewSupplyJButton, gc);
-		gc.gridx = 0;
 		gc.gridy = 6;
+		viewSupplyNameJButton.setPreferredSize(d);
+		viewSupplyJPanel.add(viewSupplyNameJButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
 		allSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(allSupplyJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 8;
 		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		viewSupplyJPanel.add(suppJScrollPane, gc);
 
@@ -1375,7 +1375,7 @@ public class RetailGUI extends JFrame{
 				try{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
-							if(supplier.getId() == Integer.parseInt(suppIdCombo.getSelectedItem().toString()) || supplier.getName() == suppNameCombo.getSelectedItem()){
+							if(supplier.getId() == Integer.parseInt(suppIdCombo.getSelectedItem().toString())){
 								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
 										+"\n Supplier Name: "+supplier.getName()
 										+"\n Supplier Address: "+supplier.getAddress()
@@ -1389,6 +1389,26 @@ public class RetailGUI extends JFrame{
 					}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Id should be a number.");
+				}
+			}
+		});
+		
+		viewSupplyNameJButton.addActionListener(new ActionListener(){
+			// function to view a supplier by id or name
+			public void actionPerformed(ActionEvent e){
+				if(suppliers.size() >= 1){
+					for(Supplier supplier: suppliers){
+						if(supplier.getName() == suppNameCombo.getSelectedItem()){
+							supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
+									+"\n Supplier Name: "+supplier.getName()
+									+"\n Supplier Address: "+supplier.getAddress()
+									+"\n Supplier Email: "+supplier.getEmail()
+									+"\n Supplier Phone: "+supplier.getPhone()
+									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+						}
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Suppliers Found");
 				}
 			}
 		});
