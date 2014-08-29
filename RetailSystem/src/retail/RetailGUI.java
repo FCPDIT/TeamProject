@@ -2383,6 +2383,7 @@ public class RetailGUI extends JFrame{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceById(num, invoices)); //viewInvoiceById() is in the Invoice Class
 					textarea.setCaretPosition(0);
+					listOfCustomers.setSelectedItem("select");
 					//invTextField2.setText("");
 					//custIdTextField.setText("");
 				}
@@ -2420,8 +2421,8 @@ public class RetailGUI extends JFrame{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceByCustomer(num, invoices));	//viewInvoiceByCustomer() is in the Invoice class
 					textarea.setCaretPosition(0);
-					//custIdTextField.setText("");
-					//invTextField2.setText("");
+					listOfInvoices.setSelectedItem("select");
+				
 				}
 			}
 		});
