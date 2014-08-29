@@ -174,15 +174,16 @@ public class RetailGUI extends JFrame{
 	private JLabel supplierPhoneJLabel = new JLabel("Supplier Phone Number: ");
 	private JTextField supplierPhoneJTextField = new JTextField();
 	private JButton supplierJButton = new JButton("Create New Supplier");
+	
 	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID: ");
-	private JTextField viewSupplyJTextField = new JTextField();
+	private JComboBox<String> suppIdCombo = new JComboBox<String>();
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
-	private JTextField viewSupplyNameJTextField = new JTextField();
+	private JComboBox<String> suppNameCombo = new JComboBox<String>();
 	private JTextArea supplierJTextArea = new JTextArea(10, 65);
 	private JButton viewSupplyJButton = new JButton("View Supplier Details");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	private JLabel editFindSuppIdJLabel = new JLabel("Enter Supplier Number");
-	private JTextField editSupplierJTextField = new JTextField();
+	private JComboBox<String> editSuppIdCombo = new JComboBox<String>();
 	private JButton editSupplierJButton = new JButton("Find Supplier");
 	private JLabel editSuppIdJLabel = new JLabel("Supplier ID");
 	private JLabel editSuppNameJLabel = new JLabel("Supplier Name");
@@ -225,7 +226,6 @@ public class RetailGUI extends JFrame{
 	
 	private JLabel editFindById = new JLabel("Enter Employee ID ");
 	private JComboBox<String> viewEmpIdCombo = new JComboBox<String>();
-	private JTextField editFindByIdField = new JTextField();
 	private JButton editById = new JButton("Find Employee Details");
 	private JLabel editEmpId = new JLabel("Employee Id");
 	private JTextField editEmpIdField = new JTextField();
@@ -1205,7 +1205,9 @@ public class RetailGUI extends JFrame{
 		addSupplyJPanel.setLayout(new GridBagLayout());
 		viewSupplyJPanel.setLayout(new GridBagLayout());
 		editSupplyJPanel.setLayout(new GridBagLayout());
-		
+		this.suppIdPopulate(suppIdCombo);
+		this.suppNamePopulate(suppNameCombo);
+		this.suppIdPopulate(editSuppIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		supplierIdJLabel.setPreferredSize(d);
@@ -1256,16 +1258,20 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewSupplyJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		viewSupplyJTextField.setPreferredSize(d);
-		viewSupplyJPanel.add(viewSupplyJTextField, gc);
+		suppIdCombo.setPreferredSize(d);
+		suppIdCombo.setSelectedIndex(0);
+		suppIdCombo.setEditable(true);
+		viewSupplyJPanel.add(suppIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		viewSupplyNameJLabel.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyNameJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
-		viewSupplyNameJTextField.setPreferredSize(d);
-		viewSupplyJPanel.add(viewSupplyNameJTextField, gc);
+		suppNameCombo.setPreferredSize(d);
+		suppNameCombo.setSelectedIndex(0);
+		suppNameCombo.setEditable(true);
+		viewSupplyJPanel.add(suppNameCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
 		viewSupplyJButton.setPreferredSize(d);
@@ -1285,8 +1291,10 @@ public class RetailGUI extends JFrame{
 		editSupplyJPanel.add(editFindSuppIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		editSupplierJTextField.setPreferredSize(d);
-		editSupplyJPanel.add(editSupplierJTextField, gc);
+		editSuppIdCombo.setPreferredSize(d);
+		editSuppIdCombo.setSelectedIndex(0);
+		editSuppIdCombo.setEditable(true);
+		editSupplyJPanel.add(editSuppIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		editSupplierJButton.setPreferredSize(d);
@@ -1368,7 +1376,7 @@ public class RetailGUI extends JFrame{
 				try{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
-							if(supplier.getId() == Integer.parseInt(viewSupplyJTextField.getText()) || supplier.getName() == viewSupplyNameJTextField.getText()){
+							if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString()) || supplier.getName() == suppNameCombo.getSelectedItem()){
 								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
 										+"\n Supplier Name: "+supplier.getName()
 										+"\n Supplier Address: "+supplier.getAddress()
@@ -1410,7 +1418,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Supplier supplier: suppliers){
-						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
 							editSupplierId.setText(Integer.toString(supplier.getId()));
 							editSupplierName.setText(supplier.getName());
 							editSupplierAddress.setText(supplier.getAddress());
@@ -1430,7 +1438,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Supplier supplier: suppliers){
-						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
 							supplier.setId(Integer.parseInt(editSupplierId.getText()));
 							supplier.setName(editSupplierName.getText());
 							supplier.setAddress(editSupplierAddress.getText());
@@ -1451,7 +1459,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent arg){
 				try{
 					for(Supplier supplier: suppliers){
-						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
 							suppliers.remove(supplier);
 						}
 					}
@@ -3837,6 +3845,7 @@ public class RetailGUI extends JFrame{
 			return returnCodeNames;
 			
 		}
+		//dropdown functions
 		public void empIDPopulate(JComboBox<String> combo){
 			for(Employee employee: employees){
 				String str = Integer.toString(employee.getEmployeeId());
@@ -3847,6 +3856,30 @@ public class RetailGUI extends JFrame{
 			for(Employee employee: employees){
 				String str = employee.getEmployeeName();
 				empNameCombo.addItem(str);
+			}
+		}
+		public void custIdPopulate(JComboBox<String> combo){
+			for(Customer customer: customers){
+				String str = Integer.toString(customer.getCustId());
+				combo.addItem(str);
+			}
+		}
+		public void custNamePopulate(JComboBox<String> combo){
+			for(Customer customer: customers){
+				String str = customer.getCustName();
+				combo.addItem(str);
+			}
+		}
+		public void suppIdPopulate(JComboBox<String> combo){
+			for(Supplier supplier: suppliers){
+				String str = Integer.toString(supplier.getId());
+				combo.addItem(str);
+			}
+		}
+		public void suppNamePopulate(JComboBox<String> combo){
+			for(Supplier supplier: suppliers){
+				String str = supplier.getName();
+				combo.addItem(str);
 			}
 		}
 
