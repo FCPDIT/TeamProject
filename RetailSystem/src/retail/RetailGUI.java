@@ -1095,7 +1095,8 @@ public class RetailGUI extends JFrame{
 						custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
 						custPhoneJTextField.getText());
 					customers.add(customer);
-					JOptionPane.showMessageDialog(null, "New Customer Added");			
+					JOptionPane.showMessageDialog(null, "New Customer Added");
+					editCustomerListOfInvoices.addElement(custIdJTextField.getText());
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
@@ -2904,6 +2905,7 @@ public class RetailGUI extends JFrame{
 									}
 									String inputFromTestField = invTextF.getText();
 									listOfInvoices.addElement(inputFromTestField);
+									editListOfInvoices.addElement(inputFromTestField);
 									String inputFromCusId = custTextF.getText();
 									listOfCustomers.addElement(inputFromCusId);
 									//input.setText("");
