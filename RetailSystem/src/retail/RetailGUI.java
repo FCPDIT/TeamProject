@@ -490,24 +490,19 @@ public class RetailGUI extends JFrame{
 	private JLabel viewOrderAuthorLabel = new JLabel("Author: ");
 	private JButton viewOrderAuthorButton = new JButton("Find order containing a product by this author");	
 	private JTextArea viewOrderTextArea;
-	//Deprecated
-	private JTextField viewOrderOrderIdTextField = new JTextField();
-	private JTextField viewOrderSupplierIdTextField = new JTextField();
-	private JTextField viewOrderTitleTextField = new JTextField();
-	private JTextField viewOrderAuthorTextField = new JTextField();
 	//Edit Order Components
 	private JPanel findOrderComponentsJPanel = new JPanel();
 	private JPanel editOrderComponentsJPanel = new JPanel();
 	private JPanel editSupplierOrderComponentsJPanel = new JPanel();
 	private JPanel saveOrderComponentsJPanel = new JPanel();
 	private JPanel editOrderProductsComponentsJPanel = new JPanel();
-	private JTextField editOrderJTextField = new JTextField("Order Id");
+	private JComboBox<String> editOrderOrderIdComboBox;
 	private JTextArea supplierOrderJTextArea = new JTextArea(10,20);
 	private JTextArea productOrderJTextArea = new JTextArea();
 	private JTextField allOrdersTotalJTextField = new JTextField("Total Owed");
 	private JButton deliverAllOrdersJButton = new JButton("Deliver All Orders");
 	private JButton editOrderJButton = new JButton("Find Order by Id");
-	private JTextField editSupplierOrderJTextField = new JTextField("Supplier Id");
+	private JComboBox<String> editOrderSupplierIdComboBox;
 	private JButton editSupplierOrderJButton = new JButton("Find Order by Supplier");
 	private JTextField editOrderId = new JTextField("Edit Order Id:");
 	private JTextField editOrderSupplier = new JTextField("Edit Order Customer");
@@ -1897,7 +1892,8 @@ public class RetailGUI extends JFrame{
 		createNewOrderLeftPanel.add(createOrderSupplierIdLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 1;
-		createOrderSupplierIdComboBox = new JComboBox<>(listOfSuppliers);
+		createOrderSupplierIdComboBox = new JComboBox<String>(listOfSuppliers);
+		listOfSuppliers.setSelectedItem("Select");
 		createOrderSupplierIdComboBox.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderSupplierIdComboBox,orderGC);
 		//=====
@@ -1906,8 +1902,9 @@ public class RetailGUI extends JFrame{
 		createNewOrderLeftPanel.add(createOrderProductCodeLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 2;
-		createOrderProductIdComboBox = new JComboBox<>();
-		createOrderProductIdTextField.setPreferredSize(d);
+		createOrderProductIdComboBox = new JComboBox<String> (listOfProductId);
+		listOfProductId.setSelectedItem("Select");
+		createOrderProductIdComboBox.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderProductIdComboBox,orderGC);
 		//=====
 		orderGC.gridx = 0;
@@ -1944,7 +1941,8 @@ public class RetailGUI extends JFrame{
 				createOrderSupplierIdTextField.setEnabled(true);
 				createOrderScrollPaneTextArea.setText("");
 				createOrderScrollPaneTextArea.setCaretPosition(0);
-				
+				listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
 			}
 		});
 		//TextPane
@@ -2056,12 +2054,16 @@ public class RetailGUI extends JFrame{
 								JOptionPane.showMessageDialog(null, "Order complete!");
 								createOrderOrderIdTextField.setEnabled(true);
 								createOrderSupplierIdTextField.setEnabled(true);
+								
 								createOrderOrderIdTextField.setText("");
 								createOrderSupplierIdTextField.setText("");
 								createOrderProductIdTextField.setText("");
 								createOrderQuantityTextField.setText("");
 								createOrderScrollPaneTextArea.setText("");
 								createOrderScrollPaneTextArea.setCaretPosition(0);
+								
+								listOfProductId.setSelectedItem("Select");
+								listOfSuppliers.setSelectedItem("Select");
 								addMoreProducts = new ArrayList<OrderProduct>();
 							}else{
 								JOptionPane.showMessageDialog (null, "Order Number is not Unique", "Order Info", JOptionPane.WARNING_MESSAGE);
@@ -2146,7 +2148,7 @@ public class RetailGUI extends JFrame{
 		viewOrderOrderIdComboBox = new JComboBox<>(listOfOrders);
 		viewOrderOrderIdComboBox.setPreferredSize(d);
 		viewOrderOrderIdComboBox.setMinimumSize(d);
-		listOfOrders.setSelectedItem(existingOrderIds.get(0));
+		listOfOrders.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 1;
 		viewOrderLeftJPanel.add(viewOrderOrderIdComboBox, viewOrderGC);
@@ -2161,13 +2163,13 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderOrderIdComboBox.getSelectedItem();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){
 					viewOrderTextArea.setText("Please enter a valid number");
-					viewOrderOrderIdTextField.setText("");
-					viewOrderSupplierIdTextField.setText("");
+					listOfOrders.setSelectedItem("Select");
+					listOfSuppliers.setSelectedItem("Select");
 				}else{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 
-					viewOrderOrderIdTextField.setText("");
-					viewOrderSupplierIdTextField.setText("");
+					listOfOrders.setSelectedItem("Select");
+					listOfSuppliers.setSelectedItem("Select");
 				}
 			}
 		});
@@ -2178,7 +2180,7 @@ public class RetailGUI extends JFrame{
 		viewOrderSupplierIdComboBox = new JComboBox<>(listOfSuppliers);
 		viewOrderSupplierIdComboBox.setPreferredSize(d);
 		viewOrderSupplierIdComboBox.setMinimumSize(d);
-		listOfSuppliers.setSelectedItem(existingSupplierIds.get(0));
+		listOfSuppliers.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 2;
 		viewOrderLeftJPanel.add(viewOrderSupplierIdComboBox, viewOrderGC);
@@ -2193,13 +2195,14 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderSupplierIdComboBox.getSelectedItem();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ 
 					viewOrderTextArea.setText("Please enter a valid number");
-					viewOrderSupplierIdTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfOrders.setSelectedItem("Select");
+					listOfSuppliers.setSelectedItem("Select");
 				}else{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));	
-					viewOrderSupplierIdTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfOrders.setSelectedItem("Select");
+					listOfSuppliers.setSelectedItem("Select");
+
 				}
 			}
 		});
@@ -2210,7 +2213,7 @@ public class RetailGUI extends JFrame{
 		viewOrderTitleComboBox = new JComboBox<>(listOfTitles);
 		viewOrderTitleComboBox.setPreferredSize(d);
 		viewOrderTitleComboBox.setMinimumSize(d);
-		listOfTitles.setSelectedItem(existingTitles.get(0));
+		listOfTitles.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 3;
 		viewOrderLeftJPanel.add(viewOrderTitleComboBox, viewOrderGC);
@@ -2225,12 +2228,12 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderTitleComboBox.getSelectedItem();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter a title");
-					viewOrderTitleTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfTitles.setSelectedItem("Select");
+					listOfOrders.setSelectedItem("Select");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));	
-					viewOrderTitleTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfTitles.setSelectedItem("Select");
+					listOfOrders.setSelectedItem("Select");
 				}
 			}
 		});
@@ -2241,7 +2244,7 @@ public class RetailGUI extends JFrame{
 		viewOrderAuthorComboBox = new JComboBox<>(listOfAuthors);
 		viewOrderAuthorComboBox.setPreferredSize(d);
 		viewOrderAuthorComboBox.setMinimumSize(d);
-		listOfAuthors.setSelectedItem(existingAuthors.get(0));
+		listOfAuthors.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 4;
 		viewOrderLeftJPanel.add(viewOrderAuthorComboBox, viewOrderGC);
@@ -2256,12 +2259,12 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderAuthorComboBox.getSelectedItem();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter an author's name");
-					viewOrderAuthorTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfAuthors.setSelectedItem("Select");
+					listOfOrders.setSelectedItem("Select");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));	
-					viewOrderAuthorTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfAuthors.setSelectedItem("Select");
+					listOfOrders.setSelectedItem("Select");
 				}
 			}
 		});
@@ -2285,28 +2288,20 @@ public class RetailGUI extends JFrame{
         findOrderComponentsJPanel.setLayout(new GridBagLayout());
         gc.gridx = 0;
         gc.gridy = 1;
-        editOrderJTextField.setPreferredSize(d);
-        findOrderComponentsJPanel.add(editOrderJTextField, gc);
-        editOrderJTextField.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        	editOrderJTextField.setText("");
-        	}
-        });
+        editOrderOrderIdComboBox = new JComboBox<String> (listOfOrders);
+        editOrderOrderIdComboBox.setPreferredSize(d);
+        listOfOrders.setSelectedItem("Select");
+        findOrderComponentsJPanel.add(editOrderOrderIdComboBox, gc);
         gc.gridx = 0;
         gc.gridy = 2;
         editOrderJButton.setPreferredSize(d);
         findOrderComponentsJPanel.add(editOrderJButton, gc);
         gc.gridx = 0;
         gc.gridy = 3;
-        editSupplierOrderJTextField.setPreferredSize(d);
-        findOrderComponentsJPanel.add(editSupplierOrderJTextField, gc);
-        editSupplierOrderJTextField.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        	editSupplierOrderJTextField.setText("");
-        	}
-        });
+        editOrderSupplierIdComboBox = new JComboBox<String> (listOfSuppliers);
+        editOrderSupplierIdComboBox.setPreferredSize(d);
+        editOrderSupplierIdComboBox.setSelectedItem("Select");
+        findOrderComponentsJPanel.add(editOrderSupplierIdComboBox, gc);
         gc.gridx = 0;
         gc.gridy = 4;
         editSupplierOrderJButton.setPreferredSize(d);
@@ -2321,13 +2316,16 @@ public class RetailGUI extends JFrame{
 
         deliverAllOrdersJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
+        		String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
         		for(Order order: orders){
-        			if(Integer.parseInt(editSupplierOrderJTextField.getText().trim()) == order.getSupplierUniqueId() ){
+        			if(Integer.parseInt(s.trim()) == order.getSupplierUniqueId() ){
         				order.setDelivered();
         			}
         		}
         		JOptionPane.showMessageDialog(null, "Delivered!");
-        		editSupplierOrderJButton.doClick();		
+        		editSupplierOrderJButton.doClick();
+        		listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
         		}
         });
         supplierOrderJTextArea.setEditable(false);
@@ -2344,14 +2342,18 @@ public class RetailGUI extends JFrame{
         editOrderComponentsJPanel.add(deliverOrderJButton);
         deliverOrderJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
+        		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
         		for(Order order: orders){
-        			if(order.getOrderUniqueId() == Integer.parseInt(editOrderJTextField.getText().trim())){
+        			if(Integer.parseInt(s.trim()) == order.getOrderUniqueId()){
         				order.setDelivered();
+        				break;
         			}
         		}
         		JOptionPane.showMessageDialog(null, "Delivered!");
         		editOrderDeliveredStatus.setForeground(Color.BLACK);
-        		editOrderJButton.doClick();		
+        		editOrderJButton.doClick();	
+        		listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
         	}
         });
         JScrollPane orderProductsJScrollPane = new JScrollPane(productOrderJTextArea);
@@ -2365,8 +2367,9 @@ public class RetailGUI extends JFrame{
         deleteOrderJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		int index=0;
+        		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
         		for(Order order: orders){
-        			if(order.getOrderUniqueId() == Integer.parseInt(editOrderJTextField.getText().trim())){
+        			if(order.getOrderUniqueId() == Integer.parseInt(s.trim())){
         				index = orders.indexOf(order);
         			}
         		}
@@ -2375,6 +2378,8 @@ public class RetailGUI extends JFrame{
         		editSupplierOrderComponentsJPanel.setVisible(false);
         		editOrderComponentsJPanel.setVisible(false);
         		saveOrderComponentsJPanel.setVisible(false);
+        		listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
         	}
         });
         editOrderJPanel.setLayout(new GridLayout(5,3));
@@ -3570,10 +3575,10 @@ public class RetailGUI extends JFrame{
 					String totalString = "";
 					int id = 0, supplierID = 1;
 					try {
-						id = Integer.parseInt( editSupplierOrderJTextField.getText().trim() );
+						id = Integer.parseInt( editOrderSupplierIdComboBox.getSelectedItem().toString().trim() );
 					}
 					catch (NumberFormatException nfe){
-						editSupplierOrderJTextField.setText("");
+						listOfOrders.setSelectedItem("Select");;
 					}
 					for(Supplier supplier: suppliers){
 						if(id == supplier.getId()){
@@ -3686,7 +3691,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed( ActionEvent e){
 				int orderId = 0;						
 				int supplierId = 0;
-				int currentId = Integer.parseInt(editOrderJTextField.getText().trim());
+				int currentId = Integer.parseInt(editOrderOrderIdComboBox.getSelectedItem().toString().trim());
 				int count = 0;
 				Supplier supp = suppliers.get(0);
 				try{
@@ -3709,7 +3714,7 @@ public class RetailGUI extends JFrame{
 							order.setSupplierUniqueId(supplierId);
 						}
 					}
-					editOrderJTextField.setText(Integer.toString(currentId));
+					listOfOrders.setSelectedItem(listOfOrders.getIndexOf(Integer.toString(currentId)));
 					JOptionPane.showMessageDialog(null, "Updated!");
 					editInvoiceJButton.doClick();
 				}
@@ -3744,10 +3749,10 @@ public class RetailGUI extends JFrame{
 				String s = "";
 				productInvoiceJTextArea.setText("Product Details\n");
 				try {
-					id = Integer.parseInt( editOrderJTextField.getText().trim() );
+					id = Integer.parseInt( editOrderOrderIdComboBox.getSelectedItem().toString().trim() );
 				}
 				catch (NumberFormatException nfe){
-					editOrderJTextField.setText("");
+					listOfOrders.setSelectedItem("Select");;
 				}
 				int orderId = verifyOrderID(id);
 				if(orderId == 1){
