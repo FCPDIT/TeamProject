@@ -12,8 +12,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -26,6 +28,7 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultRowSorter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -37,9 +40,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -514,119 +521,27 @@ public class RetailGUI extends JFrame{
 	private JButton deleteOrderJButton = new JButton("Delete Order");
 	private JTextField editOrderDeliveredStatus = new JTextField("");	
 	private JTextField editOrderAmount = new JTextField("Edit Order Amount");
+	
+	//P&L JTable Tab
+	private JPanel pLComponentsJPanel = new JPanel();
+	private static final int ROW_HEIGHT = 20;
+	private static final String[] TABLE_COLUMNS = {"Date", "Credit", "Debit"};
+	private DefaultTableModel tableModel = new DefaultTableModel(TABLE_COLUMNS, 0);
+	private JTable pLJTable = new JTable(tableModel);
+	JScrollPane pLJScrollPane = new JScrollPane(pLJTable);
+	private JTextField pLTotal = new JTextField();
+	private Vector<String> months = new Vector<>();
+	private DefaultComboBoxModel<String> listOfMonths = new DefaultComboBoxModel<>(months); //create the combo box
+	private JComboBox<String> comboBoxPL;
+	private JButton pLViewButton = new JButton("View");
+	
 	//=========================================================================
 	Dimension d = new Dimension(230, 30);
 	
 	public RetailGUI() {
 		//TODO Jump to Constructor
-		//add some test employees to array list
-		employees.add(new Employee(123, "John", 0, 2000.00, 1111));
-		employees.add( new Employee(234, "Tim", 1, 1500.00, 3333));
-		//add some test customers to array list
-		customers.add(new Customer(1, "Sam", "Dublin"));
-		customers.add(new Customer(2, "Tom", "Cork"));
-		customers.add(new Customer(3, "Mary", "Kildare"));
-		customers.add(new Customer(4, "Trish", "Dublin"));
-		customers.add(new Customer(5, "Chris", "Cork"));
-		customers.add(new Customer(6, "Billy", "Waterford"));
-		//add some test suppliers to array list
-		suppliers.add(new Supplier(1, "Smiths", "Dublin","sam@email.com","123456"));
-		suppliers.add(new Supplier(2, "Thompsons", "Cork","tom@email.com","234567"));
-		suppliers.add(new Supplier(3, "Randome", "Dublin", "randome@email.com", "789654"));
-		suppliers.add(new Supplier(4, "Sealion", "Limerick", "sealion@email.com", "987654" ));
-		suppliers.add(new Supplier(5, "Salmon", "Athlone", "salmon@email.com", "258963"));
-		suppliers.add(new Supplier(6, "Beales", "Dublin", "beales@email.com", "369852"));
-		suppliers.add(new Supplier(7, "Buzzco", "Cork", "buzzco@email.com", "147852"));
-		suppliers.add(new Supplier(8, "Vantage", "Waterford", "vantage@email.com", "255856"));
-	
-		
-		//add some test products to array list
-		//(String title, String author, String productCode,double retailPrice, double costPrice, int currentStock, int maxStock, int minStock, Supplier supplier)
-		products.add(new Product("Game of Thrones", "George R.R Martin", "0001", 9.99, 3.75,100,200,15, suppliers.get(0)));
-		products.add(new Product("Not a Drill", "Lee Child", "0002", 12.75, 4.95,221,200,10, suppliers.get(1)));
-		products.add(new Product("Harry Potter", "j.k rowling", "0003", 11.99, 2.95,9,100,10,suppliers.get(2)));
-		products.add(new Product("Tara Road", "Maeve Binchy", "0004", 11.99, 2.04,20,30,10,suppliers.get(1)));
-		products.add(new Product("Echoes", "Maeve Binchy", "0005", 14.99, 1.96,20,30,10,suppliers.get(3)));
-		products.add(new Product("The Glass Lake", "Maeve Binchy", "0006", 16.99, 2.98,20,30,10,suppliers.get(7)));
-		products.add(new Product("Heart and Soul", "Maeve Binchy", "0007", 17.99, 2.97,20,30,10,suppliers.get(3)));
-		products.add(new Product("Light a Penny Candle", "Maeve Binchy", "0008", 11.99, 3.05,20,30,10,suppliers.get(2)));
-		products.add(new Product("Die Trying", "Lee Child", "0009", 10.99, 2.54,15,20,5,suppliers.get(2)));
-		products.add(new Product("The Enemy", "Lee Child", "0010", 11.99, 2.95,15,20,5,suppliers.get(2)));
-		products.add(new Product("One Shot", "Lee Child", "0011", 12.99, 2.83,15,20,5,suppliers.get(0)));
-		products.add(new Product("61 Hours", "Lee Child", "0012", 14.99, 2.78,15,20,5,suppliers.get(3)));
-		products.add(new Product("The Book Thief", "Khaled Hosseini", "0013", 8.99, 3.17,9,30,10,suppliers.get(4)));
-		products.add(new Product("The Hunger Games", "Suzanne Collins", "0014", 8.99, 1.97,30,25,10,suppliers.get(4)));
-		products.add(new Product("The Help", "Kathryn Stockett", "0015", 10.99, 2.51,10,20,10,suppliers.get(4)));
-		products.add(new Product("Life of Pi", "Yann Martel", "0016", 9.99, 2.12,10,10,10,suppliers.get(0)));
-		products.add(new Product("Catching Fire (The Hunger Games #2)", "Suzanne Collins", "0017", 10.99, 1.95,9,100,10,suppliers.get(3)));
-		products.add(new Product("The Girl with the Dragon Tatto", "Steig Larsson", "0018", 9.99, 1.98,15,20,10,suppliers.get(3)));
-		products.add(new Product("Water for Elephants", "Sara Gruen", "0019", 11.99, 3.02,15,20,10,suppliers.get(0)));
-		products.add(new Product("The Da Vinci Code", "Dan Brown", "0020", 7.99, 1.93,15,20,10,suppliers.get(4)));
-		products.add(new Product("The Curious Incident of the Dog in the Night-Time", "Mark Haddon", "0021", 7.99, 1.92,15,20,10,suppliers.get(4)));
-		
-		//Add ArrayList of InvoiceProduct for Invoice Constructor
-		invoiceProducts1.add(new InvoiceProduct(products.get(0), 1));
-		invoiceProducts1.add(new InvoiceProduct(products.get(1), 2));
-		invoiceProducts1.add(new InvoiceProduct(products.get(2), 3));
-		invoiceProducts1.add(new InvoiceProduct(products.get(3), 31));
-		invoiceProducts1.add(new InvoiceProduct(products.get(4), 6));
-		invoiceProducts2.add(new InvoiceProduct(products.get(5), 89));
-		invoiceProducts2.add(new InvoiceProduct(products.get(6), 45));
-		invoiceProducts2.add(new InvoiceProduct(products.get(7), 33));
-		invoiceProducts2.add(new InvoiceProduct(products.get(8),45));
-		invoiceProducts1.add(new InvoiceProduct(products.get(9), 7));
-		invoiceProducts1.add(new InvoiceProduct(products.get(10), 22));
-		invoiceProducts1.add(new InvoiceProduct(products.get(11), 13));
-		invoiceProducts3.add(new InvoiceProduct(products.get(12), 18));
-		invoiceProducts3.add(new InvoiceProduct(products.get(13), 21));
-		invoiceProducts3.add(new InvoiceProduct(products.get(14), 24));
-		invoiceProducts3.add(new InvoiceProduct(products.get(15), 7));
-		invoiceProducts3.add(new InvoiceProduct(products.get(16), 8));
-		invoiceProducts1.add(new InvoiceProduct(products.get(17), 8));
-		invoiceProducts1.add(new InvoiceProduct(products.get(18), 100));
-		invoiceProducts1.add(new InvoiceProduct(products.get(19), 101));
-		invoiceProducts1.add(new InvoiceProduct(products.get(20), 102));
-		
-		//add some test invoices to array list
 		createInvoices();
-		//add some test orders to array list
-		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
-		orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
-		
-		//Create a bunch of OrderProducts for the orders
-		orderProducts1.add(new OrderProduct(products.get(0), 5));
-		orderProducts1.add(new OrderProduct(products.get(1), 7));
-		orderProducts1.add(new OrderProduct(products.get(3), 14));
-		orderProducts1.add(new OrderProduct(products.get(5), 2));
-		orderProducts1.add(new OrderProduct(products.get(1), 55));
-		orderProducts1.add(new OrderProduct(products.get(4), 8));
-		orderProducts1.add(new OrderProduct(products.get(7), 1));
-		orderProducts2.add(new OrderProduct(products.get(4), 20));
-		orderProducts2.add(new OrderProduct(products.get(3), 6));
-		orderProducts2.add(new OrderProduct(products.get(6), 15));
-		orderProducts2.add(new OrderProduct(products.get(6), 10));
-		orderProducts2.add(new OrderProduct(products.get(2), 25));
-		orderProducts2.add(new OrderProduct(products.get(4), 2));
-		orderProducts2.add(new OrderProduct(products.get(6), 2));
-		orderProducts3.add(new OrderProduct(products.get(3), 15));
-		orderProducts3.add(new OrderProduct(products.get(1), 65));
-		orderProducts3.add(new OrderProduct(products.get(7), 3));
-		orderProducts3.add(new OrderProduct(products.get(2), 4));
-		orderProducts3.add(new OrderProduct(products.get(6), 8));
-		orderProducts3.add(new OrderProduct(products.get(1), 2));
-		orderProducts3.add(new OrderProduct(products.get(3), 6));
-		orderProducts3.add(new OrderProduct(products.get(0), 5));
-		//Create a bunch of orders as dummy data
-		orders.add(new Order(3, 1, orderProducts1));
-		orders.add(new Order(4, 2, orderProducts1));
-		orders.add(new Order(5, 3, orderProducts2));
-		orders.add(new Order(6, 4, orderProducts3));
-		orders.add(new Order(7, 5, orderProducts1));
-		orders.add(new Order(8, 5, orderProducts2));
-		orders.add(new Order(9, 6, orderProducts1));
-		orders.add(new Order(10, 8, orderProducts3));
-		
-		
+	
 		/*remove comment marks to run login function
 
 		//lock the tabs until login successful
@@ -732,7 +647,7 @@ public class RetailGUI extends JFrame{
 		accessJTabbedPane.add("View Employee", viewEmployeeJPanel);
 		accessJTabbedPane.add("Edit Employee", editEmployeeJPanel);
 		
-		proflossJTabbedPane.add("Coming Soon", proflossJPanel);
+		proflossJTabbedPane.add("Profit and Loss Table", proflossJPanel);
 		proflossJTabbedPane.setEnabled(false);	
 		
 		employeeJPanel.setLayout(new GridBagLayout());
@@ -3499,7 +3414,44 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//=======================  End
-		//createInvoices();
+		
+		//Profit & Loss Account Panel
+		proflossJPanel.setLayout(new GridBagLayout());
+		pLComponentsJPanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		pLJTable.setRowHeight(ROW_HEIGHT);
+		pLJTable.setEnabled(false);
+		pLJTable.setAutoCreateRowSorter(true);	
+		DefaultRowSorter sorter = ((DefaultRowSorter)pLJTable.getRowSorter());
+		ArrayList list = new ArrayList();
+		list.add( new RowSorter.SortKey(0, SortOrder.ASCENDING) );
+		sorter.setSortKeys(list);
+		sorter.sort();	
+		proflossJPanel.add(pLJScrollPane, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		proflossJPanel.add(new JLabel("Total: "), gbc);
+		pLTotal.setPreferredSize(d);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		proflossJPanel.add(pLTotal, gbc);
+		pLTotal.setEditable(false);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		fillPLComboBox();
+		comboBoxPL = new JComboBox<String>(listOfMonths); //Combo box rather than Text Field
+		listOfMonths.setSelectedItem(months.get(0));
+		comboBoxPL.setPreferredSize(d);
+		proflossJPanel.add(comboBoxPL, gbc);
+		pLViewButton.setPreferredSize(d);
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		proflossJPanel.add(pLViewButton, gbc);
+        viewTableButtonHandler vtbh = new viewTableButtonHandler();
+        pLViewButton.addActionListener(vtbh);
+        proflossJPanel.add(pLComponentsJPanel, gbc);
 	
 		} //END OF CONSTRUCTOR
 	//TODO - end of constructor
@@ -3556,6 +3508,145 @@ public class RetailGUI extends JFrame{
 		invoices.add(new Invoice(1049, employees.get(1), customers.get(4), invoiceProducts2, 41, false));
 		invoices.add(new Invoice(1050, employees.get(0), customers.get(5), invoiceProducts3, 46, true));
 		
+		orders.add(new Order(1001, 1, orderProducts1, 100));
+		orders.add(new Order(1002, 2, orderProducts2, 100));
+		orders.add(new Order(1003, 3, orderProducts3, 100));
+		orders.add(new Order(1004, 4, orderProducts3, 10));
+		orders.add(new Order(1005, 5, orderProducts3, 10));
+		orders.add(new Order(1006, 6, orderProducts1, 10));
+		orders.add(new Order(1007, 2, orderProducts1, 10));
+		orders.add(new Order(1008, 3, orderProducts1, 2));
+		orders.add(new Order(1009, 4, orderProducts2, 2));
+		orders.add(new Order(1010, 5, orderProducts1, 222));
+		orders.add(new Order(1011, 6, orderProducts2, 3));
+		orders.add(new Order(1012, 2, orderProducts3, 365));
+		orders.add(new Order(1013, 1, orderProducts3, 3));
+		orders.add(new Order(1014, 2, orderProducts3, 4));
+		orders.add(new Order(1015, 3, orderProducts2, 4));
+		orders.add(new Order(1016, 1, orderProducts2, 4));
+		orders.add(new Order(1017, 1, orderProducts2, 15));
+		orders.add(new Order(1018, 4, orderProducts1, 15));
+		orders.add(new Order(1019, 4, orderProducts1, 15));
+		orders.add(new Order(1020, 5, orderProducts2, 8));
+		orders.add(new Order(1021, 6, orderProducts3, 80));
+		orders.add(new Order(1022, 2, orderProducts1, 8));
+		orders.add(new Order(1023, 3, orderProducts1, 22));
+		orders.add(new Order(1024, 4, orderProducts3, 200));
+		orders.add(new Order(1025, 5, orderProducts3, 19));
+		orders.add(new Order(1026, 6, orderProducts3, 30));
+		orders.add(new Order(1027, 1, orderProducts3, 440));
+		orders.add(new Order(1028, 1, orderProducts3, 66));
+		orders.add(new Order(1029, 3, orderProducts2, 27));
+		orders.add(new Order(1030, 3, orderProducts2, 25));
+		orders.add(new Order(1031, 3, orderProducts2, 160));
+		
+		//add some test employees to array list
+		employees.add(new Employee(123, "John", 0, 2000.00, 1111));
+		employees.add( new Employee(234, "Tim", 1, 1500.00, 3333));
+		//add some test customers to array list
+		customers.add(new Customer(1, "Sam", "Dublin"));
+		customers.add(new Customer(2, "Tom", "Cork"));
+		customers.add(new Customer(3, "Mary", "Kildare"));
+		customers.add(new Customer(4, "Trish", "Dublin"));
+		customers.add(new Customer(5, "Chris", "Cork"));
+		customers.add(new Customer(6, "Billy", "Waterford"));
+		//add some test suppliers to array list
+		suppliers.add(new Supplier(1, "Smiths", "Dublin","sam@email.com","123456"));
+		suppliers.add(new Supplier(2, "Thompsons", "Cork","tom@email.com","234567"));
+		suppliers.add(new Supplier(3, "Randome", "Dublin", "randome@email.com", "789654"));
+		suppliers.add(new Supplier(4, "Sealion", "Limerick", "sealion@email.com", "987654" ));
+		suppliers.add(new Supplier(5, "Salmon", "Athlone", "salmon@email.com", "258963"));
+		suppliers.add(new Supplier(6, "Beales", "Dublin", "beales@email.com", "369852"));
+		suppliers.add(new Supplier(7, "Buzzco", "Cork", "buzzco@email.com", "147852"));
+		suppliers.add(new Supplier(8, "Vantage", "Waterford", "vantage@email.com", "255856"));
+	
+		
+		//add some test products to array list
+		//(String title, String author, String productCode,double retailPrice, double costPrice, int currentStock, int maxStock, int minStock, Supplier supplier)
+		products.add(new Product("Game of Thrones", "George R.R Martin", "0001", 9.99, 3.75,100,200,15, suppliers.get(0)));
+		products.add(new Product("Not a Drill", "Lee Child", "0002", 12.75, 4.95,221,200,10, suppliers.get(1)));
+		products.add(new Product("Harry Potter", "j.k rowling", "0003", 11.99, 2.95,9,100,10,suppliers.get(2)));
+		products.add(new Product("Tara Road", "Maeve Binchy", "0004", 11.99, 2.04,20,30,10,suppliers.get(1)));
+		products.add(new Product("Echoes", "Maeve Binchy", "0005", 14.99, 1.96,20,30,10,suppliers.get(3)));
+		products.add(new Product("The Glass Lake", "Maeve Binchy", "0006", 16.99, 2.98,20,30,10,suppliers.get(7)));
+		products.add(new Product("Heart and Soul", "Maeve Binchy", "0007", 17.99, 2.97,20,30,10,suppliers.get(3)));
+		products.add(new Product("Light a Penny Candle", "Maeve Binchy", "0008", 11.99, 3.05,20,30,10,suppliers.get(2)));
+		products.add(new Product("Die Trying", "Lee Child", "0009", 10.99, 2.54,15,20,5,suppliers.get(2)));
+		products.add(new Product("The Enemy", "Lee Child", "0010", 11.99, 2.95,15,20,5,suppliers.get(2)));
+		products.add(new Product("One Shot", "Lee Child", "0011", 12.99, 2.83,15,20,5,suppliers.get(0)));
+		products.add(new Product("61 Hours", "Lee Child", "0012", 14.99, 2.78,15,20,5,suppliers.get(3)));
+		products.add(new Product("The Book Thief", "Khaled Hosseini", "0013", 8.99, 3.17,9,30,10,suppliers.get(4)));
+		products.add(new Product("The Hunger Games", "Suzanne Collins", "0014", 8.99, 1.97,30,25,10,suppliers.get(4)));
+		products.add(new Product("The Help", "Kathryn Stockett", "0015", 10.99, 2.51,10,20,10,suppliers.get(4)));
+		products.add(new Product("Life of Pi", "Yann Martel", "0016", 9.99, 2.12,10,10,10,suppliers.get(0)));
+		products.add(new Product("Catching Fire (The Hunger Games #2)", "Suzanne Collins", "0017", 10.99, 1.95,9,100,10,suppliers.get(3)));
+		products.add(new Product("The Girl with the Dragon Tatto", "Steig Larsson", "0018", 9.99, 1.98,15,20,10,suppliers.get(3)));
+		products.add(new Product("Water for Elephants", "Sara Gruen", "0019", 11.99, 3.02,15,20,10,suppliers.get(0)));
+		products.add(new Product("The Da Vinci Code", "Dan Brown", "0020", 7.99, 1.93,15,20,10,suppliers.get(4)));
+		products.add(new Product("The Curious Incident of the Dog in the Night-Time", "Mark Haddon", "0021", 7.99, 1.92,15,20,10,suppliers.get(4)));
+		
+		//Add ArrayList of InvoiceProduct for Invoice Constructor
+		invoiceProducts1.add(new InvoiceProduct(products.get(0), 1));
+		invoiceProducts1.add(new InvoiceProduct(products.get(1), 2));
+		invoiceProducts1.add(new InvoiceProduct(products.get(2), 3));
+		invoiceProducts1.add(new InvoiceProduct(products.get(3), 31));
+		invoiceProducts1.add(new InvoiceProduct(products.get(4), 6));
+		invoiceProducts2.add(new InvoiceProduct(products.get(5), 89));
+		invoiceProducts2.add(new InvoiceProduct(products.get(6), 45));
+		invoiceProducts2.add(new InvoiceProduct(products.get(7), 33));
+		invoiceProducts2.add(new InvoiceProduct(products.get(8),45));
+		invoiceProducts1.add(new InvoiceProduct(products.get(9), 7));
+		invoiceProducts1.add(new InvoiceProduct(products.get(10), 22));
+		invoiceProducts1.add(new InvoiceProduct(products.get(11), 13));
+		invoiceProducts3.add(new InvoiceProduct(products.get(12), 18));
+		invoiceProducts3.add(new InvoiceProduct(products.get(13), 21));
+		invoiceProducts3.add(new InvoiceProduct(products.get(14), 24));
+		invoiceProducts3.add(new InvoiceProduct(products.get(15), 7));
+		invoiceProducts3.add(new InvoiceProduct(products.get(16), 8));
+		invoiceProducts1.add(new InvoiceProduct(products.get(17), 8));
+		invoiceProducts1.add(new InvoiceProduct(products.get(18), 100));
+		invoiceProducts1.add(new InvoiceProduct(products.get(19), 101));
+		invoiceProducts1.add(new InvoiceProduct(products.get(20), 102));
+		
+		//add some test invoices to array list
+
+		//add some test orders to array list
+		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
+		orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
+		
+		//Create a bunch of OrderProducts for the orders
+		orderProducts1.add(new OrderProduct(products.get(0), 5));
+		orderProducts1.add(new OrderProduct(products.get(1), 7));
+		orderProducts1.add(new OrderProduct(products.get(3), 14));
+		orderProducts1.add(new OrderProduct(products.get(5), 2));
+		orderProducts1.add(new OrderProduct(products.get(1), 55));
+		orderProducts1.add(new OrderProduct(products.get(4), 8));
+		orderProducts1.add(new OrderProduct(products.get(7), 1));
+		orderProducts2.add(new OrderProduct(products.get(4), 20));
+		orderProducts2.add(new OrderProduct(products.get(3), 6));
+		orderProducts2.add(new OrderProduct(products.get(6), 15));
+		orderProducts2.add(new OrderProduct(products.get(6), 10));
+		orderProducts2.add(new OrderProduct(products.get(2), 25));
+		orderProducts2.add(new OrderProduct(products.get(4), 2));
+		orderProducts2.add(new OrderProduct(products.get(6), 2));
+		orderProducts3.add(new OrderProduct(products.get(3), 15));
+		orderProducts3.add(new OrderProduct(products.get(1), 65));
+		orderProducts3.add(new OrderProduct(products.get(7), 3));
+		orderProducts3.add(new OrderProduct(products.get(2), 4));
+		orderProducts3.add(new OrderProduct(products.get(6), 8));
+		orderProducts3.add(new OrderProduct(products.get(1), 2));
+		orderProducts3.add(new OrderProduct(products.get(3), 6));
+		orderProducts3.add(new OrderProduct(products.get(0), 5));
+		//Create a bunch of orders as dummy data
+		orders.add(new Order(3, 1, orderProducts1));
+		orders.add(new Order(4, 2, orderProducts1));
+		orders.add(new Order(5, 3, orderProducts2));
+		orders.add(new Order(6, 4, orderProducts3));
+		orders.add(new Order(7, 5, orderProducts1));
+		orders.add(new Order(8, 5, orderProducts2));
+		orders.add(new Order(9, 6, orderProducts1));
+		orders.add(new Order(10, 8, orderProducts3));
+		
 	}
 	
 	public void fillComboBox(){
@@ -3566,6 +3657,15 @@ public class RetailGUI extends JFrame{
 		for(Customer customer: customers){
 			editExistingCustomerInvoiceNums.add(Integer.toString(customer.getCustId()));
 		}
+	}
+	
+	//fill profit and loss combo box
+	public void fillPLComboBox(){
+		months.add("Please Select");
+		months.add("Current Month");
+		months.add("Last Month");
+		months.add("Last 3 Months");
+		months.add("View All");
 	}
 
 	
@@ -4070,6 +4170,124 @@ public class RetailGUI extends JFrame{
 			for(Supplier supplier: suppliers){
 				String str = supplier.getName();
 				combo.addItem(str);
+			}
+		}
+		
+		//handler for Profit and Loss table button
+		//TODO Method to get fill table
+		private class viewTableButtonHandler implements ActionListener{
+			@SuppressWarnings("unchecked")
+			public void actionPerformed( ActionEvent e){
+				//int comboIndex = (int)comboBoxPL.getSelectedIndex();
+				Collections.sort(invoices);
+				Collections.sort(orders);
+				String s = (String)comboBoxPL.getSelectedItem();
+				double orderTotal = 0;
+				double invoiceTotal = 0;
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(new Date());
+				int currentMonth = cal.get(Calendar.MONTH);
+				int currentYear = cal.get(Calendar.YEAR);
+				int lastMonth = currentMonth - 1;
+				int threeMonths = currentMonth - 2;
+				//view all months
+				if(s.equals("View All")){
+					deleteRows();
+					for(Invoice invoice:invoices){
+						if(invoice.isPaid()){
+							tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
+							invoiceTotal = invoiceTotal + invoice.getTotalInvoicePrice();
+						}
+					}
+					for(Order order:orders){
+						tableModel.addRow(new String[]{sdf.format(order.getOrderDate()), "", new String(String.format("%.2f", order.getTotalOrderPrice())) });
+						orderTotal = orderTotal + order.getTotalOrderPrice();
+					}
+					double runningTotal = invoiceTotal - orderTotal;
+					String result = String.format("%.2f", runningTotal);
+					pLTotal.setText(result);
+				}
+				//view last 3 months
+				if(s.equals("Last 3 Months")){
+					deleteRows();
+					for(Invoice invoice:invoices){
+						if(invoice.isPaid()){
+							if(invoice.getInvoiceDate().getMonth() >= threeMonths && invoice.getInvoiceDate().getYear() == currentYear){
+								tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
+								invoiceTotal = invoiceTotal + invoice.getTotalInvoicePrice();
+							}
+						}
+					}
+					for(Order order:orders){
+						if(order.getOrderDate().getMonth() >= threeMonths && order.getOrderDate().getYear() == currentYear){
+							tableModel.addRow(new String[]{sdf.format(order.getOrderDate()), "", new String(String.format("%.2f", order.getTotalOrderPrice() ))});
+							orderTotal = orderTotal + order.getTotalOrderPrice();
+						}
+					}
+					double runningTotal = invoiceTotal - orderTotal;
+					String result = String.format("%.2f", runningTotal);
+					pLTotal.setText(result);
+				}
+				//view last month
+				if(s.equals("Last Month")){
+					deleteRows();
+					int i =0;
+					int rows = 0;
+					for(i=0;i<tableModel.getRowCount();i++){
+						tableModel.removeRow(rows);
+					}
+					for(Invoice invoice:invoices){
+						if(invoice.isPaid()){
+							if(invoice.getInvoiceDate().getMonth() == lastMonth && invoice.getInvoiceDate().getYear() == currentYear){
+								tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
+								invoiceTotal = invoiceTotal + invoice.getTotalInvoicePrice();
+							}
+						}
+					}
+					for(Order order:orders){
+						if(order.getOrderDate().getMonth() == lastMonth && order.getOrderDate().getYear() == currentYear){
+							tableModel.addRow(new String[]{sdf.format(order.getOrderDate()), "", new String(String.format("%.2f", order.getTotalOrderPrice()))});
+							orderTotal = orderTotal + order.getTotalOrderPrice();
+						}
+					}
+					double runningTotal = invoiceTotal - orderTotal;
+					String result = String.format("%.2f", runningTotal);
+					pLTotal.setText(result);
+				}
+				//view current month
+				if(s.equals("Current Month")){
+					deleteRows();
+					int i =0;
+					int rows = 0;
+					for(i=0;i<tableModel.getRowCount();i++){
+						tableModel.removeRow(rows);
+					}
+					for(Invoice invoice:invoices){
+						System.out.println("the int of all invoices is: " + invoice.getInvoiceDate().getMonth());
+						if(invoice.isPaid()){
+							if(invoice.getInvoiceDate().getMonth() == currentMonth && invoice.getInvoiceDate().getYear() == currentYear){
+								tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
+								invoiceTotal = invoiceTotal + invoice.getTotalInvoicePrice();
+							}
+						}
+					}
+					for(Order order:orders){
+						if(order.getOrderDate().getMonth() == currentMonth && order.getOrderDate().getYear() == currentYear){
+							tableModel.addRow(new String[]{sdf.format(order.getOrderDate()), "", new String(String.format("%.2f", order.getTotalOrderPrice()))});
+							orderTotal = orderTotal + order.getTotalOrderPrice();
+						}
+					}
+					double runningTotal = invoiceTotal - orderTotal;
+					String result = String.format("%.2f", runningTotal);
+					pLTotal.setText(result);
+				}
+			}
+			public void deleteRows(){
+				if (tableModel.getRowCount() > 0) {
+				    for (int i = tableModel.getRowCount() - 1; i > -1; i--) {
+				    	tableModel.removeRow(i);
+				    }
+				}
 			}
 		}
 
