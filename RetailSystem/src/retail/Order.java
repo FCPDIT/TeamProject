@@ -1,6 +1,7 @@
 package retail;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -9,7 +10,7 @@ import java.util.Date;
 //when creating a new Order, only one OrderProduct is originally added
 //any other OrderProducts can then be added to that object
 //this is to make it easier to make either a single Product Order or a multiple Product Order
-public class Order {
+public class Order implements Comparable<Order> {
 	
 	private int orderUniqueId;
 	private ArrayList<OrderProduct> listOfProductsOrdered = new ArrayList<OrderProduct>();
@@ -17,6 +18,7 @@ public class Order {
 	private boolean delivered = false;
 	private Date orderDate;
 	private double totalOrderPrice;
+	private int noOfDays;
 	
 	public Order(){
 		
@@ -38,6 +40,19 @@ public class Order {
 		totalOrderPrice = calculateOrderTotal();
 	}
 	
+	//3rd constructor for past dates
+	public Order(int orderUniqueId, int supplierUniqueId, ArrayList<OrderProduct> OrderProductList, int noOfDays) {
+		this.orderUniqueId = orderUniqueId;
+		this.supplierUniqueId = supplierUniqueId;
+		this.listOfProductsOrdered = OrderProductList;
+		totalOrderPrice = calculateOrderTotal();
+		this.noOfDays = noOfDays;
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE, - noOfDays);
+		orderDate = cal.getTime();
+	}
+	
 	public double calculateOrderTotal(){
 		
 		double amount = 0.0;
@@ -48,6 +63,11 @@ public class Order {
 		return amount;
 	}
 	
+	  @Override
+	  public int compareTo(Order o) {
+	    return getOrderDate().compareTo(o.getOrderDate());
+	 }
+	  
 	public Date getOrderDate() {
 		return orderDate;
 	}
