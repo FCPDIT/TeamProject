@@ -62,6 +62,9 @@ public class RetailGUI extends JFrame{
 	private ArrayList<InvoiceProduct> invoiceProducts1 = new ArrayList<InvoiceProduct>();
 	private ArrayList<InvoiceProduct> invoiceProducts2 = new ArrayList<InvoiceProduct>();
 	private ArrayList<InvoiceProduct> invoiceProducts3 = new ArrayList<InvoiceProduct>();
+	private ArrayList<OrderProduct> orderProducts1 = new ArrayList<OrderProduct>();
+	private ArrayList<OrderProduct> orderProducts2 = new ArrayList<OrderProduct>();
+	private ArrayList<OrderProduct> orderProducts3 = new ArrayList<OrderProduct>();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
 	
 	public ArrayList<Order> getOrders(){
@@ -589,6 +592,39 @@ public class RetailGUI extends JFrame{
 		//add some test orders to array list
 		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
 		orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
+		
+		//Create a bunch of OrderProducts for the orders
+		orderProducts1.add(new OrderProduct(products.get(0), 5));
+		orderProducts1.add(new OrderProduct(products.get(1), 7));
+		orderProducts1.add(new OrderProduct(products.get(3), 14));
+		orderProducts1.add(new OrderProduct(products.get(5), 2));
+		orderProducts1.add(new OrderProduct(products.get(1), 55));
+		orderProducts1.add(new OrderProduct(products.get(4), 8));
+		orderProducts1.add(new OrderProduct(products.get(7), 1));
+		orderProducts2.add(new OrderProduct(products.get(4), 20));
+		orderProducts2.add(new OrderProduct(products.get(3), 6));
+		orderProducts2.add(new OrderProduct(products.get(6), 15));
+		orderProducts2.add(new OrderProduct(products.get(6), 10));
+		orderProducts2.add(new OrderProduct(products.get(2), 25));
+		orderProducts2.add(new OrderProduct(products.get(4), 2));
+		orderProducts2.add(new OrderProduct(products.get(6), 2));
+		orderProducts3.add(new OrderProduct(products.get(3), 15));
+		orderProducts3.add(new OrderProduct(products.get(1), 65));
+		orderProducts3.add(new OrderProduct(products.get(7), 3));
+		orderProducts3.add(new OrderProduct(products.get(2), 4));
+		orderProducts3.add(new OrderProduct(products.get(6), 8));
+		orderProducts3.add(new OrderProduct(products.get(1), 2));
+		orderProducts3.add(new OrderProduct(products.get(3), 6));
+		orderProducts3.add(new OrderProduct(products.get(0), 5));
+		//Create a bunch of orders as dummy data
+		orders.add(new Order(3, 1, orderProducts1));
+		orders.add(new Order(4, 2, orderProducts1));
+		orders.add(new Order(5, 3, orderProducts2));
+		orders.add(new Order(6, 4, orderProducts3));
+		orders.add(new Order(7, 5, orderProducts1));
+		orders.add(new Order(8, 5, orderProducts2));
+		orders.add(new Order(9, 6, orderProducts1));
+		orders.add(new Order(10, 8, orderProducts3));
 		
 		
 		/*remove comment marks to run login function

@@ -128,7 +128,7 @@ public class Order {
 		for(Order order: listOfOrders){
 			if(order.getOrderUniqueId() == orderId){
 				result = result + "----------------------------------------------" +  "\n" + "Order ID: " + 
-						 order.getOrderUniqueId() + "\n"	+ "Products: " + "\n-----------------";
+						 order.getOrderUniqueId() + "\n" + "Supplier: " + order.getSupplierUniqueId() +  "\n" + "Products: " + "\n-----------------";
 				result += printOrderDetails(order);
 				break;
 			}
@@ -283,8 +283,7 @@ public class Order {
 		String result = "";
 		for(OrderProduct oProduct: order.getListOfOrderProducts()){
 			Product product = oProduct.getProduct();
-			result = result + "\n" + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + "\n" +
-					"Products: " + "\n" + 
+			result = result + "\n" + 
 					"\n Product Id: : " + product.getProductCode() + 
 					"\n Title: " + product.getTitle() +
 					"\n Author: " + product.getAuthor() +
