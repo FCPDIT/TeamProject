@@ -72,7 +72,7 @@ public class RetailGUI extends JFrame{
 	private ArrayList<OrderProduct> orderProducts1 = new ArrayList<OrderProduct>();
 	private ArrayList<OrderProduct> orderProducts2 = new ArrayList<OrderProduct>();
 	private ArrayList<OrderProduct> orderProducts3 = new ArrayList<OrderProduct>();
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/dd");
 	
 	public ArrayList<Order> getOrders(){
 		return this.orders;
