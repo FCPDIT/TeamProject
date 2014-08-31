@@ -4228,7 +4228,6 @@ public class RetailGUI extends JFrame{
 		private class viewTableButtonHandler implements ActionListener{
 			@SuppressWarnings("unchecked")
 			public void actionPerformed( ActionEvent e){
-				//int comboIndex = (int)comboBoxPL.getSelectedIndex();
 				Collections.sort(invoices);
 				Collections.sort(orders);
 				String s = (String)comboBoxPL.getSelectedItem();
@@ -4262,14 +4261,14 @@ public class RetailGUI extends JFrame{
 					deleteRows();
 					for(Invoice invoice:invoices){
 						if(invoice.isPaid()){
-							if(invoice.getInvoiceDate().getMonth() >= threeMonths && invoice.getInvoiceDate().getYear() == currentYear){
+							if(invoice.getInvoiceDate().getMonth() >= threeMonths && invoice.getInvoiceDate().getYear() +1900 == currentYear){
 								tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
 								invoiceTotal = invoiceTotal + invoice.getTotalInvoicePrice();
 							}
 						}
 					}
 					for(Order order:orders){
-						if(order.getOrderDate().getMonth() >= threeMonths && order.getOrderDate().getYear() == currentYear){
+						if(order.getOrderDate().getMonth() >= threeMonths && order.getOrderDate().getYear() +1900 == currentYear){
 							tableModel.addRow(new String[]{sdf.format(order.getOrderDate()), "", new String(String.format("%.2f", order.getTotalOrderPrice() ))});
 							orderTotal = orderTotal + order.getTotalOrderPrice();
 						}
@@ -4288,14 +4287,14 @@ public class RetailGUI extends JFrame{
 					}
 					for(Invoice invoice:invoices){
 						if(invoice.isPaid()){
-							if(invoice.getInvoiceDate().getMonth() == lastMonth && invoice.getInvoiceDate().getYear() == currentYear){
+							if(invoice.getInvoiceDate().getMonth() == lastMonth && invoice.getInvoiceDate().getYear() +1900 == currentYear){
 								tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
 								invoiceTotal = invoiceTotal + invoice.getTotalInvoicePrice();
 							}
 						}
 					}
 					for(Order order:orders){
-						if(order.getOrderDate().getMonth() == lastMonth && order.getOrderDate().getYear() == currentYear){
+						if(order.getOrderDate().getMonth() == lastMonth && order.getOrderDate().getYear() +1900 == currentYear){
 							tableModel.addRow(new String[]{sdf.format(order.getOrderDate()), "", new String(String.format("%.2f", order.getTotalOrderPrice()))});
 							orderTotal = orderTotal + order.getTotalOrderPrice();
 						}
@@ -4315,14 +4314,14 @@ public class RetailGUI extends JFrame{
 					for(Invoice invoice:invoices){
 						System.out.println("the int of all invoices is: " + invoice.getInvoiceDate().getMonth());
 						if(invoice.isPaid()){
-							if(invoice.getInvoiceDate().getMonth() == currentMonth && invoice.getInvoiceDate().getYear() == currentYear){
+							if(invoice.getInvoiceDate().getMonth() == currentMonth && invoice.getInvoiceDate().getYear() +1900 == currentYear){
 								tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
 								invoiceTotal = invoiceTotal + invoice.getTotalInvoicePrice();
 							}
 						}
 					}
 					for(Order order:orders){
-						if(order.getOrderDate().getMonth() == currentMonth && order.getOrderDate().getYear() == currentYear){
+						if(order.getOrderDate().getMonth() == currentMonth && order.getOrderDate().getYear() +1900 == currentYear){
 							tableModel.addRow(new String[]{sdf.format(order.getOrderDate()), "", new String(String.format("%.2f", order.getTotalOrderPrice()))});
 							orderTotal = orderTotal + order.getTotalOrderPrice();
 						}
