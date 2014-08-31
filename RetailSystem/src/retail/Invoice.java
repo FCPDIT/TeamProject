@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Invoice {
+public class Invoice  implements Comparable<Invoice>  {
 	private int id;
 	private Employee employee; // or maybe just an employeeId ??
 	private Customer customer;
@@ -70,6 +70,11 @@ public class Invoice {
 		}
 		return amount;
 	}
+	
+	  @Override
+	  public int compareTo(Invoice i) {
+	    return getInvoiceDate().compareTo(i.getInvoiceDate());
+	  }
 	
 	//Getter and setters
 	public double getTotalInvoicePrice() {
