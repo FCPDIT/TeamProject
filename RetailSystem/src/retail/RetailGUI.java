@@ -365,6 +365,7 @@ public class RetailGUI extends JFrame{
 	private JTextField editPayStatus = new JTextField("");	
 	private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
 
+	private JButton lineChartJButton = new JButton("Income and Expenditure");
 
 		
 	//===========================================
@@ -677,7 +678,6 @@ public class RetailGUI extends JFrame{
 		accessJTabbedPane.add("Edit Employee", editEmployeeJPanel);
 		
 		proflossJTabbedPane.add("Profit and Loss Table", proflossJPanel);
-		proflossJTabbedPane.setEnabled(false);	
 		
 		employeeJPanel.setLayout(new GridBagLayout());
 		this.empIDPopulate(empIdCombo);
@@ -3481,6 +3481,24 @@ public class RetailGUI extends JFrame{
         viewTableButtonHandler vtbh = new viewTableButtonHandler();
         pLViewButton.addActionListener(vtbh);
         proflossJPanel.add(pLComponentsJPanel, gbc);
+        
+        lineChartJButton.setPreferredSize(d);
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		proflossJPanel.add(lineChartJButton, gbc);
+		
+		lineChartJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					JFreeChart lineChart = ChartFactory.createLineChart("Income and Expenditure","Month","Value",line_chart_dataset,PlotOrientation.VERTICAL,true,true,false);
+					ChartFrame frame = new ChartFrame("Income and Expenditure", lineChart);
+					frame.setBounds(0, 0, 600, 600);
+					frame.setVisible(true);
+				}catch (Exception i){
+		             System.out.println(i);
+		         }
+			}
+		});
 	
 		} //END OF CONSTRUCTOR
 	//TODO - end of constructor
