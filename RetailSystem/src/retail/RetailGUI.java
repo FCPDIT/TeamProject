@@ -12,11 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -26,10 +21,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -74,6 +71,8 @@ public class RetailGUI extends JFrame{
 	public void addOrders(Order order){
 		orders.add(order);
 	}
+	
+	
 	
 	private JFrame mainJFrame = new JFrame();
 	private GridBagConstraints gc = new GridBagConstraints();
@@ -140,14 +139,16 @@ public class RetailGUI extends JFrame{
 	private JTextField custPhoneJTextField = new JTextField();	
 	private JButton custJButton  = new JButton("Create New Customer");
 	private JLabel viewCustById = new JLabel("Find Customer By ID: ");
-	private JTextField custById = new JTextField();
+	private JComboBox<String> custIdCombo = new JComboBox<String>();
+	private JButton viewCustJButton = new JButton("View By ID");
 	private JLabel viewCustByName = new JLabel("Find Customer By Name: ");
-	private JTextField custByName = new JTextField();
-	private JButton viewCustJButton = new JButton("View Customer");
+	private JComboBox<String> custNameCombo = new JComboBox<String>();
+	private JButton viewCustNameJButton = new JButton("View By Name");
 	private JButton viewAllCustJButton = new JButton("View All Customers");
 	private JTextArea custJTextArea = new JTextArea(10, 65);
+	
 	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer Number");
-	private JTextField editCustById = new JTextField();
+	private JComboBox<String> editCustIdCombo = new JComboBox<String>();
 	private JButton findCustById = new JButton("Find Customer");
 	private JLabel editCustIdJLabel = new JLabel("Customer ID");
 	private JLabel editCustNameJLabel = new JLabel("Customer Name");
@@ -175,14 +176,15 @@ public class RetailGUI extends JFrame{
 	private JTextField supplierPhoneJTextField = new JTextField();
 	private JButton supplierJButton = new JButton("Create New Supplier");
 	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID: ");
-	private JTextField viewSupplyJTextField = new JTextField();
+	private JComboBox<String> suppIdCombo = new JComboBox<String>();
+	private JButton viewSupplyJButton = new JButton("View Supplier By ID");
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
-	private JTextField viewSupplyNameJTextField = new JTextField();
+	private JComboBox<String> suppNameCombo = new JComboBox<String>();
 	private JTextArea supplierJTextArea = new JTextArea(10, 65);
-	private JButton viewSupplyJButton = new JButton("View Supplier Details");
+	private JButton viewSupplyNameJButton = new JButton("View Supplier By Name");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
 	private JLabel editFindSuppIdJLabel = new JLabel("Enter Supplier Number");
-	private JTextField editSupplierJTextField = new JTextField();
+	private JComboBox<String> editSuppIdCombo = new JComboBox<String>();
 	private JButton editSupplierJButton = new JButton("Find Supplier");
 	private JLabel editSuppIdJLabel = new JLabel("Supplier ID");
 	private JLabel editSuppNameJLabel = new JLabel("Supplier Name");
@@ -213,17 +215,16 @@ public class RetailGUI extends JFrame{
 	private JTextField employeePassField = new JTextField();
 	private JButton employeeJButton = new JButton("Create New Employee");
 	private JLabel viewEmpId = new JLabel("View By ID");
-	private JTextField viewEmpIdField = new JTextField();
+	private JComboBox<String> empIdCombo = new JComboBox<String>();
 	private JButton viewEmpIdButton = new JButton("Search Employees");
 	private JLabel viewEmpName = new JLabel("View By Name");
-	private JTextField viewEmpNameField = new JTextField();
+	private JComboBox<String> empNameCombo = new JComboBox<String>();
 	private JButton viewEmpNameButton = new JButton("Search Employees");
 	private JLabel viewEmpAll = new JLabel("View All Employees");
 	private JButton viewEmpAllButton = new JButton("View All");
 	private JTextArea empJTextArea = new JTextArea(10, 65);
-	
 	private JLabel editFindById = new JLabel("Enter Employee ID ");
-	private JTextField editFindByIdField = new JTextField();
+	private JComboBox<String> viewEmpIdCombo = new JComboBox<String>();
 	private JButton editById = new JButton("Find Employee Details");
 	private JLabel editEmpId = new JLabel("Employee Id");
 	private JTextField editEmpIdField = new JTextField();
@@ -299,13 +300,32 @@ public class RetailGUI extends JFrame{
 	private JTextField productTitleTextField;
 	private JTextField productAuthorTextField;
 	private JTextField viewProductIdTextField;
-	//private JTextField invTextField;
 	private JPanel viewProductDetailsPanel= new JPanel();
 	private JPanel viewProductDetails= new JPanel();
 	private int buttonWidth = 155;
 	private int buttonHeight = 20;
 	private ButtonGroup priceRange = new ButtonGroup();
 	private ButtonGroup quantity = new ButtonGroup();
+	
+	// TODO  Set Image Icons
+//	ImageIcon productIcon = new ImageIcon("C:/Users/James/Desktop/testA.png");
+//	ImageIcon invoiceIcon = new ImageIcon("C:/Users/James/Desktop/Invoice.png");
+			
+			
+			
+	// TODO Product Combo Box
+	private Vector<String> existingProductId = new Vector<>();
+	private DefaultComboBoxModel<String> listOfProductId = new DefaultComboBoxModel<>(existingProductId);
+	private JComboBox<String> comboBoxProductId;
+	
+	private Vector<String> existingProductTitle = new Vector<>();
+	private DefaultComboBoxModel<String> listofProductTitle = new DefaultComboBoxModel<>(existingProductTitle);
+	private JComboBox<String> comboBoxProductTitle;
+	
+	private Vector<String> existingProductAuthor = new Vector<>();
+	private DefaultComboBoxModel<String> listOfProductAuthor = new DefaultComboBoxModel<>(existingProductAuthor);
+	private JComboBox<String> comboBoxProductAuthor;
+	
 	
 	//Edit Invoice Components 
 	private JPanel findInvoiceComponentsJPanel = new JPanel();
@@ -470,24 +490,19 @@ public class RetailGUI extends JFrame{
 	private JLabel viewOrderAuthorLabel = new JLabel("Author: ");
 	private JButton viewOrderAuthorButton = new JButton("Find order containing a product by this author");	
 	private JTextArea viewOrderTextArea;
-	//Deprecated
-	private JTextField viewOrderOrderIdTextField = new JTextField();
-	private JTextField viewOrderSupplierIdTextField = new JTextField();
-	private JTextField viewOrderTitleTextField = new JTextField();
-	private JTextField viewOrderAuthorTextField = new JTextField();
 	//Edit Order Components
 	private JPanel findOrderComponentsJPanel = new JPanel();
 	private JPanel editOrderComponentsJPanel = new JPanel();
 	private JPanel editSupplierOrderComponentsJPanel = new JPanel();
 	private JPanel saveOrderComponentsJPanel = new JPanel();
 	private JPanel editOrderProductsComponentsJPanel = new JPanel();
-	private JTextField editOrderJTextField = new JTextField("Order Id");
+	private JComboBox<String> editOrderOrderIdComboBox;
 	private JTextArea supplierOrderJTextArea = new JTextArea(10,20);
 	private JTextArea productOrderJTextArea = new JTextArea();
 	private JTextField allOrdersTotalJTextField = new JTextField("Total Owed");
 	private JButton deliverAllOrdersJButton = new JButton("Deliver All Orders");
 	private JButton editOrderJButton = new JButton("Find Order by Id");
-	private JTextField editSupplierOrderJTextField = new JTextField("Supplier Id");
+	private JComboBox<String> editOrderSupplierIdComboBox;
 	private JButton editSupplierOrderJButton = new JButton("Find Order by Supplier");
 	private JTextField editOrderId = new JTextField("Edit Order Id:");
 	private JTextField editOrderSupplier = new JTextField("Edit Order Customer");
@@ -647,8 +662,11 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.add("Login", loginJPanel);
 		mainJTabbedPane.add("Customer Management", custJTabbedPane);
 		mainJTabbedPane.add("Supplier Management", supplyJTabbedPane);
-		mainJTabbedPane.add("Product Management", prodJTabbedPane);
-		mainJTabbedPane.add("Invoice Management", invJTabbedPane);
+//		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);		// This code was used when testing image icons 
+//		mainJTabbedPane.addTab("Invoice Management",invoiceIcon, invJTabbedPane);		// Needs more work do not delete
+		mainJTabbedPane.addTab("Product Management", prodJTabbedPane);
+		mainJTabbedPane.addTab("Invoice Management", invJTabbedPane);
+		
 		mainJTabbedPane.add("Order Management", orderJTabbedPane);
 		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
 		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
@@ -682,6 +700,9 @@ public class RetailGUI extends JFrame{
 		proflossJTabbedPane.setEnabled(false);	
 		
 		employeeJPanel.setLayout(new GridBagLayout());
+		this.empIDPopulate(empIdCombo);
+		this.empNamePopulate();
+		this.empIDPopulate(viewEmpIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		employeeId.setPreferredSize(d);
@@ -733,8 +754,10 @@ public class RetailGUI extends JFrame{
 		viewEmployeeJPanel.add(viewEmpId, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		viewEmpIdField.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpIdField, gc);
+		empIdCombo.setPreferredSize(d);
+		empIdCombo.setSelectedIndex(0);
+		empIdCombo.setEditable(true);
+		viewEmployeeJPanel.add(empIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		viewEmpIdButton.setPreferredSize(d);
@@ -745,8 +768,10 @@ public class RetailGUI extends JFrame{
 		viewEmployeeJPanel.add(viewEmpName, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
-		viewEmpNameField.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpNameField, gc);
+		empNameCombo.setPreferredSize(d);
+		empNameCombo.setSelectedIndex(0);
+		empNameCombo.setEditable(true);
+		viewEmployeeJPanel.add(empNameCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
 		viewEmpNameButton.setPreferredSize(d);
@@ -762,8 +787,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 9;
 		JScrollPane empScrollPane = new JScrollPane(empJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		viewEmployeeJPanel.add(empScrollPane, gc);
-		
+		viewEmployeeJPanel.add(empScrollPane, gc);	
 		editEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -771,8 +795,10 @@ public class RetailGUI extends JFrame{
 		editEmployeeJPanel.add(editFindById, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		editFindByIdField.setPreferredSize(d);
-		editEmployeeJPanel.add(editFindByIdField, gc);
+		viewEmpIdCombo.setPreferredSize(d);
+		viewEmpIdCombo.setSelectedIndex(0);
+		viewEmpIdCombo.setEditable(true);
+		editEmployeeJPanel.add(viewEmpIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		editById.setPreferredSize(d);
@@ -841,12 +867,12 @@ public class RetailGUI extends JFrame{
 			if(employees.size() >= 1){
 					try{
 						for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdField.getText())){
-							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-									+"\n Employee Name: " +employee.getEmployeeName() 
-									+"\n Employee Access Level: " +employee.getAccess()
-									+"\n Employee Password: " +employee.getPassword()
-									+"\n Employee Salary: " +employee.getSalary());
+							if(employee.getEmployeeId()== Integer.parseInt(empIdCombo.getSelectedItem().toString())){
+								empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+										+"\n Employee Name: " +employee.getEmployeeName() 
+										+"\n Employee Access Level: " +employee.getAccess()
+										+"\n Employee Password: " +employee.getPassword()
+										+"\n Employee Salary: " +employee.getSalary());
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -862,7 +888,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				// view by employee name
 				for(Employee employee: employees){
-					if(employee.getEmployeeName().equalsIgnoreCase(viewEmpNameField.getText())){
+					if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
 						empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
 					+"\n Employee Name: " +employee.getEmployeeName() 
 					+"\n Employee Access Level: " +employee.getAccess()
@@ -896,7 +922,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+						if(employee.getEmployeeId()== Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							editEmpIdField.setText(Integer.toString(employee.getEmployeeId()));
 							editEmpNameField.setText(employee.getEmployeeName());
 							editEmpAccessField.setText(Integer.toString(employee.getAccess()));
@@ -915,7 +941,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							employee.setEmployeeId(Integer.parseInt(editEmpIdField.getText()));
 							employee.setEmployeeName(editEmpNameField.getText());
 							employee.setAccess(Integer.parseInt(editEmpAccessField.getText()));
@@ -935,7 +961,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent arg){
 				try{
 					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(editFindByIdField.getText())){
+						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							employees.remove(employee);
 							JOptionPane.showMessageDialog(null, "Employee Deleted");
 						}
@@ -949,6 +975,9 @@ public class RetailGUI extends JFrame{
 		addCustJPanel.setLayout(new GridBagLayout());
 		viewCustJPanel.setLayout(new GridBagLayout());
 		editCustJPanel.setLayout(new GridBagLayout());
+		this.custIdPopulate(custIdCombo);
+		this.custNamePopulate(custNameCombo);
+		this.custIdPopulate(editCustIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		custIdJLabel.setPreferredSize(d);
@@ -998,26 +1027,34 @@ public class RetailGUI extends JFrame{
 		viewCustJPanel.add(viewCustById, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		custById.setPreferredSize(d);
-		viewCustJPanel.add(custById, gc);
+		custIdCombo.setPreferredSize(d);
+		custIdCombo.setSelectedIndex(0);
+		custIdCombo.setEditable(true);
+		viewCustJPanel.add(custIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
-		viewCustByName.setPreferredSize(d);
-		viewCustJPanel.add(viewCustByName, gc);
-		gc.gridx = 0;
-		gc.gridy = 4;
-		custByName.setPreferredSize(d);
-		viewCustJPanel.add(custByName, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
 		viewCustJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewCustJButton, gc);
 		gc.gridx = 0;
+		gc.gridy = 4;
+		viewCustByName.setPreferredSize(d);
+		viewCustJPanel.add(viewCustByName, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		custNameCombo.setPreferredSize(d);
+		custNameCombo.setSelectedIndex(0);
+		custNameCombo.setEditable(true);
+		viewCustJPanel.add(custNameCombo, gc);
+		gc.gridx = 0;
 		gc.gridy = 6;
+		viewCustNameJButton.setPreferredSize(d);
+		viewCustJPanel.add(viewCustNameJButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
 		viewAllCustJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewAllCustJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 8;
 		JScrollPane custScrollPane = new JScrollPane(custJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		viewCustJPanel.add(custScrollPane, gc);
 		gc.gridx = 0;
@@ -1026,8 +1063,10 @@ public class RetailGUI extends JFrame{
 		editCustJPanel.add(editFindCustIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		editCustById.setPreferredSize(d);
-		editCustJPanel.add(editCustById, gc);
+		editCustIdCombo.setPreferredSize(d);
+		editCustIdCombo.setSelectedItem(0);
+		editCustIdCombo.setEditable(true);
+		editCustJPanel.add(editCustIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		findCustById.setPreferredSize(d);
@@ -1090,7 +1129,8 @@ public class RetailGUI extends JFrame{
 						custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
 						custPhoneJTextField.getText());
 					customers.add(customer);
-					JOptionPane.showMessageDialog(null, "New Customer Added");			
+					JOptionPane.showMessageDialog(null, "New Customer Added");
+					editCustomerListOfInvoices.addElement(custIdJTextField.getText());
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
@@ -1103,7 +1143,7 @@ public class RetailGUI extends JFrame{
 			if(customers.size() >= 1){
 					try{
 						for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(custById.getText()) || customer.getCustName() == custByName.getText()){
+						if(customer.getCustId() == Integer.parseInt(custIdCombo.getSelectedItem().toString())){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
 									+"\n Customer Name: "+customer.getCustName()
 									+"\n Customer Address: "+customer.getCustAddress()
@@ -1114,6 +1154,25 @@ public class RetailGUI extends JFrame{
 					}catch(NumberFormatException nfe){
 						JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Customers Found");
+				}
+			}
+		});
+		
+		viewCustNameJButton.addActionListener(new ActionListener(){
+			// function to view a customer by id or name
+			public void actionPerformed(ActionEvent e){
+			if(customers.size() >= 1){
+						for(Customer customer: customers){
+						if(customer.getCustName() == custNameCombo.getSelectedItem()){
+							custJTextArea.setText(" Customer Id: "+customer.getCustId()
+									+"\n Customer Name: "+customer.getCustName()
+									+"\n Customer Address: "+customer.getCustAddress()
+									+"\n Customer Email: "+customer.getCustEmail()
+									+"\n Customer Phone: "+customer.getCustTelephone());
+							}
+						}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Customers Found");
 				}
@@ -1144,7 +1203,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
 							editCustId.setText(Integer.toString(customer.getCustId()));
 							editCustName.setText(customer.getCustName());
 							editCustAddress.setText(customer.getCustAddress());
@@ -1163,7 +1222,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
 							customer.setCustId(Integer.parseInt(editCustId.getText()));
 							customer.setCustName(editCustName.getText());
 							customer.setCustAddress(editCustAddress.getText());
@@ -1182,7 +1241,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent arg){
 				try{
 					for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(editCustById.getText())){
+						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
 							customers.remove(customer);
 						}
 					}
@@ -1195,7 +1254,9 @@ public class RetailGUI extends JFrame{
 		addSupplyJPanel.setLayout(new GridBagLayout());
 		viewSupplyJPanel.setLayout(new GridBagLayout());
 		editSupplyJPanel.setLayout(new GridBagLayout());
-		
+		this.suppIdPopulate(suppIdCombo);
+		this.suppNamePopulate(suppNameCombo);
+		this.suppIdPopulate(editSuppIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		supplierIdJLabel.setPreferredSize(d);
@@ -1246,37 +1307,46 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(viewSupplyJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		viewSupplyJTextField.setPreferredSize(d);
-		viewSupplyJPanel.add(viewSupplyJTextField, gc);
+		suppIdCombo.setPreferredSize(d);
+		suppIdCombo.setSelectedIndex(0);
+		suppIdCombo.setEditable(true);
+		viewSupplyJPanel.add(suppIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
-		viewSupplyNameJLabel.setPreferredSize(d);
-		viewSupplyJPanel.add(viewSupplyNameJLabel, gc);
-		gc.gridx = 0;
-		gc.gridy = 4;
-		viewSupplyNameJTextField.setPreferredSize(d);
-		viewSupplyJPanel.add(viewSupplyNameJTextField, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
 		viewSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyJButton, gc);
 		gc.gridx = 0;
+		gc.gridy = 4;
+		viewSupplyNameJLabel.setPreferredSize(d);
+		viewSupplyJPanel.add(viewSupplyNameJLabel, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		suppNameCombo.setPreferredSize(d);
+		suppNameCombo.setSelectedIndex(0);
+		suppNameCombo.setEditable(true);
+		viewSupplyJPanel.add(suppNameCombo, gc);
+		gc.gridx = 0;
 		gc.gridy = 6;
+		viewSupplyNameJButton.setPreferredSize(d);
+		viewSupplyJPanel.add(viewSupplyNameJButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
 		allSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(allSupplyJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 8;
 		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		viewSupplyJPanel.add(suppJScrollPane, gc);
-
 		gc.gridx = 0;
 		gc.gridy = 1;
 		editFindSuppIdJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editFindSuppIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		editSupplierJTextField.setPreferredSize(d);
-		editSupplyJPanel.add(editSupplierJTextField, gc);
+		editSuppIdCombo.setPreferredSize(d);
+		editSuppIdCombo.setSelectedIndex(0);
+		editSuppIdCombo.setEditable(true);
+		editSupplyJPanel.add(editSuppIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		editSupplierJButton.setPreferredSize(d);
@@ -1358,7 +1428,7 @@ public class RetailGUI extends JFrame{
 				try{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
-							if(supplier.getId() == Integer.parseInt(viewSupplyJTextField.getText()) || supplier.getName() == viewSupplyNameJTextField.getText()){
+							if(supplier.getId() == Integer.parseInt(suppIdCombo.getSelectedItem().toString())){
 								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
 										+"\n Supplier Name: "+supplier.getName()
 										+"\n Supplier Address: "+supplier.getAddress()
@@ -1372,6 +1442,26 @@ public class RetailGUI extends JFrame{
 					}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Id should be a number.");
+				}
+			}
+		});
+		
+		viewSupplyNameJButton.addActionListener(new ActionListener(){
+			// function to view a supplier by id or name
+			public void actionPerformed(ActionEvent e){
+				if(suppliers.size() >= 1){
+					for(Supplier supplier: suppliers){
+						if(supplier.getName() == suppNameCombo.getSelectedItem()){
+							supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
+									+"\n Supplier Name: "+supplier.getName()
+									+"\n Supplier Address: "+supplier.getAddress()
+									+"\n Supplier Email: "+supplier.getEmail()
+									+"\n Supplier Phone: "+supplier.getPhone()
+									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+						}
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Suppliers Found");
 				}
 			}
 		});
@@ -1400,7 +1490,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Supplier supplier: suppliers){
-						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
 							editSupplierId.setText(Integer.toString(supplier.getId()));
 							editSupplierName.setText(supplier.getName());
 							editSupplierAddress.setText(supplier.getAddress());
@@ -1420,7 +1510,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					for(Supplier supplier: suppliers){
-						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
 							supplier.setId(Integer.parseInt(editSupplierId.getText()));
 							supplier.setName(editSupplierName.getText());
 							supplier.setAddress(editSupplierAddress.getText());
@@ -1441,7 +1531,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent arg){
 				try{
 					for(Supplier supplier: suppliers){
-						if(supplier.getId() == Integer.parseInt(editSupplierJTextField.getText())){
+						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
 							suppliers.remove(supplier);
 						}
 					}
@@ -1802,7 +1892,8 @@ public class RetailGUI extends JFrame{
 		createNewOrderLeftPanel.add(createOrderSupplierIdLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 1;
-		createOrderSupplierIdComboBox = new JComboBox<>(listOfSuppliers);
+		createOrderSupplierIdComboBox = new JComboBox<String>(listOfSuppliers);
+		listOfSuppliers.setSelectedItem("Select");
 		createOrderSupplierIdComboBox.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderSupplierIdComboBox,orderGC);
 		//=====
@@ -1811,8 +1902,9 @@ public class RetailGUI extends JFrame{
 		createNewOrderLeftPanel.add(createOrderProductCodeLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 2;
-		createOrderProductIdComboBox = new JComboBox<>();
-		createOrderProductIdTextField.setPreferredSize(d);
+		createOrderProductIdComboBox = new JComboBox<String> (listOfProductId);
+		listOfProductId.setSelectedItem("Select");
+		createOrderProductIdComboBox.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderProductIdComboBox,orderGC);
 		//=====
 		orderGC.gridx = 0;
@@ -1849,7 +1941,8 @@ public class RetailGUI extends JFrame{
 				createOrderSupplierIdTextField.setEnabled(true);
 				createOrderScrollPaneTextArea.setText("");
 				createOrderScrollPaneTextArea.setCaretPosition(0);
-				
+				listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
 			}
 		});
 		//TextPane
@@ -1961,12 +2054,16 @@ public class RetailGUI extends JFrame{
 								JOptionPane.showMessageDialog(null, "Order complete!");
 								createOrderOrderIdTextField.setEnabled(true);
 								createOrderSupplierIdTextField.setEnabled(true);
+								
 								createOrderOrderIdTextField.setText("");
 								createOrderSupplierIdTextField.setText("");
 								createOrderProductIdTextField.setText("");
 								createOrderQuantityTextField.setText("");
 								createOrderScrollPaneTextArea.setText("");
 								createOrderScrollPaneTextArea.setCaretPosition(0);
+								
+								listOfProductId.setSelectedItem("Select");
+								listOfSuppliers.setSelectedItem("Select");
 								addMoreProducts = new ArrayList<OrderProduct>();
 							}else{
 								JOptionPane.showMessageDialog (null, "Order Number is not Unique", "Order Info", JOptionPane.WARNING_MESSAGE);
@@ -2051,7 +2148,7 @@ public class RetailGUI extends JFrame{
 		viewOrderOrderIdComboBox = new JComboBox<>(listOfOrders);
 		viewOrderOrderIdComboBox.setPreferredSize(d);
 		viewOrderOrderIdComboBox.setMinimumSize(d);
-		listOfOrders.setSelectedItem(existingOrderIds.get(0));
+		listOfOrders.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 1;
 		viewOrderLeftJPanel.add(viewOrderOrderIdComboBox, viewOrderGC);
@@ -2066,13 +2163,13 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderOrderIdComboBox.getSelectedItem();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){
 					viewOrderTextArea.setText("Please enter a valid number");
-					viewOrderOrderIdTextField.setText("");
-					viewOrderSupplierIdTextField.setText("");
+					listOfOrders.setSelectedItem("Select");
+					listOfSuppliers.setSelectedItem("Select");
 				}else{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 
-					viewOrderOrderIdTextField.setText("");
-					viewOrderSupplierIdTextField.setText("");
+					listOfOrders.setSelectedItem("Select");
+					listOfSuppliers.setSelectedItem("Select");
 				}
 			}
 		});
@@ -2083,7 +2180,7 @@ public class RetailGUI extends JFrame{
 		viewOrderSupplierIdComboBox = new JComboBox<>(listOfSuppliers);
 		viewOrderSupplierIdComboBox.setPreferredSize(d);
 		viewOrderSupplierIdComboBox.setMinimumSize(d);
-		listOfSuppliers.setSelectedItem(existingSupplierIds.get(0));
+		listOfSuppliers.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 2;
 		viewOrderLeftJPanel.add(viewOrderSupplierIdComboBox, viewOrderGC);
@@ -2098,13 +2195,14 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderSupplierIdComboBox.getSelectedItem();
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ 
 					viewOrderTextArea.setText("Please enter a valid number");
-					viewOrderSupplierIdTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfOrders.setSelectedItem("Select");
+					listOfSuppliers.setSelectedItem("Select");
 				}else{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));	
-					viewOrderSupplierIdTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfOrders.setSelectedItem("Select");
+					listOfSuppliers.setSelectedItem("Select");
+
 				}
 			}
 		});
@@ -2115,7 +2213,7 @@ public class RetailGUI extends JFrame{
 		viewOrderTitleComboBox = new JComboBox<>(listOfTitles);
 		viewOrderTitleComboBox.setPreferredSize(d);
 		viewOrderTitleComboBox.setMinimumSize(d);
-		listOfTitles.setSelectedItem(existingTitles.get(0));
+		listOfTitles.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 3;
 		viewOrderLeftJPanel.add(viewOrderTitleComboBox, viewOrderGC);
@@ -2130,12 +2228,12 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderTitleComboBox.getSelectedItem();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter a title");
-					viewOrderTitleTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfTitles.setSelectedItem("Select");
+					listOfOrders.setSelectedItem("Select");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));	
-					viewOrderTitleTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfTitles.setSelectedItem("Select");
+					listOfOrders.setSelectedItem("Select");
 				}
 			}
 		});
@@ -2146,7 +2244,7 @@ public class RetailGUI extends JFrame{
 		viewOrderAuthorComboBox = new JComboBox<>(listOfAuthors);
 		viewOrderAuthorComboBox.setPreferredSize(d);
 		viewOrderAuthorComboBox.setMinimumSize(d);
-		listOfAuthors.setSelectedItem(existingAuthors.get(0));
+		listOfAuthors.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 4;
 		viewOrderLeftJPanel.add(viewOrderAuthorComboBox, viewOrderGC);
@@ -2161,12 +2259,12 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderAuthorComboBox.getSelectedItem();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter an author's name");
-					viewOrderAuthorTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfAuthors.setSelectedItem("Select");
+					listOfOrders.setSelectedItem("Select");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));	
-					viewOrderAuthorTextField.setText("");
-					viewOrderOrderIdTextField.setText("");
+					listOfAuthors.setSelectedItem("Select");
+					listOfOrders.setSelectedItem("Select");
 				}
 			}
 		});
@@ -2190,28 +2288,20 @@ public class RetailGUI extends JFrame{
         findOrderComponentsJPanel.setLayout(new GridBagLayout());
         gc.gridx = 0;
         gc.gridy = 1;
-        editOrderJTextField.setPreferredSize(d);
-        findOrderComponentsJPanel.add(editOrderJTextField, gc);
-        editOrderJTextField.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        	editOrderJTextField.setText("");
-        	}
-        });
+        editOrderOrderIdComboBox = new JComboBox<String> (listOfOrders);
+        editOrderOrderIdComboBox.setPreferredSize(d);
+        listOfOrders.setSelectedItem("Select");
+        findOrderComponentsJPanel.add(editOrderOrderIdComboBox, gc);
         gc.gridx = 0;
         gc.gridy = 2;
         editOrderJButton.setPreferredSize(d);
         findOrderComponentsJPanel.add(editOrderJButton, gc);
         gc.gridx = 0;
         gc.gridy = 3;
-        editSupplierOrderJTextField.setPreferredSize(d);
-        findOrderComponentsJPanel.add(editSupplierOrderJTextField, gc);
-        editSupplierOrderJTextField.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        	editSupplierOrderJTextField.setText("");
-        	}
-        });
+        editOrderSupplierIdComboBox = new JComboBox<String> (listOfSuppliers);
+        editOrderSupplierIdComboBox.setPreferredSize(d);
+        editOrderSupplierIdComboBox.setSelectedItem("Select");
+        findOrderComponentsJPanel.add(editOrderSupplierIdComboBox, gc);
         gc.gridx = 0;
         gc.gridy = 4;
         editSupplierOrderJButton.setPreferredSize(d);
@@ -2226,13 +2316,16 @@ public class RetailGUI extends JFrame{
 
         deliverAllOrdersJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
+        		String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
         		for(Order order: orders){
-        			if(Integer.parseInt(editSupplierOrderJTextField.getText().trim()) == order.getSupplierUniqueId() ){
+        			if(Integer.parseInt(s.trim()) == order.getSupplierUniqueId() ){
         				order.setDelivered();
         			}
         		}
         		JOptionPane.showMessageDialog(null, "Delivered!");
-        		editSupplierOrderJButton.doClick();		
+        		editSupplierOrderJButton.doClick();
+        		listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
         		}
         });
         supplierOrderJTextArea.setEditable(false);
@@ -2249,14 +2342,18 @@ public class RetailGUI extends JFrame{
         editOrderComponentsJPanel.add(deliverOrderJButton);
         deliverOrderJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
+        		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
         		for(Order order: orders){
-        			if(order.getOrderUniqueId() == Integer.parseInt(editOrderJTextField.getText().trim())){
+        			if(Integer.parseInt(s.trim()) == order.getOrderUniqueId()){
         				order.setDelivered();
+        				break;
         			}
         		}
         		JOptionPane.showMessageDialog(null, "Delivered!");
         		editOrderDeliveredStatus.setForeground(Color.BLACK);
-        		editOrderJButton.doClick();		
+        		editOrderJButton.doClick();	
+        		listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
         	}
         });
         JScrollPane orderProductsJScrollPane = new JScrollPane(productOrderJTextArea);
@@ -2270,8 +2367,9 @@ public class RetailGUI extends JFrame{
         deleteOrderJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		int index=0;
+        		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
         		for(Order order: orders){
-        			if(order.getOrderUniqueId() == Integer.parseInt(editOrderJTextField.getText().trim())){
+        			if(order.getOrderUniqueId() == Integer.parseInt(s.trim())){
         				index = orders.indexOf(order);
         			}
         		}
@@ -2280,6 +2378,8 @@ public class RetailGUI extends JFrame{
         		editSupplierOrderComponentsJPanel.setVisible(false);
         		editOrderComponentsJPanel.setVisible(false);
         		saveOrderComponentsJPanel.setVisible(false);
+        		listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
         	}
         });
         editOrderJPanel.setLayout(new GridLayout(5,3));
@@ -2342,8 +2442,8 @@ public class RetailGUI extends JFrame{
 		//TODO boobs
 		viewCustomerPanel.add(invIdlbl,gc);
 		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
-		comboBoxInvoice.setPreferredSize(new Dimension(60, 20));
-		listOfInvoices.setSelectedItem(existingInvoiceNums.get(0)); //setting the combo box to the first invoice number
+		comboBoxInvoice.setPreferredSize(new Dimension(80, 20));
+		listOfInvoices.setSelectedItem("select"); //setting the combo box to the first invoice number
 		gc.gridx = 1;
 		gc.gridy = 1;
 		viewCustomerPanel.add(comboBoxInvoice,gc);
@@ -2360,12 +2460,13 @@ public class RetailGUI extends JFrame{
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
 					textarea.setText("Please enter a valid number");
 					textarea.setCaretPosition(0);
-					invTextField2.setText("");
-					custIdTextField.setText("");
+					listOfCustomers.setSelectedItem("select");
+					listOfInvoices.setSelectedItem("select");
 				}else{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceById(num, invoices)); //viewInvoiceById() is in the Invoice Class
 					textarea.setCaretPosition(0);
+					listOfCustomers.setSelectedItem("select");
 					//invTextField2.setText("");
 					//custIdTextField.setText("");
 				}
@@ -2378,8 +2479,8 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 2;
 		viewCustomerPanel.add(custIdlbl,gc);
 		comboBoxCustomer =  new JComboBox<String>(listOfCustomers); //combo box here
-		comboBoxCustomer.setPreferredSize(new Dimension(60, 20));
-		listOfCustomers.setSelectedItem(existingCustomerId.get(0));
+		comboBoxCustomer.setPreferredSize(new Dimension(80, 20));
+		listOfCustomers.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 2;
 		viewCustomerPanel.add(comboBoxCustomer,gc);
@@ -2397,14 +2498,14 @@ public class RetailGUI extends JFrame{
 				if(input.trim().equals("") || input.matches(".*\\D.*")){ //regEx
 					textarea.setText("Please enter a valid number");
 					textarea.setCaretPosition(0);
-					custIdTextField.setText("");
-					invTextField2.setText("");
+					listOfCustomers.setSelectedItem("select");
+					listOfInvoices.setSelectedItem("select");
 				}else{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceByCustomer(num, invoices));	//viewInvoiceByCustomer() is in the Invoice class
 					textarea.setCaretPosition(0);
-					//custIdTextField.setText("");
-					//invTextField2.setText("");
+					listOfInvoices.setSelectedItem("select");
+				
 				}
 			}
 		});
@@ -2465,8 +2566,8 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				textarea.setText("");
-				invTextField2.setText("");
-				custIdTextField.setText("");
+				listOfCustomers.setSelectedItem("select");
+				listOfInvoices.setSelectedItem("select");
 				
 			}
 		});
@@ -2745,15 +2846,15 @@ public class RetailGUI extends JFrame{
 			//TODO Add more products to Invoice
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String prodId = prodTextF.getText();
+				String prodId =(String)prodIDComboBox.getSelectedItem();;
 				String quan = quantityTextF.getText();
-				if(prodId.trim().equals("")|| (quan.trim().equals("") || quan.matches(".*\\D.*"))){
+				if(prodId.equals("select")|| (quan.trim().equals("") || quan.matches(".*\\D.*"))){
 					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
 					//disable the other text fileds
 					invTextF.setEnabled(false);
-					employTextF.setEnabled(false);
-					custTextF.setEnabled(false);
+					empIDComboBox.setEnabled(false);
+					cusIDComboBox.setEnabled(false);
 					
 					//Add to 'addMoreArrayList'
 					Product p = invoice.returnProductObject(prodId, products);
@@ -2842,6 +2943,8 @@ public class RetailGUI extends JFrame{
 															"\nProduct Code: " + productIdStr+
 															"\nNo. of items: " + quantityStr;
 															//+"\nArraySize: " + addMoreArrayList.size();
+									//existingInvoiceNums.add(invoiceIdStr);
+									
 									}else{
 										Invoice multipleInvoice = new Invoice(invoiceId,employeeObj,customerObj,addMoreArrayList);
 										invoices.add(multipleInvoice);
@@ -2864,6 +2967,7 @@ public class RetailGUI extends JFrame{
 									}
 									String inputFromTestField = invTextF.getText();
 									listOfInvoices.addElement(inputFromTestField);
+									editListOfInvoices.addElement(inputFromTestField);
 									String inputFromCusId = custTextF.getText();
 									listOfCustomers.addElement(inputFromCusId);
 									//input.setText("");
@@ -2876,8 +2980,8 @@ public class RetailGUI extends JFrame{
 									textAreaMarc.setText(outputMessage);
 									textAreaMarc.setCaretPosition(0);
 									invTextF.setEnabled(true);
-									employTextF.setEnabled(true);
-									custTextF.setEnabled(true);
+									empIDComboBox.setEnabled(true);
+									cusIDComboBox.setEnabled(true);
 									outputMessage = "";
 									message = "";
 									addMoreArrayList = new ArrayList<InvoiceProduct>();
@@ -2908,14 +3012,14 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				invTextF.setText("");
-				employTextF.setText("");
-				custTextF.setText("");
-				prodTextF.setText("");
+				listOfEmpIds.setSelectedItem("select");
+				listOfCusIds.setSelectedItem("select");
+				listOfProdIds.setSelectedItem("select");
 				quantityTextF.setText("");
 				textAreaMarc.setText("");
 				invTextF.setEnabled(true);
-				employTextF.setEnabled(true);
-				custTextF.setEnabled(true);
+				empIDComboBox.setEnabled(true);
+				cusIDComboBox.setEnabled(true);
 				addMoreArrayList = new ArrayList<InvoiceProduct>();
 				
 			}
@@ -2944,7 +3048,7 @@ public class RetailGUI extends JFrame{
 		//End of Marc Functionality
 		//==============================================
 		
-		
+		// TODO Product Details
 		//======================== Start View Product Details ===========
 		
 		viewProductDetailsPanel.add(viewProductDetails);
@@ -2964,64 +3068,86 @@ public class RetailGUI extends JFrame{
         c.weightx = 1.0;
         c.weighty = 1.0;
         viewProductDetails.add(scrollPane1, c);
-		
+        
+        // For Loop used to Populate Combo Box of ProductCode/ID
+        for(int i=0;i<products.size();i++){
+			 existingProductId.add((products.get(i).getProductCode()));
+       }
+      
 		// First Label and controls:	View Product by ID 
 		JLabel productIdlbl = new JLabel("Enter Product ID: "); //Label
 		productGC.gridx = 0;
 		productGC.gridy = 1;
 		viewProductDetails.add(productIdlbl,productGC);
-		viewProductIdTextField = new JTextField(10); //Text Field
+		comboBoxProductId = new JComboBox<>(listOfProductId);
+		comboBoxProductId.setPreferredSize(d);
+		comboBoxProductId.setMinimumSize(d);
+		//viewProductIdTextField = new JTextField(10); //Text Field
 		productGC.gridx = 1;
 		productGC.gridy = 1;
-		viewProductDetails.add(viewProductIdTextField,productGC);
+		viewProductDetails.add(comboBoxProductId,productGC);
+		//viewProductDetails.add(viewProductIdTextField,productGC);
 		JButton productButton = new JButton("Search Product ID");	//button
 		productGC.gridx = 2;
 		productGC.gridy = 1;
 		viewProductDetails.add(productButton,productGC);
-		productButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		productButton.setPreferredSize(d);
+		productButton.setMinimumSize(d);
 		//Action listener For Button to view Product by Id
 		productButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = viewProductIdTextField.getText();
+				String input = (String)comboBoxProductId.getSelectedItem();
+				
+				//String input = viewProductIdTextField.getText();
 				// This method could be enhanced by adding in a check 
 				//to ensure 9 digits have been entered to match an ISBN number.
 				if(input.trim().equals("")){ 
 					//textarea.setText("Please enter a valid ID");	
 					JOptionPane.showMessageDialog(null, "Please Enter a Value in the ID Field");
-					viewProductIdTextField.setText("");
-					productTitleTextField.setText("");
+					//viewProductIdTextField.setText("");
+					//productTitleTextField.setText("");
 				}else{
 				
 					productTextArea.setText(product.viewProductById(input, products)); //viewInvoiceById() is in the Invoice Class
 					productTextArea.setCaretPosition(0);
-					viewProductIdTextField.setText("");
-					productTitleTextField.setText("");
-					productAuthorTextField.setText("");
+					//viewProductIdTextField.setText("");
+					//productTitleTextField.setText("");
+					//productAuthorTextField.setText("");
 					productTextArea.setCaretPosition(0);
 				}
 			}
 		});
+		
+		// For Loop to populate combo box of Title.
+		 for(int i=0;i<products.size();i++){
+			 existingProductTitle.add((products.get(i).getTitle()));
+       }
 		
 		//Second Label and controls: 	View Product by Title
 		JLabel productTitlelbl = new JLabel("Product Title: ");
 		productGC.gridx = 0;
 		productGC.gridy = 2;
 		viewProductDetails.add(productTitlelbl,productGC);
-		productTitleTextField = new JTextField(10);
+		comboBoxProductTitle = new JComboBox<>(listofProductTitle);
+		comboBoxProductTitle.setPreferredSize(d);
+		comboBoxProductTitle.setMinimumSize(d);
+		//productTitleTextField = new JTextField(10);
 		productGC.gridx = 1;
 		productGC.gridy = 2;
-		viewProductDetails.add(productTitleTextField,productGC);
+		viewProductDetails.add(comboBoxProductTitle,productGC);
 		JButton productTitleButton = new JButton("Search Product Title");
 		productGC.gridx = 2;
 		productGC.gridy = 2;
 		viewProductDetails.add(productTitleButton,productGC);
-		productTitleButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		productTitleButton.setPreferredSize(d);
+		productTitleButton.setMinimumSize(d);
 		productTitleButton.addActionListener(new ActionListener() {
 			//Action listener For Button to view product by Title
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = productTitleTextField.getText();
+				String input = (String)comboBoxProductTitle.getSelectedItem();
+				//String input = productTitleTextField.getText();
 				
 				if(input.trim().equals("")){ 
 					//textarea.setText("Please enter a valid Title");
@@ -3041,33 +3167,44 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
+		// For Loop to populate ComboBox of Author.
+				 for(int i=0;i<products.size();i++){
+					 existingProductAuthor.add((products.get(i).getAuthor()));
+		       }
+		
 		
 		//Third Label and controls: 	View Product by Author
 		JLabel productAuthorlbl = new JLabel("Product Author: ");
 		productGC.gridx = 0;
 		productGC.gridy = 3;
 		viewProductDetails.add(productAuthorlbl,productGC);
+		comboBoxProductAuthor = new JComboBox<>(listOfProductAuthor);
+		comboBoxProductAuthor.setPreferredSize(d);
+		comboBoxProductAuthor.setMinimumSize(d);
 		productAuthorTextField = new JTextField(10);
 		productGC.gridx = 1;
 		productGC.gridy = 3;
-		viewProductDetails.add(productAuthorTextField,productGC);
+		viewProductDetails.add(comboBoxProductAuthor,productGC);
 		JButton productAuthorBtn = new JButton("Search Author");
 		productGC.gridx = 2;
 		productGC.gridy = 3;
 		viewProductDetails.add(productAuthorBtn,productGC);
-		productAuthorBtn.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		productAuthorBtn.setPreferredSize(d);
+		productAuthorBtn.setMinimumSize(d);
 		productAuthorBtn.addActionListener(new ActionListener() {
+			
 			//Action listener For Button to view product by Title
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
-				//String input = (productAuthorTextField.getText());																	//All names in array should be stored in lower case.
+				String input = ((String)comboBoxProductAuthor.getSelectedItem()).toLowerCase();
+				//String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
+																					//All names in array should be stored in lower case.
 				
 				if(input.trim().equals("")){ 	// If no text is entered
-					//textarea.setText("Please enter text in Author Field");
+					
 					JOptionPane.showMessageDialog(null, "Please Enter a Value in the Author Field");
 					productAuthorTextField.setText("");
-					//invTextField.setText("");
+					
 				}else{							// Take in String and Search for it.
 					productTextArea.setText(product.viewProductByAuthor(input, products));	
 					productTextArea.setCaretPosition(0);		// This sets the position of the scroll bar to the top of the page.
@@ -3084,7 +3221,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 4;
 		productGC.gridy = 1;
 		viewProductDetails.add(viewAllProductsBtn,productGC);
-		viewAllProductsBtn.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		viewAllProductsBtn.setPreferredSize(d);
+		viewAllProductsBtn.setMinimumSize(d);
 		viewAllProductsBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -3103,7 +3241,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 4;
 		productGC.gridy = 2;
 		viewProductDetails.add(viewAllBelowMinReorder,productGC);
-		viewAllBelowMinReorder.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		viewAllBelowMinReorder.setPreferredSize(d);
+		viewAllBelowMinReorder.setMinimumSize(d);
 		viewAllBelowMinReorder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -3120,7 +3259,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 4;
 		productGC.gridy = 3;
 		viewProductDetails.add(viewAllAboveMaxReorder,productGC);
-		viewAllAboveMaxReorder.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+		viewAllAboveMaxReorder.setPreferredSize(d);
+		viewAllAboveMaxReorder.setMinimumSize(d);
 		viewAllAboveMaxReorder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -3137,7 +3277,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 0;
 		productGC.gridy = 4;
 		viewProductDetails.add(searchByRetail,productGC);
-		searchByRetail.setPreferredSize(new Dimension(155,20));
+		searchByRetail.setPreferredSize(d);
+		searchByRetail.setMinimumSize(d);
 		productGC.gridx = 1;
 		productGC.gridy = 4;
 		viewProductDetails.add(under5Radio,productGC);
@@ -3173,6 +3314,8 @@ public class RetailGUI extends JFrame{
 		});
 		
 		JButton costGraph = new JButton ("stock by cost price graph");
+		costGraph.setPreferredSize(d);
+		costGraph.setMinimumSize(d);
 		productGC.gridx = 0;
 		productGC.gridy = 6;
 		viewProductDetails.add(costGraph,productGC);
@@ -3224,7 +3367,8 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 0;
 		productGC.gridy = 5;
 		viewProductDetails.add(searchByQuantity,productGC);
-		searchByQuantity.setPreferredSize(new Dimension(155,20));
+		searchByQuantity.setPreferredSize(d);
+		searchByQuantity.setMinimumSize(d);
 		productGC.gridx = 1;
 		productGC.gridy = 5;
 		viewProductDetails.add(under50Radio,productGC);
@@ -3455,10 +3599,10 @@ public class RetailGUI extends JFrame{
 					String totalString = "";
 					int id = 0, supplierID = 1;
 					try {
-						id = Integer.parseInt( editSupplierOrderJTextField.getText().trim() );
+						id = Integer.parseInt( editOrderSupplierIdComboBox.getSelectedItem().toString().trim() );
 					}
 					catch (NumberFormatException nfe){
-						editSupplierOrderJTextField.setText("");
+						listOfOrders.setSelectedItem("Select");;
 					}
 					for(Supplier supplier: suppliers){
 						if(id == supplier.getId()){
@@ -3571,7 +3715,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed( ActionEvent e){
 				int orderId = 0;						
 				int supplierId = 0;
-				int currentId = Integer.parseInt(editOrderJTextField.getText().trim());
+				int currentId = Integer.parseInt(editOrderOrderIdComboBox.getSelectedItem().toString().trim());
 				int count = 0;
 				Supplier supp = suppliers.get(0);
 				try{
@@ -3594,7 +3738,7 @@ public class RetailGUI extends JFrame{
 							order.setSupplierUniqueId(supplierId);
 						}
 					}
-					editOrderJTextField.setText(Integer.toString(currentId));
+					listOfOrders.setSelectedItem(listOfOrders.getIndexOf(Integer.toString(currentId)));
 					JOptionPane.showMessageDialog(null, "Updated!");
 					editInvoiceJButton.doClick();
 				}
@@ -3629,10 +3773,10 @@ public class RetailGUI extends JFrame{
 				String s = "";
 				productInvoiceJTextArea.setText("Product Details\n");
 				try {
-					id = Integer.parseInt( editOrderJTextField.getText().trim() );
+					id = Integer.parseInt( editOrderOrderIdComboBox.getSelectedItem().toString().trim() );
 				}
 				catch (NumberFormatException nfe){
-					editOrderJTextField.setText("");
+					listOfOrders.setSelectedItem("Select");;
 				}
 				int orderId = verifyOrderID(id);
 				if(orderId == 1){
@@ -3850,6 +3994,43 @@ public class RetailGUI extends JFrame{
 			
 			return returnCodeNames;
 			
+		}
+		//dropdown functions
+		public void empIDPopulate(JComboBox<String> combo){
+			for(Employee employee: employees){
+				String str = Integer.toString(employee.getEmployeeId());
+				combo.addItem(str);
+			}
+		}
+		public void empNamePopulate(){
+			for(Employee employee: employees){
+				String str = employee.getEmployeeName();
+				empNameCombo.addItem(str);
+			}
+		}
+		public void custIdPopulate(JComboBox<String> combo){
+			for(Customer customer: customers){
+				String str = Integer.toString(customer.getCustId());
+				combo.addItem(str);
+			}
+		}
+		public void custNamePopulate(JComboBox<String> combo){
+			for(Customer customer: customers){
+				String str = customer.getCustName();
+				combo.addItem(str);
+			}
+		}
+		public void suppIdPopulate(JComboBox<String> combo){
+			for(Supplier supplier: suppliers){
+				String str = Integer.toString(supplier.getId());
+				combo.addItem(str);
+			}
+		}
+		public void suppNamePopulate(JComboBox<String> combo){
+			for(Supplier supplier: suppliers){
+				String str = supplier.getName();
+				combo.addItem(str);
+			}
 		}
 
 }//End class
