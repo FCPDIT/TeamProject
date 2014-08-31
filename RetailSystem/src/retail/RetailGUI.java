@@ -560,6 +560,7 @@ public class RetailGUI extends JFrame{
 		
 		//Line Chart data sets
 		Invoice inv = new Invoice();
+		Order ord = new Order();
 		Employee emp = new Employee();
 		line_chart_dataset.addValue(inv.getMonthlySales(0,invoices), "income", "Jan");
         line_chart_dataset.addValue(inv.getMonthlySales(1,invoices), "income", "Feb");
@@ -572,20 +573,20 @@ public class RetailGUI extends JFrame{
         line_chart_dataset.addValue(inv.getMonthlySales(8,invoices), "income", "Sept");
         line_chart_dataset.addValue(inv.getMonthlySales(9,invoices), "income", "Oct");
         line_chart_dataset.addValue(inv.getMonthlySales(10,invoices), "income", "Nov");
-        line_chart_dataset.addValue(inv.getMonthlySales(11,invoices), "income", "DEc");
+        line_chart_dataset.addValue(inv.getMonthlySales(11,invoices), "income", "Dec");
         
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Jan");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Feb");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Mar");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Apr");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "May");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Jun");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Jul");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Aug");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Sept");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Oct");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Nov");
-        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "DEc");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 0), "expenditure", "Jan");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 1), "expenditure", "Feb");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 2), "expenditure", "Mar");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 3), "expenditure", "Apr");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 4), "expenditure", "May");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 5), "expenditure", "Jun");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 6), "expenditure", "Jul");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 7), "expenditure", "Aug");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 8), "expenditure", "Sept");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 9), "expenditure", "Oct");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 10), "expenditure", "Nov");
+        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 11), "expenditure", "Dec");
 				
 		//add login components
 		loginComponentsJPanel.setLayout(new GridLayout(4,4));
@@ -3506,8 +3507,8 @@ public class RetailGUI extends JFrame{
 	
 	public void createInvoices(){
 		//add some test employees to array list
-				employees.add(new Employee(123, "John", 0, 2000.00, 1111));
-				employees.add( new Employee(234, "Tim", 1, 1500.00, 3333));
+				employees.add(new Employee(123, "John", 0, 200000.00, 1111));
+				employees.add( new Employee(234, "Tim", 1, 150000.00, 3333));
 				//add some test customers to array list
 				customers.add(new Customer(1, "Sam", "Dublin"));
 				customers.add(new Customer(2, "Tom", "Cork"));
