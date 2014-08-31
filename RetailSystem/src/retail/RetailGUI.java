@@ -326,6 +326,10 @@ public class RetailGUI extends JFrame{
 	private DefaultComboBoxModel<String> listOfProductAuthor = new DefaultComboBoxModel<>(existingProductAuthor);
 	private JComboBox<String> comboBoxProductAuthor;
 	
+	private Vector<String> existingEditProdId = new Vector<>();
+	private DefaultComboBoxModel<String> listToEditProdIds = new DefaultComboBoxModel<>(existingEditProdId);
+	private JComboBox<String> comboBoxEditProdId;
+	
 	
 	//Edit Invoice Components 
 	private JPanel findInvoiceComponentsJPanel = new JPanel();
@@ -1663,8 +1667,8 @@ public class RetailGUI extends JFrame{
 		editProductJPanel.add(editDetails, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
-		enterProdCodeJTextField.setPreferredSize(d);
-		editProductJPanel.add(enterProdCodeJTextField, gc);
+		//enterProdCodeJTextField.setPreferredSize(d);
+		//editProductJPanel.add(enterProdCodeJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		editDetailsJButton.setPreferredSize(d);
@@ -3273,7 +3277,7 @@ public class RetailGUI extends JFrame{
 		
 		
 		// Button 7: search all stock by retail price range
-		JButton searchByRetail = new JButton ("Search by retail");
+		JButton searchByRetail = new JButton ("Search by retail price");
 		productGC.gridx = 0;
 		productGC.gridy = 4;
 		viewProductDetails.add(searchByRetail,productGC);
@@ -3367,7 +3371,7 @@ public class RetailGUI extends JFrame{
 		
 
 		//Button 8: to search stock by quantity range
-		JButton searchByQuantity = new JButton ("Search by quantity");
+		JButton searchByQuantity = new JButton ("Search by current stock quantity");
 		productGC.gridx = 0;
 		productGC.gridy = 5;
 		viewProductDetails.add(searchByQuantity,productGC);
@@ -3407,10 +3411,23 @@ public class RetailGUI extends JFrame{
 			}
 		});
 
+		// to edit product	
+		
+		 // For Loop used to Populate Combo Box of ProductCode/ID
+        for(int i=0;i<products.size();i++){
+			 existingEditProdId.add((products.get(i).getProductCode()));
+       }
+		comboBoxEditProdId = new JComboBox<>(listToEditProdIds);
+		comboBoxEditProdId.setPreferredSize(d);
+		comboBoxEditProdId.setMinimumSize(d);
+		productGC.gridx = 0;
+		productGC.gridy = 2;
+		editProductJPanel.add(comboBoxEditProdId,productGC);
+		
 		editDetailsJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				for(Product product: products){
-					if(product.getProductCode().equals(enterProdCodeJTextField.getText())){
+					if(product.getProductCode().equals(comboBoxEditProdId.getSelectedItem())){
 					editCodeJTextField.setText(product.getProductCode());
 					editAuthorJTextField.setText(product.getAuthor());
 					editTitleJTextField.setText(product.getTitle());
