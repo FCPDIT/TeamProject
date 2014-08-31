@@ -560,31 +560,32 @@ public class RetailGUI extends JFrame{
 		
 		//Line Chart data sets
 		Invoice inv = new Invoice();
-		line_chart_dataset.addValue(inv.getMonthlySales(1,invoices), "income", "Jan");
-        line_chart_dataset.addValue(inv.getMonthlySales(2,invoices), "income", "Feb");
-        line_chart_dataset.addValue(inv.getMonthlySales(3,invoices), "income", "Mar");
-        line_chart_dataset.addValue(inv.getMonthlySales(4,invoices), "income", "Apr");
-        line_chart_dataset.addValue(inv.getMonthlySales(5,invoices), "income", "May");
-        line_chart_dataset.addValue(inv.getMonthlySales(6,invoices), "income", "Jun");
-        line_chart_dataset.addValue(inv.getMonthlySales(7,invoices), "income", "Jul");
-        line_chart_dataset.addValue(inv.getMonthlySales(8,invoices), "income", "Aug");
-        line_chart_dataset.addValue(inv.getMonthlySales(9,invoices), "income", "Sept");
-        line_chart_dataset.addValue(inv.getMonthlySales(10,invoices), "income", "Oct");
-        line_chart_dataset.addValue(inv.getMonthlySales(11,invoices), "income", "Nov");
-        line_chart_dataset.addValue(inv.getMonthlySales(12,invoices), "income", "DEc");
+		Employee emp = new Employee();
+		line_chart_dataset.addValue(inv.getMonthlySales(0,invoices), "income", "Jan");
+        line_chart_dataset.addValue(inv.getMonthlySales(1,invoices), "income", "Feb");
+        line_chart_dataset.addValue(inv.getMonthlySales(2,invoices), "income", "Mar");
+        line_chart_dataset.addValue(inv.getMonthlySales(3,invoices), "income", "Apr");
+        line_chart_dataset.addValue(inv.getMonthlySales(4,invoices), "income", "May");
+        line_chart_dataset.addValue(inv.getMonthlySales(5,invoices), "income", "Jun");
+        line_chart_dataset.addValue(inv.getMonthlySales(6,invoices), "income", "Jul");
+        line_chart_dataset.addValue(inv.getMonthlySales(7,invoices), "income", "Aug");
+        line_chart_dataset.addValue(inv.getMonthlySales(8,invoices), "income", "Sept");
+        line_chart_dataset.addValue(inv.getMonthlySales(9,invoices), "income", "Oct");
+        line_chart_dataset.addValue(inv.getMonthlySales(10,invoices), "income", "Nov");
+        line_chart_dataset.addValue(inv.getMonthlySales(11,invoices), "income", "DEc");
         
-        line_chart_dataset.addValue(1, "expenditure", "Jan");
-        line_chart_dataset.addValue(2, "expenditure", "Feb");
-        line_chart_dataset.addValue(3, "expenditure", "Mar");
-        line_chart_dataset.addValue(4, "expenditure", "Apr");
-        line_chart_dataset.addValue(5, "expenditure", "May");
-        line_chart_dataset.addValue(6, "expenditure", "Jun");
-        line_chart_dataset.addValue(7, "expenditure", "Jul");
-        line_chart_dataset.addValue(8, "expenditure", "Aug");
-        line_chart_dataset.addValue(9, "expenditure", "Sept");
-        line_chart_dataset.addValue(10, "expenditure", "Oct");
-        line_chart_dataset.addValue(11, "expenditure", "Nov");
-        line_chart_dataset.addValue(12, "expenditure", "DEc");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Jan");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Feb");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Mar");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Apr");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "May");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Jun");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Jul");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Aug");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Sept");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Oct");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "Nov");
+        line_chart_dataset.addValue(emp.monthlySalary(employees), "expenditure", "DEc");
 				
 		//add login components
 		loginComponentsJPanel.setLayout(new GridLayout(4,4));
