@@ -3313,7 +3313,7 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
-		JButton costGraph = new JButton ("stock by cost price graph");
+		JButton costGraph = new JButton ("Stock by cost price graph");
 		costGraph.setPreferredSize(d);
 		costGraph.setMinimumSize(d);
 		productGC.gridx = 0;
@@ -3337,9 +3337,9 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
-		JButton salesGraph = new JButton ("sales graph");
-		productGC.gridx = 0;
-		productGC.gridy = 7;
+		JButton salesGraph = new JButton ("Sales and 3 month prediction graph");
+		productGC.gridx = 1;
+		productGC.gridy = 6;
 		viewProductDetails.add(salesGraph,productGC);
 		
 		
@@ -3347,15 +3347,19 @@ public class RetailGUI extends JFrame{
 		salesGraph.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				DefaultCategoryDataset salesData = new DefaultCategoryDataset();
-				salesData.setValue(invoice.getMonthlySales(5, invoices), "Month", "June");
-				salesData.setValue(invoice.getMonthlySales(6, invoices), "Month", "July");
-				salesData.setValue(invoice.getMonthlySales(7, invoices), "Month", "August");
-				salesData.setValue(invoice.getMonthlySales(8, invoices), "Month", "September");
-				salesData.setValue(invoice.getMonthlySales(9, invoices), "Month", "October");
-				JFreeChart salesChart = ChartFactory.createBarChart("Sales Chart", "Week", "Sales value", salesData, PlotOrientation.VERTICAL, false, true, false);
+				salesData.setValue(invoice.graphSales(3, invoices), "Month", "April");
+				salesData.setValue(invoice.graphSales(4, invoices), "Month", "May");
+				salesData.setValue(invoice.graphSales(5, invoices), "Month", "June");
+				salesData.setValue(invoice.graphSales(6, invoices), "Month", "July");
+				salesData.setValue(invoice.graphSales(7, invoices), "Month", "August");
+				salesData.setValue(invoice.graphSales(8, invoices), "Month", "September");
+				salesData.setValue(invoice.graphSales(9, invoices), "Month", "October");
+				salesData.setValue(invoice.graphSales(10,invoices), "Month", "November");
+				salesData.setValue(invoice.graphSales(11, invoices), "Month", "December");
+				JFreeChart salesChart = ChartFactory.createBarChart("Sales and prediction Chart", "Week", "Sales value", salesData, PlotOrientation.VERTICAL, false, true, false);
 				CategoryPlot p = salesChart.getCategoryPlot();
 				p.setRangeGridlinePaint(Color.BLACK);
-				ChartFrame salesGraphFrame = new ChartFrame("stock value chart", salesChart);
+				ChartFrame salesGraphFrame = new ChartFrame("Sales and predictions", salesChart);
 				salesGraphFrame.setVisible(true);
 				salesGraphFrame.setSize(450, 350);
 			}

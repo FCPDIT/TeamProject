@@ -184,19 +184,38 @@ public class Invoice {
 
 	}
 	
-	public double getMonthlySales(int monthToShow, ArrayList<Invoice> invoices ){
+
+	// calculate total sales value for a given month
+	public double getMonthlySales(int currentMonth, ArrayList<Invoice> invoices ){
 		double count = 0.00;
 		for (Invoice invoice: invoices){
 			Date date1 = invoice.getInvoiceDate();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date1);
 			int month = cal.get(Calendar.MONTH);
-		 if(month == monthToShow) {
+		 if(month == currentMonth) {
 			 count += invoice.getTotalInvoicePrice();
 			}
-			
 		}return count;
 	}
+	
+	//provide graph with total sales for a given month or if no sales gives prediction based on average of previous 3 months
+	public double graphSales( int monthToShow, ArrayList<Invoice>invoices ){
+		double sales = getMonthlySales(monthToShow, invoices);
+		if (sales == 0){
+			int month1 = monthToShow - 1;
+			int month2 = monthToShow - 2;
+			int month3 = monthToShow - 3;
+			double average = (getMonthlySales(month1, invoices) + getMonthlySales(month2, invoices) + getMonthlySales(month3, invoices)) /3;
+			
+			return average;
+
+		}
+		else {
+			return sales;
+		}
+	}
+	
 	
 	// View All - Question what do we want to print for all Invoice Info
 	public String viewAllInvoices(ArrayList<Invoice> invoices) {
