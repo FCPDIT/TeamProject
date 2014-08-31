@@ -3194,6 +3194,30 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
+		JButton salesGraph = new JButton ("sales graph");
+		productGC.gridx = 0;
+		productGC.gridy = 7;
+		viewProductDetails.add(salesGraph,productGC);
+		
+		
+		
+		salesGraph.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				DefaultCategoryDataset salesData = new DefaultCategoryDataset();
+				salesData.setValue(invoice.getMonthlySales(5, invoices), "Month", "June");
+				salesData.setValue(invoice.getMonthlySales(6, invoices), "Month", "July");
+				salesData.setValue(invoice.getMonthlySales(7, invoices), "Month", "August");
+				salesData.setValue(invoice.getMonthlySales(8, invoices), "Month", "September");
+				salesData.setValue(invoice.getMonthlySales(9, invoices), "Month", "October");
+				JFreeChart salesChart = ChartFactory.createBarChart("Sales Chart", "Week", "Sales value", salesData, PlotOrientation.VERTICAL, false, true, false);
+				CategoryPlot p = salesChart.getCategoryPlot();
+				p.setRangeGridlinePaint(Color.BLACK);
+				ChartFrame salesGraphFrame = new ChartFrame("stock value chart", salesChart);
+				salesGraphFrame.setVisible(true);
+				salesGraphFrame.setSize(450, 350);
+			}
+		});
+		
 
 		//Button 8: to search stock by quantity range
 		JButton searchByQuantity = new JButton ("Search by quantity");

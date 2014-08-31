@@ -184,6 +184,20 @@ public class Invoice {
 
 	}
 	
+	public double getMonthlySales(int monthToShow, ArrayList<Invoice> invoices ){
+		double count = 0.00;
+		for (Invoice invoice: invoices){
+			Date date1 = invoice.getInvoiceDate();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date1);
+			int month = cal.get(Calendar.MONTH);
+		 if(month == monthToShow) {
+			 count += invoice.getTotalInvoicePrice();
+			}
+			
+		}return count;
+	}
+	
 	// View All - Question what do we want to print for all Invoice Info
 	public String viewAllInvoices(ArrayList<Invoice> invoices) {
 		String list = "";
