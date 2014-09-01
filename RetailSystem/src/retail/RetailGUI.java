@@ -2633,7 +2633,7 @@ public class RetailGUI extends JFrame{
 				ChartFrame frame = new ChartFrame("Pie Chart", chart);
 				frame.setVisible(true);
 				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setSize(450, 500);
+				frame.setSize(650, 500);
 			}
 		});
 		
@@ -2710,7 +2710,7 @@ public class RetailGUI extends JFrame{
 				ChartFrame frame = new ChartFrame("Pie Chart", chart);
 				frame.setVisible(true);
 				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setSize(450, 500);
+				frame.setSize(650, 500);
 			}
 		});
 		
