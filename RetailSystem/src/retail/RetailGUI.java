@@ -759,7 +759,7 @@ public class RetailGUI extends JFrame{
 		viewEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
-		JScrollPane empScrollPane = new JScrollPane(empJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane empScrollPane = new JScrollPane(empJTextArea);
 		viewEmployeeJPanel.add(empScrollPane, gc);	
 		editEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
@@ -1029,7 +1029,7 @@ public class RetailGUI extends JFrame{
 		addCustJPanel.add(custJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
-		JScrollPane custScrollPane = new JScrollPane(custJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane custScrollPane = new JScrollPane(custJTextArea);
 		viewCustJPanel.add(custScrollPane, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
@@ -1306,7 +1306,7 @@ public class RetailGUI extends JFrame{
 		addSupplyJPanel.add(supplierJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
-		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea);
 		viewSupplyJPanel.add(suppJScrollPane, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
@@ -1340,72 +1340,79 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(allSupplyJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		editFindSuppIdJLabel.setMinimumSize(d);
 		editFindSuppIdJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editFindSuppIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		editSuppIdCombo.setMinimumSize(d);
 		editSuppIdCombo.setPreferredSize(d);
 		editSuppIdCombo.setSelectedIndex(0);
 		editSupplyJPanel.add(editSuppIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		editSupplierJButton.setMinimumSize(d);
 		editSupplierJButton.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
-		editSuppIdJLabel.setPreferredSize(d);
-		editSupplyJPanel.add(editSuppIdJLabel, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
-		editSupplierId.setPreferredSize(d);
-		editSupplyJPanel.add(editSupplierId, gc);
-		gc.gridx = 0;
-		gc.gridy = 6;
+		editSuppNameJLabel.setMinimumSize(d);
 		editSuppNameJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editSuppNameJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 5;
+		editSupplierName.setMinimumSize(d);
 		editSupplierName.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierName, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
+		gc.gridy = 6;
+		editSuppAddressJLabel.setMinimumSize(d);
 		editSuppAddressJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editSuppAddressJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 9;
+		gc.gridy = 7;
+		editSupplierAddress.setMinimumSize(d);
 		editSupplierAddress.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierAddress, gc);
 		gc.gridx = 0;
-		gc.gridy = 10;
+		gc.gridy = 8;
+		editSuppEmailJLabel.setMinimumSize(d);
 		editSuppEmailJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editSuppEmailJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 11;
+		gc.gridy = 9;
+		editSupplierEmail.setMinimumSize(d);
 		editSupplierEmail.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierEmail, gc);
 		gc.gridx = 0;
-		gc.gridy = 12;
+		gc.gridy = 10;
+		editSuppPhoneJLabel.setMinimumSize(d);
 		editSuppPhoneJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editSuppPhoneJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 13;
+		gc.gridy = 11;
+		editSupplierPhone.setMinimumSize(d);
 		editSupplierPhone.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierPhone, gc);
 		gc.gridx = 0;
-		gc.gridy = 14;
+		gc.gridy = 12;
+		editDeliveryJLabel.setMinimumSize(d);
 		editDeliveryJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editDeliveryJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 15;
+		gc.gridy = 13;
+		editSupplierDelivery.setMinimumSize(d);
 		editSupplierDelivery.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierDelivery, gc);
 		gc.gridx = 0;
-		gc.gridy = 16;
+		gc.gridy = 14;
+		saveSupplierJButton.setMinimumSize(d);
 		saveSupplierJButton.setPreferredSize(d);
 		editSupplyJPanel.add(saveSupplierJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 17;
+		gc.gridy = 15;
 		deleteSupplierJButton.setPreferredSize(d);
+		deleteSupplierJButton.setMinimumSize(d);
 		editSupplyJPanel.add(deleteSupplierJButton, gc);
 
 		supplierJButton.addActionListener(new ActionListener(){
@@ -1430,11 +1437,11 @@ public class RetailGUI extends JFrame{
 						for(Supplier supplier: suppliers){
 							if(supplier.getId() == Integer.parseInt(suppIdCombo.getSelectedItem().toString())){
 								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
-										+"\n Supplier Name: "+supplier.getName()
-										+"\n Supplier Address: "+supplier.getAddress()
-										+"\n Supplier Email: "+supplier.getEmail()
-										+"\n Supplier Phone: "+supplier.getPhone()
-										+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+										+"\n Name: "+supplier.getName()
+										+"\n Address: "+supplier.getAddress()
+										+"\n Email: "+supplier.getEmail()
+										+"\n Phone: "+supplier.getPhone()
+										+"\n Delivery Time: "+supplier.getDaysToDeliver());
 							}
 						}
 					}else{
@@ -1453,11 +1460,11 @@ public class RetailGUI extends JFrame{
 					for(Supplier supplier: suppliers){
 						if(supplier.getName() == suppNameCombo.getSelectedItem()){
 							supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
-									+"\n Supplier Name: "+supplier.getName()
-									+"\n Supplier Address: "+supplier.getAddress()
-									+"\n Supplier Email: "+supplier.getEmail()
-									+"\n Supplier Phone: "+supplier.getPhone()
-									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+									+"\n Name: "+supplier.getName()
+									+"\n Address: "+supplier.getAddress()
+									+"\n Email: "+supplier.getEmail()
+									+"\n Phone: "+supplier.getPhone()
+									+"\n Delivery Time: "+supplier.getDaysToDeliver());
 						}
 					}
 				}else{
@@ -1473,11 +1480,11 @@ public class RetailGUI extends JFrame{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
 							supplierJTextArea.append("\n Supplier Id: "+supplier.getId()
-									+"\n Supplier Name: "+supplier.getName()
-									+"\n Supplier Address: "+supplier.getAddress()
-									+"\n Supplier Email: "+supplier.getEmail()
-									+"\n Supplier Phone: "+supplier.getPhone()
-									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver()+"\n");
+									+"\n Name: "+supplier.getName()
+									+"\n Address: "+supplier.getAddress()
+									+"\n Email: "+supplier.getEmail()
+									+"\n Phone: "+supplier.getPhone()
+									+"\n Delivery Time: "+supplier.getDaysToDeliver()+"\n");
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Suppliers Found");
