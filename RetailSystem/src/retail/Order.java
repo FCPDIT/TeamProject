@@ -193,8 +193,8 @@ public class Order implements Comparable<Order> {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: �" + product.getCostPrice() +
-							"\n Retail Price: �" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: " + product.getCostPrice() +
+							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -229,8 +229,8 @@ public class Order implements Comparable<Order> {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: �" + product.getCostPrice() +
-							"\n Retail Price: �" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: " + product.getCostPrice() +
+							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -265,8 +265,8 @@ public class Order implements Comparable<Order> {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: �" + product.getCostPrice() +
-							"\n Retail Price: �" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: " + product.getCostPrice() +
+							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -280,17 +280,21 @@ public class Order implements Comparable<Order> {
 	public static String viewReceivedOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		for(Order order: listOfOrders){
-			if(order.isReceived()){
+			if(order.isReceived() == true){
 				if(result.equals("")){
 					result = "Received orders: \n";
 				}
+				System.out.println(order.orderUniqueId);
+				result += "\n \n" + "Order ID: " + order.getOrderUniqueId() + "\n";
 				result += printOrderDetails(order);
 			}
 		}
 		if(result.equals("")){
-			result = "No received orders found. ";
+			return "No received orders found. ";
 		}
-		return result;
+		else{
+			return result;
+		}
 	}
 	
 	public static String viewUnreceivedOrders(ArrayList<Order> listOfOrders){
@@ -304,9 +308,11 @@ public class Order implements Comparable<Order> {
 			}
 		}
 		if(result.equals("")){
-			result = "No unreceived orders found.";
+			return "No unreceived orders found.";
 		}
-		return result;
+		else{
+			return result;
+		}
 	}
 	
 	public static String printOrderDetails(Order order){
@@ -322,8 +328,8 @@ public class Order implements Comparable<Order> {
 					"\n Supplier: " + product.getSupplier().getName() +
 					"\n Max Stock: " + product.getMaxStock() +
 					"\n Min Stock: " + product.getMinStock() +
-					"\n Cost Price: �" + product.getCostPrice() +
-					"\n Retail Price: �" + product.getRetailPrice() +"\n" + "\n------------";
+					"\n Cost Price: " + product.getCostPrice() +
+					"\n Retail Price: " + product.getRetailPrice() +"\n" + "\n------------";
 		}
 		return result;
 	}

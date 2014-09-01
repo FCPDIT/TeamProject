@@ -2100,6 +2100,7 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewOrderTextArea.setText(Order.viewAllOrders(orders));	
+				viewOrderTextArea.setCaretPosition(0);
 			}
 		});
 		//====
@@ -2112,6 +2113,7 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewOrderTextArea.setText(Order.viewReceivedOrders(orders));	
+				viewOrderTextArea.setCaretPosition(0);	
 			}
 		});
 		//====
@@ -2123,7 +2125,8 @@ public class RetailGUI extends JFrame{
 		viewOrderViewUnreceivedButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				viewOrderTextArea.setText(Order.viewUnreceivedOrders(orders));	
+				viewOrderTextArea.setText(Order.viewUnreceivedOrders(orders));		
+				viewOrderTextArea.setCaretPosition(0);
 			}
 		});
 		//====
@@ -2153,7 +2156,8 @@ public class RetailGUI extends JFrame{
 					listOfSuppliers.setSelectedItem("Select");
 				}else{
 					int num = Integer.parseInt(input);
-					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 
+					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 	
+					viewOrderTextArea.setCaretPosition(0);
 					listOfOrders.setSelectedItem("Select");
 					listOfSuppliers.setSelectedItem("Select");
 				}
@@ -2185,7 +2189,8 @@ public class RetailGUI extends JFrame{
 					listOfSuppliers.setSelectedItem("Select");
 				}else{
 					int num = Integer.parseInt(input);
-					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));	
+					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));		
+					viewOrderTextArea.setCaretPosition(0);
 					listOfOrders.setSelectedItem("Select");
 					listOfSuppliers.setSelectedItem("Select");
 
@@ -2217,7 +2222,8 @@ public class RetailGUI extends JFrame{
 					listOfTitles.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}else{
-					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));	
+					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));		
+					viewOrderTextArea.setCaretPosition(0);
 					listOfTitles.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}
@@ -2248,7 +2254,8 @@ public class RetailGUI extends JFrame{
 					listOfAuthors.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}else{
-					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));	
+					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));		
+					viewOrderTextArea.setCaretPosition(0);
 					listOfAuthors.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}
