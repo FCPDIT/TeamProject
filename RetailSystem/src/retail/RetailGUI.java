@@ -46,6 +46,7 @@ import javax.swing.JTextField;
 import javax.swing.RowSorter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SortOrder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
@@ -2773,20 +2774,22 @@ public class RetailGUI extends JFrame{
 		
 		//GridBagConstraints gc = new GridBagConstraints();
 		createInvJPanel.add(createNewInvoicePanel);
-		gc.insets = new Insets(5,5,5,5);
+		gc.insets = new Insets(80,5,5,5);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 0;
 		leftPanel.add(invIdLbl,gc);
 		gc.gridx = 1;
 		gc.gridy = 0;
+		invTextF.setPreferredSize(d);
 		leftPanel.add(invTextF,gc);
 		//=====
+		gc.insets = new Insets(5,5,5,5);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		leftPanel.add(employLbl,gc);
 		empIDComboBox = new JComboBox<String>(listOfEmpIds);
-		empIDComboBox.setPreferredSize(new Dimension(80, 20));
+		empIDComboBox.setPreferredSize(d);
 		listOfEmpIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 1;
@@ -2798,7 +2801,7 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(custId,gc);
 			//Add Combo here
 		cusIDComboBox = new JComboBox<String>(listOfCusIds);
-		cusIDComboBox.setPreferredSize(new Dimension(80, 20));
+		cusIDComboBox.setPreferredSize(d);
 		listOfCusIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 2;
@@ -2809,7 +2812,7 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(prodId,gc);
 			//Add combo here
 		prodIDComboBox = new JComboBox<String>(listOfProdIds);
-		prodIDComboBox.setPreferredSize(new Dimension(80, 20));
+		prodIDComboBox.setPreferredSize(d);
 		listOfProdIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 3;
@@ -2820,11 +2823,12 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(quantitylbl,gc);
 		gc.gridx = 1;
 		gc.gridy = 4;
+		quantityTextF.setPreferredSize(d);
 		leftPanel.add(quantityTextF,gc);
 		//=====
 		gc.gridx = 1;
 		gc.gridy = 5;
-		addMoreBtn.setPreferredSize(new Dimension(120, 30)); //width/height
+		addMoreBtn.setPreferredSize(d); //width/height
 		leftPanel.add(addMoreBtn,gc);
 		//AddMoreBtn Event Listener
 		addMoreBtn.addActionListener(new ActionListener() {
@@ -2872,7 +2876,7 @@ public class RetailGUI extends JFrame{
 		//=====
 		gc.gridx = 1;
 		gc.gridy = 6;
-		finishBtn.setPreferredSize(new Dimension(120, 30));
+		finishBtn.setPreferredSize(d);
 		leftPanel.add(finishBtn,gc);
 		//finishBtn eventListener
 		finishBtn.addActionListener(new ActionListener() {
@@ -2990,7 +2994,7 @@ public class RetailGUI extends JFrame{
 		//=====
 		gc.gridx = 1;
 		gc.gridy = 7;
-		resetBtn.setPreferredSize(new Dimension(120, 30)); //width/height
+		resetBtn.setPreferredSize(d); //width/height
 		leftPanel.add(resetBtn,gc);
 		resetBtn.addActionListener(new ActionListener() {
 			
@@ -3015,14 +3019,16 @@ public class RetailGUI extends JFrame{
 		//================================
 		//Right Panel : textAreaMarc and Pane
 		//================================
-		textAreaMarc = new JTextArea(15,20); //height - width
+		
+		textAreaMarc = new JTextArea(20,20); //height - width
 		textAreaMarc.setEditable(false);
 		JScrollPane scrollPane3 = new JScrollPane(textAreaMarc,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        gc.gridwidth = GridBagConstraints.REMAINDER;
+       /* gc.gridwidth = GridBagConstraints.REMAINDER;
         gc.fill = GridBagConstraints.BOTH;
         gc.weightx = 1.0;
         gc.weighty = 1.0;
-        gc.gridx = 3;
+        gc.gridy = 4;*/
+		rightPanel.setBorder(new EmptyBorder(80, 10, 10, 10));
         rightPanel.add(scrollPane3, gc);
 		
 		
