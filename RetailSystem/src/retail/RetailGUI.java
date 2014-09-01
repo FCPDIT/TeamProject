@@ -3066,6 +3066,7 @@ public class RetailGUI extends JFrame{
 		productGC.gridy = 1;
 		viewProductDetails.add(productIdlbl,productGC);
 		comboBoxProductId = new JComboBox<>(listOfProductId);
+		comboBoxProductId.setEditable(true);
 		comboBoxProductId.setPreferredSize(d);
 		comboBoxProductId.setMinimumSize(d);
 		//viewProductIdTextField = new JTextField(10); //Text Field
@@ -3116,6 +3117,7 @@ public class RetailGUI extends JFrame{
 		productGC.gridy = 2;
 		viewProductDetails.add(productTitlelbl,productGC);
 		comboBoxProductTitle = new JComboBox<>(listofProductTitle);
+		comboBoxProductTitle.setEditable(true);
 		comboBoxProductTitle.setPreferredSize(d);
 		comboBoxProductTitle.setMinimumSize(d);
 		//productTitleTextField = new JTextField(10);
@@ -3165,6 +3167,7 @@ public class RetailGUI extends JFrame{
 		productGC.gridy = 3;
 		viewProductDetails.add(productAuthorlbl,productGC);
 		comboBoxProductAuthor = new JComboBox<>(listOfProductAuthor);
+		comboBoxProductAuthor.setEditable(true);
 		comboBoxProductAuthor.setPreferredSize(d);
 		comboBoxProductAuthor.setMinimumSize(d);
 		productAuthorTextField = new JTextField(10);
@@ -3400,6 +3403,7 @@ public class RetailGUI extends JFrame{
 			 existingEditProdId.add((products.get(i).getProductCode()));
        }
 		comboBoxEditProdId = new JComboBox<>(listToEditProdIds);
+		comboBoxEditProdId.setEditable(true);
 		comboBoxEditProdId.setPreferredSize(d);
 		comboBoxEditProdId.setMinimumSize(d);
 		productGC.gridx = 0;
