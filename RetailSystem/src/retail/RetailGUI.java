@@ -3502,6 +3502,7 @@ public class RetailGUI extends JFrame{
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
+		gbc.insets = new Insets(5,5,5,5);
 		pLJTable.setRowHeight(ROW_HEIGHT);
 		pLJTable.setEnabled(false);
 		pLJTable.setAutoCreateRowSorter(true);	
@@ -3510,34 +3511,35 @@ public class RetailGUI extends JFrame{
 		list.add( new RowSorter.SortKey(0, SortOrder.ASCENDING) );
 		sorter.setSortKeys(list);
 		sorter.sort();	
-		proflossJPanel.add(pLJScrollPane, gbc);
+		pLComponentsJPanel.add(pLJScrollPane, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		proflossJPanel.add(new JLabel("Total: "), gbc);
+		pLComponentsJPanel.add(new JLabel("Total: "), gbc);
 		pLTotal.setPreferredSize(d);
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		proflossJPanel.add(pLTotal, gbc);
-		pLTotal.setEditable(false);
 		gbc.gridx = 0;
 		gbc.gridy = 2;
+		pLComponentsJPanel.add(pLTotal, gbc);
+		pLTotal.setText("0.00");
+		pLTotal.setEditable(false);
+		gbc.gridx = 0;
+		gbc.gridy = 3;
 		fillPLComboBox();
 		comboBoxPL = new JComboBox<String>(listOfMonths); //Combo box rather than Text Field
 		listOfMonths.setSelectedItem(months.get(0));
 		comboBoxPL.setPreferredSize(d);
-		proflossJPanel.add(comboBoxPL, gbc);
+		pLComponentsJPanel.add(comboBoxPL, gbc);
 		pLViewButton.setPreferredSize(d);
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		proflossJPanel.add(pLViewButton, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		pLComponentsJPanel.add(pLViewButton, gbc);
         viewTableButtonHandler vtbh = new viewTableButtonHandler();
         pLViewButton.addActionListener(vtbh);
         proflossJPanel.add(pLComponentsJPanel, gbc);
         
         lineChartJButton.setPreferredSize(d);
 		gbc.gridx = 0;
-		gbc.gridy = 3;
-		proflossJPanel.add(lineChartJButton, gbc);
+		gbc.gridy = 5;
+		pLComponentsJPanel.add(lineChartJButton, gbc);
 		
 		lineChartJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -4364,7 +4366,6 @@ public class RetailGUI extends JFrame{
 						tableModel.removeRow(rows);
 					}
 					for(Invoice invoice:invoices){
-						System.out.println("the int of all invoices is: " + invoice.getInvoiceDate().getMonth());
 						if(invoice.isPaid()){
 							if(invoice.getInvoiceDate().getMonth() == currentMonth && invoice.getInvoiceDate().getYear() +1900 == currentYear){
 								tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
