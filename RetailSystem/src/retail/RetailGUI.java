@@ -1262,46 +1262,57 @@ public class RetailGUI extends JFrame{
 		this.suppIdPopulate(editSuppIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		supplierIdJLabel.setMinimumSize(d);
 		supplierIdJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		supplierIdJTextField.setMinimumSize(d);
 		supplierIdJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierIdJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		supplierNameJLabel.setMinimumSize(d);
 		supplierNameJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierNameJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		supplierNameJTextField.setMinimumSize(d);
 		supplierNameJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierNameJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		supplierAddressJLabel.setMinimumSize(d);
 		supplierAddressJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierAddressJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		supplierAddressJTextField.setMinimumSize(d);
 		supplierAddressJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierAddressJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		supplierEmailJLabel.setMinimumSize(d);
 		supplierEmailJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierEmailJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		supplierEmailJTextField.setMinimumSize(d);
 		supplierEmailJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierEmailJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 9;
+		supplierPhoneJLabel.setMinimumSize(d);
 		supplierPhoneJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierPhoneJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 10;
+		supplierPhoneJTextField.setMinimumSize(d);
 		supplierPhoneJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierPhoneJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 11;
+		supplierJButton.setMinimumSize(d);
 		supplierJButton.setPreferredSize(d);
 		addSupplyJPanel.add(supplierJButton, gc);
 		gc.gridx = 0;
@@ -1310,32 +1321,39 @@ public class RetailGUI extends JFrame{
 		viewSupplyJPanel.add(suppJScrollPane, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		viewSupplyJLabel.setMinimumSize(d);
 		viewSupplyJLabel.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		suppIdCombo.setMinimumSize(d);
 		suppIdCombo.setPreferredSize(d);
 		suppIdCombo.setSelectedIndex(0);
 		viewSupplyJPanel.add(suppIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		viewSupplyJButton.setMinimumSize(d);
 		viewSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		viewSupplyNameJLabel.setMinimumSize(d);
 		viewSupplyNameJLabel.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyNameJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		suppNameCombo.setMinimumSize(d);
 		suppNameCombo.setPreferredSize(d);
 		suppNameCombo.setSelectedIndex(0);
 		viewSupplyJPanel.add(suppNameCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		viewSupplyNameJButton.setMinimumSize(d);
 		viewSupplyNameJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyNameJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		allSupplyJButton.setMinimumSize(d);
 		allSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(allSupplyJButton, gc);
 		gc.gridx = 0;
@@ -1423,6 +1441,9 @@ public class RetailGUI extends JFrame{
 							supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
 					suppliers.add(supplier);
 					JOptionPane.showMessageDialog(null, "New Supplier Added");
+					suppIdCombo.addItem(supplierIdJTextField.getText());
+					suppNameCombo.addItem(supplierNameJTextField.getText());
+					editSuppIdCombo.addItem(supplierIdJTextField.getText());
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
@@ -1498,7 +1519,6 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
-							editSupplierId.setText(Integer.toString(supplier.getId()));
 							editSupplierName.setText(supplier.getName());
 							editSupplierAddress.setText(supplier.getAddress());
 							editSupplierEmail.setText(supplier.getEmail());
@@ -1518,12 +1538,12 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
-							supplier.setId(Integer.parseInt(editSupplierId.getText()));
 							supplier.setName(editSupplierName.getText());
 							supplier.setAddress(editSupplierAddress.getText());
 							supplier.setEmail(editSupplierEmail.getText());
 							supplier.setPhone(editSupplierPhone.getText());
 							supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
+							JOptionPane.showMessageDialog(null, "Supplier Updated");
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1539,7 +1559,11 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
+							suppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
+							suppNameCombo.removeItem(editSuppIdCombo.getSelectedItem());
+							editSuppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
 							suppliers.remove(supplier);
+							JOptionPane.showMessageDialog(null, "Supplier Deleted");
 						}
 					}
 				}catch(NumberFormatException nfe){
