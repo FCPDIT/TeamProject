@@ -172,7 +172,7 @@ public class Invoice  implements Comparable<Invoice>  {
 					+"\nProduct Title: " + pds.getProduct().getTitle()
 					+ "\nProduct Price: " +  String.format("%.2f", pds.getProduct().getRetailPrice())
 					+ "\nQuantity of Order " + pds.getQuantity() 
-					+ "\nTotal of " + pds.getProduct().getProductCode() +" : " + (pds.getQuantity()*pds.getProduct().getRetailPrice()) 
+					+ "\nTotal of " + pds.getProduct().getProductCode() +" : " + String.format("%.2f", pds.getQuantity()*pds.getProduct().getRetailPrice()) 
 					+ "\n--------------";
 				}
 					list += "\nEmployee Name: " + v.getEmployee().getEmployeeName() 
