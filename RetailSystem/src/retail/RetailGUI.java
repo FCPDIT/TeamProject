@@ -154,13 +154,12 @@ public class RetailGUI extends JFrame{
 	private JLabel viewCustById = new JLabel("Find Customer By ID: ");
 	private JComboBox<String> custIdCombo = new JComboBox<String>();
 	private JButton viewCustJButton = new JButton("View By ID");
-	private JLabel viewCustByName = new JLabel("Find Customer By Name: ");
+	private JLabel viewCustByName = new JLabel("Find Customer By Name");
 	private JComboBox<String> custNameCombo = new JComboBox<String>();
 	private JButton viewCustNameJButton = new JButton("View By Name");
 	private JButton viewAllCustJButton = new JButton("View All Customers");
 	private JTextArea custJTextArea = new JTextArea(10, 65);
-	
-	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer Number");
+	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer ID");
 	private JComboBox<String> editCustIdCombo = new JComboBox<String>();
 	private JButton findCustById = new JButton("Find Customer");
 	private JLabel editCustIdJLabel = new JLabel("Customer ID");
@@ -177,18 +176,18 @@ public class RetailGUI extends JFrame{
 	private JButton deleteCustJButton = new JButton("Delete Customer");
 	
 	//Supplier Components
-	private JLabel supplierIdJLabel = new JLabel("Supplier ID: ");
+	private JLabel supplierIdJLabel = new JLabel("Supplier ID");
 	private JTextField supplierIdJTextField = new JTextField();
-	private JLabel supplierNameJLabel = new JLabel("Supplier Name: ");
+	private JLabel supplierNameJLabel = new JLabel("Supplier Name");
 	private JTextField supplierNameJTextField = new JTextField();
-	private JLabel supplierAddressJLabel = new JLabel("Supplier Address: ");
+	private JLabel supplierAddressJLabel = new JLabel("Supplier Address");
 	private JTextField supplierAddressJTextField = new JTextField();
-	private JLabel supplierEmailJLabel= new JLabel("Supplier Email: ");
+	private JLabel supplierEmailJLabel= new JLabel("Supplier Email");
 	private JTextField supplierEmailJTextField = new JTextField();
-	private JLabel supplierPhoneJLabel = new JLabel("Supplier Phone Number: ");
+	private JLabel supplierPhoneJLabel = new JLabel("Supplier Phone Number");
 	private JTextField supplierPhoneJTextField = new JTextField();
 	private JButton supplierJButton = new JButton("Create New Supplier");
-	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID: ");
+	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID");
 	private JComboBox<String> suppIdCombo = new JComboBox<String>();
 	private JButton viewSupplyJButton = new JButton("View Supplier By ID");
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
@@ -196,16 +195,14 @@ public class RetailGUI extends JFrame{
 	private JTextArea supplierJTextArea = new JTextArea(10, 65);
 	private JButton viewSupplyNameJButton = new JButton("View Supplier By Name");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
-	private JLabel editFindSuppIdJLabel = new JLabel("Enter Supplier Number");
+	private JLabel editFindSuppIdJLabel = new JLabel("Enter Supplier ID");
 	private JComboBox<String> editSuppIdCombo = new JComboBox<String>();
 	private JButton editSupplierJButton = new JButton("Find Supplier");
-	private JLabel editSuppIdJLabel = new JLabel("Supplier ID");
 	private JLabel editSuppNameJLabel = new JLabel("Supplier Name");
 	private JLabel editSuppAddressJLabel = new JLabel("Supplier Address");
 	private JLabel editSuppEmailJLabel = new JLabel("Supplier Email");
 	private JLabel editSuppPhoneJLabel = new JLabel("Supplier Telephone");
 	private JLabel editDeliveryJLabel = new JLabel("Edit Delivery Period");
-	private JTextField editSupplierId = new JTextField();
 	private JTextField editSupplierName = new JTextField();
 	private JTextField editSupplierAddress = new JTextField();
 	private JTextField editSupplierEmail = new JTextField();
@@ -238,8 +235,6 @@ public class RetailGUI extends JFrame{
 	private JLabel editFindById = new JLabel("Enter Employee ID ");
 	private JComboBox<String> viewEmpIdCombo = new JComboBox<String>();
 	private JButton editById = new JButton("Find Employee Details");
-	private JLabel editEmpId = new JLabel("Employee Id");
-	private JTextField editEmpIdField = new JTextField();
 	private JLabel editEmpName = new JLabel("Employee Name");
 	private JTextField editEmpNameField = new JTextField();
 	private JLabel editEmpAccess = new JLabel("Employee Access Level");
@@ -314,8 +309,6 @@ public class RetailGUI extends JFrame{
 	private JTextField viewProductIdTextField;
 	private JPanel viewProductDetailsPanel= new JPanel();
 	private JPanel viewProductDetails= new JPanel();
-	private int buttonWidth = 155;
-	private int buttonHeight = 20;
 	private ButtonGroup priceRange = new ButtonGroup();
 	private ButtonGroup quantity = new ButtonGroup();
 	
@@ -714,46 +707,57 @@ public class RetailGUI extends JFrame{
 		this.empIDPopulate(viewEmpIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		employeeId.setMinimumSize(d);
 		employeeId.setPreferredSize(d);
 		employeeJPanel.add(employeeId, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		employeeIdField.setMinimumSize(d);
 		employeeIdField.setPreferredSize(d);
 		employeeJPanel.add(employeeIdField, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		employeeName.setMinimumSize(d);
 		employeeName.setPreferredSize(d);
 		employeeJPanel.add(employeeName, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		employeeNameField.setMinimumSize(d);
 		employeeNameField.setPreferredSize(d);
 		employeeJPanel.add(employeeNameField, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		employeeAcess.setMinimumSize(d);
 		employeeAcess.setPreferredSize(d);
 		employeeJPanel.add(employeeAcess, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		employeeAcessField.setMinimumSize(d);
 		employeeAcessField.setPreferredSize(d);
 		employeeJPanel.add(employeeAcessField, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		employeeSalary.setMinimumSize(d);
 		employeeSalary.setPreferredSize(d);
 		employeeJPanel.add(employeeSalary, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		employeeSalaryField.setMinimumSize(d);
 		employeeSalaryField.setPreferredSize(d);
 		employeeJPanel.add(employeeSalaryField, gc);
 		gc.gridx = 0;
 		gc.gridy = 9;
+		employeePassword.setMinimumSize(d);
 		employeePassword.setPreferredSize(d);
 		employeeJPanel.add(employeePassword, gc);
 		gc.gridx = 0;
 		gc.gridy = 10;
+		employeePassField.setMinimumSize(d);
 		employeePassField.setPreferredSize(d);
 		employeeJPanel.add(employeePassField, gc);
 		gc.gridx = 0;
 		gc.gridy = 11;
+		employeeJButton.setMinimumSize(d);
 		employeeJButton.setPreferredSize(d);
 		employeeJPanel.add(employeeJButton, gc);
 		viewEmployeeJPanel.setLayout(new GridBagLayout());
@@ -764,97 +768,110 @@ public class RetailGUI extends JFrame{
 		editEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 2;
+		viewEmpId.setMinimumSize(d);
 		viewEmpId.setPreferredSize(d);
 		viewEmployeeJPanel.add(viewEmpId, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		empIdCombo.setMinimumSize(d);
 		empIdCombo.setPreferredSize(d);
 		empIdCombo.setSelectedIndex(0);
 		viewEmployeeJPanel.add(empIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		viewEmpIdButton.setMinimumSize(d);
 		viewEmpIdButton.setPreferredSize(d);
 		viewEmployeeJPanel.add(viewEmpIdButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		viewEmpName.setMinimumSize(d);
 		viewEmpName.setPreferredSize(d);
 		viewEmployeeJPanel.add(viewEmpName, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		empNameCombo.setMinimumSize(d);
 		empNameCombo.setPreferredSize(d);
 		empNameCombo.setSelectedIndex(0);
 		viewEmployeeJPanel.add(empNameCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		viewEmpNameButton.setMinimumSize(d);
 		viewEmpNameButton.setPreferredSize(d);
 		viewEmployeeJPanel.add(viewEmpNameButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		viewEmpAll.setMinimumSize(d);
 		viewEmpAll.setPreferredSize(d);
 		viewEmployeeJPanel.add(viewEmpAll, gc);
 		gc.gridx = 0;
 		gc.gridy = 9;
+		viewEmpAllButton.setMinimumSize(d);
 		viewEmpAllButton.setPreferredSize(d);
 		viewEmployeeJPanel.add(viewEmpAllButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		editFindById.setMinimumSize(d);
 		editFindById.setPreferredSize(d);
 		editEmployeeJPanel.add(editFindById, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		viewEmpIdCombo.setMinimumSize(d);
 		viewEmpIdCombo.setPreferredSize(d);
 		viewEmpIdCombo.setSelectedIndex(0);
 		editEmployeeJPanel.add(viewEmpIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		editById.setMinimumSize(d);
 		editById.setPreferredSize(d);
 		editEmployeeJPanel.add(editById, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
-		editEmpId.setPreferredSize(d);
-		editEmployeeJPanel.add(editEmpId, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
-		editEmpIdField.setPreferredSize(d);
-		editEmployeeJPanel.add(editEmpIdField, gc);
-		gc.gridx = 0;
-		gc.gridy = 6;
+		editEmpName.setMinimumSize(d);
 		editEmpName.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpName, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 5;
+		editEmpNameField.setMinimumSize(d);
 		editEmpNameField.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpNameField, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
+		gc.gridy = 6;
+		editEmpAccess.setMinimumSize(d);
 		editEmpAccess.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpAccess, gc);
 		gc.gridx = 0;
-		gc.gridy = 9;
+		gc.gridy = 7;
+		editEmpAccessField.setMinimumSize(d);
 		editEmpAccessField.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpAccessField, gc);
 		gc.gridx = 0;
-		gc.gridy = 10;
+		gc.gridy = 8;
+		editEmpSalary.setMinimumSize(d);
 		editEmpSalary.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpSalary, gc);
 		gc.gridx = 0;
-		gc.gridy = 11;
+		gc.gridy = 9;
+		editEmpSalaryField.setMinimumSize(d);
 		editEmpSalaryField.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpSalaryField, gc);
 		gc.gridx = 0;
-		gc.gridy = 12;
+		gc.gridy = 10;
+		editEmpPassword.setMinimumSize(d);
 		editEmpPassword.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpPassword, gc);
 		gc.gridx = 0;
-		gc.gridy = 13;
+		gc.gridy = 11;
+		editEmpPasswordField.setMinimumSize(d);
 		editEmpPasswordField.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpPasswordField, gc);
 		gc.gridx = 0;
-		gc.gridy = 14;
+		gc.gridy = 12;
+		updateEmployee.setMinimumSize(d);
 		updateEmployee.setPreferredSize(d);
 		editEmployeeJPanel.add(updateEmployee, gc);
 		gc.gridx = 0;
-		gc.gridy = 15;
+		gc.gridy = 13;
+		deleteEmployee.setMinimumSize(d);
 		deleteEmployee.setPreferredSize(d);
 		editEmployeeJPanel.add(deleteEmployee, gc);
 
@@ -863,6 +880,10 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
 				employees.add(employee);
+				empIdCombo.addItem(employeeIdField.getText());
+				empNameCombo.addItem(employeeNameField.getText());
+				viewEmpIdCombo.addItem(employeeIdField.getText());
+				JOptionPane.showMessageDialog(null, "Employee Successfully Created");
 			}
 
 		});
@@ -875,10 +896,10 @@ public class RetailGUI extends JFrame{
 						for(Employee employee: employees){
 							if(employee.getEmployeeId()== Integer.parseInt(empIdCombo.getSelectedItem().toString())){
 								empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-										+"\n Employee Name: " +employee.getEmployeeName() 
-										+"\n Employee Access Level: " +employee.getAccess()
-										+"\n Employee Password: " +employee.getPassword()
-										+"\n Employee Salary: " +employee.getSalary());
+										+"\n Name: " +employee.getEmployeeName() 
+										+"\n Access Level: " +employee.getAccess()
+										+"\n Password: " +employee.getPassword()
+										+"\n Salary: " +employee.getSalary());
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -893,14 +914,18 @@ public class RetailGUI extends JFrame{
 		viewEmpNameButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				// view by employee name
-				for(Employee employee: employees){
-					if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
-						empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-					+"\n Employee Name: " +employee.getEmployeeName() 
-					+"\n Employee Access Level: " +employee.getAccess()
-					+"\n Employee Password: " +employee.getPassword()
-					+"\n Employee Salary: " +employee.getSalary());
-					}
+				if(employees.size() >= 1){
+					for(Employee employee: employees){
+						if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
+							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+						+"\n Name: " +employee.getEmployeeName() 
+						+"\n Access Level: " +employee.getAccess()
+						+"\n Password: " +employee.getPassword()
+						+"\n Salary: " +employee.getSalary());
+						}
+				}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Employees Found");
 				}
 			}
 
@@ -913,13 +938,13 @@ public class RetailGUI extends JFrame{
 					if(employees.size() >= 1){
 						for(Employee employee: employees){
 							empJTextArea.append("\n Employee ID: "+employee.getEmployeeId()
-							+"\n Employee Name: " +employee.getEmployeeName() 
-							+"\n Employee Access Level: " +employee.getAccess()
-							+"\n Employee Password: " +employee.getPassword()
-							+"\n Employee Salary: " +employee.getSalary()+"\n");
+							+"\n Name: " +employee.getEmployeeName() 
+							+"\n Access Level: " +employee.getAccess()
+							+"\n Password: " +employee.getPassword()
+							+"\n Salary: " +employee.getSalary()+"\n");
 						}
 					}else{
-						JOptionPane.showMessageDialog(null, "No Customers Found");
+						JOptionPane.showMessageDialog(null, "No Employees Found");
 					}
 			}
 		});
@@ -929,7 +954,6 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Employee employee: employees){
 						if(employee.getEmployeeId()== Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
-							editEmpIdField.setText(Integer.toString(employee.getEmployeeId()));
 							editEmpNameField.setText(employee.getEmployeeName());
 							editEmpAccessField.setText(Integer.toString(employee.getAccess()));
 							editEmpSalaryField.setText(Double.toString(employee.getSalary()));
@@ -937,7 +961,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
 				}
 			}
 		});
@@ -948,7 +972,6 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Employee employee: employees){
 						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
-							employee.setEmployeeId(Integer.parseInt(editEmpIdField.getText()));
 							employee.setEmployeeName(editEmpNameField.getText());
 							employee.setAccess(Integer.parseInt(editEmpAccessField.getText()));
 							employee.setSalary(Double.parseDouble(editEmpSalaryField.getText()));
@@ -957,7 +980,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
 				}
 			}
 		});
@@ -968,6 +991,9 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Employee employee: employees){
 						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
+							empIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
+							empNameCombo.removeItem(viewEmpIdCombo.getSelectedItem());
+							viewEmpIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
 							employees.remove(employee);
 							JOptionPane.showMessageDialog(null, "Employee Deleted");
 						}
@@ -4272,36 +4298,42 @@ public class RetailGUI extends JFrame{
 		}
 		//dropdown functions
 		public void empIDPopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Employee employee: employees){
 				String str = Integer.toString(employee.getEmployeeId());
 				combo.addItem(str);
 			}
 		}
 		public void empNamePopulate(){
+			empNameCombo.addItem("Select");
 			for(Employee employee: employees){
 				String str = employee.getEmployeeName();
 				empNameCombo.addItem(str);
 			}
 		}
 		public void custIdPopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Customer customer: customers){
 				String str = Integer.toString(customer.getCustId());
 				combo.addItem(str);
 			}
 		}
 		public void custNamePopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Customer customer: customers){
 				String str = customer.getCustName();
 				combo.addItem(str);
 			}
 		}
 		public void suppIdPopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Supplier supplier: suppliers){
 				String str = Integer.toString(supplier.getId());
 				combo.addItem(str);
 			}
 		}
 		public void suppNamePopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Supplier supplier: suppliers){
 				String str = supplier.getName();
 				combo.addItem(str);
