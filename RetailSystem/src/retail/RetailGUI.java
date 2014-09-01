@@ -445,11 +445,11 @@ public class RetailGUI extends JFrame{
 	private JLabel quantitylbl = new JLabel("Quantity: ");
 	
 	//JText Fields for left panel
-	private JTextField invTextF = new JTextField(10);
+	private JTextField invTextF;// = new JTextField(10);
 	private JTextField employTextF = new JTextField(10);
 	private JTextField custTextF = new JTextField(10);
 	private JTextField prodTextF = new JTextField(10);
-	private JTextField quantityTextF = new JTextField(10);
+	private JTextField quantityTextF;// = new JTextField(10);
 	
 	//4 Buttons for left Panel
 	/*private JButton singleBtn = new JButton("Single Invoice");
@@ -2428,7 +2428,7 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 1;
 		viewCustomerPanel.add(invIdlbl,gc);
 		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
-		comboBoxInvoice.setPreferredSize(new Dimension(80, 20));
+		comboBoxInvoice.setPreferredSize(d);
 		listOfInvoices.setSelectedItem("select"); //setting the combo box to the first invoice number
 		gc.gridx = 1;
 		gc.gridy = 1;
@@ -2436,7 +2436,7 @@ public class RetailGUI extends JFrame{
 		JButton invButton = new JButton("Invoice ID");	//button
 		gc.gridx = 2;
 		gc.gridy = 1;
-		invButton.setPreferredSize(new Dimension(120, 30));
+		invButton.setPreferredSize(d);
 		viewCustomerPanel.add(invButton,gc);
 		//Action listener For Button to view Invoice by Id
 		invButton.addActionListener(new ActionListener() {
@@ -2465,7 +2465,7 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 2;
 		viewCustomerPanel.add(custIdlbl,gc);
 		comboBoxCustomer =  new JComboBox<String>(listOfCustomers); //combo box here
-		comboBoxCustomer.setPreferredSize(new Dimension(80, 20));
+		comboBoxCustomer.setPreferredSize(d);
 		listOfCustomers.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 2;
@@ -2473,7 +2473,7 @@ public class RetailGUI extends JFrame{
 		JButton custIdButton = new JButton("Customer ID");
 		gc.gridx = 2;
 		gc.gridy = 2;
-		custIdButton.setPreferredSize(new Dimension(120, 30));
+		custIdButton.setPreferredSize(d);
 		viewCustomerPanel.add(custIdButton,gc);
 		custIdButton.addActionListener(new ActionListener() {
 			//Action listener For Button to view Customer by Id
@@ -2501,7 +2501,7 @@ public class RetailGUI extends JFrame{
 		JButton viewAllBtn = new JButton("View All");
 		gc.gridx = 2;
 		gc.gridy = 3;
-		viewAllBtn.setPreferredSize(new Dimension(120, 30));
+		viewAllBtn.setPreferredSize(d);
 		viewCustomerPanel.add(viewAllBtn,gc);
 		viewAllBtn.addActionListener(new ActionListener() {
 			@Override
@@ -2515,7 +2515,7 @@ public class RetailGUI extends JFrame{
 		JButton viewPaidBtn = new JButton("View Paid");
 		gc.gridx = 3;
 		gc.gridy = 1;
-		viewPaidBtn.setPreferredSize(new Dimension(120, 30));
+		viewPaidBtn.setPreferredSize(d);
 		viewCustomerPanel.add(viewPaidBtn,gc);
 		viewPaidBtn.addActionListener(new ActionListener() {
 			
@@ -2529,6 +2529,10 @@ public class RetailGUI extends JFrame{
 		
 		//3. UnPaid Button
 		JButton viewUnpaidBtn = new JButton("View Unpaid");
+		gc.gridx = 3;
+		gc.gridy = 2;
+		viewUnpaidBtn.setPreferredSize(d);
+		viewCustomerPanel.add(viewUnpaidBtn,gc);
 		viewUnpaidBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -2536,16 +2540,13 @@ public class RetailGUI extends JFrame{
 				textarea.setCaretPosition(0);
 			}
 		});
-		gc.gridx = 3;
-		gc.gridy = 2;
-		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
-		viewCustomerPanel.add(viewUnpaidBtn,gc);
+		
 		
 		//4. Reset Panel Btn
 		JButton resetPanelBtn = new JButton("Clear Panel");
 		gc.gridx = 3;
 		gc.gridy = 3;
-		resetPanelBtn.setPreferredSize(new Dimension(120, 30));
+		resetPanelBtn.setPreferredSize(d);
 		viewCustomerPanel.add(resetPanelBtn,gc);
 		resetPanelBtn.addActionListener(new ActionListener() {
 			
@@ -2562,7 +2563,7 @@ public class RetailGUI extends JFrame{
 		highestSellingButton = new JButton("Highest selling");
 		gc.gridx = 2;
 		gc.gridy = 4;
-		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
+		highestSellingButton.setPreferredSize(d);
 		viewCustomerPanel.add(highestSellingButton,gc);
 		
 		highestSellingButton.addActionListener(new ActionListener() {
@@ -2639,7 +2640,7 @@ public class RetailGUI extends JFrame{
 		lowsetsellingButton = new JButton("Lowest selling");
 		gc.gridx = 3;
 		gc.gridy = 4;
-		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
+		lowsetsellingButton.setPreferredSize(d);
 		viewCustomerPanel.add(lowsetsellingButton,gc);
 		lowsetsellingButton.addActionListener(new ActionListener() {
 			
@@ -2779,6 +2780,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 0;
 		leftPanel.add(invIdLbl,gc);
+		invTextF = new JTextField();
 		gc.gridx = 1;
 		gc.gridy = 0;
 		invTextF.setPreferredSize(d);
@@ -2823,6 +2825,7 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(quantitylbl,gc);
 		gc.gridx = 1;
 		gc.gridy = 4;
+		quantityTextF = new JTextField();
 		quantityTextF.setPreferredSize(d);
 		leftPanel.add(quantityTextF,gc);
 		//=====
@@ -3020,7 +3023,7 @@ public class RetailGUI extends JFrame{
 		//Right Panel : textAreaMarc and Pane
 		//================================
 		
-		textAreaMarc = new JTextArea(20,20); //height - width
+		textAreaMarc = new JTextArea(19,20); //height - width
 		textAreaMarc.setEditable(false);
 		JScrollPane scrollPane3 = new JScrollPane(textAreaMarc,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
        /* gc.gridwidth = GridBagConstraints.REMAINDER;
