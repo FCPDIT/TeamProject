@@ -495,8 +495,8 @@ public class RetailGUI extends JFrame{
 	private DefaultComboBoxModel<String> listOfAuthors = new DefaultComboBoxModel<>(existingAuthors); //create the combo box
 	private JComboBox<String> viewOrderAuthorComboBox;
 	private JButton viewOrderViewAllOrdersButton = new JButton("View All");
-	private JButton viewOrderViewDeliveredButton = new JButton("View Delivered Orders");
-	private JButton viewOrderViewUndeliveredButton = new JButton("View Undelivered Order");
+	private JButton viewOrderViewReceivedButton = new JButton("View Received Orders");
+	private JButton viewOrderViewUnreceivedButton = new JButton("View Unreceived Order");
 	private JLabel viewOrderOrderIdLabel = new JLabel("Order ID: ");
 	private JButton viewOrderOrderIdButton = new JButton("Find order with this ID");	
 	private JLabel viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
@@ -516,16 +516,16 @@ public class RetailGUI extends JFrame{
 	private JTextArea supplierOrderJTextArea = new JTextArea(10,20);
 	private JTextArea productOrderJTextArea = new JTextArea();
 	private JTextField allOrdersTotalJTextField = new JTextField("Total Owed");
-	private JButton deliverAllOrdersJButton = new JButton("Deliver All Orders");
+	private JButton receiveAllOrdersJButton = new JButton("Receive All Orders");
 	private JButton editOrderJButton = new JButton("Find Order by Id");
 	private JComboBox<String> editOrderSupplierIdComboBox;
 	private JButton editSupplierOrderJButton = new JButton("Find Order by Supplier");
 	private JTextField editOrderId = new JTextField("Edit Order Id:");
 	private JTextField editOrderSupplier = new JTextField("Edit Order Customer");
-	private JButton deliverOrderJButton = new JButton("Deliver Order");
+	private JButton receiveOrderJButton = new JButton("Receive Order");
 	private JButton saveOrderJButton = new JButton("Update Order");
 	private JButton deleteOrderJButton = new JButton("Delete Order");
-	private JTextField editOrderDeliveredStatus = new JTextField("");	
+	private JTextField editOrderReceivedStatus = new JTextField("");	
 	private JTextField editOrderAmount = new JTextField("Edit Order Amount");
 	
 	//P&L JTable Tab
@@ -2105,25 +2105,25 @@ public class RetailGUI extends JFrame{
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 2;
-		viewOrderViewDeliveredButton.setPreferredSize(d);
-		viewOrderViewDeliveredButton.setMinimumSize(d);
-		viewOrderLeftJPanel.add(viewOrderViewDeliveredButton, viewOrderGC);
-		viewOrderViewDeliveredButton.addActionListener(new ActionListener() {
+		viewOrderViewReceivedButton.setPreferredSize(d);
+		viewOrderViewReceivedButton.setMinimumSize(d);
+		viewOrderLeftJPanel.add(viewOrderViewReceivedButton, viewOrderGC);
+		viewOrderViewReceivedButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				viewOrderTextArea.setText(Order.viewDeliveredOrders(orders));	
+				viewOrderTextArea.setText(Order.viewReceivedOrders(orders));	
 			}
 		});
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 3;
-		viewOrderViewUndeliveredButton.setPreferredSize(d);
-		viewOrderViewUndeliveredButton.setMinimumSize(d);
-		viewOrderLeftJPanel.add(viewOrderViewUndeliveredButton, viewOrderGC);
-		viewOrderViewUndeliveredButton.addActionListener(new ActionListener() {
+		viewOrderViewUnreceivedButton.setPreferredSize(d);
+		viewOrderViewUnreceivedButton.setMinimumSize(d);
+		viewOrderLeftJPanel.add(viewOrderViewUnreceivedButton, viewOrderGC);
+		viewOrderViewUnreceivedButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				viewOrderTextArea.setText(Order.viewUndeliveredOrders(orders));	
+				viewOrderTextArea.setText(Order.viewUnreceivedOrders(orders));	
 			}
 		});
 		//====
@@ -2298,17 +2298,17 @@ public class RetailGUI extends JFrame{
         JScrollPane supplierOrderJScrollPane = new JScrollPane(supplierOrderJTextArea);
         supplierOrderJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         editSupplierOrderComponentsJPanel.add(supplierOrderJScrollPane);
-        editSupplierOrderComponentsJPanel.add(deliverAllOrdersJButton);
+        editSupplierOrderComponentsJPanel.add(receiveAllOrdersJButton);
 
-        deliverAllOrdersJButton.addActionListener(new ActionListener(){
+        receiveAllOrdersJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
         		for(Order order: orders){
         			if(Integer.parseInt(s.trim()) == order.getSupplierUniqueId() ){
-        				order.setDelivered();
+        				order.setReceived();
         			}
         		}
-        		JOptionPane.showMessageDialog(null, "Delivered!");
+        		JOptionPane.showMessageDialog(null, "Received!");
         		editSupplierOrderJButton.doClick();
         		listOfSuppliers.setSelectedItem("Select");
         		listOfOrders.setSelectedItem("Select");
@@ -2323,20 +2323,20 @@ public class RetailGUI extends JFrame{
         editOrderComponentsJPanel.add(editOrderSupplier);
         editOrderComponentsJPanel.add(new JLabel("Total"));
         editOrderComponentsJPanel.add(editOrderAmount);
-        editOrderComponentsJPanel.add(editOrderDeliveredStatus);
-        editOrderDeliveredStatus.setEditable(false);
-        editOrderComponentsJPanel.add(deliverOrderJButton);
-        deliverOrderJButton.addActionListener(new ActionListener(){
+        editOrderComponentsJPanel.add(editOrderReceivedStatus);
+        editOrderReceivedStatus.setEditable(false);
+        editOrderComponentsJPanel.add(receiveOrderJButton);
+        receiveOrderJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
         		for(Order order: orders){
         			if(Integer.parseInt(s.trim()) == order.getOrderUniqueId()){
-        				order.setDelivered();
+        				order.setReceived();
         				break;
         			}
         		}
-        		JOptionPane.showMessageDialog(null, "Delivered!");
-        		editOrderDeliveredStatus.setForeground(Color.BLACK);
+        		JOptionPane.showMessageDialog(null, "Received!");
+        		editOrderReceivedStatus.setForeground(Color.BLACK);
         		editOrderJButton.doClick();	
         		listOfSuppliers.setSelectedItem("Select");
         		listOfOrders.setSelectedItem("Select");
@@ -3802,7 +3802,7 @@ public class RetailGUI extends JFrame{
 		return validID;
 	}
 						
-		//Handler for deliver orders by supplier button
+		//Handler for receive orders by supplier button
 		private class editSupplierOrderButtonHandler implements ActionListener{
 			public void actionPerformed( ActionEvent e){//handler starts
 					int count = 0, count1 = 0;;
@@ -3830,10 +3830,10 @@ public class RetailGUI extends JFrame{
 						editOrderComponentsJPanel.setVisible(false);
 						saveOrderComponentsJPanel.setVisible(false);
 						editOrderProductsComponentsJPanel.setVisible(false);
-						supplierOrderJTextArea.setText("Undelivered Orders: ");
+						supplierOrderJTextArea.setText("Unreceived Orders: ");
 						for(Order order: orders){
 							if(id == order.getSupplierUniqueId() ){
-								if(!order.isDelivered()){
+								if(!order.isReceived()){
 									s = "\nOrder Id : " + order.getOrderUniqueId() + 
 											"\nTotal: " + 
 											order.calculateOrderWorth() + "\n";
@@ -3844,7 +3844,7 @@ public class RetailGUI extends JFrame{
 							}
 						}
 						if(count == 0){
-							JOptionPane.showMessageDialog(loginJPanel, "No undelivered orders for this supplierer", "For your information", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(loginJPanel, "No unreceived orders for this supplierer", "For your information", JOptionPane.INFORMATION_MESSAGE);
 							editSupplierOrderComponentsJPanel.setVisible(false);
 						}
 						else{
@@ -4006,13 +4006,13 @@ public class RetailGUI extends JFrame{
 										productOrderJTextArea.append(s);								
 								}	
 							editOrderAmount.setText(Double.toString(order.calculateOrderWorth()));
-							if(!order.isDelivered()){
-								editOrderDeliveredStatus.setText("Undelivered");
-								editOrderDeliveredStatus.setForeground(Color.RED);
+							if(!order.isReceived()){
+								editOrderReceivedStatus.setText("Unreceived");
+								editOrderReceivedStatus.setForeground(Color.RED);
 							}
-							if(order.isDelivered()){
-								editOrderDeliveredStatus.setText("Delivered");
-								editOrderDeliveredStatus.setForeground(Color.BLACK);
+							if(order.isReceived()){
+								editOrderReceivedStatus.setText("Received");
+								editOrderReceivedStatus.setForeground(Color.BLACK);
 							}
 						}
 					}	
