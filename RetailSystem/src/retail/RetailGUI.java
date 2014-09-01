@@ -2083,11 +2083,10 @@ public class RetailGUI extends JFrame{
 		Dimension size1 = getPreferredSize();
 		size1.width = 500;
 		viewOrderJPanel.setPreferredSize(size1);
-		viewOrderJPanel.setBorder(BorderFactory.createTitledBorder("Order details"));
 		//====
 		viewOrderLeftJPanel.setLayout(new GridBagLayout());
 		viewOrderRightJPanel.setLayout(new GridBagLayout());
-		viewOrderJPanel.setLayout(new GridLayout(1, 1));
+		viewOrderJPanel.setLayout(new GridBagLayout());
 		GridBagConstraints viewOrderGC = new GridBagConstraints();
 		viewOrderGC.insets = new Insets(5,5,5,5);
 		//====
@@ -2262,7 +2261,7 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//====
-		viewOrderTextArea = new JTextArea(20, 20); //height - width
+		viewOrderTextArea = new JTextArea(20, 50); //height - width
 		viewOrderTextArea.setEditable(false);
 		JScrollPane viewOrderScrollPane = new JScrollPane(viewOrderTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         viewOrderGC.gridwidth = GridBagConstraints.REMAINDER;
@@ -2272,10 +2271,12 @@ public class RetailGUI extends JFrame{
         viewOrderGC.gridx = 0;
         viewOrderGC.gridy = 0;
         viewOrderRightJPanel.add(viewOrderScrollPane, viewOrderGC);
+        viewOrderGC.gridx = 0;
+        viewOrderGC.gridy = 1;
         viewOrderJPanel.add(viewOrderLeftJPanel, viewOrderGC);
-        viewOrderGC.gridx = 1;
+        viewOrderGC.gridx = 0;
         viewOrderGC.gridy = 0;
-        viewOrderJPanel.add(viewOrderRightJPanel);
+        viewOrderJPanel.add(viewOrderRightJPanel, viewOrderGC);
 		//=========================================================================================
         //add edit order components	
         findOrderComponentsJPanel.setLayout(new GridBagLayout());
@@ -2432,7 +2433,6 @@ public class RetailGUI extends JFrame{
 		JLabel invIdlbl = new JLabel("Invoice ID: "); //Label
 		gc.gridx = 0;
 		gc.gridy = 1;
-		//TODO boobs
 		viewCustomerPanel.add(invIdlbl,gc);
 		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
 		comboBoxInvoice.setPreferredSize(new Dimension(80, 20));
