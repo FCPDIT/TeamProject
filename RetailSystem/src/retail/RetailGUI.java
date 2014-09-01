@@ -1901,18 +1901,18 @@ public class RetailGUI extends JFrame{
 		createOrderQuantityTextField.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderQuantityTextField,orderGC);
 		//=====
-		orderGC.gridx = 0;
+		orderGC.gridx = 1;
 		orderGC.gridy = 4;
 		createOrderAddProductButton.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderAddProductButton,orderGC);
 		orderGC.gridx = 1;
-		orderGC.gridy = 4;
+		orderGC.gridy = 5;
 		orderGC.weighty = 10;
 		createOrderConfirmOrderButton.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderConfirmOrderButton,orderGC);
 		JButton resetOrderPanelButton = new JButton("Reset Fields");
 		gc.gridx = 1;
-		gc.gridy = 5;
+		gc.gridy = 6;
 		resetOrderPanelButton.setPreferredSize(d);
 		createNewOrderLeftPanel.add(resetOrderPanelButton,gc);
 		resetOrderPanelButton.addActionListener(new ActionListener() {
