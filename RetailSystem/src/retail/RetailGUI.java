@@ -549,19 +549,6 @@ public class RetailGUI extends JFrame{
 		//TODO Jump to Constructor
 		createInvoices();
 	
-		/*remove comment marks to run login function
-
-		//lock the tabs until login successful
-		mainJTabbedPane.setEnabledAt(1, false);
-		mainJTabbedPane.setEnabledAt(2, false);
-		mainJTabbedPane.setEnabledAt(3, false);
-		mainJTabbedPane.setEnabledAt(4, false);
-		mainJTabbedPane.setEnabledAt(5, false);
-		mainJTabbedPane.setEnabledAt(6, false);
-		mainJTabbedPane.setEnabledAt(7, false);
-		mainJTabbedPane.setEnabledAt(8, false);
-						
-		*/	
 		
 		//Line Chart data sets
 		gc.insets = new Insets(10,5,5,10);
@@ -595,13 +582,29 @@ public class RetailGUI extends JFrame{
         line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 11), "expenditure", "Dec");
 				
 		//add login components
-		loginComponentsJPanel.setLayout(new GridLayout(4,4));
-		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
-		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
-		loginComponentsJPanel.add(new JLabel("Enter Employee Password"));
-		loginComponentsJPanel.add(passwordTF = new JPasswordField("Password", 10));
-		loginComponentsJPanel.add(loginBut= new JButton("Login"));
-		loginJPanel.add(loginComponentsJPanel);
+		loginJPanel.setLayout(new GridBagLayout());
+		GridBagConstraints loginGC = new GridBagConstraints();
+		loginGC.insets = new Insets(5,5,5,5);
+		loginComponentsJPanel.setLayout(new GridBagLayout());
+		loginGC.gridx = 0;
+		loginGC.gridy = 0;
+		loginComponentsJPanel.add(new JLabel("Enter Employee ID"), loginGC);
+		loginGC.gridx = 0;
+		loginGC.gridy = 1;
+		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID"), loginGC);
+		loginTF.setPreferredSize(d);
+		loginGC.gridx = 0;
+		loginGC.gridy = 2;
+		loginComponentsJPanel.add(new JLabel("Enter Employee Password"), loginGC);
+		loginGC.gridx = 0;
+		loginGC.gridy = 3;
+		loginComponentsJPanel.add(passwordTF = new JPasswordField("Password"), loginGC);
+		passwordTF.setPreferredSize(d);
+		loginGC.gridx = 0;
+		loginGC.gridy = 4;
+		loginComponentsJPanel.add(loginBut= new JButton("Login"), loginGC);
+		loginBut.setPreferredSize(d);
+		loginJPanel.add(loginComponentsJPanel, loginGC);
 		//add listener for login button
 		LoginButtonHandler handler = new LoginButtonHandler();
 		loginBut.addActionListener(handler);
@@ -619,10 +622,16 @@ public class RetailGUI extends JFrame{
 			}
 		});					
 		
-		logoutComponentsJPanel.setLayout(new GridLayout(4,4));
-		logoutComponentsJPanel.add(new JLabel("Logout of application: "));
-		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
-		logoutJPanel.add(logoutComponentsJPanel);
+		logoutComponentsJPanel.setLayout(new GridBagLayout());
+		loginGC.gridx = 0;
+		loginGC.gridy = 0;
+		logoutComponentsJPanel.add(new JLabel("Logout of application: "), loginGC);
+		loginGC.gridx = 0;
+		loginGC.gridy = 1;
+		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"), loginGC);
+		logoutBut.setPreferredSize(d);
+		logoutComponentsJPanel.setVisible(false);
+		loginJPanel.add(logoutComponentsJPanel, loginGC);
 		logoutBut.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				// release all tabs - manager
@@ -636,8 +645,8 @@ public class RetailGUI extends JFrame{
 				mainJTabbedPane.setEnabledAt(5, false);
 				mainJTabbedPane.setEnabledAt(6, false);
 				mainJTabbedPane.setEnabledAt(7, false);
-				mainJTabbedPane.setEnabledAt(8, false);
-				mainJTabbedPane.setEnabledAt(0, true);;
+				logoutComponentsJPanel.setVisible(false);
+				loginComponentsJPanel.setVisible(true);
 			}
 		});
 		
@@ -648,7 +657,7 @@ public class RetailGUI extends JFrame{
 		mainJFrame.setVisible(true);
 		mainJFrame.add(mainJTabbedPane);
 		
-		mainJTabbedPane.add("Login", loginJPanel);
+		mainJTabbedPane.add("Login/Logout", loginJPanel);
 		mainJTabbedPane.add("Customer Management", custJTabbedPane);
 		mainJTabbedPane.add("Supplier Management", supplyJTabbedPane);
 //		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);		// This code was used when testing image icons 
@@ -659,7 +668,6 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.add("Order Management", orderJTabbedPane);
 		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
 		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
-		mainJTabbedPane.add("Logout", logoutJPanel);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
 		custJTabbedPane.add("View Customer Details", viewCustJPanel);
@@ -686,6 +694,19 @@ public class RetailGUI extends JFrame{
 		accessJTabbedPane.add("Edit Employee", editEmployeeJPanel);
 		
 		proflossJTabbedPane.add("Profit and Loss Table", proflossJPanel);
+		
+		/*remove comment marks to run login function
+
+		//lock the tabs until login successful
+		mainJTabbedPane.setEnabledAt(1, false);
+		mainJTabbedPane.setEnabledAt(2, false);
+		mainJTabbedPane.setEnabledAt(3, false);
+		mainJTabbedPane.setEnabledAt(4, false);
+		mainJTabbedPane.setEnabledAt(5, false);
+		mainJTabbedPane.setEnabledAt(6, false);
+		mainJTabbedPane.setEnabledAt(7, false);
+						
+		*/	
 		
 		employeeJPanel.setLayout(new GridBagLayout());
 		this.empIDPopulate(empIdCombo);
@@ -3899,8 +3920,8 @@ public class RetailGUI extends JFrame{
 					mainJTabbedPane.setEnabledAt(5, true);
 					mainJTabbedPane.setEnabledAt(6, true);
 					mainJTabbedPane.setEnabledAt(7, true);
-					mainJTabbedPane.setEnabledAt(8, true);
-					mainJTabbedPane.setEnabledAt(0, false);
+					loginComponentsJPanel.setVisible(false);
+					logoutComponentsJPanel.setVisible(true);
 				}
 				else if(login == 2){
 					// release some tabs - staff 
@@ -3912,12 +3933,13 @@ public class RetailGUI extends JFrame{
 					mainJTabbedPane.setEnabledAt(5, true);
 					mainJTabbedPane.setEnabledAt(6, false);
 					mainJTabbedPane.setEnabledAt(7, false);
-					mainJTabbedPane.setEnabledAt(8, true);
-					mainJTabbedPane.setEnabledAt(0, false);
 					invJTabbedPane.setEnabledAt(2, false);
+					orderJTabbedPane.setEnabledAt(2, false);
 					supplyJTabbedPane.setEnabledAt(2, false);
 					prodJTabbedPane.setEnabledAt(2, false);
-					custJTabbedPane.setEnabledAt(2, false);						
+					custJTabbedPane.setEnabledAt(2, false);	
+					loginComponentsJPanel.setVisible(false);
+					logoutComponentsJPanel.setVisible(true);
 				}
 				else if(login == 3){
 					//password incorrect
