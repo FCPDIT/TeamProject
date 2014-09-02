@@ -1012,45 +1012,57 @@ public class RetailGUI extends JFrame{
 		this.custIdPopulate(editCustIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		custIdJLabel.setMinimumSize(d);
 		custIdJLabel.setPreferredSize(d);
 		addCustJPanel.add(custIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		custIdJTextField.setMinimumSize(d);
 		custIdJTextField.setPreferredSize(d);
 		addCustJPanel.add(custIdJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		custNameJLabel.setMinimumSize(d);
+		custNameJLabel.setPreferredSize(d);
 		addCustJPanel.add(custNameJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		custNameJTextField.setMinimumSize(d);
 		custNameJTextField.setPreferredSize(d);
 		addCustJPanel.add(custNameJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		custAddressJLabel.setMinimumSize(d);
 		custAddressJLabel.setPreferredSize(d);
 		addCustJPanel.add(custAddressJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		custAddressJTextField.setMinimumSize(d);
 		custAddressJTextField.setPreferredSize(d);
 		addCustJPanel.add(custAddressJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		custEmailJLabel.setMinimumSize(d);
 		custEmailJLabel.setPreferredSize(d);
 		addCustJPanel.add(custEmailJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		custEmailJTextField.setMinimumSize(d);
 		custEmailJTextField.setPreferredSize(d);
 		addCustJPanel.add(custEmailJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 9;
+		custPhoneJLabel.setMinimumSize(d);
 		custPhoneJLabel.setPreferredSize(d);
 		addCustJPanel.add(custPhoneJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 10;
+		custPhoneJTextField.setMinimumSize(d);
 		custPhoneJTextField.setPreferredSize(d);
 		addCustJPanel.add(custPhoneJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 11;
+		custJButton.setMinimumSize(d);
 		custJButton.setPreferredSize(d);
 		addCustJPanel.add(custJButton, gc);
 		gc.gridx = 0;
@@ -1059,93 +1071,105 @@ public class RetailGUI extends JFrame{
 		viewCustJPanel.add(custScrollPane, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		viewCustById.setMinimumSize(d);
 		viewCustById.setPreferredSize(d);
 		viewCustJPanel.add(viewCustById, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		custIdCombo.setMinimumSize(d);
 		custIdCombo.setPreferredSize(d);
 		custIdCombo.setSelectedIndex(0);
 		viewCustJPanel.add(custIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		viewCustJButton.setMinimumSize(d);
 		viewCustJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewCustJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		viewCustByName.setMinimumSize(d);
 		viewCustByName.setPreferredSize(d);
 		viewCustJPanel.add(viewCustByName, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		custNameCombo.setMinimumSize(d);
 		custNameCombo.setPreferredSize(d);
 		custNameCombo.setSelectedIndex(0);
 		viewCustJPanel.add(custNameCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		viewCustNameJButton.setMinimumSize(d);
 		viewCustNameJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewCustNameJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		viewAllCustJButton.setMinimumSize(d);
 		viewAllCustJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewAllCustJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		editFindCustIdJLabel.setMinimumSize(d);
 		editFindCustIdJLabel.setPreferredSize(d);
 		editCustJPanel.add(editFindCustIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		editCustIdCombo.setMinimumSize(d);
 		editCustIdCombo.setPreferredSize(d);
 		editCustIdCombo.setSelectedItem(0);
 		editCustJPanel.add(editCustIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		findCustById.setMinimumSize(d);
 		findCustById.setPreferredSize(d);
 		editCustJPanel.add(findCustById, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
-		editCustIdJLabel.setPreferredSize(d);
-		editCustJPanel.add(editCustIdJLabel, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
-		editCustId.setPreferredSize(d);
-		editCustJPanel.add(editCustId, gc);
-		gc.gridx = 0;
-		gc.gridy = 6;
+		editCustNameJLabel.setMinimumSize(d);
 		editCustNameJLabel.setPreferredSize(d);
 		editCustJPanel.add(editCustNameJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 5;
+		editCustName.setMinimumSize(d);
 		editCustName.setPreferredSize(d);
 		editCustJPanel.add(editCustName, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
+		gc.gridy = 6;
+		editCustAddressJLabel.setMinimumSize(d);
 		editCustAddressJLabel.setPreferredSize(d);
 		editCustJPanel.add(editCustAddressJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 9;
+		gc.gridy = 7;
+		editCustAddress.setMinimumSize(d);
 		editCustAddress.setPreferredSize(d);
 		editCustJPanel.add(editCustAddress, gc);
 		gc.gridx = 0;
-		gc.gridy = 10;
+		gc.gridy = 8;
+		editCustEmailJLabel.setMinimumSize(d);
 		editCustEmailJLabel.setPreferredSize(d);
 		editCustJPanel.add(editCustEmailJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 11;
+		gc.gridy = 9;
+		editCustEmail.setMinimumSize(d);
 		editCustEmail.setPreferredSize(d);
 		editCustJPanel.add(editCustEmail, gc);
 		gc.gridx = 0;
-		gc.gridy = 12;
+		gc.gridy = 10;
+		editCustPhoneJLabel.setMinimumSize(d);
 		editCustPhoneJLabel.setPreferredSize(d);
 		editCustJPanel.add(editCustPhoneJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 13;
+		gc.gridy = 11;
+		editCustPhone.setMinimumSize(d);
 		editCustPhone.setPreferredSize(d);
 		editCustJPanel.add(editCustPhone, gc);
 		gc.gridx = 0;
-		gc.gridy = 14;
+		gc.gridy = 12;
+		updateCustJButton.setMinimumSize(d);
 		updateCustJButton.setPreferredSize(d);
 		editCustJPanel.add(updateCustJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 15;
+		gc.gridy = 13;
+		deleteCustJButton.setMinimumSize(d);
 		deleteCustJButton.setPreferredSize(d);
 		editCustJPanel.add(deleteCustJButton, gc);
 		
@@ -1158,6 +1182,9 @@ public class RetailGUI extends JFrame{
 						custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
 						custPhoneJTextField.getText());
 					customers.add(customer);
+					custIdCombo.addItem(Integer.toString(customer.getCustId()));
+					custNameCombo.addItem(customer.getCustName());
+					editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
 					JOptionPane.showMessageDialog(null, "New Customer Added");
 					editCustomerListOfInvoices.addElement(custIdJTextField.getText());
 				}catch(NumberFormatException nfe){
@@ -1174,10 +1201,10 @@ public class RetailGUI extends JFrame{
 						for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(custIdCombo.getSelectedItem().toString())){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
-									+"\n Customer Name: "+customer.getCustName()
-									+"\n Customer Address: "+customer.getCustAddress()
-									+"\n Customer Email: "+customer.getCustEmail()
-									+"\n Customer Phone: "+customer.getCustTelephone());
+									+"\n Name: "+customer.getCustName()
+									+"\n Address: "+customer.getCustAddress()
+									+"\n Email: "+customer.getCustEmail()
+									+"\n Phone: "+customer.getCustTelephone());
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -1196,10 +1223,10 @@ public class RetailGUI extends JFrame{
 						for(Customer customer: customers){
 						if(customer.getCustName() == custNameCombo.getSelectedItem()){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
-									+"\n Customer Name: "+customer.getCustName()
-									+"\n Customer Address: "+customer.getCustAddress()
-									+"\n Customer Email: "+customer.getCustEmail()
-									+"\n Customer Phone: "+customer.getCustTelephone());
+									+"\n Name: "+customer.getCustName()
+									+"\n Address: "+customer.getCustAddress()
+									+"\n Email: "+customer.getCustEmail()
+									+"\n Phone: "+customer.getCustTelephone());
 							}
 						}
 				}else{
@@ -1216,10 +1243,10 @@ public class RetailGUI extends JFrame{
 						for(Customer customer: customers){
 							
 							custJTextArea.append("\n Customer Id: "+customer.getCustId()
-										+"\n Customer Name: "+customer.getCustName()
-										+"\n Customer Address: "+customer.getCustAddress()
-										+"\n Customer Email: "+customer.getCustEmail()
-										+"\n Customer Phone: "+customer.getCustTelephone()
+										+"\n Name: "+customer.getCustName()
+										+"\n Address: "+customer.getCustAddress()
+										+"\n Email: "+customer.getCustEmail()
+										+"\n Phone: "+customer.getCustTelephone()
 										+"\n");
 						}
 					}else{
@@ -1233,7 +1260,6 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
-							editCustId.setText(Integer.toString(customer.getCustId()));
 							editCustName.setText(customer.getCustName());
 							editCustAddress.setText(customer.getCustAddress());
 							editCustEmail.setText(customer.getCustEmail());
@@ -1252,11 +1278,11 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
-							customer.setCustId(Integer.parseInt(editCustId.getText()));
 							customer.setCustName(editCustName.getText());
 							customer.setCustAddress(editCustAddress.getText());
 							customer.setCustEmail(editCustEmail.getText());
 							customer.setCustTelephone(editCustPhone.getText());
+							JOptionPane.showMessageDialog(null, "Customer Updated.");
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1271,7 +1297,11 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
+							custIdCombo.removeItem(editCustIdCombo.getSelectedItem());
+							custNameCombo.removeItem(editCustIdCombo.getSelectedItem());
+							editCustIdCombo.removeItem(editCustIdCombo.getSelectedItem());
 							customers.remove(customer);
+							JOptionPane.showMessageDialog(null, "Customer Deleted");
 						}
 					}
 				}catch(NumberFormatException nfe){
