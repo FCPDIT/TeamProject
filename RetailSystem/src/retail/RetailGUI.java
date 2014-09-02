@@ -2697,7 +2697,7 @@ public class RetailGUI extends JFrame{
 				//Filling the hash map
 				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
 				for(int i = 0;i<countsHigher.length;i++){
-					hmap.put(productCodes.get(i), countsHigher[i]);
+					hmap.put(productCodes.get(i) + "\n" + products.get(i).getTitle(), countsHigher[i]);
 				}
 				
 				//Sorting the HashMap
@@ -2737,11 +2737,11 @@ public class RetailGUI extends JFrame{
 				pieDataset.setValue(fifth, fift);
 				
 				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Highest Selling", pieDataset, true, true, true); //3D pie chart
-				PiePlot3D p = (PiePlot3D)chart.getPlot();
+				//PiePlot3D p = (PiePlot3D)chart.getPlot();
 				ChartFrame frame = new ChartFrame("Pie Chart", chart);
 				frame.setVisible(true);
 				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setSize(650, 500);
+				frame.setSize(850, 600);
 			}
 		});
 		
@@ -2774,7 +2774,7 @@ public class RetailGUI extends JFrame{
 				//Filling the hash map
 				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
 				for(int i = 0;i<countsLower.length;i++){
-					hmap.put(productCodes.get(i), countsLower[i]);
+					hmap.put(productCodes.get(i) + "\n" + products.get(i).getTitle(), countsLower[i]);
 				}
 				
 				//Sorting the HashMap
@@ -2814,11 +2814,11 @@ public class RetailGUI extends JFrame{
 				pieDataset.setValue(fifth, fift);
 				
 				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Lowest Selling", pieDataset, true, true, true); //3D pie chart
-				PiePlot3D p = (PiePlot3D)chart.getPlot();
+				//PiePlot3D p = (PiePlot3D)chart.getPlot();
 				ChartFrame frame = new ChartFrame("Pie Chart", chart);
 				frame.setVisible(true);
 				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setSize(650, 500);
+				frame.setSize(850, 600);
 			}
 		});
 		
@@ -2845,7 +2845,7 @@ public class RetailGUI extends JFrame{
 				//pieDataset.setValue("Four", new Integer(40));
 				
 				JFreeChart chart = ChartFactory.createPieChart3D("Invoice Review", pieDataset, true,true,true);
-				PiePlot3D p=(PiePlot3D)chart.getPlot();
+				//PiePlot3D p=(PiePlot3D)chart.getPlot();
 			//	ChartPanel chPanel = new ChartPanel(chart);
 			//	chPanel.setPreferredSize(new Dimension(785, 440));
 			//	chPanel.setMouseWheelEnabled(true);
