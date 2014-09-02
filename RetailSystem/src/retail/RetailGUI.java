@@ -343,6 +343,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
 	private JPanel saveInvoiceComponentsJPanel = new JPanel();
 	private JPanel editInvoiceProductsComponentsJPanel = new JPanel();
+	private JPanel editInvoiceByCustComponents = new JPanel();
 	private Vector<String> editExistingInvoiceNums = new Vector<>();
 	private DefaultComboBoxModel<String> editListOfInvoices = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
 	private JComboBox<String> editComboBoxInvoice;
@@ -1853,121 +1854,197 @@ public class RetailGUI extends JFrame{
 		
 		
 		//add edit invoice components
-		fillComboBox();
-		findInvoiceComponentsJPanel.setLayout(new GridBagLayout());
-		gc.gridx = 0;
-		gc.gridy = 1;
-		editComboBoxInvoice = new JComboBox<String>(editListOfInvoices); //Combo box rather than Text Field
-		editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
-		findInvoiceComponentsJPanel.add(editComboBoxInvoice, gc);
-		editComboBoxInvoice.setPreferredSize(d);
-		gc.gridx = 0;
-		gc.gridy = 2;
-		editInvoiceJButton.setPreferredSize(d);
-		findInvoiceComponentsJPanel.add(editInvoiceJButton, gc);
-		gc.gridx = 0;
-		gc.gridy = 3;
-		editComboBoxCustomerInvoice = new JComboBox<String>(editCustomerListOfInvoices); //Combo box rather than Text Field
-		editCustomerListOfInvoices.setSelectedItem(editExistingCustomerInvoiceNums.get(0));
-		findInvoiceComponentsJPanel.add(editComboBoxCustomerInvoice, gc);
-		editComboBoxCustomerInvoice.setPreferredSize(d);
-		gc.gridx = 0;
-		gc.gridy = 4;
-		editCustomerInvoiceJButton.setPreferredSize(d);
-		findInvoiceComponentsJPanel.add(editCustomerInvoiceJButton, gc);
-		editCustomerInvoiceComponentsJPanel.setLayout(new GridLayout(2,2));
-		editCustomerInvoiceComponentsJPanel.add(new JLabel("Total owed on all invoices:"));
-		editCustomerInvoiceComponentsJPanel.add(allInvoicesTotalJTextField);
-		JScrollPane customerInvoiceJScrollPane = new JScrollPane(customerInvoiceJTextArea);
-		customerInvoiceJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		editCustomerInvoiceComponentsJPanel.add(customerInvoiceJScrollPane);
-		editCustomerInvoiceComponentsJPanel.add(payAllInvoicesJButton);
-		
-		payAllInvoicesJButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
-				int id = Integer.parseInt( s );
-				for(Invoice invoice: invoices){
-					if(id == invoice.getCustomer().getCustId() ){
-						invoice.setPaid(true);
+			fillComboBox();				
+			//find by invoice id & customer id components
+			findInvoiceComponentsJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editComboBoxInvoice = new JComboBox<String>(editListOfInvoices); //Combo box rather than Text Field
+			editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
+			findInvoiceComponentsJPanel.add(editComboBoxInvoice, gc);
+			editComboBoxInvoice.setPreferredSize(d);
+			editComboBoxInvoice.setMinimumSize(d);
+			gc.gridx = 1;
+			gc.gridy = 1;
+			editInvoiceJButton.setPreferredSize(d);
+			editInvoiceJButton.setMinimumSize(d);
+			findInvoiceComponentsJPanel.add(editInvoiceJButton, gc);
+			gc.gridx = 0;
+			gc.gridy = 2;
+			editComboBoxCustomerInvoice = new JComboBox<String>(editCustomerListOfInvoices); //Combo box rather than Text Field
+			editCustomerListOfInvoices.setSelectedItem(editExistingCustomerInvoiceNums.get(0));
+			findInvoiceComponentsJPanel.add(editComboBoxCustomerInvoice, gc);
+			editComboBoxCustomerInvoice.setPreferredSize(d);
+			editComboBoxCustomerInvoice.setMinimumSize(d);
+			gc.gridx = 1;
+			gc.gridy = 2;
+			editCustomerInvoiceJButton.setPreferredSize(d);
+			editCustomerInvoiceJButton.setMinimumSize(d);
+			findInvoiceComponentsJPanel.add(editCustomerInvoiceJButton, gc);
+			
+			//edit by invoice id components
+			editInvoiceComponentsJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			editInvoiceComponentsJPanel.add(new JLabel("Employee ID"), gc);
+			gc.gridx = 1;
+			gc.gridy = 0;
+			editInvoiceComponentsJPanel.add(editInvoiceEmployee, gc);
+			editInvoiceEmployee.setEditable(false);
+			editInvoiceEmployee.setPreferredSize(d);
+			editInvoiceEmployee.setMinimumSize(d);
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editInvoiceComponentsJPanel.add(new JLabel("Customer ID"), gc);
+			gc.gridx = 1;
+			gc.gridy = 1;
+			editInvoiceComponentsJPanel.add(editInvoiceCustomer, gc);
+			editInvoiceCustomer.setEditable(false);
+			editInvoiceCustomer.setPreferredSize(d);
+			editInvoiceCustomer.setMinimumSize(d);
+			gc.gridx = 0;
+			gc.gridy = 2;
+			editInvoiceComponentsJPanel.add(new JLabel("Total"), gc);
+			gc.gridx = 1;
+			gc.gridy = 2;
+			editInvoiceComponentsJPanel.add(editInvoiceAmount, gc);
+			editInvoiceAmount.setPreferredSize(d);
+			editInvoiceAmount.setMinimumSize(d);
+			gc.gridx = 0;
+			gc.gridy = 3;
+			editInvoiceComponentsJPanel.add(editPayStatus, gc);
+			editPayStatus.setPreferredSize(d);
+			editPayStatus.setMinimumSize(d);
+			editPayStatus.setEditable(false);
+			gc.gridx = 1;
+			gc.gridy = 3;
+			editInvoiceComponentsJPanel.add(payInvoiceJButton, gc);
+			payInvoiceJButton.setPreferredSize(d);
+			payInvoiceJButton.setMinimumSize(d);
+			payInvoiceJButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					String s = (String)editComboBoxInvoice.getSelectedItem();
+					int id = Integer.parseInt( s );
+					for(Invoice invoice: invoices){
+						if(invoice.getId() == id){
+							invoice.setPaid(true);
+						}
 					}
+					JOptionPane.showMessageDialog(null, "Paid!");
+					editPayStatus.setForeground(Color.BLACK);
+					editInvoiceJButton.doClick();		
 				}
-				JOptionPane.showMessageDialog(null, "Paid!");
-				editCustomerInvoiceJButton.doClick();		
-				}
-		});
-		customerInvoiceJTextArea.setEditable(false);
-		allInvoicesTotalJTextField.setEditable(false);
-		editInvoiceComponentsJPanel.setLayout(new GridLayout(5,2));
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
-		editInvoiceComponentsJPanel.add(editInvoiceId);
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Employee ID"));
-		editInvoiceComponentsJPanel.add(editInvoiceEmployee);
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
-		editInvoiceComponentsJPanel.add(editInvoiceCustomer);
-		editInvoiceComponentsJPanel.add(new JLabel("Total"));
-		editInvoiceComponentsJPanel.add(editInvoiceAmount);
-		editInvoiceComponentsJPanel.add(editPayStatus);
-		editPayStatus.setEditable(false);
-		editInvoiceComponentsJPanel.add(payInvoiceJButton);
-		payInvoiceJButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				String s = (String)editComboBoxInvoice.getSelectedItem();
-				int id = Integer.parseInt( s );
-				for(Invoice invoice: invoices){
-					if(invoice.getId() == id){
-						invoice.setPaid(true);
+			});
+	
+			//show in jscrollpane product details
+			gc.gridx = 0;
+			gc.gridy = 0;
+			JScrollPane invoiceProductsJScrollPane = new JScrollPane(productInvoiceJTextArea);
+			invoiceProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
+			editInvoiceProductsComponentsJPanel.setLayout(new GridLayout(1,2));
+			productInvoiceJTextArea.setEditable(false);
+			
+			//save and delete buttons
+			saveInvoiceComponentsJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			saveInvoiceComponentsJPanel.add(saveInvoiceJButton, gc);
+			saveInvoiceJButton.setPreferredSize(d);
+			saveInvoiceJButton.setMinimumSize(d);
+			gc.gridx = 1;
+			gc.gridy = 0;
+			saveInvoiceComponentsJPanel.add(deleteInvoiceJButton, gc);
+			deleteInvoiceJButton.setPreferredSize(d);
+			deleteInvoiceJButton.setMinimumSize(d);
+			deleteInvoiceJButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					int index=0;
+					String s = (String)editComboBoxInvoice.getSelectedItem();
+					int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
+					int id = Integer.parseInt( s );
+					for(Invoice invoice: invoices){
+						if(invoice.getId() == id){
+							index = invoices.indexOf(invoice);
+						}
 					}
+					invoices.remove(index);
+					JOptionPane.showMessageDialog(null, "Deleted!");
+					editComboBoxInvoice.removeItemAt(comboIndex);
+					editCustomerInvoiceComponentsJPanel.setVisible(false);
+					editInvoiceComponentsJPanel.setVisible(false);
+					saveInvoiceComponentsJPanel.setVisible(false);
+					editInvoiceProductsComponentsJPanel.setVisible(false);
 				}
-				JOptionPane.showMessageDialog(null, "Paid!");
-				editPayStatus.setForeground(Color.BLACK);
-				editInvoiceJButton.doClick();		
-			}
-		});
-		JScrollPane invoiceProductsJScrollPane = new JScrollPane(productInvoiceJTextArea);
-		invoiceProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
-		editInvoiceProductsComponentsJPanel.setLayout(new GridLayout(1,2));
-		productInvoiceJTextArea.setEditable(false);
-		saveInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
-		saveInvoiceComponentsJPanel.add(saveInvoiceJButton);
-		saveInvoiceComponentsJPanel.add(deleteInvoiceJButton);
-		deleteInvoiceJButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				int index=0;
-				String s = (String)editComboBoxInvoice.getSelectedItem();
-				int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
-				int id = Integer.parseInt( s );
-				for(Invoice invoice: invoices){
-					if(invoice.getId() == id){
-						index = invoices.indexOf(invoice);
+			});
+				
+			//edit by customer components
+			editCustomerInvoiceComponentsJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			JScrollPane customerInvoiceJScrollPane = new JScrollPane(customerInvoiceJTextArea);
+			customerInvoiceJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			editCustomerInvoiceComponentsJPanel.add(customerInvoiceJScrollPane, gc);
+			editInvoiceByCustComponents.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			editInvoiceByCustComponents.add(new JLabel("Total owed on all invoices:"), gc);
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editInvoiceByCustComponents.add(allInvoicesTotalJTextField, gc);
+			allInvoicesTotalJTextField.setPreferredSize(d);
+			allInvoicesTotalJTextField.setMinimumSize(d);
+			gc.gridx = 0;
+			gc.gridy = 2;
+			editInvoiceByCustComponents.add(payAllInvoicesJButton, gc);
+			payAllInvoicesJButton.setPreferredSize(d);
+			payAllInvoicesJButton.setMinimumSize(d);
+			gc.gridx = 1;
+			gc.gridy = 0;
+			editCustomerInvoiceComponentsJPanel.add(editInvoiceByCustComponents, gc);	
+			payAllInvoicesJButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+					int id = Integer.parseInt( s );
+					for(Invoice invoice: invoices){
+						if(id == invoice.getCustomer().getCustId() ){
+							invoice.setPaid(true);
+						}
 					}
-				}
-				invoices.remove(index);
-				JOptionPane.showMessageDialog(null, "Deleted!");
-				editComboBoxInvoice.removeItemAt(comboIndex);
-				editCustomerInvoiceComponentsJPanel.setVisible(false);
-				editInvoiceComponentsJPanel.setVisible(false);
-				saveInvoiceComponentsJPanel.setVisible(false);
-				editInvoiceProductsComponentsJPanel.setVisible(false);
-			}
-		});
-		editInvJPanel.setLayout(new GridLayout(5,3));
-		editInvJPanel.add(findInvoiceComponentsJPanel);
-		editInvJPanel.add(editInvoiceComponentsJPanel);
-		editInvJPanel.add(editInvoiceProductsComponentsJPanel);
-		editInvJPanel.add(saveInvoiceComponentsJPanel);
-		editInvJPanel.add(editCustomerInvoiceComponentsJPanel);
-		editInvoiceProductsComponentsJPanel.setVisible(false);
-		editCustomerInvoiceComponentsJPanel.setVisible(false);
-		editInvoiceComponentsJPanel.setVisible(false);
-		saveInvoiceComponentsJPanel.setVisible(false);
-		EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
-		editInvoiceJButton.addActionListener(eib);
-		EditCustomerInvoiceButtonHandler ecib = new EditCustomerInvoiceButtonHandler();
-		editCustomerInvoiceJButton.addActionListener(ecib);
-		SaveButtonHandler sbh = new SaveButtonHandler();
-		saveInvoiceJButton.addActionListener(sbh);
+					JOptionPane.showMessageDialog(null, "Paid!");
+					editCustomerInvoiceJButton.doClick();		
+					}
+			});
+			customerInvoiceJTextArea.setEditable(false);
+			allInvoicesTotalJTextField.setEditable(false);
+				
+			//whole panel
+			editInvJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			editInvJPanel.add(findInvoiceComponentsJPanel, gc);
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editInvJPanel.add(editInvoiceComponentsJPanel, gc);
+			gc.gridx = 0;
+			gc.gridy = 2;
+			editInvJPanel.add(editInvoiceProductsComponentsJPanel, gc);
+			gc.gridx = 0;
+			gc.gridy = 3;
+			editInvJPanel.add(saveInvoiceComponentsJPanel, gc);
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editInvJPanel.add(editCustomerInvoiceComponentsJPanel, gc);
+			editInvoiceProductsComponentsJPanel.setVisible(false);
+			editCustomerInvoiceComponentsJPanel.setVisible(false);
+			editInvoiceComponentsJPanel.setVisible(false);
+			saveInvoiceComponentsJPanel.setVisible(false);
+			EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
+			editInvoiceJButton.addActionListener(eib);
+			EditCustomerInvoiceButtonHandler ecib = new EditCustomerInvoiceButtonHandler();
+			editCustomerInvoiceJButton.addActionListener(ecib);
+			SaveButtonHandler sbh = new SaveButtonHandler();
+			saveInvoiceJButton.addActionListener(sbh);
 		
 		//====================================================================================
 		//set up order panels
@@ -3877,30 +3954,36 @@ public class RetailGUI extends JFrame{
 
 	
 
-	//Handler for edit invoice by id button
 	private class EditInvoiceButtonHandler implements ActionListener{
 		public void actionPerformed( ActionEvent e){//handler starts
 			int id = 0;
 			String s = (String)editComboBoxInvoice.getSelectedItem();
-			id = Integer.parseInt( s );
+			if(!s.equals("Select")){
+				id = Integer.parseInt( s );
+			}
 			productInvoiceJTextArea.setText("Product Details\n");
 			int invoiceID = verifyInvoiceID(id);
 			if(invoiceID == 1){
 				for(Invoice invoice: invoices){
 					if(id == invoice.getId()){
+						if(invoice.isPaid()){
+							editInvoiceAmount.setEditable(false);
+						}
+						if(invoice.isPaid() == false){
+							editInvoiceAmount.setEditable(true);
+						}
 						editCustomerInvoiceComponentsJPanel.setVisible(false);
 						editInvoiceComponentsJPanel.setVisible(true);
 						saveInvoiceComponentsJPanel.setVisible(true);
 						editInvoiceProductsComponentsJPanel.setVisible(true);
-						editInvoiceId.setText(Integer.toString(id));
 						editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
 						editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
 						for(InvoiceProduct ip: invoice.getInvoiceProducts()){
-									s = "\nProduct Title: " + ip.getProduct().getTitle() + 
-											"     ||    Quantity: " + Integer.toString(ip.getQuantity());
-									productInvoiceJTextArea.append(s);								
+							s = "\nId: " + ip.getProduct().getProductCode() + ", Title: " + ip.getProduct().getTitle() + 
+									", Quantity: " + Integer.toString(ip.getQuantity());
+							productInvoiceJTextArea.append(s);								
 							}	
-						editInvoiceAmount.setText(Double.toString(invoice.getTotalInvoicePrice()));
+						editInvoiceAmount.setText( new String(String.format("%.2f", invoice.getTotalInvoicePrice())));
 						if(invoice.isPaid() == false){
 							editPayStatus.setText("Unpaid");
 							editPayStatus.setForeground(Color.RED);
@@ -3920,6 +4003,7 @@ public class RetailGUI extends JFrame{
 				saveInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceProductsComponentsJPanel.setVisible(false);
 			}
+			productInvoiceJTextArea.setCaretPosition(0);
 		}
 	}
 	public int verifyInvoiceID(int id) {
@@ -4179,121 +4263,97 @@ public class RetailGUI extends JFrame{
 		}
 						
 		//Handler for pay invoices by customer button
-		private class EditCustomerInvoiceButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){//handler starts
-					int count = 0, count1 = 0;;
-					String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
-					int id = Integer.parseInt( s );
-					double total = 0;
-					String totalString = "";
-					int customerID = 1;
-					for(Customer customer: customers){
-						if(id == customer.getCustId()){
-							count1++;
-							customerID = 1;
-						}
-					}	
-					if(count1 == 0){
-						customerID = 2;
-					}
-					if(customerID == 1){
-						editCustomerInvoiceComponentsJPanel.setVisible(true);
-						editInvoiceComponentsJPanel.setVisible(false);
-						saveInvoiceComponentsJPanel.setVisible(false);
-						editInvoiceProductsComponentsJPanel.setVisible(false);
-						customerInvoiceJTextArea.setText("Unpaid Invoices: ");
-						for(Invoice invoice: invoices){
-							if(id == invoice.getCustomer().getCustId() ){
-								if(invoice.isPaid() == false){
-									s = "\nInvoice Id : " + invoice.getId() + 
-											"\nDate: " + sdf.format(invoice.getInvoiceDate())+ "\nTotal: " + 
-											invoice.getTotalInvoicePrice() + "\n";
-									customerInvoiceJTextArea.append(s);
-									total = total + invoice.getTotalInvoicePrice();
-									count++;								
-								}
+				private class EditCustomerInvoiceButtonHandler implements ActionListener{
+					public void actionPerformed( ActionEvent e){//handler starts
+							int count = 0, count1 = 0;
+							int id = 0;
+							String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+							if(!s.equals("Select")){
+								id = Integer.parseInt( s );
 							}
-						}
-						if(count == 0){
-							JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
-							editCustomerInvoiceComponentsJPanel.setVisible(false);
-						}
-						else{
-							totalString = Double.toString(total);
-							allInvoicesTotalJTextField.setText(totalString);
-						}						
-					}
-					else if(customerID == 2){
-						//no customer id match
-						JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-						editCustomerInvoiceComponentsJPanel.setVisible(false);
-						editInvoiceComponentsJPanel.setVisible(false);
-						saveInvoiceComponentsJPanel.setVisible(false);
-						editInvoiceProductsComponentsJPanel.setVisible(false);
-					}
-				}
-			}
-						
-		//handler for save button
-		private class SaveButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){
-				int invId = 0;						
-				int empId = 0;
-				int custId = 0;
-				int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
-				String s = (String)editComboBoxInvoice.getSelectedItem();
-				int currentId = Integer.parseInt( s );
-				int count1 = 0, count2 = 0;
-				Employee emp = employees.get(0);
-				Customer cust = customers.get(0);
-				try{
-					invId = Integer.parseInt(editInvoiceId.getText().trim());
-					empId = Integer.parseInt(editInvoiceEmployee.getText().trim());
-					custId = Integer.parseInt(editInvoiceCustomer.getText().trim());
-				}
-				catch(NumberFormatException nfe){
-					invalidId();
-				}						
-				for(Employee employee: employees){
-					if(empId == employee.getEmployeeId()){
-						emp = employee;
-						count1++;
-					}
-				}						
-				for(Customer customer: customers){
-					if(custId == customer.getCustId()){
-						cust = customer;
-						count2++;
-					}
-				}											
-				if (count1 != 0 && count2 != 0){
-					for(Invoice invoice: invoices){
-						if(currentId == invoice.getId()){
-							invoice.setId(invId);
-							invoice.setEmployee(emp);
-							invoice.setCustomer(cust);
+							double total = 0;
+							int customerID = 1;
+							for(Customer customer: customers){
+								if(id == customer.getCustId()){
+									count1++;
+									customerID = 1;
+								}
+							}	
+							if(count1 == 0){
+								customerID = 2;
+							}
+							if(customerID == 1){
+								editCustomerInvoiceComponentsJPanel.setVisible(true);
+								editInvoiceComponentsJPanel.setVisible(false);
+								saveInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceProductsComponentsJPanel.setVisible(false);
+								customerInvoiceJTextArea.setText("Unpaid Invoices:");
+								for(Invoice invoice: invoices){
+									if(id == invoice.getCustomer().getCustId() ){
+										if(invoice.isPaid() == false){
+											s = "\n\nInvoice Id : " + invoice.getId() + 
+													"\nDate: " + sdf.format(invoice.getInvoiceDate())+ "\nTotal: ";
+											customerInvoiceJTextArea.append(s);
+											customerInvoiceJTextArea.append(new String(String.format("%.2f", invoice.getTotalInvoicePrice())));
+											total = total + invoice.getTotalInvoicePrice();
+											count++;								
+										}
+									}
+								}
+								if(count == 0){
+									JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
+									editCustomerInvoiceComponentsJPanel.setVisible(false);
+								}
+								else{
+									allInvoicesTotalJTextField.setText( new String(String.format("%.2f", total)));
+								}						
+							}
+							else if(customerID == 2){
+								//no customer id match
+								JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+								editCustomerInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceComponentsJPanel.setVisible(false);
+								saveInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceProductsComponentsJPanel.setVisible(false);
+							}
+							customerInvoiceJTextArea.setCaretPosition(0);
 						}
 					}
-					JOptionPane.showMessageDialog(null, "Updated!");
-					editComboBoxInvoice.removeAllItems();
-					fillComboBox();
-					editComboBoxInvoice.setSelectedItem(editExistingInvoiceNums.get(comboIndex));
-					editInvoiceJButton.doClick();
-				}
-				else if(count1 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Employee Id!");
-					editInvoiceJButton.doClick();
-				}
-				else if(count2 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Customer Id!");
-					editInvoiceJButton.doClick();
-				}
-			}
-			public void invalidId(){
-				JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
-				editInvoiceJButton.doClick();
-			}
-		}// End handler for save button
+								
+				//handler for save invoice button
+				//TODO save invoice
+				private class SaveButtonHandler implements ActionListener{
+					public void actionPerformed( ActionEvent e){
+						double total = 0;						
+						int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
+						String s = (String)editComboBoxInvoice.getSelectedItem();
+						int currentId = Integer.parseInt( s );
+						int count1 = 0, count2 = 0;
+						Employee emp = employees.get(0);
+						Customer cust = customers.get(0);
+						try{
+							total = Double.parseDouble(editInvoiceAmount.getText().trim());
+						}
+						catch(NumberFormatException nfe){
+							invalidId();
+						}																	
+						for(Invoice invoice: invoices){
+							if(currentId == invoice.getId()){
+								invoice.setTotalInvoicePrice(total);
+								}
+						}
+							JOptionPane.showMessageDialog(null, "Updated!");
+							editComboBoxInvoice.removeAllItems();
+							fillComboBox();
+							editComboBoxInvoice.setSelectedItem(editExistingInvoiceNums.get(comboIndex));
+							editInvoiceJButton.doClick();
+					}
+
+					public void invalidId(){
+						JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
+						editInvoiceJButton.doClick();
+					}
+				}// End handler for save button
 		
 		public boolean invoiceNumberUnique(int id, ArrayList<Invoice> invoices){
 			int count = 0;
