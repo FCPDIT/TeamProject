@@ -3548,24 +3548,6 @@ public class RetailGUI extends JFrame{
         viewTableButtonHandler vtbh = new viewTableButtonHandler();
         pLViewButton.addActionListener(vtbh);
         proflossJPanel.add(pLComponentsJPanel, gbc);
-        
-        lineChartJButton.setPreferredSize(d);
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		pLComponentsJPanel.add(lineChartJButton, gbc);
-		
-		lineChartJButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				try{
-					JFreeChart lineChart = ChartFactory.createLineChart("Income and Expenditure","Month","Value",line_chart_dataset,PlotOrientation.VERTICAL,true,true,false);
-					ChartFrame frame = new ChartFrame("Income and Expenditure", lineChart);
-					frame.setBounds(0, 0, 600, 600);
-					frame.setVisible(true);
-				}catch (Exception i){
-		             System.out.println(i);
-		         }
-			}
-		});
 	
 		//Graph Information Panel
 		graphJPanel.setLayout(new GridBagLayout());
@@ -3576,7 +3558,8 @@ public class RetailGUI extends JFrame{
 				highestSellingButton = new JButton();
 				graphgc.gridx = 1;
 				graphgc.gridy = 1;
-				//highestSellingButton.setPreferredSize(d);
+				highestSellingButton.setMinimumSize(d);
+				highestSellingButton.setPreferredSize(d);
 				graphJPanel.add(highestSellingButton,graphgc);
 				try{
 					highestSellingButton.setIcon(new ImageIcon("src\\images\\top.png"));
@@ -3658,6 +3641,7 @@ public class RetailGUI extends JFrame{
 				lowsetsellingButton = new JButton("Lowest selling");
 				graphgc.gridx = 2;
 				graphgc.gridy = 1;
+				lowsetsellingButton.setMinimumSize(d);
 				lowsetsellingButton.setPreferredSize(d);
 				graphJPanel.add(lowsetsellingButton,graphgc);
 				lowsetsellingButton.addActionListener(new ActionListener() {
@@ -3731,7 +3715,24 @@ public class RetailGUI extends JFrame{
 						frame.setSize(850, 600);
 					}
 				});
+				lineChartJButton.setMinimumSize(d);
+			    lineChartJButton.setPreferredSize(d);
+			    graphgc.gridx = 1;
+				graphgc.gridy = 2;
+				graphJPanel.add(lineChartJButton, graphgc);
 				
+				lineChartJButton.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						try{
+							JFreeChart lineChart = ChartFactory.createLineChart("Income and Expenditure","Month","Value",line_chart_dataset,PlotOrientation.VERTICAL,true,true,false);
+							ChartFrame frame = new ChartFrame("Income and Expenditure", lineChart);
+							frame.setBounds(0, 0, 600, 600);
+							frame.setVisible(true);
+						}catch (Exception i){
+				             System.out.println(i);
+				         }
+					}
+				});
 				//===========================================================================================
 		
 		
