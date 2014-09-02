@@ -46,6 +46,7 @@ import javax.swing.JTextField;
 import javax.swing.RowSorter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SortOrder;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,7 +54,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -542,6 +542,7 @@ public class RetailGUI extends JFrame{
 	public RetailGUI() {
 		//TODO Jump to Constructor
 		createInvoices();
+		//setDesign();
 	
 		
 		//Line Chart data sets
@@ -4498,6 +4499,16 @@ public class RetailGUI extends JFrame{
 				    }
 				}
 			}
+		}
+		
+		//Method for setting the Nimbus feel and look
+		public final static void setDesign() {
+			try{
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			}catch(Exception e){
+				System.out.println("Prob with setDesign()");
+			}
+			
 		}
 
 }//End class
