@@ -2668,163 +2668,7 @@ public class RetailGUI extends JFrame{
 				
 			}
 		});
-		//========================== Pie Chart Highest lowest Selling ===============================
-		//TODO high low
-		highestSellingButton = new JButton("Highest selling");
-		gc.gridx = 2;
-		gc.gridy = 4;
-		highestSellingButton.setPreferredSize(d);
-		viewCustomerPanel.add(highestSellingButton,gc);
 		
-		highestSellingButton.addActionListener(new ActionListener() {
-			
-			@SuppressWarnings("rawtypes")
-			@Override
-			public void actionPerformed(ActionEvent ex) {
-				productCodes = findProductCodes();
-				countsHigher = new int[productCodes.size()];
-
-				// count occuernces of each product in the invoices
-				for (Invoice v : invoices) {
-					for(InvoiceProduct inp : v.getInvoiceProducts()){
-					for(int i=0;i<productCodes.size();i++){
-						if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
-							{
-								countsHigher[i]+=inp.getQuantity();
-							}
-						}
-					}
-				}
-				
-				//Filling the hash map
-				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-				for(int i = 0;i<countsHigher.length;i++){
-					hmap.put(productCodes.get(i) + "\n" + products.get(i).getTitle(), countsHigher[i]);
-				}
-				
-				//Sorting the HashMap
-				Map<String, Integer> map = sortByValues(hmap, true);
-				//System.out.println("After sorting: ");
-				Set set2 = map.entrySet();
-				Iterator iterator2 = set2.iterator();
-				int counter = 0;
-				int [] popularValue = new int [topNum];
-				String [] popular = new String [topNum];
-				while (iterator2.hasNext() && counter < topNum) {
-					Map.Entry me2 = (Map.Entry) iterator2.next();
-					//System.out.print(me2.getKey() + " : ");
-					popularValue[counter] = (int) me2.getValue();
-					popular[counter] =  (String) me2.getKey();
-					counter++;
-				}
-				
-				//Fill the data
-				String first = popular[0];
-				String second = popular[1];
-				String third = popular[2];
-				String fourth = popular[3];
-				String fifth = popular[4];
-				
-				int fir = popularValue[0];
-				int sec = popularValue[1];
-				int thir = popularValue[2];
-				int fou = popularValue[3];
-				int fift = popularValue[4];
- 				
-				DefaultPieDataset pieDataset = new DefaultPieDataset();
-				pieDataset.setValue(first, fir);
-				pieDataset.setValue(second, sec);
-				pieDataset.setValue(third, thir);
-				pieDataset.setValue(fourth, fou);
-				pieDataset.setValue(fifth, fift);
-				
-				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Highest Selling", pieDataset, true, true, true); //3D pie chart
-				//PiePlot3D p = (PiePlot3D)chart.getPlot();
-				ChartFrame frame = new ChartFrame("Pie Chart", chart);
-				frame.setVisible(true);
-				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setSize(850, 600);
-			}
-		});
-		
-		lowsetsellingButton = new JButton("Lowest selling");
-		gc.gridx = 3;
-		gc.gridy = 4;
-		lowsetsellingButton.setPreferredSize(d);
-		viewCustomerPanel.add(lowsetsellingButton,gc);
-		lowsetsellingButton.addActionListener(new ActionListener() {
-			
-			@SuppressWarnings("rawtypes")
-			@Override
-			public void actionPerformed(ActionEvent ex) {
-
-				productCodes = findProductCodes();
-				countsLower = new int[productCodes.size()];
-				
-				// count occuernces of each product in the invoices
-				for (Invoice v : invoices) {
-					for(InvoiceProduct inp : v.getInvoiceProducts()){
-					for(int i=0;i<productCodes.size();i++){
-						if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
-							{
-							countsLower[i]+=inp.getQuantity();
-							}
-						}
-					}
-				}
-				
-				//Filling the hash map
-				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-				for(int i = 0;i<countsLower.length;i++){
-					hmap.put(productCodes.get(i) + "\n" + products.get(i).getTitle(), countsLower[i]);
-				}
-				
-				//Sorting the HashMap
-				Map<String, Integer> map = sortByValues(hmap, false);
-				//System.out.println("After sorting: ");
-				Set set2 = map.entrySet();
-				Iterator iterator2 = set2.iterator();
-				int counter = 0;
-				int [] popularValue = new int [topNum];
-				String [] popular = new String [topNum];
-				while (iterator2.hasNext() && counter < topNum) {
-					Map.Entry me2 = (Map.Entry) iterator2.next();
-					//System.out.print(me2.getKey() + " : ");
-					popularValue[counter] = (int) me2.getValue();
-					popular[counter] =  (String) me2.getKey();
-					counter++;
-				}
-				
-				//Fill the data
-				String first = popular[0];
-				String second = popular[1];
-				String third = popular[2];
-				String fourth = popular[3];
-				String fifth = popular[4];
-				
-				int fir = popularValue[0];
-				int sec = popularValue[1];
-				int thir = popularValue[2];
-				int fou = popularValue[3];
-				int fift = popularValue[4];
- 				
-				DefaultPieDataset pieDataset = new DefaultPieDataset();
-				pieDataset.setValue(first, fir);
-				pieDataset.setValue(second, sec);
-				pieDataset.setValue(third, thir);
-				pieDataset.setValue(fourth, fou);
-				pieDataset.setValue(fifth, fift);
-				
-				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Lowest Selling", pieDataset, true, true, true); //3D pie chart
-				//PiePlot3D p = (PiePlot3D)chart.getPlot();
-				ChartFrame frame = new ChartFrame("Pie Chart", chart);
-				frame.setVisible(true);
-				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setSize(850, 600);
-			}
-		});
-		
-		//===========================================================================================
 		
 		//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
 		JButton invoicesPieChart = new JButton(" Paid Vs. Unpaid Invoices");
@@ -3643,6 +3487,169 @@ public class RetailGUI extends JFrame{
 			}
 		});
 	
+		//Graph Information Panel
+		graphJPanel.setLayout(new GridBagLayout());
+		GridBagConstraints graphgc = new GridBagConstraints();
+		graphgc.insets = new Insets(5,5,5,5);
+		//========================== Pie Chart Highest lowest Selling ===============================
+				//TODO high low
+				highestSellingButton = new JButton("Highest selling");
+				graphgc.gridx = 1;
+				graphgc.gridy = 1;
+				highestSellingButton.setPreferredSize(d);
+				graphJPanel.add(highestSellingButton,graphgc);
+				
+				highestSellingButton.addActionListener(new ActionListener() {
+					
+					@SuppressWarnings("rawtypes")
+					@Override
+					public void actionPerformed(ActionEvent ex) {
+						productCodes = findProductCodes();
+						countsHigher = new int[productCodes.size()];
+
+						// count occuernces of each product in the invoices
+						for (Invoice v : invoices) {
+							for(InvoiceProduct inp : v.getInvoiceProducts()){
+							for(int i=0;i<productCodes.size();i++){
+								if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
+									{
+										countsHigher[i]+=inp.getQuantity();
+									}
+								}
+							}
+						}
+						
+						//Filling the hash map
+						HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+						for(int i = 0;i<countsHigher.length;i++){
+							hmap.put(productCodes.get(i) + "\n" + products.get(i).getTitle(), countsHigher[i]);
+						}
+						
+						//Sorting the HashMap
+						Map<String, Integer> map = sortByValues(hmap, true);
+						//System.out.println("After sorting: ");
+						Set set2 = map.entrySet();
+						Iterator iterator2 = set2.iterator();
+						int counter = 0;
+						int [] popularValue = new int [topNum];
+						String [] popular = new String [topNum];
+						while (iterator2.hasNext() && counter < topNum) {
+							Map.Entry me2 = (Map.Entry) iterator2.next();
+							//System.out.print(me2.getKey() + " : ");
+							popularValue[counter] = (int) me2.getValue();
+							popular[counter] =  (String) me2.getKey();
+							counter++;
+						}
+						
+						//Fill the data
+						String first = popular[0];
+						String second = popular[1];
+						String third = popular[2];
+						String fourth = popular[3];
+						String fifth = popular[4];
+						
+						int fir = popularValue[0];
+						int sec = popularValue[1];
+						int thir = popularValue[2];
+						int fou = popularValue[3];
+						int fift = popularValue[4];
+		 				
+						DefaultPieDataset pieDataset = new DefaultPieDataset();
+						pieDataset.setValue(first, fir);
+						pieDataset.setValue(second, sec);
+						pieDataset.setValue(third, thir);
+						pieDataset.setValue(fourth, fou);
+						pieDataset.setValue(fifth, fift);
+						
+						JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Highest Selling", pieDataset, true, true, true); //3D pie chart
+						//PiePlot3D p = (PiePlot3D)chart.getPlot();
+						ChartFrame frame = new ChartFrame("Pie Chart", chart);
+						frame.setVisible(true);
+						//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+						frame.setSize(850, 600);
+					}
+				});
+				
+				lowsetsellingButton = new JButton("Lowest selling");
+				graphgc.gridx = 2;
+				graphgc.gridy = 1;
+				lowsetsellingButton.setPreferredSize(d);
+				graphJPanel.add(lowsetsellingButton,graphgc);
+				lowsetsellingButton.addActionListener(new ActionListener() {
+					
+					@SuppressWarnings("rawtypes")
+					@Override
+					public void actionPerformed(ActionEvent ex) {
+
+						productCodes = findProductCodes();
+						countsLower = new int[productCodes.size()];
+						
+						// count occuernces of each product in the invoices
+						for (Invoice v : invoices) {
+							for(InvoiceProduct inp : v.getInvoiceProducts()){
+							for(int i=0;i<productCodes.size();i++){
+								if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
+									{
+									countsLower[i]+=inp.getQuantity();
+									}
+								}
+							}
+						}
+						
+						//Filling the hash map
+						HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+						for(int i = 0;i<countsLower.length;i++){
+							hmap.put(productCodes.get(i) + "\n" + products.get(i).getTitle(), countsLower[i]);
+						}
+						
+						//Sorting the HashMap
+						Map<String, Integer> map = sortByValues(hmap, false);
+						//System.out.println("After sorting: ");
+						Set set2 = map.entrySet();
+						Iterator iterator2 = set2.iterator();
+						int counter = 0;
+						int [] popularValue = new int [topNum];
+						String [] popular = new String [topNum];
+						while (iterator2.hasNext() && counter < topNum) {
+							Map.Entry me2 = (Map.Entry) iterator2.next();
+							//System.out.print(me2.getKey() + " : ");
+							popularValue[counter] = (int) me2.getValue();
+							popular[counter] =  (String) me2.getKey();
+							counter++;
+						}
+						
+						//Fill the data
+						String first = popular[0];
+						String second = popular[1];
+						String third = popular[2];
+						String fourth = popular[3];
+						String fifth = popular[4];
+						
+						int fir = popularValue[0];
+						int sec = popularValue[1];
+						int thir = popularValue[2];
+						int fou = popularValue[3];
+						int fift = popularValue[4];
+		 				
+						DefaultPieDataset pieDataset = new DefaultPieDataset();
+						pieDataset.setValue(first, fir);
+						pieDataset.setValue(second, sec);
+						pieDataset.setValue(third, thir);
+						pieDataset.setValue(fourth, fou);
+						pieDataset.setValue(fifth, fift);
+						
+						JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Lowest Selling", pieDataset, true, true, true); //3D pie chart
+						//PiePlot3D p = (PiePlot3D)chart.getPlot();
+						ChartFrame frame = new ChartFrame("Pie Chart", chart);
+						frame.setVisible(true);
+						//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+						frame.setSize(850, 600);
+					}
+				});
+				
+				//===========================================================================================
+		
+		
 		} //END OF CONSTRUCTOR
 	//TODO - end of constructor
 	
