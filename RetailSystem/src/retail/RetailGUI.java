@@ -881,8 +881,7 @@ public class RetailGUI extends JFrame{
 		
 		employeeJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				for(Employee employ: employees){
-					if(employ.getEmployeeId() != Integer.parseInt(employeeIdField.getText())){
+					if(checkEmployeeDuplicate(employees, Integer.parseInt(employeeIdField.getText()))){
 						Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
 						employees.add(employee);
 						empIdCombo.addItem(employeeIdField.getText());
@@ -892,7 +891,6 @@ public class RetailGUI extends JFrame{
 					}else{
 						JOptionPane.showMessageDialog(null, "Employee Already Exists");
 					}
-				}
 			}
 		});
 		
@@ -1186,21 +1184,19 @@ public class RetailGUI extends JFrame{
 			// function to add a new customer
 			public void actionPerformed(ActionEvent e){
 				try{
-					for(Customer cust: customers){
-						if(cust.getCustId() != Integer.parseInt(custIdJTextField.getText())){
-							Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
-								custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
-								custPhoneJTextField.getText());
-							customers.add(customer);
-							custIdCombo.addItem(Integer.toString(customer.getCustId()));
-							custNameCombo.addItem(customer.getCustName());
-							editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
-							JOptionPane.showMessageDialog(null, "New Customer Added");
-							editCustomerListOfInvoices.addElement(custIdJTextField.getText());
-						}else{
+					if(checkCustomerDuplicate(customers, Integer.parseInt(custIdJTextField.getText())) == true){
+						Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
+							custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
+							custPhoneJTextField.getText());
+						customers.add(customer);
+						custIdCombo.addItem(Integer.toString(customer.getCustId()));
+						custNameCombo.addItem(customer.getCustName());
+						editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
+						JOptionPane.showMessageDialog(null, "New Customer Added");
+						editCustomerListOfInvoices.addElement(custIdJTextField.getText());
+					}else{
 							JOptionPane.showMessageDialog(null, "Customer Already Exists");
 						}
-					}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
@@ -1507,8 +1503,7 @@ public class RetailGUI extends JFrame{
 			// function to add a new supplier
 			public void actionPerformed(ActionEvent e){
 				try{	
-					for(Supplier supp: suppliers){
-						if(supp.getId() != Integer.parseInt(supplierIdJTextField.getText())){
+						if(checkSupplierDuplicate(suppliers, Integer.parseInt(supplierIdJTextField.getText())) == true){
 							Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
 									supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
 							suppliers.add(supplier);
@@ -1519,7 +1514,6 @@ public class RetailGUI extends JFrame{
 						}else{
 							JOptionPane.showMessageDialog(null, "Supplier Already Exists");
 						}
-					}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
@@ -4348,6 +4342,33 @@ public class RetailGUI extends JFrame{
 			
 			return returnCodeNames;
 			
+		}
+		public boolean checkCustomerDuplicate(ArrayList<Customer> customers, int id){
+			boolean passed = true;
+			for(Customer customer: customers){
+				if(customer.getCustId() == id){
+					 passed = false;
+				}
+			}
+			return passed;
+		}
+		public boolean checkSupplierDuplicate(ArrayList<Supplier> suppliers, int id){
+			boolean passed = true;
+			for(Supplier supplier: suppliers){
+				if(supplier.getId() == id){
+					 passed = false;
+				}
+			}
+			return passed;
+		}
+		public boolean checkEmployeeDuplicate(ArrayList<Employee> employees, int id){
+			boolean passed = true;
+			for(Employee employee: employees){
+				if(employee.getEmployeeId() == id){
+					 passed = false;
+				}
+			}
+			return passed;
 		}
 		//dropdown functions
 		public void empIDPopulate(JComboBox<String> combo){
