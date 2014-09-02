@@ -881,7 +881,7 @@ public class RetailGUI extends JFrame{
 		
 		employeeJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-					if(checkEmployeeDuplicate(employees, Integer.parseInt(employeeIdField.getText()))){
+					if(checkEmployeeDuplicate(employees, Integer.parseInt(employeeIdField.getText())) == true){
 						Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
 						employees.add(employee);
 						empIdCombo.addItem(employeeIdField.getText());
