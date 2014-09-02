@@ -2676,30 +2676,21 @@ public class RetailGUI extends JFrame{
 		gc.gridx =1;
 		gc.gridy= 3;
 		viewCustomerPanel.add(invoicesPieChart,gc);
-		invoicesPieChart.setPreferredSize(new Dimension(200,30));
+		invoicesPieChart.setPreferredSize(d);
 		invoicesPieChart.addActionListener(new ActionListener(){
 		
 			public void actionPerformed(ActionEvent e){
-				//int paid = invoice.viewUnPaidInvoice(invoices);
+				
 				int count=0;
 				int paid = invoice.countPaidInvoices(count, invoices);
 				int unpaid = (invoices.size()-paid);
-				//invoice.countPaidInvoices(, invoices);
-				//pieDataset.setValue("Paid", invoice.countPaidInvoices(buttonHeight, invoices));
 				pieDataset.setValue("Paid",paid);
 				pieDataset.setValue("UnPaid",unpaid);
-				//pieDataset.setValue("Three", new Integer(30));
-				//pieDataset.setValue("Four", new Integer(40));
 				
 				JFreeChart chart = ChartFactory.createPieChart3D("Invoice Review", pieDataset, true,true,true);
-				//PiePlot3D p=(PiePlot3D)chart.getPlot();
-			//	ChartPanel chPanel = new ChartPanel(chart);
-			//	chPanel.setPreferredSize(new Dimension(785, 440));
-			//	chPanel.setMouseWheelEnabled(true);
-			//	viewCustomerPanel.add(chPanel);
 				ChartFrame frame = new ChartFrame("Pie Chart", chart);
 				frame.setVisible(true);
-				frame.setSize(450,500);
+				frame.setSize(700,600);
 			}
 			
 		});

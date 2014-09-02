@@ -307,10 +307,7 @@ public class Invoice  implements Comparable<Invoice>  {
 					//return count;
 					
 				}
-				else{
-					
-					return count;
-				}
+				
 			}
 			return count;
 			}
