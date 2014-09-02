@@ -125,6 +125,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editEmployeeJPanel = new JPanel();
 	
 	private JPanel proflossJPanel = new JPanel();
+	private JPanel graphJPanel = new JPanel();
 	
 	//login components
 	private JPanel loginComponentsJPanel = new JPanel();
@@ -687,6 +688,7 @@ public class RetailGUI extends JFrame{
 		accessJTabbedPane.add("Edit Employee", editEmployeeJPanel);
 		
 		proflossJTabbedPane.add("Profit and Loss Table", proflossJPanel);
+		proflossJTabbedPane.add("Graph Information", graphJPanel);
 		
 		/*remove comment marks to run login function
 
