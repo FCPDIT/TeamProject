@@ -881,14 +881,19 @@ public class RetailGUI extends JFrame{
 		
 		employeeJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
-				employees.add(employee);
-				empIdCombo.addItem(employeeIdField.getText());
-				empNameCombo.addItem(employeeNameField.getText());
-				viewEmpIdCombo.addItem(employeeIdField.getText());
-				JOptionPane.showMessageDialog(null, "Employee Successfully Created");
+				for(Employee employ: employees){
+					if(employ.getEmployeeId() != Integer.parseInt(employeeIdField.getText())){
+						Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
+						employees.add(employee);
+						empIdCombo.addItem(employeeIdField.getText());
+						empNameCombo.addItem(employeeNameField.getText());
+						viewEmpIdCombo.addItem(employeeIdField.getText());
+						JOptionPane.showMessageDialog(null, "Employee Successfully Created");
+					}else{
+						JOptionPane.showMessageDialog(null, "Employee Already Exists");
+					}
+				}
 			}
-
 		});
 		
 		viewEmpIdButton.addActionListener(new ActionListener(){
@@ -1181,15 +1186,21 @@ public class RetailGUI extends JFrame{
 			// function to add a new customer
 			public void actionPerformed(ActionEvent e){
 				try{
-					Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
-						custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
-						custPhoneJTextField.getText());
-					customers.add(customer);
-					custIdCombo.addItem(Integer.toString(customer.getCustId()));
-					custNameCombo.addItem(customer.getCustName());
-					editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
-					JOptionPane.showMessageDialog(null, "New Customer Added");
-					editCustomerListOfInvoices.addElement(custIdJTextField.getText());
+					for(Customer cust: customers){
+						if(cust.getCustId() != Integer.parseInt(custIdJTextField.getText())){
+							Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
+								custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
+								custPhoneJTextField.getText());
+							customers.add(customer);
+							custIdCombo.addItem(Integer.toString(customer.getCustId()));
+							custNameCombo.addItem(customer.getCustName());
+							editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
+							JOptionPane.showMessageDialog(null, "New Customer Added");
+							editCustomerListOfInvoices.addElement(custIdJTextField.getText());
+						}else{
+							JOptionPane.showMessageDialog(null, "Customer Already Exists");
+						}
+					}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
@@ -1496,13 +1507,19 @@ public class RetailGUI extends JFrame{
 			// function to add a new supplier
 			public void actionPerformed(ActionEvent e){
 				try{	
-					Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
-							supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
-					suppliers.add(supplier);
-					JOptionPane.showMessageDialog(null, "New Supplier Added");
-					suppIdCombo.addItem(supplierIdJTextField.getText());
-					suppNameCombo.addItem(supplierNameJTextField.getText());
-					editSuppIdCombo.addItem(supplierIdJTextField.getText());
+					for(Supplier supp: suppliers){
+						if(supp.getId() != Integer.parseInt(supplierIdJTextField.getText())){
+							Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
+									supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
+							suppliers.add(supplier);
+							JOptionPane.showMessageDialog(null, "New Supplier Added");
+							suppIdCombo.addItem(supplierIdJTextField.getText());
+							suppNameCombo.addItem(supplierNameJTextField.getText());
+							editSuppIdCombo.addItem(supplierIdJTextField.getText());
+						}else{
+							JOptionPane.showMessageDialog(null, "Supplier Already Exists");
+						}
+					}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
