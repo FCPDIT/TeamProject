@@ -3493,12 +3493,17 @@ public class RetailGUI extends JFrame{
 		graphgc.insets = new Insets(5,5,5,5);
 		//========================== Pie Chart Highest lowest Selling ===============================
 				//TODO high low
-				highestSellingButton = new JButton("Highest selling");
+				highestSellingButton = new JButton("Highest Selling");
 				graphgc.gridx = 1;
 				graphgc.gridy = 1;
 				highestSellingButton.setPreferredSize(d);
 				graphJPanel.add(highestSellingButton,graphgc);
-				
+				/*try{
+					highestSellingButton.setIcon(new ImageIcon("C:\\Users\\marc\\Desktop\\GitHubRepo\\TeamProject\\RetailSystem\\src\\images\\top.png"));
+					
+					}catch(Exception ex){
+						System.out.println("not working");
+					}*/
 				highestSellingButton.addActionListener(new ActionListener() {
 					
 					@SuppressWarnings("rawtypes")
