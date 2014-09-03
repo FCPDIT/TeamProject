@@ -2629,7 +2629,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 1;
 		viewCustomerPanel.add(invIdlbl,gc);
-		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
+		comboBoxInvoice = new JComboBox<String>(editListOfInvoices); //Combo box rather than Text Field
 		comboBoxInvoice.setPreferredSize(d);
 		listOfInvoices.setSelectedItem("select"); //setting the combo box to the first invoice number
 		gc.gridx = 1;
