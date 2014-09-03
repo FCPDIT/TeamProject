@@ -1978,6 +1978,7 @@ public class RetailGUI extends JFrame{
 					editInvoiceComponentsJPanel.setVisible(false);
 					saveInvoiceComponentsJPanel.setVisible(false);
 					editInvoiceProductsComponentsJPanel.setVisible(false);
+					editListOfInvoices.setSelectedItem("select");
 				}
 			});
 				
@@ -2631,7 +2632,7 @@ public class RetailGUI extends JFrame{
 		viewCustomerPanel.add(invIdlbl,gc);
 		comboBoxInvoice = new JComboBox<String>(editListOfInvoices); //Combo box rather than Text Field
 		comboBoxInvoice.setPreferredSize(d);
-		listOfInvoices.setSelectedItem("select"); //setting the combo box to the first invoice number
+		editListOfInvoices.setSelectedItem("select"); //setting the combo box to the first invoice number
 		gc.gridx = 1;
 		gc.gridy = 1;
 		viewCustomerPanel.add(comboBoxInvoice,gc);
