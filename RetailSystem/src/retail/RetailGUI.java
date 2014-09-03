@@ -486,6 +486,7 @@ public class RetailGUI extends JFrame{
 	private JButton viewOrderViewAllOrdersButton = new JButton("View All");
 	private JButton viewOrderViewReceivedButton = new JButton("View Received Orders");
 	private JButton viewOrderViewUnreceivedButton = new JButton("View Unreceived Order");
+	private JButton viewOrderClearPanelButton = new JButton("Clear Panel");
 	private JLabel viewOrderOrderIdLabel = new JLabel("Order ID: ");
 	private JButton viewOrderOrderIdButton = new JButton("Find order with this ID");	
 	private JLabel viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
@@ -501,6 +502,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editSupplierOrderComponentsJPanel = new JPanel();
 	private JPanel saveOrderComponentsJPanel = new JPanel();
 	private JPanel editOrderProductsComponentsJPanel = new JPanel();
+	private JPanel editOrderBySupplierComponentsJPanel = new JPanel();
 	private JComboBox<String> editOrderOrderIdComboBox;
 	private JTextArea supplierOrderJTextArea = new JTextArea(10,20);
 	private JTextArea productOrderJTextArea = new JTextArea();
@@ -2176,7 +2178,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String orderId = createOrderOrderIdTextField.getText();
 				String supplierId = (String) createOrderSupplierIdComboBox.getSelectedItem();
-				String productCode = createOrderProductIdTextField.getText();
+				String productCode = (String) createOrderProductIdComboBox.getSelectedItem();
 				String quantity = createOrderQuantityTextField.getText();
 				if((orderId.trim().equals("") || orderId.matches(".*\\D.*")) ||
 						(supplierId.trim().equals("") || supplierId.matches(".*\\D.*")) ||
@@ -2186,7 +2188,7 @@ public class RetailGUI extends JFrame{
 				}else{
 					//disable the other text fields
 					createOrderOrderIdTextField.setEnabled(false);
-					createOrderSupplierIdTextField.setEnabled(false);
+					createOrderSupplierIdComboBox.setEnabled(false);
 					
 					//Add to 'addMoreArrayList'
 					Product p = invoice.returnProductObject(productCode, products);
@@ -2214,7 +2216,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String orderIdString = createOrderOrderIdTextField.getText();
 				String supplierIdString = (String) createOrderSupplierIdComboBox.getSelectedItem();
-				String productCodeString = createOrderProductIdTextField.getText();
+				String productCodeString = (String) createOrderProductIdComboBox.getSelectedItem();
 				String quantityString = createOrderQuantityTextField.getText();
 
 				if((orderIdString.trim().equals("")||orderIdString.matches(".*\\D.*"))
@@ -2255,23 +2257,22 @@ public class RetailGUI extends JFrame{
 								
 								//All checks passed, create Invoice
 								if(addMoreProducts.size()<1){
-								Order singleOrderComplete = new Order(orderId, supplierId, orderProducts);
-								orders.add(singleOrderComplete);
+									Order singleOrderComplete = new Order(orderId, supplierId, orderProducts);
+									orders.add(singleOrderComplete);
 								}else{
-									Order multipleOrder = new Order(orderId, supplierId, orderProducts);
+									Order multipleOrder = new Order(orderId, supplierId, addMoreProducts);
 									orders.add(multipleOrder);
 								}
 								JOptionPane.showMessageDialog(null, "Order complete!");
 								createOrderOrderIdTextField.setEnabled(true);
-								createOrderSupplierIdTextField.setEnabled(true);
+								createOrderSupplierIdComboBox.setEnabled(true);
+								String newOrderIdFromTextField = createOrderOrderIdTextField.getText();
+								listOfOrders.addElement(newOrderIdFromTextField);
 								
 								createOrderOrderIdTextField.setText("");
-								createOrderSupplierIdTextField.setText("");
-								createOrderProductIdTextField.setText("");
 								createOrderQuantityTextField.setText("");
 								createOrderScrollPaneTextArea.setText("");
 								createOrderScrollPaneTextArea.setCaretPosition(0);
-								
 								listOfProductId.setSelectedItem("Select");
 								listOfSuppliers.setSelectedItem("Select");
 								addMoreProducts = new ArrayList<OrderProduct>();
@@ -2349,6 +2350,20 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewOrderTextArea.setText(Order.viewUnreceivedOrders(orders));		
+				viewOrderTextArea.setCaretPosition(0);
+			}
+		});
+		//====
+		//====
+		viewOrderGC.gridx = 0;
+		viewOrderGC.gridy = 4;
+		viewOrderClearPanelButton.setPreferredSize(d);
+		viewOrderClearPanelButton.setMinimumSize(d);
+		viewOrderLeftJPanel.add(viewOrderClearPanelButton, viewOrderGC);
+		viewOrderClearPanelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewOrderTextArea.setText("");		
 				viewOrderTextArea.setCaretPosition(0);
 			}
 		});
@@ -2508,35 +2523,158 @@ public class RetailGUI extends JFrame{
         gc.gridy = 1;
         editOrderOrderIdComboBox = new JComboBox<String> (listOfOrders);
         editOrderOrderIdComboBox.setPreferredSize(d);
+        editOrderOrderIdComboBox.setMinimumSize(d);
         listOfOrders.setSelectedItem("Select");
         findOrderComponentsJPanel.add(editOrderOrderIdComboBox, gc);
-        gc.gridx = 0;
-        gc.gridy = 2;
+        gc.gridx = 1;
+        gc.gridy = 1;
         editOrderJButton.setPreferredSize(d);
+        editOrderOrderIdComboBox.setMinimumSize(d);
         findOrderComponentsJPanel.add(editOrderJButton, gc);
         gc.gridx = 0;
-        gc.gridy = 3;
+        gc.gridy = 2;
         editOrderSupplierIdComboBox = new JComboBox<String> (listOfSuppliers);
-        editOrderSupplierIdComboBox.setPreferredSize(d);
         editOrderSupplierIdComboBox.setSelectedItem("Select");
         findOrderComponentsJPanel.add(editOrderSupplierIdComboBox, gc);
-        gc.gridx = 0;
-        gc.gridy = 4;
+        editOrderSupplierIdComboBox.setPreferredSize(d);
+        editOrderSupplierIdComboBox.setMinimumSize(d);
+        gc.gridx = 1;
+        gc.gridy = 2;
         editSupplierOrderJButton.setPreferredSize(d);
+        editSupplierOrderJButton.setMinimumSize(d);
         findOrderComponentsJPanel.add(editSupplierOrderJButton, gc);
-        editSupplierOrderComponentsJPanel.setLayout(new GridLayout(2,2));
-        editSupplierOrderComponentsJPanel.add(new JLabel("Total owed on all orders:"));
-        editSupplierOrderComponentsJPanel.add(allOrdersTotalJTextField);
+        
+        //edit by order ID components
+        editOrderComponentsJPanel.setLayout(new GridBagLayout());
+        gc.gridx = 0;
+        gc.gridy = 0;
+        editOrderComponentsJPanel.add(new JLabel("Order ID"), gc);
+        gc.gridx = 1;
+        gc.gridy = 0;
+        editOrderComponentsJPanel.add(editOrderId, gc);
+        editOrderId.setEditable(false);
+        editOrderId.setPreferredSize(d);
+        editOrderId.setMinimumSize(d);
+        gc.gridx = 0;
+        gc.gridy = 1;
+        editOrderComponentsJPanel.add(new JLabel("Supplier ID"), gc);
+        gc.gridx = 1;
+        gc.gridy = 1;
+        editOrderComponentsJPanel.add(editOrderSupplier, gc);
+        editOrderSupplier.setEditable(false);
+        editOrderSupplier.setPreferredSize(d);
+        editOrderSupplier.setMinimumSize(d);
+        gc.gridx = 0;
+        gc.gridy = 2;
+        editOrderComponentsJPanel.add(new JLabel("Total"), gc);
+        gc.gridx = 1;
+        gc.gridy = 2;
+        editOrderComponentsJPanel.add(editOrderAmount, gc);
+        editOrderAmount.setPreferredSize(d);
+        editOrderAmount.setMinimumSize(d);
+        gc.gridx = 0;
+        gc.gridy = 3;
+        editOrderComponentsJPanel.add(editOrderReceivedStatus, gc);
+        editOrderReceivedStatus.setPreferredSize(d);
+        editOrderReceivedStatus.setMinimumSize(d);
+        editOrderReceivedStatus.setEditable(false);
+        gc.gridx = 1;
+        gc.gridy = 3;
+        editOrderComponentsJPanel.add(receiveOrderJButton, gc);
+        receiveOrderJButton.setPreferredSize(d);
+        receiveOrderJButton.setMinimumSize(d);
+        receiveOrderJButton.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
+        		int comboId = Integer.parseInt(s.trim());
+        		for(Order order: orders){
+        			if(order.getOrderUniqueId() == comboId){
+        				if(order.isReceived() == true){
+        					JOptionPane.showMessageDialog(null, "Order already received!");
+        					break;
+        				}
+        				else{
+        					order.setReceived();
+        	        		JOptionPane.showMessageDialog(null, "Received!");
+        	        		editOrderReceivedStatus.setForeground(Color.BLACK);
+        	        		editOrderJButton.doClick();	
+        					break;
+        				}
+        			}
+        		}
+        	}
+        });
+        //show order details in scrollPane
+        gc.gridx = 0;
+        gc.gridy = 0;
+        JScrollPane orderProductsJScrollPane = new JScrollPane(productOrderJTextArea);
+        orderProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        editOrderProductsComponentsJPanel.add(orderProductsJScrollPane, gc);
+        editOrderProductsComponentsJPanel.setLayout(new GridLayout(1,2));
+        productOrderJTextArea.setEditable(false);
+        saveOrderComponentsJPanel.setLayout(new GridBagLayout());
+        gc.gridx = 0;
+        gc.gridy = 0;
+        saveOrderComponentsJPanel.add(saveOrderJButton, gc);
+        saveOrderJButton.setPreferredSize(d);
+        saveOrderJButton.setMinimumSize(d);
+        gc.gridx = 1;
+        gc.gridy = 0;
+        saveOrderComponentsJPanel.add(deleteOrderJButton, gc);
+        deleteOrderJButton.setPreferredSize(d);
+        deleteOrderJButton.setMinimumSize(d);
+        deleteOrderJButton.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		int index = 0;
+        		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
+        		int comboId = Integer.parseInt(s.trim());
+        		for(Order order: orders){
+        			if(order.getOrderUniqueId() == comboId){
+        				index = orders.indexOf(order);
+        			}
+        		}
+        		orders.remove(index);
+        		JOptionPane.showMessageDialog(null, "Deleted!");
+        		editOrderOrderIdComboBox.removeItemAt(comboId);
+        		editSupplierOrderComponentsJPanel.setVisible(false);
+        		editOrderComponentsJPanel.setVisible(false);
+        		saveOrderComponentsJPanel.setVisible(false);
+        		editOrderProductsComponentsJPanel.setVisible(false);
+        		listOfSuppliers.setSelectedItem("Select");
+        		listOfOrders.setSelectedItem("Select");
+        	}
+        });
+        //edit by supplier
+        editSupplierOrderComponentsJPanel.setLayout(new GridBagLayout());
+        gc.gridx = 0;
+        gc.gridy = 0;
         JScrollPane supplierOrderJScrollPane = new JScrollPane(supplierOrderJTextArea);
         supplierOrderJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        editSupplierOrderComponentsJPanel.add(supplierOrderJScrollPane);
-        editSupplierOrderComponentsJPanel.add(receiveAllOrdersJButton);
-
+        editSupplierOrderComponentsJPanel.add(supplierOrderJScrollPane, gc);
+        editOrderBySupplierComponentsJPanel.setLayout(new GridBagLayout());
+        gc.gridx = 0;
+        gc.gridy = 0;
+        editOrderBySupplierComponentsJPanel.add(new JLabel("Total owed on all orders:"), gc);
+        gc.gridx = 0;
+        gc.gridy = 1;
+        editOrderBySupplierComponentsJPanel.add(allOrdersTotalJTextField, gc);
+        allOrdersTotalJTextField.setPreferredSize(d);
+        allOrdersTotalJTextField.setMinimumSize(d);
+        gc.gridx = 0;
+        gc.gridy = 2;
+        editOrderBySupplierComponentsJPanel.add(receiveAllOrdersJButton, gc);
+        receiveAllOrdersJButton.setPreferredSize(d);
+        receiveAllOrdersJButton.setMinimumSize(d);
+        gc.gridx = 1;
+        gc.gridy = 0;
+        editSupplierOrderComponentsJPanel.add(editOrderBySupplierComponentsJPanel, gc);
+        //====
         receiveAllOrdersJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
+        		int comboId = Integer.parseInt(s.trim());
         		for(Order order: orders){
-        			if(Integer.parseInt(s.trim()) == order.getSupplierUniqueId() ){
+        			if(Integer.parseInt(s.trim()) == comboId ){
         				order.setReceived();
         			}
         		}
@@ -2546,66 +2684,22 @@ public class RetailGUI extends JFrame{
         		listOfOrders.setSelectedItem("Select");
         		}
         });
-        supplierOrderJTextArea.setEditable(false);
-        allOrdersTotalJTextField.setEditable(false);
-        editOrderComponentsJPanel.setLayout(new GridLayout(4,2));
-        editOrderComponentsJPanel.add(new JLabel("Enter New order ID"));
-        editOrderComponentsJPanel.add(editOrderId);
-        editOrderComponentsJPanel.add(new JLabel("Enter New supplier ID"));
-        editOrderComponentsJPanel.add(editOrderSupplier);
-        editOrderComponentsJPanel.add(new JLabel("Total"));
-        editOrderComponentsJPanel.add(editOrderAmount);
-        editOrderComponentsJPanel.add(editOrderReceivedStatus);
-        editOrderReceivedStatus.setEditable(false);
-        editOrderComponentsJPanel.add(receiveOrderJButton);
-        receiveOrderJButton.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
-        		for(Order order: orders){
-        			if(Integer.parseInt(s.trim()) == order.getOrderUniqueId()){
-        				order.setReceived();
-        				break;
-        			}
-        		}
-        		JOptionPane.showMessageDialog(null, "Received!");
-        		editOrderReceivedStatus.setForeground(Color.BLACK);
-        		editOrderJButton.doClick();	
-        		listOfSuppliers.setSelectedItem("Select");
-        		listOfOrders.setSelectedItem("Select");
-        	}
-        });
-        JScrollPane orderProductsJScrollPane = new JScrollPane(productOrderJTextArea);
-        orderProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        editOrderProductsComponentsJPanel.add(orderProductsJScrollPane);
-        editOrderProductsComponentsJPanel.setLayout(new GridLayout(1,2));
-        productOrderJTextArea.setEditable(false);
-        saveOrderComponentsJPanel.setLayout(new GridLayout(1,2));
-        saveOrderComponentsJPanel.add(saveOrderJButton);
-        saveOrderComponentsJPanel.add(deleteOrderJButton);
-        deleteOrderJButton.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		int index=0;
-        		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
-        		for(Order order: orders){
-        			if(order.getOrderUniqueId() == Integer.parseInt(s.trim())){
-        				index = orders.indexOf(order);
-        			}
-        		}
-        		orders.remove(index);
-        		JOptionPane.showMessageDialog(null, "Deleted!");
-        		editSupplierOrderComponentsJPanel.setVisible(false);
-        		editOrderComponentsJPanel.setVisible(false);
-        		saveOrderComponentsJPanel.setVisible(false);
-        		listOfSuppliers.setSelectedItem("Select");
-        		listOfOrders.setSelectedItem("Select");
-        	}
-        });
-        editOrderJPanel.setLayout(new GridLayout(5,3));
-        editOrderJPanel.add(findOrderComponentsJPanel);
-        editOrderJPanel.add(editOrderComponentsJPanel);
-        editOrderJPanel.add(editOrderProductsComponentsJPanel);
-        editOrderJPanel.add(saveOrderComponentsJPanel);
-        editOrderJPanel.add(editSupplierOrderComponentsJPanel);
+        editOrderJPanel.setLayout(new GridBagLayout());
+        gc.gridx = 0;
+        gc.gridy = 0;
+        editOrderJPanel.add(findOrderComponentsJPanel, gc);
+        gc.gridx = 0;
+        gc.gridy = 1;
+        editOrderJPanel.add(editOrderComponentsJPanel, gc);
+        gc.gridx = 0;
+        gc.gridy = 2;
+        editOrderJPanel.add(editOrderProductsComponentsJPanel, gc);
+        gc.gridx = 0;
+        gc.gridy = 3;
+        editOrderJPanel.add(saveOrderComponentsJPanel, gc);
+        gc.gridx = 0;
+        gc.gridy = 1;
+        editOrderJPanel.add(editSupplierOrderComponentsJPanel, gc);
         editOrderProductsComponentsJPanel.setVisible(false);
         editSupplierOrderComponentsJPanel.setVisible(false);
         editOrderComponentsJPanel.setVisible(false);
