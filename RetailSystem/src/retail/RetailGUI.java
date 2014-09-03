@@ -4084,6 +4084,8 @@ public class RetailGUI extends JFrame{
 	
 	public void fillComboBox(){
 		//get comboBox contents
+		editExistingInvoiceNums.add("Select");
+		editExistingCustomerInvoiceNums.add("Select");
 		for(Invoice invoice: invoices){
 			editExistingInvoiceNums.add(Integer.toString(invoice.getId()));
 		}
@@ -4094,7 +4096,7 @@ public class RetailGUI extends JFrame{
 	
 	//fill profit and loss combo box
 	public void fillPLComboBox(){
-		months.add("Please Select");
+		months.add("Select");
 		months.add("Current Month");
 		months.add("Last Month");
 		months.add("Last 3 Months");
@@ -4257,6 +4259,11 @@ public class RetailGUI extends JFrame{
 					mainJTabbedPane.setEnabledAt(5, true);
 					mainJTabbedPane.setEnabledAt(6, true);
 					mainJTabbedPane.setEnabledAt(7, true);
+					invJTabbedPane.setEnabledAt(2, true);
+					orderJTabbedPane.setEnabledAt(2, true);
+					supplyJTabbedPane.setEnabledAt(2, true);
+					prodJTabbedPane.setEnabledAt(2, true);
+					custJTabbedPane.setEnabledAt(2, true);	
 					loginComponentsJPanel.setVisible(false);
 					logoutComponentsJPanel.setVisible(true);
 				}
@@ -4266,9 +4273,9 @@ public class RetailGUI extends JFrame{
 					mainJTabbedPane.setEnabledAt(1, true);
 					mainJTabbedPane.setEnabledAt(2, true);
 					mainJTabbedPane.setEnabledAt(3, true);
-					mainJTabbedPane.setEnabledAt(4, true);
+					mainJTabbedPane.setEnabledAt(4, false);
 					mainJTabbedPane.setEnabledAt(5, true);
-					mainJTabbedPane.setEnabledAt(6, false);
+					mainJTabbedPane.setEnabledAt(6, true);
 					mainJTabbedPane.setEnabledAt(7, false);
 					invJTabbedPane.setEnabledAt(2, false);
 					orderJTabbedPane.setEnabledAt(2, false);
@@ -4731,6 +4738,12 @@ public class RetailGUI extends JFrame{
 					String result = String.format("%.2f", runningTotal);
 					pLTotal.setText(result);
 				}
+				if(s.equals("Select")){
+					deleteRows();
+					tableModel.addRow(new String[]{"", "", ""});
+					pLTotal.setText("0.00");
+				}
+
 			}
 			public void deleteRows(){
 				if (tableModel.getRowCount() > 0) {
