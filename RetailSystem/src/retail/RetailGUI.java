@@ -2095,7 +2095,6 @@ public class RetailGUI extends JFrame{
 		Dimension size = getPreferredSize();
 		size.width = 500;
 		setPreferredSize(size);
-		createOrderPanel.setBorder(BorderFactory.createTitledBorder("Order details"));
 		//Left Panel Components
 		createNewOrderLeftPanel.setLayout(new GridBagLayout());
 		GridBagConstraints orderGC = new GridBagConstraints();
@@ -2684,7 +2683,7 @@ public class RetailGUI extends JFrame{
         		String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
         		int comboId = Integer.parseInt(s.trim());
         		for(Order order: orders){
-        			if(Integer.parseInt(s.trim()) == comboId ){
+        			if(order.getOrderUniqueId() == comboId ){
         				order.setReceived();
         			}
         		}
@@ -2692,7 +2691,7 @@ public class RetailGUI extends JFrame{
         		editSupplierOrderJButton.doClick();
         		listOfSuppliers.setSelectedItem("Select");
         		listOfOrders.setSelectedItem("Select");
-        		}
+        	}
         });
         editOrderJPanel.setLayout(new GridBagLayout());
         gc.gridx = 0;
@@ -4166,23 +4165,20 @@ public class RetailGUI extends JFrame{
 		//Handler for receive orders by supplier button
 		private class editSupplierOrderButtonHandler implements ActionListener{
 			public void actionPerformed( ActionEvent e){//handler starts
-					int count = 0, count1 = 0;;
-					String s = "";
+					int count = 0, count1 = 0;
+					int id = 0;
+					String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
+					if(!s.equals("Select")){
+						id = Integer.parseInt( s );
+					}
 					double total = 0;
-					String totalString = "";
-					int id = 0, supplierID = 1;
-					try {
-						id = Integer.parseInt( editOrderSupplierIdComboBox.getSelectedItem().toString().trim() );
-					}
-					catch (NumberFormatException nfe){
-						listOfOrders.setSelectedItem("Select");;
-					}
+					int supplierID = 1;
 					for(Supplier supplier: suppliers){
 						if(id == supplier.getId()){
 							count1++;
 							supplierID = 1;
 						}
-					}	
+					}
 					if(count1 == 0){
 						supplierID = 2;
 					}
@@ -4194,11 +4190,11 @@ public class RetailGUI extends JFrame{
 						supplierOrderJTextArea.setText("Unreceived Orders: ");
 						for(Order order: orders){
 							if(id == order.getSupplierUniqueId() ){
-								if(!order.isReceived()){
+								if(order.isReceived() == false){
 									s = "\nOrder Id : " + order.getOrderUniqueId() + 
-											"\nTotal: " + 
-											order.calculateOrderWorth() + "\n";
+											"\nDate: " + sdf.format(order.getOrderDate()) + "\nTotal: ";
 									supplierOrderJTextArea.append(s);
+									supplierOrderJTextArea.append(new String(String.format("%.2f", order.calculateOrderWorth())));
 									total = total + order.calculateOrderWorth();
 									count++;								
 								}
@@ -4209,8 +4205,7 @@ public class RetailGUI extends JFrame{
 							editSupplierOrderComponentsJPanel.setVisible(false);
 						}
 						else{
-							totalString = Double.toString(total);
-							allOrdersTotalJTextField.setText(totalString);
+							allOrdersTotalJTextField.setText(new String(String.format("%.2f",  total)));
 						}						
 					}
 					else if(supplierID == 2){
@@ -4219,7 +4214,9 @@ public class RetailGUI extends JFrame{
 						editSupplierOrderComponentsJPanel.setVisible(false);
 						editOrderComponentsJPanel.setVisible(false);
 						saveOrderComponentsJPanel.setVisible(false);
+						editOrderProductsComponentsJPanel.setVisible(false);
 					}
+					supplierOrderJTextArea.setCaretPosition(0);
 				}
 			}
 		
@@ -4344,18 +4341,21 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed( ActionEvent e){//handler starts
 				productOrderJTextArea.setText("");
 				int id = 0;
-				String s = "";
+				String s = (String) editOrderOrderIdComboBox.getSelectedItem();
+				if(!s.equals("Select")){
+					id = Integer.parseInt(s);
+				}
 				productInvoiceJTextArea.setText("Product Details\n");
-				try {
-					id = Integer.parseInt( editOrderOrderIdComboBox.getSelectedItem().toString().trim() );
-				}
-				catch (NumberFormatException nfe){
-					listOfOrders.setSelectedItem("Select");;
-				}
 				int orderId = verifyOrderID(id);
 				if(orderId == 1){
 					for(Order order: orders){
 						if(id == order.getOrderUniqueId()){
+							if(order.isReceived()){
+								editOrderAmount.setEditable(false);
+							}
+							else{
+								editOrderAmount.setEditable(true);
+							}
 							editSupplierOrderComponentsJPanel.setVisible(false);
 							editOrderComponentsJPanel.setVisible(true);
 							saveOrderComponentsJPanel.setVisible(true);
@@ -4367,7 +4367,7 @@ public class RetailGUI extends JFrame{
 										"     ||    Quantity: " + Integer.toString(op.getQuantity());
 										productOrderJTextArea.append(s);								
 								}	
-							editOrderAmount.setText(Double.toString(order.calculateOrderWorth()));
+							editOrderAmount.setText(new String(String.format("%.2f", order.calculateOrderWorth())));
 							if(!order.isReceived()){
 								editOrderReceivedStatus.setText("Unreceived");
 								editOrderReceivedStatus.setForeground(Color.RED);
@@ -4387,6 +4387,7 @@ public class RetailGUI extends JFrame{
 					saveOrderComponentsJPanel.setVisible(false);
 					editOrderProductsComponentsJPanel.setVisible(false);
 				}
+				productOrderJTextArea.setCaretPosition(0);
 			}
 			public int verifyOrderID(int id) {
 		    	int count = 0;
