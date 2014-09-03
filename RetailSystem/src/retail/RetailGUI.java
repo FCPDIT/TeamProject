@@ -285,8 +285,8 @@ public class RetailGUI extends JFrame{
 	private JTextField editTitleJTextField = new JTextField();
 	private JLabel editProdAuthor = new JLabel("Author");
 	private JTextField editAuthorJTextField = new JTextField();
-	private JLabel editProdCode = new JLabel("Book Code");
-	private JTextField editCodeJTextField = new JTextField();
+	//private JLabel editProdCode = new JLabel("Book Code");
+	//private JTextField editCodeJTextField = new JTextField();
 	private JLabel editProdRetail = new JLabel("Retail Price");
 	private JTextField editRetailJTextField = new JTextField();
 	private JLabel editProdCost = new JLabel("Cost Price");
@@ -1768,94 +1768,109 @@ public class RetailGUI extends JFrame{
 		editProductJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
-		editDetails.setPreferredSize(d);
+		editDetails.setPreferredSize(d);		
 		editProductJPanel.add(editDetails, gc);
-		gc.gridx = 0;
+		
+		gc.gridx = 1;
 		gc.gridy = 2;
-		//enterProdCodeJTextField.setPreferredSize(d);
-		//editProductJPanel.add(enterProdCodeJTextField, gc);
-		gc.gridx = 0;
-		gc.gridy = 3;
 		editDetailsJButton.setPreferredSize(d);
 		editProductJPanel.add(editDetailsJButton, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 4;
 		editProdTitle.setPreferredSize(d);
 		editProductJPanel.add(editProdTitle, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
+		
+		gc.gridx = 1;
+		gc.gridy = 4;
 		editTitleJTextField.setPreferredSize(d);
+		editTitleJTextField.setMinimumSize(d);
 		editProductJPanel.add(editTitleJTextField, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 6;
 		editProdAuthor.setPreferredSize(d);
 		editProductJPanel.add(editProdAuthor, gc);
-		gc.gridx = 0;
-		gc.gridy = 7;
+		
+		gc.gridx = 1;
+		gc.gridy = 6;
 		editAuthorJTextField.setPreferredSize(d);
+		editAuthorJTextField.setMinimumSize(d);
 		editProductJPanel.add(editAuthorJTextField, gc);
-		gc.gridx = 0;
-		gc.gridy = 8;
-		editProdCode.setPreferredSize(d);
-		editProductJPanel.add(editProdCode, gc);
-		gc.gridx = 0;
-		gc.gridy = 9;
-		editCodeJTextField.setPreferredSize(d);
-		editProductJPanel.add(editCodeJTextField, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 10;
 		editProdRetail.setPreferredSize(d);
 		editProductJPanel.add(editProdRetail, gc);
-		gc.gridx = 0;
-		gc.gridy = 11;
+		
+		gc.gridx = 1;
+		gc.gridy = 10;
 		editRetailJTextField.setPreferredSize(d);
+		editRetailJTextField.setMinimumSize(d);
 		editProductJPanel.add(editRetailJTextField, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 12;
 		editProdCost.setPreferredSize(d);
 		editProductJPanel.add(editProdCost, gc);
-		gc.gridx = 0;
-		gc.gridy = 13;
+		
+		gc.gridx = 1;
+		gc.gridy = 12;
 		editCostJTextField.setPreferredSize(d);
+		editCostJTextField.setMinimumSize(d);
 		editProductJPanel.add(editCostJTextField, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 14;
 		editProdTotalStock.setPreferredSize(d);
 		editProductJPanel.add(editProdTotalStock, gc);
-		gc.gridx = 0;
-		gc.gridy = 15;
+		
+		gc.gridx = 1;
+		gc.gridy = 14;
 		editStockJTextField.setPreferredSize(d);
+		editStockJTextField.setMinimumSize(d);
 		editProductJPanel.add(editStockJTextField, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 16;
 		editProdMaxStock.setPreferredSize(d);
 		editProductJPanel.add(editProdMaxStock, gc);
-		gc.gridx = 0;
-		gc.gridy = 17;
+		
+		gc.gridx = 1;
+		gc.gridy = 16;
 		editMaxJTextField.setPreferredSize(d);
+		editMaxJTextField.setMinimumSize(d);
 		editProductJPanel.add(editMaxJTextField, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 18;
 		editProdMinStock.setPreferredSize(d);
 		editProductJPanel.add(editProdMinStock, gc);
-		gc.gridx = 0;
-		gc.gridy = 19;
+		
+		gc.gridx = 1;
+		gc.gridy = 18;
 		editMinJTextField.setPreferredSize(d);
+		editMinJTextField.setMinimumSize(d);
 		editProductJPanel.add(editMinJTextField, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 20;
 		editProdSupplierId.setPreferredSize(d);
 		editProductJPanel.add(editProdSupplierId, gc);
+		
+		gc.gridx = 1;
+		gc.gridy = 20;
+		editProdSupplierIdJTextField.setPreferredSize(d);
+		editProdSupplierIdJTextField.setMinimumSize(d);
+		editProductJPanel.add(editProdSupplierIdJTextField, gc);
+		
 		gc.gridx = 0;
 		gc.gridy = 21;
-		editProdSupplierIdJTextField.setPreferredSize(d);
-		editProductJPanel.add(editProdSupplierIdJTextField, gc);
-		gc.gridx = 0;
-		gc.gridy = 22;
 		updateProductJButton.setPreferredSize(d);
 		editProductJPanel.add(updateProductJButton, gc);
-		gc.gridx = 0;
-		gc.gridy = 23;
+		
+		gc.gridx = 1;
+		gc.gridy = 21;
 		deleteStockLineJButton.setPreferredSize(d);
 		editProductJPanel.add(deleteStockLineJButton, gc);
 		
@@ -3468,7 +3483,6 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				for(Product product: products){
 					if(product.getProductCode().equals(comboBoxEditProdId.getSelectedItem())){
-					editCodeJTextField.setText(product.getProductCode());
 					editAuthorJTextField.setText(product.getAuthor());
 					editTitleJTextField.setText(product.getTitle());
 					editRetailJTextField.setText(Double.toString(product.getRetailPrice()));
@@ -3488,7 +3502,6 @@ public class RetailGUI extends JFrame{
 				
 				for (Product product: products){
 					if(product.getProductCode().equals(enterProdCodeJTextField.getText())){
-						product.setProductCode(editCodeJTextField.getText());
 						product.setAuthor(editAuthorJTextField.getText());
 						product.setTitle(editTitleJTextField.getText());
 						product.setRetailPrice(Double.parseDouble(editRetailJTextField.getText()));
