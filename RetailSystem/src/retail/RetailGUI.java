@@ -75,16 +75,6 @@ public class RetailGUI extends JFrame{
 	private ArrayList<OrderProduct> orderProducts3 = new ArrayList<OrderProduct>();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/dd");
 	
-	public ArrayList<Order> getOrders(){
-		return this.orders;
-	}
-	
-	public void addOrders(Order order){
-		orders.add(order);
-	}
-	
-	
-	
 	private JFrame mainJFrame = new JFrame();
 	private GridBagConstraints gc = new GridBagConstraints();
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
@@ -1513,7 +1503,10 @@ public class RetailGUI extends JFrame{
 			// function to add a new supplier
 			public void actionPerformed(ActionEvent e){
 				try{	
-						if(checkSupplierDuplicate(suppliers, Integer.parseInt(supplierIdJTextField.getText())) == true){
+					if(checkSupplierDuplicate(suppliers, Integer.parseInt(supplierIdJTextField.getText())) == true){
+						if(supplierNameJTextField.getText().equalsIgnoreCase("") || supplierAddressJTextField.getText().equalsIgnoreCase("")){
+							JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Id \n Supplier Name \n Supplier Address");	
+						}else{
 							Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
 									supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
 							suppliers.add(supplier);
@@ -1521,9 +1514,10 @@ public class RetailGUI extends JFrame{
 							suppIdCombo.addItem(supplierIdJTextField.getText());
 							suppNameCombo.addItem(supplierNameJTextField.getText());
 							editSuppIdCombo.addItem(supplierIdJTextField.getText());
-						}else{
-							JOptionPane.showMessageDialog(null, "Supplier Already Exists");
 						}
+					}else{
+						JOptionPane.showMessageDialog(null, "Supplier Already Exists");
+					}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
