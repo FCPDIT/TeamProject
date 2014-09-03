@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -3197,7 +3198,8 @@ public class RetailGUI extends JFrame{
 		comboBoxProductTitle.setEditable(true);
 		comboBoxProductTitle.setPreferredSize(d);
 		comboBoxProductTitle.setMinimumSize(d);
-		//productTitleTextField = new JTextField(10);
+		comboBoxProductTitle.setSelectedItem("Select");
+		Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
 		productGC.gridx = 1;
 		productGC.gridy = 2;
 		viewProductDetails.add(comboBoxProductTitle,productGC);
@@ -3236,7 +3238,12 @@ public class RetailGUI extends JFrame{
 				 for(int i=0;i<products.size();i++){
 					 existingProductAuthor.add((products.get(i).getAuthor()));
 		       }
-		
+				 
+		HashSet productsHashSet = new HashSet();
+	 	productsHashSet.addAll(existingProductAuthor);
+		existingProductAuthor.clear();					
+		existingProductAuthor.addAll(productsHashSet);
+		Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER);
 		
 		//Third Label and controls: 	View Product by Author
 		JLabel productAuthorlbl = new JLabel("Product Author: ");
@@ -3247,6 +3254,7 @@ public class RetailGUI extends JFrame{
 		comboBoxProductAuthor.setEditable(true);
 		comboBoxProductAuthor.setPreferredSize(d);
 		comboBoxProductAuthor.setMinimumSize(d);
+		comboBoxProductAuthor.setSelectedItem("Select");
 		productAuthorTextField = new JTextField(10);
 		productGC.gridx = 1;
 		productGC.gridy = 3;
@@ -3274,9 +3282,9 @@ public class RetailGUI extends JFrame{
 				}else{							// Take in String and Search for it.
 					productTextArea.setText(product.viewProductByAuthor(input, products));	
 					productTextArea.setCaretPosition(0);		// This sets the position of the scroll bar to the top of the page.
-					productAuthorTextField.setText("");
-					viewProductIdTextField.setText("");
-					productTitleTextField.setText("");
+					//productAuthorTextField.setText("");
+					//viewProductIdTextField.setText("");
+					//productTitleTextField.setText("");
 				}
 			}
 		});
@@ -3294,9 +3302,9 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				productTextArea.setText(product.viewAllProductDetails(products));	//viewAllProducts() is in the Product Class
 				productTextArea.setCaretPosition(0);
-				viewProductIdTextField.setText("");
-				productTitleTextField.setText("");
-				productAuthorTextField.setText("");
+				//viewProductIdTextField.setText("");
+				//productTitleTextField.setText("");
+				//productAuthorTextField.setText("");
 			}
 		});
 		
@@ -3313,9 +3321,10 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				productTextArea.setText(product.viewProductByMinStock(products));
-				viewProductIdTextField.setText("");
-				productTitleTextField.setText("");
-				productAuthorTextField.setText("");
+				productTextArea.setCaretPosition(0);
+				//viewProductIdTextField.setText("");
+				//productTitleTextField.setText("");
+				//productAuthorTextField.setText("");
 			}
 		});
 				
@@ -3331,9 +3340,10 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				productTextArea.setText(product.viewProductByOverStock(products));
-				viewProductIdTextField.setText("");
-				productTitleTextField.setText("");
-				productAuthorTextField.setText("");
+				productTextArea.setCaretPosition(0);
+				//viewProductIdTextField.setText("");
+				//productTitleTextField.setText("");
+				//productAuthorTextField.setText("");
 			}
 		});
 		
