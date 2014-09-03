@@ -3138,7 +3138,7 @@ public class RetailGUI extends JFrame{
 									listOfInvoices.addElement(inputFromTestField);
 									editListOfInvoices.addElement(inputFromTestField);
 									String inputFromCusId = custTextF.getText();
-									listOfCustomers.addElement(inputFromCusId);
+									//listOfCustomers.addElement(inputFromCusId);
 									//input.setText("");
 									//reset the text Boxes to Null
 									invTextF.setText("");
