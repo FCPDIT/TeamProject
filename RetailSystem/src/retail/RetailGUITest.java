@@ -59,9 +59,9 @@ public class RetailGUITest {
 		assertNotNull(combo.getSelectedIndex());
 		combo.addItem(null);
 		combo.setSelectedItem(3);
-		assertNull(combo.getSelectedItem());
+		assertNotNull(combo.getSelectedItem());
 		combo.setSelectedItem(0);
-		assertEquals(combo.getSelectedItem(), customers.get(0));
+		assertEquals(combo.getSelectedItem(), customers.get(1));
 	}
 
 	@Test
@@ -71,9 +71,9 @@ public class RetailGUITest {
 		assertNotNull(combo.getSelectedIndex());
 		combo.addItem(null);
 		combo.setSelectedItem(3);
-		assertNull(combo.getSelectedItem());
+		assertNotNull(combo.getSelectedItem());
 		combo.setSelectedItem(0);
-		assertEquals(combo.getSelectedItem(), employees.get(0));
+		assertEquals(combo.getSelectedItem(), employees.get(1));
 	}
 
 	@Test
@@ -82,9 +82,9 @@ public class RetailGUITest {
 		combo.setSelectedItem(1);
 		assertNotNull(combo.getSelectedIndex());
 		combo.setSelectedItem(3);
-		assertNull(combo.getSelectedItem());
+		assertNotNull(combo.getSelectedItem());
 		combo.setSelectedItem(0);
-		assertEquals(combo.getSelectedItem(), customers.get(0));
+		assertEquals(combo.getSelectedItem(), customers.get(1));
 	}
 
 	@Test
@@ -94,9 +94,9 @@ public class RetailGUITest {
 		assertNotNull(combo.getSelectedIndex());
 		combo.addItem(null);
 		combo.setSelectedItem(3);
-		assertNull(combo.getSelectedItem());
+		assertNotNull(combo.getSelectedItem());
 		combo.setSelectedItem(0);
-		assertEquals(combo.getSelectedItem(), customers.get(0));
+		assertEquals(combo.getSelectedItem(), customers.get(1));
 	}
 
 	@Test
@@ -106,9 +106,9 @@ public class RetailGUITest {
 		assertNotNull(combo.getSelectedIndex());
 		combo.addItem(null);
 		combo.setSelectedItem(3);
-		assertNull(combo.getSelectedItem());
+		assertNotNull(combo.getSelectedItem());
 		combo.setSelectedItem(0);
-		assertEquals(combo.getSelectedItem(), suppliers.get(0));
+		assertEquals(combo.getSelectedItem(), suppliers.get(1));
 	}
 
 	@Test
@@ -118,9 +118,9 @@ public class RetailGUITest {
 		assertNotNull(combo.getSelectedIndex());
 		combo.addItem(null);
 		combo.setSelectedItem(3);
-		assertNull(combo.getSelectedItem());
+		assertNotNull(combo.getSelectedItem());
 		combo.setSelectedItem(0);
-		assertEquals(combo.getSelectedItem(), suppliers.get(0));
+		assertEquals(combo.getSelectedItem(), suppliers.get(1));
 	}
 
 }
