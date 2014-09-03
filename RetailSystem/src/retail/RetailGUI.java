@@ -314,9 +314,15 @@ public class RetailGUI extends JFrame{
 	private ButtonGroup quantity = new ButtonGroup();
 	
 	// TODO  Set Image Icons
-//	ImageIcon productIcon = new ImageIcon("C:/Users/James/Desktop/testA.png");
-//	ImageIcon invoiceIcon = new ImageIcon("C:/Users/James/Desktop/Invoice.png");
-			
+	ImageIcon productIcon = new ImageIcon("src\\images\\Product.png");
+	ImageIcon invoiceIcon = new ImageIcon("src\\images\\Sales.png");
+	ImageIcon loginIcon = new ImageIcon("src\\images\\Login.png");	
+	ImageIcon profitAndLossIcon = new ImageIcon("src\\images\\PL.png");
+	ImageIcon employeeIcon = new ImageIcon("src\\images\\employee.png");
+	ImageIcon customerIcon = new ImageIcon("src\\images\\Customer.png");
+	ImageIcon supplierIcon = new ImageIcon("src\\images\\Supplier.png");
+	ImageIcon orderIcon = new ImageIcon("src\\images\\Order.png");
+	
 			
 			
 	// TODO Product Combo Box
@@ -653,17 +659,14 @@ public class RetailGUI extends JFrame{
 		mainJFrame.setVisible(true);
 		mainJFrame.add(mainJTabbedPane);
 		
-		mainJTabbedPane.add("Login/Logout", loginJPanel);
-		mainJTabbedPane.add("Customer Management", custJTabbedPane);
-		mainJTabbedPane.add("Supplier Management", supplyJTabbedPane);
-//		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);		// This code was used when testing image icons 
-//		mainJTabbedPane.addTab("Invoice Management",invoiceIcon, invJTabbedPane);		// Needs more work do not delete
-		mainJTabbedPane.addTab("Product Management", prodJTabbedPane);
-		mainJTabbedPane.addTab("Invoice Management", invJTabbedPane);
-		
-		mainJTabbedPane.add("Order Management", orderJTabbedPane);
-		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
-		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
+		mainJTabbedPane.addTab("Login/Logout",loginIcon, loginJPanel);
+		mainJTabbedPane.addTab("Sales",invoiceIcon, invJTabbedPane);
+		mainJTabbedPane.addTab("Orders",orderIcon, orderJTabbedPane);
+		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);
+		mainJTabbedPane.addTab("Profit and Loss",profitAndLossIcon, proflossJTabbedPane);
+		mainJTabbedPane.addTab("Customer Management",customerIcon, custJTabbedPane);
+		mainJTabbedPane.addTab("Supplier Management",supplierIcon, supplyJTabbedPane);
+		mainJTabbedPane.addTab("Manage Employee Access",employeeIcon, accessJTabbedPane);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
 		custJTabbedPane.add("View Customer Details", viewCustJPanel);
@@ -2765,6 +2768,7 @@ public class RetailGUI extends JFrame{
 		gc.gridy= 3;
 		viewCustomerPanel.add(invoicesPieChart,gc);
 		invoicesPieChart.setPreferredSize(d);
+		invoicesPieChart.setMinimumSize(d);
 		invoicesPieChart.addActionListener(new ActionListener(){
 		
 			public void actionPerformed(ActionEvent e){
