@@ -1764,14 +1764,24 @@ public class RetailGUI extends JFrame{
 		});
 		
 		editProductJPanel.setLayout(new GridBagLayout());
+		//gc.gridx = 0;
+		//gc.gridy = 1;
+		//editDetails.setPreferredSize(d);		
+		//editProductJPanel.add(editDetails, gc);
+		
+		comboBoxEditProdId = new JComboBox<>(listToEditProdIds);
+		listToEditProdIds.setSelectedItem("Select");
+		comboBoxEditProdId.setEditable(true);
+		comboBoxEditProdId.setPreferredSize(d);
+		comboBoxEditProdId.setMinimumSize(d);
 		gc.gridx = 0;
 		gc.gridy = 1;
-		editDetails.setPreferredSize(d);		
-		editProductJPanel.add(editDetails, gc);
+		editProductJPanel.add(comboBoxEditProdId,gc);
 				
 		gc.gridx = 1;
-		gc.gridy = 2;
+		gc.gridy = 1;
 		editDetailsJButton.setPreferredSize(d);
+		editDetailsJButton.setMinimumSize(d);
 		editProductJPanel.add(editDetailsJButton, gc);
 		
 		gc.gridx = 0;
@@ -3531,14 +3541,7 @@ public class RetailGUI extends JFrame{
         for(int i=0;i<products.size();i++){
 			 existingEditProdId.add((products.get(i).getProductCode()));
        }
-		comboBoxEditProdId = new JComboBox<>(listToEditProdIds);
-		listToEditProdIds.setSelectedItem("Select");
-		comboBoxEditProdId.setEditable(true);
-		comboBoxEditProdId.setPreferredSize(d);
-		comboBoxEditProdId.setMinimumSize(d);
-		productGC.gridx = 0;
-		productGC.gridy = 2;
-		editProductJPanel.add(comboBoxEditProdId,productGC);
+		
 		
 		editDetailsJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
