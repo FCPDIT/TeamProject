@@ -885,6 +885,7 @@ public class RetailGUI extends JFrame{
 		
 		employeeJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				try{
 					if(checkEmployeeDuplicate(employees, Integer.parseInt(employeeIdField.getText())) == true){
 						Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
 						employees.add(employee);
@@ -895,6 +896,9 @@ public class RetailGUI extends JFrame{
 					}else{
 						JOptionPane.showMessageDialog(null, "Employee Already Exists");
 					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Please Complete All Fields");
+				}
 			}
 		});
 		
