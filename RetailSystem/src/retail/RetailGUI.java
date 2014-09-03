@@ -3391,7 +3391,7 @@ public class RetailGUI extends JFrame{
 				salesData.setValue(invoice.graphSales(9, invoices), "Month", "October");
 				salesData.setValue(invoice.graphSales(10,invoices), "Month", "November");
 				salesData.setValue(invoice.graphSales(11, invoices), "Month", "December");
-				JFreeChart salesChart = ChartFactory.createBarChart("Sales and prediction Chart", "Week", "Sales value", salesData, PlotOrientation.VERTICAL, false, true, false);
+				JFreeChart salesChart = ChartFactory.createBarChart("Sales and prediction Chart", "Month", "Sales value", salesData, PlotOrientation.VERTICAL, false, true, false);
 				CategoryPlot p = salesChart.getCategoryPlot();
 				p.setRangeGridlinePaint(Color.BLACK);
 				ChartFrame salesGraphFrame = new ChartFrame("Sales and predictions", salesChart);
