@@ -2651,11 +2651,13 @@ public class RetailGUI extends JFrame{
 					textarea.setCaretPosition(0);
 					listOfCustomers.setSelectedItem("select");
 					listOfInvoices.setSelectedItem("select");
+					
 				}else{
 					int num = Integer.parseInt(input);
 					textarea.setText(invoice.viewInvoiceById(num, invoices)); //viewInvoiceById() is in the Invoice Class
 					textarea.setCaretPosition(0);
 					listOfCustomers.setSelectedItem("select");
+					editListOfInvoices.setSelectedItem("select");
 					//invTextField2.setText("");
 					//custIdTextField.setText("");
 				}
@@ -2758,6 +2760,7 @@ public class RetailGUI extends JFrame{
 				textarea.setText("");
 				listOfCustomers.setSelectedItem("select");
 				listOfInvoices.setSelectedItem("select");
+				editListOfInvoices.setSelectedItem("select");
 				
 			}
 		});
@@ -3016,7 +3019,7 @@ public class RetailGUI extends JFrame{
 									outputMessage = "";
 									message = "";
 									addMoreArrayList = new ArrayList<InvoiceProduct>();
-									
+									//editListOfInvoices.setSelectedItem("select");
 								}else{
 									JOptionPane.showMessageDialog (null, "Invoice Number is not Unique", "Invoice Info", JOptionPane.WARNING_MESSAGE);
 								}
