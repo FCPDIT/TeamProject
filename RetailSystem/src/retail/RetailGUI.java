@@ -882,6 +882,7 @@ public class RetailGUI extends JFrame{
 						empNameCombo.addItem(employeeNameField.getText());
 						viewEmpIdCombo.addItem(employeeIdField.getText());
 						JOptionPane.showMessageDialog(null, "Employee Successfully Created");
+						listOfEmpIds.addElement(employeeIdField.getText());
 					}else{
 						JOptionPane.showMessageDialog(null, "Employee Already Exists");
 					}
@@ -1194,6 +1195,8 @@ public class RetailGUI extends JFrame{
 								editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
 								JOptionPane.showMessageDialog(null, "New Customer Added");
 								editCustomerListOfInvoices.addElement(custIdJTextField.getText());
+								listOfCustomers.addElement(custIdJTextField.getText());
+								listOfCusIds.addElement(custIdJTextField.getText());
 						}
 					}
 					else{
@@ -1754,6 +1757,7 @@ public class RetailGUI extends JFrame{
 								products.add(product);
 							}
 						}
+						listOfProdIds.addElement(codeJTextField.getText());
 					}else{
 						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
 					}
