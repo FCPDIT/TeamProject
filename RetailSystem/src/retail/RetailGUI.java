@@ -374,8 +374,8 @@ public class RetailGUI extends JFrame{
 	private Invoice invoice = new Invoice();
 	
 	//Combo Box for invoice ID on View Customer Invoice Panel
-	private Vector<String> existingInvoiceNums = new Vector<>();
-	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(existingInvoiceNums); //create the combo box
+	//private Vector<String> existingInvoiceNums = new Vector<>();
+	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
 	private JComboBox<String> comboBoxInvoice;
 	//====
 	private Vector<String> existingCustomerId = new Vector<>();
@@ -2583,7 +2583,7 @@ public class RetailGUI extends JFrame{
 		//vIWcUSTOMERiNVOICE fUNCTIONALITY - Marc
         //Hardcoding info TODO: Marc
         for(int i=0;i<invoices.size();i++){
-			 existingInvoiceNums.add(Integer.toString(invoices.get(i).getId()));
+        	editExistingInvoiceNums.add(Integer.toString(invoices.get(i).getId()));
         }
         for(int i = 0;i<customers.size();i++){
         existingCustomerId.add(Integer.toString(customers.get(i).getCustId()));
