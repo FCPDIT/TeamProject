@@ -135,7 +135,6 @@ public class RetailGUI extends JFrame{
 	
 	//logout components
 	private JPanel logoutComponentsJPanel = new JPanel();
-	private JPanel logoutJPanel = new JPanel();
 	private JButton logoutBut = new JButton();
 	
 	private DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
@@ -163,12 +162,10 @@ public class RetailGUI extends JFrame{
 	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer ID");
 	private JComboBox<String> editCustIdCombo = new JComboBox<String>();
 	private JButton findCustById = new JButton("Find Customer");
-	private JLabel editCustIdJLabel = new JLabel("Customer ID");
 	private JLabel editCustNameJLabel = new JLabel("Customer Name");
 	private JLabel editCustAddressJLabel = new JLabel("Customer Address");
 	private JLabel editCustEmailJLabel = new JLabel("Customer Email");
 	private JLabel editCustPhoneJLabel = new JLabel("Customer Telephone");
-	private JTextField editCustId = new JTextField();
 	private JTextField editCustName = new JTextField();
 	private JTextField editCustAddress = new JTextField();
 	private JTextField editCustEmail = new JTextField();
@@ -1193,18 +1190,23 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					if(checkCustomerDuplicate(customers, Integer.parseInt(custIdJTextField.getText())) == true){
-						Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
-							custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
-							custPhoneJTextField.getText());
-						customers.add(customer);
-						custIdCombo.addItem(Integer.toString(customer.getCustId()));
-						custNameCombo.addItem(customer.getCustName());
-						editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
-						JOptionPane.showMessageDialog(null, "New Customer Added");
-						editCustomerListOfInvoices.addElement(custIdJTextField.getText());
-					}else{
-							JOptionPane.showMessageDialog(null, "Customer Already Exists");
+						if(custNameJTextField.getText().equalsIgnoreCase("") || custAddressJTextField.getText().equalsIgnoreCase("")){
+							JOptionPane.showMessageDialog(null, "Required Fields: \n Customer Id \n Customer Name \n Customer Address");	
+						}else{
+								Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
+									custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
+									custPhoneJTextField.getText());
+								customers.add(customer);
+								custIdCombo.addItem(Integer.toString(customer.getCustId()));
+								custNameCombo.addItem(customer.getCustName());
+								editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
+								JOptionPane.showMessageDialog(null, "New Customer Added");
+								editCustomerListOfInvoices.addElement(custIdJTextField.getText());
 						}
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Customer Already Exists");
+					}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
