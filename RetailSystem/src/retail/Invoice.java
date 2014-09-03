@@ -207,19 +207,46 @@ public class Invoice  implements Comparable<Invoice>  {
 	//provide graph with total sales for a given month or if no sales gives prediction based on average of previous 3 months
 	public double graphSales( int monthToShow, ArrayList<Invoice>invoices ){
 		double sales = getMonthlySales(monthToShow, invoices);
-		if (sales == 0){
-			int month1 = monthToShow - 1;
-			int month2 = monthToShow - 2;
-			int month3 = monthToShow - 3;
+		int month1 = monthToShow - 1;
+		int month2 = monthToShow - 2;
+		int month3 = monthToShow - 3;
+		int month4 = monthToShow - 4;
+		int month5 = monthToShow - 5;
+		
+		
+		if (sales == 0.00 && getMonthlySales(month1, invoices) != 0){
 			double average = (getMonthlySales(month1, invoices) + getMonthlySales(month2, invoices) + getMonthlySales(month3, invoices)) /3;
-			
+			System.out.println("average " + average);
 			return average;
-
 		}
-		else {
+		
+		
+		else if (sales == 0.00 && getMonthlySales(month1, invoices) == 0.00 && getMonthlySales(month2, invoices) != 0){
+			double average2 = ( ((getMonthlySales(month2, invoices) + getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices)) /3) + 
+					(getMonthlySales(month2, invoices)+ getMonthlySales(month3, invoices)) )/3;
+					System.out.println("average 2 " + average2 + " whic is " + " average " + " plus " + getMonthlySales(month2, invoices) + " plus " + getMonthlySales(month3, invoices));
+					return average2;
+				} 
+		
+		
+		else if (sales == 0.00 && getMonthlySales(month2, invoices) == 0.00){
+			double average3 = (getMonthlySales(month3, invoices) +
+					((getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices) + getMonthlySales(month5, invoices))/3)+
+					 ((((getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices) + getMonthlySales(month5, invoices))/3) + getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices))/3)
+					) /3;
+			System.out.println("this average3 is " +average3 + "and is " + getMonthlySales(month3, invoices) + " " + " average /2 + " + " average2");
+			return average3;
+			
+			}
+		
+		
+		
+	
+		else 
 			return sales;
 		}
-	}
+		
+
 	
 	
 	// View All - Question what do we want to print for all Invoice Info
