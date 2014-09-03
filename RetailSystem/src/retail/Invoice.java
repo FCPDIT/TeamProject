@@ -216,7 +216,6 @@ public class Invoice  implements Comparable<Invoice>  {
 		
 		if (sales == 0.00 && getMonthlySales(month1, invoices) != 0){
 			double average = (getMonthlySales(month1, invoices) + getMonthlySales(month2, invoices) + getMonthlySales(month3, invoices)) /3;
-			System.out.println("average " + average);
 			return average;
 		}
 		
@@ -224,7 +223,6 @@ public class Invoice  implements Comparable<Invoice>  {
 		else if (sales == 0.00 && getMonthlySales(month1, invoices) == 0.00 && getMonthlySales(month2, invoices) != 0){
 			double average2 = ( ((getMonthlySales(month2, invoices) + getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices)) /3) + 
 					(getMonthlySales(month2, invoices)+ getMonthlySales(month3, invoices)) )/3;
-					System.out.println("average 2 " + average2 + " whic is " + " average " + " plus " + getMonthlySales(month2, invoices) + " plus " + getMonthlySales(month3, invoices));
 					return average2;
 				} 
 		
@@ -234,7 +232,7 @@ public class Invoice  implements Comparable<Invoice>  {
 					((getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices) + getMonthlySales(month5, invoices))/3)+
 					 ((((getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices) + getMonthlySales(month5, invoices))/3) + getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices))/3)
 					) /3;
-			System.out.println("this average3 is " +average3 + "and is " + getMonthlySales(month3, invoices) + " " + " average /2 + " + " average2");
+		
 			return average3;
 			
 			}

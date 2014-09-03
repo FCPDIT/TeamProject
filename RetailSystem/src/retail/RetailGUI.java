@@ -239,7 +239,7 @@ public class RetailGUI extends JFrame{
 	private JTextField titleJTextField = new JTextField();
 	private JLabel prodAuthor = new JLabel("Author");
 	private JTextField authorJTextField = new JTextField();
-	private JLabel prodCode = new JLabel("Book Code");
+	private JLabel prodCode = new JLabel("Product Code");
 	private JTextField codeJTextField = new JTextField();
 	private JLabel prodRetail = new JLabel("Retail Price");
 	private JTextField retailJTextField = new JTextField();
@@ -266,14 +266,13 @@ public class RetailGUI extends JFrame{
 	
 	//edit product components
 	private JLabel editDetails = new JLabel ("Product code");
-	private JTextField enterProdCodeJTextField = new JTextField();
 	private JButton editDetailsJButton = new JButton("Select product to edit");
 	private JLabel editProdTitle = new JLabel("Book Title");
 	private JTextField editTitleJTextField = new JTextField();
 	private JLabel editProdAuthor = new JLabel("Author");
 	private JTextField editAuthorJTextField = new JTextField();
-	//private JLabel editProdCode = new JLabel("Book Code");
-	//private JTextField editCodeJTextField = new JTextField();
+	private JLabel editProdCode = new JLabel("Product Code");
+	private JTextField editCodeJTextField = new JTextField();
 	private JLabel editProdRetail = new JLabel("Retail Price");
 	private JTextField editRetailJTextField = new JTextField();
 	private JLabel editProdCost = new JLabel("Cost Price");
@@ -1766,7 +1765,7 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 1;
 		editDetails.setPreferredSize(d);		
 		editProductJPanel.add(editDetails, gc);
-		
+				
 		gc.gridx = 1;
 		gc.gridy = 2;
 		editDetailsJButton.setPreferredSize(d);
@@ -1774,99 +1773,112 @@ public class RetailGUI extends JFrame{
 		
 		gc.gridx = 0;
 		gc.gridy = 4;
+		editProdCode.setPreferredSize(d);
+		editProductJPanel.add(editProdCode, gc);
+		
+		
+		gc.gridx = 1;
+		gc.gridy = 4;
+		editCodeJTextField.setEditable(false);
+		editCodeJTextField.setPreferredSize(d);
+		editCodeJTextField.setMinimumSize(d);
+		editProductJPanel.add(editCodeJTextField, gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 5;
 		editProdTitle.setPreferredSize(d);
 		editProductJPanel.add(editProdTitle, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 4;
+		gc.gridy = 5;
 		editTitleJTextField.setPreferredSize(d);
 		editTitleJTextField.setMinimumSize(d);
 		editProductJPanel.add(editTitleJTextField, gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 6;
+		gc.gridy = 7;
 		editProdAuthor.setPreferredSize(d);
 		editProductJPanel.add(editProdAuthor, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 6;
+		gc.gridy = 7;
 		editAuthorJTextField.setPreferredSize(d);
 		editAuthorJTextField.setMinimumSize(d);
 		editProductJPanel.add(editAuthorJTextField, gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 10;
+		gc.gridy = 11;
 		editProdRetail.setPreferredSize(d);
 		editProductJPanel.add(editProdRetail, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 10;
+		gc.gridy = 11;
 		editRetailJTextField.setPreferredSize(d);
 		editRetailJTextField.setMinimumSize(d);
 		editProductJPanel.add(editRetailJTextField, gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 12;
+		gc.gridy = 13;
 		editProdCost.setPreferredSize(d);
 		editProductJPanel.add(editProdCost, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 12;
+		gc.gridy = 13;
 		editCostJTextField.setPreferredSize(d);
 		editCostJTextField.setMinimumSize(d);
 		editProductJPanel.add(editCostJTextField, gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 14;
+		gc.gridy = 15;
 		editProdTotalStock.setPreferredSize(d);
 		editProductJPanel.add(editProdTotalStock, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 14;
+		gc.gridy = 15;
 		editStockJTextField.setPreferredSize(d);
 		editStockJTextField.setMinimumSize(d);
 		editProductJPanel.add(editStockJTextField, gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 16;
+		gc.gridy = 17;
 		editProdMaxStock.setPreferredSize(d);
 		editProductJPanel.add(editProdMaxStock, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 16;
+		gc.gridy = 17;
 		editMaxJTextField.setPreferredSize(d);
 		editMaxJTextField.setMinimumSize(d);
 		editProductJPanel.add(editMaxJTextField, gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 18;
+		gc.gridy = 19;
 		editProdMinStock.setPreferredSize(d);
 		editProductJPanel.add(editProdMinStock, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 18;
+		gc.gridy = 19;
 		editMinJTextField.setPreferredSize(d);
 		editMinJTextField.setMinimumSize(d);
 		editProductJPanel.add(editMinJTextField, gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 20;
+		gc.gridy = 21;
 		editProdSupplierId.setPreferredSize(d);
 		editProductJPanel.add(editProdSupplierId, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 20;
+		gc.gridy = 21;
 		editProdSupplierIdJTextField.setPreferredSize(d);
 		editProdSupplierIdJTextField.setMinimumSize(d);
 		editProductJPanel.add(editProdSupplierIdJTextField, gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 21;
+		gc.gridy = 22;
 		updateProductJButton.setPreferredSize(d);
 		editProductJPanel.add(updateProductJButton, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 21;
+		gc.gridy = 22;
 		deleteStockLineJButton.setPreferredSize(d);
 		editProductJPanel.add(deleteStockLineJButton, gc);
 		
@@ -3366,59 +3378,7 @@ public class RetailGUI extends JFrame{
 				}
 			}
 		});
-		
-		JButton costGraph = new JButton ("Stock by cost price graph");
-		costGraph.setPreferredSize(d);
-		costGraph.setMinimumSize(d);
-		productGC.gridx = 0;
-		productGC.gridy = 6;
-		viewProductDetails.add(costGraph,productGC);
-		
-		costGraph.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				DefaultCategoryDataset costData = new DefaultCategoryDataset();
-				costData.setValue(product.quantityByCost(0.01, 1.99, products), "Price", "under 2");
-				costData.setValue(product.quantityByCost(2.00, 3.00, products), "Price", "2 to 3");
-				costData.setValue(product.quantityByCost(3.01, 5.00, products), "Price", "3 to 5");
-				costData.setValue(product.quantityByCost(5.01, 200.99, products), "Price", "over 5");
 			
-				JFreeChart costChart = ChartFactory.createBarChart("Cost price chart", "Price range", "Stock quantity", costData, PlotOrientation.VERTICAL, false, true, false);
-				CategoryPlot p = costChart.getCategoryPlot();
-				p.setRangeGridlinePaint(Color.BLACK);
-				ChartFrame retailGraphFrame = new ChartFrame("stock value chart",costChart);
-				retailGraphFrame.setVisible(true);
-				retailGraphFrame.setSize(450, 350);
-			}
-		});
-		
-		JButton salesGraph = new JButton ("Sales and 3 month prediction graph");
-		productGC.gridx = 1;
-		productGC.gridy = 6;
-		viewProductDetails.add(salesGraph,productGC);
-		
-		
-		
-		salesGraph.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				DefaultCategoryDataset salesData = new DefaultCategoryDataset();
-				salesData.setValue(invoice.graphSales(3, invoices), "Month", "April");
-				salesData.setValue(invoice.graphSales(4, invoices), "Month", "May");
-				salesData.setValue(invoice.graphSales(5, invoices), "Month", "June");
-				salesData.setValue(invoice.graphSales(6, invoices), "Month", "July");
-				salesData.setValue(invoice.graphSales(7, invoices), "Month", "August");
-				salesData.setValue(invoice.graphSales(8, invoices), "Month", "September");
-				salesData.setValue(invoice.graphSales(9, invoices), "Month", "October");
-				salesData.setValue(invoice.graphSales(10,invoices), "Month", "November");
-				salesData.setValue(invoice.graphSales(11, invoices), "Month", "December");
-				JFreeChart salesChart = ChartFactory.createBarChart("Sales and prediction Chart", "Month", "Sales value", salesData, PlotOrientation.VERTICAL, false, true, false);
-				CategoryPlot p = salesChart.getCategoryPlot();
-				p.setRangeGridlinePaint(Color.BLACK);
-				ChartFrame salesGraphFrame = new ChartFrame("Sales and predictions", salesChart);
-				salesGraphFrame.setVisible(true);
-				salesGraphFrame.setSize(450, 350);
-			}
-		});
-		
 
 		//Button 8: to search stock by quantity range
 		JButton searchByQuantity = new JButton ("Search by current stock quantity");
@@ -3468,6 +3428,7 @@ public class RetailGUI extends JFrame{
 			 existingEditProdId.add((products.get(i).getProductCode()));
        }
 		comboBoxEditProdId = new JComboBox<>(listToEditProdIds);
+		listToEditProdIds.setSelectedItem("Select");
 		comboBoxEditProdId.setEditable(true);
 		comboBoxEditProdId.setPreferredSize(d);
 		comboBoxEditProdId.setMinimumSize(d);
@@ -3479,6 +3440,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				for(Product product: products){
 					if(product.getProductCode().equals(comboBoxEditProdId.getSelectedItem())){
+					editCodeJTextField.setText(product.getProductCode());
 					editAuthorJTextField.setText(product.getAuthor());
 					editTitleJTextField.setText(product.getTitle());
 					editRetailJTextField.setText(Double.toString(product.getRetailPrice()));
@@ -3497,7 +3459,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				
 				for (Product product: products){
-					if(product.getProductCode().equals(enterProdCodeJTextField.getText())){
+					if(product.getProductCode().equals(comboBoxEditProdId.getSelectedItem())){
 						product.setAuthor(editAuthorJTextField.getText());
 						product.setTitle(editTitleJTextField.getText());
 						product.setRetailPrice(Double.parseDouble(editRetailJTextField.getText()));
@@ -3522,7 +3484,7 @@ public class RetailGUI extends JFrame{
 		// to delete stockline from system
 		deleteStockLineJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String code = enterProdCodeJTextField.getText();
+				String code = editCodeJTextField.getText();
 				product.removeStockById(code,products);
 				JOptionPane.showMessageDialog(null, "Stockline deleted");
 
@@ -3738,7 +3700,7 @@ public class RetailGUI extends JFrame{
 				});
 				lineChartJButton.setMinimumSize(d);
 			    lineChartJButton.setPreferredSize(d);
-			    graphgc.gridx = 1;
+			    graphgc.gridx = 0;
 				graphgc.gridy = 2;
 				graphJPanel.add(lineChartJButton, graphgc);
 				
@@ -3752,6 +3714,57 @@ public class RetailGUI extends JFrame{
 						}catch (Exception i){
 				             System.out.println(i);
 				         }
+					}
+				});
+				
+				
+				JButton costGraph = new JButton ("Stock by cost price graph");
+				costGraph.setPreferredSize(d);
+				costGraph.setMinimumSize(d);
+				graphgc.gridx = 0;
+				graphgc.gridy = 1;
+				graphJPanel.add(costGraph,graphgc);
+				
+				costGraph.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						DefaultCategoryDataset costData = new DefaultCategoryDataset();
+						costData.setValue(product.quantityByCost(0.01, 1.99, products), "Price", "under 2");
+						costData.setValue(product.quantityByCost(2.00, 3.00, products), "Price", "2 to 3");
+						costData.setValue(product.quantityByCost(3.01, 5.00, products), "Price", "3 to 5");
+						costData.setValue(product.quantityByCost(5.01, 200.99, products), "Price", "over 5");
+					
+						JFreeChart costChart = ChartFactory.createBarChart("Cost price chart", "Price range", "Stock quantity", costData, PlotOrientation.VERTICAL, false, true, false);
+						CategoryPlot p = costChart.getCategoryPlot();
+						p.setRangeGridlinePaint(Color.BLACK);
+						ChartFrame retailGraphFrame = new ChartFrame("stock value chart",costChart);
+						retailGraphFrame.setVisible(true);
+						retailGraphFrame.setSize(450, 350);
+					}
+				});
+				
+				JButton salesGraph = new JButton ("Sales and 3 month prediction graph");
+				graphgc.gridx = 1;
+				graphgc.gridy = 2;
+				graphJPanel.add(salesGraph,graphgc);
+				
+				salesGraph.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						DefaultCategoryDataset salesData = new DefaultCategoryDataset();
+						salesData.setValue(invoice.graphSales(3, invoices), "Month", "April");
+						salesData.setValue(invoice.graphSales(4, invoices), "Month", "May");
+						salesData.setValue(invoice.graphSales(5, invoices), "Month", "June");
+						salesData.setValue(invoice.graphSales(6, invoices), "Month", "July");
+						salesData.setValue(invoice.graphSales(7, invoices), "Month", "August");
+						salesData.setValue(invoice.graphSales(8, invoices), "Month", "September");
+						salesData.setValue(invoice.graphSales(9, invoices), "Month", "October");
+						salesData.setValue(invoice.graphSales(10,invoices), "Month", "November");
+						salesData.setValue(invoice.graphSales(11, invoices), "Month", "December");
+						JFreeChart salesChart = ChartFactory.createBarChart("Sales and Prediction Chart", "Month", "Sales value", salesData, PlotOrientation.VERTICAL, false, true, false);
+						CategoryPlot p = salesChart.getCategoryPlot();
+						p.setRangeGridlinePaint(Color.BLACK);
+						ChartFrame salesGraphFrame = new ChartFrame("Sales and predictions", salesChart);
+						salesGraphFrame.setVisible(true);
+						salesGraphFrame.setSize(450, 350);
 					}
 				});
 				//===========================================================================================
