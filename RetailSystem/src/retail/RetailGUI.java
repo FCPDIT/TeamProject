@@ -75,6 +75,16 @@ public class RetailGUI extends JFrame{
 	private ArrayList<OrderProduct> orderProducts3 = new ArrayList<OrderProduct>();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/dd");
 	
+	public ArrayList<Order> getOrders(){
+		return this.orders;
+	}
+	
+	public void addOrders(Order order){
+		orders.add(order);
+	}
+	
+	
+	
 	private JFrame mainJFrame = new JFrame();
 	private GridBagConstraints gc = new GridBagConstraints();
 	private JTabbedPane mainJTabbedPane = new JTabbedPane();
@@ -125,21 +135,22 @@ public class RetailGUI extends JFrame{
 	
 	//logout components
 	private JPanel logoutComponentsJPanel = new JPanel();
+	private JPanel logoutJPanel = new JPanel();
 	private JButton logoutBut = new JButton();
 	
 	private DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
 	
 	//Customer Components
 	private JLabel custIdJLabel = new JLabel("Enter Customer ID");
-	private JTextField custIdJTextField = new JTextField(null);
+	private JTextField custIdJTextField = new JTextField();
 	private JLabel custNameJLabel = new JLabel("Enter Customer Name");
-	private JTextField custNameJTextField = new JTextField(null);
+	private JTextField custNameJTextField = new JTextField();
 	private JLabel custAddressJLabel = new JLabel("Enter Customer Address");
-	private JTextField custAddressJTextField = new JTextField(null);
+	private JTextField custAddressJTextField = new JTextField();
 	private JLabel custEmailJLabel = new JLabel("Enter Customer Email");
-	private JTextField custEmailJTextField = new JTextField(null);
+	private JTextField custEmailJTextField = new JTextField();
 	private JLabel custPhoneJLabel = new JLabel("Enter Customer Phone");
-	private JTextField custPhoneJTextField = new JTextField(null);	
+	private JTextField custPhoneJTextField = new JTextField();	
 	private JButton custJButton  = new JButton("Create New Customer");
 	private JLabel viewCustById = new JLabel("Find Customer By ID: ");
 	private JComboBox<String> custIdCombo = new JComboBox<String>();
@@ -152,10 +163,12 @@ public class RetailGUI extends JFrame{
 	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer ID");
 	private JComboBox<String> editCustIdCombo = new JComboBox<String>();
 	private JButton findCustById = new JButton("Find Customer");
+	private JLabel editCustIdJLabel = new JLabel("Customer ID");
 	private JLabel editCustNameJLabel = new JLabel("Customer Name");
 	private JLabel editCustAddressJLabel = new JLabel("Customer Address");
 	private JLabel editCustEmailJLabel = new JLabel("Customer Email");
 	private JLabel editCustPhoneJLabel = new JLabel("Customer Telephone");
+	private JTextField editCustId = new JTextField();
 	private JTextField editCustName = new JTextField();
 	private JTextField editCustAddress = new JTextField();
 	private JTextField editCustEmail = new JTextField();
@@ -165,15 +178,15 @@ public class RetailGUI extends JFrame{
 	
 	//Supplier Components
 	private JLabel supplierIdJLabel = new JLabel("Supplier ID");
-	private JTextField supplierIdJTextField = new JTextField(null);
+	private JTextField supplierIdJTextField = new JTextField();
 	private JLabel supplierNameJLabel = new JLabel("Supplier Name");
-	private JTextField supplierNameJTextField = new JTextField(null);
+	private JTextField supplierNameJTextField = new JTextField();
 	private JLabel supplierAddressJLabel = new JLabel("Supplier Address");
-	private JTextField supplierAddressJTextField = new JTextField(null);
+	private JTextField supplierAddressJTextField = new JTextField();
 	private JLabel supplierEmailJLabel= new JLabel("Supplier Email");
-	private JTextField supplierEmailJTextField = new JTextField(null);
+	private JTextField supplierEmailJTextField = new JTextField();
 	private JLabel supplierPhoneJLabel = new JLabel("Supplier Phone Number");
-	private JTextField supplierPhoneJTextField = new JTextField(null);
+	private JTextField supplierPhoneJTextField = new JTextField();
 	private JButton supplierJButton = new JButton("Create New Supplier");
 	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID");
 	private JComboBox<String> suppIdCombo = new JComboBox<String>();
@@ -374,8 +387,8 @@ public class RetailGUI extends JFrame{
 	private Invoice invoice = new Invoice();
 	
 	//Combo Box for invoice ID on View Customer Invoice Panel
-	//private Vector<String> existingInvoiceNums = new Vector<>();
-	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
+	private Vector<String> existingInvoiceNums = new Vector<>();
+	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(existingInvoiceNums); //create the combo box
 	private JComboBox<String> comboBoxInvoice;
 	//====
 	private Vector<String> existingCustomerId = new Vector<>();
@@ -872,7 +885,6 @@ public class RetailGUI extends JFrame{
 		
 		employeeJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				try{
 					if(checkEmployeeDuplicate(employees, Integer.parseInt(employeeIdField.getText())) == true){
 						Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
 						employees.add(employee);
@@ -883,9 +895,6 @@ public class RetailGUI extends JFrame{
 					}else{
 						JOptionPane.showMessageDialog(null, "Employee Already Exists");
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "All Fields are Required");
-				}
 			}
 		});
 		
@@ -2583,7 +2592,7 @@ public class RetailGUI extends JFrame{
 		//vIWcUSTOMERiNVOICE fUNCTIONALITY - Marc
         //Hardcoding info TODO: Marc
         for(int i=0;i<invoices.size();i++){
-        	editExistingInvoiceNums.add(Integer.toString(invoices.get(i).getId()));
+			 existingInvoiceNums.add(Integer.toString(invoices.get(i).getId()));
         }
         for(int i = 0;i<customers.size();i++){
         existingCustomerId.add(Integer.toString(customers.get(i).getCustId()));
