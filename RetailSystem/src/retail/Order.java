@@ -15,7 +15,7 @@ public class Order implements Comparable<Order> {
 	private int orderUniqueId;
 	private ArrayList<OrderProduct> listOfProductsOrdered = new ArrayList<OrderProduct>();
 	private int supplierUniqueId;
-	private boolean delivered = false;
+	private boolean received = false;
 	private Date orderDate;
 	private double totalOrderPrice;
 	private int noOfDays;
@@ -118,12 +118,12 @@ public class Order implements Comparable<Order> {
 		return this.supplierUniqueId;
 	}
 	
-	public boolean isDelivered(){
-		return this.delivered;
+	public boolean isReceived(){
+		return this.received;
 	}
 	
-	public void setDelivered(){
-		this.delivered = true;
+	public void setReceived(){
+		this.received = true;
 		for(OrderProduct oProduct: this.listOfProductsOrdered){
 			//set the quantity of this item in stock to be itself + the amount ordered
 			oProduct.getProduct().setCurrentStock(oProduct.getProduct().getCurrentStock() + oProduct.getQuantity());
@@ -193,8 +193,8 @@ public class Order implements Comparable<Order> {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: �" + product.getCostPrice() +
-							"\n Retail Price: �" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: " + product.getCostPrice() +
+							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -229,8 +229,8 @@ public class Order implements Comparable<Order> {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: �" + product.getCostPrice() +
-							"\n Retail Price: �" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: " + product.getCostPrice() +
+							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -265,8 +265,8 @@ public class Order implements Comparable<Order> {
 							"\n Supplier: " + product.getSupplier().getName() +
 							"\n Max Stock: " + product.getMaxStock() +
 							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: �" + product.getCostPrice() +
-							"\n Retail Price: �" + product.getRetailPrice() +"\n------------";
+							"\n Cost Price: " + product.getCostPrice() +
+							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
 					break;
 				}
 			}
@@ -277,36 +277,42 @@ public class Order implements Comparable<Order> {
 		return result;
 	}
 	
-	public static String viewDeliveredOrders(ArrayList<Order> listOfOrders){
+	public static String viewReceivedOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		for(Order order: listOfOrders){
-			if(order.isDelivered()){
+			if(order.isReceived() == true){
 				if(result.equals("")){
-					result = "Delivered orders: \n";
+					result = "Received orders: \n";
 				}
+				System.out.println(order.orderUniqueId);
+				result += "\n \n" + "Order ID: " + order.getOrderUniqueId() + "\n";
 				result += printOrderDetails(order);
 			}
 		}
 		if(result.equals("")){
-			result = "No delivered orders found. ";
+			return "No received orders found. ";
 		}
-		return result;
+		else{
+			return result;
+		}
 	}
 	
-	public static String viewUndeliveredOrders(ArrayList<Order> listOfOrders){
+	public static String viewUnreceivedOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		for(Order order: listOfOrders){
-			if(!order.isDelivered()){
+			if(!order.isReceived()){
 				if(result.equals("")){
-					result = "Undelivered orders: \n";
+					result = "Unreceived orders: \n";
 				}
 				result += printOrderDetails(order);
 			}
 		}
 		if(result.equals("")){
-			result = "No undelivered orders found.";
+			return "No unreceived orders found.";
 		}
-		return result;
+		else{
+			return result;
+		}
 	}
 	
 	public static String printOrderDetails(Order order){
@@ -322,8 +328,8 @@ public class Order implements Comparable<Order> {
 					"\n Supplier: " + product.getSupplier().getName() +
 					"\n Max Stock: " + product.getMaxStock() +
 					"\n Min Stock: " + product.getMinStock() +
-					"\n Cost Price: �" + product.getCostPrice() +
-					"\n Retail Price: �" + product.getRetailPrice() +"\n" + "\n------------";
+					"\n Cost Price: " + product.getCostPrice() +
+					"\n Retail Price: " + product.getRetailPrice() +"\n" + "\n------------";
 		}
 		return result;
 	}

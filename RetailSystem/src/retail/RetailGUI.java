@@ -46,13 +46,14 @@ import javax.swing.JTextField;
 import javax.swing.RowSorter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SortOrder;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -73,16 +74,6 @@ public class RetailGUI extends JFrame{
 	private ArrayList<OrderProduct> orderProducts2 = new ArrayList<OrderProduct>();
 	private ArrayList<OrderProduct> orderProducts3 = new ArrayList<OrderProduct>();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/dd");
-	
-	public ArrayList<Order> getOrders(){
-		return this.orders;
-	}
-	
-	public void addOrders(Order order){
-		orders.add(order);
-	}
-	
-	
 	
 	private JFrame mainJFrame = new JFrame();
 	private GridBagConstraints gc = new GridBagConstraints();
@@ -124,6 +115,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editEmployeeJPanel = new JPanel();
 	
 	private JPanel proflossJPanel = new JPanel();
+	private JPanel graphJPanel = new JPanel();
 	
 	//login components
 	private JPanel loginComponentsJPanel = new JPanel();
@@ -133,41 +125,37 @@ public class RetailGUI extends JFrame{
 	
 	//logout components
 	private JPanel logoutComponentsJPanel = new JPanel();
-	private JPanel logoutJPanel = new JPanel();
 	private JButton logoutBut = new JButton();
 	
 	private DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
 	
 	//Customer Components
 	private JLabel custIdJLabel = new JLabel("Enter Customer ID");
-	private JTextField custIdJTextField = new JTextField();
+	private JTextField custIdJTextField = new JTextField(null);
 	private JLabel custNameJLabel = new JLabel("Enter Customer Name");
-	private JTextField custNameJTextField = new JTextField();
+	private JTextField custNameJTextField = new JTextField(null);
 	private JLabel custAddressJLabel = new JLabel("Enter Customer Address");
-	private JTextField custAddressJTextField = new JTextField();
+	private JTextField custAddressJTextField = new JTextField(null);
 	private JLabel custEmailJLabel = new JLabel("Enter Customer Email");
-	private JTextField custEmailJTextField = new JTextField();
+	private JTextField custEmailJTextField = new JTextField(null);
 	private JLabel custPhoneJLabel = new JLabel("Enter Customer Phone");
-	private JTextField custPhoneJTextField = new JTextField();	
+	private JTextField custPhoneJTextField = new JTextField(null);	
 	private JButton custJButton  = new JButton("Create New Customer");
 	private JLabel viewCustById = new JLabel("Find Customer By ID: ");
 	private JComboBox<String> custIdCombo = new JComboBox<String>();
 	private JButton viewCustJButton = new JButton("View By ID");
-	private JLabel viewCustByName = new JLabel("Find Customer By Name: ");
+	private JLabel viewCustByName = new JLabel("Find Customer By Name");
 	private JComboBox<String> custNameCombo = new JComboBox<String>();
 	private JButton viewCustNameJButton = new JButton("View By Name");
 	private JButton viewAllCustJButton = new JButton("View All Customers");
 	private JTextArea custJTextArea = new JTextArea(10, 65);
-	
-	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer Number");
+	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer ID");
 	private JComboBox<String> editCustIdCombo = new JComboBox<String>();
 	private JButton findCustById = new JButton("Find Customer");
-	private JLabel editCustIdJLabel = new JLabel("Customer ID");
 	private JLabel editCustNameJLabel = new JLabel("Customer Name");
 	private JLabel editCustAddressJLabel = new JLabel("Customer Address");
 	private JLabel editCustEmailJLabel = new JLabel("Customer Email");
 	private JLabel editCustPhoneJLabel = new JLabel("Customer Telephone");
-	private JTextField editCustId = new JTextField();
 	private JTextField editCustName = new JTextField();
 	private JTextField editCustAddress = new JTextField();
 	private JTextField editCustEmail = new JTextField();
@@ -176,18 +164,18 @@ public class RetailGUI extends JFrame{
 	private JButton deleteCustJButton = new JButton("Delete Customer");
 	
 	//Supplier Components
-	private JLabel supplierIdJLabel = new JLabel("Supplier ID: ");
-	private JTextField supplierIdJTextField = new JTextField();
-	private JLabel supplierNameJLabel = new JLabel("Supplier Name: ");
-	private JTextField supplierNameJTextField = new JTextField();
-	private JLabel supplierAddressJLabel = new JLabel("Supplier Address: ");
-	private JTextField supplierAddressJTextField = new JTextField();
-	private JLabel supplierEmailJLabel= new JLabel("Supplier Email: ");
-	private JTextField supplierEmailJTextField = new JTextField();
-	private JLabel supplierPhoneJLabel = new JLabel("Supplier Phone Number: ");
-	private JTextField supplierPhoneJTextField = new JTextField();
+	private JLabel supplierIdJLabel = new JLabel("Supplier ID");
+	private JTextField supplierIdJTextField = new JTextField(null);
+	private JLabel supplierNameJLabel = new JLabel("Supplier Name");
+	private JTextField supplierNameJTextField = new JTextField(null);
+	private JLabel supplierAddressJLabel = new JLabel("Supplier Address");
+	private JTextField supplierAddressJTextField = new JTextField(null);
+	private JLabel supplierEmailJLabel= new JLabel("Supplier Email");
+	private JTextField supplierEmailJTextField = new JTextField(null);
+	private JLabel supplierPhoneJLabel = new JLabel("Supplier Phone Number");
+	private JTextField supplierPhoneJTextField = new JTextField(null);
 	private JButton supplierJButton = new JButton("Create New Supplier");
-	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID: ");
+	private JLabel viewSupplyJLabel = new JLabel("Search by Supplier ID");
 	private JComboBox<String> suppIdCombo = new JComboBox<String>();
 	private JButton viewSupplyJButton = new JButton("View Supplier By ID");
 	private JLabel viewSupplyNameJLabel = new JLabel("Search by Supplier Name: ");
@@ -195,16 +183,14 @@ public class RetailGUI extends JFrame{
 	private JTextArea supplierJTextArea = new JTextArea(10, 65);
 	private JButton viewSupplyNameJButton = new JButton("View Supplier By Name");
 	private JButton allSupplyJButton = new JButton("View All Suppliers");
-	private JLabel editFindSuppIdJLabel = new JLabel("Enter Supplier Number");
+	private JLabel editFindSuppIdJLabel = new JLabel("Enter Supplier ID");
 	private JComboBox<String> editSuppIdCombo = new JComboBox<String>();
 	private JButton editSupplierJButton = new JButton("Find Supplier");
-	private JLabel editSuppIdJLabel = new JLabel("Supplier ID");
 	private JLabel editSuppNameJLabel = new JLabel("Supplier Name");
 	private JLabel editSuppAddressJLabel = new JLabel("Supplier Address");
 	private JLabel editSuppEmailJLabel = new JLabel("Supplier Email");
 	private JLabel editSuppPhoneJLabel = new JLabel("Supplier Telephone");
 	private JLabel editDeliveryJLabel = new JLabel("Edit Delivery Period");
-	private JTextField editSupplierId = new JTextField();
 	private JTextField editSupplierName = new JTextField();
 	private JTextField editSupplierAddress = new JTextField();
 	private JTextField editSupplierEmail = new JTextField();
@@ -237,8 +223,6 @@ public class RetailGUI extends JFrame{
 	private JLabel editFindById = new JLabel("Enter Employee ID ");
 	private JComboBox<String> viewEmpIdCombo = new JComboBox<String>();
 	private JButton editById = new JButton("Find Employee Details");
-	private JLabel editEmpId = new JLabel("Employee Id");
-	private JTextField editEmpIdField = new JTextField();
 	private JLabel editEmpName = new JLabel("Employee Name");
 	private JTextField editEmpNameField = new JTextField();
 	private JLabel editEmpAccess = new JLabel("Employee Access Level");
@@ -313,15 +297,19 @@ public class RetailGUI extends JFrame{
 	private JTextField viewProductIdTextField;
 	private JPanel viewProductDetailsPanel= new JPanel();
 	private JPanel viewProductDetails= new JPanel();
-	private int buttonWidth = 155;
-	private int buttonHeight = 20;
 	private ButtonGroup priceRange = new ButtonGroup();
 	private ButtonGroup quantity = new ButtonGroup();
 	
 	// TODO  Set Image Icons
-//	ImageIcon productIcon = new ImageIcon("C:/Users/James/Desktop/testA.png");
-//	ImageIcon invoiceIcon = new ImageIcon("C:/Users/James/Desktop/Invoice.png");
-			
+	ImageIcon productIcon = new ImageIcon("src\\images\\Product.png");
+	ImageIcon invoiceIcon = new ImageIcon("src\\images\\Sales.png");
+	ImageIcon loginIcon = new ImageIcon("src\\images\\Login.png");	
+	ImageIcon profitAndLossIcon = new ImageIcon("src\\images\\PL.png");
+	ImageIcon employeeIcon = new ImageIcon("src\\images\\employee.png");
+	ImageIcon customerIcon = new ImageIcon("src\\images\\Customer.png");
+	ImageIcon supplierIcon = new ImageIcon("src\\images\\Supplier.png");
+	ImageIcon orderIcon = new ImageIcon("src\\images\\Order.png");
+	
 			
 			
 	// TODO Product Combo Box
@@ -348,6 +336,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editCustomerInvoiceComponentsJPanel = new JPanel();
 	private JPanel saveInvoiceComponentsJPanel = new JPanel();
 	private JPanel editInvoiceProductsComponentsJPanel = new JPanel();
+	private JPanel editInvoiceByCustComponents = new JPanel();
 	private Vector<String> editExistingInvoiceNums = new Vector<>();
 	private DefaultComboBoxModel<String> editListOfInvoices = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
 	private JComboBox<String> editComboBoxInvoice;
@@ -385,8 +374,8 @@ public class RetailGUI extends JFrame{
 	private Invoice invoice = new Invoice();
 	
 	//Combo Box for invoice ID on View Customer Invoice Panel
-	private Vector<String> existingInvoiceNums = new Vector<>();
-	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(existingInvoiceNums); //create the combo box
+	//private Vector<String> existingInvoiceNums = new Vector<>();
+	private DefaultComboBoxModel<String> listOfInvoices = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
 	private JComboBox<String> comboBoxInvoice;
 	//====
 	private Vector<String> existingCustomerId = new Vector<>();
@@ -444,11 +433,11 @@ public class RetailGUI extends JFrame{
 	private JLabel quantitylbl = new JLabel("Quantity: ");
 	
 	//JText Fields for left panel
-	private JTextField invTextF = new JTextField(10);
+	private JTextField invTextF;// = new JTextField(10);
 	private JTextField employTextF = new JTextField(10);
 	private JTextField custTextF = new JTextField(10);
 	private JTextField prodTextF = new JTextField(10);
-	private JTextField quantityTextF = new JTextField(10);
+	private JTextField quantityTextF;// = new JTextField(10);
 	
 	//4 Buttons for left Panel
 	/*private JButton singleBtn = new JButton("Single Invoice");
@@ -495,8 +484,8 @@ public class RetailGUI extends JFrame{
 	private DefaultComboBoxModel<String> listOfAuthors = new DefaultComboBoxModel<>(existingAuthors); //create the combo box
 	private JComboBox<String> viewOrderAuthorComboBox;
 	private JButton viewOrderViewAllOrdersButton = new JButton("View All");
-	private JButton viewOrderViewDeliveredButton = new JButton("View Delivered Orders");
-	private JButton viewOrderViewUndeliveredButton = new JButton("View Undelivered Order");
+	private JButton viewOrderViewReceivedButton = new JButton("View Received Orders");
+	private JButton viewOrderViewUnreceivedButton = new JButton("View Unreceived Order");
 	private JLabel viewOrderOrderIdLabel = new JLabel("Order ID: ");
 	private JButton viewOrderOrderIdButton = new JButton("Find order with this ID");	
 	private JLabel viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
@@ -516,16 +505,16 @@ public class RetailGUI extends JFrame{
 	private JTextArea supplierOrderJTextArea = new JTextArea(10,20);
 	private JTextArea productOrderJTextArea = new JTextArea();
 	private JTextField allOrdersTotalJTextField = new JTextField("Total Owed");
-	private JButton deliverAllOrdersJButton = new JButton("Deliver All Orders");
+	private JButton receiveAllOrdersJButton = new JButton("Receive All Orders");
 	private JButton editOrderJButton = new JButton("Find Order by Id");
 	private JComboBox<String> editOrderSupplierIdComboBox;
 	private JButton editSupplierOrderJButton = new JButton("Find Order by Supplier");
 	private JTextField editOrderId = new JTextField("Edit Order Id:");
 	private JTextField editOrderSupplier = new JTextField("Edit Order Customer");
-	private JButton deliverOrderJButton = new JButton("Deliver Order");
+	private JButton receiveOrderJButton = new JButton("Receive Order");
 	private JButton saveOrderJButton = new JButton("Update Order");
 	private JButton deleteOrderJButton = new JButton("Delete Order");
-	private JTextField editOrderDeliveredStatus = new JTextField("");	
+	private JTextField editOrderReceivedStatus = new JTextField("");	
 	private JTextField editOrderAmount = new JTextField("Edit Order Amount");
 	
 	//P&L JTable Tab
@@ -547,22 +536,11 @@ public class RetailGUI extends JFrame{
 	public RetailGUI() {
 		//TODO Jump to Constructor
 		createInvoices();
+		//setDesign();
 	
-		/*remove comment marks to run login function
-
-		//lock the tabs until login successful
-		mainJTabbedPane.setEnabledAt(1, false);
-		mainJTabbedPane.setEnabledAt(2, false);
-		mainJTabbedPane.setEnabledAt(3, false);
-		mainJTabbedPane.setEnabledAt(4, false);
-		mainJTabbedPane.setEnabledAt(5, false);
-		mainJTabbedPane.setEnabledAt(6, false);
-		mainJTabbedPane.setEnabledAt(7, false);
-		mainJTabbedPane.setEnabledAt(8, false);
-						
-		*/	
 		
 		//Line Chart data sets
+		gc.insets = new Insets(10,5,5,10);
 		Invoice inv = new Invoice();
 		Order ord = new Order();
 		Employee emp = new Employee();
@@ -593,13 +571,29 @@ public class RetailGUI extends JFrame{
         line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 11), "expenditure", "Dec");
 				
 		//add login components
-		loginComponentsJPanel.setLayout(new GridLayout(4,4));
-		loginComponentsJPanel.add(new JLabel("Enter Employee ID"));
-		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID", 10));
-		loginComponentsJPanel.add(new JLabel("Enter Employee Password"));
-		loginComponentsJPanel.add(passwordTF = new JPasswordField("Password", 10));
-		loginComponentsJPanel.add(loginBut= new JButton("Login"));
-		loginJPanel.add(loginComponentsJPanel);
+		loginJPanel.setLayout(new GridBagLayout());
+		GridBagConstraints loginGC = new GridBagConstraints();
+		loginGC.insets = new Insets(5,5,5,5);
+		loginComponentsJPanel.setLayout(new GridBagLayout());
+		loginGC.gridx = 0;
+		loginGC.gridy = 0;
+		loginComponentsJPanel.add(new JLabel("Enter Employee ID"), loginGC);
+		loginGC.gridx = 0;
+		loginGC.gridy = 1;
+		loginComponentsJPanel.add(loginTF = new JTextField("Employee ID"), loginGC);
+		loginTF.setPreferredSize(d);
+		loginGC.gridx = 0;
+		loginGC.gridy = 2;
+		loginComponentsJPanel.add(new JLabel("Enter Employee Password"), loginGC);
+		loginGC.gridx = 0;
+		loginGC.gridy = 3;
+		loginComponentsJPanel.add(passwordTF = new JPasswordField("Password"), loginGC);
+		passwordTF.setPreferredSize(d);
+		loginGC.gridx = 0;
+		loginGC.gridy = 4;
+		loginComponentsJPanel.add(loginBut= new JButton("Login"), loginGC);
+		loginBut.setPreferredSize(d);
+		loginJPanel.add(loginComponentsJPanel, loginGC);
 		//add listener for login button
 		LoginButtonHandler handler = new LoginButtonHandler();
 		loginBut.addActionListener(handler);
@@ -617,10 +611,16 @@ public class RetailGUI extends JFrame{
 			}
 		});					
 		
-		logoutComponentsJPanel.setLayout(new GridLayout(4,4));
-		logoutComponentsJPanel.add(new JLabel("Logout of application: "));
-		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"));
-		logoutJPanel.add(logoutComponentsJPanel);
+		logoutComponentsJPanel.setLayout(new GridBagLayout());
+		loginGC.gridx = 0;
+		loginGC.gridy = 0;
+		logoutComponentsJPanel.add(new JLabel("Logout of application: "), loginGC);
+		loginGC.gridx = 0;
+		loginGC.gridy = 1;
+		logoutComponentsJPanel.add(logoutBut= new JButton("Logout"), loginGC);
+		logoutBut.setPreferredSize(d);
+		logoutComponentsJPanel.setVisible(false);
+		loginJPanel.add(logoutComponentsJPanel, loginGC);
 		logoutBut.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				// release all tabs - manager
@@ -634,8 +634,8 @@ public class RetailGUI extends JFrame{
 				mainJTabbedPane.setEnabledAt(5, false);
 				mainJTabbedPane.setEnabledAt(6, false);
 				mainJTabbedPane.setEnabledAt(7, false);
-				mainJTabbedPane.setEnabledAt(8, false);
-				mainJTabbedPane.setEnabledAt(0, true);;
+				logoutComponentsJPanel.setVisible(false);
+				loginComponentsJPanel.setVisible(true);
 			}
 		});
 		
@@ -646,18 +646,14 @@ public class RetailGUI extends JFrame{
 		mainJFrame.setVisible(true);
 		mainJFrame.add(mainJTabbedPane);
 		
-		mainJTabbedPane.add("Login", loginJPanel);
-		mainJTabbedPane.add("Customer Management", custJTabbedPane);
-		mainJTabbedPane.add("Supplier Management", supplyJTabbedPane);
-//		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);		// This code was used when testing image icons 
-//		mainJTabbedPane.addTab("Invoice Management",invoiceIcon, invJTabbedPane);		// Needs more work do not delete
-		mainJTabbedPane.addTab("Product Management", prodJTabbedPane);
-		mainJTabbedPane.addTab("Invoice Management", invJTabbedPane);
-		
-		mainJTabbedPane.add("Order Management", orderJTabbedPane);
-		mainJTabbedPane.add("Manage Employee Access", accessJTabbedPane);
-		mainJTabbedPane.add("Profit and Loss", proflossJTabbedPane);
-		mainJTabbedPane.add("Logout", logoutJPanel);
+		mainJTabbedPane.addTab("Login/Logout",loginIcon, loginJPanel);
+		mainJTabbedPane.addTab("Sales",invoiceIcon, invJTabbedPane);
+		mainJTabbedPane.addTab("Orders",orderIcon, orderJTabbedPane);
+		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);
+		mainJTabbedPane.addTab("Profit and Loss",profitAndLossIcon, proflossJTabbedPane);
+		mainJTabbedPane.addTab("Customer Management",customerIcon, custJTabbedPane);
+		mainJTabbedPane.addTab("Supplier Management",supplierIcon, supplyJTabbedPane);
+		mainJTabbedPane.addTab("Manage Employee Access",employeeIcon, accessJTabbedPane);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
 		custJTabbedPane.add("View Customer Details", viewCustJPanel);
@@ -684,6 +680,20 @@ public class RetailGUI extends JFrame{
 		accessJTabbedPane.add("Edit Employee", editEmployeeJPanel);
 		
 		proflossJTabbedPane.add("Profit and Loss Table", proflossJPanel);
+		proflossJTabbedPane.add("Graph Information", graphJPanel);
+		
+		/*remove comment marks to run login function
+
+		//lock the tabs until login successful
+		mainJTabbedPane.setEnabledAt(1, false);
+		mainJTabbedPane.setEnabledAt(2, false);
+		mainJTabbedPane.setEnabledAt(3, false);
+		mainJTabbedPane.setEnabledAt(4, false);
+		mainJTabbedPane.setEnabledAt(5, false);
+		mainJTabbedPane.setEnabledAt(6, false);
+		mainJTabbedPane.setEnabledAt(7, false);
+						
+		*/	
 		
 		employeeJPanel.setLayout(new GridBagLayout());
 		this.empIDPopulate(empIdCombo);
@@ -691,160 +701,192 @@ public class RetailGUI extends JFrame{
 		this.empIDPopulate(viewEmpIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		employeeId.setMinimumSize(d);
 		employeeId.setPreferredSize(d);
 		employeeJPanel.add(employeeId, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		employeeIdField.setMinimumSize(d);
 		employeeIdField.setPreferredSize(d);
 		employeeJPanel.add(employeeIdField, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		employeeName.setMinimumSize(d);
 		employeeName.setPreferredSize(d);
 		employeeJPanel.add(employeeName, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		employeeNameField.setMinimumSize(d);
 		employeeNameField.setPreferredSize(d);
 		employeeJPanel.add(employeeNameField, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		employeeAcess.setMinimumSize(d);
 		employeeAcess.setPreferredSize(d);
 		employeeJPanel.add(employeeAcess, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		employeeAcessField.setMinimumSize(d);
 		employeeAcessField.setPreferredSize(d);
 		employeeJPanel.add(employeeAcessField, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		employeeSalary.setMinimumSize(d);
 		employeeSalary.setPreferredSize(d);
 		employeeJPanel.add(employeeSalary, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		employeeSalaryField.setMinimumSize(d);
 		employeeSalaryField.setPreferredSize(d);
 		employeeJPanel.add(employeeSalaryField, gc);
 		gc.gridx = 0;
 		gc.gridy = 9;
+		employeePassword.setMinimumSize(d);
 		employeePassword.setPreferredSize(d);
 		employeeJPanel.add(employeePassword, gc);
 		gc.gridx = 0;
 		gc.gridy = 10;
+		employeePassField.setMinimumSize(d);
 		employeePassField.setPreferredSize(d);
 		employeeJPanel.add(employeePassField, gc);
 		gc.gridx = 0;
 		gc.gridy = 11;
+		employeeJButton.setMinimumSize(d);
 		employeeJButton.setPreferredSize(d);
 		employeeJPanel.add(employeeJButton, gc);
 		viewEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
-		viewEmpId.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpId, gc);
-		gc.gridx = 0;
-		gc.gridy = 2;
-		empIdCombo.setPreferredSize(d);
-		empIdCombo.setSelectedIndex(0);
-		empIdCombo.setEditable(true);
-		viewEmployeeJPanel.add(empIdCombo, gc);
-		gc.gridx = 0;
-		gc.gridy = 3;
-		viewEmpIdButton.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpIdButton, gc);
-		gc.gridx = 0;
-		gc.gridy = 4;
-		viewEmpName.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpName, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
-		empNameCombo.setPreferredSize(d);
-		empNameCombo.setSelectedIndex(0);
-		empNameCombo.setEditable(true);
-		viewEmployeeJPanel.add(empNameCombo, gc);
-		gc.gridx = 0;
-		gc.gridy = 6;
-		viewEmpNameButton.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpNameButton, gc);
-		gc.gridx = 0;
-		gc.gridy = 7;
-		viewEmpAll.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpAll, gc);
-		gc.gridx = 0;
-		gc.gridy = 8;
-		viewEmpAllButton.setPreferredSize(d);
-		viewEmployeeJPanel.add(viewEmpAllButton, gc);
-		gc.gridx = 0;
-		gc.gridy = 9;
-		JScrollPane empScrollPane = new JScrollPane(empJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane empScrollPane = new JScrollPane(empJTextArea);
 		viewEmployeeJPanel.add(empScrollPane, gc);	
 		editEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
+		gc.gridy = 2;
+		viewEmpId.setMinimumSize(d);
+		viewEmpId.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpId, gc);
+		gc.gridx = 0;
+		gc.gridy = 3;
+		empIdCombo.setMinimumSize(d);
+		empIdCombo.setPreferredSize(d);
+		empIdCombo.setSelectedIndex(0);
+		viewEmployeeJPanel.add(empIdCombo, gc);
+		gc.gridx = 0;
+		gc.gridy = 4;
+		viewEmpIdButton.setMinimumSize(d);
+		viewEmpIdButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpIdButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 5;
+		viewEmpName.setMinimumSize(d);
+		viewEmpName.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpName, gc);
+		gc.gridx = 0;
+		gc.gridy = 6;
+		empNameCombo.setMinimumSize(d);
+		empNameCombo.setPreferredSize(d);
+		empNameCombo.setSelectedIndex(0);
+		viewEmployeeJPanel.add(empNameCombo, gc);
+		gc.gridx = 0;
+		gc.gridy = 7;
+		viewEmpNameButton.setMinimumSize(d);
+		viewEmpNameButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpNameButton, gc);
+		gc.gridx = 0;
+		gc.gridy = 8;
+		viewEmpAll.setMinimumSize(d);
+		viewEmpAll.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpAll, gc);
+		gc.gridx = 0;
+		gc.gridy = 9;
+		viewEmpAllButton.setMinimumSize(d);
+		viewEmpAllButton.setPreferredSize(d);
+		viewEmployeeJPanel.add(viewEmpAllButton, gc);
+		gc.gridx = 0;
 		gc.gridy = 1;
+		editFindById.setMinimumSize(d);
 		editFindById.setPreferredSize(d);
 		editEmployeeJPanel.add(editFindById, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		viewEmpIdCombo.setMinimumSize(d);
 		viewEmpIdCombo.setPreferredSize(d);
 		viewEmpIdCombo.setSelectedIndex(0);
-		viewEmpIdCombo.setEditable(true);
 		editEmployeeJPanel.add(viewEmpIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		editById.setMinimumSize(d);
 		editById.setPreferredSize(d);
 		editEmployeeJPanel.add(editById, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
-		editEmpId.setPreferredSize(d);
-		editEmployeeJPanel.add(editEmpId, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
-		editEmpIdField.setPreferredSize(d);
-		editEmployeeJPanel.add(editEmpIdField, gc);
-		gc.gridx = 0;
-		gc.gridy = 6;
+		editEmpName.setMinimumSize(d);
 		editEmpName.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpName, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 5;
+		editEmpNameField.setMinimumSize(d);
 		editEmpNameField.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpNameField, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
+		gc.gridy = 6;
+		editEmpAccess.setMinimumSize(d);
 		editEmpAccess.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpAccess, gc);
 		gc.gridx = 0;
-		gc.gridy = 9;
+		gc.gridy = 7;
+		editEmpAccessField.setMinimumSize(d);
 		editEmpAccessField.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpAccessField, gc);
 		gc.gridx = 0;
-		gc.gridy = 10;
+		gc.gridy = 8;
+		editEmpSalary.setMinimumSize(d);
 		editEmpSalary.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpSalary, gc);
 		gc.gridx = 0;
-		gc.gridy = 11;
+		gc.gridy = 9;
+		editEmpSalaryField.setMinimumSize(d);
 		editEmpSalaryField.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpSalaryField, gc);
 		gc.gridx = 0;
-		gc.gridy = 12;
+		gc.gridy = 10;
+		editEmpPassword.setMinimumSize(d);
 		editEmpPassword.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpPassword, gc);
 		gc.gridx = 0;
-		gc.gridy = 13;
+		gc.gridy = 11;
+		editEmpPasswordField.setMinimumSize(d);
 		editEmpPasswordField.setPreferredSize(d);
 		editEmployeeJPanel.add(editEmpPasswordField, gc);
 		gc.gridx = 0;
-		gc.gridy = 14;
+		gc.gridy = 12;
+		updateEmployee.setMinimumSize(d);
 		updateEmployee.setPreferredSize(d);
 		editEmployeeJPanel.add(updateEmployee, gc);
 		gc.gridx = 0;
-		gc.gridy = 15;
+		gc.gridy = 13;
+		deleteEmployee.setMinimumSize(d);
 		deleteEmployee.setPreferredSize(d);
 		editEmployeeJPanel.add(deleteEmployee, gc);
 
 		
 		employeeJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
-				employees.add(employee);
+				try{
+					if(checkEmployeeDuplicate(employees, Integer.parseInt(employeeIdField.getText())) == true){
+						Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
+						employees.add(employee);
+						empIdCombo.addItem(employeeIdField.getText());
+						empNameCombo.addItem(employeeNameField.getText());
+						viewEmpIdCombo.addItem(employeeIdField.getText());
+						JOptionPane.showMessageDialog(null, "Employee Successfully Created");
+					}else{
+						JOptionPane.showMessageDialog(null, "Employee Already Exists");
+					}
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "All Fields are Required");
+				}
 			}
-
 		});
 		
 		viewEmpIdButton.addActionListener(new ActionListener(){
@@ -855,10 +897,10 @@ public class RetailGUI extends JFrame{
 						for(Employee employee: employees){
 							if(employee.getEmployeeId()== Integer.parseInt(empIdCombo.getSelectedItem().toString())){
 								empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-										+"\n Employee Name: " +employee.getEmployeeName() 
-										+"\n Employee Access Level: " +employee.getAccess()
-										+"\n Employee Password: " +employee.getPassword()
-										+"\n Employee Salary: " +employee.getSalary());
+										+"\n Name: " +employee.getEmployeeName() 
+										+"\n Access Level: " +employee.getAccess()
+										+"\n Password: " +employee.getPassword()
+										+"\n Salary: " +employee.getSalary());
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -873,14 +915,18 @@ public class RetailGUI extends JFrame{
 		viewEmpNameButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				// view by employee name
-				for(Employee employee: employees){
-					if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
-						empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-					+"\n Employee Name: " +employee.getEmployeeName() 
-					+"\n Employee Access Level: " +employee.getAccess()
-					+"\n Employee Password: " +employee.getPassword()
-					+"\n Employee Salary: " +employee.getSalary());
-					}
+				if(employees.size() >= 1){
+					for(Employee employee: employees){
+						if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
+							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+						+"\n Name: " +employee.getEmployeeName() 
+						+"\n Access Level: " +employee.getAccess()
+						+"\n Password: " +employee.getPassword()
+						+"\n Salary: " +employee.getSalary());
+						}
+				}
+				}else{
+					JOptionPane.showMessageDialog(null, "No Employees Found");
 				}
 			}
 
@@ -893,13 +939,13 @@ public class RetailGUI extends JFrame{
 					if(employees.size() >= 1){
 						for(Employee employee: employees){
 							empJTextArea.append("\n Employee ID: "+employee.getEmployeeId()
-							+"\n Employee Name: " +employee.getEmployeeName() 
-							+"\n Employee Access Level: " +employee.getAccess()
-							+"\n Employee Password: " +employee.getPassword()
-							+"\n Employee Salary: " +employee.getSalary()+"\n");
+							+"\n Name: " +employee.getEmployeeName() 
+							+"\n Access Level: " +employee.getAccess()
+							+"\n Password: " +employee.getPassword()
+							+"\n Salary: " +employee.getSalary()+"\n");
 						}
 					}else{
-						JOptionPane.showMessageDialog(null, "No Customers Found");
+						JOptionPane.showMessageDialog(null, "No Employees Found");
 					}
 			}
 		});
@@ -909,7 +955,6 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Employee employee: employees){
 						if(employee.getEmployeeId()== Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
-							editEmpIdField.setText(Integer.toString(employee.getEmployeeId()));
 							editEmpNameField.setText(employee.getEmployeeName());
 							editEmpAccessField.setText(Integer.toString(employee.getAccess()));
 							editEmpSalaryField.setText(Double.toString(employee.getSalary()));
@@ -917,7 +962,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
 				}
 			}
 		});
@@ -928,7 +973,6 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Employee employee: employees){
 						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
-							employee.setEmployeeId(Integer.parseInt(editEmpIdField.getText()));
 							employee.setEmployeeName(editEmpNameField.getText());
 							employee.setAccess(Integer.parseInt(editEmpAccessField.getText()));
 							employee.setSalary(Double.parseDouble(editEmpSalaryField.getText()));
@@ -937,7 +981,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
 				}
 			}
 		});
@@ -948,6 +992,9 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Employee employee: employees){
 						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
+							empIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
+							empNameCombo.removeItem(viewEmpIdCombo.getSelectedItem());
+							viewEmpIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
 							employees.remove(employee);
 							JOptionPane.showMessageDialog(null, "Employee Deleted");
 						}
@@ -966,143 +1013,164 @@ public class RetailGUI extends JFrame{
 		this.custIdPopulate(editCustIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		custIdJLabel.setMinimumSize(d);
 		custIdJLabel.setPreferredSize(d);
 		addCustJPanel.add(custIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		custIdJTextField.setMinimumSize(d);
 		custIdJTextField.setPreferredSize(d);
 		addCustJPanel.add(custIdJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		custNameJLabel.setMinimumSize(d);
+		custNameJLabel.setPreferredSize(d);
 		addCustJPanel.add(custNameJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		custNameJTextField.setMinimumSize(d);
 		custNameJTextField.setPreferredSize(d);
 		addCustJPanel.add(custNameJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		custAddressJLabel.setMinimumSize(d);
 		custAddressJLabel.setPreferredSize(d);
 		addCustJPanel.add(custAddressJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		custAddressJTextField.setMinimumSize(d);
 		custAddressJTextField.setPreferredSize(d);
 		addCustJPanel.add(custAddressJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		custEmailJLabel.setMinimumSize(d);
 		custEmailJLabel.setPreferredSize(d);
 		addCustJPanel.add(custEmailJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		custEmailJTextField.setMinimumSize(d);
 		custEmailJTextField.setPreferredSize(d);
 		addCustJPanel.add(custEmailJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 9;
+		custPhoneJLabel.setMinimumSize(d);
 		custPhoneJLabel.setPreferredSize(d);
 		addCustJPanel.add(custPhoneJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 10;
+		custPhoneJTextField.setMinimumSize(d);
 		custPhoneJTextField.setPreferredSize(d);
 		addCustJPanel.add(custPhoneJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 11;
+		custJButton.setMinimumSize(d);
 		custJButton.setPreferredSize(d);
 		addCustJPanel.add(custJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		JScrollPane custScrollPane = new JScrollPane(custJTextArea);
+		viewCustJPanel.add(custScrollPane, gc);
+		gc.gridx = 0;
+		gc.gridy = 2;
+		viewCustById.setMinimumSize(d);
 		viewCustById.setPreferredSize(d);
 		viewCustJPanel.add(viewCustById, gc);
 		gc.gridx = 0;
-		gc.gridy = 2;
+		gc.gridy = 3;
+		custIdCombo.setMinimumSize(d);
 		custIdCombo.setPreferredSize(d);
 		custIdCombo.setSelectedIndex(0);
-		custIdCombo.setEditable(true);
 		viewCustJPanel.add(custIdCombo, gc);
 		gc.gridx = 0;
-		gc.gridy = 3;
+		gc.gridy = 4;
+		viewCustJButton.setMinimumSize(d);
 		viewCustJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewCustJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 4;
+		gc.gridy = 5;
+		viewCustByName.setMinimumSize(d);
 		viewCustByName.setPreferredSize(d);
 		viewCustJPanel.add(viewCustByName, gc);
 		gc.gridx = 0;
-		gc.gridy = 5;
+		gc.gridy = 6;
+		custNameCombo.setMinimumSize(d);
 		custNameCombo.setPreferredSize(d);
 		custNameCombo.setSelectedIndex(0);
-		custNameCombo.setEditable(true);
 		viewCustJPanel.add(custNameCombo, gc);
 		gc.gridx = 0;
-		gc.gridy = 6;
+		gc.gridy = 7;
+		viewCustNameJButton.setMinimumSize(d);
 		viewCustNameJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewCustNameJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 8;
+		viewAllCustJButton.setMinimumSize(d);
 		viewAllCustJButton.setPreferredSize(d);
 		viewCustJPanel.add(viewAllCustJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
-		JScrollPane custScrollPane = new JScrollPane(custJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		viewCustJPanel.add(custScrollPane, gc);
-		gc.gridx = 0;
 		gc.gridy = 1;
+		editFindCustIdJLabel.setMinimumSize(d);
 		editFindCustIdJLabel.setPreferredSize(d);
 		editCustJPanel.add(editFindCustIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		editCustIdCombo.setMinimumSize(d);
 		editCustIdCombo.setPreferredSize(d);
 		editCustIdCombo.setSelectedItem(0);
-		editCustIdCombo.setEditable(true);
 		editCustJPanel.add(editCustIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		findCustById.setMinimumSize(d);
 		findCustById.setPreferredSize(d);
 		editCustJPanel.add(findCustById, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
-		editCustIdJLabel.setPreferredSize(d);
-		editCustJPanel.add(editCustIdJLabel, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
-		editCustId.setPreferredSize(d);
-		editCustJPanel.add(editCustId, gc);
-		gc.gridx = 0;
-		gc.gridy = 6;
+		editCustNameJLabel.setMinimumSize(d);
 		editCustNameJLabel.setPreferredSize(d);
 		editCustJPanel.add(editCustNameJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 5;
+		editCustName.setMinimumSize(d);
 		editCustName.setPreferredSize(d);
 		editCustJPanel.add(editCustName, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
+		gc.gridy = 6;
+		editCustAddressJLabel.setMinimumSize(d);
 		editCustAddressJLabel.setPreferredSize(d);
 		editCustJPanel.add(editCustAddressJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 9;
+		gc.gridy = 7;
+		editCustAddress.setMinimumSize(d);
 		editCustAddress.setPreferredSize(d);
 		editCustJPanel.add(editCustAddress, gc);
 		gc.gridx = 0;
-		gc.gridy = 10;
+		gc.gridy = 8;
+		editCustEmailJLabel.setMinimumSize(d);
 		editCustEmailJLabel.setPreferredSize(d);
 		editCustJPanel.add(editCustEmailJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 11;
+		gc.gridy = 9;
+		editCustEmail.setMinimumSize(d);
 		editCustEmail.setPreferredSize(d);
 		editCustJPanel.add(editCustEmail, gc);
 		gc.gridx = 0;
-		gc.gridy = 12;
+		gc.gridy = 10;
+		editCustPhoneJLabel.setMinimumSize(d);
 		editCustPhoneJLabel.setPreferredSize(d);
 		editCustJPanel.add(editCustPhoneJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 13;
+		gc.gridy = 11;
+		editCustPhone.setMinimumSize(d);
 		editCustPhone.setPreferredSize(d);
 		editCustJPanel.add(editCustPhone, gc);
 		gc.gridx = 0;
-		gc.gridy = 14;
+		gc.gridy = 12;
+		updateCustJButton.setMinimumSize(d);
 		updateCustJButton.setPreferredSize(d);
 		editCustJPanel.add(updateCustJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 15;
+		gc.gridy = 13;
+		deleteCustJButton.setMinimumSize(d);
 		deleteCustJButton.setPreferredSize(d);
 		editCustJPanel.add(deleteCustJButton, gc);
 		
@@ -1111,12 +1179,19 @@ public class RetailGUI extends JFrame{
 			// function to add a new customer
 			public void actionPerformed(ActionEvent e){
 				try{
-					Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
-						custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
-						custPhoneJTextField.getText());
-					customers.add(customer);
-					JOptionPane.showMessageDialog(null, "New Customer Added");
-					editCustomerListOfInvoices.addElement(custIdJTextField.getText());
+					if(checkCustomerDuplicate(customers, Integer.parseInt(custIdJTextField.getText())) == true){
+						Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
+							custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
+							custPhoneJTextField.getText());
+						customers.add(customer);
+						custIdCombo.addItem(Integer.toString(customer.getCustId()));
+						custNameCombo.addItem(customer.getCustName());
+						editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
+						JOptionPane.showMessageDialog(null, "New Customer Added");
+						editCustomerListOfInvoices.addElement(custIdJTextField.getText());
+					}else{
+							JOptionPane.showMessageDialog(null, "Customer Already Exists");
+						}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
@@ -1131,10 +1206,10 @@ public class RetailGUI extends JFrame{
 						for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(custIdCombo.getSelectedItem().toString())){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
-									+"\n Customer Name: "+customer.getCustName()
-									+"\n Customer Address: "+customer.getCustAddress()
-									+"\n Customer Email: "+customer.getCustEmail()
-									+"\n Customer Phone: "+customer.getCustTelephone());
+									+"\n Name: "+customer.getCustName()
+									+"\n Address: "+customer.getCustAddress()
+									+"\n Email: "+customer.getCustEmail()
+									+"\n Phone: "+customer.getCustTelephone());
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -1153,10 +1228,10 @@ public class RetailGUI extends JFrame{
 						for(Customer customer: customers){
 						if(customer.getCustName() == custNameCombo.getSelectedItem()){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
-									+"\n Customer Name: "+customer.getCustName()
-									+"\n Customer Address: "+customer.getCustAddress()
-									+"\n Customer Email: "+customer.getCustEmail()
-									+"\n Customer Phone: "+customer.getCustTelephone());
+									+"\n Name: "+customer.getCustName()
+									+"\n Address: "+customer.getCustAddress()
+									+"\n Email: "+customer.getCustEmail()
+									+"\n Phone: "+customer.getCustTelephone());
 							}
 						}
 				}else{
@@ -1173,10 +1248,10 @@ public class RetailGUI extends JFrame{
 						for(Customer customer: customers){
 							
 							custJTextArea.append("\n Customer Id: "+customer.getCustId()
-										+"\n Customer Name: "+customer.getCustName()
-										+"\n Customer Address: "+customer.getCustAddress()
-										+"\n Customer Email: "+customer.getCustEmail()
-										+"\n Customer Phone: "+customer.getCustTelephone()
+										+"\n Name: "+customer.getCustName()
+										+"\n Address: "+customer.getCustAddress()
+										+"\n Email: "+customer.getCustEmail()
+										+"\n Phone: "+customer.getCustTelephone()
 										+"\n");
 						}
 					}else{
@@ -1190,7 +1265,6 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
-							editCustId.setText(Integer.toString(customer.getCustId()));
 							editCustName.setText(customer.getCustName());
 							editCustAddress.setText(customer.getCustAddress());
 							editCustEmail.setText(customer.getCustEmail());
@@ -1209,11 +1283,11 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
-							customer.setCustId(Integer.parseInt(editCustId.getText()));
 							customer.setCustName(editCustName.getText());
 							customer.setCustAddress(editCustAddress.getText());
 							customer.setCustEmail(editCustEmail.getText());
 							customer.setCustTelephone(editCustPhone.getText());
+							JOptionPane.showMessageDialog(null, "Customer Updated.");
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1228,7 +1302,11 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
+							custIdCombo.removeItem(editCustIdCombo.getSelectedItem());
+							custNameCombo.removeItem(editCustIdCombo.getSelectedItem());
+							editCustIdCombo.removeItem(editCustIdCombo.getSelectedItem());
 							customers.remove(customer);
+							JOptionPane.showMessageDialog(null, "Customer Deleted");
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1245,163 +1323,192 @@ public class RetailGUI extends JFrame{
 		this.suppIdPopulate(editSuppIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		supplierIdJLabel.setMinimumSize(d);
 		supplierIdJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		supplierIdJTextField.setMinimumSize(d);
 		supplierIdJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierIdJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		supplierNameJLabel.setMinimumSize(d);
 		supplierNameJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierNameJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
+		supplierNameJTextField.setMinimumSize(d);
 		supplierNameJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierNameJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 5;
+		supplierAddressJLabel.setMinimumSize(d);
 		supplierAddressJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierAddressJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		supplierAddressJTextField.setMinimumSize(d);
 		supplierAddressJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierAddressJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
+		supplierEmailJLabel.setMinimumSize(d);
 		supplierEmailJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierEmailJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 8;
+		supplierEmailJTextField.setMinimumSize(d);
 		supplierEmailJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierEmailJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 9;
+		supplierPhoneJLabel.setMinimumSize(d);
 		supplierPhoneJLabel.setPreferredSize(d);
 		addSupplyJPanel.add(supplierPhoneJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 10;
+		supplierPhoneJTextField.setMinimumSize(d);
 		supplierPhoneJTextField.setPreferredSize(d);
 		addSupplyJPanel.add(supplierPhoneJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 11;
+		supplierJButton.setMinimumSize(d);
 		supplierJButton.setPreferredSize(d);
 		addSupplyJPanel.add(supplierJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
+		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea);
+		viewSupplyJPanel.add(suppJScrollPane, gc);
+		gc.gridx = 0;
+		gc.gridy = 2;
+		viewSupplyJLabel.setMinimumSize(d);
 		viewSupplyJLabel.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 2;
+		gc.gridy = 3;
+		suppIdCombo.setMinimumSize(d);
 		suppIdCombo.setPreferredSize(d);
 		suppIdCombo.setSelectedIndex(0);
-		suppIdCombo.setEditable(true);
 		viewSupplyJPanel.add(suppIdCombo, gc);
 		gc.gridx = 0;
-		gc.gridy = 3;
+		gc.gridy = 4;
+		viewSupplyJButton.setMinimumSize(d);
 		viewSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 4;
+		gc.gridy = 5;
+		viewSupplyNameJLabel.setMinimumSize(d);
 		viewSupplyNameJLabel.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyNameJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 5;
+		gc.gridy = 6;
+		suppNameCombo.setMinimumSize(d);
 		suppNameCombo.setPreferredSize(d);
 		suppNameCombo.setSelectedIndex(0);
-		suppNameCombo.setEditable(true);
 		viewSupplyJPanel.add(suppNameCombo, gc);
 		gc.gridx = 0;
-		gc.gridy = 6;
+		gc.gridy = 7;
+		viewSupplyNameJButton.setMinimumSize(d);
 		viewSupplyNameJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(viewSupplyNameJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 8;
+		allSupplyJButton.setMinimumSize(d);
 		allSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(allSupplyJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
-		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		viewSupplyJPanel.add(suppJScrollPane, gc);
-		gc.gridx = 0;
 		gc.gridy = 1;
+		editFindSuppIdJLabel.setMinimumSize(d);
 		editFindSuppIdJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editFindSuppIdJLabel, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
+		editSuppIdCombo.setMinimumSize(d);
 		editSuppIdCombo.setPreferredSize(d);
 		editSuppIdCombo.setSelectedIndex(0);
-		editSuppIdCombo.setEditable(true);
 		editSupplyJPanel.add(editSuppIdCombo, gc);
 		gc.gridx = 0;
 		gc.gridy = 3;
+		editSupplierJButton.setMinimumSize(d);
 		editSupplierJButton.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierJButton, gc);
 		gc.gridx = 0;
 		gc.gridy = 4;
-		editSuppIdJLabel.setPreferredSize(d);
-		editSupplyJPanel.add(editSuppIdJLabel, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
-		editSupplierId.setPreferredSize(d);
-		editSupplyJPanel.add(editSupplierId, gc);
-		gc.gridx = 0;
-		gc.gridy = 6;
+		editSuppNameJLabel.setMinimumSize(d);
 		editSuppNameJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editSuppNameJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 7;
+		gc.gridy = 5;
+		editSupplierName.setMinimumSize(d);
 		editSupplierName.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierName, gc);
 		gc.gridx = 0;
-		gc.gridy = 8;
+		gc.gridy = 6;
+		editSuppAddressJLabel.setMinimumSize(d);
 		editSuppAddressJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editSuppAddressJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 9;
+		gc.gridy = 7;
+		editSupplierAddress.setMinimumSize(d);
 		editSupplierAddress.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierAddress, gc);
 		gc.gridx = 0;
-		gc.gridy = 10;
+		gc.gridy = 8;
+		editSuppEmailJLabel.setMinimumSize(d);
 		editSuppEmailJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editSuppEmailJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 11;
+		gc.gridy = 9;
+		editSupplierEmail.setMinimumSize(d);
 		editSupplierEmail.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierEmail, gc);
 		gc.gridx = 0;
-		gc.gridy = 12;
+		gc.gridy = 10;
+		editSuppPhoneJLabel.setMinimumSize(d);
 		editSuppPhoneJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editSuppPhoneJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 13;
+		gc.gridy = 11;
+		editSupplierPhone.setMinimumSize(d);
 		editSupplierPhone.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierPhone, gc);
 		gc.gridx = 0;
-		gc.gridy = 14;
+		gc.gridy = 12;
+		editDeliveryJLabel.setMinimumSize(d);
 		editDeliveryJLabel.setPreferredSize(d);
 		editSupplyJPanel.add(editDeliveryJLabel, gc);
 		gc.gridx = 0;
-		gc.gridy = 15;
+		gc.gridy = 13;
+		editSupplierDelivery.setMinimumSize(d);
 		editSupplierDelivery.setPreferredSize(d);
 		editSupplyJPanel.add(editSupplierDelivery, gc);
 		gc.gridx = 0;
-		gc.gridy = 16;
+		gc.gridy = 14;
+		saveSupplierJButton.setMinimumSize(d);
 		saveSupplierJButton.setPreferredSize(d);
 		editSupplyJPanel.add(saveSupplierJButton, gc);
 		gc.gridx = 0;
-		gc.gridy = 17;
+		gc.gridy = 15;
 		deleteSupplierJButton.setPreferredSize(d);
+		deleteSupplierJButton.setMinimumSize(d);
 		editSupplyJPanel.add(deleteSupplierJButton, gc);
 
 		supplierJButton.addActionListener(new ActionListener(){
 			// function to add a new supplier
 			public void actionPerformed(ActionEvent e){
 				try{	
-					Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
-							supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
-					suppliers.add(supplier);
-					JOptionPane.showMessageDialog(null, "New Supplier Added");
+						if(checkSupplierDuplicate(suppliers, Integer.parseInt(supplierIdJTextField.getText())) == true){
+							Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
+									supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
+							suppliers.add(supplier);
+							JOptionPane.showMessageDialog(null, "New Supplier Added");
+							suppIdCombo.addItem(supplierIdJTextField.getText());
+							suppNameCombo.addItem(supplierNameJTextField.getText());
+							editSuppIdCombo.addItem(supplierIdJTextField.getText());
+						}else{
+							JOptionPane.showMessageDialog(null, "Supplier Already Exists");
+						}
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
@@ -1416,11 +1523,11 @@ public class RetailGUI extends JFrame{
 						for(Supplier supplier: suppliers){
 							if(supplier.getId() == Integer.parseInt(suppIdCombo.getSelectedItem().toString())){
 								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
-										+"\n Supplier Name: "+supplier.getName()
-										+"\n Supplier Address: "+supplier.getAddress()
-										+"\n Supplier Email: "+supplier.getEmail()
-										+"\n Supplier Phone: "+supplier.getPhone()
-										+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+										+"\n Name: "+supplier.getName()
+										+"\n Address: "+supplier.getAddress()
+										+"\n Email: "+supplier.getEmail()
+										+"\n Phone: "+supplier.getPhone()
+										+"\n Delivery Time: "+supplier.getDaysToDeliver());
 							}
 						}
 					}else{
@@ -1439,11 +1546,11 @@ public class RetailGUI extends JFrame{
 					for(Supplier supplier: suppliers){
 						if(supplier.getName() == suppNameCombo.getSelectedItem()){
 							supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
-									+"\n Supplier Name: "+supplier.getName()
-									+"\n Supplier Address: "+supplier.getAddress()
-									+"\n Supplier Email: "+supplier.getEmail()
-									+"\n Supplier Phone: "+supplier.getPhone()
-									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver());
+									+"\n Name: "+supplier.getName()
+									+"\n Address: "+supplier.getAddress()
+									+"\n Email: "+supplier.getEmail()
+									+"\n Phone: "+supplier.getPhone()
+									+"\n Delivery Time: "+supplier.getDaysToDeliver());
 						}
 					}
 				}else{
@@ -1459,11 +1566,11 @@ public class RetailGUI extends JFrame{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
 							supplierJTextArea.append("\n Supplier Id: "+supplier.getId()
-									+"\n Supplier Name: "+supplier.getName()
-									+"\n Supplier Address: "+supplier.getAddress()
-									+"\n Supplier Email: "+supplier.getEmail()
-									+"\n Supplier Phone: "+supplier.getPhone()
-									+"\n Supplier Delivery Time: "+supplier.getDaysToDeliver()+"\n");
+									+"\n Name: "+supplier.getName()
+									+"\n Address: "+supplier.getAddress()
+									+"\n Email: "+supplier.getEmail()
+									+"\n Phone: "+supplier.getPhone()
+									+"\n Delivery Time: "+supplier.getDaysToDeliver()+"\n");
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Suppliers Found");
@@ -1477,7 +1584,6 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
-							editSupplierId.setText(Integer.toString(supplier.getId()));
 							editSupplierName.setText(supplier.getName());
 							editSupplierAddress.setText(supplier.getAddress());
 							editSupplierEmail.setText(supplier.getEmail());
@@ -1497,12 +1603,12 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
-							supplier.setId(Integer.parseInt(editSupplierId.getText()));
 							supplier.setName(editSupplierName.getText());
 							supplier.setAddress(editSupplierAddress.getText());
 							supplier.setEmail(editSupplierEmail.getText());
 							supplier.setPhone(editSupplierPhone.getText());
 							supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
+							JOptionPane.showMessageDialog(null, "Supplier Updated");
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1518,7 +1624,11 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
+							suppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
+							suppNameCombo.removeItem(editSuppIdCombo.getSelectedItem());
+							editSuppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
 							suppliers.remove(supplier);
+							JOptionPane.showMessageDialog(null, "Supplier Deleted");
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1738,121 +1848,197 @@ public class RetailGUI extends JFrame{
 		
 		
 		//add edit invoice components
-		fillComboBox();
-		findInvoiceComponentsJPanel.setLayout(new GridBagLayout());
-		gc.gridx = 0;
-		gc.gridy = 1;
-		editComboBoxInvoice = new JComboBox<String>(editListOfInvoices); //Combo box rather than Text Field
-		editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
-		findInvoiceComponentsJPanel.add(editComboBoxInvoice, gc);
-		editComboBoxInvoice.setPreferredSize(d);
-		gc.gridx = 0;
-		gc.gridy = 2;
-		editInvoiceJButton.setPreferredSize(d);
-		findInvoiceComponentsJPanel.add(editInvoiceJButton, gc);
-		gc.gridx = 0;
-		gc.gridy = 3;
-		editComboBoxCustomerInvoice = new JComboBox<String>(editCustomerListOfInvoices); //Combo box rather than Text Field
-		editCustomerListOfInvoices.setSelectedItem(editExistingCustomerInvoiceNums.get(0));
-		findInvoiceComponentsJPanel.add(editComboBoxCustomerInvoice, gc);
-		editComboBoxCustomerInvoice.setPreferredSize(d);
-		gc.gridx = 0;
-		gc.gridy = 4;
-		editCustomerInvoiceJButton.setPreferredSize(d);
-		findInvoiceComponentsJPanel.add(editCustomerInvoiceJButton, gc);
-		editCustomerInvoiceComponentsJPanel.setLayout(new GridLayout(2,2));
-		editCustomerInvoiceComponentsJPanel.add(new JLabel("Total owed on all invoices:"));
-		editCustomerInvoiceComponentsJPanel.add(allInvoicesTotalJTextField);
-		JScrollPane customerInvoiceJScrollPane = new JScrollPane(customerInvoiceJTextArea);
-		customerInvoiceJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		editCustomerInvoiceComponentsJPanel.add(customerInvoiceJScrollPane);
-		editCustomerInvoiceComponentsJPanel.add(payAllInvoicesJButton);
-		
-		payAllInvoicesJButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
-				int id = Integer.parseInt( s );
-				for(Invoice invoice: invoices){
-					if(id == invoice.getCustomer().getCustId() ){
-						invoice.setPaid(true);
+			fillComboBox();				
+			//find by invoice id & customer id components
+			findInvoiceComponentsJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editComboBoxInvoice = new JComboBox<String>(editListOfInvoices); //Combo box rather than Text Field
+			editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
+			findInvoiceComponentsJPanel.add(editComboBoxInvoice, gc);
+			editComboBoxInvoice.setPreferredSize(d);
+			editComboBoxInvoice.setMinimumSize(d);
+			gc.gridx = 1;
+			gc.gridy = 1;
+			editInvoiceJButton.setPreferredSize(d);
+			editInvoiceJButton.setMinimumSize(d);
+			findInvoiceComponentsJPanel.add(editInvoiceJButton, gc);
+			gc.gridx = 0;
+			gc.gridy = 2;
+			editComboBoxCustomerInvoice = new JComboBox<String>(editCustomerListOfInvoices); //Combo box rather than Text Field
+			editCustomerListOfInvoices.setSelectedItem(editExistingCustomerInvoiceNums.get(0));
+			findInvoiceComponentsJPanel.add(editComboBoxCustomerInvoice, gc);
+			editComboBoxCustomerInvoice.setPreferredSize(d);
+			editComboBoxCustomerInvoice.setMinimumSize(d);
+			gc.gridx = 1;
+			gc.gridy = 2;
+			editCustomerInvoiceJButton.setPreferredSize(d);
+			editCustomerInvoiceJButton.setMinimumSize(d);
+			findInvoiceComponentsJPanel.add(editCustomerInvoiceJButton, gc);
+			
+			//edit by invoice id components
+			editInvoiceComponentsJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			editInvoiceComponentsJPanel.add(new JLabel("Employee ID"), gc);
+			gc.gridx = 1;
+			gc.gridy = 0;
+			editInvoiceComponentsJPanel.add(editInvoiceEmployee, gc);
+			editInvoiceEmployee.setEditable(false);
+			editInvoiceEmployee.setPreferredSize(d);
+			editInvoiceEmployee.setMinimumSize(d);
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editInvoiceComponentsJPanel.add(new JLabel("Customer ID"), gc);
+			gc.gridx = 1;
+			gc.gridy = 1;
+			editInvoiceComponentsJPanel.add(editInvoiceCustomer, gc);
+			editInvoiceCustomer.setEditable(false);
+			editInvoiceCustomer.setPreferredSize(d);
+			editInvoiceCustomer.setMinimumSize(d);
+			gc.gridx = 0;
+			gc.gridy = 2;
+			editInvoiceComponentsJPanel.add(new JLabel("Total"), gc);
+			gc.gridx = 1;
+			gc.gridy = 2;
+			editInvoiceComponentsJPanel.add(editInvoiceAmount, gc);
+			editInvoiceAmount.setPreferredSize(d);
+			editInvoiceAmount.setMinimumSize(d);
+			gc.gridx = 0;
+			gc.gridy = 3;
+			editInvoiceComponentsJPanel.add(editPayStatus, gc);
+			editPayStatus.setPreferredSize(d);
+			editPayStatus.setMinimumSize(d);
+			editPayStatus.setEditable(false);
+			gc.gridx = 1;
+			gc.gridy = 3;
+			editInvoiceComponentsJPanel.add(payInvoiceJButton, gc);
+			payInvoiceJButton.setPreferredSize(d);
+			payInvoiceJButton.setMinimumSize(d);
+			payInvoiceJButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					String s = (String)editComboBoxInvoice.getSelectedItem();
+					int id = Integer.parseInt( s );
+					for(Invoice invoice: invoices){
+						if(invoice.getId() == id){
+							invoice.setPaid(true);
+						}
 					}
+					JOptionPane.showMessageDialog(null, "Paid!");
+					editPayStatus.setForeground(Color.BLACK);
+					editInvoiceJButton.doClick();		
 				}
-				JOptionPane.showMessageDialog(null, "Paid!");
-				editCustomerInvoiceJButton.doClick();		
-				}
-		});
-		customerInvoiceJTextArea.setEditable(false);
-		allInvoicesTotalJTextField.setEditable(false);
-		editInvoiceComponentsJPanel.setLayout(new GridLayout(5,2));
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Invoice ID"));
-		editInvoiceComponentsJPanel.add(editInvoiceId);
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Employee ID"));
-		editInvoiceComponentsJPanel.add(editInvoiceEmployee);
-		editInvoiceComponentsJPanel.add(new JLabel("Enter New Customer ID"));
-		editInvoiceComponentsJPanel.add(editInvoiceCustomer);
-		editInvoiceComponentsJPanel.add(new JLabel("Total"));
-		editInvoiceComponentsJPanel.add(editInvoiceAmount);
-		editInvoiceComponentsJPanel.add(editPayStatus);
-		editPayStatus.setEditable(false);
-		editInvoiceComponentsJPanel.add(payInvoiceJButton);
-		payInvoiceJButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				String s = (String)editComboBoxInvoice.getSelectedItem();
-				int id = Integer.parseInt( s );
-				for(Invoice invoice: invoices){
-					if(invoice.getId() == id){
-						invoice.setPaid(true);
+			});
+	
+			//show in jscrollpane product details
+			gc.gridx = 0;
+			gc.gridy = 0;
+			JScrollPane invoiceProductsJScrollPane = new JScrollPane(productInvoiceJTextArea);
+			invoiceProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
+			editInvoiceProductsComponentsJPanel.setLayout(new GridLayout(1,2));
+			productInvoiceJTextArea.setEditable(false);
+			
+			//save and delete buttons
+			saveInvoiceComponentsJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			saveInvoiceComponentsJPanel.add(saveInvoiceJButton, gc);
+			saveInvoiceJButton.setPreferredSize(d);
+			saveInvoiceJButton.setMinimumSize(d);
+			gc.gridx = 1;
+			gc.gridy = 0;
+			saveInvoiceComponentsJPanel.add(deleteInvoiceJButton, gc);
+			deleteInvoiceJButton.setPreferredSize(d);
+			deleteInvoiceJButton.setMinimumSize(d);
+			deleteInvoiceJButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					int index=0;
+					String s = (String)editComboBoxInvoice.getSelectedItem();
+					int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
+					int id = Integer.parseInt( s );
+					for(Invoice invoice: invoices){
+						if(invoice.getId() == id){
+							index = invoices.indexOf(invoice);
+						}
 					}
+					invoices.remove(index);
+					JOptionPane.showMessageDialog(null, "Deleted!");
+					editComboBoxInvoice.removeItemAt(comboIndex);
+					editCustomerInvoiceComponentsJPanel.setVisible(false);
+					editInvoiceComponentsJPanel.setVisible(false);
+					saveInvoiceComponentsJPanel.setVisible(false);
+					editInvoiceProductsComponentsJPanel.setVisible(false);
 				}
-				JOptionPane.showMessageDialog(null, "Paid!");
-				editPayStatus.setForeground(Color.BLACK);
-				editInvoiceJButton.doClick();		
-			}
-		});
-		JScrollPane invoiceProductsJScrollPane = new JScrollPane(productInvoiceJTextArea);
-		invoiceProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
-		editInvoiceProductsComponentsJPanel.setLayout(new GridLayout(1,2));
-		productInvoiceJTextArea.setEditable(false);
-		saveInvoiceComponentsJPanel.setLayout(new GridLayout(1,2));
-		saveInvoiceComponentsJPanel.add(saveInvoiceJButton);
-		saveInvoiceComponentsJPanel.add(deleteInvoiceJButton);
-		deleteInvoiceJButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				int index=0;
-				String s = (String)editComboBoxInvoice.getSelectedItem();
-				int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
-				int id = Integer.parseInt( s );
-				for(Invoice invoice: invoices){
-					if(invoice.getId() == id){
-						index = invoices.indexOf(invoice);
+			});
+				
+			//edit by customer components
+			editCustomerInvoiceComponentsJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			JScrollPane customerInvoiceJScrollPane = new JScrollPane(customerInvoiceJTextArea);
+			customerInvoiceJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			editCustomerInvoiceComponentsJPanel.add(customerInvoiceJScrollPane, gc);
+			editInvoiceByCustComponents.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			editInvoiceByCustComponents.add(new JLabel("Total owed on all invoices:"), gc);
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editInvoiceByCustComponents.add(allInvoicesTotalJTextField, gc);
+			allInvoicesTotalJTextField.setPreferredSize(d);
+			allInvoicesTotalJTextField.setMinimumSize(d);
+			gc.gridx = 0;
+			gc.gridy = 2;
+			editInvoiceByCustComponents.add(payAllInvoicesJButton, gc);
+			payAllInvoicesJButton.setPreferredSize(d);
+			payAllInvoicesJButton.setMinimumSize(d);
+			gc.gridx = 1;
+			gc.gridy = 0;
+			editCustomerInvoiceComponentsJPanel.add(editInvoiceByCustComponents, gc);	
+			payAllInvoicesJButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+					int id = Integer.parseInt( s );
+					for(Invoice invoice: invoices){
+						if(id == invoice.getCustomer().getCustId() ){
+							invoice.setPaid(true);
+						}
 					}
-				}
-				invoices.remove(index);
-				JOptionPane.showMessageDialog(null, "Deleted!");
-				editComboBoxInvoice.removeItemAt(comboIndex);
-				editCustomerInvoiceComponentsJPanel.setVisible(false);
-				editInvoiceComponentsJPanel.setVisible(false);
-				saveInvoiceComponentsJPanel.setVisible(false);
-				editInvoiceProductsComponentsJPanel.setVisible(false);
-			}
-		});
-		editInvJPanel.setLayout(new GridLayout(5,3));
-		editInvJPanel.add(findInvoiceComponentsJPanel);
-		editInvJPanel.add(editInvoiceComponentsJPanel);
-		editInvJPanel.add(editInvoiceProductsComponentsJPanel);
-		editInvJPanel.add(saveInvoiceComponentsJPanel);
-		editInvJPanel.add(editCustomerInvoiceComponentsJPanel);
-		editInvoiceProductsComponentsJPanel.setVisible(false);
-		editCustomerInvoiceComponentsJPanel.setVisible(false);
-		editInvoiceComponentsJPanel.setVisible(false);
-		saveInvoiceComponentsJPanel.setVisible(false);
-		EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
-		editInvoiceJButton.addActionListener(eib);
-		EditCustomerInvoiceButtonHandler ecib = new EditCustomerInvoiceButtonHandler();
-		editCustomerInvoiceJButton.addActionListener(ecib);
-		SaveButtonHandler sbh = new SaveButtonHandler();
-		saveInvoiceJButton.addActionListener(sbh);
+					JOptionPane.showMessageDialog(null, "Paid!");
+					editCustomerInvoiceJButton.doClick();		
+					}
+			});
+			customerInvoiceJTextArea.setEditable(false);
+			allInvoicesTotalJTextField.setEditable(false);
+				
+			//whole panel
+			editInvJPanel.setLayout(new GridBagLayout());
+			gc.gridx = 0;
+			gc.gridy = 0;
+			editInvJPanel.add(findInvoiceComponentsJPanel, gc);
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editInvJPanel.add(editInvoiceComponentsJPanel, gc);
+			gc.gridx = 0;
+			gc.gridy = 2;
+			editInvJPanel.add(editInvoiceProductsComponentsJPanel, gc);
+			gc.gridx = 0;
+			gc.gridy = 3;
+			editInvJPanel.add(saveInvoiceComponentsJPanel, gc);
+			gc.gridx = 0;
+			gc.gridy = 1;
+			editInvJPanel.add(editCustomerInvoiceComponentsJPanel, gc);
+			editInvoiceProductsComponentsJPanel.setVisible(false);
+			editCustomerInvoiceComponentsJPanel.setVisible(false);
+			editInvoiceComponentsJPanel.setVisible(false);
+			saveInvoiceComponentsJPanel.setVisible(false);
+			EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
+			editInvoiceJButton.addActionListener(eib);
+			EditCustomerInvoiceButtonHandler ecib = new EditCustomerInvoiceButtonHandler();
+			editCustomerInvoiceJButton.addActionListener(ecib);
+			SaveButtonHandler sbh = new SaveButtonHandler();
+			saveInvoiceJButton.addActionListener(sbh);
 		
 		//====================================================================================
 		//set up order panels
@@ -1901,18 +2087,18 @@ public class RetailGUI extends JFrame{
 		createOrderQuantityTextField.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderQuantityTextField,orderGC);
 		//=====
-		orderGC.gridx = 0;
+		orderGC.gridx = 1;
 		orderGC.gridy = 4;
 		createOrderAddProductButton.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderAddProductButton,orderGC);
 		orderGC.gridx = 1;
-		orderGC.gridy = 4;
+		orderGC.gridy = 5;
 		orderGC.weighty = 10;
 		createOrderConfirmOrderButton.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderConfirmOrderButton,orderGC);
 		JButton resetOrderPanelButton = new JButton("Reset Fields");
 		gc.gridx = 1;
-		gc.gridy = 5;
+		gc.gridy = 6;
 		resetOrderPanelButton.setPreferredSize(d);
 		createNewOrderLeftPanel.add(resetOrderPanelButton,gc);
 		resetOrderPanelButton.addActionListener(new ActionListener() {
@@ -2083,11 +2269,10 @@ public class RetailGUI extends JFrame{
 		Dimension size1 = getPreferredSize();
 		size1.width = 500;
 		viewOrderJPanel.setPreferredSize(size1);
-		viewOrderJPanel.setBorder(BorderFactory.createTitledBorder("Order details"));
 		//====
 		viewOrderLeftJPanel.setLayout(new GridBagLayout());
 		viewOrderRightJPanel.setLayout(new GridBagLayout());
-		viewOrderJPanel.setLayout(new GridLayout(1, 1));
+		viewOrderJPanel.setLayout(new GridBagLayout());
 		GridBagConstraints viewOrderGC = new GridBagConstraints();
 		viewOrderGC.insets = new Insets(5,5,5,5);
 		//====
@@ -2100,30 +2285,33 @@ public class RetailGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewOrderTextArea.setText(Order.viewAllOrders(orders));	
+				viewOrderTextArea.setCaretPosition(0);
 			}
 		});
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 2;
-		viewOrderViewDeliveredButton.setPreferredSize(d);
-		viewOrderViewDeliveredButton.setMinimumSize(d);
-		viewOrderLeftJPanel.add(viewOrderViewDeliveredButton, viewOrderGC);
-		viewOrderViewDeliveredButton.addActionListener(new ActionListener() {
+		viewOrderViewReceivedButton.setPreferredSize(d);
+		viewOrderViewReceivedButton.setMinimumSize(d);
+		viewOrderLeftJPanel.add(viewOrderViewReceivedButton, viewOrderGC);
+		viewOrderViewReceivedButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				viewOrderTextArea.setText(Order.viewDeliveredOrders(orders));	
+				viewOrderTextArea.setText(Order.viewReceivedOrders(orders));	
+				viewOrderTextArea.setCaretPosition(0);	
 			}
 		});
 		//====
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 3;
-		viewOrderViewUndeliveredButton.setPreferredSize(d);
-		viewOrderViewUndeliveredButton.setMinimumSize(d);
-		viewOrderLeftJPanel.add(viewOrderViewUndeliveredButton, viewOrderGC);
-		viewOrderViewUndeliveredButton.addActionListener(new ActionListener() {
+		viewOrderViewUnreceivedButton.setPreferredSize(d);
+		viewOrderViewUnreceivedButton.setMinimumSize(d);
+		viewOrderLeftJPanel.add(viewOrderViewUnreceivedButton, viewOrderGC);
+		viewOrderViewUnreceivedButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				viewOrderTextArea.setText(Order.viewUndeliveredOrders(orders));	
+				viewOrderTextArea.setText(Order.viewUnreceivedOrders(orders));		
+				viewOrderTextArea.setCaretPosition(0);
 			}
 		});
 		//====
@@ -2153,7 +2341,8 @@ public class RetailGUI extends JFrame{
 					listOfSuppliers.setSelectedItem("Select");
 				}else{
 					int num = Integer.parseInt(input);
-					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 
+					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 	
+					viewOrderTextArea.setCaretPosition(0);
 					listOfOrders.setSelectedItem("Select");
 					listOfSuppliers.setSelectedItem("Select");
 				}
@@ -2185,7 +2374,8 @@ public class RetailGUI extends JFrame{
 					listOfSuppliers.setSelectedItem("Select");
 				}else{
 					int num = Integer.parseInt(input);
-					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));	
+					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));		
+					viewOrderTextArea.setCaretPosition(0);
 					listOfOrders.setSelectedItem("Select");
 					listOfSuppliers.setSelectedItem("Select");
 
@@ -2217,7 +2407,8 @@ public class RetailGUI extends JFrame{
 					listOfTitles.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}else{
-					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));	
+					viewOrderTextArea.setText(Order.viewOrderByTitle(orders, input));		
+					viewOrderTextArea.setCaretPosition(0);
 					listOfTitles.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}
@@ -2248,14 +2439,15 @@ public class RetailGUI extends JFrame{
 					listOfAuthors.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}else{
-					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));	
+					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));		
+					viewOrderTextArea.setCaretPosition(0);
 					listOfAuthors.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}
 			}
 		});
 		//====
-		viewOrderTextArea = new JTextArea(20, 20); //height - width
+		viewOrderTextArea = new JTextArea(20, 50); //height - width
 		viewOrderTextArea.setEditable(false);
 		JScrollPane viewOrderScrollPane = new JScrollPane(viewOrderTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         viewOrderGC.gridwidth = GridBagConstraints.REMAINDER;
@@ -2265,10 +2457,12 @@ public class RetailGUI extends JFrame{
         viewOrderGC.gridx = 0;
         viewOrderGC.gridy = 0;
         viewOrderRightJPanel.add(viewOrderScrollPane, viewOrderGC);
+        viewOrderGC.gridx = 0;
+        viewOrderGC.gridy = 1;
         viewOrderJPanel.add(viewOrderLeftJPanel, viewOrderGC);
-        viewOrderGC.gridx = 1;
+        viewOrderGC.gridx = 0;
         viewOrderGC.gridy = 0;
-        viewOrderJPanel.add(viewOrderRightJPanel);
+        viewOrderJPanel.add(viewOrderRightJPanel, viewOrderGC);
 		//=========================================================================================
         //add edit order components	
         findOrderComponentsJPanel.setLayout(new GridBagLayout());
@@ -2298,17 +2492,17 @@ public class RetailGUI extends JFrame{
         JScrollPane supplierOrderJScrollPane = new JScrollPane(supplierOrderJTextArea);
         supplierOrderJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         editSupplierOrderComponentsJPanel.add(supplierOrderJScrollPane);
-        editSupplierOrderComponentsJPanel.add(deliverAllOrdersJButton);
+        editSupplierOrderComponentsJPanel.add(receiveAllOrdersJButton);
 
-        deliverAllOrdersJButton.addActionListener(new ActionListener(){
+        receiveAllOrdersJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
         		for(Order order: orders){
         			if(Integer.parseInt(s.trim()) == order.getSupplierUniqueId() ){
-        				order.setDelivered();
+        				order.setReceived();
         			}
         		}
-        		JOptionPane.showMessageDialog(null, "Delivered!");
+        		JOptionPane.showMessageDialog(null, "Received!");
         		editSupplierOrderJButton.doClick();
         		listOfSuppliers.setSelectedItem("Select");
         		listOfOrders.setSelectedItem("Select");
@@ -2323,20 +2517,20 @@ public class RetailGUI extends JFrame{
         editOrderComponentsJPanel.add(editOrderSupplier);
         editOrderComponentsJPanel.add(new JLabel("Total"));
         editOrderComponentsJPanel.add(editOrderAmount);
-        editOrderComponentsJPanel.add(editOrderDeliveredStatus);
-        editOrderDeliveredStatus.setEditable(false);
-        editOrderComponentsJPanel.add(deliverOrderJButton);
-        deliverOrderJButton.addActionListener(new ActionListener(){
+        editOrderComponentsJPanel.add(editOrderReceivedStatus);
+        editOrderReceivedStatus.setEditable(false);
+        editOrderComponentsJPanel.add(receiveOrderJButton);
+        receiveOrderJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		String s = (String) editOrderOrderIdComboBox.getSelectedItem();
         		for(Order order: orders){
         			if(Integer.parseInt(s.trim()) == order.getOrderUniqueId()){
-        				order.setDelivered();
+        				order.setReceived();
         				break;
         			}
         		}
-        		JOptionPane.showMessageDialog(null, "Delivered!");
-        		editOrderDeliveredStatus.setForeground(Color.BLACK);
+        		JOptionPane.showMessageDialog(null, "Received!");
+        		editOrderReceivedStatus.setForeground(Color.BLACK);
         		editOrderJButton.doClick();	
         		listOfSuppliers.setSelectedItem("Select");
         		listOfOrders.setSelectedItem("Select");
@@ -2389,7 +2583,7 @@ public class RetailGUI extends JFrame{
 		//vIWcUSTOMERiNVOICE fUNCTIONALITY - Marc
         //Hardcoding info TODO: Marc
         for(int i=0;i<invoices.size();i++){
-			 existingInvoiceNums.add(Integer.toString(invoices.get(i).getId()));
+        	editExistingInvoiceNums.add(Integer.toString(invoices.get(i).getId()));
         }
         for(int i = 0;i<customers.size();i++){
         existingCustomerId.add(Integer.toString(customers.get(i).getCustId()));
@@ -2425,10 +2619,9 @@ public class RetailGUI extends JFrame{
 		JLabel invIdlbl = new JLabel("Invoice ID: "); //Label
 		gc.gridx = 0;
 		gc.gridy = 1;
-		//TODO boobs
 		viewCustomerPanel.add(invIdlbl,gc);
 		comboBoxInvoice = new JComboBox<String>(listOfInvoices); //Combo box rather than Text Field
-		comboBoxInvoice.setPreferredSize(new Dimension(80, 20));
+		comboBoxInvoice.setPreferredSize(d);
 		listOfInvoices.setSelectedItem("select"); //setting the combo box to the first invoice number
 		gc.gridx = 1;
 		gc.gridy = 1;
@@ -2436,7 +2629,7 @@ public class RetailGUI extends JFrame{
 		JButton invButton = new JButton("Invoice ID");	//button
 		gc.gridx = 2;
 		gc.gridy = 1;
-		invButton.setPreferredSize(new Dimension(120, 30));
+		invButton.setPreferredSize(d);
 		viewCustomerPanel.add(invButton,gc);
 		//Action listener For Button to view Invoice by Id
 		invButton.addActionListener(new ActionListener() {
@@ -2465,7 +2658,7 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 2;
 		viewCustomerPanel.add(custIdlbl,gc);
 		comboBoxCustomer =  new JComboBox<String>(listOfCustomers); //combo box here
-		comboBoxCustomer.setPreferredSize(new Dimension(80, 20));
+		comboBoxCustomer.setPreferredSize(d);
 		listOfCustomers.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 2;
@@ -2473,7 +2666,7 @@ public class RetailGUI extends JFrame{
 		JButton custIdButton = new JButton("Customer ID");
 		gc.gridx = 2;
 		gc.gridy = 2;
-		custIdButton.setPreferredSize(new Dimension(120, 30));
+		custIdButton.setPreferredSize(d);
 		viewCustomerPanel.add(custIdButton,gc);
 		custIdButton.addActionListener(new ActionListener() {
 			//Action listener For Button to view Customer by Id
@@ -2501,7 +2694,7 @@ public class RetailGUI extends JFrame{
 		JButton viewAllBtn = new JButton("View All");
 		gc.gridx = 2;
 		gc.gridy = 3;
-		viewAllBtn.setPreferredSize(new Dimension(120, 30));
+		viewAllBtn.setPreferredSize(d);
 		viewCustomerPanel.add(viewAllBtn,gc);
 		viewAllBtn.addActionListener(new ActionListener() {
 			@Override
@@ -2515,7 +2708,7 @@ public class RetailGUI extends JFrame{
 		JButton viewPaidBtn = new JButton("View Paid");
 		gc.gridx = 3;
 		gc.gridy = 1;
-		viewPaidBtn.setPreferredSize(new Dimension(120, 30));
+		viewPaidBtn.setPreferredSize(d);
 		viewCustomerPanel.add(viewPaidBtn,gc);
 		viewPaidBtn.addActionListener(new ActionListener() {
 			
@@ -2529,6 +2722,10 @@ public class RetailGUI extends JFrame{
 		
 		//3. UnPaid Button
 		JButton viewUnpaidBtn = new JButton("View Unpaid");
+		gc.gridx = 3;
+		gc.gridy = 2;
+		viewUnpaidBtn.setPreferredSize(d);
+		viewCustomerPanel.add(viewUnpaidBtn,gc);
 		viewUnpaidBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -2536,16 +2733,13 @@ public class RetailGUI extends JFrame{
 				textarea.setCaretPosition(0);
 			}
 		});
-		gc.gridx = 3;
-		gc.gridy = 2;
-		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
-		viewCustomerPanel.add(viewUnpaidBtn,gc);
+		
 		
 		//4. Reset Panel Btn
 		JButton resetPanelBtn = new JButton("Clear Panel");
 		gc.gridx = 3;
 		gc.gridy = 3;
-		resetPanelBtn.setPreferredSize(new Dimension(120, 30));
+		resetPanelBtn.setPreferredSize(d);
 		viewCustomerPanel.add(resetPanelBtn,gc);
 		resetPanelBtn.addActionListener(new ActionListener() {
 			
@@ -2557,193 +2751,29 @@ public class RetailGUI extends JFrame{
 				
 			}
 		});
-		//========================== Pie Chart Highest lowest Selling ===============================
-		//TODO high low
-		highestSellingButton = new JButton("Highest selling");
-		gc.gridx = 2;
-		gc.gridy = 4;
-		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
-		viewCustomerPanel.add(highestSellingButton,gc);
 		
-		highestSellingButton.addActionListener(new ActionListener() {
-			
-			@SuppressWarnings("rawtypes")
-			@Override
-			public void actionPerformed(ActionEvent ex) {
-				productCodes = findProductCodes();
-				countsHigher = new int[productCodes.size()];
-
-				// count occuernces of each product in the invoices
-				for (Invoice v : invoices) {
-					for(InvoiceProduct inp : v.getInvoiceProducts()){
-					for(int i=0;i<productCodes.size();i++){
-						if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
-							{
-								countsHigher[i]+=inp.getQuantity();
-							}
-						}
-					}
-				}
-				
-				//Filling the hash map
-				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-				for(int i = 0;i<countsHigher.length;i++){
-					hmap.put(productCodes.get(i), countsHigher[i]);
-				}
-				
-				//Sorting the HashMap
-				Map<String, Integer> map = sortByValues(hmap, true);
-				//System.out.println("After sorting: ");
-				Set set2 = map.entrySet();
-				Iterator iterator2 = set2.iterator();
-				int counter = 0;
-				int [] popularValue = new int [topNum];
-				String [] popular = new String [topNum];
-				while (iterator2.hasNext() && counter < topNum) {
-					Map.Entry me2 = (Map.Entry) iterator2.next();
-					//System.out.print(me2.getKey() + " : ");
-					popularValue[counter] = (int) me2.getValue();
-					popular[counter] =  (String) me2.getKey();
-					counter++;
-				}
-				
-				//Fill the data
-				String first = popular[0];
-				String second = popular[1];
-				String third = popular[2];
-				String fourth = popular[3];
-				String fifth = popular[4];
-				
-				int fir = popularValue[0];
-				int sec = popularValue[1];
-				int thir = popularValue[2];
-				int fou = popularValue[3];
-				int fift = popularValue[4];
- 				
-				DefaultPieDataset pieDataset = new DefaultPieDataset();
-				pieDataset.setValue(first, fir);
-				pieDataset.setValue(second, sec);
-				pieDataset.setValue(third, thir);
-				pieDataset.setValue(fourth, fou);
-				pieDataset.setValue(fifth, fift);
-				
-				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Highest Selling", pieDataset, true, true, true); //3D pie chart
-				PiePlot3D p = (PiePlot3D)chart.getPlot();
-				ChartFrame frame = new ChartFrame("Pie Chart", chart);
-				frame.setVisible(true);
-				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setSize(450, 500);
-			}
-		});
-		
-		lowsetsellingButton = new JButton("Lowest selling");
-		gc.gridx = 3;
-		gc.gridy = 4;
-		viewUnpaidBtn.setPreferredSize(new Dimension(120, 30));
-		viewCustomerPanel.add(lowsetsellingButton,gc);
-		lowsetsellingButton.addActionListener(new ActionListener() {
-			
-			@SuppressWarnings("rawtypes")
-			@Override
-			public void actionPerformed(ActionEvent ex) {
-
-				productCodes = findProductCodes();
-				countsLower = new int[productCodes.size()];
-				
-				// count occuernces of each product in the invoices
-				for (Invoice v : invoices) {
-					for(InvoiceProduct inp : v.getInvoiceProducts()){
-					for(int i=0;i<productCodes.size();i++){
-						if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
-							{
-							countsLower[i]+=inp.getQuantity();
-							}
-						}
-					}
-				}
-				
-				//Filling the hash map
-				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-				for(int i = 0;i<countsLower.length;i++){
-					hmap.put(productCodes.get(i), countsLower[i]);
-				}
-				
-				//Sorting the HashMap
-				Map<String, Integer> map = sortByValues(hmap, false);
-				//System.out.println("After sorting: ");
-				Set set2 = map.entrySet();
-				Iterator iterator2 = set2.iterator();
-				int counter = 0;
-				int [] popularValue = new int [topNum];
-				String [] popular = new String [topNum];
-				while (iterator2.hasNext() && counter < topNum) {
-					Map.Entry me2 = (Map.Entry) iterator2.next();
-					//System.out.print(me2.getKey() + " : ");
-					popularValue[counter] = (int) me2.getValue();
-					popular[counter] =  (String) me2.getKey();
-					counter++;
-				}
-				
-				//Fill the data
-				String first = popular[0];
-				String second = popular[1];
-				String third = popular[2];
-				String fourth = popular[3];
-				String fifth = popular[4];
-				
-				int fir = popularValue[0];
-				int sec = popularValue[1];
-				int thir = popularValue[2];
-				int fou = popularValue[3];
-				int fift = popularValue[4];
- 				
-				DefaultPieDataset pieDataset = new DefaultPieDataset();
-				pieDataset.setValue(first, fir);
-				pieDataset.setValue(second, sec);
-				pieDataset.setValue(third, thir);
-				pieDataset.setValue(fourth, fou);
-				pieDataset.setValue(fifth, fift);
-				
-				JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Lowest Selling", pieDataset, true, true, true); //3D pie chart
-				PiePlot3D p = (PiePlot3D)chart.getPlot();
-				ChartFrame frame = new ChartFrame("Pie Chart", chart);
-				frame.setVisible(true);
-				//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setSize(450, 500);
-			}
-		});
-		
-		//===========================================================================================
 		
 		//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
 		JButton invoicesPieChart = new JButton(" Paid Vs. Unpaid Invoices");
 		gc.gridx =1;
 		gc.gridy= 3;
 		viewCustomerPanel.add(invoicesPieChart,gc);
-		invoicesPieChart.setPreferredSize(new Dimension(200,30));
+		invoicesPieChart.setPreferredSize(d);
+		invoicesPieChart.setMinimumSize(d);
 		invoicesPieChart.addActionListener(new ActionListener(){
 		
 			public void actionPerformed(ActionEvent e){
-				//int paid = invoice.viewUnPaidInvoice(invoices);
+				
 				int count=0;
 				int paid = invoice.countPaidInvoices(count, invoices);
 				int unpaid = (invoices.size()-paid);
-				//invoice.countPaidInvoices(, invoices);
-				//pieDataset.setValue("Paid", invoice.countPaidInvoices(buttonHeight, invoices));
 				pieDataset.setValue("Paid",paid);
 				pieDataset.setValue("UnPaid",unpaid);
-				//pieDataset.setValue("Three", new Integer(30));
-				//pieDataset.setValue("Four", new Integer(40));
 				
 				JFreeChart chart = ChartFactory.createPieChart3D("Invoice Review", pieDataset, true,true,true);
-				PiePlot3D p=(PiePlot3D)chart.getPlot();
-			//	ChartPanel chPanel = new ChartPanel(chart);
-			//	chPanel.setPreferredSize(new Dimension(785, 440));
-			//	chPanel.setMouseWheelEnabled(true);
-			//	viewCustomerPanel.add(chPanel);
 				ChartFrame frame = new ChartFrame("Pie Chart", chart);
 				frame.setVisible(true);
-				frame.setSize(450,500);
+				frame.setSize(700,600);
 			}
 			
 		});
@@ -2774,20 +2804,23 @@ public class RetailGUI extends JFrame{
 		
 		//GridBagConstraints gc = new GridBagConstraints();
 		createInvJPanel.add(createNewInvoicePanel);
-		gc.insets = new Insets(5,5,5,5);
+		gc.insets = new Insets(80,5,5,5);
 		//=====
 		gc.gridx = 0;
 		gc.gridy = 0;
 		leftPanel.add(invIdLbl,gc);
+		invTextF = new JTextField();
 		gc.gridx = 1;
 		gc.gridy = 0;
+		invTextF.setPreferredSize(d);
 		leftPanel.add(invTextF,gc);
 		//=====
+		gc.insets = new Insets(5,5,5,5);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		leftPanel.add(employLbl,gc);
 		empIDComboBox = new JComboBox<String>(listOfEmpIds);
-		empIDComboBox.setPreferredSize(new Dimension(80, 20));
+		empIDComboBox.setPreferredSize(d);
 		listOfEmpIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 1;
@@ -2799,7 +2832,7 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(custId,gc);
 			//Add Combo here
 		cusIDComboBox = new JComboBox<String>(listOfCusIds);
-		cusIDComboBox.setPreferredSize(new Dimension(80, 20));
+		cusIDComboBox.setPreferredSize(d);
 		listOfCusIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 2;
@@ -2810,7 +2843,7 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(prodId,gc);
 			//Add combo here
 		prodIDComboBox = new JComboBox<String>(listOfProdIds);
-		prodIDComboBox.setPreferredSize(new Dimension(80, 20));
+		prodIDComboBox.setPreferredSize(d);
 		listOfProdIds.setSelectedItem("select");
 		gc.gridx = 1;
 		gc.gridy = 3;
@@ -2821,11 +2854,13 @@ public class RetailGUI extends JFrame{
 		leftPanel.add(quantitylbl,gc);
 		gc.gridx = 1;
 		gc.gridy = 4;
+		quantityTextF = new JTextField();
+		quantityTextF.setPreferredSize(d);
 		leftPanel.add(quantityTextF,gc);
 		//=====
 		gc.gridx = 1;
 		gc.gridy = 5;
-		addMoreBtn.setPreferredSize(new Dimension(120, 30)); //width/height
+		addMoreBtn.setPreferredSize(d); //width/height
 		leftPanel.add(addMoreBtn,gc);
 		//AddMoreBtn Event Listener
 		addMoreBtn.addActionListener(new ActionListener() {
@@ -2873,7 +2908,7 @@ public class RetailGUI extends JFrame{
 		//=====
 		gc.gridx = 1;
 		gc.gridy = 6;
-		finishBtn.setPreferredSize(new Dimension(120, 30));
+		finishBtn.setPreferredSize(d);
 		leftPanel.add(finishBtn,gc);
 		//finishBtn eventListener
 		finishBtn.addActionListener(new ActionListener() {
@@ -2991,7 +3026,7 @@ public class RetailGUI extends JFrame{
 		//=====
 		gc.gridx = 1;
 		gc.gridy = 7;
-		resetBtn.setPreferredSize(new Dimension(120, 30)); //width/height
+		resetBtn.setPreferredSize(d); //width/height
 		leftPanel.add(resetBtn,gc);
 		resetBtn.addActionListener(new ActionListener() {
 			
@@ -3016,14 +3051,16 @@ public class RetailGUI extends JFrame{
 		//================================
 		//Right Panel : textAreaMarc and Pane
 		//================================
-		textAreaMarc = new JTextArea(15,20); //height - width
+		
+		textAreaMarc = new JTextArea(19,20); //height - width
 		textAreaMarc.setEditable(false);
 		JScrollPane scrollPane3 = new JScrollPane(textAreaMarc,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        gc.gridwidth = GridBagConstraints.REMAINDER;
+       /* gc.gridwidth = GridBagConstraints.REMAINDER;
         gc.fill = GridBagConstraints.BOTH;
         gc.weightx = 1.0;
         gc.weighty = 1.0;
-        gc.gridx = 3;
+        gc.gridy = 4;*/
+		rightPanel.setBorder(new EmptyBorder(80, 10, 10, 10));
         rightPanel.add(scrollPane3, gc);
 		
 		
@@ -3473,6 +3510,7 @@ public class RetailGUI extends JFrame{
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
+		gbc.insets = new Insets(5,5,5,5);
 		pLJTable.setRowHeight(ROW_HEIGHT);
 		pLJTable.setEnabled(false);
 		pLJTable.setAutoCreateRowSorter(true);	
@@ -3481,48 +3519,218 @@ public class RetailGUI extends JFrame{
 		list.add( new RowSorter.SortKey(0, SortOrder.ASCENDING) );
 		sorter.setSortKeys(list);
 		sorter.sort();	
-		proflossJPanel.add(pLJScrollPane, gbc);
+		pLComponentsJPanel.add(pLJScrollPane, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		proflossJPanel.add(new JLabel("Total: "), gbc);
+		pLComponentsJPanel.add(new JLabel("Total: "), gbc);
 		pLTotal.setPreferredSize(d);
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		proflossJPanel.add(pLTotal, gbc);
-		pLTotal.setEditable(false);
 		gbc.gridx = 0;
 		gbc.gridy = 2;
+		pLComponentsJPanel.add(pLTotal, gbc);
+		pLTotal.setText("0.00");
+		pLTotal.setEditable(false);
+		gbc.gridx = 0;
+		gbc.gridy = 3;
 		fillPLComboBox();
 		comboBoxPL = new JComboBox<String>(listOfMonths); //Combo box rather than Text Field
 		listOfMonths.setSelectedItem(months.get(0));
 		comboBoxPL.setPreferredSize(d);
-		proflossJPanel.add(comboBoxPL, gbc);
+		pLComponentsJPanel.add(comboBoxPL, gbc);
 		pLViewButton.setPreferredSize(d);
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		proflossJPanel.add(pLViewButton, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		pLComponentsJPanel.add(pLViewButton, gbc);
         viewTableButtonHandler vtbh = new viewTableButtonHandler();
         pLViewButton.addActionListener(vtbh);
         proflossJPanel.add(pLComponentsJPanel, gbc);
-        
-        lineChartJButton.setPreferredSize(d);
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		proflossJPanel.add(lineChartJButton, gbc);
-		
-		lineChartJButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				try{
-					JFreeChart lineChart = ChartFactory.createLineChart("Income and Expenditure","Month","Value",line_chart_dataset,PlotOrientation.VERTICAL,true,true,false);
-					ChartFrame frame = new ChartFrame("Income and Expenditure", lineChart);
-					frame.setBounds(0, 0, 600, 600);
-					frame.setVisible(true);
-				}catch (Exception i){
-		             System.out.println(i);
-		         }
-			}
-		});
 	
+		//Graph Information Panel
+		graphJPanel.setLayout(new GridBagLayout());
+		GridBagConstraints graphgc = new GridBagConstraints();
+		graphgc.insets = new Insets(5,5,5,5);
+		//========================== Pie Chart Highest lowest Selling ===============================
+				//TODO high low
+				highestSellingButton = new JButton();
+				graphgc.gridx = 1;
+				graphgc.gridy = 1;
+				highestSellingButton.setMinimumSize(d);
+				highestSellingButton.setPreferredSize(d);
+				graphJPanel.add(highestSellingButton,graphgc);
+				try{
+					highestSellingButton.setIcon(new ImageIcon("src\\images\\top.png"));
+					
+					}catch(Exception ex){
+						System.out.println("not working");
+					}
+				highestSellingButton.addActionListener(new ActionListener() {
+					
+					@SuppressWarnings("rawtypes")
+					@Override
+					public void actionPerformed(ActionEvent ex) {
+						productCodes = findProductCodes();
+						countsHigher = new int[productCodes.size()];
+
+						// count occuernces of each product in the invoices
+						for (Invoice v : invoices) {
+							for(InvoiceProduct inp : v.getInvoiceProducts()){
+							for(int i=0;i<productCodes.size();i++){
+								if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
+									{
+										countsHigher[i]+=inp.getQuantity();
+									}
+								}
+							}
+						}
+						
+						//Filling the hash map
+						HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+						for(int i = 0;i<countsHigher.length;i++){
+							hmap.put(productCodes.get(i) + "\n" + products.get(i).getTitle(), countsHigher[i]);
+						}
+						
+						//Sorting the HashMap
+						Map<String, Integer> map = sortByValues(hmap, true);
+						//System.out.println("After sorting: ");
+						Set set2 = map.entrySet();
+						Iterator iterator2 = set2.iterator();
+						int counter = 0;
+						int [] popularValue = new int [topNum];
+						String [] popular = new String [topNum];
+						while (iterator2.hasNext() && counter < topNum) {
+							Map.Entry me2 = (Map.Entry) iterator2.next();
+							//System.out.print(me2.getKey() + " : ");
+							popularValue[counter] = (int) me2.getValue();
+							popular[counter] =  (String) me2.getKey();
+							counter++;
+						}
+						
+						//Fill the data
+						String first = popular[0];
+						String second = popular[1];
+						String third = popular[2];
+						String fourth = popular[3];
+						String fifth = popular[4];
+						
+						int fir = popularValue[0];
+						int sec = popularValue[1];
+						int thir = popularValue[2];
+						int fou = popularValue[3];
+						int fift = popularValue[4];
+		 				
+						DefaultPieDataset pieDataset = new DefaultPieDataset();
+						pieDataset.setValue(first, fir);
+						pieDataset.setValue(second, sec);
+						pieDataset.setValue(third, thir);
+						pieDataset.setValue(fourth, fou);
+						pieDataset.setValue(fifth, fift);
+						
+						JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Highest Selling", pieDataset, true, true, true); //3D pie chart
+						//PiePlot3D p = (PiePlot3D)chart.getPlot();
+						ChartFrame frame = new ChartFrame("Pie Chart", chart);
+						frame.setVisible(true);
+						//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+						frame.setSize(850, 600);
+					}
+				});
+				
+				lowsetsellingButton = new JButton("Lowest selling");
+				graphgc.gridx = 2;
+				graphgc.gridy = 1;
+				lowsetsellingButton.setMinimumSize(d);
+				lowsetsellingButton.setPreferredSize(d);
+				graphJPanel.add(lowsetsellingButton,graphgc);
+				lowsetsellingButton.addActionListener(new ActionListener() {
+					
+					@SuppressWarnings("rawtypes")
+					@Override
+					public void actionPerformed(ActionEvent ex) {
+
+						productCodes = findProductCodes();
+						countsLower = new int[productCodes.size()];
+						
+						// count occuernces of each product in the invoices
+						for (Invoice v : invoices) {
+							for(InvoiceProduct inp : v.getInvoiceProducts()){
+							for(int i=0;i<productCodes.size();i++){
+								if (inp.getProduct().getProductCode().equals(productCodes.get(i)))
+									{
+									countsLower[i]+=inp.getQuantity();
+									}
+								}
+							}
+						}
+						
+						//Filling the hash map
+						HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+						for(int i = 0;i<countsLower.length;i++){
+							hmap.put(productCodes.get(i) + "\n" + products.get(i).getTitle(), countsLower[i]);
+						}
+						
+						//Sorting the HashMap
+						Map<String, Integer> map = sortByValues(hmap, false);
+						//System.out.println("After sorting: ");
+						Set set2 = map.entrySet();
+						Iterator iterator2 = set2.iterator();
+						int counter = 0;
+						int [] popularValue = new int [topNum];
+						String [] popular = new String [topNum];
+						while (iterator2.hasNext() && counter < topNum) {
+							Map.Entry me2 = (Map.Entry) iterator2.next();
+							//System.out.print(me2.getKey() + " : ");
+							popularValue[counter] = (int) me2.getValue();
+							popular[counter] =  (String) me2.getKey();
+							counter++;
+						}
+						
+						//Fill the data
+						String first = popular[0];
+						String second = popular[1];
+						String third = popular[2];
+						String fourth = popular[3];
+						String fifth = popular[4];
+						
+						int fir = popularValue[0];
+						int sec = popularValue[1];
+						int thir = popularValue[2];
+						int fou = popularValue[3];
+						int fift = popularValue[4];
+		 				
+						DefaultPieDataset pieDataset = new DefaultPieDataset();
+						pieDataset.setValue(first, fir);
+						pieDataset.setValue(second, sec);
+						pieDataset.setValue(third, thir);
+						pieDataset.setValue(fourth, fou);
+						pieDataset.setValue(fifth, fift);
+						
+						JFreeChart chart = ChartFactory.createPieChart3D("Top 5 Lowest Selling", pieDataset, true, true, true); //3D pie chart
+						//PiePlot3D p = (PiePlot3D)chart.getPlot();
+						ChartFrame frame = new ChartFrame("Pie Chart", chart);
+						frame.setVisible(true);
+						//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+						frame.setSize(850, 600);
+					}
+				});
+				lineChartJButton.setMinimumSize(d);
+			    lineChartJButton.setPreferredSize(d);
+			    graphgc.gridx = 1;
+				graphgc.gridy = 2;
+				graphJPanel.add(lineChartJButton, graphgc);
+				
+				lineChartJButton.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						try{
+							JFreeChart lineChart = ChartFactory.createLineChart("Income and Expenditure","Month","Value",line_chart_dataset,PlotOrientation.VERTICAL,true,true,false);
+							ChartFrame frame = new ChartFrame("Income and Expenditure", lineChart);
+							frame.setBounds(0, 0, 600, 600);
+							frame.setVisible(true);
+						}catch (Exception i){
+				             System.out.println(i);
+				         }
+					}
+				});
+				//===========================================================================================
+		
+		
 		} //END OF CONSTRUCTOR
 	//TODO - end of constructor
 	
@@ -3742,30 +3950,36 @@ public class RetailGUI extends JFrame{
 
 	
 
-	//Handler for edit invoice by id button
 	private class EditInvoiceButtonHandler implements ActionListener{
 		public void actionPerformed( ActionEvent e){//handler starts
 			int id = 0;
 			String s = (String)editComboBoxInvoice.getSelectedItem();
-			id = Integer.parseInt( s );
+			if(!s.equals("Select")){
+				id = Integer.parseInt( s );
+			}
 			productInvoiceJTextArea.setText("Product Details\n");
 			int invoiceID = verifyInvoiceID(id);
 			if(invoiceID == 1){
 				for(Invoice invoice: invoices){
 					if(id == invoice.getId()){
+						if(invoice.isPaid()){
+							editInvoiceAmount.setEditable(false);
+						}
+						if(invoice.isPaid() == false){
+							editInvoiceAmount.setEditable(true);
+						}
 						editCustomerInvoiceComponentsJPanel.setVisible(false);
 						editInvoiceComponentsJPanel.setVisible(true);
 						saveInvoiceComponentsJPanel.setVisible(true);
 						editInvoiceProductsComponentsJPanel.setVisible(true);
-						editInvoiceId.setText(Integer.toString(id));
 						editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
 						editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
 						for(InvoiceProduct ip: invoice.getInvoiceProducts()){
-									s = "\nProduct Title: " + ip.getProduct().getTitle() + 
-											"     ||    Quantity: " + Integer.toString(ip.getQuantity());
-									productInvoiceJTextArea.append(s);								
+							s = "\nId: " + ip.getProduct().getProductCode() + ", Title: " + ip.getProduct().getTitle() + 
+									", Quantity: " + Integer.toString(ip.getQuantity());
+							productInvoiceJTextArea.append(s);								
 							}	
-						editInvoiceAmount.setText(Double.toString(invoice.getTotalInvoicePrice()));
+						editInvoiceAmount.setText( new String(String.format("%.2f", invoice.getTotalInvoicePrice())));
 						if(invoice.isPaid() == false){
 							editPayStatus.setText("Unpaid");
 							editPayStatus.setForeground(Color.RED);
@@ -3785,6 +3999,7 @@ public class RetailGUI extends JFrame{
 				saveInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceProductsComponentsJPanel.setVisible(false);
 			}
+			productInvoiceJTextArea.setCaretPosition(0);
 		}
 	}
 	public int verifyInvoiceID(int id) {
@@ -3802,7 +4017,7 @@ public class RetailGUI extends JFrame{
 		return validID;
 	}
 						
-		//Handler for deliver orders by supplier button
+		//Handler for receive orders by supplier button
 		private class editSupplierOrderButtonHandler implements ActionListener{
 			public void actionPerformed( ActionEvent e){//handler starts
 					int count = 0, count1 = 0;;
@@ -3830,10 +4045,10 @@ public class RetailGUI extends JFrame{
 						editOrderComponentsJPanel.setVisible(false);
 						saveOrderComponentsJPanel.setVisible(false);
 						editOrderProductsComponentsJPanel.setVisible(false);
-						supplierOrderJTextArea.setText("Undelivered Orders: ");
+						supplierOrderJTextArea.setText("Unreceived Orders: ");
 						for(Order order: orders){
 							if(id == order.getSupplierUniqueId() ){
-								if(!order.isDelivered()){
+								if(!order.isReceived()){
 									s = "\nOrder Id : " + order.getOrderUniqueId() + 
 											"\nTotal: " + 
 											order.calculateOrderWorth() + "\n";
@@ -3844,7 +4059,7 @@ public class RetailGUI extends JFrame{
 							}
 						}
 						if(count == 0){
-							JOptionPane.showMessageDialog(loginJPanel, "No undelivered orders for this supplierer", "For your information", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(loginJPanel, "No unreceived orders for this supplierer", "For your information", JOptionPane.INFORMATION_MESSAGE);
 							editSupplierOrderComponentsJPanel.setVisible(false);
 						}
 						else{
@@ -3891,8 +4106,8 @@ public class RetailGUI extends JFrame{
 					mainJTabbedPane.setEnabledAt(5, true);
 					mainJTabbedPane.setEnabledAt(6, true);
 					mainJTabbedPane.setEnabledAt(7, true);
-					mainJTabbedPane.setEnabledAt(8, true);
-					mainJTabbedPane.setEnabledAt(0, false);
+					loginComponentsJPanel.setVisible(false);
+					logoutComponentsJPanel.setVisible(true);
 				}
 				else if(login == 2){
 					// release some tabs - staff 
@@ -3904,12 +4119,13 @@ public class RetailGUI extends JFrame{
 					mainJTabbedPane.setEnabledAt(5, true);
 					mainJTabbedPane.setEnabledAt(6, false);
 					mainJTabbedPane.setEnabledAt(7, false);
-					mainJTabbedPane.setEnabledAt(8, true);
-					mainJTabbedPane.setEnabledAt(0, false);
 					invJTabbedPane.setEnabledAt(2, false);
+					orderJTabbedPane.setEnabledAt(2, false);
 					supplyJTabbedPane.setEnabledAt(2, false);
 					prodJTabbedPane.setEnabledAt(2, false);
-					custJTabbedPane.setEnabledAt(2, false);						
+					custJTabbedPane.setEnabledAt(2, false);	
+					loginComponentsJPanel.setVisible(false);
+					logoutComponentsJPanel.setVisible(true);
 				}
 				else if(login == 3){
 					//password incorrect
@@ -4006,13 +4222,13 @@ public class RetailGUI extends JFrame{
 										productOrderJTextArea.append(s);								
 								}	
 							editOrderAmount.setText(Double.toString(order.calculateOrderWorth()));
-							if(!order.isDelivered()){
-								editOrderDeliveredStatus.setText("Undelivered");
-								editOrderDeliveredStatus.setForeground(Color.RED);
+							if(!order.isReceived()){
+								editOrderReceivedStatus.setText("Unreceived");
+								editOrderReceivedStatus.setForeground(Color.RED);
 							}
-							if(order.isDelivered()){
-								editOrderDeliveredStatus.setText("Delivered");
-								editOrderDeliveredStatus.setForeground(Color.BLACK);
+							if(order.isReceived()){
+								editOrderReceivedStatus.setText("Received");
+								editOrderReceivedStatus.setForeground(Color.BLACK);
 							}
 						}
 					}	
@@ -4043,121 +4259,97 @@ public class RetailGUI extends JFrame{
 		}
 						
 		//Handler for pay invoices by customer button
-		private class EditCustomerInvoiceButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){//handler starts
-					int count = 0, count1 = 0;;
-					String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
-					int id = Integer.parseInt( s );
-					double total = 0;
-					String totalString = "";
-					int customerID = 1;
-					for(Customer customer: customers){
-						if(id == customer.getCustId()){
-							count1++;
-							customerID = 1;
-						}
-					}	
-					if(count1 == 0){
-						customerID = 2;
-					}
-					if(customerID == 1){
-						editCustomerInvoiceComponentsJPanel.setVisible(true);
-						editInvoiceComponentsJPanel.setVisible(false);
-						saveInvoiceComponentsJPanel.setVisible(false);
-						editInvoiceProductsComponentsJPanel.setVisible(false);
-						customerInvoiceJTextArea.setText("Unpaid Invoices: ");
-						for(Invoice invoice: invoices){
-							if(id == invoice.getCustomer().getCustId() ){
-								if(invoice.isPaid() == false){
-									s = "\nInvoice Id : " + invoice.getId() + 
-											"\nDate: " + sdf.format(invoice.getInvoiceDate())+ "\nTotal: " + 
-											invoice.getTotalInvoicePrice() + "\n";
-									customerInvoiceJTextArea.append(s);
-									total = total + invoice.getTotalInvoicePrice();
-									count++;								
-								}
+				private class EditCustomerInvoiceButtonHandler implements ActionListener{
+					public void actionPerformed( ActionEvent e){//handler starts
+							int count = 0, count1 = 0;
+							int id = 0;
+							String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+							if(!s.equals("Select")){
+								id = Integer.parseInt( s );
 							}
-						}
-						if(count == 0){
-							JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
-							editCustomerInvoiceComponentsJPanel.setVisible(false);
-						}
-						else{
-							totalString = Double.toString(total);
-							allInvoicesTotalJTextField.setText(totalString);
-						}						
-					}
-					else if(customerID == 2){
-						//no customer id match
-						JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-						editCustomerInvoiceComponentsJPanel.setVisible(false);
-						editInvoiceComponentsJPanel.setVisible(false);
-						saveInvoiceComponentsJPanel.setVisible(false);
-						editInvoiceProductsComponentsJPanel.setVisible(false);
-					}
-				}
-			}
-						
-		//handler for save button
-		private class SaveButtonHandler implements ActionListener{
-			public void actionPerformed( ActionEvent e){
-				int invId = 0;						
-				int empId = 0;
-				int custId = 0;
-				int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
-				String s = (String)editComboBoxInvoice.getSelectedItem();
-				int currentId = Integer.parseInt( s );
-				int count1 = 0, count2 = 0;
-				Employee emp = employees.get(0);
-				Customer cust = customers.get(0);
-				try{
-					invId = Integer.parseInt(editInvoiceId.getText().trim());
-					empId = Integer.parseInt(editInvoiceEmployee.getText().trim());
-					custId = Integer.parseInt(editInvoiceCustomer.getText().trim());
-				}
-				catch(NumberFormatException nfe){
-					invalidId();
-				}						
-				for(Employee employee: employees){
-					if(empId == employee.getEmployeeId()){
-						emp = employee;
-						count1++;
-					}
-				}						
-				for(Customer customer: customers){
-					if(custId == customer.getCustId()){
-						cust = customer;
-						count2++;
-					}
-				}											
-				if (count1 != 0 && count2 != 0){
-					for(Invoice invoice: invoices){
-						if(currentId == invoice.getId()){
-							invoice.setId(invId);
-							invoice.setEmployee(emp);
-							invoice.setCustomer(cust);
+							double total = 0;
+							int customerID = 1;
+							for(Customer customer: customers){
+								if(id == customer.getCustId()){
+									count1++;
+									customerID = 1;
+								}
+							}	
+							if(count1 == 0){
+								customerID = 2;
+							}
+							if(customerID == 1){
+								editCustomerInvoiceComponentsJPanel.setVisible(true);
+								editInvoiceComponentsJPanel.setVisible(false);
+								saveInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceProductsComponentsJPanel.setVisible(false);
+								customerInvoiceJTextArea.setText("Unpaid Invoices:");
+								for(Invoice invoice: invoices){
+									if(id == invoice.getCustomer().getCustId() ){
+										if(invoice.isPaid() == false){
+											s = "\n\nInvoice Id : " + invoice.getId() + 
+													"\nDate: " + sdf.format(invoice.getInvoiceDate())+ "\nTotal: ";
+											customerInvoiceJTextArea.append(s);
+											customerInvoiceJTextArea.append(new String(String.format("%.2f", invoice.getTotalInvoicePrice())));
+											total = total + invoice.getTotalInvoicePrice();
+											count++;								
+										}
+									}
+								}
+								if(count == 0){
+									JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
+									editCustomerInvoiceComponentsJPanel.setVisible(false);
+								}
+								else{
+									allInvoicesTotalJTextField.setText( new String(String.format("%.2f", total)));
+								}						
+							}
+							else if(customerID == 2){
+								//no customer id match
+								JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+								editCustomerInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceComponentsJPanel.setVisible(false);
+								saveInvoiceComponentsJPanel.setVisible(false);
+								editInvoiceProductsComponentsJPanel.setVisible(false);
+							}
+							customerInvoiceJTextArea.setCaretPosition(0);
 						}
 					}
-					JOptionPane.showMessageDialog(null, "Updated!");
-					editComboBoxInvoice.removeAllItems();
-					fillComboBox();
-					editComboBoxInvoice.setSelectedItem(editExistingInvoiceNums.get(comboIndex));
-					editInvoiceJButton.doClick();
-				}
-				else if(count1 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Employee Id!");
-					editInvoiceJButton.doClick();
-				}
-				else if(count2 == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Customer Id!");
-					editInvoiceJButton.doClick();
-				}
-			}
-			public void invalidId(){
-				JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
-				editInvoiceJButton.doClick();
-			}
-		}// End handler for save button
+								
+				//handler for save invoice button
+				//TODO save invoice
+				private class SaveButtonHandler implements ActionListener{
+					public void actionPerformed( ActionEvent e){
+						double total = 0;						
+						int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
+						String s = (String)editComboBoxInvoice.getSelectedItem();
+						int currentId = Integer.parseInt( s );
+						int count1 = 0, count2 = 0;
+						Employee emp = employees.get(0);
+						Customer cust = customers.get(0);
+						try{
+							total = Double.parseDouble(editInvoiceAmount.getText().trim());
+						}
+						catch(NumberFormatException nfe){
+							invalidId();
+						}																	
+						for(Invoice invoice: invoices){
+							if(currentId == invoice.getId()){
+								invoice.setTotalInvoicePrice(total);
+								}
+						}
+							JOptionPane.showMessageDialog(null, "Updated!");
+							editComboBoxInvoice.removeAllItems();
+							fillComboBox();
+							editComboBoxInvoice.setSelectedItem(editExistingInvoiceNums.get(comboIndex));
+							editInvoiceJButton.doClick();
+					}
+
+					public void invalidId(){
+						JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
+						editInvoiceJButton.doClick();
+					}
+				}// End handler for save button
 		
 		public boolean invoiceNumberUnique(int id, ArrayList<Invoice> invoices){
 			int count = 0;
@@ -4207,38 +4399,71 @@ public class RetailGUI extends JFrame{
 			return returnCodeNames;
 			
 		}
+		public boolean checkCustomerDuplicate(ArrayList<Customer> customers, int id){
+			boolean passed = true;
+			for(Customer customer: customers){
+				if(customer.getCustId() == id){
+					 passed = false;
+				}
+			}
+			return passed;
+		}
+		public boolean checkSupplierDuplicate(ArrayList<Supplier> suppliers, int id){
+			boolean passed = true;
+			for(Supplier supplier: suppliers){
+				if(supplier.getId() == id){
+					 passed = false;
+				}
+			}
+			return passed;
+		}
+		public boolean checkEmployeeDuplicate(ArrayList<Employee> employees, int id){
+			boolean passed = true;
+			for(Employee employee: employees){
+				if(employee.getEmployeeId() == id){
+					 passed = false;
+				}
+			}
+			return passed;
+		}
 		//dropdown functions
 		public void empIDPopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Employee employee: employees){
 				String str = Integer.toString(employee.getEmployeeId());
 				combo.addItem(str);
 			}
 		}
 		public void empNamePopulate(){
+			empNameCombo.addItem("Select");
 			for(Employee employee: employees){
 				String str = employee.getEmployeeName();
 				empNameCombo.addItem(str);
 			}
 		}
 		public void custIdPopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Customer customer: customers){
 				String str = Integer.toString(customer.getCustId());
 				combo.addItem(str);
 			}
 		}
 		public void custNamePopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Customer customer: customers){
 				String str = customer.getCustName();
 				combo.addItem(str);
 			}
 		}
 		public void suppIdPopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Supplier supplier: suppliers){
 				String str = Integer.toString(supplier.getId());
 				combo.addItem(str);
 			}
 		}
 		public void suppNamePopulate(JComboBox<String> combo){
+			combo.addItem("Select");
 			for(Supplier supplier: suppliers){
 				String str = supplier.getName();
 				combo.addItem(str);
@@ -4334,7 +4559,6 @@ public class RetailGUI extends JFrame{
 						tableModel.removeRow(rows);
 					}
 					for(Invoice invoice:invoices){
-						System.out.println("the int of all invoices is: " + invoice.getInvoiceDate().getMonth());
 						if(invoice.isPaid()){
 							if(invoice.getInvoiceDate().getMonth() == currentMonth && invoice.getInvoiceDate().getYear() +1900 == currentYear){
 								tableModel.addRow(new String[]{sdf.format(invoice.getInvoiceDate()), new String(String.format("%.2f", invoice.getTotalInvoicePrice())), ""});
@@ -4360,6 +4584,16 @@ public class RetailGUI extends JFrame{
 				    }
 				}
 			}
+		}
+		
+		//Method for setting the Nimbus feel and look
+		public final static void setDesign() {
+			try{
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			}catch(Exception e){
+				System.out.println("Prob with setDesign()");
+			}
+			
 		}
 
 }//End class
