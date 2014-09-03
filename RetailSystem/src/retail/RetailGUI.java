@@ -995,6 +995,7 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Employee employee: employees){
 						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
+							listOfEmpIds.removeElement(viewEmpIdCombo.getSelectedItem().toString());
 							empIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
 							empNameCombo.removeItem(viewEmpIdCombo.getSelectedItem());
 							viewEmpIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
@@ -1312,11 +1313,14 @@ public class RetailGUI extends JFrame{
 				try{
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
+							listOfCustomers.removeElement(editCustIdCombo.getSelectedItem().toString());
+							listOfCusIds.removeElement(editCustIdCombo.getSelectedItem().toString());
 							custIdCombo.removeItem(editCustIdCombo.getSelectedItem());
 							custNameCombo.removeItem(editCustIdCombo.getSelectedItem());
 							editCustIdCombo.removeItem(editCustIdCombo.getSelectedItem());
 							customers.remove(customer);
 							JOptionPane.showMessageDialog(null, "Customer Deleted");
+							return;
 						}
 					}
 				}catch(NumberFormatException nfe){
