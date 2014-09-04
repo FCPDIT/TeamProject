@@ -4426,12 +4426,15 @@ public class RetailGUI extends JFrame{
 					public void actionPerformed( ActionEvent e){//handler starts
 							int count = 0, count1 = 0;
 							int id = 0;
-							String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
-							if(!s.equals("Select")){
-								id = 0;
-							}
-							double total = 0;
 							int customerID = 1;
+							String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+							if(s.equals("Select")){
+								customerID = 2;
+							}
+							else{
+								id = Integer.parseInt( s );
+							}							
+							double total = 0;
 							for(Customer customer: customers){
 								if(id == customer.getCustId()){
 									count1++;
