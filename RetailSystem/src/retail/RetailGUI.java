@@ -141,18 +141,22 @@ public class RetailGUI extends JFrame{
 	private JTextField custEmailJTextField = new JTextField();
 	private JLabel custPhoneJLabel = new JLabel("Enter Customer Phone");
 	private JTextField custPhoneJTextField = new JTextField();	
-	private JButton custJButton  = new JButton("Create New Customer");
+	private JButton custJButton; //  = new JButton("Create New Customer");
+	private JButton viewCustJButton; // = new JButton("View By ID");
+	private JButton viewCustNameJButton; // = new JButton("View By Name");
+	private JButton viewAllCustJButton; // = new JButton("View All Customers");
+	private JButton findCustById; // = new JButton("Find Customer");
+	private JButton updateCustJButton; // = new JButton("Update Customer Details");
+	private JButton deleteCustJButton; // = new JButton("Delete Customer");
 	private JLabel viewCustById = new JLabel("Find Customer By ID: ");
 	private JComboBox<String> custIdCombo = new JComboBox<String>();
-	private JButton viewCustJButton = new JButton("View By ID");
 	private JLabel viewCustByName = new JLabel("Find Customer By Name");
 	private JComboBox<String> custNameCombo = new JComboBox<String>();
-	private JButton viewCustNameJButton = new JButton("View By Name");
-	private JButton viewAllCustJButton = new JButton("View All Customers");
+	
 	private JTextArea custJTextArea = new JTextArea(10, 65);
 	private JLabel editFindCustIdJLabel = new JLabel("Enter Customer ID");
 	private JComboBox<String> editCustIdCombo = new JComboBox<String>();
-	private JButton findCustById = new JButton("Find Customer");
+	
 	private JLabel editCustNameJLabel = new JLabel("Customer Name");
 	private JLabel editCustAddressJLabel = new JLabel("Customer Address");
 	private JLabel editCustEmailJLabel = new JLabel("Customer Email");
@@ -161,8 +165,7 @@ public class RetailGUI extends JFrame{
 	private JTextField editCustAddress = new JTextField();
 	private JTextField editCustEmail = new JTextField();
 	private JTextField editCustPhone = new JTextField();
-	private JButton updateCustJButton = new JButton("Update Customer Details");
-	private JButton deleteCustJButton = new JButton("Delete Customer");
+	
 	
 	//Supplier Components
 	private JLabel supplierIdJLabel = new JLabel("Supplier ID");
@@ -254,7 +257,7 @@ public class RetailGUI extends JFrame{
 	private JTextField minJTextField = new JTextField();
 	private JLabel prodSupplierId = new JLabel("Supplier Id");
 	private JTextField prodSupplierIdJTextField = new JTextField();
-	private JButton productJButton = new JButton("Create New Product");
+	private JButton productJButton;// = new JButton("Create New Product");
 	
 	private JRadioButton under5Radio = new JRadioButton("under 4.99");
 	private JRadioButton fiveTo10Radio = new JRadioButton("5 - 9.99");
@@ -267,7 +270,6 @@ public class RetailGUI extends JFrame{
 	
 	//edit product components
 	private JLabel editDetails = new JLabel ("Product code");
-	private JButton editDetailsJButton = new JButton("Select product to edit");
 	private JLabel editProdTitle = new JLabel("Book Title");
 	private JTextField editTitleJTextField = new JTextField();
 	private JLabel editProdAuthor = new JLabel("Author");
@@ -286,8 +288,9 @@ public class RetailGUI extends JFrame{
 	private JTextField editMinJTextField = new JTextField();
 	private JLabel editProdSupplierId = new JLabel("Supplier Id");
 	private JTextField editProdSupplierIdJTextField = new JTextField();
-	private JButton updateProductJButton = new JButton("Update details");
-	private JButton deleteStockLineJButton = new JButton("Delete stock line");
+	private JButton editDetailsJButton; // = new JButton("Select product to edit");
+	private JButton updateProductJButton; // = new JButton("Update details");
+	private JButton deleteStockLineJButton; // = new JButton("Delete stock line");
 	
 	// View Product Components
 	private Product product = new Product();
@@ -357,7 +360,7 @@ public class RetailGUI extends JFrame{
 	private JTextField editPayStatus = new JTextField("");	
 	private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
 
-	private JButton lineChartJButton = new JButton("Income and Expenditure");
+	private JButton lineChartJButton; // = new JButton("Income and Expenditure");
 
 		
 	//===========================================
@@ -465,8 +468,8 @@ public class RetailGUI extends JFrame{
 	private JTextField createOrderSupplierIdTextField = new JTextField();
 	private JTextField createOrderProductIdTextField = new JTextField();
 	private JTextField createOrderQuantityTextField = new JTextField();
-	private JButton createOrderAddProductButton =  new JButton("Add Product to Order");
-	private JButton createOrderConfirmOrderButton = new JButton("Confirm Order");
+	private JButton createOrderAddProductButton;// =  new JButton("Add Product to Order");
+	private JButton createOrderConfirmOrderButton;// = new JButton("Confirm Order");
 	private JTextArea createOrderScrollPaneTextArea = new JTextArea();
 	//=====
 	//viewOrder Panel components
@@ -482,18 +485,19 @@ public class RetailGUI extends JFrame{
 	private Vector<String> existingAuthors = new Vector<>();
 	private DefaultComboBoxModel<String> listOfAuthors = new DefaultComboBoxModel<>(existingAuthors); //create the combo box
 	private JComboBox<String> viewOrderAuthorComboBox;
-	private JButton viewOrderViewAllOrdersButton = new JButton("View All");
-	private JButton viewOrderViewReceivedButton = new JButton("View Received Orders");
-	private JButton viewOrderViewUnreceivedButton = new JButton("View Unreceived Order");
-	private JButton viewOrderClearPanelButton = new JButton("Clear Panel");
+	private JButton viewOrderViewAllOrdersButton;// = new JButton("View All");
+	private JButton viewOrderViewReceivedButton;// = new JButton("View Received Orders");
+	private JButton viewOrderViewUnreceivedButton;// = new JButton("View Unreceived Order");
+	private JButton viewOrderClearPanelButton;// = new JButton("Clear Panel");
 	private JLabel viewOrderOrderIdLabel = new JLabel("Order ID: ");
-	private JButton viewOrderOrderIdButton = new JButton("Find order with this ID");	
+	private JButton viewOrderOrderIdButton;// = new JButton("Find order with this ID");
+	private JButton viewOrderSupplierIdButton;// = new JButton("Find order with this Supplier");
+	private JButton viewOrderTitleButton;// = new JButton("Find order containing a product with this title");
+	private JButton viewOrderAuthorButton;//  = new JButton("Find order containing a product by this author");
 	private JLabel viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
-	private JButton viewOrderSupplierIdButton = new JButton("Find order with this Supplier");
 	private JLabel viewOrderTitleLabel = new JLabel("Title: ");
-	private JButton viewOrderTitleButton = new JButton("Find order containing a product with this title");	
 	private JLabel viewOrderAuthorLabel = new JLabel("Author: ");
-	private JButton viewOrderAuthorButton = new JButton("Find order containing a product by this author");	
+		
 	private JTextArea viewOrderTextArea;
 	//Edit Order Components
 	private JPanel findOrderComponentsJPanel = new JPanel();
@@ -506,15 +510,15 @@ public class RetailGUI extends JFrame{
 	private JTextArea supplierOrderJTextArea = new JTextArea(10,20);
 	private JTextArea productOrderJTextArea = new JTextArea(10,40);
 	private JTextField allOrdersTotalJTextField = new JTextField("Total Owed");
-	private JButton receiveAllOrdersJButton = new JButton("Receive All Orders");
-	private JButton editOrderJButton = new JButton("Find Order by Id");
 	private JComboBox<String> editOrderSupplierIdComboBox;
-	private JButton editSupplierOrderJButton = new JButton("Find Order by Supplier");
+	private JButton receiveAllOrdersJButton;// = new JButton("Receive All Orders");
+	private JButton editOrderJButton;// = new JButton("Find Order by Id");
+	private JButton editSupplierOrderJButton;// = new JButton("Find Order by Supplier");
+	private JButton receiveOrderJButton;// = new JButton("Receive Order");
+	private JButton saveOrderJButton; // = new JButton("Update Order");
+	private JButton deleteOrderJButton; // = new JButton("Delete Order");
 	private JTextField editOrderId = new JTextField("Edit Order Id:");
 	private JTextField editOrderSupplier = new JTextField("Edit Order Customer");
-	private JButton receiveOrderJButton = new JButton("Receive Order");
-	private JButton saveOrderJButton = new JButton("Update Order");
-	private JButton deleteOrderJButton = new JButton("Delete Order");
 	private JTextField editOrderReceivedStatus = new JTextField("");	
 	private JTextField editOrderAmount = new JTextField("Edit Order Amount");
 	
@@ -529,7 +533,7 @@ public class RetailGUI extends JFrame{
 	private Vector<String> months = new Vector<>();
 	private DefaultComboBoxModel<String> listOfMonths = new DefaultComboBoxModel<>(months); //create the combo box
 	private JComboBox<String> comboBoxPL;
-	private JButton pLViewButton = new JButton("View");
+	private JButton pLViewButton; // = new JButton("View");
 	
 	//=========================================================================
 	Dimension d = new Dimension(230, 30);
@@ -4809,6 +4813,36 @@ public class RetailGUI extends JFrame{
 			 payInvoiceJButton = new JButton("Pay Invoice");
 			saveInvoiceJButton = new JButton("Update Invoice");
 			deleteInvoiceJButton = new JButton("Delete Invoice");
+			createOrderAddProductButton =  new JButton("Add Product to Order");
+			createOrderConfirmOrderButton = new JButton("Confirm Order");
+			viewOrderViewAllOrdersButton = new JButton("View All");
+			viewOrderViewReceivedButton = new JButton("View Received Orders");
+			viewOrderViewUnreceivedButton = new JButton("View Unreceived Order");
+			viewOrderClearPanelButton = new JButton("Clear Panel");
+			viewOrderOrderIdLabel = new JLabel("Order ID: ");
+			viewOrderOrderIdButton = new JButton("Find order with this ID");
+			viewOrderSupplierIdButton = new JButton("Find order with this Supplier");
+			viewOrderTitleButton = new JButton("Find order containing a product with this title");
+			viewOrderAuthorButton = new JButton("Find order containing a product by this author");
+			receiveAllOrdersJButton = new JButton("Receive All Orders");
+			editOrderJButton = new JButton("Find Order by Id");
+			editSupplierOrderJButton = new JButton("Find Order by Supplier");
+			receiveOrderJButton = new JButton("Receive Order");
+			saveOrderJButton = new JButton("Update Order");
+			deleteOrderJButton = new JButton("Delete Order");
+			editDetailsJButton = new JButton("Select product to edit");
+			updateProductJButton = new JButton("Update details");
+			deleteStockLineJButton = new JButton("Delete stock line");
+			lineChartJButton = new JButton("Income and Expenditure");
+			pLViewButton = new JButton("View");
+			productJButton = new JButton("Create New Product");
+			custJButton  = new JButton("Create New Customer");
+			viewCustJButton = new JButton("View By ID");
+			viewCustNameJButton = new JButton("View By Name");
+			viewAllCustJButton = new JButton("View All Customers");
+			findCustById = new JButton("Find Customer");
+			updateCustJButton = new JButton("Update Customer Details");
+			deleteCustJButton = new JButton("Delete Customer");
 		}
 
 }//End class
