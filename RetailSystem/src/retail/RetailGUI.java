@@ -984,17 +984,21 @@ public class RetailGUI extends JFrame{
 			//update a specific customer
 			public void actionPerformed(ActionEvent e){
 				try{
-					for(Employee employee: employees){
-						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
-							employee.setEmployeeName(editEmpNameField.getText());
-							employee.setAccess(Integer.parseInt(editEmpAccessField.getText()));
-							employee.setSalary(Double.parseDouble(editEmpSalaryField.getText()));
-							employee.setPassword(Integer.parseInt(editEmpPasswordField.getText()));
-							JOptionPane.showMessageDialog(null, "Employee Updated");
+					if(editEmpNameField.getText().isEmpty()){
+						JOptionPane.showMessageDialog(null, "Please Complete All Fields");	
+					}else{
+						for(Employee employee: employees){
+							if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
+								employee.setEmployeeName(editEmpNameField.getText());
+								employee.setAccess(Integer.parseInt(editEmpAccessField.getText()));
+								employee.setSalary(Double.parseDouble(editEmpSalaryField.getText()));
+								employee.setPassword(Integer.parseInt(editEmpPasswordField.getText()));
+								JOptionPane.showMessageDialog(null, "Employee Updated");
+							}
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Complete All Fields");
 				}
 			}
 		});
@@ -1303,13 +1307,17 @@ public class RetailGUI extends JFrame{
 			//update a specific customer
 			public void actionPerformed(ActionEvent e){
 				try{
-					for(Customer customer: customers){
-						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
-							customer.setCustName(editCustName.getText());
-							customer.setCustAddress(editCustAddress.getText());
-							customer.setCustEmail(editCustEmail.getText());
-							customer.setCustTelephone(editCustPhone.getText());
-							JOptionPane.showMessageDialog(null, "Customer Updated.");
+					if(custNameJTextField.getText().isEmpty() || custAddressJTextField.getText().isEmpty()){
+						JOptionPane.showMessageDialog(null, "Required Fields: \n Customer Name \n Customer Address");	
+					}else{
+						for(Customer customer: customers){
+							if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
+								customer.setCustName(editCustName.getText());
+								customer.setCustAddress(editCustAddress.getText());
+								customer.setCustEmail(editCustEmail.getText());
+								customer.setCustTelephone(editCustPhone.getText());
+								JOptionPane.showMessageDialog(null, "Customer Updated.");
+							}
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1631,14 +1639,18 @@ public class RetailGUI extends JFrame{
 			//function to update supplier
 			public void actionPerformed(ActionEvent e){
 				try{
-					for(Supplier supplier: suppliers){
-						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
-							supplier.setName(editSupplierName.getText());
-							supplier.setAddress(editSupplierAddress.getText());
-							supplier.setEmail(editSupplierEmail.getText());
-							supplier.setPhone(editSupplierPhone.getText());
-							supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
-							JOptionPane.showMessageDialog(null, "Supplier Updated");
+					if(supplierNameJTextField.getText().isEmpty() || supplierAddressJTextField.getText().isEmpty()){
+						JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Name \n Supplier Address");	
+					}else{
+						for(Supplier supplier: suppliers){
+							if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
+								supplier.setName(editSupplierName.getText());
+								supplier.setAddress(editSupplierAddress.getText());
+								supplier.setEmail(editSupplierEmail.getText());
+								supplier.setPhone(editSupplierPhone.getText());
+								supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
+								JOptionPane.showMessageDialog(null, "Supplier Updated");
+							}
 						}
 					}
 				}catch(NumberFormatException nfe){
