@@ -2746,6 +2746,7 @@ public class RetailGUI extends JFrame{
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.insets = new Insets(5, 5, 5, 5);
 		viewInvJPanel.add(viewCustomerPanel);
+		viewCustomerPanel.setBorder(new EmptyBorder(80, 10, 10, 10));
 		viewCustomerPanel.setLayout(new GridBagLayout());
 		gc.insets = new Insets(5,5,5,5); //sets the padding around each component
 		
@@ -3025,9 +3026,12 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String prodId =(String)prodIDComboBox.getSelectedItem();;
 				String quan = quantityTextF.getText();
+				String invoiceIdStr = invTextF.getText();
+				int invoiceId = Integer.parseInt(invoiceIdStr);
 				if(prodId.equals("select")|| (quan.trim().equals("") || quan.matches(".*\\D.*"))){
 					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
+					if(invoiceNumberUnique(invoiceId,invoices)){
 					//disable the other text fileds
 					invTextF.setEnabled(false);
 					empIDComboBox.setEnabled(false);
@@ -3047,7 +3051,7 @@ public class RetailGUI extends JFrame{
 						textAreaMarc.setCaretPosition(0);
 						message = "";
 						
-						
+					}
 					}else{
 						JOptionPane.showMessageDialog (null, "No Product Record exist with that Input", "Product Info", JOptionPane.WARNING_MESSAGE);
 					}
@@ -3113,7 +3117,8 @@ public class RetailGUI extends JFrame{
 									Invoice singleInvoiceComplete = new Invoice(invoiceId, employeeObj, customerObj, prods);
 									invoices.add(singleInvoiceComplete);
 									/*System.out.println(invoices.size());*/
-									outputMessage += "Thank you for you order"+
+									outputMessage += "Invoice Created "
+												   + "\n- - - - - - - - - - - - - - "+
 															"\nInvoice No: " + invoiceIdStr +
 															"\nEmployees No: "+ employeeIdStr +
 															"\nCustomer No: " + customerIdStr+
