@@ -2185,6 +2185,7 @@ public class RetailGUI extends JFrame{
         orderGC.gridx = 3;
         createNewOrderRightPanel.add(orderScrollPane, orderGC);
 		//Right Panel
+        createNewOrderRightPanel.setBorder(new EmptyBorder(80, 10, 10, 10));
 		//Main Panel Add
 		createOrderPanel.add(createNewOrderLeftPanel);
 		createOrderPanel.add(createNewOrderRightPanel);
