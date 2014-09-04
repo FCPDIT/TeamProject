@@ -148,10 +148,10 @@ public class RetailGUI extends JFrame{
 	private JButton findCustById; // = new JButton("Find Customer");
 	private JButton updateCustJButton; // = new JButton("Update Customer Details");
 	private JButton deleteCustJButton; // = new JButton("Delete Customer");
-	private JLabel viewCustById = new JLabel("Find Customer By ID: ");
-	private JComboBox<String> custIdCombo = new JComboBox<String>();
-	private JLabel viewCustByName = new JLabel("Find Customer By Name");
-	private JComboBox<String> custNameCombo = new JComboBox<String>();
+	private JLabel viewCustById;// = new JLabel("Find Customer By ID: ");
+	private JComboBox<String> custIdCombo;// = new JComboBox<String>();
+	private JLabel viewCustByName;// = new JLabel("Find Customer By Name");
+	private JComboBox<String> custNameCombo;// = new JComboBox<String>();
 	
 	private JTextArea custJTextArea; //  = new JTextArea(10, 65);
 	private JLabel editFindCustIdJLabel; // = new JLabel("Enter Customer ID");
@@ -462,15 +462,15 @@ public class RetailGUI extends JFrame{
 	private JLabel createOrderSupplierIdLabel = new JLabel("Supplier ID: ");
 	private JLabel createOrderProductCodeLabel = new JLabel("Product ID: ");
 	private JLabel createOrderQuantityLabel = new JLabel("Quantity: ");
-	private JTextField createOrderOrderIdTextField = new JTextField();
+	private JTextField createOrderOrderIdTextField;// = new JTextField();
 	private JComboBox<String> createOrderSupplierIdComboBox;
 	private JComboBox<String> createOrderProductIdComboBox;
-	private JTextField createOrderSupplierIdTextField = new JTextField();
-	private JTextField createOrderProductIdTextField = new JTextField();
-	private JTextField createOrderQuantityTextField = new JTextField();
+	private JTextField createOrderSupplierIdTextField;// = new JTextField();
+	private JTextField createOrderProductIdTextField;// = new JTextField();
+	private JTextField createOrderQuantityTextField;// = new JTextField();
 	private JButton createOrderAddProductButton;// =  new JButton("Add Product to Order");
 	private JButton createOrderConfirmOrderButton;// = new JButton("Confirm Order");
-	private JTextArea createOrderScrollPaneTextArea = new JTextArea();
+	private JTextArea createOrderScrollPaneTextArea; // = new JTextArea();
 	//=====
 	//viewOrder Panel components
 	private Vector<String> existingOrderIds = new Vector<>();
@@ -4819,6 +4819,12 @@ public class RetailGUI extends JFrame{
 			viewOrderViewReceivedButton = new JButton("View Received Orders");
 			viewOrderViewUnreceivedButton = new JButton("View Unreceived Order");
 			viewOrderClearPanelButton = new JButton("Clear Panel");
+			//Order
+			createOrderOrderIdTextField = new JTextField();
+			createOrderSupplierIdTextField = new JTextField();
+			createOrderProductIdTextField = new JTextField();
+			createOrderQuantityTextField = new JTextField();
+			createOrderScrollPaneTextArea = new JTextArea();
 			viewOrderOrderIdLabel = new JLabel("Order ID: ");
 			viewOrderOrderIdButton = new JButton("Find order with this ID");
 			viewOrderSupplierIdButton = new JButton("Find order with this Supplier");
@@ -4864,6 +4870,10 @@ public class RetailGUI extends JFrame{
 			editCustAddress = new JTextField();
 			editCustEmail = new JTextField();
 			editCustPhone = new JTextField();
+			 viewCustById = new JLabel("Find Customer By ID: ");
+			custIdCombo = new JComboBox<String>();
+			viewCustByName = new JLabel("Find Customer By Name");
+			custNameCombo = new JComboBox<String>();
 			
 			//Supplier Components
 			supplierIdJLabel = new JLabel("Supplier ID");
