@@ -349,7 +349,6 @@ public class RetailGUI extends JFrame{
 	private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
 	private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
 	private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
-	private JTextField editInvoiceId = new JTextField("Edit Invoice Id:");
 	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
 	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
 	private JButton payInvoiceJButton = new JButton("Pay Invoice");
@@ -4334,10 +4333,6 @@ public class RetailGUI extends JFrame{
 					JOptionPane.showMessageDialog(null, "Updated!");
 					editInvoiceJButton.doClick();
 				}
-				else if(count == 0){
-					JOptionPane.showMessageDialog(null, "Invalid Supplier Id!");
-					editInvoiceJButton.doClick();
-				}
 			}
 			public void invalidId(){
 				JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
@@ -4433,7 +4428,7 @@ public class RetailGUI extends JFrame{
 							int id = 0;
 							String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
 							if(!s.equals("Select")){
-								id = Integer.parseInt( s );
+								id = 0;
 							}
 							double total = 0;
 							int customerID = 1;
@@ -4491,10 +4486,10 @@ public class RetailGUI extends JFrame{
 						double total = 0;						
 						int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
 						String s = (String)editComboBoxInvoice.getSelectedItem();
+						if(s.equals("Select")){
+							invalidId();
+						}
 						int currentId = Integer.parseInt( s );
-						int count1 = 0, count2 = 0;
-						Employee emp = employees.get(0);
-						Customer cust = customers.get(0);
 						try{
 							total = Double.parseDouble(editInvoiceAmount.getText().trim());
 						}
@@ -4508,8 +4503,10 @@ public class RetailGUI extends JFrame{
 						}
 							JOptionPane.showMessageDialog(null, "Updated!");
 							editComboBoxInvoice.removeAllItems();
+							editComboBoxCustomerInvoice.removeAllItems();
 							fillComboBox();
 							editComboBoxInvoice.setSelectedItem(editExistingInvoiceNums.get(comboIndex));
+							editComboBoxCustomerInvoice.setSelectedItem(editExistingInvoiceNums.get(0));
 							editInvoiceJButton.doClick();
 					}
 
