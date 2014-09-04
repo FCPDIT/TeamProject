@@ -3929,7 +3929,7 @@ public class RetailGUI extends JFrame{
 				products.add(new Product("The Help", "Kathryn Stockett", "0015", 10.99, 2.51,10,20,10,suppliers.get(4)));
 				products.add(new Product("Life of Pi", "Yann Martel", "0016", 9.99, 2.12,10,10,10,suppliers.get(0)));
 				products.add(new Product("Catching Fire (The Hunger Games #2)", "Suzanne Collins", "0017", 10.99, 1.95,9,100,10,suppliers.get(3)));
-				products.add(new Product("The Girl with the Dragon Tatto", "Steig Larsson", "0018", 9.99, 1.98,15,20,10,suppliers.get(3)));
+				products.add(new Product("The Girl with the Dragon Tattoo", "Steig Larsson", "0018", 9.99, 1.98,15,20,10,suppliers.get(3)));
 				products.add(new Product("Water for Elephants", "Sara Gruen", "0019", 11.99, 3.02,15,20,10,suppliers.get(0)));
 				products.add(new Product("The Da Vinci Code", "Dan Brown", "0020", 7.99, 1.93,15,20,10,suppliers.get(4)));
 				products.add(new Product("The Curious Incident of the Dog in the Night-Time", "Mark Haddon", "0021", 7.99, 1.92,15,20,10,suppliers.get(4)));
@@ -4384,8 +4384,8 @@ public class RetailGUI extends JFrame{
 							editOrderId.setText(Integer.toString(id));
 							editOrderSupplier.setText(Integer.toString(order.getSupplierUniqueId()));
 							for(OrderProduct op: order.getListOfOrderProducts()){
-										s = "\nProduct Title: " + op.getProduct().getTitle() + 
-										"     ||    Quantity: " + Integer.toString(op.getQuantity());
+										s = "\nId: " + op.getProduct().getProductCode() + ", Title: " + op.getProduct().getTitle() + 
+										", Quantity: " + Integer.toString(op.getQuantity());
 										productOrderJTextArea.append(s);								
 								}	
 							editOrderAmount.setText(new String(String.format("%.2f", order.calculateOrderWorth())));
