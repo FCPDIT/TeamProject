@@ -4806,6 +4806,8 @@ public class RetailGUI extends JFrame{
 			editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
 			payInvoiceJButton = new JButton("Pay Invoice");
 			saveInvoiceJButton = new JButton("Update Invoice");
+			 payInvoiceJButton = new JButton("Pay Invoice");
+			saveInvoiceJButton = new JButton("Update Invoice");
 			deleteInvoiceJButton = new JButton("Delete Invoice");
 		}
 
