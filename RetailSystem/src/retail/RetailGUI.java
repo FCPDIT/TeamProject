@@ -344,7 +344,7 @@ public class RetailGUI extends JFrame{
 	private DefaultComboBoxModel<String> editCustomerListOfInvoices = new DefaultComboBoxModel<>(editExistingCustomerInvoiceNums); //create the combo box
 	private JComboBox<String> editComboBoxCustomerInvoice;
 	private JTextArea customerInvoiceJTextArea = new JTextArea(10,20);
-	private JTextArea productInvoiceJTextArea = new JTextArea();
+	private JTextArea productInvoiceJTextArea = new JTextArea(10,40);
 	private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
 	private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
 	private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
@@ -505,7 +505,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editOrderBySupplierComponentsJPanel = new JPanel();
 	private JComboBox<String> editOrderOrderIdComboBox;
 	private JTextArea supplierOrderJTextArea = new JTextArea(10,20);
-	private JTextArea productOrderJTextArea = new JTextArea();
+	private JTextArea productOrderJTextArea = new JTextArea(10,40);
 	private JTextField allOrdersTotalJTextField = new JTextField("Total Owed");
 	private JButton receiveAllOrdersJButton = new JButton("Receive All Orders");
 	private JButton editOrderJButton = new JButton("Find Order by Id");
