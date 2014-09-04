@@ -209,7 +209,7 @@ public class RetailGUI extends JFrame{
 	private JLabel  employeeName; // = new JLabel("Employee Name ");
 	private JTextField employeeNameField; // = new JTextField();
 	private JLabel employeeAcess; // = new JLabel("Access Level ");
-	private JTextField employeeAcessField; // = new JTextField();
+	private JComboBox<Integer> employeeAcessField;
 	private JLabel employeeSalary; // = new JLabel("Employee Salary");
 	private JTextField employeeSalaryField;// = new JTextField();
 	private JLabel employeePassword;// = new JLabel("Employee Password");
@@ -732,6 +732,10 @@ public class RetailGUI extends JFrame{
 		employeeJPanel.add(employeeAcess, gc);
 		gc.gridx = 0;
 		gc.gridy = 6;
+		employeeAcessField.addItem(0);
+		employeeAcessField.addItem(1);
+		employeeAcessField.setSelectedItem(0);
+		employeeAcessField.setEditable(false);
 		employeeAcessField.setMinimumSize(d);
 		employeeAcessField.setPreferredSize(d);
 		employeeJPanel.add(employeeAcessField, gc);
@@ -881,7 +885,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					if(checkEmployeeDuplicate(employees, Integer.parseInt(employeeIdField.getText())) == true){
-						Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getText()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
+						Employee employee = new Employee(Integer.parseInt(employeeIdField.getText()),employeeNameField.getText(), Integer.parseInt(employeeAcessField.getSelectedItem().toString()), Double.parseDouble(employeeSalaryField.getText()), Integer.parseInt(employeePassField.getText()));
 						employees.add(employee);
 						empIdCombo.addItem(employeeIdField.getText());
 						empNameCombo.addItem(employeeNameField.getText());
@@ -4919,7 +4923,7 @@ public class RetailGUI extends JFrame{
 			employeeName = new JLabel("Employee Name ");
 			employeeNameField = new JTextField();
 			employeeAcess = new JLabel("Access Level ");
-			employeeAcessField = new JTextField();
+			employeeAcessField = new JComboBox<Integer>();
 			employeeSalary = new JLabel("Employee Salary");
 			employeeSalaryField = new JTextField();
 			employeePassword = new JLabel("Employee Password");
