@@ -3301,9 +3301,7 @@ public class RetailGUI extends JFrame{
 				
 					productTextArea.setText(product.viewProductById(input, products)); //viewInvoiceById() is in the Invoice Class
 					productTextArea.setCaretPosition(0);
-					//viewProductIdTextField.setText("");
-					//productTitleTextField.setText("");
-					//productAuthorTextField.setText("");
+					
 					
 				}
 			}
