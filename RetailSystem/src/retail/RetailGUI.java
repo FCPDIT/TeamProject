@@ -1761,6 +1761,11 @@ public class RetailGUI extends JFrame{
 							}
 						}
 						listOfProdIds.addElement(codeJTextField.getText());
+						listOfProductAuthor.addElement(authorJTextField.getText());
+						listofProductTitle.addElement(titleJTextField.getText());
+						Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
+						Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
+						
 					}else{
 						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
 					}
@@ -3263,7 +3268,7 @@ public class RetailGUI extends JFrame{
 		productGC.gridx = 0;
 		productGC.gridy = 1;
 		viewProductDetails.add(productIdlbl,productGC);
-		comboBoxProductId = new JComboBox<>(listOfProductId);
+		comboBoxProductId = new JComboBox<>(listOfProdIds);
 		comboBoxProductId.setEditable(true);
 		comboBoxProductId.setPreferredSize(d);
 		comboBoxProductId.setMinimumSize(d);
@@ -3299,7 +3304,7 @@ public class RetailGUI extends JFrame{
 					//viewProductIdTextField.setText("");
 					//productTitleTextField.setText("");
 					//productAuthorTextField.setText("");
-					productTextArea.setCaretPosition(0);
+					
 				}
 			}
 		});
