@@ -193,17 +193,19 @@ public class Product {
 	}
 	
 	
-	public void removeStockById (String productCode, ArrayList<Product> products){
+	public Product removeStockById (String productCode, ArrayList<Product> products){
 		for (Product p : products) {
 			if (productCode.equals(p.getProductCode())) {
 
 				products.remove(p);
+				return p;
 				              //not sure if this is the best way to remove a 
 									//stockline but might be ok for this project..
 			}/*else{
 				JOptionPane.showMessageDialog(null, "Product not deleted.");
 			}*/
 		}
+		return null;
 	}
 	
 

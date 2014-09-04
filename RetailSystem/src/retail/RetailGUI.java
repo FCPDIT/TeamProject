@@ -3608,8 +3608,9 @@ public class RetailGUI extends JFrame{
 		deleteStockLineJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String code = editCodeJTextField.getText();
-				product.removeStockById(code,products);
+				Product proReturned = product.removeStockById(code,products);
 				JOptionPane.showMessageDialog(null, "Stockline deleted");
+				listOfProdIds.removeElement(proReturned.getProductCode());
 
 			}
 		});
