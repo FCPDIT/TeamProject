@@ -764,6 +764,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 1;
 		JScrollPane empScrollPane = new JScrollPane(empJTextArea);
+		empJTextArea.setEditable(false);
 		viewEmployeeJPanel.add(empScrollPane, gc);	
 		editEmployeeJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
@@ -1077,6 +1078,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 1;
 		JScrollPane custScrollPane = new JScrollPane(custJTextArea);
+		custJTextArea.setEditable(false);
 		viewCustJPanel.add(custScrollPane, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
@@ -1397,6 +1399,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 0;
 		gc.gridy = 1;
 		JScrollPane suppJScrollPane = new JScrollPane(supplierJTextArea);
+		supplierJTextArea.setEditable(false);
 		viewSupplyJPanel.add(suppJScrollPane, gc);
 		gc.gridx = 0;
 		gc.gridy = 2;
