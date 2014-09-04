@@ -76,19 +76,19 @@ public class RetailGUI extends JFrame{
 	private ArrayList<OrderProduct> orderProducts3 = new ArrayList<OrderProduct>();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/dd");
 	
-	private JFrame mainJFrame = new JFrame();
+	private JFrame mainJFrame;// = new JFrame();
 	private GridBagConstraints gc = new GridBagConstraints();
-	private JTabbedPane mainJTabbedPane = new JTabbedPane();
-	JScrollPane scrollPane = new JScrollPane();
+	private JTabbedPane mainJTabbedPane;// = new JTabbedPane();
+	JScrollPane scrollPane;// = new JScrollPane();
 	
-	private JPanel loginJPanel = new JPanel();
-	private JTabbedPane custJTabbedPane = new JTabbedPane();
-	private JTabbedPane supplyJTabbedPane = new JTabbedPane();
-	private JTabbedPane prodJTabbedPane = new JTabbedPane();
-	private JTabbedPane invJTabbedPane = new JTabbedPane();
-	private JTabbedPane orderJTabbedPane = new JTabbedPane();
-	private JTabbedPane accessJTabbedPane = new JTabbedPane();
-	private JTabbedPane proflossJTabbedPane = new JTabbedPane();
+	private JPanel loginJPanel;// = new JPanel();
+	private JTabbedPane custJTabbedPane;// = new JTabbedPane();
+	private JTabbedPane supplyJTabbedPane;// = new JTabbedPane();
+	private JTabbedPane prodJTabbedPane;// = new JTabbedPane();
+	private JTabbedPane invJTabbedPane;// = new JTabbedPane();
+	private JTabbedPane orderJTabbedPane;// = new JTabbedPane();
+	private JTabbedPane accessJTabbedPane; // = new JTabbedPane();
+	private JTabbedPane proflossJTabbedPane;// = new JTabbedPane();
 	
 	private JPanel addCustJPanel = new JPanel();
 	private JPanel viewCustJPanel = new JPanel();
@@ -346,14 +346,14 @@ public class RetailGUI extends JFrame{
 	private JTextArea customerInvoiceJTextArea = new JTextArea(10,20);
 	private JTextArea productInvoiceJTextArea = new JTextArea(10,40);
 	private JTextField allInvoicesTotalJTextField = new JTextField("Total Owed");
-	private JButton payAllInvoicesJButton = new JButton("Pay All Invoices");
-	private JButton editInvoiceJButton = new JButton("Find Invoice by Id");
-	private JButton editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
+	private JButton payAllInvoicesJButton;// = new JButton("Pay All Invoices");
+	private JButton editInvoiceJButton;// = new JButton("Find Invoice by Id");
+	private JButton editCustomerInvoiceJButton;// = new JButton("Find Invoice by Customer");
 	private JTextField editInvoiceEmployee = new JTextField("Edit Invoice Employee");
 	private JTextField editInvoiceCustomer = new JTextField("Edit Invoice Customer");
-	private JButton payInvoiceJButton = new JButton("Pay Invoice");
-	private JButton saveInvoiceJButton = new JButton("Update Invoice");
-	private JButton deleteInvoiceJButton = new JButton("Delete Invoice");
+	private JButton payInvoiceJButton;// = new JButton("Pay Invoice");
+	private JButton saveInvoiceJButton;// = new JButton("Update Invoice");
+	private JButton deleteInvoiceJButton;// = new JButton("Delete Invoice");
 	private JTextField editPayStatus = new JTextField("");	
 	private JTextField editInvoiceAmount = new JTextField("Edit Invoice Amount");
 
@@ -441,9 +441,9 @@ public class RetailGUI extends JFrame{
 	//4 Buttons for left Panel
 	/*private JButton singleBtn = new JButton("Single Invoice");
 	private JButton multiBtn = new JButton("Multiple Invoice");*/
-	private JButton addMoreBtn = new JButton("Add More");
-	private JButton finishBtn = new JButton("Finished");
-	private JButton resetBtn = new JButton("Reset");
+	private JButton addMoreBtn;// = new JButton("Add More");
+	private JButton finishBtn;// = new JButton("Finished");
+	private JButton resetBtn;// = new JButton("Reset");
 	//End Of Marc: Create a new Invoice Panel
 	//=========================================
 	
@@ -537,7 +537,8 @@ public class RetailGUI extends JFrame{
 	public RetailGUI() {
 		//TODO Jump to Constructor
 		createInvoices();
-		//setDesign();
+		setDesign();
+		initialize();
 	
 		
 		//Line Chart data sets
@@ -4778,6 +4779,31 @@ public class RetailGUI extends JFrame{
 				System.out.println("Prob with setDesign()");
 			}
 			
+		}
+		
+		
+		//MEthod to initialize Panes etc
+		public void initialize(){
+			mainJFrame = new JFrame();
+			mainJTabbedPane = new JTabbedPane();
+			scrollPane = new JScrollPane();
+			loginJPanel = new JPanel();
+			custJTabbedPane = new JTabbedPane();
+			supplyJTabbedPane = new JTabbedPane();
+			prodJTabbedPane = new JTabbedPane();
+			invJTabbedPane = new JTabbedPane();
+			orderJTabbedPane = new JTabbedPane();
+			accessJTabbedPane = new JTabbedPane();
+			proflossJTabbedPane = new JTabbedPane();
+			addMoreBtn = new JButton("Add More");
+			finishBtn = new JButton("Finished");
+			resetBtn = new JButton("Reset");
+			payAllInvoicesJButton = new JButton("Pay All Invoices");
+			editInvoiceJButton = new JButton("Find Invoice by Id");
+			editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
+			payInvoiceJButton = new JButton("Pay Invoice");
+			saveInvoiceJButton = new JButton("Update Invoice");
+			deleteInvoiceJButton = new JButton("Delete Invoice");
 		}
 
 }//End class
