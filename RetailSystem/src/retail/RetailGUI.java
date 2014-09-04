@@ -2166,11 +2166,12 @@ public class RetailGUI extends JFrame{
 				createOrderProductIdTextField.setText("");
 				createOrderQuantityTextField.setText("");
 				createOrderOrderIdTextField.setEnabled(true);
-				createOrderSupplierIdTextField.setEnabled(true);
+				createOrderSupplierIdComboBox.setEnabled(true);
 				createOrderScrollPaneTextArea.setText("");
 				createOrderScrollPaneTextArea.setCaretPosition(0);
 				listOfSuppliers.setSelectedItem("Select");
         		listOfOrders.setSelectedItem("Select");
+        		listOfProductId.setSelectedItem("Select");
 			}
 		});
 		//TextPane
@@ -2202,7 +2203,10 @@ public class RetailGUI extends JFrame{
 							(productCode.trim().equals("") || productCode.matches(".*\\D.*")) ||
 								(quantity.trim().equals("") || quantity.matches(".*\\D.*"))){
 									JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
-				}else{
+				}else if(!orderNumberUnique(Integer.parseInt(orderId), orders)){
+					JOptionPane.showMessageDialog (null, "Order Number is not Unique", "Order Info", JOptionPane.WARNING_MESSAGE);
+				}
+				else{
 					//disable the other text fields
 					createOrderOrderIdTextField.setEnabled(false);
 					createOrderSupplierIdComboBox.setEnabled(false);
