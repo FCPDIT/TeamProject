@@ -4281,7 +4281,12 @@ public class RetailGUI extends JFrame{
 					orderJTabbedPane.setEnabledAt(2, false);
 					supplyJTabbedPane.setEnabledAt(2, false);
 					prodJTabbedPane.setEnabledAt(2, false);
-					custJTabbedPane.setEnabledAt(2, false);	
+					custJTabbedPane.setEnabledAt(2, false);
+					invJTabbedPane.setSelectedIndex(0);
+					orderJTabbedPane.setSelectedIndex(0);
+					supplyJTabbedPane.setSelectedIndex(0);
+					prodJTabbedPane.setSelectedIndex(0);
+					custJTabbedPane.setSelectedIndex(0);
 					loginComponentsJPanel.setVisible(false);
 					logoutComponentsJPanel.setVisible(true);
 				}
