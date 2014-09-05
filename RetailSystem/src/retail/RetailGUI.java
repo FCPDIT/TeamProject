@@ -3031,7 +3031,7 @@ public class RetailGUI extends JFrame{
 			//Add combo here
 		prodIDComboBox = new JComboBox<String>(listOfProdIds);
 		prodIDComboBox.setPreferredSize(d);
-		listOfProdIds.setSelectedItem("select");
+		listOfProdIds.setSelectedItem("Select");
 		gc.gridx = 1;
 		gc.gridy = 3;
 		leftPanel.add(prodIDComboBox,gc);
@@ -3317,17 +3317,18 @@ public class RetailGUI extends JFrame{
 				//String input = viewProductIdTextField.getText();
 				// This method could be enhanced by adding in a check 
 				//to ensure 9 digits have been entered to match an ISBN number.
-				if(input.trim().equals("")){ 
+				if(input.trim().equals("Select")){ 
 					//textarea.setText("Please enter a valid ID");	
-					JOptionPane.showMessageDialog(null, "Please Enter a Value in the ID Field");
+					JOptionPane.showMessageDialog(null, "Please Select a Value from the Product ID Drop Down Menu");
 					//viewProductIdTextField.setText("");
 					//productTitleTextField.setText("");
 				}else{
 				
 					productTextArea.setText(product.viewProductById(input, products)); //viewInvoiceById() is in the Invoice Class
 					productTextArea.setCaretPosition(0);
-					
-					
+					listOfProdIds.setSelectedItem("Select");
+					listofProductTitle.setSelectedItem("Select");
+					listOfProductAuthor.setSelectedItem("Select");
 				}
 			}
 		});
@@ -3364,18 +3365,18 @@ public class RetailGUI extends JFrame{
 				String input = (String)comboBoxProductTitle.getSelectedItem();
 				//String input = productTitleTextField.getText();
 				
-				if(input.trim().equals("")){ 
+				if(input.trim().equals("Select")){ 
 					//textarea.setText("Please enter a valid Title");
-					JOptionPane.showMessageDialog(null, "Please Enter a Value in the Title Field");
+					JOptionPane.showMessageDialog(null, "Please Select a Value from the Product Title Drop Down Menu");
 					productTitleTextField.setText("");
 					
 				}else{
 					
 					productTextArea.setText(product.viewProductByTitle(input, products));	//viewInvoiceByCustomer() is in the Invoice class
 					productTextArea.setCaretPosition(0);
-					productTitleTextField.setText("");
-					viewProductIdTextField.setText("");
-					productAuthorTextField.setText("");
+					listOfProdIds.setSelectedItem("Select");
+					listofProductTitle.setSelectedItem("Select");
+					listOfProductAuthor.setSelectedItem("Select");
 					
 					
 				}
@@ -3415,24 +3416,24 @@ public class RetailGUI extends JFrame{
 		productAuthorBtn.setMinimumSize(d);
 		productAuthorBtn.addActionListener(new ActionListener() {
 			
-			//Action listener For Button to view product by Title
+			//Action listener For Button to view product by Author
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = ((String)comboBoxProductAuthor.getSelectedItem()).toLowerCase();
 				//String input = (productAuthorTextField.getText()).toLowerCase();	// Convert input text to lower case. 
 																					//All names in array should be stored in lower case.
 				
-				if(input.trim().equals("")){ 	// If no text is entered
+				if(input.trim().equals("select")){ 	// If no value is selected
 					
-					JOptionPane.showMessageDialog(null, "Please Enter a Value in the Author Field");
+					JOptionPane.showMessageDialog(null, "Please Select a Value from the Author Drop Down Menu");
 					productAuthorTextField.setText("");
 					
 				}else{							// Take in String and Search for it.
 					productTextArea.setText(product.viewProductByAuthor(input, products));	
 					productTextArea.setCaretPosition(0);		// This sets the position of the scroll bar to the top of the page.
-					//productAuthorTextField.setText("");
-					//viewProductIdTextField.setText("");
-					//productTitleTextField.setText("");
+					listOfProdIds.setSelectedItem("Select");
+					listofProductTitle.setSelectedItem("Select");
+					listOfProductAuthor.setSelectedItem("Select");
 				}
 			}
 		});
@@ -3450,9 +3451,9 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				productTextArea.setText(product.viewAllProductDetails(products));	//viewAllProducts() is in the Product Class
 				productTextArea.setCaretPosition(0);
-				//viewProductIdTextField.setText("");
-				//productTitleTextField.setText("");
-				//productAuthorTextField.setText("");
+				listOfProdIds.setSelectedItem("Select");
+				listofProductTitle.setSelectedItem("Select");
+				listOfProductAuthor.setSelectedItem("Select");
 			}
 		});
 		
@@ -3470,9 +3471,9 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				productTextArea.setText(product.viewProductByMinStock(products));
 				productTextArea.setCaretPosition(0);
-				//viewProductIdTextField.setText("");
-				//productTitleTextField.setText("");
-				//productAuthorTextField.setText("");
+				listOfProdIds.setSelectedItem("Select");
+				listofProductTitle.setSelectedItem("Select");
+				listOfProductAuthor.setSelectedItem("Select");
 			}
 		});
 				
@@ -3489,9 +3490,9 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				productTextArea.setText(product.viewProductByOverStock(products));
 				productTextArea.setCaretPosition(0);
-				//viewProductIdTextField.setText("");
-				//productTitleTextField.setText("");
-				//productAuthorTextField.setText("");
+				listOfProdIds.setSelectedItem("Select");
+				listofProductTitle.setSelectedItem("Select");
+				listOfProductAuthor.setSelectedItem("Select");
 			}
 		});
 		
@@ -3626,7 +3627,7 @@ public class RetailGUI extends JFrame{
 						}
 					
 						JOptionPane.showMessageDialog(null, "Product updated");
-
+						
 					}
 				}
 			}
