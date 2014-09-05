@@ -470,6 +470,7 @@ public class RetailGUI extends JFrame{
 	private JTextArea createOrderScrollPaneTextArea; // = new JTextArea();
 	//=====
 	//viewOrder Panel components
+	private JPanel viewSupplierPanel;
 	private Vector<String> existingOrderIds;// = new Vector<>();
 	private DefaultComboBoxModel<String> listOfOrders;// = new DefaultComboBoxModel<>(existingOrderIds); //create the combo box
 	private JComboBox<String> viewOrderOrderIdComboBox;
@@ -2350,17 +2351,31 @@ public class RetailGUI extends JFrame{
 		size1.width = 500;
 		viewOrderJPanel.setPreferredSize(size1);
 		//====
-		viewOrderLeftJPanel.setLayout(new GridBagLayout());
-		viewOrderRightJPanel.setLayout(new GridBagLayout());
-		viewOrderJPanel.setLayout(new GridBagLayout());
 		GridBagConstraints viewOrderGC = new GridBagConstraints();
-		viewOrderGC.insets = new Insets(5,5,5,5);
+		viewOrderGC.insets = new Insets(5, 5, 5, 5);
+		viewOrderJPanel.add(viewSupplierPanel);
+		viewSupplierPanel.setBorder(new EmptyBorder(80, 10, 10, 10));
+		viewSupplierPanel.setLayout(new GridBagLayout());
+		viewOrderGC.insets = new Insets(5,5,5,5); 
+
+		//1. TextArea inside scroll pane added first
+		viewOrderTextArea = new JTextArea(20,50); //height - width
+		viewOrderTextArea.setEditable(false);
+		JScrollPane viewOrderScrollPane = new JScrollPane(viewOrderTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints vOGC = new GridBagConstraints();
+		vOGC.gridwidth = GridBagConstraints.REMAINDER;
+		vOGC.fill = GridBagConstraints.BOTH;
+		vOGC.weightx = 1.0;
+		vOGC.weighty = 1.0;
+		viewSupplierPanel.add(viewOrderScrollPane, vOGC);
+
 		//====
+		//First row: view all button, orderID label, orderID combo box and orderID button
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 1;
 		viewOrderViewAllOrdersButton.setMinimumSize(d);
 		viewOrderViewAllOrdersButton.setPreferredSize(d);
-		viewOrderLeftJPanel.add(viewOrderViewAllOrdersButton, viewOrderGC);
+		viewSupplierPanel.add(viewOrderViewAllOrdersButton, viewOrderGC);
 		viewOrderViewAllOrdersButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -2368,63 +2383,21 @@ public class RetailGUI extends JFrame{
 				viewOrderTextArea.setCaretPosition(0);
 			}
 		});
-		//====
-		viewOrderGC.gridx = 0;
-		viewOrderGC.gridy = 2;
-		viewOrderViewReceivedButton.setPreferredSize(d);
-		viewOrderViewReceivedButton.setMinimumSize(d);
-		viewOrderLeftJPanel.add(viewOrderViewReceivedButton, viewOrderGC);
-		viewOrderViewReceivedButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				viewOrderTextArea.setText(Order.viewReceivedOrders(orders));	
-				viewOrderTextArea.setCaretPosition(0);	
-			}
-		});
-		//====
-		viewOrderGC.gridx = 0;
-		viewOrderGC.gridy = 3;
-		viewOrderViewUnreceivedButton.setPreferredSize(d);
-		viewOrderViewUnreceivedButton.setMinimumSize(d);
-		viewOrderLeftJPanel.add(viewOrderViewUnreceivedButton, viewOrderGC);
-		viewOrderViewUnreceivedButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				viewOrderTextArea.setText(Order.viewUnreceivedOrders(orders));		
-				viewOrderTextArea.setCaretPosition(0);
-			}
-		});
-		//====
-		//====
-		viewOrderGC.gridx = 0;
-		viewOrderGC.gridy = 4;
-		viewOrderClearPanelButton.setPreferredSize(d);
-		viewOrderClearPanelButton.setMinimumSize(d);
-		viewOrderLeftJPanel.add(viewOrderClearPanelButton, viewOrderGC);
-		viewOrderClearPanelButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				viewOrderTextArea.setText("");		
-				viewOrderTextArea.setCaretPosition(0);
-			}
-		});
-		//====
 		viewOrderGC.gridx = 1;
 		viewOrderGC.gridy = 1;
-		viewOrderLeftJPanel.add(viewOrderOrderIdLabel, viewOrderGC);
-		//TODO comboBox order
+		viewSupplierPanel.add(viewOrderOrderIdLabel, viewOrderGC);
 		viewOrderOrderIdComboBox = new JComboBox<>(listOfOrders);
 		viewOrderOrderIdComboBox.setPreferredSize(d);
 		viewOrderOrderIdComboBox.setMinimumSize(d);
 		listOfOrders.setSelectedItem("Select");
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 1;
-		viewOrderLeftJPanel.add(viewOrderOrderIdComboBox, viewOrderGC);
+		viewSupplierPanel.add(viewOrderOrderIdComboBox, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 1;
 		viewOrderOrderIdButton.setPreferredSize(d2);
 		viewOrderOrderIdButton.setMinimumSize(d2);
-		viewOrderLeftJPanel.add(viewOrderOrderIdButton, viewOrderGC);
+		viewSupplierPanel.add(viewOrderOrderIdButton, viewOrderGC);
 		viewOrderOrderIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -2442,22 +2415,37 @@ public class RetailGUI extends JFrame{
 				}
 			}
 		});
+
 		//====
+		//Second row: view received, supplierID label, supplierID combo box and supplierId button
+		viewOrderGC.gridx = 0;
+		viewOrderGC.gridy = 2;
+		viewOrderViewReceivedButton.setPreferredSize(d);
+		viewOrderViewReceivedButton.setMinimumSize(d);
+		viewSupplierPanel.add(viewOrderViewReceivedButton, viewOrderGC);
+		viewOrderViewReceivedButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewOrderTextArea.setText(Order.viewReceivedOrders(orders));	
+				viewOrderTextArea.setCaretPosition(0);	
+			}
+		});
+
 		viewOrderGC.gridx = 1;
 		viewOrderGC.gridy = 2;
-		viewOrderLeftJPanel.add(viewOrderSupplierIdLabel,viewOrderGC);
+		viewSupplierPanel.add(viewOrderSupplierIdLabel,viewOrderGC);
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 2;
 		viewOrderSupplierIdComboBox = new JComboBox<>(listOfSuppliers);
 		viewOrderSupplierIdComboBox.setPreferredSize(d);
 		viewOrderSupplierIdComboBox.setMinimumSize(d);
 		listOfSuppliers.setSelectedItem("Select");
-		viewOrderGC.gridx = 2;
-		viewOrderGC.gridy = 2;
-		viewOrderLeftJPanel.add(viewOrderSupplierIdComboBox, viewOrderGC);
+		viewSupplierPanel.add(viewOrderSupplierIdComboBox, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 2;
 		viewOrderSupplierIdButton.setPreferredSize(d2);
 		viewOrderSupplierIdButton.setMinimumSize(d2);
-		viewOrderLeftJPanel.add(viewOrderSupplierIdButton,viewOrderGC);
+		viewSupplierPanel.add(viewOrderSupplierIdButton,viewOrderGC);
 		viewOrderSupplierIdButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -2476,22 +2464,36 @@ public class RetailGUI extends JFrame{
 				}
 			}
 		});
+
 		//====
+		//Third row: unreceived button, title label, title combo box, title button
+		viewOrderGC.gridx = 0;
+		viewOrderGC.gridy = 3;
+		viewOrderViewUnreceivedButton.setPreferredSize(d);
+		viewOrderViewUnreceivedButton.setMinimumSize(d);
+		viewSupplierPanel.add(viewOrderViewUnreceivedButton, viewOrderGC);
+		viewOrderViewUnreceivedButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewOrderTextArea.setText(Order.viewUnreceivedOrders(orders));		
+				viewOrderTextArea.setCaretPosition(0);
+			}
+		});
 		viewOrderGC.gridx = 1;
 		viewOrderGC.gridy = 3;
-		viewOrderLeftJPanel.add(viewOrderTitleLabel, viewOrderGC);
+		viewSupplierPanel.add(viewOrderTitleLabel, viewOrderGC);
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 3;
 		viewOrderTitleComboBox = new JComboBox<>(listOfTitles);
 		viewOrderTitleComboBox.setPreferredSize(d);
 		viewOrderTitleComboBox.setMinimumSize(d);
 		listOfTitles.setSelectedItem("Select");
-		viewOrderGC.gridx = 2;
-		viewOrderGC.gridy = 3;
-		viewOrderLeftJPanel.add(viewOrderTitleComboBox, viewOrderGC);
+		viewSupplierPanel.add(viewOrderTitleComboBox, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 3;
 		viewOrderTitleButton.setPreferredSize(d2);
 		viewOrderTitleButton.setMinimumSize(d2);
-		viewOrderLeftJPanel.add(viewOrderTitleButton, viewOrderGC);
+		viewSupplierPanel.add(viewOrderTitleButton, viewOrderGC);
 		viewOrderTitleButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -2508,22 +2510,36 @@ public class RetailGUI extends JFrame{
 				}
 			}
 		});
+
 		//====
+		//Fourth row: clear panel button, author label, author combo box, author button
+		viewOrderGC.gridx = 0;
+		viewOrderGC.gridy = 4;
+		viewOrderClearPanelButton.setPreferredSize(d);
+		viewOrderClearPanelButton.setMinimumSize(d);
+		viewSupplierPanel.add(viewOrderClearPanelButton, viewOrderGC);
+		viewOrderClearPanelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewOrderTextArea.setText("");		
+				viewOrderTextArea.setCaretPosition(0);
+			}
+		});
 		viewOrderGC.gridx = 1;
 		viewOrderGC.gridy = 4;
-		viewOrderLeftJPanel.add(viewOrderAuthorLabel, viewOrderGC);
+		viewSupplierPanel.add(viewOrderAuthorLabel, viewOrderGC);
+		viewOrderGC.gridx = 2;
+		viewOrderGC.gridy = 4;
 		viewOrderAuthorComboBox = new JComboBox<>(listOfAuthors);
 		viewOrderAuthorComboBox.setPreferredSize(d);
 		viewOrderAuthorComboBox.setMinimumSize(d);
 		listOfAuthors.setSelectedItem("Select");
-		viewOrderGC.gridx = 2;
-		viewOrderGC.gridy = 4;
-		viewOrderLeftJPanel.add(viewOrderAuthorComboBox, viewOrderGC);
+		viewSupplierPanel.add(viewOrderAuthorComboBox, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 4;
 		viewOrderAuthorButton.setPreferredSize(d2);
 		viewOrderAuthorButton.setMinimumSize(d2);
-		viewOrderLeftJPanel.add(viewOrderAuthorButton,viewOrderGC);
+		viewSupplierPanel.add(viewOrderAuthorButton,viewOrderGC);
 		viewOrderAuthorButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -2540,23 +2556,6 @@ public class RetailGUI extends JFrame{
 				}
 			}
 		});
-		//====
-		viewOrderTextArea = new JTextArea(20, 50); //height - width
-		viewOrderTextArea.setEditable(false);
-		JScrollPane viewOrderScrollPane = new JScrollPane(viewOrderTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        viewOrderGC.gridwidth = GridBagConstraints.REMAINDER;
-        viewOrderGC.fill = GridBagConstraints.BOTH;
-        viewOrderGC.weightx = 1.0;
-        viewOrderGC.weighty = 1.0;
-        viewOrderGC.gridx = 0;
-        viewOrderGC.gridy = 0;
-        viewOrderRightJPanel.add(viewOrderScrollPane, viewOrderGC);
-        viewOrderGC.gridx = 0;
-        viewOrderGC.gridy = 1;
-        viewOrderJPanel.add(viewOrderLeftJPanel, viewOrderGC);
-        viewOrderGC.gridx = 0;
-        viewOrderGC.gridy = 0;
-        viewOrderJPanel.add(viewOrderRightJPanel, viewOrderGC);
 		//=========================================================================================
         //add edit order components	
         findOrderComponentsJPanel.setLayout(new GridBagLayout());
@@ -5115,6 +5114,7 @@ public class RetailGUI extends JFrame{
 			createOrderProductCodeLabel = new JLabel("Product ID: ");
 			createOrderQuantityLabel = new JLabel("Quantity: ");
 			//viewOrder Panel components
+			viewSupplierPanel = new JPanel();
 			existingOrderIds = new Vector<>();
 			listOfOrders = new DefaultComboBoxModel<>(existingOrderIds); //create the combo box
 			existingSupplierIds = new Vector<>();
