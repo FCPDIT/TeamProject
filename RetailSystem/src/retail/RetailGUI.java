@@ -342,9 +342,7 @@ public class RetailGUI extends JFrame{
 	private Vector<String> editExistingInvoiceNums;// = new Vector<>();
 	private DefaultComboBoxModel<String> editListOfInvoices;// = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
 	private JComboBox<String> editComboBoxInvoice;
-	private Vector<String> editExistingCustomerInvoiceNums;// = new Vector<>();
-	private DefaultComboBoxModel<String> editCustomerListOfInvoices;// = new DefaultComboBoxModel<>(editExistingCustomerInvoiceNums); //create the combo box
-	private JComboBox<String> editComboBoxCustomerInvoice;
+	private JComboBox<String> editCustIdComboInv;
 	private JTextArea customerInvoiceJTextArea;// = new JTextArea(10,20);
 	private JTextArea productInvoiceJTextArea;// = new JTextArea(10,40);
 	private JTextField allInvoicesTotalJTextField;// = new JTextField("Total Owed");
@@ -1200,7 +1198,7 @@ public class RetailGUI extends JFrame{
 								custAddressJTextField.setText("");
 								custEmailJTextField.setText("");
 								custPhoneJTextField.setText("");
-								editCustomerListOfInvoices.addElement(custIdJTextField.getText());
+								editCustIdComboInv.addItem(Integer.toString(customer.getCustId()));
 								listOfCustomers.addElement(custIdJTextField.getText());
 								listOfCusIds.addElement(custIdJTextField.getText());
 						}
@@ -1958,7 +1956,8 @@ public class RetailGUI extends JFrame{
 		
 		
 		//add edit invoice components
-			fillComboBox();				
+			fillComboBox();		
+			this.custIdPopulate(editCustIdComboInv);
 			//find by invoice id & customer id components
 			findInvoiceComponentsJPanel.setLayout(new GridBagLayout());
 			gc.gridx = 0;
@@ -1975,11 +1974,10 @@ public class RetailGUI extends JFrame{
 			findInvoiceComponentsJPanel.add(editInvoiceJButton, gc);
 			gc.gridx = 0;
 			gc.gridy = 2;
-			editComboBoxCustomerInvoice = new JComboBox<String>(editCustomerListOfInvoices); //Combo box rather than Text Field
-			editCustomerListOfInvoices.setSelectedItem(editExistingCustomerInvoiceNums.get(0));
-			findInvoiceComponentsJPanel.add(editComboBoxCustomerInvoice, gc);
-			editComboBoxCustomerInvoice.setPreferredSize(d);
-			editComboBoxCustomerInvoice.setMinimumSize(d);
+			editCustIdComboInv.setSelectedItem(0);
+			findInvoiceComponentsJPanel.add(editCustIdComboInv, gc);
+			editCustIdComboInv.setPreferredSize(d);
+			editCustIdComboInv.setMinimumSize(d);
 			gc.gridx = 1;
 			gc.gridy = 2;
 			editCustomerInvoiceJButton.setPreferredSize(d);
@@ -2082,7 +2080,7 @@ public class RetailGUI extends JFrame{
 			editCustomerInvoiceComponentsJPanel.add(editInvoiceByCustComponents, gc);	
 			payAllInvoicesJButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+					String s = (String)editCustIdComboInv.getSelectedItem();
 					int id = Integer.parseInt( s );
 					for(Invoice invoice: invoices){
 						if(id == invoice.getCustomer().getCustId() ){
@@ -4118,12 +4116,8 @@ public class RetailGUI extends JFrame{
 	public void fillComboBox(){
 		//get comboBox contents
 		editExistingInvoiceNums.add("Select");
-		editExistingCustomerInvoiceNums.add("Select");
 		for(Invoice invoice: invoices){
 			editExistingInvoiceNums.add(Integer.toString(invoice.getId()));
-		}
-		for(Customer customer: customers){
-			editExistingCustomerInvoiceNums.add(Integer.toString(customer.getCustId()));
 		}
 	}
 	
@@ -4452,7 +4446,7 @@ public class RetailGUI extends JFrame{
 							int count = 0, count1 = 0;
 							int id = 0;
 							int customerID = 1;
-							String s = (String)editComboBoxCustomerInvoice.getSelectedItem();
+							String s = (String)editCustIdComboInv.getSelectedItem();
 							if(s.equals("Select")){
 								customerID = 2;
 							}
@@ -5060,8 +5054,7 @@ public class RetailGUI extends JFrame{
 			editInvoiceByCustComponents = new JPanel();
 			editExistingInvoiceNums = new Vector<>();
 			editListOfInvoices = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
-			editExistingCustomerInvoiceNums = new Vector<>();
-			editCustomerListOfInvoices = new DefaultComboBoxModel<>(editExistingCustomerInvoiceNums); //create the combo box
+			editCustIdComboInv = new JComboBox<String>();
 			customerInvoiceJTextArea = new JTextArea(10,20);
 			productInvoiceJTextArea = new JTextArea(10,40);
 			allInvoicesTotalJTextField = new JTextField("Total Owed");
