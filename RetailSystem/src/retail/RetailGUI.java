@@ -4150,12 +4150,6 @@ public class RetailGUI extends JFrame{
 			if(invoiceID == 1){
 				for(Invoice invoice: invoices){
 					if(id == invoice.getId()){
-						if(invoice.isPaid()){
-							editInvoiceAmount.setEditable(false);
-						}
-						if(invoice.isPaid() == false){
-							editInvoiceAmount.setEditable(true);
-						}
 						editCustomerInvoiceComponentsJPanel.setVisible(false);
 						editInvoiceComponentsJPanel.setVisible(true);
 						editInvoiceProductsComponentsJPanel.setVisible(true);
