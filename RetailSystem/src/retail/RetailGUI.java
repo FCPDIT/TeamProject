@@ -3706,15 +3706,8 @@ public class RetailGUI extends JFrame{
 				highestSellingButton = new JButton();
 				graphgc.gridx = 1;
 				graphgc.gridy = 1;
-				highestSellingButton.setMinimumSize(d);
-				highestSellingButton.setPreferredSize(d);
 				graphJPanel.add(highestSellingButton,graphgc);
-				try{
-					highestSellingButton.setIcon(new ImageIcon("src\\images\\top.png"));
-					
-					}catch(Exception ex){
-						System.out.println("not working");
-					}
+				highestSellingButton.setIcon(new ImageIcon("src\\images\\top.png"));
 				highestSellingButton.addActionListener(new ActionListener() {
 					
 					@SuppressWarnings("rawtypes")
@@ -3786,12 +3779,11 @@ public class RetailGUI extends JFrame{
 					}
 				});
 				
-				lowsetsellingButton = new JButton("Lowest selling");
+				lowsetsellingButton = new JButton();
 				graphgc.gridx = 2;
 				graphgc.gridy = 1;
-				lowsetsellingButton.setMinimumSize(d);
-				lowsetsellingButton.setPreferredSize(d);
 				graphJPanel.add(lowsetsellingButton,graphgc);
+				lowsetsellingButton.setIcon(new ImageIcon("src\\images\\bottom.png"));
 				lowsetsellingButton.addActionListener(new ActionListener() {
 					
 					@SuppressWarnings("rawtypes")
@@ -3863,12 +3855,10 @@ public class RetailGUI extends JFrame{
 						frame.setSize(850, 600);
 					}
 				});
-				lineChartJButton.setMinimumSize(d);
-			    lineChartJButton.setPreferredSize(d);
 			    graphgc.gridx = 0;
 				graphgc.gridy = 2;
 				graphJPanel.add(lineChartJButton, graphgc);
-				
+				lineChartJButton.setIcon(new ImageIcon("src\\images\\income.png"));
 				lineChartJButton.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						try{
@@ -3885,13 +3875,11 @@ public class RetailGUI extends JFrame{
 				});
 				
 				
-				JButton costGraph = new JButton ("Stock by cost price graph");
-				costGraph.setPreferredSize(d);
-				costGraph.setMinimumSize(d);
+				JButton costGraph = new JButton ();
 				graphgc.gridx = 0;
 				graphgc.gridy = 1;
 				graphJPanel.add(costGraph,graphgc);
-				
+				costGraph.setIcon(new ImageIcon("src\\images\\stock.png"));
 				costGraph.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						DefaultCategoryDataset costData = new DefaultCategoryDataset();
@@ -3909,11 +3897,11 @@ public class RetailGUI extends JFrame{
 					}
 				});
 				
-				JButton salesGraph = new JButton ("Sales and 3 month prediction graph");
+				JButton salesGraph = new JButton ();
 				graphgc.gridx = 1;
 				graphgc.gridy = 2;
 				graphJPanel.add(salesGraph,graphgc);
-				
+				salesGraph.setIcon(new ImageIcon("src\\images\\prediction.png"));
 				salesGraph.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						DefaultCategoryDataset salesData = new DefaultCategoryDataset();
@@ -3937,12 +3925,11 @@ public class RetailGUI extends JFrame{
 				//===========================================================================================
 		
 				//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
-				JButton invoicesPieChart = new JButton(" Paid Vs. Unpaid Invoices");
+				JButton invoicesPieChart = new JButton();
 				graphgc.gridx =2;
 				graphgc.gridy= 2;
 				graphJPanel.add(invoicesPieChart,graphgc);
-				invoicesPieChart.setPreferredSize(d);
-				invoicesPieChart.setMinimumSize(d);
+				invoicesPieChart.setIcon(new ImageIcon("src\\images\\paid.png"));
 				invoicesPieChart.addActionListener(new ActionListener(){
 				
 					public void actionPerformed(ActionEvent e){
@@ -4970,7 +4957,7 @@ public class RetailGUI extends JFrame{
 			editDetailsJButton = new JButton("Select product to edit");
 			updateProductJButton = new JButton("Update details");
 			deleteStockLineJButton = new JButton("Delete stock line");
-			lineChartJButton = new JButton("Income and Expenditure");
+			lineChartJButton = new JButton();
 			pLViewButton = new JButton("View");
 			productJButton = new JButton("Create New Product");
 			custJButton  = new JButton("Create New Customer");
