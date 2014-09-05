@@ -1222,6 +1222,11 @@ public class RetailGUI extends JFrame{
 								custNameCombo.addItem(customer.getCustName());
 								editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
 								JOptionPane.showMessageDialog(null, "New Customer Added");
+								custIdJTextField.setText("");
+								custNameJTextField.setText("");
+								custAddressJTextField.setText("");
+								custEmailJTextField.setText("");
+								custPhoneJTextField.setText("");
 								editCustomerListOfInvoices.addElement(custIdJTextField.getText());
 								listOfCustomers.addElement(custIdJTextField.getText());
 								listOfCusIds.addElement(custIdJTextField.getText());
@@ -1351,6 +1356,11 @@ public class RetailGUI extends JFrame{
 							editCustIdCombo.removeItem(editCustIdCombo.getSelectedItem());
 							customers.remove(customer);
 							JOptionPane.showMessageDialog(null, "Customer Deleted");
+							editCustIdCombo.setSelectedItem(0);
+							editCustName.setText("");
+							editCustAddress.setText("");
+							editCustEmail.setText("");
+							editCustPhone.setText("");
 							return;
 						}
 					}
@@ -1555,6 +1565,11 @@ public class RetailGUI extends JFrame{
 							suppIdCombo.addItem(supplierIdJTextField.getText());
 							suppNameCombo.addItem(supplierNameJTextField.getText());
 							editSuppIdCombo.addItem(supplierIdJTextField.getText());
+							supplierIdJTextField.setText("");
+							supplierNameJTextField.setText("");
+							supplierAddressJTextField.setText("");
+							supplierEmailJTextField.setText("");
+							supplierPhoneJTextField.setText("");
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "Supplier Already Exists");
@@ -1683,6 +1698,13 @@ public class RetailGUI extends JFrame{
 							editSuppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
 							suppliers.remove(supplier);
 							JOptionPane.showMessageDialog(null, "Supplier Deleted");
+							editSuppIdCombo.setSelectedItem(0);
+							editSupplierName.setText("");
+							editSupplierAddress.setText("");
+							editSupplierEmail.setText("");
+							editSupplierPhone.setText("");
+							editSupplierDelivery.setText("");
+							return;
 						}
 					}
 				}catch(NumberFormatException nfe){
