@@ -473,8 +473,6 @@ public class RetailGUI extends JFrame{
 	private Vector<String> existingTitles;// = new Vector<>();
 	private DefaultComboBoxModel<String> listOfTitles;// = new DefaultComboBoxModel<>(existingTitles); //create the combo box
 	private JComboBox<String> viewOrderTitleComboBox;
-	private Vector<String> existingAuthors;// = new Vector<>();
-	private DefaultComboBoxModel<String> listOfAuthors;// = new DefaultComboBoxModel<>(existingAuthors); //create the combo box
 	private JComboBox<String> viewOrderAuthorComboBox;
 	private JButton viewOrderViewAllOrdersButton;// = new JButton("View All");
 	private JButton viewOrderViewReceivedButton;// = new JButton("View Received Orders");
@@ -2329,9 +2327,7 @@ public class RetailGUI extends JFrame{
         for(int i = 0; i< products.size(); i++){
     	   	existingTitles.add((products.get(i).getTitle()));
         }
-        for(int i = 0; i< products.size(); i++){
-    	   	existingAuthors.add((products.get(i).getAuthor()));
-        }
+        
 		Dimension d2 = new Dimension(300, 30);
 		Dimension size1 = getPreferredSize();
 		size1.width = 500;
@@ -2516,10 +2512,10 @@ public class RetailGUI extends JFrame{
 		viewSupplierPanel.add(viewOrderAuthorLabel, viewOrderGC);
 		viewOrderGC.gridx = 2;
 		viewOrderGC.gridy = 4;
-		viewOrderAuthorComboBox = new JComboBox<>(listOfAuthors);
+		viewOrderAuthorComboBox = new JComboBox<>(listOfProductAuthor);
 		viewOrderAuthorComboBox.setPreferredSize(d);
 		viewOrderAuthorComboBox.setMinimumSize(d);
-		listOfAuthors.setSelectedItem("Select");
+		listOfProductAuthor.setSelectedItem("Select");
 		viewSupplierPanel.add(viewOrderAuthorComboBox, viewOrderGC);
 		viewOrderGC.gridx = 3;
 		viewOrderGC.gridy = 4;
@@ -2532,12 +2528,12 @@ public class RetailGUI extends JFrame{
 				String input = (String) viewOrderAuthorComboBox.getSelectedItem();
 				if(input.trim().equals("")){ 
 					viewOrderTextArea.setText("Please enter an author's name");
-					listOfAuthors.setSelectedItem("Select");
+					listOfProductAuthor.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}else{
 					viewOrderTextArea.setText(Order.viewOrderByAuthor(orders, input));		
 					viewOrderTextArea.setCaretPosition(0);
-					listOfAuthors.setSelectedItem("Select");
+					listOfProductAuthor.setSelectedItem("Select");
 					listOfOrders.setSelectedItem("Select");
 				}
 			}
@@ -5110,8 +5106,6 @@ public class RetailGUI extends JFrame{
 			listOfSuppliers = new DefaultComboBoxModel<>(existingSupplierIds); //create the combo box
 			existingTitles = new Vector<>();
 			listOfTitles = new DefaultComboBoxModel<>(existingTitles); //create the combo box
-			existingAuthors = new Vector<>();
-			listOfAuthors = new DefaultComboBoxModel<>(existingAuthors); //create the combo box
 			viewOrderOrderIdLabel = new JLabel("Order ID: ");
 			viewOrderSupplierIdLabel = new JLabel("Supplier ID: ");
 			viewOrderTitleLabel = new JLabel("Title: ");
