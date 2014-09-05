@@ -640,8 +640,8 @@ public class RetailGUI extends JFrame{
 		prodJTabbedPane.add("Edit Product Details", editProductJPanel);	
 		
 		invJTabbedPane.add("Create New Invoice", createInvJPanel);
-		invJTabbedPane.add("View Customer Invoice", viewInvJPanel);
-		invJTabbedPane.add("Edit Customer Invoice", editInvJPanel);
+		invJTabbedPane.add("View Invoices", viewInvJPanel);
+		invJTabbedPane.add("Edit Invoices", editInvJPanel);
 		
 		orderJTabbedPane.add("Create New Order", createOrderPanel);
 		orderJTabbedPane.add("View Orders", viewOrderJPanel);
@@ -3577,6 +3577,7 @@ public class RetailGUI extends JFrame{
 					editProdSupplierIdJTextField.setText(Integer.toString(product.getSupplier().getId()));
 					}
 				}
+				listOfProdIds.setSelectedItem("select");
 			}
 		});
 
@@ -4834,9 +4835,9 @@ public class RetailGUI extends JFrame{
 			logoutComponentsJPanel = new JPanel();
 			logoutBut = new JButton();
 			//====
-			addMoreBtn = new JButton("Add More");
-			finishBtn = new JButton("Finished");
-			resetBtn = new JButton("Reset");
+			addMoreBtn = new JButton("Add Product To Invoice");
+			finishBtn = new JButton("Confirm Invoice");
+			resetBtn = new JButton("Reset Fields");
 			payAllInvoicesJButton = new JButton("Pay All Invoices");
 			editInvoiceJButton = new JButton("Find Invoice by Id");
 			editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
