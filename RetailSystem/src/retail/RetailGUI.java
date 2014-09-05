@@ -90,43 +90,43 @@ public class RetailGUI extends JFrame{
 	private JTabbedPane accessJTabbedPane; // = new JTabbedPane();
 	private JTabbedPane proflossJTabbedPane;// = new JTabbedPane();
 	
-	private JPanel addCustJPanel = new JPanel();
-	private JPanel viewCustJPanel = new JPanel();
-	private JPanel editCustJPanel = new JPanel();
+	private JPanel addCustJPanel;// = new JPanel();
+	private JPanel viewCustJPanel;// = new JPanel();
+	private JPanel editCustJPanel;// = new JPanel();
 	
-	private JPanel addSupplyJPanel = new JPanel();
-	private JPanel viewSupplyJPanel = new JPanel();
-	private JPanel editSupplyJPanel = new JPanel();
+	private JPanel addSupplyJPanel;// = new JPanel();
+	private JPanel viewSupplyJPanel;// = new JPanel();
+	private JPanel editSupplyJPanel;// = new JPanel();
 	
-	private JPanel addProductJPanel = new JPanel();
-	private JPanel editProductJPanel = new JPanel();
+	private JPanel addProductJPanel;// = new JPanel();
+	private JPanel editProductJPanel;// = new JPanel();
 	
-	private JPanel createInvJPanel = new JPanel();
-	private JPanel viewInvJPanel = new JPanel();
-	private JPanel editInvJPanel = new JPanel();
+	private JPanel createInvJPanel;// = new JPanel();
+	private JPanel viewInvJPanel;// = new JPanel();
+	private JPanel editInvJPanel;// = new JPanel();
 	
-	private JPanel createOrderPanel = new JPanel();
-	private JPanel viewOrderJPanel = new JPanel();
-	private JPanel viewOrderLeftJPanel = new JPanel();
-	private JPanel viewOrderRightJPanel = new JPanel();
-	private JPanel editOrderJPanel = new JPanel();
+	private JPanel createOrderPanel;// = new JPanel();
+	private JPanel viewOrderJPanel;// = new JPanel();
+	private JPanel viewOrderLeftJPanel;// = new JPanel();
+	private JPanel viewOrderRightJPanel;// = new JPanel();
+	private JPanel editOrderJPanel;// = new JPanel();
 	
-	private JPanel employeeJPanel = new JPanel();
-	private JPanel viewEmployeeJPanel = new JPanel();
-	private JPanel editEmployeeJPanel = new JPanel();
+	private JPanel employeeJPanel;// = new JPanel();
+	private JPanel viewEmployeeJPanel;// = new JPanel();
+	private JPanel editEmployeeJPanel;// = new JPanel();
 	
-	private JPanel proflossJPanel = new JPanel();
-	private JPanel graphJPanel = new JPanel();
+	private JPanel proflossJPanel;// = new JPanel();
+	private JPanel graphJPanel;// = new JPanel();
 	
 	//login components
-	private JPanel loginComponentsJPanel = new JPanel();
-	private JTextField loginTF = new JTextField();
-	private JPasswordField passwordTF = new JPasswordField();
-	private JButton loginBut = new JButton();
+	private JPanel loginComponentsJPanel;// = new JPanel();
+	private JTextField loginTF;// = new JTextField();
+	private JPasswordField passwordTF;// = new JPasswordField();
+	private JButton loginBut;// = new JButton();
 	
 	//logout components
-	private JPanel logoutComponentsJPanel = new JPanel();
-	private JButton logoutBut = new JButton();
+	private JPanel logoutComponentsJPanel;// = new JPanel();
+	private JButton logoutBut;// = new JButton();
 	
 	private DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
 	
@@ -155,7 +155,7 @@ public class RetailGUI extends JFrame{
 	
 	private JTextArea custJTextArea; //  = new JTextArea(10, 65);
 	private JLabel editFindCustIdJLabel; // = new JLabel("Enter Customer ID");
-	private JComboBox<String> editCustIdCombo = new JComboBox<String>();
+	private JComboBox<String> editCustIdCombo;// = new JComboBox<String>();
 	
 	private JLabel editCustNameJLabel; // = new JLabel("Customer Name");
 	private JLabel editCustAddressJLabel; // = new JLabel("Customer Address");
@@ -239,34 +239,34 @@ public class RetailGUI extends JFrame{
 	private JButton deleteEmployee;// = new JButton("Delete Employee");
 	
 	//Product Components
-	private JLabel prodTitle = new JLabel("Book Title");
-	private JTextField titleJTextField = new JTextField();
-	private JLabel prodAuthor = new JLabel("Author");
-	private JTextField authorJTextField = new JTextField();
-	private JLabel prodCode = new JLabel("Product Code");
-	private JTextField codeJTextField = new JTextField();
-	private JLabel prodRetail = new JLabel("Retail Price");
-	private JTextField retailJTextField = new JTextField();
-	private JLabel prodCost = new JLabel("Cost Price");
-	private JTextField costJTextField = new JTextField();
-	private JLabel prodTotalStock = new JLabel("Total Stock");
-	private JTextField tStockJTextField = new JTextField();
-	private JLabel prodMaxStock = new JLabel("Maximum Stock");
-	private JTextField maxJTextField = new JTextField();
-	private JLabel prodMinStock = new JLabel("Minimum Stock");
-	private JTextField minJTextField = new JTextField();
-	private JLabel prodSupplierId = new JLabel("Supplier Id");
-	private JTextField prodSupplierIdJTextField = new JTextField();
+	private JLabel prodTitle;// = new JLabel("Book Title");
+	private JTextField titleJTextField;// = new JTextField();
+	private JLabel prodAuthor;// = new JLabel("Author");
+	private JTextField authorJTextField;// = new JTextField();
+	private JLabel prodCode;// = new JLabel("Product Code");
+	private JTextField codeJTextField;// = new JTextField();
+	private JLabel prodRetail;// = new JLabel("Retail Price");
+	private JTextField retailJTextField;// = new JTextField();
+	private JLabel prodCost;// = new JLabel("Cost Price");
+	private JTextField costJTextField;// = new JTextField();
+	private JLabel prodTotalStock;// = new JLabel("Total Stock");
+	private JTextField tStockJTextField;// = new JTextField();
+	private JLabel prodMaxStock;// = new JLabel("Maximum Stock");
+	private JTextField maxJTextField;// = new JTextField();
+	private JLabel prodMinStock;// = new JLabel("Minimum Stock");
+	private JTextField minJTextField;// = new JTextField();
+	private JLabel prodSupplierId;// = new JLabel("Supplier Id");
+	private JTextField prodSupplierIdJTextField;// = new JTextField();
 	private JButton productJButton;// = new JButton("Create New Product");
 	
-	private JRadioButton under5Radio = new JRadioButton("under 4.99");
-	private JRadioButton fiveTo10Radio = new JRadioButton("5 - 9.99");
-	private JRadioButton tenTo20Radio = new JRadioButton("10 - 20");
-	private JRadioButton over20Radio = new JRadioButton("20 plus");
-	private JRadioButton under50Radio = new JRadioButton("under 50");
-	private JRadioButton fiftyTo100Radio = new JRadioButton("50 - 100");
-	private JRadioButton hundredTo200Radio = new JRadioButton("100 - 200");
-	private JRadioButton over200Radio = new JRadioButton("200 plus");
+	private JRadioButton under5Radio;// = new JRadioButton("under 4.99");
+	private JRadioButton fiveTo10Radio;// = new JRadioButton("5 - 9.99");
+	private JRadioButton tenTo20Radio;// = new JRadioButton("10 - 20");
+	private JRadioButton over20Radio;// = new JRadioButton("20 plus");
+	private JRadioButton under50Radio;// = new JRadioButton("under 50");
+	private JRadioButton fiftyTo100Radio;// = new JRadioButton("50 - 100");
+	private JRadioButton hundredTo200Radio;// = new JRadioButton("100 - 200");
+	private JRadioButton over200Radio;// = new JRadioButton("200 plus");
 	
 	//edit product components
 	private JLabel editDetails = new JLabel ("Product code");
@@ -4811,6 +4811,8 @@ public class RetailGUI extends JFrame{
 		
 		//MEthod to initialize Panes etc
 		public void initialize(){
+			//TODO
+			//Main Frame
 			mainJFrame = new JFrame();
 			mainJTabbedPane = new JTabbedPane();
 			scrollPane = new JScrollPane();
@@ -4822,6 +4824,41 @@ public class RetailGUI extends JFrame{
 			orderJTabbedPane = new JTabbedPane();
 			accessJTabbedPane = new JTabbedPane();
 			proflossJTabbedPane = new JTabbedPane();
+			//=====
+			//Main Panels
+			addCustJPanel = new JPanel();
+			viewCustJPanel = new JPanel();
+			editCustJPanel = new JPanel();
+			
+			addSupplyJPanel = new JPanel();
+			viewSupplyJPanel = new JPanel();
+			editSupplyJPanel = new JPanel();
+			addProductJPanel = new JPanel();
+			editProductJPanel = new JPanel();
+			createInvJPanel = new JPanel();
+			viewInvJPanel = new JPanel();
+			editInvJPanel = new JPanel();
+			createOrderPanel = new JPanel();
+			viewOrderJPanel = new JPanel();
+			viewOrderLeftJPanel = new JPanel();
+			viewOrderRightJPanel = new JPanel();
+			editOrderJPanel = new JPanel();
+			employeeJPanel = new JPanel();
+			viewEmployeeJPanel = new JPanel();
+			editEmployeeJPanel = new JPanel();
+			proflossJPanel = new JPanel();
+			graphJPanel = new JPanel();
+			//=====
+			//login components
+			loginComponentsJPanel = new JPanel();
+			loginTF = new JTextField();
+			passwordTF = new JPasswordField();
+			loginBut = new JButton();
+			//====
+			//logout components
+			logoutComponentsJPanel = new JPanel();
+			logoutBut = new JButton();
+			//====
 			addMoreBtn = new JButton("Add More");
 			finishBtn = new JButton("Finished");
 			resetBtn = new JButton("Reset");
@@ -4882,6 +4919,7 @@ public class RetailGUI extends JFrame{
 			custPhoneJTextField = new JTextField();	
 			custJTextArea = new JTextArea(10, 65);
 			editFindCustIdJLabel = new JLabel("Enter Customer ID");
+			editCustIdCombo = new JComboBox<String>();
 			editCustNameJLabel = new JLabel("Customer Name");
 			editCustAddressJLabel = new JLabel("Customer Address");
 			editCustEmailJLabel = new JLabel("Customer Email");
@@ -4964,6 +5002,36 @@ public class RetailGUI extends JFrame{
 			editEmpPasswordField = new JTextField();
 			updateEmployee = new JButton("Update Employee");
 			deleteEmployee = new JButton("Delete Employee");
+			//====
+			//Product Components
+			prodTitle = new JLabel("Book Title");
+			titleJTextField = new JTextField();
+			prodAuthor = new JLabel("Author");
+			authorJTextField = new JTextField();
+			prodCode = new JLabel("Product Code");
+			codeJTextField = new JTextField();
+			prodRetail = new JLabel("Retail Price");
+			retailJTextField = new JTextField();
+			prodCost = new JLabel("Cost Price");
+			costJTextField = new JTextField();
+			prodTotalStock = new JLabel("Total Stock");
+			tStockJTextField = new JTextField();
+			prodMaxStock = new JLabel("Maximum Stock");
+			maxJTextField = new JTextField();
+			prodMinStock = new JLabel("Minimum Stock");
+			minJTextField = new JTextField();
+			prodSupplierId = new JLabel("Supplier Id");
+			prodSupplierIdJTextField = new JTextField();
+			productJButton = new JButton("Create New Product");
+			
+			under5Radio = new JRadioButton("under 4.99");
+			fiveTo10Radio = new JRadioButton("5 - 9.99");
+			tenTo20Radio = new JRadioButton("10 - 20");
+			over20Radio = new JRadioButton("20 plus");
+			under50Radio = new JRadioButton("under 50");
+			fiftyTo100Radio = new JRadioButton("50 - 100");
+			hundredTo200Radio = new JRadioButton("100 - 200");
+			over200Radio = new JRadioButton("200 plus");
 		}
 
 }//End class
