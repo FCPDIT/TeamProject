@@ -2940,32 +2940,7 @@ public class RetailGUI extends JFrame{
 		});
 		
 		
-		//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
-		JButton invoicesPieChart = new JButton(" Paid Vs. Unpaid Invoices");
-		gc.gridx =1;
-		gc.gridy= 3;
-		viewCustomerPanel.add(invoicesPieChart,gc);
-		invoicesPieChart.setPreferredSize(d);
-		invoicesPieChart.setMinimumSize(d);
-		invoicesPieChart.addActionListener(new ActionListener(){
 		
-			public void actionPerformed(ActionEvent e){
-				
-				int count=0;
-				int paid = invoice.countPaidInvoices(count, invoices);
-				int unpaid = (invoices.size()-paid);
-				pieDataset.setValue("Paid",paid);
-				pieDataset.setValue("UnPaid",unpaid);
-				
-				JFreeChart chart = ChartFactory.createPieChart3D("Invoice Review", pieDataset, true,true,true);
-				ChartFrame frame = new ChartFrame("Pie Chart", chart);
-				frame.setVisible(true);
-				frame.setSize(700,600);
-			}
-			
-		});
-		
-		//===============================================================================================
 		
 		
 		
@@ -3318,10 +3293,13 @@ public class RetailGUI extends JFrame{
 				// This method could be enhanced by adding in a check 
 				//to ensure 9 digits have been entered to match an ISBN number.
 				if(input.trim().equals("Select")){ 
-					//textarea.setText("Please enter a valid ID");	
-					JOptionPane.showMessageDialog(null, "Please Select a Value from the Product ID Drop Down Menu");
-					//viewProductIdTextField.setText("");
-					//productTitleTextField.setText("");
+					
+					productTextArea.setText("");
+					productTextArea.setCaretPosition(0);
+					listofProductTitle.setSelectedItem("Select");
+					listOfProductAuthor.setSelectedItem("Select");
+					JOptionPane.showMessageDialog(null, "Please Select Product ID From Drop Down Menu");
+		
 				}else{
 				
 					productTextArea.setText(product.viewProductById(input, products)); //viewInvoiceById() is in the Invoice Class
@@ -3366,9 +3344,11 @@ public class RetailGUI extends JFrame{
 				//String input = productTitleTextField.getText();
 				
 				if(input.trim().equals("Select")){ 
-					//textarea.setText("Please enter a valid Title");
-					JOptionPane.showMessageDialog(null, "Please Select a Value from the Product Title Drop Down Menu");
-					productTitleTextField.setText("");
+					productTextArea.setText("");
+					productTextArea.setCaretPosition(0);
+					listOfProdIds.setSelectedItem("Select");
+					listOfProductAuthor.setSelectedItem("Select");
+					JOptionPane.showMessageDialog(null, "Please Select Product Title From Drop Down Menu");
 					
 				}else{
 					
@@ -3424,9 +3404,12 @@ public class RetailGUI extends JFrame{
 																					//All names in array should be stored in lower case.
 				
 				if(input.trim().equals("select")){ 	// If no value is selected
+					productTextArea.setText("");
+					productTextArea.setCaretPosition(0);
+					listOfProdIds.setSelectedItem("Select");
+					listofProductTitle.setSelectedItem("Select");					
+					JOptionPane.showMessageDialog(null, "Please Select Product Author From Drop Down Menu");
 					
-					JOptionPane.showMessageDialog(null, "Please Select a Value from the Author Drop Down Menu");
-					productAuthorTextField.setText("");
 					
 				}else{							// Take in String and Search for it.
 					productTextArea.setText(product.viewProductByAuthor(input, products));	
@@ -3864,6 +3847,7 @@ public class RetailGUI extends JFrame{
 							ChartFrame frame = new ChartFrame("Income and Expenditure", lineChart);
 							frame.setBounds(0, 0, 600, 600);
 							frame.setVisible(true);
+							frame.setSize(850, 600);
 						}catch (Exception i){
 				             System.out.println(i);
 				         }
@@ -3891,7 +3875,7 @@ public class RetailGUI extends JFrame{
 						p.setRangeGridlinePaint(Color.BLACK);
 						ChartFrame retailGraphFrame = new ChartFrame("stock value chart",costChart);
 						retailGraphFrame.setVisible(true);
-						retailGraphFrame.setSize(450, 350);
+						retailGraphFrame.setSize(850, 600);
 					}
 				});
 				
@@ -3917,11 +3901,39 @@ public class RetailGUI extends JFrame{
 						p.setRangeGridlinePaint(Color.BLACK);
 						ChartFrame salesGraphFrame = new ChartFrame("Sales and predictions", salesChart);
 						salesGraphFrame.setVisible(true);
-						salesGraphFrame.setSize(450, 350);
+						salesGraphFrame.setSize(850, 600);
 					}
 				});
 				//===========================================================================================
 		
+				//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
+				JButton invoicesPieChart = new JButton(" Paid Vs. Unpaid Invoices");
+				graphgc.gridx =2;
+				graphgc.gridy= 2;
+				graphJPanel.add(invoicesPieChart,graphgc);
+				invoicesPieChart.setPreferredSize(d);
+				invoicesPieChart.setMinimumSize(d);
+				invoicesPieChart.addActionListener(new ActionListener(){
+				
+					public void actionPerformed(ActionEvent e){
+						
+						int count=0;
+						int paid = invoice.countPaidInvoices(count, invoices);
+						int unpaid = (invoices.size()-paid);
+						pieDataset.setValue("Paid",paid);
+						pieDataset.setValue("UnPaid",unpaid);
+						
+						JFreeChart chart = ChartFactory.createPieChart3D("Invoice Review", pieDataset, true,true,true);
+						ChartFrame frame = new ChartFrame("Pie Chart", chart);
+						frame.setVisible(true);
+						frame.setSize(850, 600);
+					}
+					
+				});
+				
+				//===============================================================================================
+				
+				
 		
 		} //END OF CONSTRUCTOR
 	//TODO - end of constructor
