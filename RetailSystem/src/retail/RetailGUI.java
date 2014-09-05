@@ -1211,7 +1211,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					if(checkCustomerDuplicate(customers, Integer.parseInt(custIdJTextField.getText())) == true){
-						if(custNameJTextField.getText().equalsIgnoreCase("") || custAddressJTextField.getText().equalsIgnoreCase("")){
+						if(custNameJTextField.getText().isEmpty() || custAddressJTextField.getText().isEmpty()){
 							JOptionPane.showMessageDialog(null, "Required Fields: \n Customer Id \n Customer Name \n Customer Address");	
 						}else{
 								Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
@@ -1324,7 +1324,7 @@ public class RetailGUI extends JFrame{
 			//update a specific customer
 			public void actionPerformed(ActionEvent e){
 				try{
-					if(custNameJTextField.getText().isEmpty() || custAddressJTextField.getText().isEmpty()){
+					if(editCustName.getText().isEmpty() || editCustAddress.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Required Fields: \n Customer Name \n Customer Address");	
 					}else{
 						for(Customer customer: customers){
@@ -1555,7 +1555,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{	
 					if(checkSupplierDuplicate(suppliers, Integer.parseInt(supplierIdJTextField.getText())) == true){
-						if(supplierNameJTextField.getText().equalsIgnoreCase("") || supplierAddressJTextField.getText().equalsIgnoreCase("")){
+						if(supplierNameJTextField.getText().isEmpty() || supplierAddressJTextField.getText().isEmpty()){
 							JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Id \n Supplier Name \n Supplier Address");	
 						}else{
 							Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
@@ -1666,7 +1666,7 @@ public class RetailGUI extends JFrame{
 			//function to update supplier
 			public void actionPerformed(ActionEvent e){
 				try{
-					if(supplierNameJTextField.getText().isEmpty() || supplierAddressJTextField.getText().isEmpty()){
+					if(editSupplierName.getText().isEmpty() || editSupplierAddress.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Name \n Supplier Address");	
 					}else{
 						for(Supplier supplier: suppliers){
