@@ -3125,6 +3125,7 @@ public class RetailGUI extends JFrame{
 									outputMessage += "Invoice Created "
 												   + "\n- - - - - - - - - - - - - - "+
 															"\nInvoice No: " + invoiceIdStr +
+															"\n- - - - - - - - - - - - - - "+
 															"\nEmployees No: "+ employeeIdStr +
 															"\nCustomer No: " + customerIdStr+
 															"\nProduct Code: " + productIdStr+
@@ -3139,10 +3140,11 @@ public class RetailGUI extends JFrame{
 										outputMessage +=  "Invoice Created "
 												   + "\n- - - - - - - - - - - - - - "+
 												"\nInvoice No: " + invoiceIdStr +
+												"\n- - - - - - - - - - - - - - "+
 												"\nEmployees No: "+ employeeIdStr +
 												"\nCustomer No: " + customerIdStr+
 												"\nList Of Products Ordered:" +
-												"\n------------------------";
+												"\n- - - - - - - - - - - - - - ";
 										for(Invoice v : invoices){
 											if(v.getId()==invoiceId){
 												for(InvoiceProduct p : v.getInvoiceProducts()){
