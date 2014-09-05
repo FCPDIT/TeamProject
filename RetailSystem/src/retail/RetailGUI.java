@@ -1781,13 +1781,21 @@ public class RetailGUI extends JFrame{
 				try{
 					if(suppliers.size() >= 1){
 						for(Supplier supplier: suppliers){
-							if(supplier.getId() ==Integer.parseInt(prodSupplierIdJTextField.getText())){
-								Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
-										codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
-										Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
-										Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
-										);
-								products.add(product);
+							if(supplier.getId() == Integer.parseInt(prodSupplierIdJTextField.getText())){
+								if(titleJTextField.getText().isEmpty() || authorJTextField.getText().isEmpty() ||
+										codeJTextField.getText().isEmpty() || retailJTextField.getText().isEmpty() ||
+										costJTextField.getText().isEmpty() ||	tStockJTextField.getText().isEmpty() ||
+										maxJTextField.getText().isEmpty() || minJTextField.getText().isEmpty()){
+									JOptionPane.showMessageDialog(null, "Please Complete All Fields");
+								}else{
+									Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
+											codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
+											Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
+											Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
+											);
+									products.add(product);
+									JOptionPane.showMessageDialog(null, "New Product Added");
+							}
 							}
 						}
 						listOfProdIds.addElement(codeJTextField.getText());
