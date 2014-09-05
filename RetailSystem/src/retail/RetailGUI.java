@@ -3565,7 +3565,7 @@ public class RetailGUI extends JFrame{
 					editProdSupplierIdJTextField.setText(Integer.toString(product.getSupplier().getId()));
 					}
 				}
-				listOfProdIds.setSelectedItem("select");
+				
 			}
 		});
 
@@ -3581,7 +3581,7 @@ public class RetailGUI extends JFrame{
 						product.setCostPrice(Double.parseDouble(editCostJTextField.getText()));
 						product.setCurrentStock(Integer.parseInt(editStockJTextField.getText()));
 						product.setMaxStock(Integer.parseInt(editMaxJTextField.getText()));
-						product.setMinStock(Integer.parseInt(editMaxJTextField.getText()));
+						product.setMinStock(Integer.parseInt(editMinJTextField.getText()));
 						
 						for (Supplier supplier:suppliers){
 							if (supplier.getId() == Integer.parseInt (editProdSupplierIdJTextField.getText())){
@@ -3590,6 +3590,17 @@ public class RetailGUI extends JFrame{
 						}
 					
 						JOptionPane.showMessageDialog(null, "Product updated");
+						listOfProdIds.setSelectedItem("select");
+						editAuthorJTextField.setText("");
+						editTitleJTextField.setText("");
+						editRetailJTextField.setText("");
+						editCostJTextField.setText("");
+						editStockJTextField.setText("");
+						editMaxJTextField.setText("");
+						editMinJTextField.setText("");
+						editCodeJTextField.setText("");
+						editProdSupplierIdJTextField.setText("");
+						
 						
 					}
 				}
@@ -3599,11 +3610,16 @@ public class RetailGUI extends JFrame{
 		// to delete stockline from system
 		deleteStockLineJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				int warning = JOptionPane.YES_NO_OPTION;
+				int result = JOptionPane.showConfirmDialog(null, "Delete this stockline?", "warning!", warning);
+				if (result == 0){
 				String code = editCodeJTextField.getText();
 				Product proReturned = product.removeStockById(code,products);
 				JOptionPane.showMessageDialog(null, "Stockline deleted");
 				listOfProdIds.removeElement(proReturned.getProductCode());
+				listofProductTitle.removeElement(proReturned.getTitle());
 				listOfProdIds.setSelectedItem("select");
+			}
 			}
 		});
 		//=======================  End
