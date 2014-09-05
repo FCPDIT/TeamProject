@@ -893,6 +893,12 @@ public class RetailGUI extends JFrame{
 						viewEmpIdCombo.addItem(employeeIdField.getText());
 						JOptionPane.showMessageDialog(null, "Employee Successfully Created");
 						listOfEmpIds.addElement(employeeIdField.getText());
+						//Reset fields
+						employeeIdField.setText("");
+						employeeNameField.setText("");
+						employeeAcessField.setSelectedItem(0);
+						employeeSalaryField.setText("");
+						employeePassField.setText("");
 					}else{
 						JOptionPane.showMessageDialog(null, "Employee Already Exists");
 					}
@@ -1015,6 +1021,12 @@ public class RetailGUI extends JFrame{
 							viewEmpIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
 							employees.remove(employee);
 							JOptionPane.showMessageDialog(null, "Employee Deleted");
+							viewEmpIdCombo.setSelectedItem(0);
+							editEmpNameField.setText("");
+							editEmpAccessField.setText("");
+							editEmpSalaryField.setText("");
+							editEmpPasswordField.setText("");
+							return;
 						}
 					}
 				}catch(NumberFormatException nfe){
