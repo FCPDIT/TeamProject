@@ -2011,6 +2011,7 @@ public class RetailGUI extends JFrame{
 			gc.gridx = 1;
 			gc.gridy = 2;
 			editInvoiceComponentsJPanel.add(editInvoiceAmount, gc);
+			editInvoiceAmount.setEditable(false);
 			editInvoiceAmount.setPreferredSize(d);
 			editInvoiceAmount.setMinimumSize(d);
 			gc.gridx = 0;
@@ -2030,10 +2031,15 @@ public class RetailGUI extends JFrame{
 					int id = Integer.parseInt( s );
 					for(Invoice invoice: invoices){
 						if(invoice.getId() == id){
-							invoice.setPaid(true);
+							if(invoice.isPaid()){
+								JOptionPane.showMessageDialog(null, "Already Paid!");
+							}
+							else{
+								invoice.setPaid(true);
+								JOptionPane.showMessageDialog(null, "Paid!");
+							}
 						}
 					}
-					JOptionPane.showMessageDialog(null, "Paid!");
 					editPayStatus.setForeground(Color.BLACK);
 					editInvoiceJButton.doClick();		
 				}
@@ -2044,7 +2050,8 @@ public class RetailGUI extends JFrame{
 			gc.gridy = 0;
 			JScrollPane invoiceProductsJScrollPane = new JScrollPane(productInvoiceJTextArea);
 			invoiceProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-			invoiceProductsJScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);			editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
+			invoiceProductsJScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);			
+			editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
 			editInvoiceProductsComponentsJPanel.setLayout(new GridLayout(1,2));
 			productInvoiceJTextArea.setEditable(false);
 				
@@ -2643,6 +2650,7 @@ public class RetailGUI extends JFrame{
         gc.gridy = 0;
         JScrollPane orderProductsJScrollPane = new JScrollPane(productOrderJTextArea);
         orderProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        orderProductsJScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);	
         editOrderProductsComponentsJPanel.add(orderProductsJScrollPane, gc);
         editOrderProductsComponentsJPanel.setLayout(new GridLayout(1,2));
         productOrderJTextArea.setEditable(false);
