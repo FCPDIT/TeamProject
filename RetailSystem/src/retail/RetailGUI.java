@@ -893,6 +893,12 @@ public class RetailGUI extends JFrame{
 						viewEmpIdCombo.addItem(employeeIdField.getText());
 						JOptionPane.showMessageDialog(null, "Employee Successfully Created");
 						listOfEmpIds.addElement(employeeIdField.getText());
+						//Reset fields
+						employeeIdField.setText("");
+						employeeNameField.setText("");
+						employeeAcessField.setSelectedItem(0);
+						employeeSalaryField.setText("");
+						employeePassField.setText("");
 					}else{
 						JOptionPane.showMessageDialog(null, "Employee Already Exists");
 					}
@@ -1015,6 +1021,12 @@ public class RetailGUI extends JFrame{
 							viewEmpIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
 							employees.remove(employee);
 							JOptionPane.showMessageDialog(null, "Employee Deleted");
+							viewEmpIdCombo.setSelectedItem(0);
+							editEmpNameField.setText("");
+							editEmpAccessField.setText("");
+							editEmpSalaryField.setText("");
+							editEmpPasswordField.setText("");
+							return;
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1199,7 +1211,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					if(checkCustomerDuplicate(customers, Integer.parseInt(custIdJTextField.getText())) == true){
-						if(custNameJTextField.getText().equalsIgnoreCase("") || custAddressJTextField.getText().equalsIgnoreCase("")){
+						if(custNameJTextField.getText().isEmpty() || custAddressJTextField.getText().isEmpty()){
 							JOptionPane.showMessageDialog(null, "Required Fields: \n Customer Id \n Customer Name \n Customer Address");	
 						}else{
 								Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
@@ -1210,6 +1222,11 @@ public class RetailGUI extends JFrame{
 								custNameCombo.addItem(customer.getCustName());
 								editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
 								JOptionPane.showMessageDialog(null, "New Customer Added");
+								custIdJTextField.setText("");
+								custNameJTextField.setText("");
+								custAddressJTextField.setText("");
+								custEmailJTextField.setText("");
+								custPhoneJTextField.setText("");
 								editCustomerListOfInvoices.addElement(custIdJTextField.getText());
 								listOfCustomers.addElement(custIdJTextField.getText());
 								listOfCusIds.addElement(custIdJTextField.getText());
@@ -1307,7 +1324,7 @@ public class RetailGUI extends JFrame{
 			//update a specific customer
 			public void actionPerformed(ActionEvent e){
 				try{
-					if(custNameJTextField.getText().isEmpty() || custAddressJTextField.getText().isEmpty()){
+					if(editCustName.getText().isEmpty() || editCustAddress.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Required Fields: \n Customer Name \n Customer Address");	
 					}else{
 						for(Customer customer: customers){
@@ -1339,6 +1356,11 @@ public class RetailGUI extends JFrame{
 							editCustIdCombo.removeItem(editCustIdCombo.getSelectedItem());
 							customers.remove(customer);
 							JOptionPane.showMessageDialog(null, "Customer Deleted");
+							editCustIdCombo.setSelectedItem(0);
+							editCustName.setText("");
+							editCustAddress.setText("");
+							editCustEmail.setText("");
+							editCustPhone.setText("");
 							return;
 						}
 					}
@@ -1533,7 +1555,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{	
 					if(checkSupplierDuplicate(suppliers, Integer.parseInt(supplierIdJTextField.getText())) == true){
-						if(supplierNameJTextField.getText().equalsIgnoreCase("") || supplierAddressJTextField.getText().equalsIgnoreCase("")){
+						if(supplierNameJTextField.getText().isEmpty() || supplierAddressJTextField.getText().isEmpty()){
 							JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Id \n Supplier Name \n Supplier Address");	
 						}else{
 							Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
@@ -1543,6 +1565,11 @@ public class RetailGUI extends JFrame{
 							suppIdCombo.addItem(supplierIdJTextField.getText());
 							suppNameCombo.addItem(supplierNameJTextField.getText());
 							editSuppIdCombo.addItem(supplierIdJTextField.getText());
+							supplierIdJTextField.setText("");
+							supplierNameJTextField.setText("");
+							supplierAddressJTextField.setText("");
+							supplierEmailJTextField.setText("");
+							supplierPhoneJTextField.setText("");
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "Supplier Already Exists");
@@ -1639,7 +1666,7 @@ public class RetailGUI extends JFrame{
 			//function to update supplier
 			public void actionPerformed(ActionEvent e){
 				try{
-					if(supplierNameJTextField.getText().isEmpty() || supplierAddressJTextField.getText().isEmpty()){
+					if(editSupplierName.getText().isEmpty() || editSupplierAddress.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Name \n Supplier Address");	
 					}else{
 						for(Supplier supplier: suppliers){
@@ -1671,6 +1698,13 @@ public class RetailGUI extends JFrame{
 							editSuppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
 							suppliers.remove(supplier);
 							JOptionPane.showMessageDialog(null, "Supplier Deleted");
+							editSuppIdCombo.setSelectedItem(0);
+							editSupplierName.setText("");
+							editSupplierAddress.setText("");
+							editSupplierEmail.setText("");
+							editSupplierPhone.setText("");
+							editSupplierDelivery.setText("");
+							return;
 						}
 					}
 				}catch(NumberFormatException nfe){
