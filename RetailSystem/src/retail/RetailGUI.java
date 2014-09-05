@@ -337,7 +337,6 @@ public class RetailGUI extends JFrame{
 	private JPanel findInvoiceComponentsJPanel;// = new JPanel();
 	private JPanel editInvoiceComponentsJPanel;// = new JPanel();
 	private JPanel editCustomerInvoiceComponentsJPanel;// = new JPanel();
-	private JPanel saveInvoiceComponentsJPanel;// = new JPanel();
 	private JPanel editInvoiceProductsComponentsJPanel;// = new JPanel();
 	private JPanel editInvoiceByCustComponents;// = new JPanel();
 	private Vector<String> editExistingInvoiceNums;// = new Vector<>();
@@ -355,8 +354,6 @@ public class RetailGUI extends JFrame{
 	private JTextField editInvoiceEmployee;// = new JTextField("Edit Invoice Employee");
 	private JTextField editInvoiceCustomer;// = new JTextField("Edit Invoice Customer");
 	private JButton payInvoiceJButton;// = new JButton("Pay Invoice");
-	private JButton saveInvoiceJButton;// = new JButton("Update Invoice");
-	private JButton deleteInvoiceJButton;// = new JButton("Delete Invoice");
 	private JTextField editPayStatus;// = new JTextField("");	
 	private JTextField editInvoiceAmount;// = new JTextField("Edit Invoice Amount");
 
@@ -2047,43 +2044,9 @@ public class RetailGUI extends JFrame{
 			gc.gridy = 0;
 			JScrollPane invoiceProductsJScrollPane = new JScrollPane(productInvoiceJTextArea);
 			invoiceProductsJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-			editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
+			invoiceProductsJScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);			editInvoiceProductsComponentsJPanel.add(invoiceProductsJScrollPane);
 			editInvoiceProductsComponentsJPanel.setLayout(new GridLayout(1,2));
 			productInvoiceJTextArea.setEditable(false);
-			
-			//save and delete buttons
-			saveInvoiceComponentsJPanel.setLayout(new GridBagLayout());
-			gc.gridx = 0;
-			gc.gridy = 0;
-			saveInvoiceComponentsJPanel.add(saveInvoiceJButton, gc);
-			saveInvoiceJButton.setPreferredSize(d);
-			saveInvoiceJButton.setMinimumSize(d);
-			gc.gridx = 1;
-			gc.gridy = 0;
-			saveInvoiceComponentsJPanel.add(deleteInvoiceJButton, gc);
-			deleteInvoiceJButton.setPreferredSize(d);
-			deleteInvoiceJButton.setMinimumSize(d);
-			deleteInvoiceJButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					int index=0;
-					String s = (String)editComboBoxInvoice.getSelectedItem();
-					int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
-					int id = Integer.parseInt( s );
-					for(Invoice invoice: invoices){
-						if(invoice.getId() == id){
-							index = invoices.indexOf(invoice);
-						}
-					}
-					invoices.remove(index);
-					JOptionPane.showMessageDialog(null, "Deleted!");
-					editComboBoxInvoice.removeItemAt(comboIndex);
-					editCustomerInvoiceComponentsJPanel.setVisible(false);
-					editInvoiceComponentsJPanel.setVisible(false);
-					saveInvoiceComponentsJPanel.setVisible(false);
-					editInvoiceProductsComponentsJPanel.setVisible(false);
-					editListOfInvoices.setSelectedItem("select");
-				}
-			});
 				
 			//edit by customer components
 			editCustomerInvoiceComponentsJPanel.setLayout(new GridBagLayout());
@@ -2137,21 +2100,15 @@ public class RetailGUI extends JFrame{
 			gc.gridy = 2;
 			editInvJPanel.add(editInvoiceProductsComponentsJPanel, gc);
 			gc.gridx = 0;
-			gc.gridy = 3;
-			editInvJPanel.add(saveInvoiceComponentsJPanel, gc);
-			gc.gridx = 0;
 			gc.gridy = 1;
 			editInvJPanel.add(editCustomerInvoiceComponentsJPanel, gc);
 			editInvoiceProductsComponentsJPanel.setVisible(false);
 			editCustomerInvoiceComponentsJPanel.setVisible(false);
 			editInvoiceComponentsJPanel.setVisible(false);
-			saveInvoiceComponentsJPanel.setVisible(false);
 			EditInvoiceButtonHandler eib = new EditInvoiceButtonHandler();
 			editInvoiceJButton.addActionListener(eib);
 			EditCustomerInvoiceButtonHandler ecib = new EditCustomerInvoiceButtonHandler();
 			editCustomerInvoiceJButton.addActionListener(ecib);
-			SaveButtonHandler sbh = new SaveButtonHandler();
-			saveInvoiceJButton.addActionListener(sbh);
 		
 		//====================================================================================
 		//set up order panels
@@ -4194,7 +4151,6 @@ public class RetailGUI extends JFrame{
 						}
 						editCustomerInvoiceComponentsJPanel.setVisible(false);
 						editInvoiceComponentsJPanel.setVisible(true);
-						saveInvoiceComponentsJPanel.setVisible(true);
 						editInvoiceProductsComponentsJPanel.setVisible(true);
 						editInvoiceEmployee.setText(Integer.toString(invoice.getEmployee().getEmployeeId()));
 						editInvoiceCustomer.setText(Integer.toString(invoice.getCustomer().getCustId()));
@@ -4220,7 +4176,6 @@ public class RetailGUI extends JFrame{
 				JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 				editCustomerInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceComponentsJPanel.setVisible(false);
-				saveInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceProductsComponentsJPanel.setVisible(false);
 			}
 			productInvoiceJTextArea.setCaretPosition(0);
@@ -4516,7 +4471,6 @@ public class RetailGUI extends JFrame{
 							if(customerID == 1){
 								editCustomerInvoiceComponentsJPanel.setVisible(true);
 								editInvoiceComponentsJPanel.setVisible(false);
-								saveInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceProductsComponentsJPanel.setVisible(false);
 								customerInvoiceJTextArea.setText("Unpaid Invoices:");
 								for(Invoice invoice: invoices){
@@ -4544,7 +4498,6 @@ public class RetailGUI extends JFrame{
 								JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 								editCustomerInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceComponentsJPanel.setVisible(false);
-								saveInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceProductsComponentsJPanel.setVisible(false);
 							}
 							customerInvoiceJTextArea.setCaretPosition(0);
@@ -4552,41 +4505,6 @@ public class RetailGUI extends JFrame{
 					}
 								
 				//handler for save invoice button
-				//TODO save invoice
-				private class SaveButtonHandler implements ActionListener{
-					public void actionPerformed( ActionEvent e){
-						double total = 0;						
-						int comboIndex = (int)editComboBoxInvoice.getSelectedIndex();
-						String s = (String)editComboBoxInvoice.getSelectedItem();
-						if(s.equals("Select")){
-							invalidId();
-						}
-						int currentId = Integer.parseInt( s );
-						try{
-							total = Double.parseDouble(editInvoiceAmount.getText().trim());
-						}
-						catch(NumberFormatException nfe){
-							invalidId();
-						}																	
-						for(Invoice invoice: invoices){
-							if(currentId == invoice.getId()){
-								invoice.setTotalInvoicePrice(total);
-								}
-						}
-							JOptionPane.showMessageDialog(null, "Updated!");
-							editComboBoxInvoice.removeAllItems();
-							editComboBoxCustomerInvoice.removeAllItems();
-							fillComboBox();
-							editComboBoxInvoice.setSelectedItem(editExistingInvoiceNums.get(comboIndex));
-							editComboBoxCustomerInvoice.setSelectedItem(editExistingInvoiceNums.get(0));
-							editInvoiceJButton.doClick();
-					}
-
-					public void invalidId(){
-						JOptionPane.showMessageDialog(null, "Id must be a numerical value!");
-						editInvoiceJButton.doClick();
-					}
-				}// End handler for save button
 		
 		public boolean invoiceNumberUnique(int id, ArrayList<Invoice> invoices){
 			int count = 0;
@@ -4928,10 +4846,7 @@ public class RetailGUI extends JFrame{
 			editInvoiceJButton = new JButton("Find Invoice by Id");
 			editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
 			payInvoiceJButton = new JButton("Pay Invoice");
-			saveInvoiceJButton = new JButton("Update Invoice");
 			payInvoiceJButton = new JButton("Pay Invoice");
-			saveInvoiceJButton = new JButton("Update Invoice");
-			deleteInvoiceJButton = new JButton("Delete Invoice");
 			createOrderAddProductButton =  new JButton("Add Product to Order");
 			createOrderConfirmOrderButton = new JButton("Confirm Order");
 			viewOrderViewAllOrdersButton = new JButton("View All");
@@ -5140,7 +5055,6 @@ public class RetailGUI extends JFrame{
 			findInvoiceComponentsJPanel = new JPanel();
 			editInvoiceComponentsJPanel = new JPanel();
 			editCustomerInvoiceComponentsJPanel = new JPanel();
-			saveInvoiceComponentsJPanel = new JPanel();
 			editInvoiceProductsComponentsJPanel = new JPanel();
 			editInvoiceByCustComponents = new JPanel();
 			editExistingInvoiceNums = new Vector<>();
