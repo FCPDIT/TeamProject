@@ -1,19 +1,20 @@
 Retail System User Documentation:
 ===========
 
-Login Function – Manager has access to all functions, access is restricted for other staff.
+Login  & Logout Functions: Managers have access to all functions, access is restricted to create and view functions for other staff members, logout returns to login area.
 
-Customer Functions:  - Create new, edit, delete, view all, view by id, view by name.
+Sales Functions: Create new invoice, view all, view by invoice id, view by customer id, view by payment status, pay invoice by id, pay by customer.
 
-Supplier Functions:  - Create new, edit, delete, view all, view by id, view by name.
+Order Functions: Create new order, view all, view by order id, view by supplier, view by delivery status, view by product, deliver by order.
 
-Product Functions:  - Create new, edit, delete, view all, , view by low stock, , view by high stock, view by id, view by title, view by author, view by retail price, view by quantity.
+Product Functions: Create new product, edit, delete, view all, , view understocked, view by overstocked, view by id, view by title, view by author, view by retail price, view by quantity.
 
-Invoice Functions:  - Create new, edit, delete, view all, view by invoice id, view by customer id, pay by invoice, pay by customer.
+Profit & Loss Functions: View profit & loss table by current month, last month, last 3 months or all, view graphs for stock value, top 5 highest and lowest selling, income and expenditure, sales prediction and invoice review.
+Customer Functions: Create new, edit, delete, view all, view by id, view by name.
 
-Order Functions:  - Create new, edit, delete, view all, view by order id, view by supplier, view by delivery status, view by product, deliver by order.
+Supplier Functions: Create new, edit, delete, view all, view by id, view by name.
 
-Logout Function – return to login function.
+Employee Functions: Create new, edit, delete, view all, view by id, view by name.
 
 
 
