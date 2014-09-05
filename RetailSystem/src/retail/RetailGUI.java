@@ -3652,7 +3652,7 @@ public class RetailGUI extends JFrame{
 				Product proReturned = product.removeStockById(code,products);
 				JOptionPane.showMessageDialog(null, "Stockline deleted");
 				listOfProdIds.removeElement(proReturned.getProductCode());
-
+				listOfProdIds.setSelectedItem("select");
 			}
 		});
 		//=======================  End
