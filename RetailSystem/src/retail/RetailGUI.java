@@ -3161,7 +3161,8 @@ public class RetailGUI extends JFrame{
 										Invoice multipleInvoice = new Invoice(invoiceId,employeeObj,customerObj,addMoreArrayList);
 										invoices.add(multipleInvoice);
 										//System.out.println(invoices.size());
-										outputMessage += "Thank you for you order"+
+										outputMessage +=  "Invoice Created "
+												   + "\n- - - - - - - - - - - - - - "+
 												"\nInvoice No: " + invoiceIdStr +
 												"\nEmployees No: "+ employeeIdStr +
 												"\nCustomer No: " + customerIdStr+
