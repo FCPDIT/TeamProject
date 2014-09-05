@@ -3667,6 +3667,7 @@ public class RetailGUI extends JFrame{
 		pLJTable.setRowHeight(ROW_HEIGHT);
 		pLJTable.setEnabled(false);
 		pLJTable.setAutoCreateRowSorter(true);	
+		pLJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		DefaultRowSorter sorter = ((DefaultRowSorter)pLJTable.getRowSorter());
 		ArrayList list = new ArrayList();
 		list.add( new RowSorter.SortKey(0, SortOrder.ASCENDING) );
