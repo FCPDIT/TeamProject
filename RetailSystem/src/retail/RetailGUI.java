@@ -896,7 +896,7 @@ public class RetailGUI extends JFrame{
 						//Reset fields
 						employeeIdField.setText("");
 						employeeNameField.setText("");
-						employeeAcessField.setSelectedItem(0);
+						employeeAcessField.setSelectedIndex(0);
 						employeeSalaryField.setText("");
 						employeePassField.setText("");
 					}else{
@@ -1000,6 +1000,11 @@ public class RetailGUI extends JFrame{
 								employee.setSalary(Double.parseDouble(editEmpSalaryField.getText()));
 								employee.setPassword(Integer.parseInt(editEmpPasswordField.getText()));
 								JOptionPane.showMessageDialog(null, "Employee Updated");
+								viewEmpIdCombo.setSelectedIndex(0);
+								editEmpNameField.setText("");
+								editEmpAccessField.setText("");
+								editEmpSalaryField.setText("");
+								editEmpPasswordField.setText("");
 							}
 						}
 					}
@@ -1021,7 +1026,7 @@ public class RetailGUI extends JFrame{
 							viewEmpIdCombo.removeItem(viewEmpIdCombo.getSelectedItem());
 							employees.remove(employee);
 							JOptionPane.showMessageDialog(null, "Employee Deleted");
-							viewEmpIdCombo.setSelectedItem(0);
+							viewEmpIdCombo.setSelectedIndex(0);
 							editEmpNameField.setText("");
 							editEmpAccessField.setText("");
 							editEmpSalaryField.setText("");
@@ -1334,6 +1339,11 @@ public class RetailGUI extends JFrame{
 								customer.setCustEmail(editCustEmail.getText());
 								customer.setCustTelephone(editCustPhone.getText());
 								JOptionPane.showMessageDialog(null, "Customer Updated.");
+								editCustIdCombo.setSelectedIndex(0);
+								editCustName.setText("");
+								editCustAddress.setText("");
+								editCustEmail.setText("");
+								editCustPhone.setText("");
 							}
 						}
 					}
@@ -1356,7 +1366,7 @@ public class RetailGUI extends JFrame{
 							editCustIdCombo.removeItem(editCustIdCombo.getSelectedItem());
 							customers.remove(customer);
 							JOptionPane.showMessageDialog(null, "Customer Deleted");
-							editCustIdCombo.setSelectedItem(0);
+							editCustIdCombo.setSelectedIndex(0);
 							editCustName.setText("");
 							editCustAddress.setText("");
 							editCustEmail.setText("");
@@ -1677,6 +1687,12 @@ public class RetailGUI extends JFrame{
 								supplier.setPhone(editSupplierPhone.getText());
 								supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
 								JOptionPane.showMessageDialog(null, "Supplier Updated");
+								editSuppIdCombo.setSelectedIndex(0);
+								editSupplierName.setText("");
+								editSupplierAddress.setText("");
+								editSupplierEmail.setText("");
+								editSupplierPhone.setText("");
+								editSupplierDelivery.setText("");
 							}
 						}
 					}
@@ -1698,7 +1714,7 @@ public class RetailGUI extends JFrame{
 							editSuppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
 							suppliers.remove(supplier);
 							JOptionPane.showMessageDialog(null, "Supplier Deleted");
-							editSuppIdCombo.setSelectedItem(0);
+							editSuppIdCombo.setSelectedIndex(0);
 							editSupplierName.setText("");
 							editSupplierAddress.setText("");
 							editSupplierEmail.setText("");
