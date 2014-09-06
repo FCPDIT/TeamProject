@@ -1175,6 +1175,9 @@ public class RetailGUI extends JFrame{
 								custNameCombo.addItem(customer.getCustName());
 								editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
 								JOptionPane.showMessageDialog(null, "New Customer Added");
+								listOfCustomers.addElement(custIdJTextField.getText());
+								listOfCusIds.addElement(custIdJTextField.getText());
+								listOfProdIds.addElement(custIdJTextField.getText());
 								custIdJTextField.setText("");
 								custNameJTextField.setText("");
 								custAddressJTextField.setText("");
