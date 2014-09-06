@@ -3064,7 +3064,7 @@ public class RetailGUI extends JFrame{
 					||	(employeeIdStr.equals("select"))
 					||	(customerIdStr.equals("select"))
 					||	(productIdStr.trim().equals(""))
-					||	(quantityStr.equals("select")))
+					||	(quantityStr.equals("select") || quantityStr.matches(".*\\D.*")))
 				{
 					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
