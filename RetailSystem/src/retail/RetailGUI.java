@@ -3012,7 +3012,7 @@ public class RetailGUI extends JFrame{
 				String invoiceIdStr = invTextF.getText();
 				int invoiceId = Integer.parseInt(invoiceIdStr);
 				if(prodId.equals("select")|| (quan.trim().equals("") || quan.matches(".*\\D.*"))){
-					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog (null, "There is an error in your input", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
 					if(invoiceNumberUnique(invoiceId,invoices)){
 					//disable the other text fileds
@@ -3072,7 +3072,7 @@ public class RetailGUI extends JFrame{
 					||	(productIdStr.trim().equals(""))
 					||	(quantityStr.equals("select") || quantityStr.matches(".*\\D.*")))
 				{
-					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog (null, "There is an error in your input", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
 					int invoiceId = Integer.parseInt(invoiceIdStr);
 					int employeeId = Integer.parseInt(employeeIdStr);
