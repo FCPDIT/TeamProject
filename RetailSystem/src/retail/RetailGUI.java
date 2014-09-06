@@ -1777,15 +1777,9 @@ public class RetailGUI extends JFrame{
 			//function to create a product
 			public void actionPerformed(ActionEvent e){
 				try{
-					if(suppliers.size() >= 1){
+					if(suppliers.size() >= 1 ){
 						for(Supplier supplier: suppliers){
 							if(supplier.getId() == Integer.parseInt(prodSupplierIdJTextField.getText())){
-								if(titleJTextField.getText().isEmpty() || authorJTextField.getText().isEmpty() ||
-										codeJTextField.getText().isEmpty() || retailJTextField.getText().isEmpty() ||
-										costJTextField.getText().isEmpty() ||	tStockJTextField.getText().isEmpty() ||
-										maxJTextField.getText().isEmpty() || minJTextField.getText().isEmpty()){
-									JOptionPane.showMessageDialog(null, "Please Complete All Fields");
-								}else{
 									Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
 											codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
 											Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
@@ -1793,7 +1787,6 @@ public class RetailGUI extends JFrame{
 											);
 									products.add(product);
 									JOptionPane.showMessageDialog(null, "New Product Added");
-							}
 							}
 						}
 						listOfProdIds.addElement(codeJTextField.getText());
@@ -1806,7 +1799,7 @@ public class RetailGUI extends JFrame{
 						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Complete All Fields");
 				}
 			}
 		});
