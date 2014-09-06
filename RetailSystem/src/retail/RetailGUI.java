@@ -611,14 +611,14 @@ public class RetailGUI extends JFrame{
 		mainJFrame.setVisible(true);
 		mainJFrame.add(mainJTabbedPane);
 		
-		mainJTabbedPane.addTab("Login/Logout",loginIcon, loginJPanel);
-		mainJTabbedPane.addTab("Sales",invoiceIcon, invJTabbedPane);
-		mainJTabbedPane.addTab("Orders",orderIcon, orderJTabbedPane);
-		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);
-		mainJTabbedPane.addTab("Profit and Loss",profitAndLossIcon, proflossJTabbedPane);
-		mainJTabbedPane.addTab("Customer Management",customerIcon, custJTabbedPane);
-		mainJTabbedPane.addTab("Supplier Management",supplierIcon, supplyJTabbedPane);
-		mainJTabbedPane.addTab("Manage Employee Access",employeeIcon, accessJTabbedPane);
+		mainJTabbedPane.addTab("Login/Logout ",loginIcon, loginJPanel);
+		mainJTabbedPane.addTab("Sales ",invoiceIcon, invJTabbedPane);
+		mainJTabbedPane.addTab("Orders ",orderIcon, orderJTabbedPane);
+		mainJTabbedPane.addTab("Product Management ", productIcon, prodJTabbedPane);
+		mainJTabbedPane.addTab("Profit and Loss ",profitAndLossIcon, proflossJTabbedPane);
+		mainJTabbedPane.addTab("Customer Management ",customerIcon, custJTabbedPane);
+		mainJTabbedPane.addTab("Supplier Management ",supplierIcon, supplyJTabbedPane);
+		mainJTabbedPane.addTab("Manage Employee Access ",employeeIcon, accessJTabbedPane);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
 		custJTabbedPane.add("View Customer Details", viewCustJPanel);
@@ -1849,6 +1849,7 @@ public class RetailGUI extends JFrame{
 		
 		gc.gridx = 1;
 		gc.gridy = 5;
+		editTitleJTextField.setEditable(false);
 		editTitleJTextField.setPreferredSize(d);
 		editTitleJTextField.setMinimumSize(d);
 		editProductJPanel.add(editTitleJTextField, gc);
@@ -1860,6 +1861,7 @@ public class RetailGUI extends JFrame{
 		
 		gc.gridx = 1;
 		gc.gridy = 7;
+		editAuthorJTextField.setEditable(false);
 		editAuthorJTextField.setPreferredSize(d);
 		editAuthorJTextField.setMinimumSize(d);
 		editProductJPanel.add(editAuthorJTextField, gc);
@@ -3566,14 +3568,18 @@ public class RetailGUI extends JFrame{
 				for(Product product: products){				
 					if(product.getProductCode().equals(comboBoxEditProdId.getSelectedItem())){
 					editCodeJTextField.setText(product.getProductCode());
+					editCodeJTextField.setBackground(Color.LIGHT_GRAY);
 					editAuthorJTextField.setText(product.getAuthor());
+					editAuthorJTextField.setBackground(Color.LIGHT_GRAY);
 					editTitleJTextField.setText(product.getTitle());
+					editTitleJTextField.setBackground(Color.LIGHT_GRAY);
 					editRetailJTextField.setText(Double.toString(product.getRetailPrice()));
 					editCostJTextField.setText(Double.toString(product.getCostPrice()));
 					editStockJTextField.setText(Integer.toString(product.getCurrentStock()));
 					editMaxJTextField.setText(Integer.toString(product.getMaxStock()));
 					editMinJTextField.setText(Integer.toString(product.getMinStock()));
 					editProdSupplierIdJTextField.setText(Integer.toString(product.getSupplier().getId()));
+					
 					}
 				
 				}				
@@ -5033,12 +5039,12 @@ public class RetailGUI extends JFrame{
 			over200Radio = new JRadioButton("200 plus");
 			//==
 			//edit product components
-			editDetails = new JLabel ("Product code");
+			editDetails = new JLabel ("Product ID");
 			editProdTitle = new JLabel("Book Title");
 			editTitleJTextField = new JTextField();
 			editProdAuthor = new JLabel("Author");
 			editAuthorJTextField = new JTextField();
-			editProdCode = new JLabel("Product Code");
+			editProdCode = new JLabel("Product ID");
 			editCodeJTextField = new JTextField();
 			editProdRetail = new JLabel("Retail Price");
 			editRetailJTextField = new JTextField();

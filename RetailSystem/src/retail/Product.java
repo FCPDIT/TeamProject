@@ -102,7 +102,7 @@ public class Product {
 		String list = "";
 
 		for (Product p : products) {
-			if (p.getAuthor().toLowerCase().contains(searchAuthor)) {	// Convert Author which is stored in Array into lower case while searching.
+			if (p.getAuthor().toLowerCase().equals(searchAuthor)) {	// Convert Author which is stored in Array into lower case while searching.
 				list += printProductDetails(p);
 				
 			}
