@@ -532,7 +532,7 @@ public class RetailGUI extends JFrame{
 		createInvoices();
 		setDesign();
 		initialize();
-		
+		System.out.println();
 		gc.insets = new Insets(10,5,5,10);
 		
 		//add login components
@@ -4651,7 +4651,6 @@ public class RetailGUI extends JFrame{
 		
 		public void populateIEGraph(){
 			Invoice inv = new Invoice();
-			Order ord = new Order();
 			Employee emp = new Employee();
 			line_chart_dataset.addValue(inv.getMonthlySales(0,invoices), "income", "Jan");
 	        line_chart_dataset.addValue(inv.getMonthlySales(1,invoices), "income", "Feb");
@@ -4666,18 +4665,18 @@ public class RetailGUI extends JFrame{
 	        line_chart_dataset.addValue(inv.getMonthlySales(10,invoices), "income", "Nov");
 	        line_chart_dataset.addValue(inv.getMonthlySales(11,invoices), "income", "Dec");
 	        
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 0), "expenditure", "Jan");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 1), "expenditure", "Feb");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 2), "expenditure", "Mar");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 3), "expenditure", "Apr");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 4), "expenditure", "May");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 5), "expenditure", "Jun");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 6), "expenditure", "Jul");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 7), "expenditure", "Aug");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 8), "expenditure", "Sept");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 9), "expenditure", "Oct");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 10), "expenditure", "Nov");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 11), "expenditure", "Dec");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 0), "expenditure", "Jan");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 1), "expenditure", "Feb");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 2), "expenditure", "Mar");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 3), "expenditure", "Apr");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 4), "expenditure", "May");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 5), "expenditure", "Jun");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 6), "expenditure", "Jul");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 7), "expenditure", "Aug");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 8), "expenditure", "Sept");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 9), "expenditure", "Oct");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 10), "expenditure", "Nov");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 11), "expenditure", "Dec");
 		}		
 		
 		//handler for Profit and Loss table button
@@ -5164,6 +5163,18 @@ public class RetailGUI extends JFrame{
 			listOfMonths = new DefaultComboBoxModel<>(months); //create the combo box
 			
 		
-		} //TODO
+		}//TODO
+		public double calculateOrderValue(ArrayList<Order> orders, int month){
+			double total = 0.00;
+			for(Order order: orders){
+				if(order.getOrderDate().getMonth() == month){
+					ArrayList<OrderProduct> prods = order.getListOfOrderProducts();
+					for(OrderProduct product: prods){
+						 total = total + product.getProduct().getCostPrice() * product.getQuantity();
+					}
+				}
+			}
+			return total;
+		}
 
 }//End class
