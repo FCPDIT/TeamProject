@@ -1679,31 +1679,30 @@ public class RetailGUI extends JFrame{
 		addProductJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
-		prodTitle.setPreferredSize(d);
-		addProductJPanel.add(prodTitle, gc);
-		gc.gridx = 1;
-		gc.gridy = 1;
-		titleJTextField.setPreferredSize(d);
-		titleJTextField.setMinimumSize(d);
-		addProductJPanel.add(titleJTextField, gc);
-		gc.gridx = 0;
-		gc.gridy = 4;
-		prodAuthor.setPreferredSize(d);
-		addProductJPanel.add(prodAuthor, gc);
-		gc.gridx = 1;
-		gc.gridy = 4;
-		authorJTextField.setPreferredSize(d);
-		authorJTextField.setMinimumSize(d);
-		addProductJPanel.add(authorJTextField, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
 		prodCode.setPreferredSize(d);
 		addProductJPanel.add(prodCode, gc);
 		gc.gridx = 1;
-		gc.gridy = 5;
+		gc.gridy = 1;
 		codeJTextField.setPreferredSize(d);
-		codeJTextField.setMinimumSize(d);
 		addProductJPanel.add(codeJTextField, gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 4;
+		prodTitle.setPreferredSize(d);
+		addProductJPanel.add(prodTitle, gc);
+		gc.gridx = 1;
+		gc.gridy = 4;
+		titleJTextField.setPreferredSize(d);
+		addProductJPanel.add(titleJTextField, gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 5;
+		prodAuthor.setPreferredSize(d);
+		addProductJPanel.add(prodAuthor, gc);
+		gc.gridx = 1;
+		gc.gridy = 5;
+		authorJTextField.setPreferredSize(d);
+		addProductJPanel.add(authorJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
 		prodRetail.setPreferredSize(d);
@@ -1789,11 +1788,22 @@ public class RetailGUI extends JFrame{
 									JOptionPane.showMessageDialog(null, "New Product Added");
 							}
 						}
+
 						listOfProdIds.addElement(codeJTextField.getText());
 						listOfProductAuthor.addElement(authorJTextField.getText());
 						listofProductTitle.addElement(titleJTextField.getText());
 						Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
 						Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
+						titleJTextField.setText("");
+						prodSupplierIdJTextField.setText("");
+						authorJTextField.setText("");
+						codeJTextField.setText("");
+						retailJTextField.setText("");
+						costJTextField.setText("");
+						tStockJTextField.setText("");
+						maxJTextField.setText("");
+						minJTextField.setText("");
+						
 						
 					}else{
 						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
@@ -5014,7 +5024,7 @@ public class RetailGUI extends JFrame{
 			retailJTextField = new JTextField();
 			prodCost = new JLabel("Cost Price");
 			costJTextField = new JTextField();
-			prodTotalStock = new JLabel("Total Stock");
+			prodTotalStock = new JLabel("Current Stock");
 			tStockJTextField = new JTextField();
 			prodMaxStock = new JLabel("Maximum Stock");
 			maxJTextField = new JTextField();
