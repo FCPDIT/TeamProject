@@ -3282,6 +3282,8 @@ public class RetailGUI extends JFrame{
 					listOfProdIds.setSelectedItem("Select");
 					listofProductTitle.setSelectedItem("Select");
 					listOfProductAuthor.setSelectedItem("Select");
+					priceRange.clearSelection();
+					quantity.clearSelection();
 				}
 			}
 		});
@@ -3332,6 +3334,8 @@ public class RetailGUI extends JFrame{
 					listOfProdIds.setSelectedItem("Select");
 					listofProductTitle.setSelectedItem("Select");
 					listOfProductAuthor.setSelectedItem("Select");
+					priceRange.clearSelection();
+					quantity.clearSelection();
 					
 					
 				}
@@ -3392,6 +3396,8 @@ public class RetailGUI extends JFrame{
 					listOfProdIds.setSelectedItem("Select");
 					listofProductTitle.setSelectedItem("Select");
 					listOfProductAuthor.setSelectedItem("Select");
+					priceRange.clearSelection();
+					quantity.clearSelection();
 				}
 			}
 		});
@@ -3480,18 +3486,22 @@ public class RetailGUI extends JFrame{
 				if (under5Radio.isSelected()) {
 				productTextArea.setText(product.viewProductbyRetailPrice(0.01, 4.99, products));
 				productTextArea.setCaretPosition(0);
+				quantity.clearSelection();
 				}
 				if (fiveTo10Radio.isSelected()){
 				productTextArea.setText(product.viewProductbyRetailPrice(5,10, products));
 				productTextArea.setCaretPosition(0);
+				quantity.clearSelection();
 				}
 				if (tenTo20Radio.isSelected()){
 				productTextArea.setText(product.viewProductbyRetailPrice(10.01, 20, products));
 				productTextArea.setCaretPosition(0);
+				quantity.clearSelection();
 				}
 				if (over20Radio.isSelected()){
 				productTextArea.setText(product.viewProductbyRetailPrice(20.01, 100, products));
 				productTextArea.setCaretPosition(0);
+				quantity.clearSelection();
 				}
 			}
 		});
@@ -3522,18 +3532,22 @@ public class RetailGUI extends JFrame{
 				if (under50Radio.isSelected()) {
 					productTextArea.setText(product.viewProductbyQuantity(1, 50, products));
 					productTextArea.setCaretPosition(0);
+					priceRange.clearSelection();
 					}
 					if (fiftyTo100Radio.isSelected()){
 					productTextArea.setText(product.viewProductbyQuantity(51,100, products));
 					productTextArea.setCaretPosition(0);
+					priceRange.clearSelection();
 					}
 					if (hundredTo200Radio.isSelected()){
 					productTextArea.setText(product.viewProductbyQuantity(101, 200, products));	
 					productTextArea.setCaretPosition(0);
+					priceRange.clearSelection();
 					}
 					if (over200Radio.isSelected()){
 					productTextArea.setText(product.viewProductbyQuantity(200, 500, products));
 					productTextArea.setCaretPosition(0);
+					priceRange.clearSelection();
 				}
 			}
 		});
