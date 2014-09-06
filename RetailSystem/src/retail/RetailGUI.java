@@ -3876,15 +3876,15 @@ public class RetailGUI extends JFrame{
 				costGraph.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						DefaultCategoryDataset costData = new DefaultCategoryDataset();
-						costData.setValue(product.quantityByCost(0.01, 1.99, products), "Price", "under 2");
-						costData.setValue(product.quantityByCost(2.00, 3.00, products), "Price", "2 to 3");
-						costData.setValue(product.quantityByCost(3.01, 5.00, products), "Price", "3 to 5");
-						costData.setValue(product.quantityByCost(5.01, 200.99, products), "Price", "over 5");
+						costData.setValue(product.quantityByCost(0.01, 1.99, products), "Price", "under 2 Euro");
+						costData.setValue(product.quantityByCost(2.00, 3.00, products), "Price", "2 to 3 Euro");
+						costData.setValue(product.quantityByCost(3.01, 5.00, products), "Price", "3 to 5 Euro");
+						costData.setValue(product.quantityByCost(5.01, 200.99, products), "Price", "over 5 Euro");
 					
-						JFreeChart costChart = ChartFactory.createBarChart("Cost price chart", "Price range", "Stock quantity", costData, PlotOrientation.VERTICAL, false, true, false);
+						JFreeChart costChart = ChartFactory.createBarChart("Stock by Cost Price Chart", "Cost Price Range", "Stock Quantity", costData, PlotOrientation.VERTICAL, false, true, false);
 						CategoryPlot p = costChart.getCategoryPlot();
 						p.setRangeGridlinePaint(Color.BLACK);
-						ChartFrame retailGraphFrame = new ChartFrame("stock value chart",costChart);
+						ChartFrame retailGraphFrame = new ChartFrame("Stock by Cost Chart",costChart);
 						retailGraphFrame.setVisible(true);
 						retailGraphFrame.setSize(850, 600);
 					}
