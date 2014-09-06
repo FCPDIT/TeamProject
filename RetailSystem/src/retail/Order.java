@@ -63,16 +63,6 @@ public class Order implements Comparable<Order> {
 		return amount;
 	}
 	
-	public double orderTotalByMonth(ArrayList<Order> orders, int month){
-		double totalOrder = 0.00;
-		for(Order order: orders){
-			if(order.getOrderDate().getMonth() == month){
-				totalOrder = totalOrder + this.calculateOrderTotal();
-			}
-		}
-		return totalOrder;
-	}
-	
 	  @Override
 	  public int compareTo(Order o) {
 	    return getOrderDate().compareTo(o.getOrderDate());

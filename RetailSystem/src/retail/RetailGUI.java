@@ -532,7 +532,7 @@ public class RetailGUI extends JFrame{
 		createInvoices();
 		setDesign();
 		initialize();
-		
+		System.out.println();
 		gc.insets = new Insets(10,5,5,10);
 		
 		//add login components
@@ -611,14 +611,14 @@ public class RetailGUI extends JFrame{
 		mainJFrame.setVisible(true);
 		mainJFrame.add(mainJTabbedPane);
 		
-		mainJTabbedPane.addTab("Login/Logout",loginIcon, loginJPanel);
-		mainJTabbedPane.addTab("Sales",invoiceIcon, invJTabbedPane);
-		mainJTabbedPane.addTab("Orders",orderIcon, orderJTabbedPane);
-		mainJTabbedPane.addTab("Product Management", productIcon, prodJTabbedPane);
-		mainJTabbedPane.addTab("Profit and Loss",profitAndLossIcon, proflossJTabbedPane);
-		mainJTabbedPane.addTab("Customer Management",customerIcon, custJTabbedPane);
-		mainJTabbedPane.addTab("Supplier Management",supplierIcon, supplyJTabbedPane);
-		mainJTabbedPane.addTab("Manage Employee Access",employeeIcon, accessJTabbedPane);
+		mainJTabbedPane.addTab("Login/Logout ",loginIcon, loginJPanel);
+		mainJTabbedPane.addTab("Sales ",invoiceIcon, invJTabbedPane);
+		mainJTabbedPane.addTab("Orders ",orderIcon, orderJTabbedPane);
+		mainJTabbedPane.addTab("Product Management ", productIcon, prodJTabbedPane);
+		mainJTabbedPane.addTab("Profit and Loss ",profitAndLossIcon, proflossJTabbedPane);
+		mainJTabbedPane.addTab("Customer Management ",customerIcon, custJTabbedPane);
+		mainJTabbedPane.addTab("Supplier Management ",supplierIcon, supplyJTabbedPane);
+		mainJTabbedPane.addTab("Manage Employee Access ",employeeIcon, accessJTabbedPane);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
 		custJTabbedPane.add("View Customer Details", viewCustJPanel);
@@ -1175,14 +1175,15 @@ public class RetailGUI extends JFrame{
 								custNameCombo.addItem(customer.getCustName());
 								editCustIdCombo.addItem(Integer.toString(customer.getCustId()));
 								JOptionPane.showMessageDialog(null, "New Customer Added");
+								listOfCustomers.addElement(custIdJTextField.getText());
+								listOfCusIds.addElement(custIdJTextField.getText());
 								custIdJTextField.setText("");
 								custNameJTextField.setText("");
 								custAddressJTextField.setText("");
 								custEmailJTextField.setText("");
 								custPhoneJTextField.setText("");
 								editCustIdComboInv.addItem(Integer.toString(customer.getCustId()));
-								listOfCustomers.addElement(custIdJTextField.getText());
-								listOfCusIds.addElement(custIdJTextField.getText());
+							
 						}
 					}
 					else{
@@ -1679,31 +1680,30 @@ public class RetailGUI extends JFrame{
 		addProductJPanel.setLayout(new GridBagLayout());
 		gc.gridx = 0;
 		gc.gridy = 1;
-		prodTitle.setPreferredSize(d);
-		addProductJPanel.add(prodTitle, gc);
-		gc.gridx = 1;
-		gc.gridy = 1;
-		titleJTextField.setPreferredSize(d);
-		titleJTextField.setMinimumSize(d);
-		addProductJPanel.add(titleJTextField, gc);
-		gc.gridx = 0;
-		gc.gridy = 4;
-		prodAuthor.setPreferredSize(d);
-		addProductJPanel.add(prodAuthor, gc);
-		gc.gridx = 1;
-		gc.gridy = 4;
-		authorJTextField.setPreferredSize(d);
-		authorJTextField.setMinimumSize(d);
-		addProductJPanel.add(authorJTextField, gc);
-		gc.gridx = 0;
-		gc.gridy = 5;
 		prodCode.setPreferredSize(d);
 		addProductJPanel.add(prodCode, gc);
 		gc.gridx = 1;
-		gc.gridy = 5;
+		gc.gridy = 1;
 		codeJTextField.setPreferredSize(d);
-		codeJTextField.setMinimumSize(d);
 		addProductJPanel.add(codeJTextField, gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 4;
+		prodTitle.setPreferredSize(d);
+		addProductJPanel.add(prodTitle, gc);
+		gc.gridx = 1;
+		gc.gridy = 4;
+		titleJTextField.setPreferredSize(d);
+		addProductJPanel.add(titleJTextField, gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 5;
+		prodAuthor.setPreferredSize(d);
+		addProductJPanel.add(prodAuthor, gc);
+		gc.gridx = 1;
+		gc.gridy = 5;
+		authorJTextField.setPreferredSize(d);
+		addProductJPanel.add(authorJTextField, gc);
 		gc.gridx = 0;
 		gc.gridy = 7;
 		prodRetail.setPreferredSize(d);
@@ -1777,15 +1777,9 @@ public class RetailGUI extends JFrame{
 			//function to create a product
 			public void actionPerformed(ActionEvent e){
 				try{
-					if(suppliers.size() >= 1){
+					if(suppliers.size() >= 1 ){
 						for(Supplier supplier: suppliers){
 							if(supplier.getId() == Integer.parseInt(prodSupplierIdJTextField.getText())){
-								if(titleJTextField.getText().isEmpty() || authorJTextField.getText().isEmpty() ||
-										codeJTextField.getText().isEmpty() || retailJTextField.getText().isEmpty() ||
-										costJTextField.getText().isEmpty() ||	tStockJTextField.getText().isEmpty() ||
-										maxJTextField.getText().isEmpty() || minJTextField.getText().isEmpty()){
-									JOptionPane.showMessageDialog(null, "Please Complete All Fields");
-								}else{
 									Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
 											codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
 											Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
@@ -1794,19 +1788,29 @@ public class RetailGUI extends JFrame{
 									products.add(product);
 									JOptionPane.showMessageDialog(null, "New Product Added");
 							}
-							}
 						}
+
 						listOfProdIds.addElement(codeJTextField.getText());
 						listOfProductAuthor.addElement(authorJTextField.getText());
 						listofProductTitle.addElement(titleJTextField.getText());
 						Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
 						Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
+						titleJTextField.setText("");
+						prodSupplierIdJTextField.setText("");
+						authorJTextField.setText("");
+						codeJTextField.setText("");
+						retailJTextField.setText("");
+						costJTextField.setText("");
+						tStockJTextField.setText("");
+						maxJTextField.setText("");
+						minJTextField.setText("");
+						
 						
 					}else{
 						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Complete All Fields");
 				}
 			}
 		});
@@ -1849,6 +1853,7 @@ public class RetailGUI extends JFrame{
 		
 		gc.gridx = 1;
 		gc.gridy = 5;
+		editTitleJTextField.setEditable(false);
 		editTitleJTextField.setPreferredSize(d);
 		editTitleJTextField.setMinimumSize(d);
 		editProductJPanel.add(editTitleJTextField, gc);
@@ -1860,6 +1865,7 @@ public class RetailGUI extends JFrame{
 		
 		gc.gridx = 1;
 		gc.gridy = 7;
+		editAuthorJTextField.setEditable(false);
 		editAuthorJTextField.setPreferredSize(d);
 		editAuthorJTextField.setMinimumSize(d);
 		editProductJPanel.add(editAuthorJTextField, gc);
@@ -3006,7 +3012,7 @@ public class RetailGUI extends JFrame{
 				String invoiceIdStr = invTextF.getText();
 				int invoiceId = Integer.parseInt(invoiceIdStr);
 				if(prodId.equals("select")|| (quan.trim().equals("") || quan.matches(".*\\D.*"))){
-					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog (null, "There is an error in your input", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
 					if(invoiceNumberUnique(invoiceId,invoices)){
 					//disable the other text fileds
@@ -3066,7 +3072,7 @@ public class RetailGUI extends JFrame{
 					||	(productIdStr.trim().equals(""))
 					||	(quantityStr.equals("select") || quantityStr.matches(".*\\D.*")))
 				{
-					JOptionPane.showMessageDialog (null, "Please ensure all text fields have been filled", "Missing Info", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog (null, "There is an error in your input", "Missing Info", JOptionPane.WARNING_MESSAGE);
 				}else{
 					int invoiceId = Integer.parseInt(invoiceIdStr);
 					int employeeId = Integer.parseInt(employeeIdStr);
@@ -3566,14 +3572,18 @@ public class RetailGUI extends JFrame{
 				for(Product product: products){				
 					if(product.getProductCode().equals(comboBoxEditProdId.getSelectedItem())){
 					editCodeJTextField.setText(product.getProductCode());
+					editCodeJTextField.setBackground(Color.LIGHT_GRAY);
 					editAuthorJTextField.setText(product.getAuthor());
+					editAuthorJTextField.setBackground(Color.LIGHT_GRAY);
 					editTitleJTextField.setText(product.getTitle());
+					editTitleJTextField.setBackground(Color.LIGHT_GRAY);
 					editRetailJTextField.setText(Double.toString(product.getRetailPrice()));
 					editCostJTextField.setText(Double.toString(product.getCostPrice()));
 					editStockJTextField.setText(Integer.toString(product.getCurrentStock()));
 					editMaxJTextField.setText(Integer.toString(product.getMaxStock()));
 					editMinJTextField.setText(Integer.toString(product.getMinStock()));
 					editProdSupplierIdJTextField.setText(Integer.toString(product.getSupplier().getId()));
+					
 					}
 				
 				}				
@@ -4166,7 +4176,10 @@ public class RetailGUI extends JFrame{
 		public void actionPerformed( ActionEvent e){//handler starts
 			int id = 0;
 			String s = (String)editComboBoxInvoice.getSelectedItem();
-			if(!s.equals("Select")){
+			if(s.equals("Select") || s.equals("select")){
+				id = 0;
+			}
+			else{
 				id = Integer.parseInt( s );
 			}
 			productInvoiceJTextArea.setText("Product Details\n");
@@ -4652,7 +4665,6 @@ public class RetailGUI extends JFrame{
 		
 		public void populateIEGraph(){
 			Invoice inv = new Invoice();
-			Order ord = new Order();
 			Employee emp = new Employee();
 			line_chart_dataset.addValue(inv.getMonthlySales(0,invoices), "income", "Jan");
 	        line_chart_dataset.addValue(inv.getMonthlySales(1,invoices), "income", "Feb");
@@ -4667,18 +4679,18 @@ public class RetailGUI extends JFrame{
 	        line_chart_dataset.addValue(inv.getMonthlySales(10,invoices), "income", "Nov");
 	        line_chart_dataset.addValue(inv.getMonthlySales(11,invoices), "income", "Dec");
 	        
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 0), "expenditure", "Jan");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 1), "expenditure", "Feb");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 2), "expenditure", "Mar");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 3), "expenditure", "Apr");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 4), "expenditure", "May");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 5), "expenditure", "Jun");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 6), "expenditure", "Jul");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 7), "expenditure", "Aug");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 8), "expenditure", "Sept");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 9), "expenditure", "Oct");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 10), "expenditure", "Nov");
-	        line_chart_dataset.addValue(emp.monthlySalary(employees) + ord.orderTotalByMonth(orders, 11), "expenditure", "Dec");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 0), "expenditure", "Jan");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 1), "expenditure", "Feb");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 2), "expenditure", "Mar");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 3), "expenditure", "Apr");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 4), "expenditure", "May");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 5), "expenditure", "Jun");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 6), "expenditure", "Jul");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 7), "expenditure", "Aug");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 8), "expenditure", "Sept");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 9), "expenditure", "Oct");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 10), "expenditure", "Nov");
+	        line_chart_dataset.addValue(emp.monthlySalary(employees) + calculateOrderValue(orders, 11), "expenditure", "Dec");
 		}		
 		
 		//handler for Profit and Loss table button
@@ -5013,7 +5025,7 @@ public class RetailGUI extends JFrame{
 			retailJTextField = new JTextField();
 			prodCost = new JLabel("Cost Price");
 			costJTextField = new JTextField();
-			prodTotalStock = new JLabel("Total Stock");
+			prodTotalStock = new JLabel("Current Stock");
 			tStockJTextField = new JTextField();
 			prodMaxStock = new JLabel("Maximum Stock");
 			maxJTextField = new JTextField();
@@ -5033,12 +5045,12 @@ public class RetailGUI extends JFrame{
 			over200Radio = new JRadioButton("200 plus");
 			//==
 			//edit product components
-			editDetails = new JLabel ("Product code");
+			editDetails = new JLabel ("Product ID");
 			editProdTitle = new JLabel("Book Title");
 			editTitleJTextField = new JTextField();
 			editProdAuthor = new JLabel("Author");
 			editAuthorJTextField = new JTextField();
-			editProdCode = new JLabel("Product Code");
+			editProdCode = new JLabel("Product ID");
 			editCodeJTextField = new JTextField();
 			editProdRetail = new JLabel("Retail Price");
 			editRetailJTextField = new JTextField();
@@ -5165,6 +5177,18 @@ public class RetailGUI extends JFrame{
 			listOfMonths = new DefaultComboBoxModel<>(months); //create the combo box
 			
 		
-		} //TODO
+		}//TODO
+		public double calculateOrderValue(ArrayList<Order> orders, int month){
+			double total = 0.00;
+			for(Order order: orders){
+				if(order.getOrderDate().getMonth() == month){
+					ArrayList<OrderProduct> prods = order.getListOfOrderProducts();
+					for(OrderProduct product: prods){
+						 total = total + product.getProduct().getCostPrice() * product.getQuantity();
+					}
+				}
+			}
+			return total;
+		}
 
 }//End class

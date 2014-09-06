@@ -44,13 +44,15 @@ public class Product {
 
 	public String printProductDetails(Product p) {
 		if (p != null) {
-		return "\n Product Id: : " + (p.getProductCode()) + "\n Title: "
+		return "\n Product ID: " + (p.getProductCode()) + "\n Title: "
 		+ p.getTitle() + "\n Author: " + p.getAuthor()
-		+ "\n Current Stock: " + p.getCurrentStock()
+		+ "\n Retail Price: " + p.getRetailPrice() 
+		+"\n Cost Price: " + p.getCostPrice()
+		+"\n Current Stock: " + p.getCurrentStock()
+		+ "\n Max Stock:" + p.getMaxStock() 
+		+ "\n Min Stock: " + p.getMinStock() 
 		+ "\n Supplier: " + p.getSupplier().getName()
-		+ "\n Max Stock:" + p.getMaxStock() + "\n Min Stock: "
-		+ p.getMinStock() + "\n Cost Price: " + p.getCostPrice()
-		+ "\n Retail Price: " + p.getRetailPrice() + "\n";
+		+  "\n";
 		} else {
 		return " No Details to Print ";
 		}
@@ -102,7 +104,7 @@ public class Product {
 		String list = "";
 
 		for (Product p : products) {
-			if (p.getAuthor().toLowerCase().contains(searchAuthor)) {	// Convert Author which is stored in Array into lower case while searching.
+			if (p.getAuthor().toLowerCase().equals(searchAuthor)) {	// Convert Author which is stored in Array into lower case while searching.
 				list += printProductDetails(p);
 				
 			}
