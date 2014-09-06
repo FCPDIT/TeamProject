@@ -4165,7 +4165,10 @@ public class RetailGUI extends JFrame{
 		public void actionPerformed( ActionEvent e){//handler starts
 			int id = 0;
 			String s = (String)editComboBoxInvoice.getSelectedItem();
-			if(!s.equals("Select")){
+			if(s.equals("Select") || s.equals("select")){
+				id = 0;
+			}
+			else{
 				id = Integer.parseInt( s );
 			}
 			productInvoiceJTextArea.setText("Product Details\n");
