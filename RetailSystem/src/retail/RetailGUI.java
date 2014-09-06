@@ -3479,19 +3479,19 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if (under5Radio.isSelected()) {
 				productTextArea.setText(product.viewProductbyRetailPrice(0.01, 4.99, products));
-				priceRange.clearSelection();
+				productTextArea.setCaretPosition(0);
 				}
 				if (fiveTo10Radio.isSelected()){
 				productTextArea.setText(product.viewProductbyRetailPrice(5,10, products));
-				priceRange.clearSelection();
+				productTextArea.setCaretPosition(0);
 				}
 				if (tenTo20Radio.isSelected()){
 				productTextArea.setText(product.viewProductbyRetailPrice(10.01, 20, products));
-				priceRange.clearSelection();
+				productTextArea.setCaretPosition(0);
 				}
 				if (over20Radio.isSelected()){
 				productTextArea.setText(product.viewProductbyRetailPrice(20.01, 100, products));
-				priceRange.clearSelection();
+				productTextArea.setCaretPosition(0);
 				}
 			}
 		});
@@ -3521,19 +3521,19 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if (under50Radio.isSelected()) {
 					productTextArea.setText(product.viewProductbyQuantity(1, 50, products));
-					quantity.clearSelection();
+					productTextArea.setCaretPosition(0);
 					}
 					if (fiftyTo100Radio.isSelected()){
 					productTextArea.setText(product.viewProductbyQuantity(51,100, products));
-					quantity.clearSelection();
+					productTextArea.setCaretPosition(0);
 					}
 					if (hundredTo200Radio.isSelected()){
-					productTextArea.setText(product.viewProductbyQuantity(101, 200, products));
-					quantity.clearSelection();
+					productTextArea.setText(product.viewProductbyQuantity(101, 200, products));	
+					productTextArea.setCaretPosition(0);
 					}
 					if (over200Radio.isSelected()){
 					productTextArea.setText(product.viewProductbyQuantity(200, 500, products));
-					quantity.clearSelection();
+					productTextArea.setCaretPosition(0);
 				}
 			}
 		});
@@ -3548,7 +3548,8 @@ public class RetailGUI extends JFrame{
 		
 		editDetailsJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				for(Product product: products){
+				
+				for(Product product: products){				
 					if(product.getProductCode().equals(comboBoxEditProdId.getSelectedItem())){
 					editCodeJTextField.setText(product.getProductCode());
 					editAuthorJTextField.setText(product.getAuthor());
@@ -3560,15 +3561,15 @@ public class RetailGUI extends JFrame{
 					editMinJTextField.setText(Integer.toString(product.getMinStock()));
 					editProdSupplierIdJTextField.setText(Integer.toString(product.getSupplier().getId()));
 					}
-				}
 				
+				}				
 			}
 		});
 
 		// to update product details
 		updateProductJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
+				try{
 				for (Product product: products){
 					if(product.getProductCode().equals(comboBoxEditProdId.getSelectedItem())){
 						product.setAuthor(editAuthorJTextField.getText());
@@ -3596,11 +3597,16 @@ public class RetailGUI extends JFrame{
 						editMinJTextField.setText("");
 						editCodeJTextField.setText("");
 						editProdSupplierIdJTextField.setText("");
-						
-						
 					}
 				}
-			}
+				}
+						
+						catch(NumberFormatException nfe){
+							JOptionPane.showMessageDialog(null, "Please enter a digit in field required");
+						}
+					}
+				
+			
 		});
 
 		// to delete stockline from system
@@ -3615,6 +3621,15 @@ public class RetailGUI extends JFrame{
 				listOfProdIds.removeElement(proReturned.getProductCode());
 				listofProductTitle.removeElement(proReturned.getTitle());
 				listOfProdIds.setSelectedItem("select");
+				editAuthorJTextField.setText("");
+				editTitleJTextField.setText("");
+				editRetailJTextField.setText("");
+				editCostJTextField.setText("");
+				editStockJTextField.setText("");
+				editMaxJTextField.setText("");
+				editMinJTextField.setText("");
+				editCodeJTextField.setText("");
+				editProdSupplierIdJTextField.setText("");
 			}
 			}
 		});
