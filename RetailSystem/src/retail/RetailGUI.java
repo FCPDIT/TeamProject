@@ -943,7 +943,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Employee.");
 				}
 			}
 		});
@@ -951,8 +951,9 @@ public class RetailGUI extends JFrame{
 		updateEmployee.addActionListener(new ActionListener(){
 			//update a specific customer
 			public void actionPerformed(ActionEvent e){
-				try{
-					if(editEmpNameField.getText().isEmpty()){
+				if(viewEmpIdCombo.getSelectedIndex() != 0){
+					if(editEmpNameField.getText().isEmpty() || editEmpAccessField.getText().isEmpty() || 
+							editEmpSalaryField.getText().isEmpty() || editEmpPasswordField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Please Complete All Fields");	
 					}else{
 						for(Employee employee: employees){
@@ -970,8 +971,8 @@ public class RetailGUI extends JFrame{
 							}
 						}
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Please Complete All Fields");
+				}else{
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Employee.");
 				}
 			}
 		});
@@ -979,7 +980,7 @@ public class RetailGUI extends JFrame{
 		deleteEmployee.addActionListener(new ActionListener(){
 			//delete function for employee
 			public void actionPerformed(ActionEvent arg){
-				try{
+				if(viewEmpIdCombo.getSelectedIndex() != 0){
 					for(Employee employee: employees){
 						if(employee.getEmployeeId() == Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							listOfEmpIds.removeElement(viewEmpIdCombo.getSelectedItem().toString());
@@ -996,8 +997,8 @@ public class RetailGUI extends JFrame{
 							return;
 						}
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
+				}else{
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Employee.");
 				}
 			}
 		});
@@ -1221,7 +1222,7 @@ public class RetailGUI extends JFrame{
 							}
 						}
 					}catch(NumberFormatException nfe){
-						JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+						JOptionPane.showMessageDialog(null, "Please Select a Valid Customer.");
 					}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Customers Found");
@@ -1287,7 +1288,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer.");
 				}
 			}
 		});
@@ -1315,7 +1316,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer.");
 				}
 			}
 		});
@@ -1342,7 +1343,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer.");
 				}
 			}
 		});
@@ -1450,7 +1451,6 @@ public class RetailGUI extends JFrame{
 		allSupplyJButton.setMinimumSize(d);
 		allSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(allSupplyJButton, gc);
-	
 		gc.gridx = 0;
 		gc.gridy = 1;
 		editSuppIdCombo.setMinimumSize(d);
@@ -1574,7 +1574,7 @@ public class RetailGUI extends JFrame{
 						JOptionPane.showMessageDialog(null, "No Suppliers Found");
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier.");
 				}
 			}
 		});
@@ -1639,7 +1639,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier.");
 				}
 			}
 		});
@@ -1669,7 +1669,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier.");
 				}
 			}
 			
@@ -1696,7 +1696,7 @@ public class RetailGUI extends JFrame{
 						}
 					}
 				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Id should be a number.");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier.");
 				}
 			}
 		});
