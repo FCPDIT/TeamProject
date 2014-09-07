@@ -968,6 +968,7 @@ public class RetailGUI extends JFrame{
 								editEmpAccessField.setText("");
 								editEmpSalaryField.setText("");
 								editEmpPasswordField.setText("");
+								return;
 							}
 						}
 					}
