@@ -10,11 +10,11 @@ public class Customer {
 	private String custName;
 	private String custAddress;
 	private String custEmail;
-	private String custTelephone;
+	private int custTelephone;
 	
 	//Constructors
 	public Customer(int custId, String custName, String custAddress,
-			String custEmail, String custTelephone) {
+			String custEmail, int custTelephone) {
 		this.custId = custId;
 		this.custName = custName;
 		this.custAddress = custAddress;
@@ -61,11 +61,11 @@ public class Customer {
 		this.custEmail = custEmail;
 	}
 
-	public String getCustTelephone() {
+	public int getCustTelephone() {
 		return custTelephone;
 	}
 
-	public void setCustTelephone(String custTelephone) {
+	public void setCustTelephone(int custTelephone) {
 		this.custTelephone = custTelephone;
 	}
 	
