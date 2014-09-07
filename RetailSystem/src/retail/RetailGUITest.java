@@ -74,7 +74,7 @@ public class RetailGUITest {
 		combo.setSelectedIndex(0);
 		assertNotNull(combo.getSelectedIndex());
 		combo.setSelectedIndex(0);
-		assertEquals(combo.getSelectedItem(), "Select");
+		assertEquals(combo.getSelectedItem(), "John");
 	}
 
 	@Test

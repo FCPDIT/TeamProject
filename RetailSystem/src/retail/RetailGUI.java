@@ -25,8 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
-
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultRowSorter;
@@ -50,7 +48,6 @@ import javax.swing.SortOrder;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -76,56 +73,56 @@ public class RetailGUI extends JFrame{
 	private ArrayList<OrderProduct> orderProducts3 = new ArrayList<OrderProduct>();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/dd");
 	
-	private JFrame mainJFrame;// = new JFrame();
+	private JFrame mainJFrame;
 	private GridBagConstraints gc = new GridBagConstraints();
-	private JTabbedPane mainJTabbedPane;// = new JTabbedPane();
-	JScrollPane scrollPane;// = new JScrollPane();
+	private JTabbedPane mainJTabbedPane;
+	JScrollPane scrollPane;
 	
-	private JPanel loginJPanel;// = new JPanel();
-	private JTabbedPane custJTabbedPane;// = new JTabbedPane();
-	private JTabbedPane supplyJTabbedPane;// = new JTabbedPane();
-	private JTabbedPane prodJTabbedPane;// = new JTabbedPane();
-	private JTabbedPane invJTabbedPane;// = new JTabbedPane();
-	private JTabbedPane orderJTabbedPane;// = new JTabbedPane();
-	private JTabbedPane accessJTabbedPane; // = new JTabbedPane();
-	private JTabbedPane proflossJTabbedPane;// = new JTabbedPane();
+	private JPanel loginJPanel;
+	private JTabbedPane custJTabbedPane;
+	private JTabbedPane supplyJTabbedPane;
+	private JTabbedPane prodJTabbedPane;
+	private JTabbedPane invJTabbedPane;
+	private JTabbedPane orderJTabbedPane;
+	private JTabbedPane accessJTabbedPane; 
+	private JTabbedPane proflossJTabbedPane;
 	
-	private JPanel addCustJPanel;// = new JPanel();
-	private JPanel viewCustJPanel;// = new JPanel();
-	private JPanel editCustJPanel;// = new JPanel();
+	private JPanel addCustJPanel;
+	private JPanel viewCustJPanel;
+	private JPanel editCustJPanel;
 	
-	private JPanel addSupplyJPanel;// = new JPanel();
-	private JPanel viewSupplyJPanel;// = new JPanel();
-	private JPanel editSupplyJPanel;// = new JPanel();
+	private JPanel addSupplyJPanel;
+	private JPanel viewSupplyJPanel;
+	private JPanel editSupplyJPanel;
 	
-	private JPanel addProductJPanel;// = new JPanel();
-	private JPanel editProductJPanel;// = new JPanel();
+	private JPanel addProductJPanel;
+	private JPanel editProductJPanel;
 	
-	private JPanel createInvJPanel;// = new JPanel();
-	private JPanel viewInvJPanel;// = new JPanel();
-	private JPanel editInvJPanel;// = new JPanel();
+	private JPanel createInvJPanel;
+	private JPanel viewInvJPanel;
+	private JPanel editInvJPanel;
 	
-	private JPanel createOrderPanel;// = new JPanel();
-	private JPanel viewOrderJPanel;// = new JPanel();
-	private JPanel viewOrderLeftJPanel;// = new JPanel();
-	private JPanel viewOrderRightJPanel;// = new JPanel();
-	private JPanel editOrderJPanel;// = new JPanel();
+	private JPanel createOrderPanel;
+	private JPanel viewOrderJPanel;
+	private JPanel viewOrderLeftJPanel;
+	private JPanel viewOrderRightJPanel;
+	private JPanel editOrderJPanel;
 	
-	private JPanel employeeJPanel;// = new JPanel();
-	private JPanel viewEmployeeJPanel;// = new JPanel();
-	private JPanel editEmployeeJPanel;// = new JPanel();
+	private JPanel employeeJPanel;
+	private JPanel viewEmployeeJPanel;
+	private JPanel editEmployeeJPanel;
 	
-	private JPanel proflossJPanel;// = new JPanel();
-	private JPanel graphJPanel;// = new JPanel();
+	private JPanel proflossJPanel;
+	private JPanel graphJPanel;
 	
 	//login components
-	private JPanel loginComponentsJPanel;// = new JPanel();
+	private JPanel loginComponentsJPanel;
 	private JTextField loginTF;// = new JTextField();
 	private JPasswordField passwordTF;// = new JPasswordField();
 	private JButton loginBut;// = new JButton();
 	
 	//logout components
-	private JPanel logoutComponentsJPanel;// = new JPanel();
+	private JPanel logoutComponentsJPanel;
 	private JButton logoutBut;// = new JButton();
 	
 	private DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
@@ -329,11 +326,11 @@ public class RetailGUI extends JFrame{
 	
 	
 	//Edit Invoice Components 
-	private JPanel findInvoiceComponentsJPanel;// = new JPanel();
-	private JPanel editInvoiceComponentsJPanel;// = new JPanel();
-	private JPanel editCustomerInvoiceComponentsJPanel;// = new JPanel();
-	private JPanel editInvoiceProductsComponentsJPanel;// = new JPanel();
-	private JPanel editInvoiceByCustComponents;// = new JPanel();
+	private JPanel findInvoiceComponentsJPanel;
+	private JPanel editInvoiceComponentsJPanel;
+	private JPanel editCustomerInvoiceComponentsJPanel;
+	private JPanel editInvoiceProductsComponentsJPanel;
+	private JPanel editInvoiceByCustComponents;
 	private Vector<String> editExistingInvoiceNums;// = new Vector<>();
 	private DefaultComboBoxModel<String> editListOfInvoices;// = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
 	private JComboBox<String> editComboBoxInvoice;
@@ -357,7 +354,7 @@ public class RetailGUI extends JFrame{
 	//TODO Marc: View Customer Invoice Panel and Components
 		
 	//Panel
-	private JPanel viewCustomerPanel;// = new JPanel();
+	private JPanel viewCustomerPanel;
 	
 	//Components
 	private JTextArea textarea;
@@ -404,7 +401,7 @@ public class RetailGUI extends JFrame{
 	//Marc: Create a new Invoice Panel
 	
 	//Panel
-	private JPanel createNewInvoicePanel;// = new JPanel();
+	private JPanel createNewInvoicePanel;
 	
 	//Components
 	//variables
@@ -415,8 +412,8 @@ public class RetailGUI extends JFrame{
 	private String orderOutputMessage = "";
 	//Panels
 	private JTextArea textAreaMarc;// = new JTextArea();
-	private JPanel leftPanel;// = new JPanel();
-	private JPanel rightPanel;// = new JPanel();
+	private JPanel leftPanel;
+	private JPanel rightPanel;
 	
 	//Labels for left panel
 	private JLabel invIdLbl;// = new JLabel("Invoice Id: ");
@@ -447,8 +444,8 @@ public class RetailGUI extends JFrame{
 	Order baseOrder;
 	ArrayList<OrderProduct> addMoreProducts;// = new ArrayList<OrderProduct>();
 	String result = "";
-	private JPanel createNewOrderLeftPanel;// = new JPanel();
-	private JPanel createNewOrderRightPanel;// = new JPanel();
+	private JPanel createNewOrderLeftPanel;
+	private JPanel createNewOrderRightPanel;
 	private JLabel createOrderOrderIdLabel;// = new JLabel("Order ID: ");
 	private JLabel createOrderSupplierIdLabel;// = new JLabel("Supplier ID: ");
 	private JLabel createOrderProductCodeLabel;// = new JLabel("Product ID: ");
@@ -490,12 +487,12 @@ public class RetailGUI extends JFrame{
 		
 	private JTextArea viewOrderTextArea;
 	//Edit Order Components
-	private JPanel findOrderComponentsJPanel;// = new JPanel();
-	private JPanel editOrderComponentsJPanel;// = new JPanel();
-	private JPanel editSupplierOrderComponentsJPanel;//  = new JPanel();
-	private JPanel saveOrderComponentsJPanel;//  = new JPanel();
-	private JPanel editOrderProductsComponentsJPanel;//  = new JPanel();
-	private JPanel editOrderBySupplierComponentsJPanel;// = new JPanel();
+	private JPanel findOrderComponentsJPanel;
+	private JPanel editOrderComponentsJPanel;
+	private JPanel editSupplierOrderComponentsJPanel;
+	private JPanel saveOrderComponentsJPanel;
+	private JPanel editOrderProductsComponentsJPanel;
+	private JPanel editOrderBySupplierComponentsJPanel;
 	private JComboBox<String> editOrderOrderIdComboBox;
 	private JTextArea supplierOrderJTextArea;// = new JTextArea(10,20);
 	private JTextArea productOrderJTextArea;// = new JTextArea(10,40);
@@ -510,20 +507,20 @@ public class RetailGUI extends JFrame{
 	private JTextField editOrderId;// = new JTextField("Edit Order Id:");
 	private JTextField editOrderSupplier;//= new JTextField("Edit Order Customer");
 	private JTextField editOrderReceivedStatus;// = new JTextField("");	
-	private JTextField editOrderAmount;// = new JTextField("Edit Order Amount");
+	private JTextField editOrderAmount;
 	
 	//P&L JTable Tab
-	private JPanel pLComponentsJPanel;// = new JPanel();
+	private JPanel pLComponentsJPanel;
 	private static final int ROW_HEIGHT = 20;
 	private static final String[] TABLE_COLUMNS = {"Date", "Credit", "Debit"};
 	private DefaultTableModel tableModel = new DefaultTableModel(TABLE_COLUMNS, 0);
-	private JTable pLJTable;// = new JTable(tableModel);
-	JScrollPane pLJScrollPane;// = new JScrollPane(pLJTable);
-	private JTextField pLTotal;// = new JTextField();
-	private Vector<String> months;// = new Vector<>();
-	private DefaultComboBoxModel<String> listOfMonths;// = new DefaultComboBoxModel<>(months); //create the combo box
+	private JTable pLJTable;
+	JScrollPane pLJScrollPane;
+	private JTextField pLTotal;
+	private Vector<String> months;
+	private DefaultComboBoxModel<String> listOfMonths;
 	private JComboBox<String> comboBoxPL;
-	private JButton pLViewButton; // = new JButton("View");
+	private JButton pLViewButton;
 	
 	//=========================================================================
 	Dimension d = new Dimension(230, 30);
@@ -648,8 +645,7 @@ public class RetailGUI extends JFrame{
 		proflossJTabbedPane.add("Profit and Loss Table", proflossJPanel);
 		proflossJTabbedPane.add("Graph Information", graphJPanel);
 		
-		/*remove comment marks to run login function
-
+		
 		//lock the tabs until login successful
 		mainJTabbedPane.setEnabledAt(1, false);
 		mainJTabbedPane.setEnabledAt(2, false);
@@ -659,7 +655,7 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.setEnabledAt(6, false);
 		mainJTabbedPane.setEnabledAt(7, false);
 						
-		*/	
+			
 		
 		employeeJPanel.setLayout(new GridBagLayout());
 		this.empIDPopulate(empIdCombo);
