@@ -4359,9 +4359,9 @@ public class RetailGUI extends JFrame{
 					mainJTabbedPane.setEnabledAt(1, true);
 					mainJTabbedPane.setEnabledAt(2, true);
 					mainJTabbedPane.setEnabledAt(3, true);
-					mainJTabbedPane.setEnabledAt(4, false);
+					mainJTabbedPane.setEnabledAt(4, true);
 					mainJTabbedPane.setEnabledAt(5, true);
-					mainJTabbedPane.setEnabledAt(6, true);
+					mainJTabbedPane.setEnabledAt(6, false);
 					mainJTabbedPane.setEnabledAt(7, false);
 					invJTabbedPane.setEnabledAt(2, false);
 					orderJTabbedPane.setEnabledAt(2, false);
