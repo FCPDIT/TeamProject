@@ -10,6 +10,7 @@ public class Employee {
     private int access;
     private double salary;
     private int password;
+    
     public Employee(int employeeId, String employeeName, int access,
             double salary, int password) {
         this.employeeId = employeeId;
@@ -51,7 +52,15 @@ public class Employee {
     public void setPassword(int password) {
         this.password = password;
     }
-    
+    public double monthlySalary(ArrayList<Employee> employees){
+    	double salaryPerMonth = 0.00;
+    	double totalSalaries = 0.00;
+    	for(Employee employee: employees){
+    		salaryPerMonth = employee.getSalary() / 12;
+    		totalSalaries = totalSalaries + salaryPerMonth;
+    	}
+    	return totalSalaries;
+    }
 	//method to verify login
 	public int verifyLogin(ArrayList<Employee> employees, int id, int password) {
 	int count = 0;

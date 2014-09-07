@@ -12,7 +12,7 @@ public class Product {
 	private int maxStock;
 	private int minStock;
 	
-	private Supplier supplier; // or just supplierId ??
+	private Supplier supplier;
 
 	public Supplier getSupplier() {
 		return supplier;
@@ -42,13 +42,15 @@ public class Product {
 
 	public String printProductDetails(Product p) {
 		if (p != null) {
-		return "\n Product Id: : " + (p.getProductCode()) + "\n Title: "
-		+ p.getTitle() + "\n Author: " + p.getAuthor()
-		+ "\n Current Stock: " + p.getCurrentStock()
-		+ "\n Supplier: " + p.getSupplier().getName()
-		+ "\n Max Stock:" + p.getMaxStock() + "\n Min Stock: "
-		+ p.getMinStock() + "\n Cost Price: �" + p.getCostPrice()
-		+ "\n Retail Price: �" + p.getRetailPrice() + "\n";
+		return "\n PRODUCT ID:		" + (p.getProductCode()) + "\n TITLE:		"
+		+ p.getTitle() + "\n AUTHOR:		" + p.getAuthor()
+		+ "\n RETAIL PRICE:		" + p.getRetailPrice() 
+		+"\n COST PRICE:		" + p.getCostPrice()
+		+"\n CURRENT STOCK:	" + p.getCurrentStock()
+		+ "\n MAX STOCK:		" + p.getMaxStock() 
+		+ "\n MIN STOCK:		" + p.getMinStock() 
+		+ "\n SUPPLIER:		" + p.getSupplier().getName()
+		+  "\n";
 		} else {
 		return " No Details to Print ";
 		}
@@ -69,7 +71,7 @@ public class Product {
 
 		for (Product p : products) {
 			if (p.getProductCode().equalsIgnoreCase(search)) {
-				System.out.println("--- ID Search Results ---");
+				//System.out.println("--- ID Search Results ---");
 				return printProductDetails(p);
 			}
 
@@ -96,12 +98,13 @@ public class Product {
 		}
 	}
 
-	public String viewProductByAuthor(String search, ArrayList<Product> products) {
+	public String viewProductByAuthor(String searchAuthor, ArrayList<Product> products) {
 		String list = "";
 
 		for (Product p : products) {
-			if (p.getAuthor().contains(search)) {
+			if (p.getAuthor().toLowerCase().equals(searchAuthor)) {	// Convert Author which is stored in Array into lower case while searching.
 				list += printProductDetails(p);
+				
 			}
 		}
 		if (list.equals("")) {
@@ -160,6 +163,18 @@ public class Product {
 		}
 	}
 	
+	public int quantityByCost(double minPrice, double maxPrice, ArrayList<Product> products) {
+		int amount = 0;
+		for (Product p : products) {
+			if (p.getCostPrice() >= minPrice & p.getCostPrice() < maxPrice){
+			amount = amount += p.getCurrentStock();
+			}
+		}
+				return amount;
+			}
+		
+
+	
 	//again to check stock levels in a range, under 50, over 100 etc
 	public String viewProductbyQuantity(int minQuantity,int maxQuantity, ArrayList<Product> products) {
 		String list = "";
@@ -178,17 +193,19 @@ public class Product {
 	}
 	
 	
-	public void removeStockById (String productCode, ArrayList<Product> products){
+	public Product removeStockById (String productCode, ArrayList<Product> products){
 		for (Product p : products) {
 			if (productCode.equals(p.getProductCode())) {
 
 				products.remove(p);
+				return p;
 				              //not sure if this is the best way to remove a 
 									//stockline but might be ok for this project..
 			}/*else{
 				JOptionPane.showMessageDialog(null, "Product not deleted.");
 			}*/
 		}
+		return null;
 	}
 	
 

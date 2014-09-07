@@ -2,18 +2,21 @@ package retail;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
-public class Invoice {
+public class Invoice  implements Comparable<Invoice>  {
 	private int id;
 	private Employee employee; // or maybe just an employeeId ??
 	private Customer customer;
 	private Product product;
 	private int quantity;
-	private String invoiceDate;
+	private Date invoiceDate;
 	private boolean paid = false;
 	private double totalInvoicePrice;
 	private ArrayList<InvoiceProduct> invoiceProducts = new ArrayList<InvoiceProduct>();
+	private int noOfDays;
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
 
 	public Invoice() {
 	} // used for testing only
@@ -24,8 +27,7 @@ public class Invoice {
 		this.customer = customer;
 		this.employee = employee;
 		this.quantity = quantity;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
-		invoiceDate = sdf.format(new Date());  
+		invoiceDate = new Date();
 		totalInvoicePrice = product.getRetailPrice() * quantity;
 		product.setCurrentStock(product.getCurrentStock() - quantity); // Stock check must be added in the driver class
 																		
@@ -37,9 +39,25 @@ public class Invoice {
 		this.employee = employee;
 		this.customer = customer;
 		this.invoiceProducts = invoiceProducts;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); //may want to review the dates set up!!
-		invoiceDate = sdf.format(new Date());
+		invoiceDate = new Date();
 		totalInvoicePrice = calculateInvoiceTotal();
+	}
+	
+	//3rd Constructor for test invoices with historical dates
+	public Invoice(int id, Employee employee, Customer customer, ArrayList<InvoiceProduct> invoiceProducts, int noOfDays, boolean paid) {
+		this.id = id;
+		this.employee = employee;
+		this.customer = customer;
+		this.invoiceProducts = invoiceProducts;
+		this.noOfDays = noOfDays;
+		this.paid = paid;
+		invoiceDate = new Date();
+		totalInvoicePrice = calculateInvoiceTotal();
+		this.noOfDays = noOfDays;
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE, - noOfDays);
+		invoiceDate = cal.getTime();
 	}
 
 	//Methods
@@ -52,6 +70,11 @@ public class Invoice {
 		}
 		return amount;
 	}
+	
+	  @Override
+	  public int compareTo(Invoice i) {
+	    return getInvoiceDate().compareTo(i.getInvoiceDate());
+	  }
 	
 	//Getter and setters
 	public double getTotalInvoicePrice() {
@@ -114,11 +137,11 @@ public class Invoice {
 		return id;
 	}
 
-	public String getInvoiceDate() {
+	public Date getInvoiceDate() {
 		return invoiceDate;
 	}
 
-	public void setInvoiceDate(String invoiceDate) {
+	public void setInvoiceDate(Date invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 
@@ -139,25 +162,25 @@ public class Invoice {
 		int count = 1;
 		String list = "";
 		if (v != null) {
-			list += "Invoice ID: " + v.getId();
+			list += "INVOICE ID: " + v.getId();
 			list+="\n-------------------------------";
 				for(InvoiceProduct pds : v.getInvoiceProducts() ){
-					list+="\nItem number " + count+ " of this Invoice \n";
+					list+="\nITEM NUMBER " + count+ " OF THIS INVOICE \n";
 					list+="-------------------------------";
 					count++;
-					list+="\nProduct Id: " + pds.getProduct().getProductCode()
-					+"\nProduct Title: " + pds.getProduct().getTitle()
-					+ "\nProduct Price: " +  String.format("�%.2f", pds.getProduct().getRetailPrice())
-					+ "\nQuantity of Order " + pds.getQuantity() 
-					+ "\nTotal of " + pds.getProduct().getProductCode() +" : " + (pds.getQuantity()*pds.getProduct().getRetailPrice()) 
+					list+="\nPRODUCT ID:		" + pds.getProduct().getProductCode()
+					+"\nPRODUCT TITLE:	" + pds.getProduct().getTitle()
+					+ "\nPRODUCT PRICE:	" +  String.format("%.2f", pds.getProduct().getRetailPrice())
+					+ "\nQUANTITY OF ORDER	" + pds.getQuantity() 
+					+ "\nTOTAL :		" + String.format("%.2f", pds.getQuantity()*pds.getProduct().getRetailPrice()) 
 					+ "\n--------------";
 				}
-					list += "\nEmployee Name: " + v.getEmployee().getEmployeeName() 
-					+ "\nEmployee Id: "   + v.getEmployee().getEmployeeId() 
-					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
-					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
-					+ "\nInvoice Total: " +  String.format("�%.2f", v.calculateInvoiceTotal()) 
-					+ "\nDate: " + v.getInvoiceDate() + "\n\n";
+					list += "\nEMPLOYEE NAME:	" + v.getEmployee().getEmployeeName() 
+					+ "\nEMPLOYEE ID:		"   + v.getEmployee().getEmployeeId() 
+					+ "\nCUSTOMER NAME:	" + v.getCustomer().getCustName() 
+					+ "\nCUSTOMER ID:		"   + v.getCustomer().getCustId() 
+					+ "\nINVOICE TOTAL:	" +  String.format("%.2f", v.calculateInvoiceTotal()) 
+					+ "\nDATE:		" + sdf.format(v.getInvoiceDate()) + "\n\n";
 					list+="-------------------------------\n";
 				return list;
 		} else {
@@ -165,6 +188,64 @@ public class Invoice {
 		}
 
 	}
+	
+
+	// calculate total sales value for a given month
+	public double getMonthlySales(int currentMonth, ArrayList<Invoice> invoices ){
+		double count = 0.00;
+		for (Invoice invoice: invoices){
+			Date date1 = invoice.getInvoiceDate();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date1);
+			int month = cal.get(Calendar.MONTH);
+		 if(month == currentMonth) {
+			 count += invoice.getTotalInvoicePrice();
+			}
+		}return count;
+	}
+	
+	//provide graph with total sales for a given month or if no sales gives prediction based on average of previous 3 months
+	public double graphSales( int monthToShow, ArrayList<Invoice>invoices ){
+		double sales = getMonthlySales(monthToShow, invoices);
+		int month1 = monthToShow - 1;
+		int month2 = monthToShow - 2;
+		int month3 = monthToShow - 3;
+		int month4 = monthToShow - 4;
+		int month5 = monthToShow - 5;
+		
+		
+		if (sales == 0.00 && getMonthlySales(month1, invoices) != 0){
+			double average = (getMonthlySales(month1, invoices) + getMonthlySales(month2, invoices) + getMonthlySales(month3, invoices)) /3;
+			return average;
+		}
+		
+		
+		else if (sales == 0.00 && getMonthlySales(month1, invoices) == 0.00 && getMonthlySales(month2, invoices) != 0){
+			double average2 = ( ((getMonthlySales(month2, invoices) + getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices)) /3) + 
+					(getMonthlySales(month2, invoices)+ getMonthlySales(month3, invoices)) )/3;
+					return average2;
+				} 
+		
+		
+		else if (sales == 0.00 && getMonthlySales(month2, invoices) == 0.00){
+			double average3 = (getMonthlySales(month3, invoices) +
+					((getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices) + getMonthlySales(month5, invoices))/3)+
+					 ((((getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices) + getMonthlySales(month5, invoices))/3) + getMonthlySales(month3, invoices) + getMonthlySales(month4, invoices))/3)
+					) /3;
+		
+			return average3;
+			
+			}
+		
+		
+		
+	
+		else 
+			return sales;
+		}
+		
+
+	
 	
 	// View All - Question what do we want to print for all Invoice Info
 	public String viewAllInvoices(ArrayList<Invoice> invoices) {
@@ -239,6 +320,27 @@ public class Invoice {
 				return unpaid;
 			}
 		}
+		
+		//============= Method to Count amount of Invoices which are paid ==============================
+		public int countPaidInvoices(int count, ArrayList<Invoice> invoices) {
+			
+			for(Invoice v : invoices){
+				if(v.isPaid()== true){
+					count++;
+					//System.out.println("Count num is" + count);		// Debug code to ensure count is working.
+	
+					//return count;
+					
+				}
+				
+			}
+			return count;
+			}
+		
+		//============================================================================================
+		
+		
+		
 		
 		/**
 		 * Methods required to create a new Invoice Object:

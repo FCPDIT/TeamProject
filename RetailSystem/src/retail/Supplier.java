@@ -6,10 +6,10 @@ public class Supplier {
 	private int id;
 	private String address;
 	private String email;
-	private String phone;
+	private int phone;
 	private int daysToDeliver;
 
-	public Supplier(int id, String name, String address, String email, String phone) {
+	public Supplier(int id, String name, String address, String email, int phone) {
 		
 		this.id = id;
 		this.name = name;
@@ -67,11 +67,11 @@ public Supplier(int id, String name, String address, String email){
 		this.email = email;
 	}
 
-	public String getPhone() {
+	public int getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(int phone) {
 		this.phone = phone;
 	}
 
