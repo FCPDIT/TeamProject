@@ -158,95 +158,94 @@ public class RetailGUI extends JFrame{
 	private JTextField editCustEmail;
 	private JTextField editCustPhone;
 	
-	
 	//Supplier Components
-	private JLabel supplierIdJLabel;// = new JLabel("Supplier ID");
+	private JLabel supplierIdJLabel;
 	private JTextField supplierIdJTextField;
-	private JLabel supplierNameJLabel; // = new JLabel("Supplier Name");
+	private JLabel supplierNameJLabel;
 	private JTextField supplierNameJTextField;
-	private JLabel supplierAddressJLabel; // = new JLabel("Supplier Address");
+	private JLabel supplierAddressJLabel;
 	private JTextField supplierAddressJTextField;
-	private JLabel supplierEmailJLabel; //= new JLabel("Supplier Email");
-	private JTextField supplierEmailJTextField;// = new JTextField();
-	private JLabel supplierPhoneJLabel;// = new JLabel("Supplier Phone Number");
+	private JLabel supplierEmailJLabel;
+	private JTextField supplierEmailJTextField;
+	private JLabel supplierPhoneJLabel;
 	private JTextField supplierPhoneJTextField;
-	private JButton supplierJButton; // = new JButton("Create New Supplier");
-	private JLabel viewSupplyJLabel; // = new JLabel("Search by Supplier ID");
-	private JComboBox<String> suppIdCombo; // = new JComboBox<String>();
-	private JButton viewSupplyJButton; // = new JButton("View Supplier By ID");
-	private JLabel viewSupplyNameJLabel; // = new JLabel("Search by Supplier Name: ");
-	private JComboBox<String> suppNameCombo; // = new JComboBox<String>();
-	private JTextArea supplierJTextArea; // = new JTextArea(10, 65);
-	private JButton viewSupplyNameJButton; // = new JButton("View Supplier By Name");
-	private JButton allSupplyJButton; // = new JButton("View All Suppliers");
-	private JComboBox<String> editSuppIdCombo; // = new JComboBox<String>();
-	private JButton editSupplierJButton; // = new JButton("Find Supplier");
-	private JLabel editSuppNameJLabel; // = new JLabel("Supplier Name");
-	private JLabel editSuppAddressJLabel; // = new JLabel("Supplier Address");
-	private JLabel editSuppEmailJLabel; // = new JLabel("Supplier Email");
-	private JLabel editSuppPhoneJLabel; // = new JLabel("Supplier Telephone");
-	private JLabel editDeliveryJLabel; // = new JLabel("Edit Delivery Period");
+	private JButton supplierJButton;
+	private JLabel viewSupplyJLabel;
+	private JComboBox<String> suppIdCombo;
+	private JButton viewSupplyJButton;
+	private JLabel viewSupplyNameJLabel;
+	private JComboBox<String> suppNameCombo; 
+	private JTextArea supplierJTextArea;
+	private JButton viewSupplyNameJButton;
+	private JButton allSupplyJButton;
+	private JComboBox<String> editSuppIdCombo; 
+	private JButton editSupplierJButton;
+	private JLabel editSuppNameJLabel;
+	private JLabel editSuppAddressJLabel;
+	private JLabel editSuppEmailJLabel;
+	private JLabel editSuppPhoneJLabel;
+	private JLabel editDeliveryJLabel;
 	private JTextField editSupplierName;
 	private JTextField editSupplierAddress;
 	private JTextField editSupplierEmail;
 	private JTextField editSupplierPhone;
 	private JTextField editSupplierDelivery;
-	private JButton saveSupplierJButton; // = new JButton("Update Supplier");
-	private JButton deleteSupplierJButton; // = new JButton("Delete Supplier");
+	private JButton saveSupplierJButton;
+	private JButton deleteSupplierJButton;
 	
 	//Employee Components
-	private JLabel employeeId;// = new JLabel("Employee ID ");
+	private JLabel employeeId;
 	private JTextField employeeIdField;
-	private JLabel  employeeName; // = new JLabel("Employee Name ");
+	private JLabel  employeeName; 
 	private JTextField employeeNameField;
-	private JLabel employeeAcess; // = new JLabel("Access Level ");
+	private JLabel employeeAcess; 
 	private JComboBox<Integer> employeeAcessField;
-	private JLabel employeeSalary; // = new JLabel("Employee Salary");
-	private JTextField employeeSalaryField;// = new JTextField();
-	private JLabel employeePassword;// = new JLabel("Employee Password");
-	private JTextField employeePassField;// = new JTextField();
-	private JButton employeeJButton;// = new JButton("Create New Employee");
-	private JLabel viewEmpId;// = new JLabel("View By ID");
-	private JComboBox<String> empIdCombo;// = new JComboBox<String>();
-	private JButton viewEmpIdButton;// = new JButton("Search Employees");
-	private JLabel viewEmpName;// = new JLabel("View By Name");
-	private JComboBox<String> empNameCombo;// = new JComboBox<String>();
-	private JButton viewEmpNameButton;// = new JButton("Search Employees");
-	private JLabel viewEmpAll;// = new JLabel("View All Employees");
-	private JButton viewEmpAllButton;// = new JButton("View All");
-	private JTextArea empJTextArea;// = new JTextArea(10, 65);
-	private JComboBox<String> viewEmpIdCombo;// = new JComboBox<String>();
-	private JButton editById;// = new JButton("Find Employee Details");
-	private JLabel editEmpName;// = new JLabel("Employee Name");
-	private JTextField editEmpNameField;// = new JTextField();
+	private JLabel employeeSalary; 
+	private JTextField employeeSalaryField;
+	private JLabel employeePassword;
+	private JTextField employeePassField;
+	private JButton employeeJButton;
+	private JLabel viewEmpId;
+	private JComboBox<String> empIdCombo;
+	private JButton viewEmpIdButton;
+	private JLabel viewEmpName;
+	private JComboBox<String> empNameCombo;
+	private JButton viewEmpNameButton;
+	private JLabel viewEmpAll;
+	private JButton viewEmpAllButton;
+	private JTextArea empJTextArea;
+	private JComboBox<String> viewEmpIdCombo;
+	private JButton editById;
+	private JLabel editEmpName;
+	private JTextField editEmpNameField;
 	private JLabel editEmpAccess;// = new JLabel("Employee Access Level");
-	private JTextField editEmpAccessField;// = new JTextField();
+	private JTextField editEmpAccessField;
 	private JLabel editEmpSalary;// = new JLabel("Employee Salary");
-	private JTextField editEmpSalaryField;// = new JTextField();
+	private JTextField editEmpSalaryField;
 	private JLabel editEmpPassword;// = new JLabel("Employee Password");
-	private JTextField editEmpPasswordField;// = new JTextField();
+	private JTextField editEmpPasswordField;
 	private JButton updateEmployee;// = new JButton("Update Employee");
 	private JButton deleteEmployee;// = new JButton("Delete Employee");
 	
 	//Product Components
-	private JLabel prodTitle;// = new JLabel("Book Title");
-	private JTextField titleJTextField;// = new JTextField();
-	private JLabel prodAuthor;// = new JLabel("Author");
-	private JTextField authorJTextField;// = new JTextField();
-	private JLabel prodCode;// = new JLabel("Product Code");
-	private JTextField codeJTextField;// = new JTextField();
-	private JLabel prodRetail;// = new JLabel("Retail Price");
-	private JTextField retailJTextField;// = new JTextField();
+	private JLabel prodTitle;
+	private JTextField titleJTextField;
+	private JLabel prodAuthor;
+	private JTextField authorJTextField;
+	private JLabel prodCode;
+	private JTextField codeJTextField;
+	private JLabel prodRetail;
+	private JTextField retailJTextField;
 	private JLabel prodCost;// = new JLabel("Cost Price");
-	private JTextField costJTextField;// = new JTextField();
+	private JTextField costJTextField;
 	private JLabel prodTotalStock;// = new JLabel("Current Stock");
-	private JTextField tStockJTextField;// = new JTextField();
+	private JTextField tStockJTextField;
 	private JLabel prodMaxStock;// = new JLabel("Maximum Stock");
-	private JTextField maxJTextField;// = new JTextField();
+	private JTextField maxJTextField;
 	private JLabel prodMinStock;// = new JLabel("Minimum Stock");
-	private JTextField minJTextField;// = new JTextField();
+	private JTextField minJTextField;
 	private JLabel prodSupplierId;// = new JLabel("Supplier Id");
-	private JTextField prodSupplierIdJTextField;// = new JTextField();
+	private JTextField prodSupplierIdJTextField;
 	private JButton productJButton;// = new JButton("Create New Product");
 	
 	private JRadioButton under5Radio;// = new JRadioButton("under 4.99");
@@ -259,41 +258,36 @@ public class RetailGUI extends JFrame{
 	private JRadioButton over200Radio;// = new JRadioButton("200 plus");
 	
 	//edit product components
-	private JLabel editDetails;// = new JLabel ("Product code");
 	private JLabel editProdTitle;// = new JLabel("Book Title");
-	private JTextField editTitleJTextField;// = new JTextField();
+	private JTextField editTitleJTextField;
 	private JLabel editProdAuthor;// = new JLabel("Author");
-	private JTextField editAuthorJTextField;// = new JTextField();
+	private JTextField editAuthorJTextField;
 	private JLabel editProdCode;// = new JLabel("Product Code");
-	private JTextField editCodeJTextField;// = new JTextField();
+	private JTextField editCodeJTextField;
 	private JLabel editProdRetail;// = new JLabel("Retail Price");
-	private JTextField editRetailJTextField;// = new JTextField();
+	private JTextField editRetailJTextField;
 	private JLabel editProdCost;// = new JLabel("Cost Price");
-	private JTextField editCostJTextField;// = new JTextField();
+	private JTextField editCostJTextField;
 	private JLabel editProdTotalStock;// = new JLabel("Current Stock");
-	private JTextField editStockJTextField;// = new JTextField();
+	private JTextField editStockJTextField;
 	private JLabel editProdMaxStock;// = new JLabel("Maximum Stock");
-	private JTextField editMaxJTextField;// = new JTextField();
+	private JTextField editMaxJTextField;
 	private JLabel editProdMinStock;// = new JLabel("Minimum Stock");
-	private JTextField editMinJTextField;// = new JTextField();
+	private JTextField editMinJTextField;
 	private JLabel editProdSupplierId;// = new JLabel("Supplier Id");
-	private JTextField editProdSupplierIdJTextField;// = new JTextField();
+	private JTextField editProdSupplierIdJTextField;
 	private JButton editDetailsJButton; // = new JButton("Select product to edit");
 	private JButton updateProductJButton; // = new JButton("Update details");
 	private JButton deleteStockLineJButton; // = new JButton("Delete stock line");
 	
 	// View Product Components
-	private Product product;// = new Product();
+	private Product product;
 	private JTextArea productTextArea;
-	private JTextField productTitleTextField;
-	private JTextField productAuthorTextField;
-	private JTextField viewProductIdTextField;
-	private JPanel viewProductDetailsPanel;//= new JPanel();
-	private JPanel viewProductDetails; //= new JPanel();
-	private ButtonGroup priceRange;// = new ButtonGroup();
-	private ButtonGroup quantity;// = new ButtonGroup();
+	private JPanel viewProductDetailsPanel;
+	private JPanel viewProductDetails;
+	private ButtonGroup priceRange;
+	private ButtonGroup quantity;
 	
-	// TODO  Set Image Icons
 	ImageIcon productIcon = new ImageIcon("src\\images\\Product.png");
 	ImageIcon invoiceIcon = new ImageIcon("src\\images\\Sales.png");
 	ImageIcon loginIcon = new ImageIcon("src\\images\\Login.png");	
@@ -303,25 +297,19 @@ public class RetailGUI extends JFrame{
 	ImageIcon supplierIcon = new ImageIcon("src\\images\\Supplier.png");
 	ImageIcon orderIcon = new ImageIcon("src\\images\\Order.png");
 	
-			
-			
-	// TODO Product Combo Box
-	private Vector<String> existingProductId;// = new Vector<>();
-	private DefaultComboBoxModel<String> listOfProductId;// = new DefaultComboBoxModel<>(existingProductId);
 	private JComboBox<String> comboBoxProductId;
 	
-	private Vector<String> existingProductTitle;// = new Vector<>();
-	private DefaultComboBoxModel<String> listofProductTitle;// = new DefaultComboBoxModel<>(existingProductTitle);
+	private Vector<String> existingProductTitle;
+	private DefaultComboBoxModel<String> listofProductTitle;
 	private JComboBox<String> comboBoxProductTitle;
 	
-	private Vector<String> existingProductAuthor;// = new Vector<>();
-	private DefaultComboBoxModel<String> listOfProductAuthor;// = new DefaultComboBoxModel<>(existingProductAuthor);
+	private Vector<String> existingProductAuthor;
+	private DefaultComboBoxModel<String> listOfProductAuthor;
 	private JComboBox<String> comboBoxProductAuthor;
 	
-	private Vector<String> existingEditProdId;// = new Vector<>();
-	private DefaultComboBoxModel<String> listToEditProdIds;// = new DefaultComboBoxModel<>(existingEditProdId);
+	private Vector<String> existingEditProdId;
+	private DefaultComboBoxModel<String> listToEditProdIds;
 	private JComboBox<String> comboBoxEditProdId;
-	
 	
 	//Edit Invoice Components 
 	private JPanel findInvoiceComponentsJPanel;
@@ -329,7 +317,7 @@ public class RetailGUI extends JFrame{
 	private JPanel editCustomerInvoiceComponentsJPanel;
 	private JPanel editInvoiceProductsComponentsJPanel;
 	private JPanel editInvoiceByCustComponents;
-	private Vector<String> editExistingInvoiceNums;// = new Vector<>();
+	private Vector<String> editExistingInvoiceNums;
 	private DefaultComboBoxModel<String> editListOfInvoices;// = new DefaultComboBoxModel<>(editExistingInvoiceNums); //create the combo box
 	private JComboBox<String> editComboBoxInvoice;
 	private JComboBox<String> editCustIdComboInv;
@@ -348,40 +336,34 @@ public class RetailGUI extends JFrame{
 	private JButton lineChartJButton; // = new JButton("Income and Expenditure");
 
 		
-	//===========================================
-	//TODO Marc: View Customer Invoice Panel and Components
-		
-	//Panel
+	//Marc: View Customer Invoice Panel and Components
 	private JPanel viewCustomerPanel;
 	
 	//Components
 	private JTextArea textarea;
-	private JTextField invTextField2;
-	private JTextField custIdTextField;
 	private Invoice invoice = new Invoice();
 	
 	//Combo Box for invoice ID on View Customer Invoice Panel
-	private Vector<String> existingInvoiceNums;// = new Vector<>();
+	private Vector<String> existingInvoiceNums;
 	private DefaultComboBoxModel<String> listOfInvoices;// = new DefaultComboBoxModel<>(existingInvoiceNums); //create the combo box
 	private JComboBox<String> comboBoxInvoice;
-	//====
-	private Vector<String> existingCustomerId;// = new Vector<>();
+	
+	private Vector<String> existingCustomerId;
 	private DefaultComboBoxModel<String> listOfCustomers;// = new DefaultComboBoxModel<>(existingCustomerId); //create the combo box
 	private JComboBox<String> comboBoxCustomer;
 	
-	//TODO Marc: Combo
 	//Combo Box for Employee ID, Customer ID, Product ID on Create new Invoice Panel
-	private Vector<String> empIdVector;// = new Vector<>();
+	private Vector<String> empIdVector;
 	private DefaultComboBoxModel<String> listOfEmpIds;// = new DefaultComboBoxModel<>(empIdVector); //create the combo box
 	private JComboBox<String> empIDComboBox;
-	private Vector<String> cusIdVector;// = new Vector<>();
+	private Vector<String> cusIdVector;
 	private DefaultComboBoxModel<String> listOfCusIds;// = new DefaultComboBoxModel<>(cusIdVector); //create the combo box
 	private JComboBox<String> cusIDComboBox;
-	private Vector<String> prodIdVector;// = new Vector<>();
+	private Vector<String> prodIdVector;
 	private DefaultComboBoxModel<String> listOfProdIds;// = new DefaultComboBoxModel<>(prodIdVector); //create the combo box
 	private JComboBox<String> prodIDComboBox;
 	
-	//=========Marc: Components for higher and lower Pie Chart==========
+	//Marc: Components for higher and lower Pie Chart
 	private ArrayList<String> productCodes;
 	private int[] countsHigher; //needed in main
 	private int[] countsLower;  //needed in main
@@ -389,84 +371,66 @@ public class RetailGUI extends JFrame{
 	private JButton lowsetsellingButton;
 	private int topNum = 5;
 	
-	//End
-	//==========================================
-	
-	///============Components for Pie Chart ============================
+
+	//Components for Pie Chart
 		private DefaultPieDataset pieDataset = new DefaultPieDataset();
-	//=========================================
 		
 	//Marc: Create a new Invoice Panel
-	
-	//Panel
 	private JPanel createNewInvoicePanel;
-	
-	//Components
-	//variables
-	//private Invoice invoice = new Invoice();
-	private ArrayList<InvoiceProduct> addMoreArrayList;// = new ArrayList<InvoiceProduct>();
+	private ArrayList<InvoiceProduct> addMoreArrayList;
 	private String message = "";
 	private String outputMessage="";
 	private String orderOutputMessage = "";
-	//Panels
-	private JTextArea textAreaMarc;// = new JTextArea();
+	private JTextArea textAreaMarc;
 	private JPanel leftPanel;
 	private JPanel rightPanel;
 	
 	//Labels for left panel
-	private JLabel invIdLbl;// = new JLabel("Invoice Id: ");
-	private JLabel employLbl;// = new JLabel("Employee ID: ");
-	private JLabel custId;// = new JLabel("Customer ID: ");
-	private JLabel prodId;// = new JLabel("Product ID: ");
-	private JLabel quantitylbl;// = new JLabel("Quantity: ");
+	private JLabel invIdLbl;
+	private JLabel employLbl;
+	private JLabel custId;
+	private JLabel prodId;
+	private JLabel quantitylbl;
 	
 	//JText Fields for left panel
-	private JTextField invTextF;// = new JTextField(10);
-	private JTextField employTextF;// = new JTextField(10);
-	private JTextField custTextF;// = new JTextField(10);
-	private JTextField prodTextF;// = new JTextField(10);
-	private JTextField quantityTextF;// = new JTextField(10);
+	private JTextField invTextF;
+	private JTextField quantityTextF;
 	
 	//4 Buttons for left Panel
-	/*private JButton singleBtn = new JButton("Single Invoice");
-	private JButton multiBtn = new JButton("Multiple Invoice");*/
-	private JButton addMoreBtn;// = new JButton("Add More");
-	private JButton finishBtn;// = new JButton("Finished");
-	private JButton resetBtn;// = new JButton("Reset");
+	private JButton addMoreBtn;
+	private JButton finishBtn;
+	private JButton resetBtn;
 	//End Of Marc: Create a new Invoice Panel
-	//=========================================
 	
-	
-	//==================================
 	//createNewOrder Panel components
 	Order baseOrder;
-	ArrayList<OrderProduct> addMoreProducts;// = new ArrayList<OrderProduct>();
+	ArrayList<OrderProduct> addMoreProducts;
 	String result = "";
 	private JPanel createNewOrderLeftPanel;
 	private JPanel createNewOrderRightPanel;
-	private JLabel createOrderOrderIdLabel;// = new JLabel("Order ID: ");
-	private JLabel createOrderSupplierIdLabel;// = new JLabel("Supplier ID: ");
-	private JLabel createOrderProductCodeLabel;// = new JLabel("Product ID: ");
-	private JLabel createOrderQuantityLabel;// = new JLabel("Quantity: ");
-	private JTextField createOrderOrderIdTextField;// = new JTextField();
+	private JLabel createOrderOrderIdLabel;
+	private JLabel createOrderSupplierIdLabel;
+	private JLabel createOrderProductCodeLabel;
+	private JLabel createOrderQuantityLabel;
+	private JTextField createOrderOrderIdTextField;
 	private JComboBox<String> createOrderSupplierIdComboBox;
 	private JComboBox<String> createOrderProductIdComboBox;
-	private JTextField createOrderSupplierIdTextField;// = new JTextField();
-	private JTextField createOrderProductIdTextField;// = new JTextField();
-	private JTextField createOrderQuantityTextField;// = new JTextField();
-	private JButton createOrderAddProductButton;// =  new JButton("Add Product to Order");
-	private JButton createOrderConfirmOrderButton;// = new JButton("Confirm Order");
-	private JTextArea createOrderScrollPaneTextArea; // = new JTextArea();
-	//=====
+	private JTextField createOrderSupplierIdTextField;
+	private JTextField createOrderProductIdTextField;
+	private JTextField createOrderQuantityTextField;
+	private JButton createOrderAddProductButton;
+	private JButton createOrderConfirmOrderButton;
+	private JTextArea createOrderScrollPaneTextArea;
+	
 	//viewOrder Panel components
 	private JPanel viewSupplierPanel;
-	private Vector<String> existingOrderIds;// = new Vector<>();
+	private Vector<String> existingOrderIds;
 	private DefaultComboBoxModel<String> listOfOrders;// = new DefaultComboBoxModel<>(existingOrderIds); //create the combo box
 	private JComboBox<String> viewOrderOrderIdComboBox;
-	private Vector<String> existingSupplierIds;// = new Vector<>();
+	private Vector<String> existingSupplierIds;
 	private DefaultComboBoxModel<String> listOfSuppliers;// = new DefaultComboBoxModel<>(existingSupplierIds); //create the combo box
 	private JComboBox<String> viewOrderSupplierIdComboBox;
-	private Vector<String> existingTitles;// = new Vector<>();
+	private Vector<String> existingTitles;
 	private DefaultComboBoxModel<String> listOfTitles;// = new DefaultComboBoxModel<>(existingTitles); //create the combo box
 	private JComboBox<String> viewOrderTitleComboBox;
 	private JComboBox<String> viewOrderAuthorComboBox;
@@ -520,9 +484,9 @@ public class RetailGUI extends JFrame{
 	private JComboBox<String> comboBoxPL;
 	private JButton pLViewButton;
 	
-	//=========================================================================
 	Dimension d = new Dimension(230, 30);
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public RetailGUI() {
 		//TODO Jump to Constructor
 		createInvoices();
@@ -2138,7 +2102,6 @@ public class RetailGUI extends JFrame{
 			EditCustomerInvoiceButtonHandler ecib = new EditCustomerInvoiceButtonHandler();
 			editCustomerInvoiceJButton.addActionListener(ecib);
 		
-		//====================================================================================
 		//set up order panels
 		Dimension size = getPreferredSize();
 		size.width = 500;
@@ -2147,7 +2110,7 @@ public class RetailGUI extends JFrame{
 		createNewOrderLeftPanel.setLayout(new GridBagLayout());
 		GridBagConstraints orderGC = new GridBagConstraints();
 		orderGC.insets = new Insets(5,5,5,5);
-		//=====
+		
 		orderGC.gridx = 0;
 		orderGC.gridy = 0;
 		createNewOrderLeftPanel.add(createOrderOrderIdLabel,orderGC);
@@ -2155,7 +2118,7 @@ public class RetailGUI extends JFrame{
 		orderGC.gridy = 0;
 		createOrderOrderIdTextField.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderOrderIdTextField,orderGC);
-		//=====
+		
 		orderGC.gridx = 0;
 		orderGC.gridy = 1;
 		createNewOrderLeftPanel.add(createOrderSupplierIdLabel,orderGC);
@@ -2165,7 +2128,7 @@ public class RetailGUI extends JFrame{
 		listOfSuppliers.setSelectedItem("Select");
 		createOrderSupplierIdComboBox.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderSupplierIdComboBox,orderGC);
-		//=====
+		
 		orderGC.gridx = 0;
 		orderGC.gridy = 2;
 		createNewOrderLeftPanel.add(createOrderProductCodeLabel,orderGC);
@@ -2175,7 +2138,7 @@ public class RetailGUI extends JFrame{
 		listOfProdIds.setSelectedItem("Select");
 		createOrderProductIdComboBox.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderProductIdComboBox,orderGC);
-		//=====
+		
 		orderGC.gridx = 0;
 		orderGC.gridy = 3;
 		createNewOrderLeftPanel.add(createOrderQuantityLabel,orderGC);
@@ -2183,7 +2146,7 @@ public class RetailGUI extends JFrame{
 		orderGC.gridy = 3;
 		createOrderQuantityTextField.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderQuantityTextField,orderGC);
-		//=====
+		
 		orderGC.gridx = 1;
 		orderGC.gridy = 4;
 		createOrderAddProductButton.setPreferredSize(d);
@@ -2232,8 +2195,6 @@ public class RetailGUI extends JFrame{
 		createOrderPanel.add(createNewOrderRightPanel);
 		//if clicked, we try to add the product to the order if it is being made, add it to a new one if it isn't and throw up an error if it already has been made.
 		createOrderAddProductButton.addActionListener(new ActionListener() {
-			//TODO Create Order, add product to order
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				String orderId = createOrderOrderIdTextField.getText();
 				String supplierId = (String) createOrderSupplierIdComboBox.getSelectedItem();
@@ -2273,8 +2234,6 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		createOrderConfirmOrderButton.addActionListener(new ActionListener() {
-			//TODO Create Order Finish Order
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				String orderIdString = createOrderOrderIdTextField.getText();
 				String supplierIdString = (String) createOrderSupplierIdComboBox.getSelectedItem();
@@ -2341,12 +2300,11 @@ public class RetailGUI extends JFrame{
 										if(o.getOrderUniqueId()==orderId){
 											for(OrderProduct p : o.getListOfOrderProducts()){
 												orderOutputMessage+= "\nPRODUCT CODE: " + p.getProduct().getProductCode() +
-													"\nNO. OF ITEMS: " + p.getQuantity() + "\n"; //TODO
+													"\nNO. OF ITEMS: " + p.getQuantity() + "\n";
 											}
 										}
 									}
 								}
-								//JOptionPane.showMessageDialog(null, "Order complete!");
 								createOrderScrollPaneTextArea.setText(orderOutputMessage);
 								createOrderScrollPaneTextArea.setCaretPosition(0);
 								orderOutputMessage = "";
@@ -2358,8 +2316,6 @@ public class RetailGUI extends JFrame{
 								
 								createOrderOrderIdTextField.setText("");
 								createOrderQuantityTextField.setText("");
-								/*createOrderScrollPaneTextArea.setText("");
-								createOrderScrollPaneTextArea.setCaretPosition(0);*/
 								listOfProdIds.setSelectedItem("Select");
 								listOfSuppliers.setSelectedItem("Select");
 								addMoreProducts = new ArrayList<OrderProduct>();
@@ -2393,7 +2349,7 @@ public class RetailGUI extends JFrame{
 		Dimension size1 = getPreferredSize();
 		size1.width = 500;
 		viewOrderJPanel.setPreferredSize(size1);
-		//====
+		
 		GridBagConstraints viewOrderGC = new GridBagConstraints();
 		viewOrderGC.insets = new Insets(5, 5, 5, 5);
 		viewOrderJPanel.add(viewSupplierPanel);
@@ -2412,7 +2368,7 @@ public class RetailGUI extends JFrame{
 		vOGC.weighty = 1.0;
 		viewSupplierPanel.add(viewOrderScrollPane, vOGC);
 
-		//====
+		
 		//First row: view all button, orderID label, orderID combo box and orderID button
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 1;
@@ -2458,7 +2414,7 @@ public class RetailGUI extends JFrame{
 			}
 		});
 
-		//====
+		
 		//Second row: view received, supplierID label, supplierID combo box and supplierId button
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 2;
@@ -2506,7 +2462,7 @@ public class RetailGUI extends JFrame{
 			}
 		});
 
-		//====
+		
 		//Third row: unreceived button, title label, title combo box, title button
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 3;
@@ -2552,7 +2508,7 @@ public class RetailGUI extends JFrame{
 			}
 		});
 
-		//====
+		
 		//Fourth row: clear panel button, author label, author combo box, author button
 		viewOrderGC.gridx = 0;
 		viewOrderGC.gridy = 4;
@@ -2601,7 +2557,6 @@ public class RetailGUI extends JFrame{
 				}
 			}
 		});
-		//=========================================================================================
         //add edit order components	
         findOrderComponentsJPanel.setLayout(new GridBagLayout());
         gc.gridx = 0;
@@ -2755,7 +2710,7 @@ public class RetailGUI extends JFrame{
         gc.gridx = 1;
         gc.gridy = 0;
         editSupplierOrderComponentsJPanel.add(editOrderBySupplierComponentsJPanel, gc);
-        //====
+        
         receiveAllOrdersJButton.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
@@ -2821,9 +2776,8 @@ public class RetailGUI extends JFrame{
         saveOrderButtonHandler sobh = new saveOrderButtonHandler();
         saveOrderJButton.addActionListener(sobh);
 	
-		//===============================
-		//vIWcUSTOMERiNVOICE fUNCTIONALITY - Marc
-        //Hardcoding info TODO: Marc
+		//ViewCustomerInvoice Functionality - Marc
+        //Hardcoding info 
         for(int i=0;i<invoices.size();i++){
 			 existingInvoiceNums.add(Integer.toString(invoices.get(i).getId()));
         }
@@ -2998,18 +2952,7 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
-		
-		
-		
-		
-		
-	
-		//==============================================
-		//TODO Marc: Create Invoice Functionality
-		
-		//================================
 		//Left Panel Components
-		//================================
 		leftPanel.setLayout(new GridBagLayout());
 		
 		//Get the info to fill the list of details for each dropdown
@@ -3026,7 +2969,6 @@ public class RetailGUI extends JFrame{
 		//GridBagConstraints gc = new GridBagConstraints();
 		createInvJPanel.add(createNewInvoicePanel);
 		gc.insets = new Insets(80,5,5,5);
-		//=====
 		gc.gridx = 0;
 		gc.gridy = 0;
 		leftPanel.add(invIdLbl,gc);
@@ -3035,7 +2977,6 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 0;
 		invTextF.setPreferredSize(d);
 		leftPanel.add(invTextF,gc);
-		//=====
 		gc.insets = new Insets(5,5,5,5);
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -3047,7 +2988,6 @@ public class RetailGUI extends JFrame{
 		gc.gridy = 1;
 		leftPanel.add(empIDComboBox,gc);
 		
-		//=====
 		gc.gridx = 0;
 		gc.gridy = 2;
 		leftPanel.add(custId,gc);
@@ -3058,7 +2998,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 1;
 		gc.gridy = 2;
 		leftPanel.add(cusIDComboBox,gc);
-		//=====
+		
 		gc.gridx = 0;
 		gc.gridy = 3;
 		leftPanel.add(prodId,gc);
@@ -3069,7 +3009,7 @@ public class RetailGUI extends JFrame{
 		gc.gridx = 1;
 		gc.gridy = 3;
 		leftPanel.add(prodIDComboBox,gc);
-		//=====
+		
 		gc.gridx = 0;
 		gc.gridy = 4;
 		leftPanel.add(quantitylbl,gc);
@@ -3078,15 +3018,14 @@ public class RetailGUI extends JFrame{
 		quantityTextF = new JTextField();
 		quantityTextF.setPreferredSize(d);
 		leftPanel.add(quantityTextF,gc);
-		//=====
+		
 		gc.gridx = 1;
 		gc.gridy = 5;
 		addMoreBtn.setPreferredSize(d); //width/height
 		leftPanel.add(addMoreBtn,gc);
 		//AddMoreBtn Event Listener
 		addMoreBtn.addActionListener(new ActionListener() {
-			//TODO Add more products to Invoice
-			@Override
+			// Add more products to Invoice
 			public void actionPerformed(ActionEvent e) {
 				String prodId =(String)prodIDComboBox.getSelectedItem();;
 				String quan = quantityTextF.getText();
@@ -3129,14 +3068,14 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		//End of AddMoreBtnEventListener		
-		//=====
+		
 		gc.gridx = 1;
 		gc.gridy = 6;
 		finishBtn.setPreferredSize(d);
 		leftPanel.add(finishBtn,gc);
 		//finishBtn eventListener
 		finishBtn.addActionListener(new ActionListener() {
-			//TODO Finish creating Invoice
+			//Finish creating Invoice
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(addMoreArrayList.size());
@@ -3247,7 +3186,7 @@ public class RetailGUI extends JFrame{
 			}
 		});
 		
-		//=====
+		
 		gc.gridx = 1;
 		gc.gridy = 7;
 		resetBtn.setPreferredSize(d); //width/height
@@ -3270,39 +3209,24 @@ public class RetailGUI extends JFrame{
 			}
 		});
 	
-		
-		
-		//================================
 		//Right Panel : textAreaMarc and Pane
-		//================================
 		
-		textAreaMarc = new JTextArea(19,20); //height - width
+		textAreaMarc = new JTextArea(19,20);
 		textAreaMarc.setEditable(false);
 		JScrollPane scrollPane3 = new JScrollPane(textAreaMarc,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-       /* gc.gridwidth = GridBagConstraints.REMAINDER;
-        gc.fill = GridBagConstraints.BOTH;
-        gc.weightx = 1.0;
-        gc.weighty = 1.0;
-        gc.gridy = 4;*/
 		rightPanel.setBorder(new EmptyBorder(80, 10, 10, 10));
         rightPanel.add(scrollPane3, gc);
-		
 		
 		//Main Panel Add
         createNewInvoicePanel.add(leftPanel);
         createNewInvoicePanel.add(rightPanel);
-		
 		//End of Marc Functionality
-		//==============================================
 		
-		// TODO Product Details
-		//======================== Start View Product Details ===========
-		
+		//Product Details
 		viewProductDetailsPanel.add(viewProductDetails);
 		viewProductDetails.setLayout(new GridBagLayout());
 		GridBagConstraints productGC = new GridBagConstraints();
 		productGC.insets = new Insets(5,5,5,5); //sets the padding around each component
-		
 
 		//1. TextArea
 		productTextArea = new JTextArea(20,20); //height - width
@@ -3318,7 +3242,7 @@ public class RetailGUI extends JFrame{
        
       
 		// First Label and controls:	View Product by ID 
-		JLabel productIdlbl = new JLabel("Enter Product ID: "); //Label
+		JLabel productIdlbl = new JLabel("Enter Product ID: ");
 		productGC.gridx = 0;
 		productGC.gridy = 1;
 		viewProductDetails.add(productIdlbl,productGC);
@@ -3326,12 +3250,10 @@ public class RetailGUI extends JFrame{
 		comboBoxProductId.setEditable(true);
 		comboBoxProductId.setPreferredSize(d);
 		comboBoxProductId.setMinimumSize(d);
-		//viewProductIdTextField = new JTextField(10); //Text Field
 		productGC.gridx = 1;
 		productGC.gridy = 1;
 		viewProductDetails.add(comboBoxProductId,productGC);
-		//viewProductDetails.add(viewProductIdTextField,productGC);
-		JButton productButton = new JButton("Search Product ID");	//button
+		JButton productButton = new JButton("Search Product ID");
 		productGC.gridx = 2;
 		productGC.gridy = 1;
 		viewProductDetails.add(productButton,productGC);
@@ -3442,7 +3364,6 @@ public class RetailGUI extends JFrame{
 		comboBoxProductAuthor.setPreferredSize(d);
 		comboBoxProductAuthor.setMinimumSize(d);
 		comboBoxProductAuthor.setSelectedItem("Select");
-		productAuthorTextField = new JTextField(10);
 		productGC.gridx = 1;
 		productGC.gridy = 3;
 		viewProductDetails.add(comboBoxProductAuthor,productGC);
@@ -3730,7 +3651,6 @@ public class RetailGUI extends JFrame{
 			}
 			}
 		});
-		//=======================  End
 		
 		//Profit & Loss Account Panel
 		proflossJPanel.setLayout(new GridBagLayout());
@@ -3777,8 +3697,8 @@ public class RetailGUI extends JFrame{
 		graphJPanel.setLayout(new GridBagLayout());
 		GridBagConstraints graphgc = new GridBagConstraints();
 		graphgc.insets = new Insets(5,5,5,5);
-		//========================== Pie Chart Highest lowest Selling ===============================
-				//TODO high low
+		// Pie Chart Highest lowest Selling
+				//high low
 				highestSellingButton = new JButton();
 				graphgc.gridx = 1;
 				graphgc.gridy = 1;
@@ -3786,13 +3706,11 @@ public class RetailGUI extends JFrame{
 				highestSellingButton.setIcon(new ImageIcon("src\\images\\top.png"));
 				highestSellingButton.addActionListener(new ActionListener() {
 					
-					@SuppressWarnings("rawtypes")
-					@Override
 					public void actionPerformed(ActionEvent ex) {
 						productCodes = findProductCodes();
 						countsHigher = new int[productCodes.size()];
 
-						// count occuernces of each product in the invoices
+						// count occurrence of each product in the invoices
 						for (Invoice v : invoices) {
 							for(InvoiceProduct inp : v.getInvoiceProducts()){
 							for(int i=0;i<productCodes.size();i++){
@@ -3862,8 +3780,6 @@ public class RetailGUI extends JFrame{
 				lowsetsellingButton.setIcon(new ImageIcon("src\\images\\bottom.png"));
 				lowsetsellingButton.addActionListener(new ActionListener() {
 					
-					@SuppressWarnings("rawtypes")
-					@Override
 					public void actionPerformed(ActionEvent ex) {
 
 						productCodes = findProductCodes();
@@ -3998,9 +3914,8 @@ public class RetailGUI extends JFrame{
 						salesGraphFrame.setSize(850, 600);
 					}
 				});
-				//===========================================================================================
 		
-				//========================== Pie Chart View Paid Vs. Unpaid Invoices ========================
+				//Pie Chart View Paid Vs. Unpaid Invoices
 				JButton invoicesPieChart = new JButton();
 				graphgc.gridx =2;
 				graphgc.gridy= 2;
@@ -4021,15 +3936,9 @@ public class RetailGUI extends JFrame{
 						frame.setVisible(true);
 						frame.setSize(850, 600);
 					}
-					
 				});
-				
-				//===============================================================================================
-				
-				
-		
-		} //END OF CONSTRUCTOR
-	//TODO - end of constructor
+		}
+	// - end of constructor
 	
 	public void createInvoices(){
 		//add some test employees to array list
@@ -4546,21 +4455,6 @@ public class RetailGUI extends JFrame{
 				else{
 					JOptionPane.showMessageDialog(null, "Please choose an order ID number.");
 				}
-				/*
-				int orderId = verifyOrderID(id);
-				if(orderId == 1){
-					
-				}
-				else if(orderId == 2){
-					//no order id match
-					JOptionPane.showMessageDialog(loginJPanel, "Order ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-					editSupplierOrderComponentsJPanel.setVisible(false);
-					editOrderComponentsJPanel.setVisible(false);
-					saveOrderComponentsJPanel.setVisible(false);
-					editOrderProductsComponentsJPanel.setVisible(false);
-				}
-				productOrderJTextArea.setCaretPosition(0);
-				*/
 			}
 			public int verifyOrderID(int id) {
 		    	int count = 0;
@@ -4679,7 +4573,7 @@ public class RetailGUI extends JFrame{
 			return sortedHashMap;
 		}
 		
-		//TODO Method to get all the product codes from the ArrayList
+		// Method to get all the product codes from the ArrayList
 		public ArrayList<String> findProductCodes(){
 			ArrayList<String> returnCodeNames = new ArrayList<String>();
 			
@@ -4792,7 +4686,7 @@ public class RetailGUI extends JFrame{
 		}		
 		
 		//handler for Profit and Loss table button
-		//TODO Method to get fill table
+		//Method to get fill table
 		private class viewTableButtonHandler implements ActionListener{
 			@SuppressWarnings("unchecked")
 			public void actionPerformed( ActionEvent e){
@@ -4939,7 +4833,7 @@ public class RetailGUI extends JFrame{
 			orderJTabbedPane = new JTabbedPane();
 			accessJTabbedPane = new JTabbedPane();
 			proflossJTabbedPane = new JTabbedPane();
-			//=====
+			
 			//Main Panels
 			addCustJPanel = new JPanel();
 			viewCustJPanel = new JPanel();
@@ -4961,17 +4855,17 @@ public class RetailGUI extends JFrame{
 			editEmployeeJPanel = new JPanel();
 			proflossJPanel = new JPanel();
 			graphJPanel = new JPanel();
-			//=====
+			
 			//login components
 			loginComponentsJPanel = new JPanel();
 			loginTF = new JTextField();
 			passwordTF = new JPasswordField();
 			loginBut = new JButton();
-			//====
+			
 			//logout components
 			logoutComponentsJPanel = new JPanel();
 			logoutBut = new JButton();
-			//====
+			
 			addMoreBtn = new JButton("Add Product To Invoice");
 			finishBtn = new JButton("Confirm Invoice");
 			resetBtn = new JButton("Reset Fields");
@@ -5109,7 +5003,7 @@ public class RetailGUI extends JFrame{
 			editEmpPasswordField = new JTextField();
 			updateEmployee = new JButton("Update Employee");
 			deleteEmployee = new JButton("Delete Employee");
-			//====
+			
 			//Product Components
 			prodTitle = new JLabel("Book Title");
 			titleJTextField = new JTextField();
@@ -5139,9 +5033,8 @@ public class RetailGUI extends JFrame{
 			fiftyTo100Radio = new JRadioButton("50 - 100");
 			hundredTo200Radio = new JRadioButton("100 - 200");
 			over200Radio = new JRadioButton("200 plus");
-			//==
+
 			//edit product components
-			editDetails = new JLabel ("Product ID");
 			editProdTitle = new JLabel("Book Title");
 			editTitleJTextField = new JTextField();
 			editProdAuthor = new JLabel("Author");
@@ -5160,16 +5053,13 @@ public class RetailGUI extends JFrame{
 			editMinJTextField = new JTextField();
 			editProdSupplierId = new JLabel("Supplier Id");
 			editProdSupplierIdJTextField = new JTextField();
-			//====
+			
 			// View Product Components
 			product = new Product();
 			viewProductDetailsPanel= new JPanel();
 			viewProductDetails= new JPanel();
 			priceRange = new ButtonGroup();
 			quantity = new ButtonGroup();
-			//===
-			//Product Combo Box
-			existingProductId = new Vector<>();
 			
 			existingProductTitle = new Vector<>();
 			listofProductTitle = new DefaultComboBoxModel<>(existingProductTitle);
@@ -5179,7 +5069,7 @@ public class RetailGUI extends JFrame{
 			
 			existingEditProdId = new Vector<>();
 			listToEditProdIds = new DefaultComboBoxModel<>(existingEditProdId);
-			//===
+
 			//Edit Invoice Components 
 			findInvoiceComponentsJPanel = new JPanel();
 			editInvoiceComponentsJPanel = new JPanel();
@@ -5200,7 +5090,7 @@ public class RetailGUI extends JFrame{
 			editInvoiceCustomer = new JTextField("Edit Invoice Customer");
 			editPayStatus = new JTextField("");	
 			editInvoiceAmount = new JTextField("Edit Invoice Amount");
-			//====
+			
 			//Marc: View Customer Invoice Panel and Components
 			viewCustomerPanel = new JPanel();	
 			existingInvoiceNums = new Vector<>();
@@ -5224,9 +5114,6 @@ public class RetailGUI extends JFrame{
 			custId = new JLabel("Customer ID: ");
 			prodId = new JLabel("Product ID: ");
 			quantitylbl = new JLabel("Quantity: ");
-			employTextF = new JTextField(10);
-			custTextF = new JTextField(10);
-			prodTextF = new JTextField(10);
 			addMoreProducts = new ArrayList<OrderProduct>();
 			createNewOrderLeftPanel = new JPanel();
 			createNewOrderRightPanel = new JPanel();
@@ -5260,8 +5147,7 @@ public class RetailGUI extends JFrame{
 	
 			editOrderId = new JTextField("Edit Order Id:");
 			editOrderSupplier= new JTextField("Edit Order Customer");
-			editOrderReceivedStatus = new JTextField("");	
-			JTextField editOrderAmount = new JTextField("Edit Order Amount");
+			editOrderReceivedStatus = new JTextField("");
 			
 			//P&L JTable Tab
 			pLComponentsJPanel = new JPanel();
@@ -5272,7 +5158,7 @@ public class RetailGUI extends JFrame{
 			listOfMonths = new DefaultComboBoxModel<>(months); //create the combo box
 			
 		
-		}//TODO
+		}
 		public double calculateOrderValue(ArrayList<Order> orders, int month){
 			double total = 0.00;
 			for(Order order: orders){
