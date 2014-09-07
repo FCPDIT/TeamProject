@@ -1296,7 +1296,7 @@ public class RetailGUI extends JFrame{
 		updateCustJButton.addActionListener(new ActionListener(){
 			//update a specific customer
 			public void actionPerformed(ActionEvent e){
-				try{
+				if(editCustIdCombo.getSelectedIndex() != 0){
 					if(editCustName.getText().isEmpty() || editCustAddress.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Required Fields: \n Customer Name \n Customer Address");	
 					}else{
@@ -1315,7 +1315,7 @@ public class RetailGUI extends JFrame{
 							}
 						}
 					}
-				}catch(NumberFormatException nfe){
+				}else{
 					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer.");
 				}
 			}
@@ -1324,7 +1324,7 @@ public class RetailGUI extends JFrame{
 		deleteCustJButton.addActionListener(new ActionListener(){
 			//delete function for customer
 			public void actionPerformed(ActionEvent arg){
-				try{
+				if(editCustIdCombo.getSelectedIndex()!= 0){
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
 							listOfCustomers.removeElement(editCustIdCombo.getSelectedItem().toString());
@@ -1342,7 +1342,7 @@ public class RetailGUI extends JFrame{
 							return;
 						}
 					}
-				}catch(NumberFormatException nfe){
+				}else{
 					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer.");
 				}
 			}
@@ -1647,7 +1647,7 @@ public class RetailGUI extends JFrame{
 		saveSupplierJButton.addActionListener(new ActionListener(){
 			//function to update supplier
 			public void actionPerformed(ActionEvent e){
-				try{
+				if(editSuppIdCombo.getSelectedIndex() != 0){
 					if(editSupplierName.getText().isEmpty() || editSupplierAddress.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Name \n Supplier Address");	
 					}else{
@@ -1668,7 +1668,7 @@ public class RetailGUI extends JFrame{
 							}
 						}
 					}
-				}catch(NumberFormatException nfe){
+				}else{
 					JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier.");
 				}
 			}
@@ -1678,7 +1678,7 @@ public class RetailGUI extends JFrame{
 		deleteSupplierJButton.addActionListener(new ActionListener(){
 			// function to delete supplier by getting id from the supplier id label
 			public void actionPerformed(ActionEvent arg){
-				try{
+				if(editSuppIdCombo.getSelectedIndex() != 0){
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
 							suppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
@@ -1695,7 +1695,7 @@ public class RetailGUI extends JFrame{
 							return;
 						}
 					}
-				}catch(NumberFormatException nfe){
+				}else{
 					JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier.");
 				}
 			}
