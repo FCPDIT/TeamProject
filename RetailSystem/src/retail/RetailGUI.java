@@ -925,7 +925,7 @@ public class RetailGUI extends JFrame{
 		
 		editById.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(viewEmpIdCombo.getSelectedIndex() != 0){
+				try{
 					for(Employee employee: employees){
 						if(employee.getEmployeeId()== Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							editEmpNameField.setText(employee.getEmployeeName());
@@ -934,8 +934,8 @@ public class RetailGUI extends JFrame{
 							editEmpPasswordField.setText(Integer.toString(employee.getPassword()));
 						}
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Please Select a Valid Employee.");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
 				}
 			}
 		});
@@ -959,7 +959,6 @@ public class RetailGUI extends JFrame{
 								editEmpAccessField.setText("");
 								editEmpSalaryField.setText("");
 								editEmpPasswordField.setText("");
-								break;
 							}
 						}
 					}
@@ -1280,7 +1279,7 @@ public class RetailGUI extends JFrame{
 		updateCustJButton.addActionListener(new ActionListener(){
 			//update a specific customer
 			public void actionPerformed(ActionEvent e){
-				if(editCustIdCombo.getSelectedIndex() != 0){
+				try{
 					if(editCustName.getText().isEmpty() || editCustAddress.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Required Fields: \n Customer Name \n Customer Address");	
 					}else{
@@ -1296,12 +1295,11 @@ public class RetailGUI extends JFrame{
 								editCustAddress.setText("");
 								editCustEmail.setText("");
 								editCustPhone.setText("");
-								break;
 							}
 						}
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer.");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
 			}
 		});
@@ -1309,7 +1307,7 @@ public class RetailGUI extends JFrame{
 		deleteCustJButton.addActionListener(new ActionListener(){
 			//delete function for customer
 			public void actionPerformed(ActionEvent arg){
-				if(editCustIdCombo.getSelectedIndex() != 0){
+				try{
 					for(Customer customer: customers){
 						if(customer.getCustId() == Integer.parseInt(editCustIdCombo.getSelectedItem().toString())){
 							listOfCustomers.removeElement(editCustIdCombo.getSelectedItem().toString());
@@ -1327,8 +1325,8 @@ public class RetailGUI extends JFrame{
 							return;
 						}
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer.");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Customer Id should be a number.");
 				}
 			}
 		});
@@ -1436,6 +1434,7 @@ public class RetailGUI extends JFrame{
 		allSupplyJButton.setMinimumSize(d);
 		allSupplyJButton.setPreferredSize(d);
 		viewSupplyJPanel.add(allSupplyJButton, gc);
+	
 		gc.gridx = 0;
 		gc.gridy = 1;
 		editSuppIdCombo.setMinimumSize(d);
@@ -1624,7 +1623,7 @@ public class RetailGUI extends JFrame{
 		saveSupplierJButton.addActionListener(new ActionListener(){
 			//function to update supplier
 			public void actionPerformed(ActionEvent e){
-				if(editSuppIdCombo.getSelectedIndex() != 0){
+				try{
 					if(editSupplierName.getText().isEmpty() || editSupplierAddress.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Name \n Supplier Address");	
 					}else{
@@ -1642,12 +1641,11 @@ public class RetailGUI extends JFrame{
 								editSupplierEmail.setText("");
 								editSupplierPhone.setText("");
 								editSupplierDelivery.setText("");
-								break;
 							}
 						}
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier.");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
 			}
 			
@@ -1656,7 +1654,7 @@ public class RetailGUI extends JFrame{
 		deleteSupplierJButton.addActionListener(new ActionListener(){
 			// function to delete supplier by getting id from the supplier id label
 			public void actionPerformed(ActionEvent arg){
-				if(editSuppIdCombo.getSelectedIndex() != 0){
+				try{
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
 							suppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
@@ -1673,8 +1671,8 @@ public class RetailGUI extends JFrame{
 							return;
 						}
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier.");
+				}catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Id should be a number.");
 				}
 			}
 		});
@@ -2029,10 +2027,12 @@ public class RetailGUI extends JFrame{
 						if(invoice.getId() == id){
 							if(invoice.isPaid()){
 								JOptionPane.showMessageDialog(null, "Already Paid!");
+								editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
 							}
 							else{
 								invoice.setPaid(true);
 								JOptionPane.showMessageDialog(null, "Paid!");
+								editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
 							}
 						}
 					}
@@ -4242,6 +4242,7 @@ public class RetailGUI extends JFrame{
 				editCustomerInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceProductsComponentsJPanel.setVisible(false);
+				editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
 			}
 			productInvoiceJTextArea.setCaretPosition(0);
 		}
@@ -4554,6 +4555,7 @@ public class RetailGUI extends JFrame{
 								if(count == 0){
 									JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
 									editCustomerInvoiceComponentsJPanel.setVisible(false);
+									editCustIdComboInv.setSelectedIndex(0);
 								}
 								else{
 									allInvoicesTotalJTextField.setText( new String(String.format("%.2f", total)));
@@ -4565,6 +4567,7 @@ public class RetailGUI extends JFrame{
 								editCustomerInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceProductsComponentsJPanel.setVisible(false);
+								editCustIdComboInv.setSelectedIndex(0);
 							}
 							customerInvoiceJTextArea.setCaretPosition(0);
 						}
@@ -4908,8 +4911,8 @@ public class RetailGUI extends JFrame{
 			finishBtn = new JButton("Confirm Invoice");
 			resetBtn = new JButton("Reset Fields");
 			payAllInvoicesJButton = new JButton("Pay All Invoices");
-			editInvoiceJButton = new JButton("Find Invoice by Id");
-			editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
+			editInvoiceJButton = new JButton("Pay Invoice by Id");
+			editCustomerInvoiceJButton = new JButton("Pay Invoices by Customer");
 			payInvoiceJButton = new JButton("Pay Invoice");
 			payInvoiceJButton = new JButton("Pay Invoice");
 			createOrderAddProductButton =  new JButton("Add Product to Order");
