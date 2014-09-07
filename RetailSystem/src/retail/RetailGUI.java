@@ -1679,6 +1679,7 @@ public class RetailGUI extends JFrame{
 				if(editSuppIdCombo.getSelectedIndex() != 0){
 					for(Supplier supplier: suppliers){
 						if(supplier.getId() == Integer.parseInt(editSuppIdCombo.getSelectedItem().toString())){
+							listOfSuppliers.removeElement(editSuppIdCombo.getSelectedItem().toString());
 							suppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
 							suppNameCombo.removeItem(editSuppIdCombo.getSelectedItem());
 							editSuppIdCombo.removeItem(editSuppIdCombo.getSelectedItem());
@@ -1690,7 +1691,6 @@ public class RetailGUI extends JFrame{
 							editSupplierEmail.setText("");
 							editSupplierPhone.setText("");
 							editSupplierDelivery.setText("");
-							listOfSuppliers.removeElement(editSuppIdCombo.getSelectedItem().toString());
 							return;
 						}
 					}
