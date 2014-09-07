@@ -44,14 +44,14 @@ public class Product {
 
 	public String printProductDetails(Product p) {
 		if (p != null) {
-		return "\n Product ID: " + (p.getProductCode()) + "\n Title: "
-		+ p.getTitle() + "\n Author: " + p.getAuthor()
-		+ "\n Retail Price: " + p.getRetailPrice() 
-		+"\n Cost Price: " + p.getCostPrice()
-		+"\n Current Stock: " + p.getCurrentStock()
-		+ "\n Max Stock:" + p.getMaxStock() 
-		+ "\n Min Stock: " + p.getMinStock() 
-		+ "\n Supplier: " + p.getSupplier().getName()
+		return "\n PRODUCT ID:		" + (p.getProductCode()) + "\n TITLE:		"
+		+ p.getTitle() + "\n AUTHOR:		" + p.getAuthor()
+		+ "\n RETAIL PRICE:		" + p.getRetailPrice() 
+		+"\n COST PRICE:		" + p.getCostPrice()
+		+"\n CURRENT STOCK:	" + p.getCurrentStock()
+		+ "\n MAX STOCK:		" + p.getMaxStock() 
+		+ "\n MIN STOCK:		" + p.getMinStock() 
+		+ "\n SUPPLIER:		" + p.getSupplier().getName()
 		+  "\n";
 		} else {
 		return " No Details to Print ";
