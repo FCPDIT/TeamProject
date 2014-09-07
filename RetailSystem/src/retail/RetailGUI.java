@@ -2775,7 +2775,7 @@ public class RetailGUI extends JFrame{
         		
         		if(findUnreceived){
         			for(Order order: orders){
-            			if(order.getOrderUniqueId() == comboId ){
+            			if(order.getSupplierUniqueId() == comboId ){
             				order.setReceived();
             			}
             		}
@@ -4314,7 +4314,6 @@ public class RetailGUI extends JFrame{
 		//Handler for receive orders by supplier button
 		private class editSupplierOrderButtonHandler implements ActionListener{
 			public void actionPerformed( ActionEvent e){//handler starts
-					listOfSuppliers.setSelectedItem("Select");
 					productOrderJTextArea.setText("");
 					allOrdersTotalJTextField.setEditable(false);
 					double total = 0;
@@ -4360,8 +4359,14 @@ public class RetailGUI extends JFrame{
 						allOrdersTotalJTextField.setText(new String(String.format("%.2f", total)));
 						
 					}
-					else if (dontShow){
+					else if (!foundUnreceived){
 						JOptionPane.showMessageDialog(loginJPanel, "No unreceived orders for this supplier", "For your information", JOptionPane.INFORMATION_MESSAGE);
+						editSupplierOrderComponentsJPanel.setVisible(false);
+						editOrderComponentsJPanel.setVisible(false);
+						saveOrderComponentsJPanel.setVisible(false);
+						editOrderProductsComponentsJPanel.setVisible(false);
+					}
+					else if(dontShow){
 						editSupplierOrderComponentsJPanel.setVisible(false);
 						editOrderComponentsJPanel.setVisible(false);
 						saveOrderComponentsJPanel.setVisible(false);
