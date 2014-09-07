@@ -134,7 +134,7 @@ public class Order implements Comparable<Order> {
 		String result = "";
 		for(Order order: listOfOrders){
 			result = result + "---------------------------------------------- \n"  + "ORDER ID: " + order.getOrderUniqueId() 
-					+ "\n PRODUCTS: " + "-----------------";
+					+ "\n PRODUCTS: " + "\n-----------------";
 			result += printOrderDetails(order);
 		}
 		if(result.equals("")){
@@ -184,7 +184,7 @@ public class Order implements Comparable<Order> {
 							"\n MAX STOCK:		" + product.getMaxStock() +
 							"\n MIN STOCK:		" + product.getMinStock() +
 							"\n COST PRICE:		" + product.getCostPrice() +
-							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -";
+							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -\n";
 					break;
 				}
 			}
@@ -220,7 +220,7 @@ public class Order implements Comparable<Order> {
 							"\n MAX STOCK:		" + product.getMaxStock() +
 							"\n MIN STOCK:		" + product.getMinStock() +
 							"\n COST PRICE:		" + product.getCostPrice() +
-							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -";
+							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -\n";
 					break;
 				}
 			}
@@ -256,7 +256,7 @@ public class Order implements Comparable<Order> {
 							"\n MAX STOCK:		" + product.getMaxStock() +
 							"\n MIN STOCK:		" + product.getMinStock() +
 							"\n COST PRICE:		" + product.getCostPrice() +
-							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -";
+							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -\n";
 					break;
 				}
 			}
@@ -319,7 +319,7 @@ public class Order implements Comparable<Order> {
 					"\n MAX STOCK:		" + product.getMaxStock() +
 					"\n MIN STOCK:		" + product.getMinStock() +
 					"\n COST PRICE:		" + product.getCostPrice() +
-					"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -";
+					"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -\n";
 		}
 		return result;
 	}
