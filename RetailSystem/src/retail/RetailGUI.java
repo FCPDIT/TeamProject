@@ -4226,6 +4226,7 @@ public class RetailGUI extends JFrame{
 	private class EditInvoiceButtonHandler implements ActionListener{
 		public void actionPerformed( ActionEvent e){//handler starts
 			int id = 0;
+			editCustIdComboInv.setSelectedIndex(0);
 			String s = (String)editComboBoxInvoice.getSelectedItem();
 			if(s.equals("Select") || s.equals("select")){
 				id = 0;
@@ -4542,6 +4543,7 @@ public class RetailGUI extends JFrame{
 							int count = 0, count1 = 0;
 							int id = 0;
 							int customerID = 1;
+							editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
 							String s = (String)editCustIdComboInv.getSelectedItem();
 							if(s.equals("Select")){
 								customerID = 2;
