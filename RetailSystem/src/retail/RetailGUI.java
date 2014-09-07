@@ -639,7 +639,7 @@ public class RetailGUI extends JFrame{
 		
 		orderJTabbedPane.add("Create New Order", createOrderPanel);
 		orderJTabbedPane.add("View Orders", viewOrderJPanel);
-		orderJTabbedPane.add("Edit Orders", editOrderJPanel);
+		orderJTabbedPane.add("Receive Orders", editOrderJPanel);
 		
 		accessJTabbedPane.add("Create Employee", employeeJPanel);
 		accessJTabbedPane.add("View Employee", viewEmployeeJPanel);
@@ -2675,14 +2675,15 @@ public class RetailGUI extends JFrame{
         		for(Order order: orders){
         			if(order.getOrderUniqueId() == comboId){
         				if(order.isReceived() == true){
-        					JOptionPane.showMessageDialog(null, "Order already received!");
+        					editOrderJButton.doClick();	
+        					listOfOrders.setSelectedItem("Select");
         					break;
         				}
         				else{
         					order.setReceived();
-        	        		JOptionPane.showMessageDialog(null, "Received!");
         	        		editOrderReceivedStatus.setForeground(Color.BLACK);
         	        		editOrderJButton.doClick();	
+        	        		listOfOrders.setSelectedItem("Select");
         					break;
         				}
         			}
@@ -2759,16 +2760,39 @@ public class RetailGUI extends JFrame{
         	public void actionPerformed(ActionEvent e){
         		String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
         		int comboId = Integer.parseInt(s.trim());
-        		for(Order order: orders){
-        			if(order.getOrderUniqueId() == comboId ){
-        				order.setReceived();
+        		boolean findUnreceived = false;
+        		for(Order orderCheck: orders)
+        		{
+        			if(orderCheck.getSupplierUniqueId() == comboId){
+        				if(orderCheck.isReceived() == false){
+        					findUnreceived = true;
+                			break;
+        				}
         			}
         		}
-        		JOptionPane.showMessageDialog(null, "Received!");
-        		editOrderSupplierJButton.doClick();
-        		listOfSuppliers.setSelectedItem("Select");
-        		listOfOrders.setSelectedItem("Select");
-        	}
+        		
+        		if(findUnreceived){
+        			for(Order order: orders){
+            			if(order.getOrderUniqueId() == comboId ){
+            				order.setReceived();
+            			}
+            		}
+            		JOptionPane.showMessageDialog(null, "Received!");
+            		editOrderSupplierJButton.doClick();
+            		supplierOrderJTextArea.setText("");
+            		supplierOrderJTextArea.setCaretPosition(0);
+            		listOfOrders.setSelectedItem("Select");
+            		listOfSuppliers.setSelectedItem("Select");
+					editSupplierOrderComponentsJPanel.setVisible(false);
+					editOrderComponentsJPanel.setVisible(false);
+					saveOrderComponentsJPanel.setVisible(false);
+					editOrderProductsComponentsJPanel.setVisible(false);
+            		
+            	}
+        		else{
+        			JOptionPane.showMessageDialog(null, "All orders from this supplier already received!");
+        		}
+        	}	
         });
         editOrderJPanel.setLayout(new GridBagLayout());
         gc.gridx = 0;
@@ -4292,25 +4316,31 @@ public class RetailGUI extends JFrame{
 		//Handler for receive orders by supplier button
 		private class editSupplierOrderButtonHandler implements ActionListener{
 			public void actionPerformed( ActionEvent e){//handler starts
-					int count = 0, count1 = 0;
+					listOfSuppliers.setSelectedItem("Select");
+					productOrderJTextArea.setText("");
+					allOrdersTotalJTextField.setEditable(false);
+					double total = 0;
 					int id = 0;
-					editOrderOrderIdComboBox.setSelectedItem("Select");
+					boolean dontShow = false;
 					String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
+					boolean foundUnreceived = false;
 					if(!s.equals("Select")){
 						id = Integer.parseInt( s );
-					}
-					double total = 0;
-					int supplierID = 1;
-					for(Supplier supplier: suppliers){
-						if(id == supplier.getId()){
-							count1++;
-							supplierID = 1;
+						for(Order order: orders){
+							if(id == order.getSupplierUniqueId()){
+								if(!order.isReceived()){
+									foundUnreceived = true;
+									break;
+								}
+							}
 						}
 					}
-					if(count1 == 0){
-						supplierID = 2;
+					else{
+						JOptionPane.showMessageDialog(null, "Please choose a supplier ID number.");
+						dontShow = true;
 					}
-					if(supplierID == 1){
+					
+					if(foundUnreceived){
 						editSupplierOrderComponentsJPanel.setVisible(true);
 						editOrderComponentsJPanel.setVisible(false);
 						saveOrderComponentsJPanel.setVisible(false);
@@ -4324,22 +4354,16 @@ public class RetailGUI extends JFrame{
 									supplierOrderJTextArea.append(s);
 									supplierOrderJTextArea.append(new String(String.format("%.2f", order.calculateOrderWorth())));
 									total = total + order.calculateOrderWorth();
-									count++;	
+									
 									supplierOrderJTextArea.append("\n - - - - - - - - - - - \n");
 								}
 							}
 						}
-						if(count == 0){
-							JOptionPane.showMessageDialog(loginJPanel, "No unreceived orders for this supplierer", "For your information", JOptionPane.INFORMATION_MESSAGE);
-							editSupplierOrderComponentsJPanel.setVisible(false);
-						}
-						else{
-							allOrdersTotalJTextField.setText(new String(String.format("%.2f",  total)));
-						}						
+						allOrdersTotalJTextField.setText(new String(String.format("%.2f", total)));
+						
 					}
-					else if(supplierID == 2){
-						//no supplier id match
-						JOptionPane.showMessageDialog(loginJPanel, "Supplier ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+					else if (dontShow){
+						JOptionPane.showMessageDialog(loginJPanel, "No unreceived orders for this supplier", "For your information", JOptionPane.INFORMATION_MESSAGE);
 						editSupplierOrderComponentsJPanel.setVisible(false);
 						editOrderComponentsJPanel.setVisible(false);
 						saveOrderComponentsJPanel.setVisible(false);
@@ -4474,36 +4498,39 @@ public class RetailGUI extends JFrame{
 		}
 		private class editOrderButtonHandler implements ActionListener{
 			public void actionPerformed( ActionEvent e){//handler starts
-				productOrderJTextArea.setText("");
 				editOrderSupplierIdComboBox.setSelectedItem("Select");
+				productOrderJTextArea.setText("");
+				editOrderAmount.setEditable(false);
 				int id = 0;
-				String s = (String) editOrderOrderIdComboBox.getSelectedItem();
+				String s = (String) listOfOrders.getSelectedItem();
 				if(!s.equals("Select")){
 					id = Integer.parseInt(s);
-				}
-				productInvoiceJTextArea.setText("Product Details\n");
-				int orderId = verifyOrderID(id);
-				if(orderId == 1){
 					for(Order order: orders){
 						if(id == order.getOrderUniqueId()){
 							if(order.isReceived()){
-								editOrderAmount.setEditable(false);
+								JOptionPane.showMessageDialog(null, "Order has been received! ");
+								editSupplierOrderComponentsJPanel.setVisible(false);
+								editOrderComponentsJPanel.setVisible(false);
+								saveOrderComponentsJPanel.setVisible(false);
+								editOrderProductsComponentsJPanel.setVisible(false);
 							}
 							else{
-								editOrderAmount.setEditable(true);
+								editSupplierOrderComponentsJPanel.setVisible(false);
+								editOrderComponentsJPanel.setVisible(true);
+								saveOrderComponentsJPanel.setVisible(true);
+								editOrderProductsComponentsJPanel.setVisible(true);
+								productOrderJTextArea.setText("Order details: \n");
+								editOrderId.setText(Integer.toString(id));
+								editOrderSupplier.setText(Integer.toString(order.getSupplierUniqueId()));
+								productOrderJTextArea.setText("Order ID: " + editOrderId.getText() + "\nSupplier ID: " + editOrderSupplier.getText());
+								for(OrderProduct op: order.getListOfOrderProducts()){
+											s = "\nProduct ID: " + op.getProduct().getProductCode() + ", Title: " + op.getProduct().getTitle() + 
+											", Quantity: " + Integer.toString(op.getQuantity());
+											productOrderJTextArea.append(s);								
+									}	
+								editOrderAmount.setText(new String(String.format("%.2f", order.calculateOrderWorth())));
 							}
-							editSupplierOrderComponentsJPanel.setVisible(false);
-							editOrderComponentsJPanel.setVisible(true);
-							saveOrderComponentsJPanel.setVisible(true);
-							editOrderProductsComponentsJPanel.setVisible(true);
-							editOrderId.setText(Integer.toString(id));
-							editOrderSupplier.setText(Integer.toString(order.getSupplierUniqueId()));
-							for(OrderProduct op: order.getListOfOrderProducts()){
-										s = "\nId: " + op.getProduct().getProductCode() + ", Title: " + op.getProduct().getTitle() + 
-										", Quantity: " + Integer.toString(op.getQuantity());
-										productOrderJTextArea.append(s);								
-								}	
-							editOrderAmount.setText(new String(String.format("%.2f", order.calculateOrderWorth())));
+							
 							if(!order.isReceived()){
 								editOrderReceivedStatus.setText("Unreceived");
 								editOrderReceivedStatus.setForeground(Color.RED);
@@ -4515,6 +4542,14 @@ public class RetailGUI extends JFrame{
 						}
 					}	
 				}
+				else{
+					JOptionPane.showMessageDialog(null, "Please choose an order ID number.");
+				}
+				/*
+				int orderId = verifyOrderID(id);
+				if(orderId == 1){
+					
+				}
 				else if(orderId == 2){
 					//no order id match
 					JOptionPane.showMessageDialog(loginJPanel, "Order ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
@@ -4524,6 +4559,7 @@ public class RetailGUI extends JFrame{
 					editOrderProductsComponentsJPanel.setVisible(false);
 				}
 				productOrderJTextArea.setCaretPosition(0);
+				*/
 			}
 			public int verifyOrderID(int id) {
 		    	int count = 0;
@@ -4542,68 +4578,68 @@ public class RetailGUI extends JFrame{
 		}
 						
 		//Handler for pay invoices by customer button
-				private class EditCustomerInvoiceButtonHandler implements ActionListener{
-					public void actionPerformed( ActionEvent e){//handler starts
-							int count = 0, count1 = 0;
-							int id = 0;
-							int customerID = 1;
-							editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
-							String s = (String)editCustIdComboInv.getSelectedItem();
-							if(s.equals("Select")){
-								customerID = 2;
-							}
-							else{
-								id = Integer.parseInt( s );
-							}							
-							double total = 0;
-							for(Customer customer: customers){
-								if(id == customer.getCustId()){
-									count1++;
-									customerID = 1;
-								}
-							}	
-							if(count1 == 0){
-								customerID = 2;
-							}
-							if(customerID == 1){
-								editCustomerInvoiceComponentsJPanel.setVisible(true);
-								editInvoiceComponentsJPanel.setVisible(false);
-								editInvoiceProductsComponentsJPanel.setVisible(false);
-								customerInvoiceJTextArea.setText("Unpaid Invoices:");
-								for(Invoice invoice: invoices){
-									if(id == invoice.getCustomer().getCustId() ){
-										if(invoice.isPaid() == false){
-											s = "\n\nInvoice Id : " + invoice.getId() + 
-													"\nDate: " + sdf.format(invoice.getInvoiceDate())+ "\nTotal: ";
-											customerInvoiceJTextArea.append(s);
-											customerInvoiceJTextArea.append(new String(String.format("%.2f", invoice.getTotalInvoicePrice())));
-											total = total + invoice.getTotalInvoicePrice();
-											count++;								
-										}
-									}
-								}
-								if(count == 0){
-									JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
-									editCustomerInvoiceComponentsJPanel.setVisible(false);
-									editCustIdComboInv.setSelectedIndex(0);
-								}
-								else{
-									allInvoicesTotalJTextField.setText( new String(String.format("%.2f", total)));
-								}						
-							}
-							else if(customerID == 2){
-								//no customer id match
-								JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
-								editCustomerInvoiceComponentsJPanel.setVisible(false);
-								editInvoiceComponentsJPanel.setVisible(false);
-								editInvoiceProductsComponentsJPanel.setVisible(false);
-								editCustIdComboInv.setSelectedIndex(0);
-							}
-							customerInvoiceJTextArea.setCaretPosition(0);
-						}
+		private class EditCustomerInvoiceButtonHandler implements ActionListener{
+			public void actionPerformed( ActionEvent e){//handler starts
+					int count = 0, count1 = 0;
+					int id = 0;
+					int customerID = 1;
+					editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
+					String s = (String)editCustIdComboInv.getSelectedItem();
+					if(s.equals("Select")){
+						customerID = 2;
 					}
-								
-				//handler for save invoice button
+					else{
+						id = Integer.parseInt( s );
+					}							
+					double total = 0;
+					for(Customer customer: customers){
+						if(id == customer.getCustId()){
+							count1++;
+							customerID = 1;
+						}
+					}	
+					if(count1 == 0){
+						customerID = 2;
+					}
+					if(customerID == 1){
+						editCustomerInvoiceComponentsJPanel.setVisible(true);
+						editInvoiceComponentsJPanel.setVisible(false);
+						editInvoiceProductsComponentsJPanel.setVisible(false);
+						customerInvoiceJTextArea.setText("Unpaid Invoices:");
+						for(Invoice invoice: invoices){
+							if(id == invoice.getCustomer().getCustId() ){
+								if(invoice.isPaid() == false){
+									s = "\n\nInvoice Id : " + invoice.getId() + 
+											"\nDate: " + sdf.format(invoice.getInvoiceDate())+ "\nTotal: ";
+									customerInvoiceJTextArea.append(s);
+									customerInvoiceJTextArea.append(new String(String.format("%.2f", invoice.getTotalInvoicePrice())));
+									total = total + invoice.getTotalInvoicePrice();
+									count++;								
+								}
+							}
+						}
+						if(count == 0){
+							JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
+							editCustomerInvoiceComponentsJPanel.setVisible(false);
+							editCustIdComboInv.setSelectedIndex(0);
+						}
+						else{
+							allInvoicesTotalJTextField.setText( new String(String.format("%.2f", total)));
+						}						
+					}
+					else if(customerID == 2){
+						//no customer id match
+						JOptionPane.showMessageDialog(loginJPanel, "Customer ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+						editCustomerInvoiceComponentsJPanel.setVisible(false);
+						editInvoiceComponentsJPanel.setVisible(false);
+						editInvoiceProductsComponentsJPanel.setVisible(false);
+						editCustIdComboInv.setSelectedIndex(0);
+					}
+					customerInvoiceJTextArea.setCaretPosition(0);
+				}
+			}
+						
+		//handler for save invoice button
 		
 		public boolean invoiceNumberUnique(int id, ArrayList<Invoice> invoices){
 			int count = 0;
