@@ -873,6 +873,8 @@ public class RetailGUI extends JFrame{
 										+"\n Access Level: " +employee.getAccess()
 										+"\n Password: " +employee.getPassword()
 										+"\n Salary: " +employee.getSalary());
+								empIdCombo.setSelectedIndex(0);
+								break;
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -888,15 +890,21 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				// view by employee name
 				if(employees.size() >= 1){
-					for(Employee employee: employees){
-						if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
-							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-						+"\n Name: " +employee.getEmployeeName() 
-						+"\n Access Level: " +employee.getAccess()
-						+"\n Password: " +employee.getPassword()
-						+"\n Salary: " +employee.getSalary());
+					if(empNameCombo.getSelectedIndex() != 0){
+						for(Employee employee: employees){
+							if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
+								empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+							+"\n Name: " +employee.getEmployeeName() 
+							+"\n Access Level: " +employee.getAccess()
+							+"\n Password: " +employee.getPassword()
+							+"\n Salary: " +employee.getSalary());
+							empNameCombo.setSelectedIndex(0);
+							break;
+							}
 						}
-				}
+					}else{
+						JOptionPane.showMessageDialog(null, "Please Select a Valid Employee.");
+					}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Employees Found");
 				}
@@ -1209,6 +1217,8 @@ public class RetailGUI extends JFrame{
 									+"\n Address: "+customer.getCustAddress()
 									+"\n Email: "+customer.getCustEmail()
 									+"\n Phone: "+customer.getCustTelephone());
+							custIdCombo.setSelectedIndex(0);
+							break;
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -1224,18 +1234,24 @@ public class RetailGUI extends JFrame{
 			// function to view a customer by id or name
 			public void actionPerformed(ActionEvent e){
 			if(customers.size() >= 1){
-						for(Customer customer: customers){
+				if(custNameCombo.getSelectedIndex() != 0){
+					for(Customer customer: customers){
 						if(customer.getCustName() == custNameCombo.getSelectedItem()){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
 									+"\n Name: "+customer.getCustName()
 									+"\n Address: "+customer.getCustAddress()
 									+"\n Email: "+customer.getCustEmail()
 									+"\n Phone: "+customer.getCustTelephone());
+							custNameCombo.setSelectedIndex(0);
+							break;
 							}
 						}
 				}else{
-					JOptionPane.showMessageDialog(null, "No Customers Found");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer");
 				}
+			}else{
+				JOptionPane.showMessageDialog(null, "No Customers Found");
+			}
 			}
 		});
 		
@@ -1551,6 +1567,8 @@ public class RetailGUI extends JFrame{
 										+"\n Email: "+supplier.getEmail()
 										+"\n Phone: "+supplier.getPhone()
 										+"\n Delivery Time: "+supplier.getDaysToDeliver());
+								suppIdCombo.setSelectedIndex(0);
+								break;
 							}
 						}
 					}else{
@@ -1566,15 +1584,21 @@ public class RetailGUI extends JFrame{
 			// function to view a supplier by id or name
 			public void actionPerformed(ActionEvent e){
 				if(suppliers.size() >= 1){
-					for(Supplier supplier: suppliers){
-						if(supplier.getName() == suppNameCombo.getSelectedItem()){
-							supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
-									+"\n Name: "+supplier.getName()
-									+"\n Address: "+supplier.getAddress()
-									+"\n Email: "+supplier.getEmail()
-									+"\n Phone: "+supplier.getPhone()
-									+"\n Delivery Time: "+supplier.getDaysToDeliver());
+					if(suppNameCombo.getSelectedIndex() != 0){
+						for(Supplier supplier: suppliers){
+							if(supplier.getName() == suppNameCombo.getSelectedItem()){
+								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
+										+"\n Name: "+supplier.getName()
+										+"\n Address: "+supplier.getAddress()
+										+"\n Email: "+supplier.getEmail()
+										+"\n Phone: "+supplier.getPhone()
+										+"\n Delivery Time: "+supplier.getDaysToDeliver());
+								suppNameCombo.setSelectedIndex(0);
+								break;
+							}
 						}
+					}else{
+						JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier");
 					}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Suppliers Found");
