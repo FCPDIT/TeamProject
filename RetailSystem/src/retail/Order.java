@@ -274,7 +274,7 @@ public class Order implements Comparable<Order> {
 				if(result.equals("")){
 					result = "Received orders: \n";
 				}
-				System.out.println(order.orderUniqueId);
+				//System.out.println(order.orderUniqueId);
 				result += "\n \n" + "Order ID: " + order.getOrderUniqueId() + "\n";
 				result += printOrderDetails(order);
 			}

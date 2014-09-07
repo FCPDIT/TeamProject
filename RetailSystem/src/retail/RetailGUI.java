@@ -412,6 +412,7 @@ public class RetailGUI extends JFrame{
 	private ArrayList<InvoiceProduct> addMoreArrayList;// = new ArrayList<InvoiceProduct>();
 	private String message = "";
 	private String outputMessage="";
+	private String orderOutputMessage = "";
 	//Panels
 	private JTextArea textAreaMarc;// = new JTextArea();
 	private JPanel leftPanel;// = new JPanel();
@@ -532,7 +533,7 @@ public class RetailGUI extends JFrame{
 		createInvoices();
 		setDesign();
 		initialize();
-		System.out.println();
+
 		gc.insets = new Insets(10,5,5,10);
 		
 		//add login components
@@ -615,10 +616,10 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.addTab("Sales ",invoiceIcon, invJTabbedPane);
 		mainJTabbedPane.addTab("Orders ",orderIcon, orderJTabbedPane);
 		mainJTabbedPane.addTab("Product Management ", productIcon, prodJTabbedPane);
-		mainJTabbedPane.addTab("Profit and Loss ",profitAndLossIcon, proflossJTabbedPane);
 		mainJTabbedPane.addTab("Customer Management ",customerIcon, custJTabbedPane);
 		mainJTabbedPane.addTab("Supplier Management ",supplierIcon, supplyJTabbedPane);
-		mainJTabbedPane.addTab("Manage Employee Access ",employeeIcon, accessJTabbedPane);
+		mainJTabbedPane.addTab("Employee Management",employeeIcon, accessJTabbedPane);
+		mainJTabbedPane.addTab("Profit and Loss ",profitAndLossIcon, proflossJTabbedPane);
 		
 		custJTabbedPane.add("Create New Customer",addCustJPanel);
 		custJTabbedPane.add("View Customer Details", viewCustJPanel);
@@ -2291,11 +2292,36 @@ public class RetailGUI extends JFrame{
 								if(addMoreProducts.size()<1){
 									Order singleOrderComplete = new Order(orderId, supplierId, orderProducts);
 									orders.add(singleOrderComplete);
+									orderOutputMessage+="Order Complete"+
+														"\n- - - - - - - - - -"+
+														"\nOrder No: " + orderIdString
+														+"\nSupplier No: " + supplierIdString
+														+"\nProduct No:  " + productCodeString +
+														"\nNo. of items: " + quantityString;
+									
 								}else{
 									Order multipleOrder = new Order(orderId, supplierId, addMoreProducts);
 									orders.add(multipleOrder);
+									orderOutputMessage+="Order Complete"+
+											"\n- - - - - - - - - -"+
+											"\nOrder No: " + orderIdString
+											+"\nSupplier No: " + supplierIdString
+											+"\nProduct No:  " + productCodeString +
+											"\nNo. of items: " + quantityString+
+											"\n- - - - - - - - - - - - - - ";
+									for(Order o : orders){
+										if(o.getOrderUniqueId()==orderId){
+											for(OrderProduct p : o.getListOfOrderProducts()){
+												orderOutputMessage+= "\nProduct Code: " + p.getProduct().getProductCode() +
+													"\nNo. of items: " + p.getQuantity() + "\n"; //TODO
+											}
+										}
+									}
 								}
-								JOptionPane.showMessageDialog(null, "Order complete!");
+								//JOptionPane.showMessageDialog(null, "Order complete!");
+								createOrderScrollPaneTextArea.setText(orderOutputMessage);
+								createOrderScrollPaneTextArea.setCaretPosition(0);
+								orderOutputMessage = "";
 								createOrderOrderIdTextField.setEnabled(true);
 								createOrderSupplierIdComboBox.setEnabled(true);
 								String newOrderIdFromTextField = createOrderOrderIdTextField.getText();
@@ -2303,8 +2329,8 @@ public class RetailGUI extends JFrame{
 								
 								createOrderOrderIdTextField.setText("");
 								createOrderQuantityTextField.setText("");
-								createOrderScrollPaneTextArea.setText("");
-								createOrderScrollPaneTextArea.setCaretPosition(0);
+								/*createOrderScrollPaneTextArea.setText("");
+								createOrderScrollPaneTextArea.setCaretPosition(0);*/
 								listOfProductId.setSelectedItem("Select");
 								listOfSuppliers.setSelectedItem("Select");
 								addMoreProducts = new ArrayList<OrderProduct>();
@@ -3872,7 +3898,7 @@ public class RetailGUI extends JFrame{
 							frame.setVisible(true);
 							frame.setSize(850, 600);
 						}catch (Exception i){
-				             System.out.println(i);
+				             //System.out.println(i);
 				         }
 					}
 				});
@@ -4259,7 +4285,7 @@ public class RetailGUI extends JFrame{
 						editOrderComponentsJPanel.setVisible(false);
 						saveOrderComponentsJPanel.setVisible(false);
 						editOrderProductsComponentsJPanel.setVisible(false);
-						supplierOrderJTextArea.setText("Unreceived Orders: ");
+						supplierOrderJTextArea.setText("Unreceived Orders: \n");
 						for(Order order: orders){
 							if(id == order.getSupplierUniqueId() ){
 								if(order.isReceived() == false){
@@ -4268,7 +4294,8 @@ public class RetailGUI extends JFrame{
 									supplierOrderJTextArea.append(s);
 									supplierOrderJTextArea.append(new String(String.format("%.2f", order.calculateOrderWorth())));
 									total = total + order.calculateOrderWorth();
-									count++;								
+									count++;	
+									supplierOrderJTextArea.append("\n - - - - - - - - - - - \n");
 								}
 							}
 						}
