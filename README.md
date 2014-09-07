@@ -1,3 +1,7 @@
+Dependencies:
+===========
+This application requires access to the JFreeChart Library, it can downloaded from http://sourceforge.net/projects/jfreechart/files/latest/download?source=files
+
 Retail System User Documentation:
 ===========
 
