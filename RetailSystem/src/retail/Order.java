@@ -133,8 +133,8 @@ public class Order implements Comparable<Order> {
 	public static String viewAllOrders(ArrayList<Order> listOfOrders){
 		String result = "";
 		for(Order order: listOfOrders){
-			result = result + "---------------------------------------------- \n"  + "Order ID: " + order.getOrderUniqueId() 
-					+ "\n Products: " + "-----------------";
+			result = result + "---------------------------------------------- \n"  + "ORDER ID: " + order.getOrderUniqueId() 
+					+ "\n PRODUCTS: " + "-----------------";
 			result += printOrderDetails(order);
 		}
 		if(result.equals("")){
@@ -147,8 +147,8 @@ public class Order implements Comparable<Order> {
 		String result = "";
 		for(Order order: listOfOrders){
 			if(order.getOrderUniqueId() == orderId){
-				result = result + "----------------------------------------------" +  "\n" + "Order ID: " + 
-						 order.getOrderUniqueId() + "\n" + "Supplier: " + order.getSupplierUniqueId() +  "\n" + "Products: " + "\n-----------------";
+				result = result + "----------------------------------------------" +  "\n" + "ORDER ID: " + 
+						 order.getOrderUniqueId() + "\n" + "SUPPLIER: " + order.getSupplierUniqueId() +  "\n" + "PRODUCTS: " + "\n-----------------";
 				result += printOrderDetails(order);
 				break;
 			}
@@ -169,22 +169,22 @@ public class Order implements Comparable<Order> {
 				if(product.getAuthor().equalsIgnoreCase(author) ){
 					if(!first){
 						//add this if this is the first order with a product from this author
-						result = result + "----------------------------------------------" +  "\n" + "Author: " + author + "\n"
-								+ "Orders: " + "\n-----------------";
+						result = result + "----------------------------------------------" +  "\n" + "AUTHOR: " + author + "\n"
+								+ "\n - - - - - - - - - - - - - - - ";
 						first = true;
 					}
-					result = result + "\nOrder details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
-							"\nProducts: " + "\n" + 
-							"\n Product Id: : " + product.getProductCode() + 
-							"\n Title: " + product.getTitle() +
-							"\n Author: " + product.getAuthor() +
-							"\n Current Stock: " + product.getCurrentStock() +
-							"\n Quantity Ordered: " + oProduct.getQuantity() + 
-							"\n Supplier: " + product.getSupplier().getName() +
-							"\n Max Stock: " + product.getMaxStock() +
-							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: " + product.getCostPrice() +
-							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
+					result = result + "\nORDER DETAILS: " + "\n - - - - - - - - - - - - - - - \n" + "ORDER ID:		" + order.getOrderUniqueId() + 
+							"\n" + "CUSTOMER ID:		" + order.getSupplierUniqueId() + 
+							"\n PRODUCT ID :		" + product.getProductCode() + 
+							"\n TITLE:		" + product.getTitle() +
+							"\n AUTHOR:		" + product.getAuthor() +
+							"\n QUANTITY ORDERED:	" + oProduct.getQuantity() + 
+							"\n CURRENT STOCK:	" + product.getCurrentStock() +
+							"\n SUPPLIER:		" + product.getSupplier().getName() +
+							"\n MAX STOCK:		" + product.getMaxStock() +
+							"\n MIN STOCK:		" + product.getMinStock() +
+							"\n COST PRICE:		" + product.getCostPrice() +
+							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -";
 					break;
 				}
 			}
@@ -205,22 +205,22 @@ public class Order implements Comparable<Order> {
 				if(product.getTitle().equalsIgnoreCase(title)){
 					if(!first){
 						//add this if this is the first order with a product with this title
-						result = result + "----------------------------------------------" +  "\n" + "Title: " + title + "\n"
-								+ "Orders: " + "\n-----------------";
+						result = result + "----------------------------------------------" +  "\n" + "TITLE: " + title + "\n"
+								+ "\n - - - - - - - - - - - - - - - ";
 						first = true;
 					}
-					result = result + "\nOrder details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Customer ID: " + order.getSupplierUniqueId() + 
-							"\nProducts: " + "\n" + 
-							"\n Product Id: : " + product.getProductCode() + 
-							"\n Title: " + product.getTitle() +
-							"\n Author: " + product.getAuthor() +
-							"\n Quantity Ordered: " + oProduct.getQuantity() + 
-							"\n Current Stock: " + product.getCurrentStock() +
-							"\n Supplier: " + product.getSupplier().getName() +
-							"\n Max Stock: " + product.getMaxStock() +
-							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: " + product.getCostPrice() +
-							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
+					result = result + "\nORDER DETAILS: " + "\n - - - - - - - - - - - - - - - \n" + "ORDER ID:		" + order.getOrderUniqueId() + 
+							"\n" + "CUSTOMER ID:		" + order.getSupplierUniqueId() + 
+							"\n PRODUCT ID :		" + product.getProductCode() + 
+							"\n TITLE:		" + product.getTitle() +
+							"\n AUTHOR:		" + product.getAuthor() +
+							"\n QUANTITY ORDERED:	" + oProduct.getQuantity() + 
+							"\n CURRENT STOCK:	" + product.getCurrentStock() +
+							"\n SUPPLIER:		" + product.getSupplier().getName() +
+							"\n MAX STOCK:		" + product.getMaxStock() +
+							"\n MIN STOCK:		" + product.getMinStock() +
+							"\n COST PRICE:		" + product.getCostPrice() +
+							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -";
 					break;
 				}
 			}
@@ -241,22 +241,22 @@ public class Order implements Comparable<Order> {
 				if(product.getSupplier().getId() == supplierId){
 					if(!first){
 						//add this if this is the first order with a product with this title
-						result = result + "----------------------------------------------" +  "\n" + "Supplier: " + supplierId + "\n"
-								+ "Orders: " + "\n-----------------";
+						result = result + "----------------------------------------------" +  "\n" + "SUPPLIER: " + supplierId + "\n"
+								+ "\n - - - - - - - - - - - - - - - ";
 						first = true;
 					}
-					result = result + "\n" + "Order details: " + "\n" + "Order ID: " + order.getOrderUniqueId() + "\n" + "Supplier ID: " + order.getSupplierUniqueId() + "\n" + 
-							"Products: " + "\n" + 
-							"\n Product Id: : " + product.getProductCode() + 
-							"\n Title: " + product.getTitle() +
-							"\n Author: " + product.getAuthor() +
-							"\n Quantity Ordered: " + oProduct.getQuantity() + 
-							"\n Current Stock: " + product.getCurrentStock() +
-							"\n Supplier: " + product.getSupplier().getName() +
-							"\n Max Stock: " + product.getMaxStock() +
-							"\n Min Stock: " + product.getMinStock() +
-							"\n Cost Price: " + product.getCostPrice() +
-							"\n Retail Price: " + product.getRetailPrice() +"\n------------";
+					result = result + "\nORDER DETAILS: " + "\n - - - - - - - - - - - - - - - \n" + "ORDER ID:		" + order.getOrderUniqueId() + 
+							"\n" + "CUSTOMER ID:		" + order.getSupplierUniqueId() + 
+							"\n PRODUCT ID :		" + product.getProductCode() + 
+							"\n TITLE:		" + product.getTitle() +
+							"\n AUTHOR:		" + product.getAuthor() +
+							"\n QUANTITY ORDERED:	" + oProduct.getQuantity() + 
+							"\n CURRENT STOCK:	" + product.getCurrentStock() +
+							"\n SUPPLIER:		" + product.getSupplier().getName() +
+							"\n MAX STOCK:		" + product.getMaxStock() +
+							"\n MIN STOCK:		" + product.getMinStock() +
+							"\n COST PRICE:		" + product.getCostPrice() +
+							"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -";
 					break;
 				}
 			}
@@ -310,16 +310,16 @@ public class Order implements Comparable<Order> {
 		for(OrderProduct oProduct: order.getListOfOrderProducts()){
 			Product product = oProduct.getProduct();
 			result = result + "\n" + 
-					"\n Product Id: : " + product.getProductCode() + 
-					"\n Title: " + product.getTitle() +
-					"\n Author: " + product.getAuthor() +
-					"\n Quantity Ordered: " + oProduct.getQuantity() + 
-					"\n Current Stock: " + product.getCurrentStock() +
-					"\n Supplier: " + product.getSupplier().getName() +
-					"\n Max Stock: " + product.getMaxStock() +
-					"\n Min Stock: " + product.getMinStock() +
-					"\n Cost Price: " + product.getCostPrice() +
-					"\n Retail Price: " + product.getRetailPrice() +"\n" + "\n------------";
+					"\n PRODUCT ID :		" + product.getProductCode() + 
+					"\n TITLE:		" + product.getTitle() +
+					"\n AUTHOR:		" + product.getAuthor() +
+					"\n QUANTITY ORDERED:	" + oProduct.getQuantity() + 
+					"\n CURRENT STOCK:	" + product.getCurrentStock() +
+					"\n SUPPLIER:		" + product.getSupplier().getName() +
+					"\n MAX STOCK:		" + product.getMaxStock() +
+					"\n MIN STOCK:		" + product.getMinStock() +
+					"\n COST PRICE:		" + product.getCostPrice() +
+					"\n RETAIL PRICE:		" + product.getRetailPrice() +"\n - - - - - - - - - - - - - - -";
 		}
 		return result;
 	}
