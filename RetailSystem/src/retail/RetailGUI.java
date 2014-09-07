@@ -1313,6 +1313,7 @@ public class RetailGUI extends JFrame{
 								editCustAddress.setText("");
 								editCustEmail.setText("");
 								editCustPhone.setText("");
+								return;
 							}
 						}
 					}
@@ -1666,6 +1667,7 @@ public class RetailGUI extends JFrame{
 								editSupplierEmail.setText("");
 								editSupplierPhone.setText("");
 								editSupplierDelivery.setText("");
+								return;
 							}
 						}
 					}
