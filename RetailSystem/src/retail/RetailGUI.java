@@ -1758,44 +1758,64 @@ public class RetailGUI extends JFrame{
 		productJButton.addActionListener(new ActionListener(){
 			//function to create a product
 			public void actionPerformed(ActionEvent e){
-				try{
-					if(suppliers.size() >= 1 ){
-						for(Supplier supplier: suppliers){
-							if(supplier.getId() == Integer.parseInt(prodSupplierIdJTextField.getText())){
-									Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
-											codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
-											Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
-											Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
-											);
-									products.add(product);
-									JOptionPane.showMessageDialog(null, "New Product Added");
-									
-									listOfProdIds.addElement(codeJTextField.getText());
-									listOfProductAuthor.addElement(authorJTextField.getText());
-									listofProductTitle.addElement(titleJTextField.getText());
-									Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
-									Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
-
-							}
-						}
-						
-					}else{
-						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
-					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Please Complete All Fields");
+				if(codeJTextField.getText().trim().equals("") || codeJTextField.getText().trim().matches(".*\\D.*")){
+					JOptionPane.showMessageDialog(null, "Product code must be a number");
 				}
-				
-				titleJTextField.setText("");
-				prodSupplierIdJTextField.setText("");
-				authorJTextField.setText("");
-				codeJTextField.setText("");
-				retailJTextField.setText("");
-				costJTextField.setText("");
-				tStockJTextField.setText("");
-				maxJTextField.setText("");
-				minJTextField.setText("");
+				else if(retailJTextField.getText().trim().equals("") || retailJTextField.getText().trim().matches(".*\\D.*")){
+					JOptionPane.showMessageDialog(null, "Retail price must be a number");
+				}
+				else if(costJTextField.getText().trim().equals("") || costJTextField.getText().trim().matches(".*\\D.*")){
+					JOptionPane.showMessageDialog(null, "Cost price must be a number");
+				}
+				else if(tStockJTextField.getText().trim().equals("") || tStockJTextField.getText().trim().matches(".*\\D.*")){
+					JOptionPane.showMessageDialog(null, "Current stock must be a number");
+				}
+				else if(maxJTextField.getText().trim().equals("") || maxJTextField.getText().trim().matches(".*\\D.*")){
+					JOptionPane.showMessageDialog(null, "Maximum stock must be a number");
+				}
+				else if(minJTextField.getText().trim().equals("") || minJTextField.getText().trim().matches(".*\\D.*")){
+					JOptionPane.showMessageDialog(null, "Minimum stock must be a number");
+				}
+				else{ 
+					try{
+						if(suppliers.size() >= 1 ){
+							for(Supplier supplier: suppliers){
+								if(supplier.getId() == Integer.parseInt(prodSupplierIdJTextField.getText())){
+										Product product = new Product(titleJTextField.getText(),authorJTextField.getText().toLowerCase(),
+												codeJTextField.getText(),Double.parseDouble(retailJTextField.getText()),
+												Double.parseDouble(costJTextField.getText()), Integer.parseInt(tStockJTextField.getText()),
+												Integer.parseInt(maxJTextField.getText()), Integer.parseInt(minJTextField.getText()),supplier
+												);
+										products.add(product);
+										JOptionPane.showMessageDialog(null, "New Product Added");
+										
+										listOfProdIds.addElement(codeJTextField.getText());
+										listOfProductAuthor.addElement(authorJTextField.getText());
+										listofProductTitle.addElement(titleJTextField.getText());
+										Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
+										Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
 
+								}
+							}
+							
+						}else{
+							JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
+						}
+					}catch(NumberFormatException nfe){
+						JOptionPane.showMessageDialog(null, "Please Complete All Fields");
+					}
+					
+					titleJTextField.setText("");
+					prodSupplierIdJTextField.setText("");
+					authorJTextField.setText("");
+					codeJTextField.setText("");
+					retailJTextField.setText("");
+					costJTextField.setText("");
+					tStockJTextField.setText("");
+					maxJTextField.setText("");
+					minJTextField.setText("");
+
+				}
 			}
 		});
 		
@@ -3934,112 +3954,112 @@ public class RetailGUI extends JFrame{
 	
 	public void createInvoices(){
 		//add some test employees to array list
-				employees.add(new Employee(123, "John", 0, 200000.00, 1111));
-				employees.add( new Employee(234, "Tim", 1, 150000.00, 3333));
-				//add some test customers to array list
-				customers.add(new Customer(1, "Sam", "Dublin"));
-				customers.add(new Customer(2, "Tom", "Cork"));
-				customers.add(new Customer(3, "Mary", "Kildare"));
-				customers.add(new Customer(4, "Trish", "Dublin"));
-				customers.add(new Customer(5, "Chris", "Cork"));
-				customers.add(new Customer(6, "Billy", "Waterford"));
-				//add some test suppliers to array list
-				suppliers.add(new Supplier(1, "Smiths", "Dublin","sam@email.com",123456));
-				suppliers.add(new Supplier(2, "Thompsons", "Cork","tom@email.com",234567));
-				suppliers.add(new Supplier(3, "Randome", "Dublin", "randome@email.com", 789654));
-				suppliers.add(new Supplier(4, "Sealion", "Limerick", "sealion@email.com", 987654 ));
-				suppliers.add(new Supplier(5, "Salmon", "Athlone", "salmon@email.com", 258963));
-				suppliers.add(new Supplier(6, "Beales", "Dublin", "beales@email.com", 369852));
-				suppliers.add(new Supplier(7, "Buzzco", "Cork", "buzzco@email.com", 147852));
-				suppliers.add(new Supplier(8, "Vantage", "Waterford", "vantage@email.com", 255856));
-			
-				
-				//add some test products to array list
-				//(String title, String author, String productCode,double retailPrice, double costPrice, int currentStock, int maxStock, int minStock, Supplier supplier)
-				products.add(new Product("Game of Thrones", "George R.R Martin", "0001", 9.99, 3.75,100,200,15, suppliers.get(0)));
-				products.add(new Product("Not a Drill", "Lee Child", "0002", 12.75, 4.95,221,200,10, suppliers.get(1)));
-				products.add(new Product("Harry Potter", "j.k rowling", "0003", 11.99, 2.95,9,100,10,suppliers.get(2)));
-				products.add(new Product("Tara Road", "Maeve Binchy", "0004", 11.99, 2.04,20,30,10,suppliers.get(1)));
-				products.add(new Product("Echoes", "Maeve Binchy", "0005", 14.99, 1.96,20,30,10,suppliers.get(3)));
-				products.add(new Product("The Glass Lake", "Maeve Binchy", "0006", 16.99, 2.98,20,30,10,suppliers.get(7)));
-				products.add(new Product("Heart and Soul", "Maeve Binchy", "0007", 17.99, 2.97,20,30,10,suppliers.get(3)));
-				products.add(new Product("Light a Penny Candle", "Maeve Binchy", "0008", 11.99, 3.05,20,30,10,suppliers.get(2)));
-				products.add(new Product("Die Trying", "Lee Child", "0009", 10.99, 2.54,15,20,5,suppliers.get(2)));
-				products.add(new Product("The Enemy", "Lee Child", "0010", 11.99, 2.95,15,20,5,suppliers.get(2)));
-				products.add(new Product("One Shot", "Lee Child", "0011", 12.99, 2.83,15,20,5,suppliers.get(0)));
-				products.add(new Product("61 Hours", "Lee Child", "0012", 14.99, 2.78,15,20,5,suppliers.get(3)));
-				products.add(new Product("The Book Thief", "Khaled Hosseini", "0013", 8.99, 3.17,9,30,10,suppliers.get(4)));
-				products.add(new Product("The Hunger Games", "Suzanne Collins", "0014", 8.99, 1.97,30,25,10,suppliers.get(4)));
-				products.add(new Product("The Help", "Kathryn Stockett", "0015", 10.99, 2.51,10,20,10,suppliers.get(4)));
-				products.add(new Product("Life of Pi", "Yann Martel", "0016", 9.99, 2.12,10,10,10,suppliers.get(0)));
-				products.add(new Product("Catching Fire (The Hunger Games #2)", "Suzanne Collins", "0017", 10.99, 1.95,9,100,10,suppliers.get(3)));
-				products.add(new Product("The Girl with the Dragon Tattoo", "Steig Larsson", "0018", 9.99, 1.98,15,20,10,suppliers.get(3)));
-				products.add(new Product("Water for Elephants", "Sara Gruen", "0019", 11.99, 3.02,15,20,10,suppliers.get(0)));
-				products.add(new Product("The Da Vinci Code", "Dan Brown", "0020", 7.99, 1.93,15,20,10,suppliers.get(4)));
-				products.add(new Product("The Curious Incident of the Dog in the Night-Time", "Mark Haddon", "0021", 7.99, 1.92,15,20,10,suppliers.get(4)));
-				
-				//Add ArrayList of InvoiceProduct for Invoice Constructor
-				invoiceProducts1.add(new InvoiceProduct(products.get(0), 1));
-				invoiceProducts1.add(new InvoiceProduct(products.get(1), 2));
-				invoiceProducts1.add(new InvoiceProduct(products.get(2), 3));
-				invoiceProducts1.add(new InvoiceProduct(products.get(3), 31));
-				invoiceProducts1.add(new InvoiceProduct(products.get(4), 6));
-				invoiceProducts2.add(new InvoiceProduct(products.get(5), 89));
-				invoiceProducts2.add(new InvoiceProduct(products.get(6), 45));
-				invoiceProducts2.add(new InvoiceProduct(products.get(7), 33));
-				invoiceProducts2.add(new InvoiceProduct(products.get(8),45));
-				invoiceProducts1.add(new InvoiceProduct(products.get(9), 7));
-				invoiceProducts1.add(new InvoiceProduct(products.get(10), 22));
-				invoiceProducts1.add(new InvoiceProduct(products.get(11), 13));
-				invoiceProducts3.add(new InvoiceProduct(products.get(12), 18));
-				invoiceProducts3.add(new InvoiceProduct(products.get(13), 21));
-				invoiceProducts3.add(new InvoiceProduct(products.get(14), 24));
-				invoiceProducts3.add(new InvoiceProduct(products.get(15), 7));
-				invoiceProducts3.add(new InvoiceProduct(products.get(16), 8));
-				invoiceProducts1.add(new InvoiceProduct(products.get(17), 8));
-				invoiceProducts1.add(new InvoiceProduct(products.get(18), 100));
-				invoiceProducts1.add(new InvoiceProduct(products.get(19), 101));
-				invoiceProducts1.add(new InvoiceProduct(products.get(20), 102));
-				
-				//add some test invoices to array list
-
-				//add some test orders to array list
-				orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
-				orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
-				
-				//Create a bunch of OrderProducts for the orders
-				orderProducts1.add(new OrderProduct(products.get(0), 5));
-				orderProducts1.add(new OrderProduct(products.get(1), 7));
-				orderProducts1.add(new OrderProduct(products.get(3), 14));
-				orderProducts1.add(new OrderProduct(products.get(5), 2));
-				orderProducts1.add(new OrderProduct(products.get(1), 55));
-				orderProducts1.add(new OrderProduct(products.get(4), 8));
-				orderProducts1.add(new OrderProduct(products.get(7), 1));
-				orderProducts2.add(new OrderProduct(products.get(4), 20));
-				orderProducts2.add(new OrderProduct(products.get(3), 6));
-				orderProducts2.add(new OrderProduct(products.get(6), 15));
-				orderProducts2.add(new OrderProduct(products.get(6), 10));
-				orderProducts2.add(new OrderProduct(products.get(2), 25));
-				orderProducts2.add(new OrderProduct(products.get(4), 2));
-				orderProducts2.add(new OrderProduct(products.get(6), 2));
-				orderProducts3.add(new OrderProduct(products.get(3), 15));
-				orderProducts3.add(new OrderProduct(products.get(1), 65));
-				orderProducts3.add(new OrderProduct(products.get(7), 3));
-				orderProducts3.add(new OrderProduct(products.get(2), 4));
-				orderProducts3.add(new OrderProduct(products.get(6), 8));
-				orderProducts3.add(new OrderProduct(products.get(1), 2));
-				orderProducts3.add(new OrderProduct(products.get(3), 6));
-				orderProducts3.add(new OrderProduct(products.get(0), 5));
-				//Create a bunch of orders as dummy data
-				orders.add(new Order(3, 1, orderProducts1));
-				orders.add(new Order(4, 2, orderProducts1));
-				orders.add(new Order(5, 3, orderProducts2));
-				orders.add(new Order(6, 4, orderProducts3));
-				orders.add(new Order(7, 5, orderProducts1));
-				orders.add(new Order(8, 5, orderProducts2));
-				orders.add(new Order(9, 6, orderProducts1));
-				orders.add(new Order(10, 8, orderProducts3));
+		employees.add(new Employee(123, "John", 0, 200000.00, 1111));
+		employees.add( new Employee(234, "Tim", 1, 150000.00, 3333));
+		//add some test customers to array list
+		customers.add(new Customer(1, "Sam", "Dublin"));
+		customers.add(new Customer(2, "Tom", "Cork"));
+		customers.add(new Customer(3, "Mary", "Kildare"));
+		customers.add(new Customer(4, "Trish", "Dublin"));
+		customers.add(new Customer(5, "Chris", "Cork"));
+		customers.add(new Customer(6, "Billy", "Waterford"));
+		//add some test suppliers to array list
+		suppliers.add(new Supplier(1, "Smiths", "Dublin","sam@email.com",123456));
+		suppliers.add(new Supplier(2, "Thompsons", "Cork","tom@email.com",234567));
+		suppliers.add(new Supplier(3, "Randome", "Dublin", "randome@email.com", 789654));
+		suppliers.add(new Supplier(4, "Sealion", "Limerick", "sealion@email.com", 987654 ));
+		suppliers.add(new Supplier(5, "Salmon", "Athlone", "salmon@email.com", 258963));
+		suppliers.add(new Supplier(6, "Beales", "Dublin", "beales@email.com", 369852));
+		suppliers.add(new Supplier(7, "Buzzco", "Cork", "buzzco@email.com", 147852));
+		suppliers.add(new Supplier(8, "Vantage", "Waterford", "vantage@email.com", 255856));
+	
 		
+		//add some test products to array list
+		//(String title, String author, String productCode,double retailPrice, double costPrice, int currentStock, int maxStock, int minStock, Supplier supplier)
+		products.add(new Product("Game of Thrones", "George R.R Martin", "0001", 9.99, 3.75,100,200,15, suppliers.get(0)));
+		products.add(new Product("Not a Drill", "Lee Child", "0002", 12.75, 4.95,221,200,10, suppliers.get(1)));
+		products.add(new Product("Harry Potter", "j.k rowling", "0003", 11.99, 2.95,9,100,10,suppliers.get(2)));
+		products.add(new Product("Tara Road", "Maeve Binchy", "0004", 11.99, 2.04,20,30,10,suppliers.get(1)));
+		products.add(new Product("Echoes", "Maeve Binchy", "0005", 14.99, 1.96,20,30,10,suppliers.get(3)));
+		products.add(new Product("The Glass Lake", "Maeve Binchy", "0006", 16.99, 2.98,20,30,10,suppliers.get(7)));
+		products.add(new Product("Heart and Soul", "Maeve Binchy", "0007", 17.99, 2.97,20,30,10,suppliers.get(3)));
+		products.add(new Product("Light a Penny Candle", "Maeve Binchy", "0008", 11.99, 3.05,20,30,10,suppliers.get(2)));
+		products.add(new Product("Die Trying", "Lee Child", "0009", 10.99, 2.54,15,20,5,suppliers.get(2)));
+		products.add(new Product("The Enemy", "Lee Child", "0010", 11.99, 2.95,15,20,5,suppliers.get(2)));
+		products.add(new Product("One Shot", "Lee Child", "0011", 12.99, 2.83,15,20,5,suppliers.get(0)));
+		products.add(new Product("61 Hours", "Lee Child", "0012", 14.99, 2.78,15,20,5,suppliers.get(3)));
+		products.add(new Product("The Book Thief", "Khaled Hosseini", "0013", 8.99, 3.17,9,30,10,suppliers.get(4)));
+		products.add(new Product("The Hunger Games", "Suzanne Collins", "0014", 8.99, 1.97,30,25,10,suppliers.get(4)));
+		products.add(new Product("The Help", "Kathryn Stockett", "0015", 10.99, 2.51,10,20,10,suppliers.get(4)));
+		products.add(new Product("Life of Pi", "Yann Martel", "0016", 9.99, 2.12,10,10,10,suppliers.get(0)));
+		products.add(new Product("Catching Fire (The Hunger Games #2)", "Suzanne Collins", "0017", 10.99, 1.95,9,100,10,suppliers.get(3)));
+		products.add(new Product("The Girl with the Dragon Tattoo", "Steig Larsson", "0018", 9.99, 1.98,15,20,10,suppliers.get(3)));
+		products.add(new Product("Water for Elephants", "Sara Gruen", "0019", 11.99, 3.02,15,20,10,suppliers.get(0)));
+		products.add(new Product("The Da Vinci Code", "Dan Brown", "0020", 7.99, 1.93,15,20,10,suppliers.get(4)));
+		products.add(new Product("The Curious Incident of the Dog in the Night-Time", "Mark Haddon", "0021", 7.99, 1.92,15,20,10,suppliers.get(4)));
+		
+		//Add ArrayList of InvoiceProduct for Invoice Constructor
+		invoiceProducts1.add(new InvoiceProduct(products.get(0), 1));
+		invoiceProducts1.add(new InvoiceProduct(products.get(1), 2));
+		invoiceProducts1.add(new InvoiceProduct(products.get(2), 3));
+		invoiceProducts1.add(new InvoiceProduct(products.get(3), 31));
+		invoiceProducts1.add(new InvoiceProduct(products.get(4), 6));
+		invoiceProducts2.add(new InvoiceProduct(products.get(5), 89));
+		invoiceProducts2.add(new InvoiceProduct(products.get(6), 45));
+		invoiceProducts2.add(new InvoiceProduct(products.get(7), 33));
+		invoiceProducts2.add(new InvoiceProduct(products.get(8),45));
+		invoiceProducts1.add(new InvoiceProduct(products.get(9), 7));
+		invoiceProducts1.add(new InvoiceProduct(products.get(10), 22));
+		invoiceProducts1.add(new InvoiceProduct(products.get(11), 13));
+		invoiceProducts3.add(new InvoiceProduct(products.get(12), 18));
+		invoiceProducts3.add(new InvoiceProduct(products.get(13), 21));
+		invoiceProducts3.add(new InvoiceProduct(products.get(14), 24));
+		invoiceProducts3.add(new InvoiceProduct(products.get(15), 7));
+		invoiceProducts3.add(new InvoiceProduct(products.get(16), 8));
+		invoiceProducts1.add(new InvoiceProduct(products.get(17), 8));
+		invoiceProducts1.add(new InvoiceProduct(products.get(18), 100));
+		invoiceProducts1.add(new InvoiceProduct(products.get(19), 101));
+		invoiceProducts1.add(new InvoiceProduct(products.get(20), 102));
+		
+		//add some test invoices to array list
+
+		//add some test orders to array list
+		orders.add(new Order(1, 1, new OrderProduct(products.get(0), 10)));
+		orders.add(new Order(2, 2, new OrderProduct(products.get(1), 15)));
+		
+		//Create a bunch of OrderProducts for the orders
+		orderProducts1.add(new OrderProduct(products.get(0), 5));
+		orderProducts1.add(new OrderProduct(products.get(1), 7));
+		orderProducts1.add(new OrderProduct(products.get(3), 14));
+		orderProducts1.add(new OrderProduct(products.get(5), 2));
+		orderProducts1.add(new OrderProduct(products.get(1), 55));
+		orderProducts1.add(new OrderProduct(products.get(4), 8));
+		orderProducts1.add(new OrderProduct(products.get(7), 1));
+		orderProducts2.add(new OrderProduct(products.get(4), 20));
+		orderProducts2.add(new OrderProduct(products.get(3), 6));
+		orderProducts2.add(new OrderProduct(products.get(6), 15));
+		orderProducts2.add(new OrderProduct(products.get(6), 10));
+		orderProducts2.add(new OrderProduct(products.get(2), 25));
+		orderProducts2.add(new OrderProduct(products.get(4), 2));
+		orderProducts2.add(new OrderProduct(products.get(6), 2));
+		orderProducts3.add(new OrderProduct(products.get(3), 15));
+		orderProducts3.add(new OrderProduct(products.get(1), 65));
+		orderProducts3.add(new OrderProduct(products.get(7), 3));
+		orderProducts3.add(new OrderProduct(products.get(2), 4));
+		orderProducts3.add(new OrderProduct(products.get(6), 8));
+		orderProducts3.add(new OrderProduct(products.get(1), 2));
+		orderProducts3.add(new OrderProduct(products.get(3), 6));
+		orderProducts3.add(new OrderProduct(products.get(0), 5));
+		//Create a bunch of orders as dummy data
+		orders.add(new Order(3, 1, orderProducts1));
+		orders.add(new Order(4, 2, orderProducts1));
+		orders.add(new Order(5, 3, orderProducts2));
+		orders.add(new Order(6, 4, orderProducts3));
+		orders.add(new Order(7, 5, orderProducts1));
+		orders.add(new Order(8, 5, orderProducts2));
+		orders.add(new Order(9, 6, orderProducts1));
+		orders.add(new Order(10, 8, orderProducts3));
+
 		invoices.add(new Invoice(1001, employees.get(0), customers.get(0), invoiceProducts1, 1, true));
 		invoices.add(new Invoice(1002, employees.get(1), customers.get(1), invoiceProducts2, 1, true));
 		invoices.add(new Invoice(1003, employees.get(0), customers.get(2), invoiceProducts3, 1, false));
