@@ -725,7 +725,6 @@ public class RetailGUI extends JFrame{
 		employeeJButton.setPreferredSize(d);
 		employeeJPanel.add(employeeJButton, gc);
 		viewEmployeeJPanel.setLayout(new GridBagLayout());
-		
 		gc.gridx = 0;
 		gc.gridy = 1;
 		JScrollPane empScrollPane = new JScrollPane(empJTextArea);
@@ -916,6 +915,7 @@ public class RetailGUI extends JFrame{
 							+"\n Access Level: " +employee.getAccess()
 							+"\n Password: " +employee.getPassword()
 							+"\n Salary: " +employee.getSalary()+"\n");
+							empJTextArea.setCaretPosition(0);
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Employees Found");
@@ -1251,6 +1251,7 @@ public class RetailGUI extends JFrame{
 										+"\n Email: "+customer.getCustEmail()
 										+"\n Phone: "+customer.getCustTelephone()
 										+"\n");
+							custJTextArea.setCaretPosition(0);
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Customers Found");
@@ -1592,6 +1593,7 @@ public class RetailGUI extends JFrame{
 									+"\n Email: "+supplier.getEmail()
 									+"\n Phone: "+supplier.getPhone()
 									+"\n Delivery Time: "+supplier.getDaysToDeliver()+"\n");
+							supplierJTextArea.setCaretPosition(0);
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Suppliers Found");
