@@ -635,7 +635,7 @@ public class RetailGUI extends JFrame{
 		
 		invJTabbedPane.add("Create New Invoice", createInvJPanel);
 		invJTabbedPane.add("View Invoices", viewInvJPanel);
-		invJTabbedPane.add("Edit Invoices", editInvJPanel);
+		invJTabbedPane.add("Pay Invoices", editInvJPanel);
 		
 		orderJTabbedPane.add("Create New Order", createOrderPanel);
 		orderJTabbedPane.add("View Orders", viewOrderJPanel);
@@ -873,6 +873,8 @@ public class RetailGUI extends JFrame{
 										+"\n Access Level: " +employee.getAccess()
 										+"\n Password: " +employee.getPassword()
 										+"\n Salary: " +employee.getSalary());
+								empIdCombo.setSelectedIndex(0);
+								break;
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -888,15 +890,21 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				// view by employee name
 				if(employees.size() >= 1){
-					for(Employee employee: employees){
-						if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
-							empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
-						+"\n Name: " +employee.getEmployeeName() 
-						+"\n Access Level: " +employee.getAccess()
-						+"\n Password: " +employee.getPassword()
-						+"\n Salary: " +employee.getSalary());
+					if(empNameCombo.getSelectedIndex() != 0){
+						for(Employee employee: employees){
+							if(employee.getEmployeeName().equalsIgnoreCase(empNameCombo.getSelectedItem().toString())){
+								empJTextArea.setText("Employee ID: "+employee.getEmployeeId()
+							+"\n Name: " +employee.getEmployeeName() 
+							+"\n Access Level: " +employee.getAccess()
+							+"\n Password: " +employee.getPassword()
+							+"\n Salary: " +employee.getSalary());
+							empNameCombo.setSelectedIndex(0);
+							break;
+							}
 						}
-				}
+					}else{
+						JOptionPane.showMessageDialog(null, "Please Select a Valid Employee.");
+					}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Employees Found");
 				}
@@ -1208,6 +1216,8 @@ public class RetailGUI extends JFrame{
 									+"\n Address: "+customer.getCustAddress()
 									+"\n Email: "+customer.getCustEmail()
 									+"\n Phone: "+customer.getCustTelephone());
+							custIdCombo.setSelectedIndex(0);
+							break;
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -1223,18 +1233,24 @@ public class RetailGUI extends JFrame{
 			// function to view a customer by id or name
 			public void actionPerformed(ActionEvent e){
 			if(customers.size() >= 1){
-						for(Customer customer: customers){
+				if(custNameCombo.getSelectedIndex() != 0){
+					for(Customer customer: customers){
 						if(customer.getCustName() == custNameCombo.getSelectedItem()){
 							custJTextArea.setText(" Customer Id: "+customer.getCustId()
 									+"\n Name: "+customer.getCustName()
 									+"\n Address: "+customer.getCustAddress()
 									+"\n Email: "+customer.getCustEmail()
 									+"\n Phone: "+customer.getCustTelephone());
+							custNameCombo.setSelectedIndex(0);
+							break;
 							}
 						}
 				}else{
-					JOptionPane.showMessageDialog(null, "No Customers Found");
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Customer");
 				}
+			}else{
+				JOptionPane.showMessageDialog(null, "No Customers Found");
+			}
 			}
 		});
 		
@@ -1550,6 +1566,8 @@ public class RetailGUI extends JFrame{
 										+"\n Email: "+supplier.getEmail()
 										+"\n Phone: "+supplier.getPhone()
 										+"\n Delivery Time: "+supplier.getDaysToDeliver());
+								suppIdCombo.setSelectedIndex(0);
+								break;
 							}
 						}
 					}else{
@@ -1565,15 +1583,21 @@ public class RetailGUI extends JFrame{
 			// function to view a supplier by id or name
 			public void actionPerformed(ActionEvent e){
 				if(suppliers.size() >= 1){
-					for(Supplier supplier: suppliers){
-						if(supplier.getName() == suppNameCombo.getSelectedItem()){
-							supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
-									+"\n Name: "+supplier.getName()
-									+"\n Address: "+supplier.getAddress()
-									+"\n Email: "+supplier.getEmail()
-									+"\n Phone: "+supplier.getPhone()
-									+"\n Delivery Time: "+supplier.getDaysToDeliver());
+					if(suppNameCombo.getSelectedIndex() != 0){
+						for(Supplier supplier: suppliers){
+							if(supplier.getName() == suppNameCombo.getSelectedItem()){
+								supplierJTextArea.setText(" Supplier Id: "+supplier.getId()
+										+"\n Name: "+supplier.getName()
+										+"\n Address: "+supplier.getAddress()
+										+"\n Email: "+supplier.getEmail()
+										+"\n Phone: "+supplier.getPhone()
+										+"\n Delivery Time: "+supplier.getDaysToDeliver());
+								suppNameCombo.setSelectedIndex(0);
+								break;
+							}
 						}
+					}else{
+						JOptionPane.showMessageDialog(null, "Please Select a Valid Supplier");
 					}
 				}else{
 					JOptionPane.showMessageDialog(null, "No Suppliers Found");
@@ -2027,10 +2051,12 @@ public class RetailGUI extends JFrame{
 						if(invoice.getId() == id){
 							if(invoice.isPaid()){
 								JOptionPane.showMessageDialog(null, "Already Paid!");
+								editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
 							}
 							else{
 								invoice.setPaid(true);
 								JOptionPane.showMessageDialog(null, "Paid!");
+								editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
 							}
 						}
 					}
@@ -4200,6 +4226,7 @@ public class RetailGUI extends JFrame{
 	private class EditInvoiceButtonHandler implements ActionListener{
 		public void actionPerformed( ActionEvent e){//handler starts
 			int id = 0;
+			editCustIdComboInv.setSelectedIndex(0);
 			String s = (String)editComboBoxInvoice.getSelectedItem();
 			if(s.equals("Select") || s.equals("select")){
 				id = 0;
@@ -4236,10 +4263,11 @@ public class RetailGUI extends JFrame{
 			}
 			else if(invoiceID == 2){
 				//no invoice id match
-				JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+				//JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 				editCustomerInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceProductsComponentsJPanel.setVisible(false);
+				editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
 			}
 			productInvoiceJTextArea.setCaretPosition(0);
 		}
@@ -4515,6 +4543,7 @@ public class RetailGUI extends JFrame{
 							int count = 0, count1 = 0;
 							int id = 0;
 							int customerID = 1;
+							editListOfInvoices.setSelectedItem(editExistingInvoiceNums.get(0));
 							String s = (String)editCustIdComboInv.getSelectedItem();
 							if(s.equals("Select")){
 								customerID = 2;
@@ -4552,6 +4581,7 @@ public class RetailGUI extends JFrame{
 								if(count == 0){
 									JOptionPane.showMessageDialog(loginJPanel, "No unpaid invoices for this customer", "For your information", JOptionPane.INFORMATION_MESSAGE);
 									editCustomerInvoiceComponentsJPanel.setVisible(false);
+									editCustIdComboInv.setSelectedIndex(0);
 								}
 								else{
 									allInvoicesTotalJTextField.setText( new String(String.format("%.2f", total)));
@@ -4563,6 +4593,7 @@ public class RetailGUI extends JFrame{
 								editCustomerInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceComponentsJPanel.setVisible(false);
 								editInvoiceProductsComponentsJPanel.setVisible(false);
+								editCustIdComboInv.setSelectedIndex(0);
 							}
 							customerInvoiceJTextArea.setCaretPosition(0);
 						}
@@ -4906,8 +4937,8 @@ public class RetailGUI extends JFrame{
 			finishBtn = new JButton("Confirm Invoice");
 			resetBtn = new JButton("Reset Fields");
 			payAllInvoicesJButton = new JButton("Pay All Invoices");
-			editInvoiceJButton = new JButton("Find Invoice by Id");
-			editCustomerInvoiceJButton = new JButton("Find Invoice by Customer");
+			editInvoiceJButton = new JButton("Pay Invoice by Id");
+			editCustomerInvoiceJButton = new JButton("Pay Invoices by Customer");
 			payInvoiceJButton = new JButton("Pay Invoice");
 			payInvoiceJButton = new JButton("Pay Invoice");
 			createOrderAddProductButton =  new JButton("Add Product to Order");
