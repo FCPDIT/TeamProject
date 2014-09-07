@@ -3055,7 +3055,7 @@ public class RetailGUI extends JFrame{
 						addMoreArrayList.add(invProd);
 						
 						for(InvoiceProduct prod : addMoreArrayList){
-						message += "Product No: " + prod.getProduct().getProductCode() +"\nQuantity: " + prod.getQuantity() + "\n\n";
+						message += "PRODUCT NO: " + prod.getProduct().getProductCode() +"\nQUANTITY: " + prod.getQuantity() + "\n\n";
 						}
 						textAreaMarc.setText(message);
 						textAreaMarc.setCaretPosition(0);
@@ -3127,14 +3127,14 @@ public class RetailGUI extends JFrame{
 									Invoice singleInvoiceComplete = new Invoice(invoiceId, employeeObj, customerObj, prods);
 									invoices.add(singleInvoiceComplete);
 									/*System.out.println(invoices.size());*/
-									outputMessage += "Invoice Created "
+									outputMessage += "INVOICE CREATED "
 												   + "\n- - - - - - - - - - - - - - "+
-															"\nInvoice No: " + invoiceIdStr +
+															"\nINVOICE NO: 	" + invoiceIdStr +
 															"\n- - - - - - - - - - - - - - "+
-															"\nEmployees No: "+ employeeIdStr +
-															"\nCustomer No: " + customerIdStr+
-															"\nProduct Code: " + productIdStr+
-															"\nNo. of items: " + quantityStr;
+															"\nEMPLOYEE NO:    "+ employeeIdStr +
+															"\nCUSTOMER NO:    " + customerIdStr+
+															"\nPRODUCT CODE:    " + productIdStr+
+															"\nNO. OF ITEMS:    " + quantityStr;
 															//+"\nArraySize: " + addMoreArrayList.size();
 									//existingInvoiceNums.add(invoiceIdStr);
 									
@@ -3142,19 +3142,19 @@ public class RetailGUI extends JFrame{
 										Invoice multipleInvoice = new Invoice(invoiceId,employeeObj,customerObj,addMoreArrayList);
 										invoices.add(multipleInvoice);
 										//System.out.println(invoices.size());
-										outputMessage +=  "Invoice Created "
+										outputMessage +=  "INVOICE CREATED "
 												   + "\n- - - - - - - - - - - - - - "+
-												"\nInvoice No: " + invoiceIdStr +
+												"\nINVOICE NO: " + invoiceIdStr +
 												"\n- - - - - - - - - - - - - - "+
-												"\nEmployees No: "+ employeeIdStr +
-												"\nCustomer No: " + customerIdStr+
-												"\nList Of Products Ordered:" +
+												"\nEMPLOYEES NO: "+ employeeIdStr +
+												"\nCUSTOMER NO: " + customerIdStr+
+												"\nLIST OF PRODUCT ORDERED:" +
 												"\n- - - - - - - - - - - - - - ";
 										for(Invoice v : invoices){
 											if(v.getId()==invoiceId){
 												for(InvoiceProduct p : v.getInvoiceProducts()){
-												outputMessage+= "\nProduct Code: " + p.getProduct().getProductCode() +
-														"\nNo. of items: " + p.getQuantity() + "\n";
+												outputMessage+= "\nPRODUCT CODE: " + p.getProduct().getProductCode() +
+														"\nNO OF ITEMS: " + p.getQuantity() + "\n";
 												}
 											}
 										}
