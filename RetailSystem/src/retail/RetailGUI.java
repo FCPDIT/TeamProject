@@ -635,7 +635,7 @@ public class RetailGUI extends JFrame{
 		
 		invJTabbedPane.add("Create New Invoice", createInvJPanel);
 		invJTabbedPane.add("View Invoices", viewInvJPanel);
-		invJTabbedPane.add("Edit Invoices", editInvJPanel);
+		invJTabbedPane.add("Pay Invoices", editInvJPanel);
 		
 		orderJTabbedPane.add("Create New Order", createOrderPanel);
 		orderJTabbedPane.add("View Orders", viewOrderJPanel);
