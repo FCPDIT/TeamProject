@@ -2173,8 +2173,8 @@ public class RetailGUI extends JFrame{
 		createNewOrderLeftPanel.add(createOrderProductCodeLabel,orderGC);
 		orderGC.gridx = 1;
 		orderGC.gridy = 2;
-		createOrderProductIdComboBox = new JComboBox<String> (listOfProductId);
-		listOfProductId.setSelectedItem("Select");
+		createOrderProductIdComboBox = new JComboBox<String> (listOfProdIds);
+		listOfProdIds.setSelectedItem("Select");
 		createOrderProductIdComboBox.setPreferredSize(d);
 		createNewOrderLeftPanel.add(createOrderProductIdComboBox,orderGC);
 		//=====
@@ -2214,7 +2214,7 @@ public class RetailGUI extends JFrame{
 				createOrderScrollPaneTextArea.setCaretPosition(0);
 				listOfSuppliers.setSelectedItem("Select");
         		listOfOrders.setSelectedItem("Select");
-        		listOfProductId.setSelectedItem("Select");
+        		listOfProdIds.setSelectedItem("Select");
 			}
 		});
 		//TextPane
@@ -2362,7 +2362,7 @@ public class RetailGUI extends JFrame{
 								createOrderQuantityTextField.setText("");
 								/*createOrderScrollPaneTextArea.setText("");
 								createOrderScrollPaneTextArea.setCaretPosition(0);*/
-								listOfProductId.setSelectedItem("Select");
+								listOfProdIds.setSelectedItem("Select");
 								listOfSuppliers.setSelectedItem("Select");
 								addMoreProducts = new ArrayList<OrderProduct>();
 							}else{
@@ -3317,11 +3317,7 @@ public class RetailGUI extends JFrame{
         c.weightx = 1.0;
         c.weighty = 1.0;
         viewProductDetails.add(scrollPane1, c);
-        
-        // For Loop used to Populate Combo Box of ProductCode/ID
-        for(int i=0;i<products.size();i++){
-			 existingProductId.add((products.get(i).getProductCode()));
-       }
+       
       
 		// First Label and controls:	View Product by ID 
 		JLabel productIdlbl = new JLabel("Enter Product ID: "); //Label
@@ -5173,7 +5169,6 @@ public class RetailGUI extends JFrame{
 			//===
 			//Product Combo Box
 			existingProductId = new Vector<>();
-			listOfProductId = new DefaultComboBoxModel<>(existingProductId);
 			
 			existingProductTitle = new Vector<>();
 			listofProductTitle = new DefaultComboBoxModel<>(existingProductTitle);
