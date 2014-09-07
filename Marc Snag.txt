@@ -1,0 +1,129 @@
+General things
+
+3. Should all the output messages in the Scroll panes be spruced up a bit. At times they are bunched and limited spacing??
+4. More test classes.
+
+
+///==========================
+Sales Tab
+
+
+	Edit Invoices Panel
+1. If you click the 'Find Invoice by Id' button, set the the 'Find Invoice by Customer' DROPDOWN to 'select' and visa versa. - 
+	Now changed
+	
+	I have changed the name of the edit invoice tab to pay invoices as this is what it is for now. With regards to points 2 and 3, I believe the pay by customer function is for a customer to clear their account in one click? Where as the function to view all invoices for a customer would be in the view invoices tab. What do you think?
+			-Hannah
+
+
+2. Does the 'Find Invoice by customer' only show unpaid invoices?? Should it not show all invoice by that Customer??
+3. Is there any point in having the 'Pay All Invoice' button when you view Invoices by a particular user?? Would you ever need that functionality in real life??
+
+
+
+///==========================
+Orders Tab
+	
+	Create New Order Panel
+1. If I create or delete a new/old Supplier the 'Supplier ID' Dropdown doesnt include the new supplier or delete the removed Supplier ID.
+2. If I create or delete an new/old Order the 'Product ID' Dropdown doesnt include the new product or delete the removed Product ID.
+
+	View Orders Panel
+1. If I create or delete a supplier the Dropdown doesnt include the new/old supplier
+
+3. Clear panel should reset all the drop down menus back to 'select' if they are displaying info that isnt 'select'.
+
+	Edit Orders Panel
+1. If you click 'Find Order by Id' set the the 'Find Order by Supplier' DROPDOWN to select and visa versa.
+2. I dont think there should be a 'Recieve All Orders' button, in real life why would you have that??
+3. In the text area of 'Unrecieved Orders' more spacing between the orders is needed. They are all being displayed in one block of text.
+4. Are we not getting rid of the 'Update Order' button and 'Delete Order' button like we did in Invoice??
+5. The total text box is editable??
+
+
+
+///==========================
+Product Management Tab
+
+	Create new Product Panel
+1. Shouldn't 'Supplier id' be a dropdown list? If you enter a supplier ID that doesnt exist what happens??
+2. At the minute if you create a product with an exisiting 'Product ID' its allowed. This should be unique.
+3. If you enter a word into 'Product ID' it accepts and allows a product to be created, it which it shouldnt, only numbers are allowed.
+4. When you click 'Create New Product' the text fields should all be reset to blank.
+
+	View Product Details Panel 
+1. Looks good
+
+	Edit Product Details Panels
+1. Supplier ID should be a dropdown
+
+
+
+
+///==========================
+Profit and Loss Tab 
+
+	Profit and Loss Table Panel
+1. Looks good
+
+
+
+///==========================
+Customer Management Tab
+	
+	Create New Cutomer Panel
+1. When you enter a word into 'Enter Customer Phone', it accepts it. Only numbers should be accepted
+
+	View Customer Details Panel
+1. When you click 'View All Customer button' the text area scroll bar starts at the bottom rather than the top. See the .setCaretPosition(0) method
+2. If you click 'View By Id' it should set the 'Find Customer by Name' dropdown to select and visa versa.
+
+	Edit Customer Details
+1. If you update a customers details and  click 'Update Customer Details' you get a pop up box saying 'Customer Id should be a number' after the confirmation box.
+2. Customer Telephone should only take numbers not words.
+
+
+
+
+
+
+///==========================
+Supplier Management Tab
+
+Same as Customer Management Tab above. 
+The new layouts look good.
+
+
+
+
+
+///==========================
+Manage Employee Access
+	
+	Create  employee Panel
+1. The error messages could be a bit clearer of mistakes. For example if you enter a letter into the 'Emplyoee ID' text box you get a message saying
+	'Please complete all fields'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
