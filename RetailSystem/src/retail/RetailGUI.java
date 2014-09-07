@@ -725,7 +725,6 @@ public class RetailGUI extends JFrame{
 		employeeJButton.setPreferredSize(d);
 		employeeJPanel.add(employeeJButton, gc);
 		viewEmployeeJPanel.setLayout(new GridBagLayout());
-		
 		gc.gridx = 0;
 		gc.gridy = 1;
 		JScrollPane empScrollPane = new JScrollPane(empJTextArea);
@@ -916,6 +915,7 @@ public class RetailGUI extends JFrame{
 							+"\n Access Level: " +employee.getAccess()
 							+"\n Password: " +employee.getPassword()
 							+"\n Salary: " +employee.getSalary()+"\n");
+							empJTextArea.setCaretPosition(0);
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Employees Found");
@@ -1251,6 +1251,7 @@ public class RetailGUI extends JFrame{
 										+"\n Email: "+customer.getCustEmail()
 										+"\n Phone: "+customer.getCustTelephone()
 										+"\n");
+							custJTextArea.setCaretPosition(0);
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Customers Found");
@@ -1592,6 +1593,7 @@ public class RetailGUI extends JFrame{
 									+"\n Email: "+supplier.getEmail()
 									+"\n Phone: "+supplier.getPhone()
 									+"\n Delivery Time: "+supplier.getDaysToDeliver()+"\n");
+							supplierJTextArea.setCaretPosition(0);
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "No Suppliers Found");
@@ -4359,9 +4361,9 @@ public class RetailGUI extends JFrame{
 					mainJTabbedPane.setEnabledAt(1, true);
 					mainJTabbedPane.setEnabledAt(2, true);
 					mainJTabbedPane.setEnabledAt(3, true);
-					mainJTabbedPane.setEnabledAt(4, false);
+					mainJTabbedPane.setEnabledAt(4, true);
 					mainJTabbedPane.setEnabledAt(5, true);
-					mainJTabbedPane.setEnabledAt(6, true);
+					mainJTabbedPane.setEnabledAt(6, false);
 					mainJTabbedPane.setEnabledAt(7, false);
 					invJTabbedPane.setEnabledAt(2, false);
 					orderJTabbedPane.setEnabledAt(2, false);
