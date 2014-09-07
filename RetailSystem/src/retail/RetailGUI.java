@@ -1170,7 +1170,7 @@ public class RetailGUI extends JFrame{
 						}else{
 								Customer customer = new Customer(Integer.parseInt(custIdJTextField.getText()),
 									custNameJTextField.getText(),custAddressJTextField.getText(), custEmailJTextField.getText(),
-									custPhoneJTextField.getText());
+									Integer.parseInt(custPhoneJTextField.getText()));
 								customers.add(customer);
 								custIdCombo.addItem(Integer.toString(customer.getCustId()));
 								custNameCombo.addItem(customer.getCustName());
@@ -1266,7 +1266,7 @@ public class RetailGUI extends JFrame{
 							editCustName.setText(customer.getCustName());
 							editCustAddress.setText(customer.getCustAddress());
 							editCustEmail.setText(customer.getCustEmail());
-							editCustPhone.setText(customer.getCustTelephone());
+							editCustPhone.setText(Integer.toString(customer.getCustTelephone()));
 						}
 					}
 				}catch(NumberFormatException nfe){
@@ -1287,7 +1287,7 @@ public class RetailGUI extends JFrame{
 								customer.setCustName(editCustName.getText());
 								customer.setCustAddress(editCustAddress.getText());
 								customer.setCustEmail(editCustEmail.getText());
-								customer.setCustTelephone(editCustPhone.getText());
+								customer.setCustTelephone(Integer.parseInt(editCustPhone.getText()));
 								JOptionPane.showMessageDialog(null, "Customer Updated.");
 								editCustIdCombo.setSelectedIndex(0);
 								editCustName.setText("");
@@ -1515,7 +1515,7 @@ public class RetailGUI extends JFrame{
 							JOptionPane.showMessageDialog(null, "Required Fields: \n Supplier Id \n Supplier Name \n Supplier Address");	
 						}else{
 							Supplier supplier = new Supplier(Integer.parseInt(supplierIdJTextField.getText()), supplierNameJTextField.getText(), 
-									supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), supplierPhoneJTextField.getText());
+									supplierAddressJTextField.getText(), supplierEmailJTextField.getText(), Integer.parseInt(supplierPhoneJTextField.getText()));
 							suppliers.add(supplier);
 							JOptionPane.showMessageDialog(null, "New Supplier Added");
 							suppIdCombo.addItem(supplierIdJTextField.getText());
@@ -1608,7 +1608,7 @@ public class RetailGUI extends JFrame{
 							editSupplierName.setText(supplier.getName());
 							editSupplierAddress.setText(supplier.getAddress());
 							editSupplierEmail.setText(supplier.getEmail());
-							editSupplierPhone.setText(supplier.getPhone());
+							editSupplierPhone.setText(Integer.toString(supplier.getPhone()));
 							editSupplierDelivery.setText(Integer.toString(supplier.getDaysToDeliver()));
 						}
 					}
@@ -1630,7 +1630,7 @@ public class RetailGUI extends JFrame{
 								supplier.setName(editSupplierName.getText());
 								supplier.setAddress(editSupplierAddress.getText());
 								supplier.setEmail(editSupplierEmail.getText());
-								supplier.setPhone(editSupplierPhone.getText());
+								supplier.setPhone(Integer.parseInt(editSupplierPhone.getText()));
 								supplier.setDaysToDeliver(Integer.parseInt(editSupplierDelivery.getText()));
 								JOptionPane.showMessageDialog(null, "Supplier Updated");
 								editSuppIdCombo.setSelectedIndex(0);
@@ -3993,14 +3993,14 @@ public class RetailGUI extends JFrame{
 				customers.add(new Customer(5, "Chris", "Cork"));
 				customers.add(new Customer(6, "Billy", "Waterford"));
 				//add some test suppliers to array list
-				suppliers.add(new Supplier(1, "Smiths", "Dublin","sam@email.com","123456"));
-				suppliers.add(new Supplier(2, "Thompsons", "Cork","tom@email.com","234567"));
-				suppliers.add(new Supplier(3, "Randome", "Dublin", "randome@email.com", "789654"));
-				suppliers.add(new Supplier(4, "Sealion", "Limerick", "sealion@email.com", "987654" ));
-				suppliers.add(new Supplier(5, "Salmon", "Athlone", "salmon@email.com", "258963"));
-				suppliers.add(new Supplier(6, "Beales", "Dublin", "beales@email.com", "369852"));
-				suppliers.add(new Supplier(7, "Buzzco", "Cork", "buzzco@email.com", "147852"));
-				suppliers.add(new Supplier(8, "Vantage", "Waterford", "vantage@email.com", "255856"));
+				suppliers.add(new Supplier(1, "Smiths", "Dublin","sam@email.com",123456));
+				suppliers.add(new Supplier(2, "Thompsons", "Cork","tom@email.com",234567));
+				suppliers.add(new Supplier(3, "Randome", "Dublin", "randome@email.com", 789654));
+				suppliers.add(new Supplier(4, "Sealion", "Limerick", "sealion@email.com", 987654 ));
+				suppliers.add(new Supplier(5, "Salmon", "Athlone", "salmon@email.com", 258963));
+				suppliers.add(new Supplier(6, "Beales", "Dublin", "beales@email.com", 369852));
+				suppliers.add(new Supplier(7, "Buzzco", "Cork", "buzzco@email.com", 147852));
+				suppliers.add(new Supplier(8, "Vantage", "Waterford", "vantage@email.com", 255856));
 			
 				
 				//add some test products to array list
