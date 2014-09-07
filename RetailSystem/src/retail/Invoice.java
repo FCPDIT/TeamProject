@@ -162,25 +162,25 @@ public class Invoice  implements Comparable<Invoice>  {
 		int count = 1;
 		String list = "";
 		if (v != null) {
-			list += "Invoice ID: " + v.getId();
+			list += "INVOICE ID: " + v.getId();
 			list+="\n-------------------------------";
 				for(InvoiceProduct pds : v.getInvoiceProducts() ){
-					list+="\nItem number " + count+ " of this Invoice \n";
+					list+="\nITEM NUMBER " + count+ " OF THIS INVOICE \n";
 					list+="-------------------------------";
 					count++;
-					list+="\nProduct Id: " + pds.getProduct().getProductCode()
-					+"\nProduct Title: " + pds.getProduct().getTitle()
-					+ "\nProduct Price: " +  String.format("%.2f", pds.getProduct().getRetailPrice())
-					+ "\nQuantity of Order " + pds.getQuantity() 
-					+ "\nTotal : " + String.format("%.2f", pds.getQuantity()*pds.getProduct().getRetailPrice()) 
+					list+="\nPRODUCT ID:		" + pds.getProduct().getProductCode()
+					+"\nPRODUCT TITLE:	" + pds.getProduct().getTitle()
+					+ "\nPRODUCT PRICE:	" +  String.format("%.2f", pds.getProduct().getRetailPrice())
+					+ "\nQUANTITY OF ORDER	" + pds.getQuantity() 
+					+ "\nTOTAL :		" + String.format("%.2f", pds.getQuantity()*pds.getProduct().getRetailPrice()) 
 					+ "\n--------------";
 				}
-					list += "\nEmployee Name: " + v.getEmployee().getEmployeeName() 
-					+ "\nEmployee Id: "   + v.getEmployee().getEmployeeId() 
-					+ "\nCustomer Name: " + v.getCustomer().getCustName() 
-					+ "\nCustomer Id: "   + v.getCustomer().getCustId() 
-					+ "\nInvoice Total: " +  String.format("%.2f", v.calculateInvoiceTotal()) 
-					+ "\nDate: " + sdf.format(v.getInvoiceDate()) + "\n\n";
+					list += "\nEMPLOYEE NAME:	" + v.getEmployee().getEmployeeName() 
+					+ "\nEMPLOYEE ID:		"   + v.getEmployee().getEmployeeId() 
+					+ "\nCUSTOMER NAME:	" + v.getCustomer().getCustName() 
+					+ "\nCUSTOMER ID:		"   + v.getCustomer().getCustId() 
+					+ "\nINVOICE TOTAL:	" +  String.format("%.2f", v.calculateInvoiceTotal()) 
+					+ "\nDATE:		" + sdf.format(v.getInvoiceDate()) + "\n\n";
 					list+="-------------------------------\n";
 				return list;
 		} else {
