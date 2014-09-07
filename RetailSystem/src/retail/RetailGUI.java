@@ -2322,6 +2322,7 @@ public class RetailGUI extends JFrame{
 								createOrderScrollPaneTextArea.setText(orderOutputMessage);
 								createOrderScrollPaneTextArea.setCaretPosition(0);
 								orderOutputMessage = "";
+								result="";
 								createOrderOrderIdTextField.setEnabled(true);
 								createOrderSupplierIdComboBox.setEnabled(true);
 								String newOrderIdFromTextField = createOrderOrderIdTextField.getText();
@@ -3162,10 +3163,6 @@ public class RetailGUI extends JFrame{
 									String inputFromTestField = invTextF.getText();
 									listOfInvoices.addElement(inputFromTestField);
 									editListOfInvoices.addElement(inputFromTestField);
-									String inputFromCusId = custTextF.getText();
-									//listOfCustomers.addElement(inputFromCusId);
-									//input.setText("");
-									//reset the text Boxes to Null
 									invTextF.setText("");
 									listOfEmpIds.setSelectedItem("select");
 									listOfCusIds.setSelectedItem("select");
