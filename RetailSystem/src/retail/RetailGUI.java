@@ -104,8 +104,6 @@ public class RetailGUI extends JFrame{
 	
 	private JPanel createOrderPanel;
 	private JPanel viewOrderJPanel;
-	private JPanel viewOrderLeftJPanel;
-	private JPanel viewOrderRightJPanel;
 	private JPanel editOrderJPanel;
 	
 	private JPanel employeeJPanel;
@@ -117,61 +115,61 @@ public class RetailGUI extends JFrame{
 	
 	//login components
 	private JPanel loginComponentsJPanel;
-	private JTextField loginTF;// = new JTextField();
-	private JPasswordField passwordTF;// = new JPasswordField();
-	private JButton loginBut;// = new JButton();
+	private JTextField loginTF;
+	private JPasswordField passwordTF;
+	private JButton loginBut;
 	
 	//logout components
 	private JPanel logoutComponentsJPanel;
-	private JButton logoutBut;// = new JButton();
+	private JButton logoutBut;
 	
 	private DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
 	
 	//Customer Components
-	private JLabel custIdJLabel; // = new JLabel("Enter Customer ID");
-	private JTextField custIdJTextField; // = new JTextField();
-	private JLabel custNameJLabel; // = new JLabel("Enter Customer Name");
-	private JTextField custNameJTextField; // = new JTextField();
-	private JLabel custAddressJLabel; // = new JLabel("Enter Customer Address");
-	private JTextField custAddressJTextField; // = new JTextField();
-	private JLabel custEmailJLabel; // = new JLabel("Enter Customer Email");
-	private JTextField custEmailJTextField; // = new JTextField();
-	private JLabel custPhoneJLabel; // = new JLabel("Enter Customer Phone");
-	private JTextField custPhoneJTextField; // = new JTextField();	
-	private JButton custJButton; //  = new JButton("Create New Customer");
-	private JButton viewCustJButton; // = new JButton("View By ID");
-	private JButton viewCustNameJButton; // = new JButton("View By Name");
-	private JButton viewAllCustJButton; // = new JButton("View All Customers");
-	private JButton findCustById; // = new JButton("Find Customer");
-	private JButton updateCustJButton; // = new JButton("Update Customer Details");
-	private JButton deleteCustJButton; // = new JButton("Delete Customer");
-	private JLabel viewCustById;// = new JLabel("Find Customer By ID: ");
-	private JComboBox<String> custIdCombo;// = new JComboBox<String>();
-	private JLabel viewCustByName;// = new JLabel("Find Customer By Name");
-	private JComboBox<String> custNameCombo;// = new JComboBox<String>();
-	private JTextArea custJTextArea; //  = new JTextArea(10, 65);
-	private JComboBox<String> editCustIdCombo;// = new JComboBox<String>();
-	private JLabel editCustNameJLabel; // = new JLabel("Customer Name");
-	private JLabel editCustAddressJLabel; // = new JLabel("Customer Address");
-	private JLabel editCustEmailJLabel; // = new JLabel("Customer Email");
-	private JLabel editCustPhoneJLabel; // = new JLabel("Customer Telephone");
-	private JTextField editCustName; // = new JTextField();
-	private JTextField editCustAddress; // = new JTextField();
-	private JTextField editCustEmail; // = new JTextField();
-	private JTextField editCustPhone; // = new JTextField();
+	private JLabel custIdJLabel;
+	private JTextField custIdJTextField;
+	private JLabel custNameJLabel;
+	private JTextField custNameJTextField;
+	private JLabel custAddressJLabel;
+	private JTextField custAddressJTextField;
+	private JLabel custEmailJLabel;
+	private JTextField custEmailJTextField;
+	private JLabel custPhoneJLabel;
+	private JTextField custPhoneJTextField;	
+	private JButton custJButton;
+	private JButton viewCustJButton;
+	private JButton viewCustNameJButton;
+	private JButton viewAllCustJButton;
+	private JButton findCustById;
+	private JButton updateCustJButton;
+	private JButton deleteCustJButton;
+	private JLabel viewCustById;
+	private JComboBox<String> custIdCombo;
+	private JLabel viewCustByName;
+	private JComboBox<String> custNameCombo;
+	private JTextArea custJTextArea;
+	private JComboBox<String> editCustIdCombo;
+	private JLabel editCustNameJLabel;
+	private JLabel editCustAddressJLabel;
+	private JLabel editCustEmailJLabel;
+	private JLabel editCustPhoneJLabel;
+	private JTextField editCustName;
+	private JTextField editCustAddress;
+	private JTextField editCustEmail;
+	private JTextField editCustPhone;
 	
 	
 	//Supplier Components
 	private JLabel supplierIdJLabel;// = new JLabel("Supplier ID");
-	private JTextField supplierIdJTextField; // = new JTextField();
+	private JTextField supplierIdJTextField;
 	private JLabel supplierNameJLabel; // = new JLabel("Supplier Name");
-	private JTextField supplierNameJTextField; // = new JTextField();
+	private JTextField supplierNameJTextField;
 	private JLabel supplierAddressJLabel; // = new JLabel("Supplier Address");
-	private JTextField supplierAddressJTextField; // = new JTextField();
+	private JTextField supplierAddressJTextField;
 	private JLabel supplierEmailJLabel; //= new JLabel("Supplier Email");
 	private JTextField supplierEmailJTextField;// = new JTextField();
 	private JLabel supplierPhoneJLabel;// = new JLabel("Supplier Phone Number");
-	private JTextField supplierPhoneJTextField; // = new JTextField();
+	private JTextField supplierPhoneJTextField;
 	private JButton supplierJButton; // = new JButton("Create New Supplier");
 	private JLabel viewSupplyJLabel; // = new JLabel("Search by Supplier ID");
 	private JComboBox<String> suppIdCombo; // = new JComboBox<String>();
@@ -188,19 +186,19 @@ public class RetailGUI extends JFrame{
 	private JLabel editSuppEmailJLabel; // = new JLabel("Supplier Email");
 	private JLabel editSuppPhoneJLabel; // = new JLabel("Supplier Telephone");
 	private JLabel editDeliveryJLabel; // = new JLabel("Edit Delivery Period");
-	private JTextField editSupplierName; // = new JTextField();
-	private JTextField editSupplierAddress; // = new JTextField();
-	private JTextField editSupplierEmail; // = new JTextField();
-	private JTextField editSupplierPhone; // = new JTextField();
-	private JTextField editSupplierDelivery; // = new JTextField();
+	private JTextField editSupplierName;
+	private JTextField editSupplierAddress;
+	private JTextField editSupplierEmail;
+	private JTextField editSupplierPhone;
+	private JTextField editSupplierDelivery;
 	private JButton saveSupplierJButton; // = new JButton("Update Supplier");
 	private JButton deleteSupplierJButton; // = new JButton("Delete Supplier");
 	
 	//Employee Components
 	private JLabel employeeId;// = new JLabel("Employee ID ");
-	private JTextField employeeIdField; // = new JTextField();
+	private JTextField employeeIdField;
 	private JLabel  employeeName; // = new JLabel("Employee Name ");
-	private JTextField employeeNameField; // = new JTextField();
+	private JTextField employeeNameField;
 	private JLabel employeeAcess; // = new JLabel("Access Level ");
 	private JComboBox<Integer> employeeAcessField;
 	private JLabel employeeSalary; // = new JLabel("Employee Salary");
