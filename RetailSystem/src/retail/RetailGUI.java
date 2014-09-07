@@ -2566,6 +2566,10 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				viewOrderTextArea.setText("");		
 				viewOrderTextArea.setCaretPosition(0);
+				viewOrderOrderIdComboBox.setSelectedItem("Select");
+				viewOrderSupplierIdComboBox.setSelectedItem("Select");
+				viewOrderTitleComboBox.setSelectedItem("Select");
+				viewOrderAuthorComboBox.setSelectedItem("Select");
 			}
 		});
 		viewOrderGC.gridx = 1;
