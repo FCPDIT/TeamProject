@@ -2259,7 +2259,7 @@ public class RetailGUI extends JFrame{
 						addMoreProducts.add(orderProduct);
 						
 						for(OrderProduct prod : addMoreProducts){
-						result += "Product No: " + prod.getProduct().getProductCode() +"\nQuantity: " + prod.getQuantity() + "\n\n";
+						result += "PRODUCT NO: " + prod.getProduct().getProductCode() +"\nQUANITIY: " + prod.getQuantity() + "\n\n";
 						}
 						createOrderScrollPaneTextArea.setText(result);
 						createOrderScrollPaneTextArea.setCaretPosition(0);
@@ -2320,28 +2320,27 @@ public class RetailGUI extends JFrame{
 								if(addMoreProducts.size()<1){
 									Order singleOrderComplete = new Order(orderId, supplierId, orderProducts);
 									orders.add(singleOrderComplete);
-									orderOutputMessage+="Order Complete"+
+									orderOutputMessage+="ORDER COMPLETE"+
 														"\n- - - - - - - - - -"+
-														"\nOrder No: " + orderIdString
-														+"\nSupplier No: " + supplierIdString
-														+"\nProduct No:  " + productCodeString +
-														"\nNo. of items: " + quantityString;
+														"\nORDER NO: " + orderIdString
+														+"\nSUPPLIER NO: " + supplierIdString
+														+"\nPRODUCT NO:  " + productCodeString +
+														"\nNO. OF ITEMS: " + quantityString;
 									
 								}else{
 									Order multipleOrder = new Order(orderId, supplierId, addMoreProducts);
 									orders.add(multipleOrder);
-									orderOutputMessage+="Order Complete"+
+									orderOutputMessage+="ORDER COMPLETE"+
 											"\n- - - - - - - - - -"+
-											"\nOrder No: " + orderIdString
-											+"\nSupplier No: " + supplierIdString
-											+"\nProduct No:  " + productCodeString +
-											"\nNo. of items: " + quantityString+
-											"\n- - - - - - - - - - - - - - ";
+											"\nORDER NO: " + orderIdString
+											+"\nSUPPLIER NO: " + supplierIdString
+											+"\nPRODUCT NO:  " + productCodeString +
+											"\nNO. OF ITEMS: " + quantityString + "\n";
 									for(Order o : orders){
 										if(o.getOrderUniqueId()==orderId){
 											for(OrderProduct p : o.getListOfOrderProducts()){
-												orderOutputMessage+= "\nProduct Code: " + p.getProduct().getProductCode() +
-													"\nNo. of items: " + p.getQuantity() + "\n"; //TODO
+												orderOutputMessage+= "\nPRODUCT CODE: " + p.getProduct().getProductCode() +
+													"\nNO. OF ITEMS: " + p.getQuantity() + "\n"; //TODO
 											}
 										}
 									}
@@ -3159,10 +3158,10 @@ public class RetailGUI extends JFrame{
 												   + "\n- - - - - - - - - - - - - - "+
 															"\nINVOICE NO: 	" + invoiceIdStr +
 															"\n- - - - - - - - - - - - - - "+
-															"\nEMPLOYEE NO:    "+ employeeIdStr +
-															"\nCUSTOMER NO:    " + customerIdStr+
+															"\nEMPLOYEE NO:        "+ employeeIdStr +
+															"\nCUSTOMER NO:       " + customerIdStr+
 															"\nPRODUCT CODE:    " + productIdStr+
-															"\nNO. OF ITEMS:    " + quantityStr;
+															"\nNO. OF ITEMS:           " + quantityStr;
 															//+"\nArraySize: " + addMoreArrayList.size();
 									//existingInvoiceNums.add(invoiceIdStr);
 									
@@ -4954,10 +4953,10 @@ public class RetailGUI extends JFrame{
 			createOrderQuantityTextField = new JTextField();
 			createOrderScrollPaneTextArea = new JTextArea();
 			viewOrderOrderIdLabel = new JLabel("Order ID: ");
-			viewOrderOrderIdButton = new JButton("Find order with this ID");
-			viewOrderSupplierIdButton = new JButton("Find order with this Supplier");
-			viewOrderTitleButton = new JButton("Find order containing a product with this title");
-			viewOrderAuthorButton = new JButton("Find order containing a product by this author");
+			viewOrderOrderIdButton = new JButton("Search ID");
+			viewOrderSupplierIdButton = new JButton("Search for Supplier");
+			viewOrderTitleButton = new JButton("Search for title");
+			viewOrderAuthorButton = new JButton("Search for Author");
 			receiveAllOrdersJButton = new JButton("Receive All Orders");
 			editOrderJButton = new JButton("Find Order by Id");
 			editSupplierOrderJButton = new JButton("Find Order by Supplier");
