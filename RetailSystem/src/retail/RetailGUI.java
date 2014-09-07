@@ -244,7 +244,7 @@ public class RetailGUI extends JFrame{
 	private JTextField retailJTextField;// = new JTextField();
 	private JLabel prodCost;// = new JLabel("Cost Price");
 	private JTextField costJTextField;// = new JTextField();
-	private JLabel prodTotalStock;// = new JLabel("Total Stock");
+	private JLabel prodTotalStock;// = new JLabel("Current Stock");
 	private JTextField tStockJTextField;// = new JTextField();
 	private JLabel prodMaxStock;// = new JLabel("Maximum Stock");
 	private JTextField maxJTextField;// = new JTextField();
@@ -275,7 +275,7 @@ public class RetailGUI extends JFrame{
 	private JTextField editRetailJTextField;// = new JTextField();
 	private JLabel editProdCost;// = new JLabel("Cost Price");
 	private JTextField editCostJTextField;// = new JTextField();
-	private JLabel editProdTotalStock;// = new JLabel("Total Stock");
+	private JLabel editProdTotalStock;// = new JLabel("Current Stock");
 	private JTextField editStockJTextField;// = new JTextField();
 	private JLabel editProdMaxStock;// = new JLabel("Maximum Stock");
 	private JTextField editMaxJTextField;// = new JTextField();
@@ -5153,7 +5153,7 @@ public class RetailGUI extends JFrame{
 			editRetailJTextField = new JTextField();
 			editProdCost = new JLabel("Cost Price");
 			editCostJTextField = new JTextField();
-			editProdTotalStock = new JLabel("Total Stock");
+			editProdTotalStock = new JLabel("Current Stock");
 			editStockJTextField = new JTextField();
 			editProdMaxStock = new JLabel("Maximum Stock");
 			editMaxJTextField = new JTextField();
