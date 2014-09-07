@@ -1539,6 +1539,7 @@ public class RetailGUI extends JFrame{
 							supplierAddressJTextField.setText("");
 							supplierEmailJTextField.setText("");
 							supplierPhoneJTextField.setText("");
+							listOfSuppliers.addElement(supplierIdJTextField.getText());
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "Supplier Already Exists");
@@ -1689,6 +1690,7 @@ public class RetailGUI extends JFrame{
 							editSupplierEmail.setText("");
 							editSupplierPhone.setText("");
 							editSupplierDelivery.setText("");
+							listOfSuppliers.removeElement(editSuppIdCombo.getSelectedItem().toString());
 							return;
 						}
 					}
@@ -4953,8 +4955,6 @@ public class RetailGUI extends JFrame{
 			editInvJPanel = new JPanel();
 			createOrderPanel = new JPanel();
 			viewOrderJPanel = new JPanel();
-			viewOrderLeftJPanel = new JPanel();
-			viewOrderRightJPanel = new JPanel();
 			editOrderJPanel = new JPanel();
 			employeeJPanel = new JPanel();
 			viewEmployeeJPanel = new JPanel();
