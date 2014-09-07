@@ -244,7 +244,7 @@ public class RetailGUI extends JFrame{
 	private JTextField retailJTextField;// = new JTextField();
 	private JLabel prodCost;// = new JLabel("Cost Price");
 	private JTextField costJTextField;// = new JTextField();
-	private JLabel prodTotalStock;// = new JLabel("Total Stock");
+	private JLabel prodTotalStock;// = new JLabel("Current Stock");
 	private JTextField tStockJTextField;// = new JTextField();
 	private JLabel prodMaxStock;// = new JLabel("Maximum Stock");
 	private JTextField maxJTextField;// = new JTextField();
@@ -275,7 +275,7 @@ public class RetailGUI extends JFrame{
 	private JTextField editRetailJTextField;// = new JTextField();
 	private JLabel editProdCost;// = new JLabel("Cost Price");
 	private JTextField editCostJTextField;// = new JTextField();
-	private JLabel editProdTotalStock;// = new JLabel("Total Stock");
+	private JLabel editProdTotalStock;// = new JLabel("Current Stock");
 	private JTextField editStockJTextField;// = new JTextField();
 	private JLabel editProdMaxStock;// = new JLabel("Maximum Stock");
 	private JTextField editMaxJTextField;// = new JTextField();
@@ -1817,24 +1817,15 @@ public class RetailGUI extends JFrame{
 											);
 									products.add(product);
 									JOptionPane.showMessageDialog(null, "New Product Added");
+									
+									listOfProdIds.addElement(codeJTextField.getText());
+									listOfProductAuthor.addElement(authorJTextField.getText());
+									listofProductTitle.addElement(titleJTextField.getText());
+									Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
+									Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
+
 							}
 						}
-
-						listOfProdIds.addElement(codeJTextField.getText());
-						listOfProductAuthor.addElement(authorJTextField.getText());
-						listofProductTitle.addElement(titleJTextField.getText());
-						Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
-						Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
-						titleJTextField.setText("");
-						prodSupplierIdJTextField.setText("");
-						authorJTextField.setText("");
-						codeJTextField.setText("");
-						retailJTextField.setText("");
-						costJTextField.setText("");
-						tStockJTextField.setText("");
-						maxJTextField.setText("");
-						minJTextField.setText("");
-						
 						
 					}else{
 						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
@@ -1842,6 +1833,17 @@ public class RetailGUI extends JFrame{
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Please Complete All Fields");
 				}
+				
+				titleJTextField.setText("");
+				prodSupplierIdJTextField.setText("");
+				authorJTextField.setText("");
+				codeJTextField.setText("");
+				retailJTextField.setText("");
+				costJTextField.setText("");
+				tStockJTextField.setText("");
+				maxJTextField.setText("");
+				minJTextField.setText("");
+
 			}
 		});
 		
@@ -5156,7 +5158,7 @@ public class RetailGUI extends JFrame{
 			editRetailJTextField = new JTextField();
 			editProdCost = new JLabel("Cost Price");
 			editCostJTextField = new JTextField();
-			editProdTotalStock = new JLabel("Total Stock");
+			editProdTotalStock = new JLabel("Current Stock");
 			editStockJTextField = new JTextField();
 			editProdMaxStock = new JLabel("Maximum Stock");
 			editMaxJTextField = new JTextField();
