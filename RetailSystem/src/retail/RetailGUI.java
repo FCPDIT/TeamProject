@@ -925,7 +925,7 @@ public class RetailGUI extends JFrame{
 		
 		editById.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				try{
+				if(viewEmpIdCombo.getSelectedIndex() != 0){
 					for(Employee employee: employees){
 						if(employee.getEmployeeId()== Integer.parseInt(viewEmpIdCombo.getSelectedItem().toString())){
 							editEmpNameField.setText(employee.getEmployeeName());
@@ -934,8 +934,8 @@ public class RetailGUI extends JFrame{
 							editEmpPasswordField.setText(Integer.toString(employee.getPassword()));
 						}
 					}
-				}catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Employee Id should be a number.");
+				}else{
+					JOptionPane.showMessageDialog(null, "Please Select a Valid Employee.");
 				}
 			}
 		});
@@ -959,6 +959,7 @@ public class RetailGUI extends JFrame{
 								editEmpAccessField.setText("");
 								editEmpSalaryField.setText("");
 								editEmpPasswordField.setText("");
+								break;
 							}
 						}
 					}
