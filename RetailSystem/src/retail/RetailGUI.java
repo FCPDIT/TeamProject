@@ -603,7 +603,7 @@ public class RetailGUI extends JFrame{
 		proflossJTabbedPane.add("Profit and Loss Table", proflossJPanel);
 		proflossJTabbedPane.add("Graph Information", graphJPanel);
 		
-		//lock the tabs until login successful
+		/*lock the tabs until login successful
 		mainJTabbedPane.setEnabledAt(1, false);
 		mainJTabbedPane.setEnabledAt(2, false);
 		mainJTabbedPane.setEnabledAt(3, false);
@@ -611,7 +611,7 @@ public class RetailGUI extends JFrame{
 		mainJTabbedPane.setEnabledAt(5, false);
 		mainJTabbedPane.setEnabledAt(6, false);
 		mainJTabbedPane.setEnabledAt(7, false);
-									
+		*/
 		
 		employeeJPanel.setLayout(new GridBagLayout());
 		this.empIDPopulate(empIdCombo);
@@ -826,7 +826,7 @@ public class RetailGUI extends JFrame{
 										+"\n Password: " +employee.getPassword()
 										+"\n Salary: " +employee.getSalary());
 								empIdCombo.setSelectedIndex(0);
-								break;
+								return;
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -851,7 +851,7 @@ public class RetailGUI extends JFrame{
 							+"\n Password: " +employee.getPassword()
 							+"\n Salary: " +employee.getSalary());
 							empNameCombo.setSelectedIndex(0);
-							break;
+							return;
 							}
 						}
 					}else{
@@ -1171,7 +1171,7 @@ public class RetailGUI extends JFrame{
 									+"\n Email: "+customer.getCustEmail()
 									+"\n Phone: "+customer.getCustTelephone());
 							custIdCombo.setSelectedIndex(0);
-							break;
+							return;
 							}
 						}
 					}catch(NumberFormatException nfe){
@@ -1196,7 +1196,7 @@ public class RetailGUI extends JFrame{
 									+"\n Email: "+customer.getCustEmail()
 									+"\n Phone: "+customer.getCustTelephone());
 							custNameCombo.setSelectedIndex(0);
-							break;
+							return;
 							}
 						}
 				}else{
@@ -1522,7 +1522,7 @@ public class RetailGUI extends JFrame{
 										+"\n Phone: "+supplier.getPhone()
 										+"\n Delivery Time: "+supplier.getDaysToDeliver());
 								suppIdCombo.setSelectedIndex(0);
-								break;
+								return;
 							}
 						}
 					}else{
@@ -1547,8 +1547,8 @@ public class RetailGUI extends JFrame{
 										+"\n Email: "+supplier.getEmail()
 										+"\n Phone: "+supplier.getPhone()
 										+"\n Delivery Time: "+supplier.getDaysToDeliver());
-								suppNameCombo.setSelectedIndex(0);
-								break;
+								suppNameCombo.setSelectedItem(0);
+								return;
 							}
 						}
 					}else{
