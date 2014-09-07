@@ -16,6 +16,9 @@ public class RetailGUITest {
 	ArrayList<Customer> customers = new ArrayList<Customer>();
 	ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
 	ArrayList<Employee> employees = new ArrayList<Employee>();
+	ArrayList<Invoice> invoices = new ArrayList<Invoice>();
+	ArrayList<Product> products = new ArrayList<Product>();
+	ArrayList<InvoiceProduct> invoiceProducts = new ArrayList<InvoiceProduct>();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -28,6 +31,9 @@ public class RetailGUITest {
 		employees.add(new Employee(1, "John", 1, 2.00, 1));
 		employees.add(new Employee(2, "John", 1, 2.00, 1));
 		employees.add(new Employee(3, "Jim", 1, 2.00, 1));
+		products.add(new Product("The Curious Incident of the Dog in the Night-Time", "Mark Haddon", "0021", 7.99, 1.92,15,20,10,suppliers.get(0)));
+		invoiceProducts.add(new InvoiceProduct(products.get(0), 1));
+		invoices.add(new Invoice(1001, employees.get(0), customers.get(0), invoiceProducts, 1, true));
 	}
 
 	@After
@@ -111,5 +117,13 @@ public class RetailGUITest {
 		assertNotNull(combo.getSelectedItem());
 		combo.setSelectedIndex(0);
 		assertEquals(combo.getSelectedItem(), "Select");
+	}
+	
+	@Test
+	public void testVerifyInvoiceID() {
+		int a = gui.verifyInvoiceID(1001);
+		int b = gui.verifyInvoiceID(1);
+		assertEquals(a,1);
+		assertEquals(b,2);
 	}
 }
