@@ -4263,7 +4263,7 @@ public class RetailGUI extends JFrame{
 			}
 			else if(invoiceID == 2){
 				//no invoice id match
-				JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
+				//JOptionPane.showMessageDialog(loginJPanel, "Invoice ID not found", "For your information", JOptionPane.INFORMATION_MESSAGE);
 				editCustomerInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceComponentsJPanel.setVisible(false);
 				editInvoiceProductsComponentsJPanel.setVisible(false);
