@@ -10,134 +10,106 @@ import javax.swing.JComboBox;
 
 public class RetailGUITest {
 	
+	int inRange = 0;
+	RetailGUI gui = new RetailGUI();
+	JComboBox<String> combo = new JComboBox<String>();
+	ArrayList<Customer> customers = new ArrayList<Customer>();
+	ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
+	ArrayList<Employee> employees = new ArrayList<Employee>();
+	
 	@Before
 	public void setUp() throws Exception {
+		customers.add(new Customer(1, "John", "123 Fake Street"));
+		customers.add(new Customer(2, "Jane", "123 Fake Street"));
+		customers.add(new Customer(3, "Jim", "123 Fake Street"));
+		suppliers.add(new Supplier(1, "John", "123 Fake Street"));
+		suppliers.add(new Supplier(2, "Jane", "123 Fake Street"));
+		suppliers.add(new Supplier(3, "Jim", "123 Fake Street"));
+		employees.add(new Employee(1, "John", 1, 2.00, 1));
+		employees.add(new Employee(2, "John", 1, 2.00, 1));
+		employees.add(new Employee(3, "Jim", 1, 2.00, 1));
 	}
 
 	@After
 	public void tearDown() throws Exception {
-	}
-	
-	RetailGUI gui = new RetailGUI();
-	int inRange = 1;
-	int outRange = 3;
-	String str =  "";
-	ArrayList<Customer> customers = new ArrayList<Customer>();
-	ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
-	ArrayList<Employee> employees = new ArrayList<Employee>();
-	JComboBox<String> combo = new JComboBox<String>();
-	
-	@Test
-	public void testCreateInvoices() {
-		assertEquals(0, customers.size());
 		customers.add(new Customer(1, "John", "123 Fake Street"));
 		customers.add(new Customer(2, "Jane", "123 Fake Street"));
-		assertEquals(2, customers.size());
-		assertEquals(0, suppliers.size());
+		customers.add(new Customer(3, "Jim", "123 Fake Street"));
 		suppliers.add(new Supplier(1, "John", "123 Fake Street"));
 		suppliers.add(new Supplier(2, "Jane", "123 Fake Street"));
-		assertEquals(2, suppliers.size());
-		assertEquals(0, employees.size());
+		suppliers.add(new Supplier(3, "Jim", "123 Fake Street"));
 		employees.add(new Employee(1, "John", 1, 2.00, 1));
-		employees.add(new Employee(2, "Jane", 1, 2.00, 1));
-		assertEquals(2, employees.size());
+		employees.add(new Employee(2, "John", 1, 2.00, 1));
+		employees.add(new Employee(3, "Jim", 1, 2.00, 1));
 	}
+	
 
 	@Test
 	public void testCheckCustomerDuplicate() {
-		gui.createInvoices();
-		assertFalse(gui.checkCustomerDuplicate(customers, inRange));
-		assertTrue(gui.checkCustomerDuplicate(customers, outRange));
+		assertTrue(gui.checkCustomerDuplicate(customers, inRange));
 	}
 
 	@Test
 	public void testCheckSupplierDuplicate() {
-		gui.createInvoices();
-		assertFalse(gui.checkSupplierDuplicate(suppliers, inRange));
-		assertTrue(gui.checkSupplierDuplicate(suppliers, outRange));
+		assertTrue(gui.checkSupplierDuplicate(suppliers, inRange));
 	}
 
 	@Test
 	public void testCheckEmployeeDuplicate() {
-		gui.createInvoices();
-		assertFalse(gui.checkEmployeeDuplicate(employees, inRange));
-		assertTrue(gui.checkEmployeeDuplicate(employees, outRange));
+		assertTrue(gui.checkEmployeeDuplicate(employees, inRange));
 	}
 
 	@Test
 	public void testEmpIDPopulate() {
-		gui.createInvoices();
 		gui.empIDPopulate(combo);
-		combo.setSelectedItem(1);
-		assertNotNull(combo.getSelectedIndex());
-		combo.addItem(null);
-		combo.setSelectedItem(3);
+		combo.setSelectedIndex(0);
 		assertNotNull(combo.getSelectedItem());
-		combo.setSelectedItem(1);
-		assertEquals(combo.getSelectedItem(), customers.get(1));
+		combo.setSelectedIndex(0);
+		assertEquals(combo.getSelectedItem(), "Select");
 	}
 
 	@Test
 	public void testEmpNamePopulate() {
-		gui.createInvoices();
-		gui.empNamePopulate();
-		combo.setSelectedItem(1);
+		gui.empNamePopulate(combo);
+		combo.setSelectedIndex(0);
 		assertNotNull(combo.getSelectedIndex());
-		combo.addItem(null);
-		combo.setSelectedItem(3);
-		assertNotNull(combo.getSelectedItem());
-		combo.setSelectedItem(01);
-		assertEquals(combo.getSelectedItem(), employees.get(1));
+		combo.setSelectedIndex(0);
+		assertEquals(combo.getSelectedItem(), "Select");
 	}
 
 	@Test
 	public void testCustIdPopulate() {
-		gui.createInvoices();
 		gui.empIDPopulate(combo);
-		combo.setSelectedItem(1);
-		assertNotNull(combo.getSelectedIndex());
-		combo.setSelectedItem(3);
+		combo.setSelectedIndex(0);
 		assertNotNull(combo.getSelectedItem());
-		combo.setSelectedItem(1);
-		assertEquals(combo.getSelectedItem(), customers.get(1));
+		combo.setSelectedIndex(0);
+		assertEquals(combo.getSelectedItem(), "Select");
 	}
 
 	@Test
 	public void testCustNamePopulate() {
-		gui.createInvoices();
 		gui.custNamePopulate(combo);
-		combo.setSelectedItem(1);
-		assertNotNull(combo.getSelectedIndex());
-		combo.addItem(null);
-		combo.setSelectedItem(3);
+		combo.setSelectedIndex(0);
 		assertNotNull(combo.getSelectedItem());
-		combo.setSelectedItem(1);
-		assertEquals(combo.getSelectedItem(), customers.get(1));
+		combo.setSelectedIndex(0);
+		assertEquals(combo.getSelectedItem(), "Select");
 	}
 
 	@Test
 	public void testSuppIdPopulate() {
-		gui.createInvoices();
 		gui.suppIdPopulate(combo);
-		combo.setSelectedItem(1);
-		assertNotNull(combo.getSelectedIndex());
-		combo.addItem(null);
-		combo.setSelectedItem(3);
+		combo.setSelectedIndex(0);
 		assertNotNull(combo.getSelectedItem());
-		combo.setSelectedItem(1);
-		assertEquals(combo.getSelectedItem(), suppliers.get(1));
+		combo.setSelectedIndex(0);
+		assertEquals(combo.getSelectedItem(), "Select");
 	}
 
 	@Test
 	public void testSuppNamePopulate() {
-		gui.createInvoices();
 		gui.suppNamePopulate(combo);
-		combo.setSelectedItem(1);
-		assertNotNull(combo.getSelectedIndex());
-		combo.addItem(null);
-		combo.setSelectedItem(3);
+		combo.setSelectedIndex(0);
 		assertNotNull(combo.getSelectedItem());
-		combo.setSelectedItem(1);
-		assertEquals(combo.getSelectedItem(), suppliers.get(1));
+		combo.setSelectedIndex(0);
+		assertEquals(combo.getSelectedItem(), "Select");
 	}
 }

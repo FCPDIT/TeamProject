@@ -663,7 +663,7 @@ public class RetailGUI extends JFrame{
 		
 		employeeJPanel.setLayout(new GridBagLayout());
 		this.empIDPopulate(empIdCombo);
-		this.empNamePopulate();
+		this.empNamePopulate(empNameCombo);
 		this.empIDPopulate(viewEmpIdCombo);
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -4729,11 +4729,11 @@ public class RetailGUI extends JFrame{
 				combo.addItem(str);
 			}
 		}
-		public void empNamePopulate(){
+		public void empNamePopulate(JComboBox<String> combo){
 			empNameCombo.addItem("Select");
 			for(Employee employee: employees){
 				String str = employee.getEmployeeName();
-				empNameCombo.addItem(str);
+				combo.addItem(str);
 			}
 		}
 		public void custIdPopulate(JComboBox<String> combo){
