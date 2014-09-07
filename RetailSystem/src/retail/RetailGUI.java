@@ -1817,24 +1817,15 @@ public class RetailGUI extends JFrame{
 											);
 									products.add(product);
 									JOptionPane.showMessageDialog(null, "New Product Added");
+									
+									listOfProdIds.addElement(codeJTextField.getText());
+									listOfProductAuthor.addElement(authorJTextField.getText());
+									listofProductTitle.addElement(titleJTextField.getText());
+									Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
+									Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
+
 							}
 						}
-
-						listOfProdIds.addElement(codeJTextField.getText());
-						listOfProductAuthor.addElement(authorJTextField.getText());
-						listofProductTitle.addElement(titleJTextField.getText());
-						Collections.sort(existingProductAuthor, String.CASE_INSENSITIVE_ORDER); // Sort Each list after adding to new element.
-						Collections.sort(existingProductTitle, String.CASE_INSENSITIVE_ORDER);
-						titleJTextField.setText("");
-						prodSupplierIdJTextField.setText("");
-						authorJTextField.setText("");
-						codeJTextField.setText("");
-						retailJTextField.setText("");
-						costJTextField.setText("");
-						tStockJTextField.setText("");
-						maxJTextField.setText("");
-						minJTextField.setText("");
-						
 						
 					}else{
 						JOptionPane.showMessageDialog(null, "Suppliers List is Empty");
@@ -1842,6 +1833,17 @@ public class RetailGUI extends JFrame{
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null, "Please Complete All Fields");
 				}
+				
+				titleJTextField.setText("");
+				prodSupplierIdJTextField.setText("");
+				authorJTextField.setText("");
+				codeJTextField.setText("");
+				retailJTextField.setText("");
+				costJTextField.setText("");
+				tStockJTextField.setText("");
+				maxJTextField.setText("");
+				minJTextField.setText("");
+
 			}
 		});
 		
