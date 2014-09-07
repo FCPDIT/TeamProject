@@ -503,7 +503,7 @@ public class RetailGUI extends JFrame{
 	private JComboBox<String> editOrderSupplierIdComboBox;
 	private JButton receiveAllOrdersJButton;// = new JButton("Receive All Orders");
 	private JButton editOrderJButton;// = new JButton("Find Order by Id");
-	private JButton editSupplierOrderJButton;// = new JButton("Find Order by Supplier");
+	private JButton editOrderSupplierJButton;// = new JButton("Find Order by Supplier");
 	private JButton receiveOrderJButton;// = new JButton("Receive Order");
 	private JButton saveOrderJButton; // = new JButton("Update Order");
 	private JButton deleteOrderJButton; // = new JButton("Delete Order");
@@ -2452,7 +2452,6 @@ public class RetailGUI extends JFrame{
 					int num = Integer.parseInt(input);
 					viewOrderTextArea.setText(Order.viewByOrderId(orders, num)); 	
 					viewOrderTextArea.setCaretPosition(0);
-					listOfOrders.setSelectedItem("Select");
 					listOfSuppliers.setSelectedItem("Select");
 				}
 			}
@@ -2501,7 +2500,6 @@ public class RetailGUI extends JFrame{
 					viewOrderTextArea.setText(Order.viewOrderBySupplier(orders, num));		
 					viewOrderTextArea.setCaretPosition(0);
 					listOfOrders.setSelectedItem("Select");
-					listOfSuppliers.setSelectedItem("Select");
 
 				}
 			}
@@ -2626,9 +2624,9 @@ public class RetailGUI extends JFrame{
         editOrderSupplierIdComboBox.setMinimumSize(d);
         gc.gridx = 1;
         gc.gridy = 2;
-        editSupplierOrderJButton.setPreferredSize(d);
-        editSupplierOrderJButton.setMinimumSize(d);
-        findOrderComponentsJPanel.add(editSupplierOrderJButton, gc);
+        editOrderSupplierJButton.setPreferredSize(d);
+        editOrderSupplierJButton.setMinimumSize(d);
+        findOrderComponentsJPanel.add(editOrderSupplierJButton, gc);
         
         //edit by order ID components
         editOrderComponentsJPanel.setLayout(new GridBagLayout());
@@ -2766,7 +2764,7 @@ public class RetailGUI extends JFrame{
         			}
         		}
         		JOptionPane.showMessageDialog(null, "Received!");
-        		editSupplierOrderJButton.doClick();
+        		editOrderSupplierJButton.doClick();
         		listOfSuppliers.setSelectedItem("Select");
         		listOfOrders.setSelectedItem("Select");
         	}
@@ -2783,7 +2781,7 @@ public class RetailGUI extends JFrame{
         editOrderJPanel.add(editOrderProductsComponentsJPanel, gc);
         gc.gridx = 0;
         gc.gridy = 3;
-        editOrderJPanel.add(saveOrderComponentsJPanel, gc);
+        //editOrderJPanel.add(saveOrderComponentsJPanel, gc);
         gc.gridx = 0;
         gc.gridy = 1;
         editOrderJPanel.add(editSupplierOrderComponentsJPanel, gc);
@@ -2794,7 +2792,7 @@ public class RetailGUI extends JFrame{
         editOrderButtonHandler eob = new editOrderButtonHandler();
         editOrderJButton.addActionListener(eob);
         editSupplierOrderButtonHandler esob = new editSupplierOrderButtonHandler();
-        editSupplierOrderJButton.addActionListener(esob);
+        editOrderSupplierJButton.addActionListener(esob);
         saveOrderButtonHandler sobh = new saveOrderButtonHandler();
         saveOrderJButton.addActionListener(sobh);
 	
@@ -4295,6 +4293,7 @@ public class RetailGUI extends JFrame{
 			public void actionPerformed( ActionEvent e){//handler starts
 					int count = 0, count1 = 0;
 					int id = 0;
+					editOrderOrderIdComboBox.setSelectedItem("Select");
 					String s = (String) editOrderSupplierIdComboBox.getSelectedItem();
 					if(!s.equals("Select")){
 						id = Integer.parseInt( s );
@@ -4475,6 +4474,7 @@ public class RetailGUI extends JFrame{
 		private class editOrderButtonHandler implements ActionListener{
 			public void actionPerformed( ActionEvent e){//handler starts
 				productOrderJTextArea.setText("");
+				editOrderSupplierIdComboBox.setSelectedItem("Select");
 				int id = 0;
 				String s = (String) editOrderOrderIdComboBox.getSelectedItem();
 				if(!s.equals("Select")){
@@ -4959,11 +4959,11 @@ public class RetailGUI extends JFrame{
 			viewOrderOrderIdLabel = new JLabel("Order ID: ");
 			viewOrderOrderIdButton = new JButton("Search ID");
 			viewOrderSupplierIdButton = new JButton("Search for Supplier");
-			viewOrderTitleButton = new JButton("Search for title");
+			viewOrderTitleButton = new JButton("Search for Title");
 			viewOrderAuthorButton = new JButton("Search for Author");
 			receiveAllOrdersJButton = new JButton("Receive All Orders");
 			editOrderJButton = new JButton("Find Order by Id");
-			editSupplierOrderJButton = new JButton("Find Order by Supplier");
+			editOrderSupplierJButton = new JButton("Find Order by Supplier");
 			receiveOrderJButton = new JButton("Receive Order");
 			saveOrderJButton = new JButton("Update Order");
 			deleteOrderJButton = new JButton("Delete Order");
